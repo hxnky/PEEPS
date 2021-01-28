@@ -57,7 +57,7 @@
     }
 
     #login_text {
-        width: 600px;
+        width: 300px;
         height: 35px;
         border: solid 0.2px #CCC;
         border-radius: 5px;
@@ -65,7 +65,16 @@
     }
 
     #login_wrap {
-        margin: 10px 70px;
+        text-align: center;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .form-group-left,
+    .form-group-right {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 10px auto;
     }
 
     #find_pw {
@@ -85,26 +94,37 @@
     }
 
     #k_login {
-        margin-left: 50px;
-        
+        margin-left: 100px;
     }
 
     #g_login {
-        margin-left: 50px;
+        margin-left: 90px;
         width: 250px;
+    }
+
+    #or_wrap {
+        margin-left: 100px;
+    }
+
+    #or_wrap>ul>li {
+        list-style: none;
+        display: inline-block;
+        text-align: center;
+        width: 150px;
+        vertical-align: middle;
+    }
+
+    #or_wrap>ul>li>hr {
+        width: 150px;
+        border: 1px solid #AAA;
     }
 </style>
 
 <body>
-    <div class="image-container set-full-height" style="background-color: #836DB3">
+    <div class="image-container set-full-height" style="background-color: #fcf9f6">
         <div class="logo-container">
-            <div class="logo">
-                <!-- 로고 넣기 -->
-                <img src="assets/img/chick.jpg">
-            </div>
-            <div class="brand">
-                PEEPS
-            </div>
+            <!-- 로고 넣기 -->
+            <img id="logo" src="images/KakaoTalk_20210127_164336960.png">
         </div>
 
         <!--   Big container   -->
@@ -133,28 +153,35 @@
 
                                 </div>
                                 <div id="login_wrap">
-                                    <div class="form-group">
-                                        <label>이메일</label>
-                                        <input type="text" id="login_text" placeholder="  example@email.com">
-                                        <label>비밀번호</label>
-                                        <input type="text" id="login_text">
-                                        <label>아이디</label>
-                                        <input type="text" id="login_text" placeholder=" 사용자 아이디">
-                                        <label>이름</label>
-                                        <input type="text" id="login_text">
-                                        
+                                    <div class="form-group-left">
+                                        <input type="text" id="login_text" placeholder="이메일">
+                                        <input type="text" id="login_text" placeholder="비밀번호">
+                                    </div>
+                                    <div class="form-group-right">
+                                        <input type="text" id="login_text" placeholder="아이디">
+                                        <input type="text" id="login_text" placeholder=" 사용자 이름 ">
                                     </div>
                                 </div>
                                 <input type="button" id="sign_btn" value="회원가입" />
-                                <h5 id="find_pw">소셜 아이디로 회원가입하기</h5>
+                                <div id="or_wrap">
+                                    <ul>
+                                        <li>
+                                            <hr>
+                                        </li>
+                                        <li>또는</li>
+                                        <li>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <!-- 카카오랑 구글 이미지 -->
                                 <div>
-                                    <a href="#"><img id="k_login" src="assets/img/kakao_login_medium_narrow.png"></a>
-                                    <a href="#"><img id="g_login" src="assets/img/google_login.png"></a>
+                                    <a href="#"><img id="k_login" src="images/kakao_login_medium_narrow.png"></a>
+                                    <a href="#"><img id="g_login" src="images/google_login.png"></a>
                                 </div>
                                 <div class="wizard-footer height-wizard">
                                     <div class="clearfix">
-                                <br>
+                                        <br>
                                     </div>
                                 </div>
                             </form>
