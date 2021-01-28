@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
@@ -57,11 +58,13 @@
     }
 
     #login_text {
-        width: 600px;
+        /*width: 600px;*/
         height: 35px;
         border: solid 0.2px #CCC;
         border-radius: 5px;
         max-width: 99%;
+        display: inline-block;
+        vertical-align: middle;
     }
 
     #login_wrap {
@@ -77,29 +80,64 @@
     }
 
     #logo {
-        height: 55px;
+        height: 100px;
+
     }
-    
-    #k_login{
-        margin-left: 50px; 
+
+    #k_login {
+        margin-left: 100px;
     }
-    
-    #g_login{
-        margin-left: 50px; 
+
+    #g_login {
+        margin-left: 100px;
         width: 250px;
     }
+
+    #total_wrap {
+        text-align: center;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    #img_wrap, #login_wrap{
+        display: inline-block;
+        vertical-align: middle;
+    }
+    
+    #img_wrap>img {
+        width: 100px;
+        height: 100px;
+        display: inline-block;
+        text-align: center;
+        display: inline-block;
+        vertical-align: middle;
+
+    }
+
+    #or_wrap {
+        margin-left: 100px;
+    }
+
+    #or_wrap>ul>li {
+        list-style: none;
+        display: inline-block;
+        text-align: center;
+        width: 150px;
+        vertical-align: middle;
+    }
+
+    #or_wrap>ul>li>hr {
+        width: 150px;
+        border: 1px solid #AAA;
+    }
+
 </style>
 
 <body>
-    <div class="image-container set-full-height" style="background-color: #836DB3">
+    <div class="image-container set-full-height" style="background-color: #fcf9f6">
         <div class="logo-container">
-            <div class="logo">
-                <!-- 로고 넣기 -->
-                <img id="logo" src="assets/img/KakaoTalk_20210127_155916140-removebg-preview.png">
-            </div>
-            <div class="brand">
-                PEEPS
-            </div>
+            <!-- 로고 넣기 -->
+            <img id="logo" src="images/KakaoTalk_20210127_164336960.png">
         </div>
 
         <!--   Big container   -->
@@ -127,23 +165,35 @@
                                     </ul>
 
                                 </div>
-                                <div id="login_wrap">
-                                    <div class="form-group">
-                                        <label>아이디 <small>(이메일)</small></label>
-                                        <input type="text" id="login_text" placeholder="  example@email.com">
+                                <div id="total_wrap">
+                                    <div id="img_wrap">
+                                        <img src="images/plus.png">
                                     </div>
-                                    <div class="form-group">
-                                        <label>비밀번호</label>
-                                        <input type="text" id="login_text">
+                                    <div id="login_wrap">
+                                        <div class="form-group">
+                                            <input type="text" id="login_text" placeholder="아이디(이메일)">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" id="login_text" placeholder="비밀번호">
+                                        </div>
                                     </div>
                                 </div>
-
                                 <input type="button" id="login_btn" value="로그인" />
-                                <h5 id="find_pw">소셜 아이디로 로그인하기</h5>
+                                <div id="or_wrap">
+                                    <ul>
+                                        <li>
+                                            <hr>
+                                        </li>
+                                        <li>또는</li>
+                                        <li>
+                                            <hr>
+                                        </li>
+                                    </ul>
+                                </div>
                                 <!-- 카카오랑 구글 이미지 -->
                                 <div>
-                                    <a href="#"><img id="k_login" src="assets/img/kakao_login_medium_narrow.png"></a>
-                                    <a href="#"><img id="g_login" src="assets/img/google_login.png"></a>
+                                    <a href="#"><img id="k_login" src="images/kakao_login_medium_narrow.png"></a>
+                                    <a href="#"><img id="g_login" src="images/google_login.png"></a>
                                 </div>
                                 <h5 id="find_pw">아이디가 없으신가요? <small><a href="#">회원가입 하기</a></small></h5>
                                 <h5 id="find_pw">비밀번호를 잊으셨나요? <small><a href="#">비밀번호 찾기</a></small></h5>
