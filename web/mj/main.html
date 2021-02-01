@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+
+    <!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="../hxnky/css/bootstrap.css">
+
+<!-- 부가적인 테마 -->
+<!--<link rel="stylesheet" href="htts://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">-->
+
+<!-- 합쳐지고 최소화된 최신 
+자바스크립트 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>-->
+
+</head>
+        <style>
+            
+        nav ul {
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            height: 60px;
+            width: 100%;
+            background-color: #F5E978;
+            padding: 0px;
+            position: fixed;
+            z-index: 2;
+            list-style-type: none;
+        }
+
+        .icon {
+            margin: 0px;
+            display: inline-flex;
+            justify-content: space-between;
+        }
+
+        nav ul li {
+            margin: auto 15px;
+        }
+
+        .center {
+            margin-top: -18px;
+        }
+
+        .right a {
+            padding: 5px;
+            margin-top: 20px;
+        }
+
+        input[type="search"] {
+            padding-left: 10px;
+            float: left;
+            height: 20px;
+            border-radius: 30px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border: none;
+        }
+
+        nav ul li button {
+            background-color: #EEF0ED;
+            height: 20px;
+            border: none;
+            border-radius: 30px;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .container-fluid {
+        height: 50px;
+        text-align: center;
+        width: 1100px;
+        color: black;
+        max-width: 100%;
+    }
+
+    #top_wrap {
+        margin: 0px auto;
+        position: fixed;
+        z-index: 999;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        background-color: aquamarine;
+    }
+
+  
+    nav_wrap{
+        background-color: aqua;
+    }
+
+    #my_nav {
+        margin: auto;
+    }
+
+    .menuselect>button {
+        width: 370px;
+        height: 95px;
+        font-size: 30px;
+        border: none;
+        outline: none;
+    }
+
+    .jumbotron {
+        height: 400px;
+        width: 1150px;
+        margin: 100px auto 0px auto;
+        text-align: center;
+        background-color: #F5E978;
+    }
+
+    #profile_wrap>img {
+        width: 200px;
+        border-radius: 100%;
+        margin-left: -750px;
+        margin-top: 50px;
+        border: 1px solid #CCC;
+    }
+
+    #pro_btn>ul>li {
+        list-style: none;
+        font-size: 30px;
+        display: inline-block;
+        text-align: center;
+        margin-right: 40px;
+        background-color: aqua;
+
+    }
+
+    #pro_btn {
+        margin: -180px -300px 0px 0px;
+    }
+
+    #foll_btn {
+        border: 0;
+        background-color: #F5E978;
+    }
+
+    #pro_edit {
+        border: solid 0.2px #CCC;
+        background-color: #DDD;
+        border-radius: 5px;
+        width: 300px;
+        height: 35px;
+        font-size: 20px;
+        background-color: fuchsia;
+    }
+
+    #pro_name {
+        font-size: 20px;
+        margin: 10px auto;
+
+    }
+
+    #pro_bio {
+        font-size: 20px;
+        margin: 10px auto;
+    }
+
+    .menuselect a img {
+        background-color: aqua;
+        width: 50px;
+        height: 50px;
+        margin: 10px;
+
+    }
+
+    #nav_wrap hr {
+
+        height: 1px;
+        background-color: gray;
+    }
+
+ 
+    #nav_wrap {
+        width: 1150px;
+        margin: 0 690px 0;
+    }
+
+    .menuselect {
+        margin: 0 465px;
+    }
+
+
+    </style>
+
+
+<body>
+    <nav_wrap>
+         <div id="nav">
+
+        <nav>
+            <ul class="icon">
+
+                <li class="left">
+                    <span><input type="search" placeholder="이젠 제발 올라가라ㅎㅎ">
+                        <button>
+                            <a href="#"><img src="/hyo0/icon/navi/search.png"></a>
+                        </button></span>
+                </li>
+
+                <li class="center">
+                    <a id="Logo"><img src="/hyo0/icon/Logo.png"></a>
+                </li>
+
+                <li class="right">
+                    <a id="Home" href="#"><img src="/hyo0/icon/navi/023-home.png"></a>
+                    <a id="Content" href="#"><img src="/hyo0/icon/navi/Content.png"></a>
+                    <a id="Alarm" href="#"><img src="/hyo0/icon/navi/008-notification.png"></a>
+                    <a id="Chat" href="#"><img src="/hyo0/icon/navi/050-wechat.png"></a>
+                    <a id="MyPage" href="#"><img src="/hyo0/icon/navi/010-user.png"></a>
+                </li>
+
+            </ul>
+
+        </nav>
+    </div>
+
+    </nav_wrap>
+   
+    <!----------------------------------------------------------------------------------------->
+    <div id="main_wrap">
+        <div class="jumbotron">
+            <div id="profile_wrap">
+                <img src="../hxnky/assets/img/chick.jpg">
+                <div id="pro_btn">
+                    <ul>
+                        <li>아이디</li>
+                        <li><button id="pro_edit"><a href="#">프로필 편집</a></button></li>
+                    </ul>
+
+                    <ul>
+                        <li>게시물</li>
+                        <li>NN</li>
+                        <li>팔로워</li>
+                        <li><button id="foll_btn">NN</button></li>
+                        <li>팔로잉</li>
+                        <li> <button id="foll_btn">NN</button></li>
+                    </ul>
+                    <div id="pro_name">사용자 이름</div>
+                    <div id="pro_bio">사용자 소개글</div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <div id="nav_wrap">
+            <hr>
+            <div class="menuselect">
+                <a href="#"><img src="../1946398-social-network/png/006-newsfeed.png"></a>
+                <a href="#"><img src="../1946398-social-network/png/017-friends.png"></a>
+                <a href="#"><img src="../1946398-social-network/png/018-location%20pin.png"></a>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <!--=====================context======================-->
+    <div class="changing">
+
+
+
+
+
+
+        <div class="container">
+
+
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">titleL</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">title</div>
+                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
+                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+                    </div>
+                </div>
+            </div>
+        </div><br><br>
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -60,7 +60,7 @@
 		</dependency>
 
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.15</version>
@@ -82,8 +82,8 @@
 					<artifactId>jmxri</artifactId>
 				</exclusion>
 			</exclusions>
-			<!-- <scope>runtime</scope> -->
-		</dependency>
+			<scope>runtime</scope>
+		</dependency> -->
 
 
 
@@ -272,6 +272,28 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.0</version>
+    <scope>provided</scope>
+</dependency>
+
+<!-- log4j -->
+<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-api</artifactId>
+    <version>5.7.0</version>
+    <scope>test</scope>
+</dependency>
+
 
 
 

@@ -72,15 +72,47 @@
          overflow: hidden;
         
     }
+     .post_4_table_ul>li:nth-child(1){
+     background-color: aqua;
+        float: left;
+        
+        
+    }
+    .post_4_table_ul>li:nth-child(2){
+     background-color: aquamarine;
+        float: right;
+        margin: 0 10px;
+        
+    }
+    .post_4_table_ul>li:nth-child(3){
+     background-color: aquamarine;
+        float: right;
+        margin: 0 10px;
+        
+    }
+    hr{
+     height: 1px;
+        background-color: gray;    
+    }
+    #update{
+        float: right;
+        background-color: aqua;
+        
+        
+    }
+    span>#title{
+        background-color: aqua;
+    }
 </style>
 
 <body>
 
     <div class="post_wrap">
-        <table class="post_4_table" border>
+        <table class="post_4_table" >
 
             <tr>
                 <td>
+                    <!-- 회원 정보 들어가는 곳-->
                     <ul class="post_4_top">
                         <li> <img src="" id="u_photo"></li>
                         <li>
@@ -104,19 +136,22 @@
 
             <tr>
                 <td>
+                    <!-- 제목 들어가는 곳-->
 
-                    <div id="title">
+                    <span id="title">
                         <h1>나만 없어 댕댕이</h1>
-                    </div>
-                    <div id="update">
-                        <h5>2021.01.28</h5>
-                    </div>
+                    </span >
+                    <span id="update">
+                        <h3>2021.01.28</h3>
+                    </span>
                 </td>
             </tr>
 
             <tr>
                 <td>
+                    <!-- 게시물 내용 들어가는 곳 -->
                     <div class="post">
+                         <img src="2021-02-01%2014;17;31.PNG">
 
 
                     </div>
@@ -124,25 +159,28 @@
             </tr>
 
             <tr>
-                <td>
+                <td><!-- 지도  좋아요  댓글 카운트-->
                     <ul class="post_4_table_ul">
-                        <li><img src="../1946398-social-network/png/018-location%20pin.png" width="30px" height="30px"><h4>명지네</h4></li>
+                        <li><img src="../1946398-social-network/png/018-location%20pin.png" width="30px" height="30px"> <h4>명지네</h4> </li>
                         <li><span><img src="../1946398-social-network/png/001-like.png" width="30px" height="30px"><h4>123</h4></span>
                         </li>
                         <li><img src="../1946398-social-network/png/004-comment.png" width="30px" height="30px"> <h4>5</h4></li>
                     </ul>
                     <br>
-                    <hr>
+                   
                 </td>
             </tr>
 
             <tr>
                 <td>
+                     <hr>
+                    <!-- 대글 대댓글 구현 하는 곳 -->
                     <div class="insert_comment">
                         <img src="../1946398-social-network/png/011-add.png" width="30px" height="30px">
                         <textarea></textarea>
                         <hr>
                         <div id="commented">
+                           
 
                         </div>
 
