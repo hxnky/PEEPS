@@ -31,7 +31,7 @@ public class MailSenderService {
 			message.setSubject("[PEEPS] 회원가입을 축하합니다.", "UTF-8");
 			
 			// 메일 내용 컨텐츠 html
-			String html = "<h1>회원가입을 축하합니다.</h1>";
+			String html = "<h1>회원가입을 축하합니다! (●'◡'●) </h1>";
 			html += "<h3>인증을 위해 아래 링크를 클릭해주세요</h3>";
 			html += "<a href=\"http://localhost:8080/peeps/member/verify?m_idx="+peeps.getM_idx()+"&code="+peeps.getCode()+"\">인증하기</a>";
 			

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,7 @@
 	href="resources/img/apple-icon.png">
 <link rel="icon" type="image/png" href="resources/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>PEEPS 회원가입</title>
+<title>임시 타임라인</title>
 <meta
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
@@ -21,8 +21,7 @@
 	rel="stylesheet">
 
 <!-- CSS Files -->
-<link href="<c:url value="/resources/css/bootstrap.min.css" />"
-	rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/gsdk-bootstrap-wizard.css"/>"
 	rel="stylesheet" />
 
@@ -35,8 +34,7 @@
 		style="background-color: #fcf9f6">
 		<div class="logo-container">
 			<!-- 로고 넣기 -->
-			<img id="logo"
-				src="${pageContext.request.contextPath}/resources/images/plus.png">
+			<img id="logo" src="${pageContext.request.contextPath}/resources/images/plus.png">
 		</div>
 
 		<!--   Big container   -->
@@ -64,61 +62,9 @@
 									</ul>
 
 								</div>
-								<div id="login_wrap">
-
-									<!-- 표 만들기 -->
-									<table>
-										<tr>
-											<td>
-												<div class="form-group-left">
-													<input type="email" id="login_text" name="email" placeholder="이메일">
-												</div>
-											</td>
-											<td>
-												<div class="form-group-left">
-													<input type="password" id="login_text" name="password"
-														placeholder="비밀번호">
-												</div>
-											</td>
-
-										</tr>
-										<tr>
-											<td>
-												<div class="form-group-right">
-													<input type="text" id="login_text" name="id"
-														placeholder="아이디">
-												</div>
-											</td>
-											<td>
-												<div class="form-group-right">
-													<input type="text" id="login_text" name="name"
-														placeholder=" 사용자 이름 ">
-												</div>
-											</td>
-										</tr>
-									</table>
-
-								</div>
-								<input type="submit" id="sign_btn" value="회원가입" />
-								<div id="or_wrap">
-									<ul>
-										<li>
-											<hr>
-										</li>
-										<li>또는</li>
-										<li>
-											<hr>
-										</li>
-									</ul>
-								</div>
-								<!-- 카카오랑 구글 이미지 -->
-								<div>
-									<a href="#"> <img id="k_login"
-										src="${pageContext.request.contextPath}/resources/images/kakao_login_medium_narrow.png">
-									</a> <a href="#"> <img id="g_login"
-										src="${pageContext.request.contextPath}/resources/images/google_login.png">
-									</a>
-								</div>
+								
+								<h1> 타 임 라 인</h1>
+								
 								<div class="wizard-footer height-wizard">
 									<div class="clearfix">
 										<br>

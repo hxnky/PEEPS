@@ -10,7 +10,7 @@
 </head>
 <body>
 
-	<a href="<c:url value="/member/reg"/>">회원가입</a>
+	<a href="<c:url value="/member/login"/>">로그인</a>
 
 </body>
 </html>

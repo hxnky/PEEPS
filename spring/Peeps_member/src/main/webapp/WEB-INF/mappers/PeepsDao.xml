@@ -7,24 +7,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 회원가입 -->
 	<insert id="insertMember"
-		parameterType="com.gnjk.peeps.domain.Peeps"
-		useGeneratedKeys="true" keyProperty="m_idx">
+		parameterType="com.gnjk.peeps.domain.Peeps" useGeneratedKeys="true"
+		keyProperty="m_idx">
 		insert into member (email, id,
-		password, name, code) values (#{email}, #{id},#{password},#{name},
+		password, name, code) values
+		(#{email}, #{id},#{password},#{name},
 		#{code});
 	</insert>
 
 	<select id="selectMemberByIdCount" resultType="int">
-		select count(*) from member where id=#{id}
+		select count(*)
+		from member where id=#{id}
 	</select>
 
+	<!-- 이메일 인증 -->
 	<select id="selectMemberByIdxVerify" resultType="int">
-		select count(*) from member where m_idx=#{m_idx} and verify='Y'
+		select count(*)
+		from member where m_idx=#{m_idx} and verify='Y'
 	</select>
 
 	<update id="updateMemberVerify">
-		update member set verify='Y' where m_idx=#{param1} and code=#{param2}
+		update member set verify='Y' where m_idx=#{param1}
+		and code=#{param2}
 	</update>
+
+	<!-- 로그인 -->
+	<resultMap id="memberResult"
+		type="com.gnjk.peeps.domain.Peeps">
+		<id column="m_idx" property="m_idx" />
+		<result column="email" property="email" />
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="password" property="password" />
+		<result column="m_photo" property="m_photo" />
+	</resultMap>
+	
+	<select id="selectLogin" resultMap="memberResult">
+		select * from member where id=#{param1} and password=#{param2}
+	</select>
+	
+	
 
 
 </mapper>

@@ -12,5 +12,7 @@ public interface PeepsDao {
 	int updateMemberVerify(int m_idx, String code);
 	// 아이디 중복 확인
 	int selectMemberByIdCount(String id);
+	// 로그인
+	Peeps selectLogin(String id, String password);
 
 }

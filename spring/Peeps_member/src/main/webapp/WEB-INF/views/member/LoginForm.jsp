@@ -9,7 +9,7 @@
 	href="resources/img/apple-icon.png">
 <link rel="icon" type="image/png" href="resources/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>PEEPS 회원가입</title>
+<title>PEEPS 로그인</title>
 <meta
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
@@ -30,6 +30,18 @@
 <link href="<c:url value="/resources/css/demo.css"/>" rel="stylesheet" />
 <link href="<c:url value="/resources/css/reg.css"/>" rel="stylesheet" />
 </head>
+<style>
+/* 21.02.01 로그인 css 추가*/
+#login_img {
+	width: 100px;
+	height: 100px;
+	float: left;
+}
+
+td {
+	width: 200px;
+}
+</style>
 <body>
 	<div class="image-container set-full-height"
 		style="background-color: #fcf9f6">
@@ -48,7 +60,7 @@
 					<div class="wizard-container">
 
 						<div class="card wizard-card" id="wizardProfile">
-							<form id="regForm" method="post" enctype="multipart/form-data">
+							<form method="post">
 								<!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
 
 								<div class="wizard-header">
@@ -64,42 +76,32 @@
 									</ul>
 
 								</div>
-								<div id="login_wrap">
-
+								<div>
 									<!-- 표 만들기 -->
 									<table>
 										<tr>
+											<td rowspan="2"><img id="login_img"
+												src="${pageContext.request.contextPath}/resources/images/plus.png"></td>
 											<td>
 												<div class="form-group-left">
-													<input type="email" id="login_text" name="email" placeholder="이메일">
-												</div>
-											</td>
-											<td>
-												<div class="form-group-left">
-													<input type="password" id="login_text" name="password"
-														placeholder="비밀번호">
-												</div>
-											</td>
-
-										</tr>
-										<tr>
-											<td>
-												<div class="form-group-right">
 													<input type="text" id="login_text" name="id"
 														placeholder="아이디">
 												</div>
 											</td>
+
+										</tr>
+										<tr>
 											<td>
 												<div class="form-group-right">
-													<input type="text" id="login_text" name="name"
-														placeholder=" 사용자 이름 ">
+													<input type="password" id="login_text" name="password"
+														placeholder=" 비밀번호 ">
 												</div>
 											</td>
 										</tr>
 									</table>
-
 								</div>
-								<input type="submit" id="sign_btn" value="회원가입" />
+
+								<input type="submit" id="sign_btn" value="로그인" />
 								<div id="or_wrap">
 									<ul>
 										<li>
@@ -122,6 +124,14 @@
 								<div class="wizard-footer height-wizard">
 									<div class="clearfix">
 										<br>
+									</div>
+								</div>
+								<div id="find">
+									<div>
+										아이디가 없으신가요? <a href="<c:url value="/member/reg"/>">회원가입 하기</a>
+									</div>
+									<div>
+										비밀번호를 잊으셨나요? <a href="#">비밀번호 찾기</a>
 									</div>
 								</div>
 							</form>
