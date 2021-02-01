@@ -5284,3 +5284,9 @@ Caused by: java.io.FileNotFoundException: C:\Users\kho3\OneDrive\Documents\Git\m
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2021-01-31 22:42:39.076
 !MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
 >>>>>>> a9568d05bcdbc20adf7c277c01a8892ecc7afbd1
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2021-02-01 11:08:41.954
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2021-02-01 11:08:41.985
+!MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!

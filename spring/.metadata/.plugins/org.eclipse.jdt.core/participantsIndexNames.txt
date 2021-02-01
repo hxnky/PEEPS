@@ -1,27 +1,9 @@
 INDEX VERSION 1.131
-<<<<<<< HEAD
-C:\Users\pc\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2567265282.index
-\Peeps_Post\src\main\java
-C:\Users\pc\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\938116217.index
-\Peeps\src\main\java
-C:\Users\pc\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1953769438.index
-=======
-C:\Users\kimjh\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\938116217.index
-\Peeps\src\main\java
-C:\Users\kimjh\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3682458181.index
-\Peeps_Post\src\main\java
-C:\Users\kimjh\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\492598916.index
-\Peeps_Post\src\main\java
-C:\Users\kimjh\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1953769438.index
->>>>>>> a9568d05bcdbc20adf7c277c01a8892ecc7afbd1
-\Peeps_Chat\src\main\java
-C:\Users\kimjh\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2678678533.index
-\Peeps_Post\src\main\java
-C:\Users\kimjh\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\743573377.index
-\Peeps_Post\src\main\java
-C:\Users\kimjh\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2567265282.index
-\Peeps_Post\src\main\java
-C:\Users\kimjh\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2699156089.index
-\Peeps_Post\src\main\java
-C:\Users\kimjh\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1924685571.index
+C:\Users\hanky\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2262979896.index
+\Peeps_member\src
+C:\Users\hanky\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3856009295.index
+\Peeps_member\src
+C:\Users\hanky\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2509147163.index
+\Peeps_member\src\main\java
+C:\Users\hanky\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1924685571.index
 \Peeps_member\src\main\java
