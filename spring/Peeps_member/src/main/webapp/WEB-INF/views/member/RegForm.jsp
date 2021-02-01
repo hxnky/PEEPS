@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,8 +21,7 @@
 	rel="stylesheet">
 
 <!-- CSS Files -->
-<link href="<c:url value="/resources/css/bootstrap.min.css"/>"
-	rel="stylesheet" />
+<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/gsdk-bootstrap-wizard.css"/>"
 	rel="stylesheet" />
 
@@ -34,7 +34,7 @@
 		style="background-color: #fcf9f6">
 		<div class="logo-container">
 			<!-- 로고 넣기 -->
-			<img id="logo" src="images/KakaoTalk_20210127_164336960.png">
+			<img id="logo" src="${pageContext.request.contextPath}/resources/images/plus.png">
 		</div>
 
 		<!--   Big container   -->
@@ -88,9 +88,12 @@
 								</div>
 								<!-- 카카오랑 구글 이미지 -->
 								<div>
-									<a href="#"><img id="k_login"
-										src="images/kakao_login_medium_narrow.png"></a> <a href="#"><img
-										id="g_login" src="images/google_login.png"></a>
+									<a href="#">
+										<img id="k_login" src="${pageContext.request.contextPath}/resources/images/kakao_login_medium_narrow.png">
+									</a> 
+									<a href="#">
+										<img id="g_login" src="${pageContext.request.contextPath}/resources/images/google_login.png">
+									</a>
 								</div>
 								<div class="wizard-footer height-wizard">
 									<div class="clearfix">
