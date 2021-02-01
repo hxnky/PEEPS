@@ -40,6 +40,11 @@
         margin: 80px auto 65px;
 
     }
+      .post_4_table {
+        margin: 100px auto;
+        padding: 20px;
+        width: 780px
+    }
 
     #thumbnail_h1 {
         text-align: center;
@@ -55,13 +60,17 @@
     }
 
     .thumbnail_sumit {
-        margin: 50px;
+        margin: 0 350px;
+       
     }
 
     .thumbnail_sumit input {
-        background-color: aqua;
+       background-color: #eef0ed;
         width: 100px;
         height: 49px;
+        border-radius: 10px;
+        
+        
     }
 
 </style>
@@ -69,11 +78,23 @@
 <body>
 
     <div class="post_wrap">
-        <div class="post">
-            <div id="thumbnail_h1">
+        <table class="post_4_table" >
+
+            <tr>
+                <td>
+                   
+<div id="thumbnail_h1">
                 <h1>썸네일 선택</h1>
                 <hr>
             </div>
+
+                </td>
+
+            </tr>
+
+            <tr>
+                <td>
+                       
             <!-- carousel를 구성할 영역 설정 -->
             <div class="thumbnail_choi" style="margin: 50px;">
                 <!-- carousel를 사용하기 위해서는 class에 carousel와 slide 설정한다. -->
@@ -123,34 +144,25 @@
                 </div>
             </div>
 
-            <div class="thumbnail_sumit">
+                    
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                     <div class="thumbnail_sumit">
                 <input type="submit" value="등록">
 
             </div>
+                </td>
+            </tr>
 
 
+        </table>
 
-        </div>
 
+</div>
 
-    </div>
-    <script>
-        /*   $(function() {
-                    // 이미지 슬라이드 컨트롤를 사용하기 위해서는 carousel를 실행해야한다.
-                    $('#carousel-example-generic').carousel({
-                        // 슬리아딩 자동 순환 지연 시간
-                        // false면 자동 순환하지 않는다.
-                        interval: 1000,
-                        // hover를 설정하면 마우스를 가져대면 자동 순환이 멈춘다.
-                        pause: "hover",
-                        // 순환 설정, true면 1 -> 2가면 다시 1로 돌아가서 반복
-                        wrap: true,
-                        // 키보드 이벤트 설정 여부(?)
-                        keyboard: true
-                    });
-                });*/
-
-    </script>
 
 </body>
 
