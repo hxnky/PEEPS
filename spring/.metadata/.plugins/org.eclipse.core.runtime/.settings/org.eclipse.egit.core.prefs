@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 GitRepositoriesView.GitDirectories=C\:\\Users\\pc\\Documents\\GitHub\\PEEPS\\.git;C\:\\Users\\kho3\\OneDrive\\Documents\\GitHub\\PEEPS\\.git;
 GitRepositoriesView.GitDirectories.relative=C\:\\Users\\pc\\Documents\\GitHub\\PEEPS\\.git;C\:\\Users\\kho3\\OneDrive\\Documents\\GitHub\\PEEPS\\.git;
+=======
+GitRepositoriesView.GitDirectories=C\:\\Users\\kho3\\OneDrive\\Documents\\GitHub\\PEEPS\\.git;C\:\\Users\\kimjh\\Documents\\GitHub\\PEEPS\\.git;
+GitRepositoriesView.GitDirectories.relative=C\:\\Users\\kho3\\OneDrive\\Documents\\GitHub\\PEEPS\\.git;C\:\\Users\\kimjh\\Documents\\GitHub\\PEEPS\\.git;
+>>>>>>> a9568d05bcdbc20adf7c277c01a8892ecc7afbd1
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1
