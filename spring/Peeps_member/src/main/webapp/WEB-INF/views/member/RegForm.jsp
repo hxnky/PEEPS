@@ -20,14 +20,16 @@
 	rel="stylesheet">
 
 <!-- CSS Files -->
-<link href="resources/css/bootstrap.min.css" rel="stylesheet" />
-<link href="resources/css/gsdk-bootstrap-wizard.css" rel="stylesheet" />
+<link href="<c:url value="/resources/css/bootstrap.min.css"/>"
+	rel="stylesheet" />
+<link href="<c:url value="/resources/css/gsdk-bootstrap-wizard.css"/>"
+	rel="stylesheet" />
 
 <!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="resources/css/demo.css" rel="stylesheet" />
-<link href="resources/css/reg.css" rel="stylesheet" />
+<link href="<c:url value="/resources/css/demo.css"/>" rel="stylesheet" />
+<link href="<c:url value="/resources/css/reg.css"/>" rel="stylesheet" />
 </head>
-<body> 
+<body>
 	<div class="image-container set-full-height"
 		style="background-color: #fcf9f6">
 		<div class="logo-container">
@@ -112,18 +114,17 @@
 	</div>
 
 </body>
-
 <!--   Core JS Files   -->
-<script src="resources/js/jquery-2.2.4.min.js" type="text/javascript"></script>
-<script src="resources/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="resources/js/jquery.bootstrap.wizard.js"
+<script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
+	type="text/javascript"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js"/>"
+	type="text/javascript"></script>
+<script src="<c:url value="/resources/js/jquery.bootstrap.wizard.js"/>"
 	type="text/javascript"></script>
 
 <!--  Plugin for the Wizard -->
-<script src="resources/js/gsdk-bootstrap-wizard.js"></script>
+<script src="<c:url value="/resources/js/gsdk-bootstrap-wizard.js"/>"></script>
 
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
-<script src="resources/js/jquery.validate.min.js"></script>
-</html>
-
+<script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 </html>
