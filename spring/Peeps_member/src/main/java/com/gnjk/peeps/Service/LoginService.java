@@ -20,7 +20,7 @@ public class LoginService {
 
 	public boolean login(HttpServletRequest request, HttpServletResponse response) {
 
-		String id = request.getParameter("id");
+		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String chk = request.getParameter("chk");
 
@@ -28,7 +28,7 @@ public class LoginService {
 
 		boolean loginCheck = false;
 
-		Peeps peeps = dao.selectLogin(id, password);
+		Peeps peeps = dao.selectLogin(email, password);
 
 		if (peeps != null) {
 			if (peeps.getVerify() == 'Y') {

@@ -72,7 +72,7 @@ td {
 								<!-- nav css 수정하기 -->
 								<div>
 									<ul>
-										<li id="top_nav">회원가입</li>
+										<li id="top_nav">로그인</li>
 									</ul>
 
 								</div>
@@ -84,8 +84,8 @@ td {
 												src="${pageContext.request.contextPath}/resources/images/plus.png"></td>
 											<td>
 												<div class="form-group-left">
-													<input type="text" id="login_text" name="id"
-														placeholder="아이디">
+													<input type="email" id="login_text" name="email"
+														placeholder="이메일">
 												</div>
 											</td>
 
@@ -115,7 +115,9 @@ td {
 								</div>
 								<!-- 카카오랑 구글 이미지 -->
 								<div>
-									<a href="#"> <img id="k_login"
+									<a
+										href="https://kauth.kakao.com/oauth/authorize?client_id=c2617392eaee575ec9e742581b354a62&redirect_uri=http://localhost:8080/peeps/login&response_type=code">
+										<img id="k_login"
 										src="${pageContext.request.contextPath}/resources/images/kakao_login_medium_narrow.png">
 									</a> <a href="#"> <img id="g_login"
 										src="${pageContext.request.contextPath}/resources/images/google_login.png">

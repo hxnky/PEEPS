@@ -84,7 +84,7 @@
 										</h3>
 
 										<button id="login_btn" type="button"
-											onclick="location.href='login' ">로그인 하기</button>
+											onclick="location.href='${pageContext.request.contextPath}' ">로그인 하기</button>
 									</c:if>
 
 									<c:if test="${result eq 0}">

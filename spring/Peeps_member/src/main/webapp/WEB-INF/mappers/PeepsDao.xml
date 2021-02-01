@@ -41,12 +41,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="password" property="password" />
 		<result column="m_photo" property="m_photo" />
 	</resultMap>
-	
+
 	<select id="selectLogin" resultMap="memberResult">
-		select * from member where id=#{param1} and password=#{param2}
+		select * from member where
+		email=#{param1} and password=#{param2}
 	</select>
-	
-	
+
+
 
 
 </mapper>
