@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
-Built-By: bit
+<<<<<<< HEAD
+Built-By: pcpc
+Build-Jdk: 1.8.0_271
+=======
+Built-By: kimjh
 Build-Jdk: 1.8.0_261
+>>>>>>> a9568d05bcdbc20adf7c277c01a8892ecc7afbd1
 Created-By: Maven Integration for Eclipse
 
