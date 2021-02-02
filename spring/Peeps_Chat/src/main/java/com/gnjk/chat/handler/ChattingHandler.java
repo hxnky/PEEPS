@@ -13,6 +13,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.gnjk.chat.domain.Message;
 import com.google.gson.Gson;
 
+// TextWebSocketHandler를 상속받은 핸들러 클래스는 자동으로 아래 3개의 메소드가 오버라이드 됨.
 public class ChattingHandler extends TextWebSocketHandler {
 
 	private static final Logger logger = LoggerFactory.getLogger(ChattingHandler.class);
@@ -34,15 +35,19 @@ public class ChattingHandler extends TextWebSocketHandler {
 
 
 	// 메세지 전송 ------------------------ (추가 수정 필요) 
+	// jsp 파일에서 클라이언트가 현재 접속중인 닉네임을 웹소켓을 통해서 서버로 보내면 이 메소드가 실행 
 	@Override
 	protected void handleTextMessage (WebSocketSession session, TextMessage message)  throws Exception {          
 
+		// Dao 클래스 필
+		
 		System.out.println(message.getPayload()); // 나중에 삭제 
 
 		String friend = (String) session.getAttributes().get("user");
 
 		// Json -> java 객체 
 		Gson gson = new Gson();
+		// 현재 접속중인 닉네임은 message.getPayload()라는 함수를 통해 메세지에 담긴 텍스트값을 얻을 수 있다.
 		Message mes = gson.fromJson( message.getPayload(), Message.class);
 		System.out.println(mes);
 
