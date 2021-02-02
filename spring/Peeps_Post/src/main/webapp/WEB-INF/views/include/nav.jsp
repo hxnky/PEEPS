@@ -7,7 +7,7 @@
 			<a href="<c:url value="/"/>">HOME</a>
 		</ul>
 		<ul>
-			<a href="<c:url value="/post/postWriteForm"/>">POST WRITE</a>
+			<a href="<c:url value="/write"/>">POST WRITE</a>
 		</ul>
 	</div>
 </nav>
