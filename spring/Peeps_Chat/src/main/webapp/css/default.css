@@ -168,11 +168,11 @@ main footer img {
 	justify-content: center;
 }
 
-.button {
+#sendBtn {
 	margin-top: -11px;
 	width: 100px;
 	height: 100px;
-	font-size: 20px; -
+	font-size: 20px;
 	-text-transform: uppercase;
 	letter-spacing: 2px;
 	background-color: #F5E978;
@@ -182,13 +182,13 @@ main footer img {
 	outline: none;
 }
 
-.button:hover {
+#sendBtn:hover {
 	background-color: #F2D665;
 	box-shadow: 0px 15px 20px #F2D665;
 	color: #fff;
 	transform: scale(1.1);
 }
 
-.button a:hover {
+#sendBtn a:hover {
 	color: #fff;
 }
