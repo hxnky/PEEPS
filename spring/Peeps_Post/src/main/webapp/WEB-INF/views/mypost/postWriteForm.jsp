@@ -56,15 +56,19 @@ body {
 
 .p_content {
 	resize: none;
-	/* width: 770px; */
+	width: 770px;
+	height: 600px;
 	font-size: 1.2em;
 	font-family: 'Nanum Gothic', sans-serif;
 	padding: 15px;
 	margin-top: 15px;
 	margin-bottom: 5px;
-	overflow-y: hidden;
 }
 
+.p_content::-webkit-scrollbar {
+	display: none;
+}
+/* 스크롤바 숨김 & 스크롤 정상 작동 */
 .post_cnclorsubmt {
 	text-align: right;
 }
@@ -101,7 +105,6 @@ body {
                 $('span').text(inputStrLen);
             });
             
-           
         });
     
     </script>
@@ -135,7 +138,7 @@ body {
 			</tr>
 			<tr>
 				<td>
-					<textarea rows="25" cols="71" class="p_content"
+					<textarea cols="50" class="p_content"
 							  placeholder="내용을 입력해주세요."
 					></textarea>
 					<div><span>0</span>/1500</div>
