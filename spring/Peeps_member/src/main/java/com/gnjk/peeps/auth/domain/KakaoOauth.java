@@ -12,5 +12,11 @@ public class KakaoOauth implements SocialDao {
 		
 		return "";
 	}
+
+	@Override
+	public String requestAccessToken(String code) {
+		
+		return null;
+	}
 	
 }

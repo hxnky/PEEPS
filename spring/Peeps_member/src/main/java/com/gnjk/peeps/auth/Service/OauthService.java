@@ -1,13 +1,13 @@
 package com.gnjk.peeps.auth.Service;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Service;
 
-import com.gnjk.peeps.auth.domain.GoogleOauth;
-import com.gnjk.peeps.auth.domain.KakaoOauth;
+import com.gnjk.peeps.auth.dao.SocialDao;
 import com.gnjk.peeps.auth.domain.SocialType;
 
 import lombok.RequiredArgsConstructor;
@@ -16,37 +16,35 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor // 의존성 주입
 public class OauthService {
 
-	private final KakaoOauth kakaoOauth;
-	private final GoogleOauth googleOauth;
+	// socialDao를 List 타입으로 주입
+	private final List<SocialDao> socialDaoList;
 	private final HttpServletResponse response;
 
 	public void request(SocialType socialType) {
 
-		String redirectURL;
+		SocialDao socialDao = this.findSocialDaoByType(socialType);
 
-		// 분기별로 나누어 다른 파라미터가 들어올 경우 exception 처리
-		switch (socialType) {
-			case GOOGLE: {
-				redirectURL = googleOauth.getOauthRedirectURL();
-			}
-			break;
-			case KAKAO: {
-				redirectURL = kakaoOauth.getOauthRedirectURL();
-			}
-			break;
-			default: {
-				throw new IllegalArgumentException("알 수 없는 소셜 로그인 형식입니다.");
-			}
-		}
-		
+		String redirectURL = socialDao.getOauthRedirectURL();
+
 		try {
 			response.sendRedirect(redirectURL);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
 
+	}
+
+	public String requestAccessToken(SocialType socialType, String code) {
+
+		SocialDao socialDao = this.findSocialDaoByType(socialType);
+
+		return socialDao.requestAccessToken(code);
+	}
+
+	// 21.02.02 스위치 문 사용 시 코드가 길어져서 소셜 로그인 타입을 구별하는 메소드 따로 생성
+	private SocialDao findSocialDaoByType(SocialType socialType) {
+		
+		return socialDaoList.stream().filter(x -> x.type() == socialType).findFirst().orElseThrow(() -> new IllegalArgumentException("알 수 없는 SocialLoginType 입니다."));
 	}
 
 }

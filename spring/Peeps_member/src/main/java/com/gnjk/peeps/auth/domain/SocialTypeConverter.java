@@ -6,8 +6,8 @@ import org.springframework.core.convert.converter.Converter;
 @Configuration
 public class SocialTypeConverter implements Converter<String, SocialType> {
 	@Override
-	public SocialType convert(String s) {
+	public SocialType convert(String str) {
 		
-		return SocialType.valueOf(s.toUpperCase());
+		return SocialType.valueOf(str.toUpperCase());
 	}
 }

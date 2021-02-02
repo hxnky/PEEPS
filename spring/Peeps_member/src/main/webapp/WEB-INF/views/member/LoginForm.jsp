@@ -116,7 +116,7 @@ td {
 								<!-- 카카오랑 구글 이미지 -->
 								<div>
 									<a
-										href="${pageContext.request.contextPath}/auth/KAKAO">
+										href="https://kauth.kakao.com/oauth/authorize?client_id=c2617392eaee575ec9e742581b354a62&redirect_uri=http://localhost:8080/peeps/login&response_type=code">
 										<img id="k_login"
 										src="${pageContext.request.contextPath}/resources/images/kakao_login_medium_narrow.png">
 									</a> <a href="${pageContext.request.contextPath}/auth/GOOGLE"> <img id="g_login"
