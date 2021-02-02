@@ -8,7 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- navi -->
-<link rel="styleSheet" href="<c:url value="/css/default.css"/>">
+<link rel="styleSheet" href="<c:url value="/css/default.css"/>" type="text/css">
+
 <style>
 h2, h3 {
 	margin: 0;
@@ -132,7 +133,7 @@ main header h3 {
 					<div class="stylish-input-group">
 						<span><input type="search" placeholder="@lovely_junghyun">
 							<button id="srch_b">
-								<a href="#"><img src="/hyo0/icon/navi/search.png"></a>
+								<a href=""><img src="/icon/navi/search.png"></a>
 							</button></span>
 					</div>
 				</div>
