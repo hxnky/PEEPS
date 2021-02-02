@@ -5,7 +5,152 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2021-01-29T01:13:00Z</updated>
+  <updated>2021-02-01T16:05:00Z</updated>
+  <entry>
+    <title>Spring Integration AWS 2.3.5.RELEASE &amp; 2.4.0,  and Spring Cloud Stream Kinesis Binder 2.0.4.RELEASE &amp; 2.1.0 Available</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/02/01/spring-integration-aws-2-3-5-release-2-4-0-and-spring-cloud-stream-kinesis-binder-2-0-4-release-2-1-0-available" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Artem Bilan</name>
+    </author>
+    <id>tag:spring.io,2021-02-01:4350</id>
+    <updated>2021-02-01T16:05:00Z</updated>
+    <content type="html">&lt;div class="paragraph"&gt;
+&lt;p&gt;Dear Spring Community,&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Today it&amp;#8217;s my pleasure to announce releases of Spring Integration for Amazon Web Services extension versions &lt;code&gt;2.3.5.RELEASE&lt;/code&gt; &amp;amp; &lt;code&gt;2.4.0&lt;/code&gt;, and Spring Cloud Stream Binder for AWS Kinesis versions &lt;code&gt;2.0.4.RELEASE&lt;/code&gt; &amp;amp; &lt;code&gt;2.1.0&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;These releases can be downloaded from Maven Central, JCenter:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="listingblock"&gt;
+&lt;div class="content"&gt;
+&lt;pre class="prettyprint highlight"&gt;&lt;code data-lang="groovy"&gt;compile "org.springframework.integration:spring-integration-aws:2.3.5.RELEASE"&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;If you don&amp;#8217;t use Kinesis Binder.
+Or via Binder dependency:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="listingblock"&gt;
+&lt;div class="content"&gt;
+&lt;pre class="prettyprint highlight"&gt;&lt;code data-lang="groovy"&gt;compile "org.springframework.cloud:spring-cloud-stream-binder-kinesis:2.0.4.RELEASE"&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Mostly these versions have bug fixes and some community feedback refinements.
+So, it is highly recommended to bump your projects to this latest versions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;The new minor versions (&lt;code&gt;spring-integration-aws:2.4.0&lt;/code&gt; &amp;amp; &lt;code&gt;spring-cloud-stream-binder-kinesis:2.1.0&lt;/code&gt;) have the same fixes content, but with an upgrade to the latest Spring Integration and Spring Cloud Stream versions for compatibility with the latest Spring Boot and Spring Cloud, respectively.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Many thanks to everyone from the Community for all the feedback and contribution to these projects.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Any feedback is welcome via all the available communication channels!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Spring Integration for AWS resources:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;a href="https://github.com/spring-projects/spring-integration-aws"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-integration/blob/master/CONTRIBUTING.adoc"&gt;Contributing&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-integration"&gt;Help&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-integration"&gt;Chat&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;Spring Cloud Stream Binder for AWS Kinesis resources:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;a href="https://github.com/spring-cloud/spring-cloud-stream-binder-aws-kinesis"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-cloud/spring-cloud-stream-binder-aws-kinesis/blob/master/spring-cloud-stream-binder-kinesis-docs/src/main/asciidoc/contributing.adoc"&gt;Contributing&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-cloud-stream"&gt;Help&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-cloud-stream"&gt;Chat&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
+  <entry>
+    <title>YMNNALFT: A lightweight SQL data mapper with the JdbcTemplate</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/02/01/ymnnalft-a-lightweight-sql-data-mapper-with-the-jdbctemplate" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2020-12-30:4324</id>
+    <updated>2021-02-01T11:00:00Z</updated>
+    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;You May Not Need Another Library For That&lt;/em&gt; (YMNNALFT)! I&amp;rsquo;ve spent a lot of time since 2016 illuminating (or trying to, anyway!) some of the more enormous opportunities in the Spring ecosystem in &lt;a href="http://bit.ly/spring-tips-playlist"&gt;my Spring Tips videos&lt;/a&gt;. Today, however, I come to you in a different spirit, wanting to focus on the little, sometimes hidden, gems that do fantastic things and that might spare you an additional third-party dependency and its implied complexity. &lt;/p&gt;
+&lt;p&gt;I think the first use I had for Spring, more than 15 years ago, was the &lt;code&gt;JdbcTemplate&lt;/code&gt;, which eliminated the eye-watering and verbose work of using JDBC directly. As you might know, JDBC stands for &amp;ldquo;Just Don&amp;rsquo;t Break, Compiler!&amp;rdquo; and was designed to test the JVM limit of 65535 bytes of bytecode per method by providing an API that consistently requires more lines of code than that to do even basic things. &lt;/p&gt;
+&lt;p&gt;Thus just in. I&amp;rsquo;m being told that JDBC is, in fact, the Java Database Connectivity API. Moving on&amp;hellip; &lt;/p&gt;
+&lt;p&gt;I couldn&amp;rsquo;t use Spring as a framework in the project at the time, but I &lt;em&gt;could&lt;/em&gt; bring in Spring as a sort of library. I brought it in initially to get access to the &lt;code&gt;JdbcTemplate&lt;/code&gt;, and the concept of the various &lt;code&gt;*Template&lt;/code&gt; objects as a whole. &lt;/p&gt;
+&lt;p&gt;A template object is an excellent example of the inversion-of-control principle. You let the template object do 90% of the work and provide it with a callback to be invoked when the template needs your input on something. Templates invert the application flow; they do the tedious stuff and then involve you only when it&amp;rsquo;s time to do the thing you want to do. They&amp;rsquo;re kind of like &lt;em&gt;mini-frameworks&lt;/em&gt;. &lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;JdbcTemplate&lt;/code&gt; is one of the best-known templates in the Java ecosystem, and for a good reason. JDBC is a low-level API in the Java ecosystem for working with SQL databases. It&amp;rsquo;s powerful, and it has dominated for &lt;em&gt;decades&lt;/em&gt;. But it is, at the end of the day, &lt;em&gt;very&lt;/em&gt; low level. You&amp;rsquo;re not going to get very far writing this code yourself. &lt;/p&gt;
+&lt;p&gt;The alternatives were brittle (at the time) technologies like Hibernate, Apache OJB, any of the various, mildly incompatible JDO implementations, iBatis, or - &lt;em&gt;gasp!&lt;/em&gt; - EJB 1.x or 2.x persistent entity beans. Most of these were way too top-heavy for the work I was trying to do. I loved iBatis (and continue to love its &lt;a href="http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/"&gt;successor MyBatis&lt;/a&gt;), but I found I could get far with just the &lt;code&gt;JdbcTemplate&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;JdbcTemplate&lt;/code&gt; is part of a rich class arrangement and various abstractions for working with SQL databases. Nowadays, there&amp;rsquo;s even a non-blocking, reactive alternative to JDBC available to the Spring developer: &lt;a href="https://R2DBC.io"&gt;R2DBC&lt;/a&gt;. Most data access logic today uses JDBC (indirectly, if nothing else), alas, so let&amp;rsquo;s look at an example of that. &lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+  &lt;p&gt;JDBC on &lt;a href="http://start.spring.io"&gt;the Spring Initializr&lt;/a&gt; - &lt;code&gt;org.springframework.boot&lt;/code&gt; : &lt;code&gt;spring-boot-starter-jdbc&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+  &lt;li&gt;
+  &lt;p&gt;H2 on &lt;a href="http://start.spring.io"&gt;the Spring Initializr&lt;/a&gt; - &lt;code&gt;com.h2database&lt;/code&gt; : &lt;code&gt;h2&lt;/code&gt; &lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here&amp;rsquo;s the code:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;package bootiful.data;&#xD;
+&#xD;
+import lombok.SneakyThrows;&#xD;
+import org.springframework.boot.SpringApplication;&#xD;
+import org.springframework.boot.autoconfigure.SpringBootApplication;&#xD;
+import org.springframework.boot.context.event.ApplicationReadyEvent;&#xD;
+import org.springframework.context.ApplicationListener;&#xD;
+import org.springframework.context.annotation.Bean;&#xD;
+import org.springframework.core.io.ClassPathResource;&#xD;
+import org.springframework.core.io.Resource;&#xD;
+import org.springframework.jdbc.core.JdbcTemplate;&#xD;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;&#xD;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;&#xD;
+import org.springframework.util.FileCopyUtils;&#xD;
+&#xD;
+import javax.sql.DataSource;&#xD;
+import java.io.InputStreamReader;&#xD;
+import java.io.Reader;&#xD;
+import java.util.List;&#xD;
+&#xD;
+@SpringBootApplication&#xD;
+public class BootifulApplication {&#xD;
+&#xD;
+	public static void main(String[] args) {&#xD;
+		SpringApplication.run(BootifulApplication.class, args);&#xD;
+	}&#xD;
+&#xD;
+	@Bean&#xD;
+	DataSource dataSource() {&#xD;
+		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build();&#xD;
+	}&#xD;
+&#xD;
+	@SneakyThrows&#xD;
+	private String loadSql() {&#xD;
+		Resource resource = new ClassPathResource(&amp;quot;/initialization.sql&amp;quot;);&#xD;
+		try (Reader r = new InputStreamReader(resource.getInputStream())) {&#xD;
+			return FileCopyUtils.copyToString(r);&#xD;
+		}&#xD;
+	}&#xD;
+&#xD;
+	@Bean&#xD;
+	ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; ready(DataSource dataSource) {&#xD;
+		return event -&amp;gt; {&#xD;
+			String sql = loadSql();&#xD;
+			String[] names = new String[] { &amp;quot;Spencer&amp;quot;, &amp;quot;Violetta&amp;quot;, &amp;quot;Madhura&amp;quot;, &amp;quot;Yuxin&amp;quot;, &amp;quot;St?phane&amp;quot;, &amp;quot;Dr. Syer&amp;quot; };&#xD;
+			JdbcTemplate template = new JdbcTemplate(dataSource);&#xD;
+			template.execute(sql);&#xD;
+			for (var name : names) {&#xD;
+				template.update(&amp;quot;insert into CUSTOMER(name) values(?)&amp;quot;, name);&#xD;
+			}&#xD;
+			List&amp;lt;Customer&amp;gt; results = template.query(&amp;quot;select * from CUSTOMER&amp;quot;,&#xD;
+					(resultSet, i) -&amp;gt; new Customer(resultSet.getInt(&amp;quot;id&amp;quot;), resultSet.getString(&amp;quot;name&amp;quot;)));&#xD;
+			results.forEach(System.out::println);&#xD;
+		};&#xD;
+	}&#xD;
+&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you don&amp;rsquo;t mind rolling up your sleeves and slinging a little SQL (and why would you? SQL is &lt;em&gt;awesome&lt;/em&gt;!), then you&amp;rsquo;ll feel right at home using the &lt;code&gt;JdbcTemplate&lt;/code&gt; and the various commands classes in the JDBC module. If not, Spring continues to meet you where you today with rich integrations for JDBC-centric data access technologies like JOOQ, Hibernate, JPA, MyBatis, Spring Data JPA, Spring Data JDBC, and a slew of other options. &lt;/p&gt;
+&lt;p&gt;Did you like this gem at a glance approach? Did you learn anything? As always, I&amp;rsquo;m keen on hearing from you, so &lt;a href="http://twitter.com/starbuxman"&gt;please sound off on Twitter (@starbuxman) &lt;/a&gt;! I&amp;rsquo;ll be back with another installment of &lt;em&gt;YMNNALFT&lt;/em&gt;, so be sure not to miss that. &lt;/p&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>A Bootiful Podcast: AppDynamics' Pavol Loffay</title>
     <link rel="alternate" href="https://spring.io/blog/2021/01/28/a-bootiful-podcast-appdynamics-pavol-loffay" />
@@ -365,10 +510,10 @@ public class DemoApplication {&#xD;
 $ mvn spring-boot:build-image -Dspring-boot.build-image.imageName=benas/bootiful-job&#xD;
 [INFO] Scanning for projects...&#xD;
 [INFO]&#xD;
-‚Ä¶&#xD;
+°¶&#xD;
 [INFO] --- spring-boot-maven-plugin:2.4.1:build-image (default-cli) @ demo ---&#xD;
 [INFO] Building image &amp;#39;docker.io/benas/bootiful-job:latest&amp;#39;&#xD;
-‚Ä¶&#xD;
+°¶&#xD;
 [INFO] Successfully built image &amp;#39;docker.io/benas/bootiful-job:latest&amp;#39;&#xD;
 [INFO]&#xD;
 [INFO] ------------------------------------------------------------------------&#xD;
@@ -446,7 +591,7 @@ java.lang.IllegalStateException: Failed to execute ApplicationRunner&#xD;
 	at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) [workspace/:na]&#xD;
 	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:88) [workspace/:na]&#xD;
 Caused by: org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException: A job instance already exists and is complete for parameters={fileName=https://raw.githubusercontent.com/benas/spring-batch-lab/master/blog/spring-batch-kubernetes/data/sample1.csv}.  If you want to run this job again, change the parameters.&#xD;
-‚Ä¶
+°¶
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Spring Batch does not let the same job instance be re-run after it has successfully completed. This is by design, to prevent duplicate job executions due to either a human error or a platform limitation, as explained in the previous section.&lt;/p&gt;&lt;h4&gt;&lt;a href="#preventing-concurrent-job-executions-of-the-same-job-instance" class="anchor" name="preventing-concurrent-job-executions-of-the-same-job-instance"&gt;&lt;/a&gt;Preventing Concurrent Job Executions of the Same Job Instance&lt;/h4&gt;
 &lt;p&gt;In the same spirit, Spring Batch prevents concurrent executions of the same job instance. To test it, add an item processor that does a &lt;code&gt;Thread.sleep&lt;/code&gt; to slow down the processing and try to run a second job execution (in a separate terminal) while the first one is running. The second (concurrent) attempt fails with:&lt;/p&gt;
@@ -468,7 +613,7 @@ java.lang.IllegalStateException: Failed to execute ApplicationRunner&#xD;
 	at org.springframework.boot.loader.Launcher.launch(Launcher.java:58) [workspace/:na]&#xD;
 	at org.springframework.boot.loader.JarLauncher.main(JarLauncher.java:88) [workspace/:na]&#xD;
 Caused by: org.springframework.batch.core.repository.JobExecutionAlreadyRunningException: A job execution for this job is already running: JobExecution: id=1, version=1, startTime=2021-01-08 20:58:46.434, endTime=null, lastUpdated=2021-01-08 20:58:46.435, status=STARTED, exitStatus=exitCode=UNKNOWN;exitDescription=, job=[JobInstance: id=1, version=0, Job=[job]], jobParameters=[{fileName=https://raw.githubusercontent.com/benas/spring-batch-lab/master/blog/spring-batch-kubernetes/data/sample1.csv}]&#xD;
-‚Ä¶
+°¶
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Thanks to the centralized job repository, Spring Batch can detect currently running executions (based on the job status in the database) and prevent concurrent executions either on the same node or any other node of the cluster by throwing a &lt;code&gt;JobExecutionAlreadyRunningException&lt;/code&gt;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#3-deploy-the-job-on-kubernetes" class="anchor" name="3-deploy-the-job-on-kubernetes"&gt;&lt;/a&gt;3. Deploy the Job on Kubernetes&lt;/h3&gt;
 &lt;p&gt;Setting up a Kubernetes cluster is beyond the scope of this post, so I assume you already have a Kubernetes cluster up and running and can interact with it by using &lt;code&gt;kubectl&lt;/code&gt;. In this post, I use the single-node local Kubernetes cluster provided by the Docker Desktop application.&lt;/p&gt;
@@ -650,7 +795,7 @@ $ kubectl logs bootiful-job-sample2-n8mlb&#xD;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;Unfortunately, many people fail at designing good identifying job parameters and end up adding a timestamp or a random number as an additional identifying job parameter acting as job instance discriminator. Using an ever growing ‚Äúrun.id‚Äù parameter is a symptom of such a failure.&lt;/p&gt;&lt;h3&gt;&lt;a href="#3-choosing-the-right-kubernetes-job-deployment-pattern" class="anchor" name="3-choosing-the-right-kubernetes-job-deployment-pattern"&gt;&lt;/a&gt;3. Choosing the Right Kubernetes Job Deployment Pattern&lt;/h3&gt;
+&lt;p&gt;Unfortunately, many people fail at designing good identifying job parameters and end up adding a timestamp or a random number as an additional identifying job parameter acting as job instance discriminator. Using an ever growing °∞run.id°± parameter is a symptom of such a failure.&lt;/p&gt;&lt;h3&gt;&lt;a href="#3-choosing-the-right-kubernetes-job-deployment-pattern" class="anchor" name="3-choosing-the-right-kubernetes-job-deployment-pattern"&gt;&lt;/a&gt;3. Choosing the Right Kubernetes Job Deployment Pattern&lt;/h3&gt;
 &lt;p&gt;The Kubernetes&amp;rsquo; documentation provides a whole section called &lt;a href="https://kubernetes.io/docs/concepts/workloads/controllers/job/#job-patterns"&gt;Job patterns&lt;/a&gt;, which describes how to choose the right job deployment pattern. In this post, I followed the &lt;a href="https://kubernetes.io/docs/tasks/job/parallel-processing-expansion/"&gt;Parallel processing using expansions&lt;/a&gt; approach to create a job per file from a template. While this approach allows for processing multiple files in parallel, it can put a pressure on Kubernetes when there are many files to ingest, as this would result in many Kubernetes job objects being created. If all your files have a similar structure and you want to create a single job to ingest them in one shot, you can use the &lt;code&gt;MultiResourceItemReader&lt;/code&gt; provided by Spring Batch and create a single Kubernetes job. Another option is to use a single job with a partitioned step where each worker step handles a file (this can be achieved by using the built-in &lt;code&gt;MultiResourcePartitioner&lt;/code&gt;).&lt;/p&gt;&lt;h3&gt;&lt;a href="#4-graceful-abrupt-shutdown-implication" class="anchor" name="4-graceful-abrupt-shutdown-implication"&gt;&lt;/a&gt;4. Graceful/Abrupt Shutdown Implication&lt;/h3&gt;
 &lt;p&gt;When a Spring Batch job execution fails, you can restart it if the job instance is restartable. You can automate this, as long as the job execution is shut down gracefully, since this gives Spring Batch a chance to correctly set the job execution&amp;rsquo;s status to &lt;code&gt;FAILED&lt;/code&gt; and set its &lt;code&gt;END_TIME&lt;/code&gt; to a non-null value. However, if the job execution fails abruptly, the job execution&amp;rsquo;s status is still be set to &lt;code&gt;STARTED&lt;/code&gt; and its &lt;code&gt;END_TIME&lt;/code&gt; is &lt;code&gt;null&lt;/code&gt;. When you try to restart such a job execution, Spring Batch will think (since it only looks at the database status) that a job execution is currently running for this instance and fails with a &lt;code&gt;JobExecutionAlreadyRunningException&lt;/code&gt;. In such cases, the metadata tables should be updated to allow the restart of such a failed execution &amp;ndash; something like:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="prettyprint"&gt;&amp;gt; update BATCH_JOB_EXECUTION set status = &amp;#39;FAILED&amp;#39;, END_TIME = &amp;#39;2020-01-15 10:10:28.235&amp;#39; where job_execution_id = X;&#xD;
@@ -845,7 +990,7 @@ class Customer implements Serializable {&#xD;
 &#xD;
 }
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This example introduces a &lt;em&gt;sm√∂rg√•sbord&lt;/em&gt; of various &lt;code&gt;Utils&lt;/code&gt; class implementations in the Spring ecosystem. It looks at &lt;/p&gt;
+&lt;p&gt;This example introduces a &lt;em&gt;sm?rg?sbord&lt;/em&gt; of various &lt;code&gt;Utils&lt;/code&gt; class implementations in the Spring ecosystem. It looks at &lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;code&gt;BeanUtils&lt;/code&gt; - useful functions for dealing with JavaBeans&lt;/li&gt;
   &lt;li&gt;&lt;code&gt;ClassUtils&lt;/code&gt; - useful functions for asking questions reflectively about types&lt;/li&gt;
@@ -883,11 +1028,11 @@ class Customer implements Serializable {&#xD;
   &lt;li&gt;&lt;a href="https://developer.okta.com/blog/2021/01/20/reactive-java-microservices"&gt;The Okta blog has a nice post on reactive Java microservices &lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://github.com/trankchung/kubeswitch/"&gt;Kubeswitch v0.2.0 - Kubernetes context and namespace switching&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://www.javavogue.com/2019/02/how-to-create-a-rest-api-with-spring-boot/"&gt;How to create a REST API with Spring Boot&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://jishuin.proginn.com/p/763bfbd382bf"&gt;An interesting post on RSocket (Êõø‰ª£ REST ÁöÑ‰∏ç‰∫åÈÄâÊã©)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://jishuin.proginn.com/p/763bfbd382bf"&gt;An interesting post on RSocket (Ù”€ REST Ó‹‹ÙÏ£??)&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://spring.io/blog/2021/01/21/spring-boot-2-5-0-m1-available-now"&gt;Spring Boot 2.5.0-M1 available now&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://twitter.com/rorypreddy/status/1353338898219479044?s=12"&gt;The Azure Spring Cloud VSCode extension is out!&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;I really enjoyed this discussion - &lt;a href="https://www.reddit.com/r/kubernetes/comments/l2l9jf/top_considerations_when_evaluating_an_ingress/"&gt;Top Considerations when Evaluating an Ingress Controller for Kubernetes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://twitter.com/VMwareTanzu/status/1351951632158875652"&gt;VMwareTanzu KubeAcademy‚Äôs expert instructors design and deliver each course to give you practical #Kubernetes training. &lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://twitter.com/VMwareTanzu/status/1351951632158875652"&gt;VMwareTanzu KubeAcademy°Øs expert instructors design and deliver each course to give you practical #Kubernetes training. &lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://twitter.com/cloudfoundry/status/1351963315614879746"&gt; Learn how CF Protect helps recover data in Cloud Foundry &lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
@@ -904,8 +1049,8 @@ class Customer implements Serializable {&#xD;
     <content type="html">&lt;blockquote&gt;
   &lt;p&gt;This post was written by our friend on the Azure Spring Cloud team, the amazing &lt;a href="https://twitter.com/liangkylie"&gt;Kylie Liang (@liangkylie)&lt;/a&gt;. I interviewed her for the &lt;a href="http://bootifulpodcast.fm"&gt;&lt;em&gt;Bootiful Podcast&lt;/em&gt;&lt;/a&gt; in April 2019, too! -Josh&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;2020 was a busy year for Azure Spring Cloud service. Microsoft and VMware co-announced Azure Spring Cloud General Availability (GA). We were excited to see how Azure Spring Cloud helped customers focus on code and let us take care of the underlying infrastructure management, operation, and maintenance. We continue to prioritize our work according to customers‚Äô requests and feedback. For example, 7 more regions were enabled, and Azure Spring Cloud service is now available in &lt;a href="https://docs.microsoft.com/azure/spring-cloud/spring-cloud-faq?pivots=programming-language-java#in-which-regions-is-azure-spring-cloud-available"&gt;18&lt;/a&gt; regions of Asia Pacific, Australia, Canada, China, Europe, India, Korea, United Arab Emirates, United Kingdom, and the United States. In this blog, I‚Äôll share more about the newest features and enhancements since GA. &lt;/p&gt;&lt;h2&gt;&lt;a href="#full-apm-capabilities-w-application-insights-java-in-process-agent" class="anchor" name="full-apm-capabilities-w-application-insights-java-in-process-agent"&gt;&lt;/a&gt;Full APM Capabilities w/ Application Insights Java in-process Agent&lt;/h2&gt;
-&lt;p&gt;Application Insights is an extensible Application Performance Management (APM) service for developers and DevOps professionals. With its latest Java in-process agent you can enjoy full APM functionalities besides distributed tracing. For example, you can monitor real-time live metrics without any code changes and obtain insights into application dependencies ‚Äì MySQL, PostgreSQL, JDBC, Redis, JMS, Kafka, Netty / WebFlux, etc. Learn more &lt;a href="https://spring.io/blog/2021/01/21/bootiful-application-monitoring-with-azure-spring-cloud"&gt;from here&lt;/a&gt; about effortlessly monitoring applications and dependencies in Azure Spring Cloud!&lt;/p&gt;
+&lt;p&gt;2020 was a busy year for Azure Spring Cloud service. Microsoft and VMware co-announced Azure Spring Cloud General Availability (GA). We were excited to see how Azure Spring Cloud helped customers focus on code and let us take care of the underlying infrastructure management, operation, and maintenance. We continue to prioritize our work according to customers°Ø requests and feedback. For example, 7 more regions were enabled, and Azure Spring Cloud service is now available in &lt;a href="https://docs.microsoft.com/azure/spring-cloud/spring-cloud-faq?pivots=programming-language-java#in-which-regions-is-azure-spring-cloud-available"&gt;18&lt;/a&gt; regions of Asia Pacific, Australia, Canada, China, Europe, India, Korea, United Arab Emirates, United Kingdom, and the United States. In this blog, I°Øll share more about the newest features and enhancements since GA. &lt;/p&gt;&lt;h2&gt;&lt;a href="#full-apm-capabilities-w-application-insights-java-in-process-agent" class="anchor" name="full-apm-capabilities-w-application-insights-java-in-process-agent"&gt;&lt;/a&gt;Full APM Capabilities w/ Application Insights Java in-process Agent&lt;/h2&gt;
+&lt;p&gt;Application Insights is an extensible Application Performance Management (APM) service for developers and DevOps professionals. With its latest Java in-process agent you can enjoy full APM functionalities besides distributed tracing. For example, you can monitor real-time live metrics without any code changes and obtain insights into application dependencies ? MySQL, PostgreSQL, JDBC, Redis, JMS, Kafka, Netty / WebFlux, etc. Learn more &lt;a href="https://spring.io/blog/2021/01/21/bootiful-application-monitoring-with-azure-spring-cloud"&gt;from here&lt;/a&gt; about effortlessly monitoring applications and dependencies in Azure Spring Cloud!&lt;/p&gt;
 &lt;p&gt;As you know, there is always the possibility that a service may be down or having high latency when a service invokes another service. This may lead to exhaustion of the threads as they might be waiting for other requests to complete. With the implementation of the Circuit Breaker pattern, you can prevent failures from cascading and provide fallback behavior until a failing service is restored to normal operation. The new Spring Cloud Circuit Breaker framework unifies all implementations of its metrics data pipeline into Micrometer. Resilience4j is a new option for Spring developers to implement the Circuit Breaker pattern. Resilience4j works well with Spring Boot and using Micrometer libraries, it can produce metrics for monitoring. After enabling &lt;a href="https://docs.microsoft.com/azure/spring-cloud/spring-cloud-howto-circuit-breaker-metrics"&gt;Application Insights java in-process agent and dimension collection for Resilience4j metrics&lt;/a&gt;, you can collect Spring Cloud Resilience4j Circuit Breaker Metrics and display them in the Metrics blade of Application Insights. &lt;/p&gt;
 &lt;img src ="https://github.com/joshlong/blog-images/raw/master/whats-new-in-azure-spring-cloud-after-ga-25-jan-2021/Picture1.png" /&gt;&lt;h2&gt;&lt;a href="#get-outbound-public-ip-to-secure-the-communication-with-external-resources" class="anchor" name="get-outbound-public-ip-to-secure-the-communication-with-external-resources"&gt;&lt;/a&gt;Get outbound public IP to secure the communication with external resources&lt;/h2&gt;
 &lt;p&gt;Some network environments are locked down via a Firewall and allow only whitelisted IP addresses inbound to their internal network. Learn how to get &lt;a href="https://docs.microsoft.com/azure/spring-cloud/spring-cloud-howto-outbound-public-ip"&gt;static outbound public IP addresses&lt;/a&gt; of Azure Spring Cloud applications to communicate with external resources, such as databases, storage, and key vaults. &lt;/p&gt;
@@ -919,7 +1064,7 @@ class Customer implements Serializable {&#xD;
 &lt;p&gt;Security, elastic scaling, and monitoring are key tenets of Azure Spring Cloud. In the following months, you will see more updates for:&lt;/p&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;Managed Virtual Network&lt;/strong&gt;: allows users to be in control of inbound and outbound network communications for Azure Spring Cloud and enables Azure Spring Cloud to interact with systems in on-premises data centers or Azure services in virtual networks.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Autoscale&lt;/strong&gt;: automates the upscaling or downscaling of the application based on load or schedule ‚Äì thus providing cost-efficiency and better performance.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Autoscale&lt;/strong&gt;: automates the upscaling or downscaling of the application based on load or schedule ? thus providing cost-efficiency and better performance.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;E2E TLS&lt;/strong&gt;: allows users to encrypt and securely transmit sensitive data among applications or from app to the backend.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Azure RBAC&lt;/strong&gt; for managed Spring Cloud Config Server/Service Registry: allows users to authenticate with AAD (Azure Active Directory) token for accessing to managed Spring Cloud Config Server/Service Registry by Azure Spring Cloud service.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Integration with 3rd party APM solutions&lt;/strong&gt;: enables out-of-box experience w/ 3rd party Application Performance Monitoring (APM) tools such as New Relic, App Dynamics and Dynatrace for Azure Spring Cloud apps.&lt;/li&gt;
@@ -1169,7 +1314,7 @@ public class BootifulApplication {&#xD;
 &lt;ul&gt;
   &lt;li&gt;Visibility into all your applications with &lt;strong&gt;distributed tracing&lt;/strong&gt;, including paths of operation requests from origins to destinations and insights into applications that are operating correctly and those with bottlenecks.&lt;/li&gt;
   &lt;li&gt;Logs, exceptions, and metrics in the context of call paths offer &lt;strong&gt;meaningful insights and actionable information&lt;/strong&gt; to speed root cause analysis.&lt;/li&gt;
-  &lt;li&gt;Insights into application &lt;strong&gt;dependencies&lt;/strong&gt; ‚Äì SQL Database, MySQL, PostgreSQL, MariaDB, JDBC, MongoDB, Cassandra, Redis, JMS, Kafka, Netty / WebFlux, etc.&lt;/li&gt;
+  &lt;li&gt;Insights into application &lt;strong&gt;dependencies&lt;/strong&gt; ? SQL Database, MySQL, PostgreSQL, MariaDB, JDBC, MongoDB, Cassandra, Redis, JMS, Kafka, Netty / WebFlux, etc.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Performance data&lt;/strong&gt; for every call into operations exposed by applications, including data-like request counts, response times, CPU usage, and memory.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Custom metrics&lt;/strong&gt; conveniently auto-collected through Micrometer, allowing you to publish custom performance indicators or business-specific metrics and visualize deeper application and business insights.&lt;/li&gt;
   &lt;li&gt;Ability to &lt;strong&gt;browse, query, and alert on application metrics and logs&lt;/strong&gt;.&lt;/li&gt;
@@ -1181,49 +1326,49 @@ public class BootifulApplication {&#xD;
         --resource-group ${RESOURCE_GROUP} &#xD;
         --location ${REGION}
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Then, you can open Application Insights created by Azure Spring Cloud and start monitoring applications and their dependencies ‚Äì we will illustrate this using a &lt;a href="https://github.com/Azure-Samples/spring-petclinic-microservices"&gt;distributed version of Spring Petclinic&lt;/a&gt;. Navigate to the &lt;code&gt;Application Map&lt;/code&gt; blade where you can see an incredible, holistic view of microservices that shows applications that are operating correctly (green) and those with bottlenecks (red) [Figure 1]. Developers can easily identify issues in their applications and quickly troubleshoot and fix them.&lt;/p&gt;
+&lt;p&gt;Then, you can open Application Insights created by Azure Spring Cloud and start monitoring applications and their dependencies ? we will illustrate this using a &lt;a href="https://github.com/Azure-Samples/spring-petclinic-microservices"&gt;distributed version of Spring Petclinic&lt;/a&gt;. Navigate to the &lt;code&gt;Application Map&lt;/code&gt; blade where you can see an incredible, holistic view of microservices that shows applications that are operating correctly (green) and those with bottlenecks (red) [Figure 1]. Developers can easily identify issues in their applications and quickly troubleshoot and fix them.&lt;/p&gt;
 &lt;figcaption &gt; Figure 1 - Microservice transactions in Application Insights &lt;/figcaption&gt;
 &lt;img  width="700" src ="https://github.com/Azure-Samples/spring-petclinic-microservices/raw/azure/media/distributed-tracking-new-ai-agent.jpg" /&gt;
 &lt;p&gt;Navigate to the &lt;code&gt;Performance&lt;/code&gt; blade where you can see response times and request counts for operations exposed by your applications [Figure 2]. &lt;/p&gt;
 &lt;figcaption &gt; &#xD;
-Figure 2 ‚Äì Performance of operations exposed by applications &lt;/figcaption&gt;
+Figure 2 ? Performance of operations exposed by applications &lt;/figcaption&gt;
 &lt;img width="700" src="https://github.com/Azure-Samples/spring-petclinic-microservices/raw/azure/media/petclinic-microservices-performance.jpg" /&gt;
 &lt;p&gt;Navigate to the &lt;code&gt;Dependencies&lt;/code&gt; tab in the &lt;code&gt;Performance&lt;/code&gt; blade where you can see all your dependencies and their response times and request counts [Figure 3]. &lt;/p&gt;
-&lt;figcaption&gt;Figure 3 ‚Äì Performance of application dependencies&#xD;
+&lt;figcaption&gt;Figure 3 ? Performance of application dependencies&#xD;
 &lt;/figcaption&gt;
 &lt;img  width="700" src="https://github.com/Azure-Samples/spring-petclinic-microservices/raw/azure/media/petclinic-microservices-insights-on-dependencies.jpg" /&gt;
 &lt;p&gt;You can click a SQL call or a dependency to see the full end-to-end transaction in context [Figure 4].&lt;/p&gt;
 &lt;figcaption&gt;&#xD;
-Figure 4 ‚Äì End-to-end application to SQL call transaction details&#xD;
+Figure 4 ? End-to-end application to SQL call transaction details&#xD;
 &lt;/figcaption&gt;
 &lt;img width="700" src="https://github.com/Azure-Samples/spring-petclinic-microservices/raw/azure/media/petclinic-microservices-end-to-end-transaction-details.jpg" /&gt;
 &lt;p&gt;Navigate to the &lt;code&gt;Exceptions&lt;/code&gt; tab in the &lt;code&gt;Failures&lt;/code&gt; blade to see a collection of exceptions thrown by applications [Figure 5].&lt;/p&gt;
-&lt;figcaption&gt;Figure 5 ‚Äì Exceptions thrown by applications&#xD;
+&lt;figcaption&gt;Figure 5 ? Exceptions thrown by applications&#xD;
 &lt;/figcaption&gt;
 &lt;img  width="700" src="https://github.com/Azure-Samples/spring-petclinic-microservices/raw/azure/media/petclinic-microservices-failures-exceptions.jpg" /&gt;
 &lt;p&gt;Simply select an exception and drill in for meaningful insights and actionable stack trace [Figure 6].&lt;/p&gt;
-&lt;figcaption&gt;Figure 6 ‚Äì End-to-end transaction details for an application exception&#xD;
+&lt;figcaption&gt;Figure 6 ? End-to-end transaction details for an application exception&#xD;
 &lt;/figcaption&gt;
 &lt;img  width="700" src="https://github.com/Azure-Samples/spring-petclinic-microservices/raw/azure/media/end-to-end-transaction-details.jpg" /&gt;
 &lt;p&gt;Navigate to the &lt;code&gt;Metrics&lt;/code&gt; blade to see all the metrics contributed by Spring Boot applications, Spring Cloud modules, and their dependencies. The chart below showcases &lt;code&gt;gateway-requests&lt;/code&gt; contributed by Spring Cloud Gateway and &lt;code&gt;hikaricp_connections&lt;/code&gt; contributed by JDBC [Figure 7]. Similarly, you can aggregate Spring Cloud Resilience4J metrics and visualize them.&lt;/p&gt;
-&lt;figcaption&gt;Figure 7 ‚Äì Metrics contributed by Spring modules&#xD;
+&lt;figcaption&gt;Figure 7 ? Metrics contributed by Spring modules&#xD;
 &lt;/figcaption&gt;
 &lt;img  width="700" src="https://github.com/Azure-Samples/spring-petclinic-microservices/raw/azure/media/petclinic-microservices-metrics.jpg" /&gt;
-&lt;p&gt;Spring Boot applications register a lot of core metrics ‚Äì JVM, CPU, Tomcat, Logback, etc. You can use Micrometer to contribute your own custom metrics, say using the &lt;code&gt;@Timed&lt;/code&gt; Micrometer annotation at the class level. You can then visualize those custom metrics in Application Insights. As an example, see how pet owners, pets, and their clinical visits are tracked by custom metrics below ‚Äì you can also see how the pattern changes at 9 PM because applications are driving higher utilization when autoscaling kicked in [Figure 8].&lt;/p&gt;
-&lt;figcaption&gt;Figure 8 ‚Äì Custom metrics published by user applications&#xD;
+&lt;p&gt;Spring Boot applications register a lot of core metrics ? JVM, CPU, Tomcat, Logback, etc. You can use Micrometer to contribute your own custom metrics, say using the &lt;code&gt;@Timed&lt;/code&gt; Micrometer annotation at the class level. You can then visualize those custom metrics in Application Insights. As an example, see how pet owners, pets, and their clinical visits are tracked by custom metrics below ? you can also see how the pattern changes at 9 PM because applications are driving higher utilization when autoscaling kicked in [Figure 8].&lt;/p&gt;
+&lt;figcaption&gt;Figure 8 ? Custom metrics published by user applications&#xD;
 &lt;/figcaption&gt;
 &lt;img  width="700" src="https://github.com/Azure-Samples/spring-petclinic-microservices/raw/azure/media/petclinic-microservices-custom-metrics.jpg" /&gt;
-&lt;p&gt;You can use the Availability Test feature in Application Insights to monitor the availability of applications in Azure Spring Cloud. This is a recurring test to monitor the availability and responsiveness of applications at regular intervals from anywhere across the globe. It can proactively alert you if your applications are not responding or if they respond too slowly. The chart below shows availability tests from across North America ‚Äì West US, South Central, Central US and East US [Figure 9].&lt;/p&gt;
-&lt;figcaption&gt;Figure 9 ‚Äì Availability of application endpoints across time&#xD;
+&lt;p&gt;You can use the Availability Test feature in Application Insights to monitor the availability of applications in Azure Spring Cloud. This is a recurring test to monitor the availability and responsiveness of applications at regular intervals from anywhere across the globe. It can proactively alert you if your applications are not responding or if they respond too slowly. The chart below shows availability tests from across North America ? West US, South Central, Central US and East US [Figure 9].&lt;/p&gt;
+&lt;figcaption&gt;Figure 9 ? Availability of application endpoints across time&#xD;
 &lt;/figcaption&gt;
 &lt;img  width="700" src="https://github.com/Azure-Samples/spring-petclinic-microservices/raw/azure/media/petclinic-microservices-availability.jpg" /&gt;
 &lt;p&gt;Navigate to the &lt;code&gt;Live Metrics&lt;/code&gt; blade where you can see live metrics practically in real-time, within only one second [Figure 10]. &lt;/p&gt;
-&lt;figcaption&gt;Figure 10 ‚Äì Real-time metrics&#xD;
+&lt;figcaption&gt;Figure 10 ? Real-time metrics&#xD;
 &lt;/figcaption&gt;
 &lt;img  width="700" src="https://github.com/Azure-Samples/spring-petclinic-microservices/raw/azure/media/petclinic-microservices-live-metrics.jpg" /&gt;
 &lt;p&gt;Application Insights Java agent is based on &lt;a href="https://opentelemetry.io/docs/java/automatic_instrumentation/"&gt;OpenTelemetry&lt;/a&gt; auto instrumentation effort, where Microsoft collaborates with other brightest minds of the APM space.&lt;/p&gt;&lt;h2&gt;&lt;a href="#build-your-solutions-and-monitor-them-today" class="anchor" name="build-your-solutions-and-monitor-them-today"&gt;&lt;/a&gt;Build your solutions and monitor them today!&lt;/h2&gt;
 &lt;p&gt;Azure Spring Cloud abstracts away the complexity of infrastructure management and Spring Cloud middleware management, so you can focus on building your business logic and let Azure take care of dynamic scaling, patches, security, compliance, and high availability. With a few steps, you can provision Azure Spring Cloud, create applications, deploy, and scale Spring Boot applications, and start monitoring in minutes. We will continue to bring more developer-friendly and enterprise-ready features to Azure Spring Cloud.&lt;/p&gt;
-&lt;p&gt;We would love to hear how you are building impactful solutions using Azure Spring Cloud. Get started today ‚Äì deploy Spring applications to Azure Spring Cloud using &lt;a href="https://docs.microsoft.com/en-us/azure/spring-cloud/spring-cloud-quickstart?tabs=Azure-CLI&amp;pivots=programming-language-java"&gt;quickstart&lt;/a&gt;!&lt;/p&gt;&lt;h2&gt;&lt;a href="#resources" class="anchor" name="resources"&gt;&lt;/a&gt;Resources:&lt;/h2&gt;
+&lt;p&gt;We would love to hear how you are building impactful solutions using Azure Spring Cloud. Get started today ? deploy Spring applications to Azure Spring Cloud using &lt;a href="https://docs.microsoft.com/en-us/azure/spring-cloud/spring-cloud-quickstart?tabs=Azure-CLI&amp;pivots=programming-language-java"&gt;quickstart&lt;/a&gt;!&lt;/p&gt;&lt;h2&gt;&lt;a href="#resources" class="anchor" name="resources"&gt;&lt;/a&gt;Resources:&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;Get started with your next Spring Boot-based project at &lt;a href="http://start.spring.io"&gt;the Spring Initializr&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Learn using an &lt;a href="https://docs.microsoft.com/en-us/learn/modules/azure-spring-cloud-workshop/"&gt;MS Learn module&lt;/a&gt; or &lt;a href="https://github.com/microsoft/azure-spring-cloud-training"&gt;self-paced workshop&lt;/a&gt; on GitHub&lt;/li&gt;
@@ -1343,7 +1488,7 @@ management.endpoint.metrics.enabled=true
     <updated>2021-01-19T21:53:00Z</updated>
     <content type="html">&lt;p&gt;Hi, Spring fans! Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! We&amp;rsquo;ve got a lot to cover so let&amp;rsquo;s get to it.&lt;/p&gt;
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=lgyo9c9zdrg&amp;feature=share"&gt;What‚Äôs new in Spring Boot 2.4&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=lgyo9c9zdrg&amp;feature=share"&gt;What°Øs new in Spring Boot 2.4&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://spring.io/blog/2021/01/14/a-bootiful-podcast-spring-cloud-stream-lead-oleg-zhurakousky"&gt;A Bootiful Podcast - Spring Cloud Stream lead Oleg Zhurakousky&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://spring.io/blog/2021/01/18/ymnnalft-easy-rpc-with-rsocket"&gt;YMNNALFT: Easy RPC with RSocket&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://spring.io/blog/2021/01/13/ymnnalft-express-yourself-with-spel"&gt;YMNNALFT: Express Yourself with SpEL&lt;/a&gt;&lt;/li&gt;
@@ -1564,36 +1709,6 @@ public class BootifulApplication {&#xD;
     <updated>2021-01-15T01:58:00Z</updated>
     <content type="html">&lt;p&gt;Hi, Spring fans! Welcome to another installment of &lt;em&gt;A Bootiful Podcast&lt;/em&gt;. This week, &lt;a href="http://twitter.com/starbuxman"&gt;Josh Long (@starbuxman)&lt;/a&gt; talks to Spring Cloud Stream &lt;a href="https://twitter.com/z_oleg"&gt;lead Oleg Zhurakousky (@z_oleg)&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;iframe title="Spring Cloud Stream lead Oleg Zhurakousky" height="122" width="100%" style="border: none;" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/media/player/gagc3-f79a60?from=pb6admin&amp;download=1&amp;version=1&amp;auto=0&amp;share=1&amp;download=1&amp;rtl=0&amp;fonts=Helvetica&amp;skin=1&amp;pfauth=&amp;btn-skin=107"&gt;&lt;/iframe&gt;&lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Boot 2.3.8 available now</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/01/14/spring-boot-2-3-8-available-now" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Scott Frederick</name>
-    </author>
-    <id>tag:spring.io,2021-01-14:4336</id>
-    <updated>2021-01-14T19:52:00Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the team and everyone who has contributed, I&amp;rsquo;m happy to announce that Spring Boot 2.3.8 has been released and is now available from Maven Central.&lt;/p&gt;
-&lt;p&gt;This release includes &lt;a href="https://github.com/spring-projects/spring-boot/releases/tag/v2.3.8.RELEASE"&gt;35 bug fixes and dependency upgrades&lt;/a&gt;. Thanks to all those who have contributed with issue reports and pull requests.&lt;/p&gt;&lt;h3&gt;&lt;a href="#how-can-you-help" class="anchor" name="how-can-you-help"&gt;&lt;/a&gt;How can you help?&lt;/h3&gt;
-&lt;p&gt;If you&amp;rsquo;re interested in helping out, check out the &lt;a href="https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution"&gt;&amp;ldquo;ideal for contribution&amp;rdquo; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href="http://stackoverflow.com"&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href="http://stackoverflow.com/tags/spring-boot"&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt; or chat with the community on &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://spring.io/projects/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-boot/docs/2.3.8.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-boot"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;&lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Boot 2.2.13 available now</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/01/14/spring-boot-2-2-13-available-now" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>St√©phane Nicoll</name>
-    </author>
-    <id>tag:spring.io,2021-01-14:4335</id>
-    <updated>2021-01-14T17:25:00Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the team and everyone who has contributed, I&amp;rsquo;m happy to announce that Spring Boot 2.2.13 has been released and is now available from Maven Central.&lt;/p&gt;
-&lt;p&gt;This release includes &lt;a href="https://github.com/spring-projects/spring-boot/releases/tag/v2.2.13.RELEASE"&gt;19 bug fixes and dependency upgrades&lt;/a&gt;. Thanks to all those who have contributed with issue reports and pull requests.&lt;/p&gt;&lt;h3&gt;&lt;a href="#how-can-you-help" class="anchor" name="how-can-you-help"&gt;&lt;/a&gt;How can you help?&lt;/h3&gt;
-&lt;p&gt;If you&amp;rsquo;re interested in helping out, check out the &lt;a href="https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution"&gt;&amp;ldquo;ideal for contribution&amp;rdquo; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href="http://stackoverflow.com"&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href="http://stackoverflow.com/tags/spring-boot"&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt; or chat with the community on &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://spring.io/projects/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-boot/docs/2.2.13.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-boot"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;&lt;/p&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>
