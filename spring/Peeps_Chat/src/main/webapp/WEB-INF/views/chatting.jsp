@@ -57,20 +57,20 @@
 	});
 
 	function sendMessage() {
-		var msg = {
+		var mes = {
 			user : '${user}',
 			to : 'jin', // 현재 페이지 작성자의 id를 작성
 			time : Date.now(),
 			message : $("#message").val()
 		};
-		sock.send(JSON.stringify(msg));
+		sock.send(JSON.stringify(mes));
 		console.log('sendMessage()');
 	}
 
 	//evt 파라미터는 websocket이 보내준 데이터다.
 	function onMessage(evt) { // 변수 안에 function자체를 넣음.
 		var data = evt.data;
-		msgData = JSON.parse(data);
+		mesData = JSON.parse(data);
 		var sessionid = null;
 		var message = null;
 
@@ -83,16 +83,16 @@
 
 		if (target.length == 0) {
 			$('<div id=\"chattingBox-1\" class=\"chattingBox\"></div>').html(
-					'<h3>${user} : 게시물 작성자-' + msgData.user + '</h3>')
+					'<h3>${user} : 게시물 작성자-' + mesData.user + '</h3>')
 					.appendTo('body');
 			$('#chattingBox-1').append('<hr>')
 		}
 
 		// 나와 상대방이 보낸 메세지를 구분하여 출력
-		if (msgData.user == currentuser_session) {
+		if (mesData.user == currentuser_session) {
 			var printHTML = "<div class='well text_right'>";
 			printHTML += "<div class='alert alert-info'>";
-			printHTML += "<strong>[" + msgData.user + "] -> " + msgData.message
+			printHTML += "<strong>[" + mesData.user + "] -> " + mesData.message
 					+ "</strong>";
 			printHTML += "</div>";
 			printHTML += "</div>";
@@ -101,7 +101,7 @@
 		} else {
 			var printHTML = "<div class='well text_left'>";
 			printHTML += "<div class='alert alert-warning'>";
-			printHTML += "<strong>[" + msgData.user + "] -> " + msgData.message
+			printHTML += "<strong>[" + mesData.user + "] -> " + mesData.message
 					+ "</strong>";
 			printHTML += "</div>";
 			printHTML += "</div>";
