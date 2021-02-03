@@ -34,14 +34,14 @@ body {
 	margin: 80px auto 65px;
 }
 
-.p_date {
+.pdate_wrap {
 	text-align: right;
 	height: 40px;
 	font-family: 'Nanum Gothic', sans-serif;
 	font-weight: 800;
 }
 
-.p_title {
+.ptitle {
 	border: 1px solid;
 	width: 770px;
 	height: 50px;
@@ -54,7 +54,7 @@ body {
 	margin: 20px 0;
 }
 
-.p_content {
+.pcontent {
 	resize: none;
 	width: 770px;
 	height: 600px;
@@ -65,7 +65,7 @@ body {
 	margin-bottom: 5px;
 }
 
-.p_content::-webkit-scrollbar {
+.pcontent::-webkit-scrollbar {
 	display: none;
 }
 /* 스크롤바 숨김 & 스크롤 정상 작동 */
@@ -115,18 +115,23 @@ body {
 		<form method="post" enctype="multipart/form-data">
 		<table class="post">
 			<tr>
-				<td class="p_date">
+				<td>
+					<input type="hidden" name="userIdx" value="userIdx">
+				</td>
+			</tr>
+			<tr>
+				<td class="pdate_wrap">
 					<%
 					Date now = new Date();
 					SimpleDateFormat ymd = new SimpleDateFormat("yyyy.MM.dd");
 					SimpleDateFormat hms = new SimpleDateFormat("hh.mm.ss");
 					%>
-					<%= ymd.format(now) %>
+					<div class="pdate"><%= ymd.format(now) %></div>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<input type="text" class="p_title" placeholder="제목을 입력해주세요.">
+					<input type="text" class="ptitle" name="ptitle" placeholder="제목을 입력해주세요.">
 				</td>
 			</tr>
 			<tr>
@@ -138,7 +143,7 @@ body {
 			</tr>
 			<tr>
 				<td>
-					<textarea cols="50" class="p_content"
+					<textarea cols="50" class="pcontent"
 							  placeholder="내용을 입력해주세요."
 					></textarea>
 					<div><span>0</span>/1500</div>
@@ -146,7 +151,7 @@ body {
 			</tr>
 			<tr>
 				<td>
-					<div class="p_loc">
+					<div class="ploc">
 					위치추가<input type="text">
 					</div>
 				</td>
