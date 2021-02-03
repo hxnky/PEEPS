@@ -8,7 +8,7 @@ public class PostWriteRequest {
 	
 	private int userIdx;
 	private String ptitle;
-	private MultipartFile file[];
+//	private MultipartFile file[];
 	private String pcontent;
 	private String ploc;
 	
@@ -26,12 +26,12 @@ public class PostWriteRequest {
 	public void setPtitle(String ptitle) {
 		this.ptitle = ptitle;
 	}
-	public MultipartFile[] getFile() {
-		return file;
-	}
-	public void setFile(MultipartFile[] file) {
-		this.file = file;
-	}
+//	public MultipartFile[] getFile() {
+//		return file;
+//	}
+//	public void setFile(MultipartFile[] file) {
+//		this.file = file;
+//	}
 	public String getPcontent() {
 		return pcontent;
 	}
@@ -50,7 +50,7 @@ public class PostWriteRequest {
 		post.setMember_idx(userIdx);
 		post.setP_title(ptitle);
 		post.setP_content(pcontent);
-		post.setP_loc(ploc);
+//		post.setP_loc(ploc);
 //		썸네일 선택시 set 필요
 		
 		return post;
