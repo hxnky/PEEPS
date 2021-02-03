@@ -143,7 +143,8 @@ body {
 			</tr>
 			<tr>
 				<td>
-					<textarea rows="50" class="pcontent"
+					<textarea rows="50"  
+							  class="pcontent" name="pcontent"
 							  placeholder="내용을 입력해주세요." required
 					></textarea>
 					<div><span>0</span>/1500</div>

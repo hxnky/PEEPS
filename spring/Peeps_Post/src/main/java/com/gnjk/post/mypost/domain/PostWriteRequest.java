@@ -15,10 +15,10 @@ public class PostWriteRequest {
 	public int getUser_idx() {
 		return userIdx;
 	}
-
-	/*
-	 * public void setUser_idx(int user_idx) { this.user_idx = user_idx; }
-	 */
+	
+	public void setuserIdx(int userIdx) { 
+		this.userIdx = userIdx; 
+	}
 	
 	public String getPtitle() {
 		return ptitle;
