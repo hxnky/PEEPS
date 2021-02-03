@@ -15,6 +15,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{code});
 	</insert>
 
+	<!-- 소셜 로그인 시 회원 이메일 있는지 확인 -->
+	<select id="selectMemberByEmailCount" resultType="int">
+		select count(*) from member where email=#{email}
+	</select>
+
+	<!-- 이메일 없으면 이메일, 이름, 사진, 로그인 타입 insert 하기 -->
+
+	<!-- 아이디 중복 확인 -->
 	<select id="selectMemberByIdCount" resultType="int">
 		select count(*)
 		from member where id=#{id}
@@ -26,6 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from member where m_idx=#{m_idx} and verify='Y'
 	</select>
 
+	<!-- 이메일 인증 상태 업데이트 -->
 	<update id="updateMemberVerify">
 		update member set verify='Y' where m_idx=#{param1}
 		and code=#{param2}

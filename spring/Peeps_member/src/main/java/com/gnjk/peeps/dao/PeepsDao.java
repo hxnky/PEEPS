@@ -14,5 +14,8 @@ public interface PeepsDao {
 	int selectMemberByIdCount(String id);
 	// 로그인
 	Peeps selectLogin(String id, String password);
+	// 이메일 중복 확인
+	int selectMemberByEmailCount(String email);
+	
 
 }

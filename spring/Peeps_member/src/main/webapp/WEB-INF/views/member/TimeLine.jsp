@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,13 +15,15 @@
 	name='viewport' />
 <meta name="viewport" content="width=device-width" />
 
+
 <!--     Fonts and icons     -->
 <link
 	href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css"
 	rel="stylesheet">
 
 <!-- CSS Files -->
-<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/bootstrap.min.css" />"
+	rel="stylesheet">
 <link href="<c:url value="/resources/css/gsdk-bootstrap-wizard.css"/>"
 	rel="stylesheet" />
 
@@ -34,7 +36,8 @@
 		style="background-color: #fcf9f6">
 		<div class="logo-container">
 			<!-- 로고 넣기 -->
-			<img id="logo" src="${pageContext.request.contextPath}/resources/images/plus.png">
+			<img id="logo"
+				src="${pageContext.request.contextPath}/resources/images/plus.png">
 		</div>
 
 		<!--   Big container   -->
@@ -62,10 +65,14 @@
 									</ul>
 
 								</div>
-								
-								<h1> 타 임 라 인</h1>
-								<h1>${email}</h1>
-								<input type="button" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/logout'">
+
+								<h1>타 임 라 인</h1>
+								<h3 id="email">${email}</h3>
+								<h3>${name}</h3>
+								<h3>${m_photo}</h3>
+								<input type="button" value="로그아웃"
+									onclick="location.href='${pageContext.request.contextPath}/logout'">
+
 								<div class="wizard-footer height-wizard">
 									<div class="clearfix">
 										<br>
@@ -88,6 +95,12 @@
 	</div>
 
 </body>
+
+
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
+
+
+
 <!--   Core JS Files   -->
 <script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
 	type="text/javascript"></script>
@@ -101,4 +114,28 @@
 
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 <script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
+
+<script>
+// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+	$(document).ready(function(){
+		// id = "id_reg" / name = "userId"
+		var email = $('#email').val();
+		$.ajax({
+			url : '${pageContext.request.contextPath}/user/idCheck?email='+ email,
+			type : 'get',
+			success : function(data) {						
+				
+				if (data == 1) {
+						console.log("아이디가 DB에 존재합니다. 아이디를 Session에 저장합니다 . . .");
+						// session에 아이디 저장
+					} else{
+						console.log("아이디가 DB에 존재하지 않습니다. DB에 저장합니다 . . .");
+						// DB에 저장하는 ,, 코드 짜기 ,,,
+					}
+				} , error : function() {
+						console.log("실패,,,,");
+				}
+			});
+		});
+</script>
 </html>

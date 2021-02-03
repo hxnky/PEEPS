@@ -63,14 +63,16 @@ public class GoogleController {
 
 		Map<String, String> userInfo = mapper.readValue(resultJson, new TypeReference<Map<String, String>>() {
 		});
-		
-		model.addAllAttributes(userInfo);
+
+		model.addAttribute("email", userInfo.get("email"));
+		model.addAttribute("name", userInfo.get("name"));
+		model.addAttribute("m_photo", userInfo.get("picture"));
 		model.addAttribute("token", result.getAccessToken());
-		
+
 		System.out.println(userInfo);
-		System.out.println(userInfo.get("email"));
-		System.out.println(userInfo.get("name"));
-		System.out.println(userInfo.get("picture"));
+		System.out.println("이메일 : " + userInfo.get("email"));
+		System.out.println("이름 : " + userInfo.get("name"));
+		System.out.println("사진 URL : " + userInfo.get("picture"));
 
 		return "member/TimeLine";
 

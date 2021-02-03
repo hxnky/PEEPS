@@ -18,6 +18,8 @@ import com.google.gson.JsonParser;
 @Service
 public class KakaoService {
 
+
+
 	public String getAccessToken(String authorize_code) {
 
 		String access_Token = "";
@@ -148,13 +150,13 @@ public class KakaoService {
 				result += line;
 			}
 			System.out.println(result);
-			
-			
-			
+
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
 	}
+
+	
 
 }

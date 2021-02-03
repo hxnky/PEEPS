@@ -25,12 +25,9 @@ public class KakaoConroller {
 		HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
 
 		System.out.println("유저 정보 : " + userInfo);
-		
-		if (userInfo.get("email") != null) {
-			model.addAllAttributes(userInfo);
-			model.addAttribute("email", userInfo.get("email"));
-	        model.addAttribute("access_Token", access_Token);
-	    }
+
+		model.addAllAttributes(userInfo);
+		model.addAttribute("token", access_Token);
 
 		return "member/TimeLine";
 
@@ -43,8 +40,7 @@ public class KakaoConroller {
 
 		session.removeAttribute("access_Token");
 		session.removeAttribute("userId");
-		
-		
+
 		return "redirect:/";
 	}
 

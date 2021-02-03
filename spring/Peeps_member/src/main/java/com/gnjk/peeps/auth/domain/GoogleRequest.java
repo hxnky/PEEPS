@@ -1,23 +1,23 @@
 package com.gnjk.peeps.auth.domain;
 
+import com.gnjk.peeps.domain.Peeps;
+
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @Builder
 public class GoogleRequest {
-	
-	private String redirectUri;
+
 	private String clientId;
 	private String clientSecret;
-	private String code;
-	private String responseType;
-	private String scope;
-	private String accessType;
+	private String redirectUri;
 	private String grantType;
-	private String state;
-	private String includeGrantedScopes;
-	private String loginHint;
-	private String prompt;
-	
+	private String code;
+	private String email;
+	private String picture;
+	private String name;
+
 }

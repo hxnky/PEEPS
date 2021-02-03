@@ -35,4 +35,15 @@ public class RegRequest {
 		
 		return peeps;
 	}
+	
+public Peeps toGPeeps() {
+		
+		Peeps peeps = new Peeps();
+		
+		peeps.setEmail(email);
+		peeps.setId(id);
+		peeps.setName(name);
+		
+		return peeps;
+	}
 }
