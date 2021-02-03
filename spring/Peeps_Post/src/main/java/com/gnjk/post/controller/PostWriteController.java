@@ -12,5 +12,7 @@ public class PostWriteController {
 	public String getRegForm() {
 		return "mypost/postWriteForm";
 	}
+	
+	
 
 }
