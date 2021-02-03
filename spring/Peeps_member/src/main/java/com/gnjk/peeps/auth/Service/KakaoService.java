@@ -1,4 +1,4 @@
-package com.gnjk.peeps.Service;
+package com.gnjk.peeps.auth.Service;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

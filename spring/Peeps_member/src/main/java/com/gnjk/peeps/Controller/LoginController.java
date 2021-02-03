@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gnjk.peeps.Service.KakaoService;
 import com.gnjk.peeps.Service.LoginService;
+import com.gnjk.peeps.auth.Service.KakaoService;
 
 @Controller
 public class LoginController {

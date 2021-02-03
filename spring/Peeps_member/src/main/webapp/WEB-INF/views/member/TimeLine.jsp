@@ -64,7 +64,7 @@
 								</div>
 								
 								<h1> 타 임 라 인</h1>
-								<h1>${userInfo }</h1>
+								<h1>${email}</h1>
 								<input type="button" value="로그아웃" onclick="location.href='${pageContext.request.contextPath}/logout'">
 								<div class="wizard-footer height-wizard">
 									<div class="clearfix">
