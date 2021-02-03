@@ -116,7 +116,7 @@ body {
 		<table class="post">
 			<tr>
 				<td>
-					<input type="hidden" name="userIdx" value="userIdx">
+					<input type="hidden" name="userIdx" value="1">
 				</td>
 			</tr>
 			<tr>
