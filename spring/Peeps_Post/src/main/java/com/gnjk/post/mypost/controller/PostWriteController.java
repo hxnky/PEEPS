@@ -1,4 +1,4 @@
-package com.gnjk.post.controller;
+package com.gnjk.post.mypost.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.gnjk.post.domain;
+package com.gnjk.post.mypost.domain;
 
 import java.sql.Timestamp;
 
