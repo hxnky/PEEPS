@@ -9,10 +9,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- css -->
-<link rel="styleSheet"  href="<c:url value="/css/default.css"/>">
+<link rel="styleSheet" href="<c:url value="/css/default.css"/>">
 
 <style>
-
 </style>
 
 <!-- SocketJS CDN -->
@@ -25,76 +24,13 @@
 <body>
 
 	<!-- navi-->
-	<%@ include file="/WEB-INF/views/nav.jsp" %>
+	<%@ include file="/WEB-INF/views/nav.jsp"%>
 
 	<!---------------------------------------->
 
 	<!--chatting-->
+	<%@ include file="/WEB-INF/views/container.jsp"%>
 
-	<div id="container">
-		<aside>
-			<header>
-
-				<div class="srch_bar">
-					<div class="stylish-input-group">
-						<span><input type="search" placeholder="@lovely_junghyun" style="width: 160px;">
-							<button id="srch_b">
-								<a href="#"><img src="<c:url value='/icon/navi/search.png' />"></a>
-							</button></span>
-					</div>
-				</div>
-
-			</header>
-			<ul>
-				<li><img
-					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg"
-					alt="">
-					<div>
-						<h2>Prénom Nom</h2>
-						<h3>
-							<span class="status orange"></span> offline
-						</h3>
-					</div></li>
-			</ul>
-		</aside>
-
-		<main>
-			<header>
-				<img
-					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg"
-					alt="">
-				<div>
-					<h2>Chat with Vincent Porter</h2>
-					<h3>already 1902 messages</h3>
-				</div>
-				<img
-					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png"
-					alt="">
-			</header>
-
-			<!-- <div id="chatArea"></div> -->
-			<div class="well" id="chatdata">
-				<!-- User Session Info Hidden -->
-				<input type="hidden" value='${user}' id="sessionuserid">
-			</div>
-
-			<footer>
-				<img
-					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png"
-					alt=""> <img
-					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png"
-					alt="">
-				<div class="send">
-
-					<input type="text" id="message"
-						onkeydown="if(event.keyCode==13){sendMessage();}"
-						placeholder="Type your message" /> <input type="submit"
-						id="sendBtn" value="전송" />
-				</div>
-
-			</footer>
-		</main>
-	</div>
 
 </body>
 
@@ -123,10 +59,11 @@
 		var msg = {
 			user : '${user}',
 			to : 'jin', // 현재 페이지 작성자의 id를 작성
-			time : '${time}',
+			time : Date.now(),
 			message : $("#message").val()
 		};
 		sock.send(JSON.stringify(msg));
+		console.log('sendMessage()');
 	}
 
 	//evt 파라미터는 websocket이 보내준 데이터다.
@@ -145,7 +82,7 @@
 
 		if (target.length == 0) {
 			$('<div id=\"chattingBox-1\" class=\"chattingBox\"></div>').html(
-					'<h3>${user} : 게시물 작성자-' + msgData.articleOwner + '</h3>')
+					'<h3>${user} : 게시물 작성자-' + msgData.user + '</h3>')
 					.appendTo('body');
 			$('#chattingBox-1').append('<hr>')
 		}
