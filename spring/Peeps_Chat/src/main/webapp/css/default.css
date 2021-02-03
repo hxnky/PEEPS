@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-#Logo {
-	background-image: url('../../icon/Logo.png')
-}
-
 /* navi */
 nav ul {
 	top: 0px;

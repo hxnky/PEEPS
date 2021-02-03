@@ -18,14 +18,12 @@
 		<nav>
 			<ul class="icon">
 
-				<li class="left"><span><input type="search"
-						placeholder="서아언니 메롱">
+				<li class="left"><span><input type="search" placeholder="서아언니 메롱">
 						<button>
 							<a href="#"><img src="<c:url value='/icon/navi/search.png' />"></a>
 						</button></span></li>
 
-				<li class="center"><a id="Logo"><img
-						src="<c:url value='/icon/Logo.png' />"></a></li>
+				<li class="center"><a id="Logo"><img src="<c:url value='/icon/navi/Logo.png' />"></a></li>
 
 				<li class="right">
 						<a id="Home" href="#"><img src="<c:url value='/icon/navi/023-home.png' />"></a>
