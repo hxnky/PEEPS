@@ -21,6 +21,7 @@ public class PostWriteService {
 	// 데이터베이스 저장
 	// ##파일 업로드 미구현
 	public int postWrite(PostWriteRequest writeRequest, HttpServletRequest request) {
+		
 		int result = 0;
 		
 		Post post = writeRequest.toPost();

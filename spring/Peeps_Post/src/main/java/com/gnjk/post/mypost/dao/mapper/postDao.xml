@@ -13,9 +13,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		>
 		
 		INSERT INTO post
-		(p_idx, member_idx, p_title, p_content)
+		(member_idx, p_title, p_content)
 		VALUES 
-		(#{p_idx},#{member_idx},#{p_title}, #{p_content})
+		(#{member_idx},#{p_title},#{p_content})
 		
 	</insert>
 
