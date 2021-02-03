@@ -1,6 +1,5 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=a9568d05bcdbc20adf7c277c01a8892ecc7afbd1
 eclipse.preferences.version=1
-<<<<<<< HEAD
-org.eclipse.jdt.launching.PREF_VM_XML=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<vmSettings defaultVM\="57,org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType13,1611902243372" defaultVMConnector\="">\r\n<vmType id\="org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType">\r\n<vm id\="1611902243372" name\="jre1.8.0_271" path\="C\:\\Program Files\\Java\\jre1.8.0_271"/>\r\n</vmType>\r\n</vmSettings>\r\n
-=======
-org.eclipse.jdt.launching.PREF_VM_XML=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<vmSettings defaultVM\="57,org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType13,1612098511734" defaultVMConnector\="">\r\n<vmType id\="org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType">\r\n<vm id\="1611902243372" name\="jre1.8.0_271" path\="C\:\\Program Files\\Java\\jre1.8.0_271"/>\r\n<vm id\="1612098511734" javadocURL\="https\://docs.oracle.com/javase/8/docs/api/" name\="jre1.8.0_261" path\="C\:\\Program Files\\Java\\jre1.8.0_261"/>\r\n</vmType>\r\n</vmSettings>\r\n
->>>>>>> a9568d05bcdbc20adf7c277c01a8892ecc7afbd1
+org.eclipse.jdt.launching.PREF_VM_XML=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<vmSettings defaultVM\="52,org.eclipse.jdt.internal.launching.macosx.MacOSXType27,com.oracle.java.11.0.10.jdk" defaultVMConnector\="">\n    <vmType id\="org.eclipse.jdt.internal.launching.macosx.MacOSXType">\n        <vm id\="com.oracle.java.11.0.10.jdk" name\="Java SE 11.0.10 [11.0.10]" path\="/Library/Java/JavaVirtualMachines/jdk-11.0.10.jdk/Contents/Home"/>\n    </vmType>\n    <vmType id\="org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType">\n        <vm id\="1611902243372" name\="jre1.8.0_271" path\="/Applications/STS.app/Contents/MacOS/C\:\\Program Files\\Java\\jre1.8.0_271"/>\n        <vm id\="1612098511734" name\="jre1.8.0_261" path\="/Applications/STS.app/Contents/MacOS/C\:\\Program Files\\Java\\jre1.8.0_261"/>\n    </vmType>\n</vmSettings>\n

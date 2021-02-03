@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-GitRepositoriesView.GitDirectories=C\:\\Users\\pc\\Documents\\GitHub\\PEEPS\\.git;C\:\\Users\\kho3\\OneDrive\\Documents\\GitHub\\PEEPS\\.git;
-GitRepositoriesView.GitDirectories.relative=C\:\\Users\\pc\\Documents\\GitHub\\PEEPS\\.git;C\:\\Users\\kho3\\OneDrive\\Documents\\GitHub\\PEEPS\\.git;
-=======
-GitRepositoriesView.GitDirectories=C\:\\Users\\kho3\\OneDrive\\Documents\\GitHub\\PEEPS\\.git;C\:\\Users\\kimjh\\Documents\\GitHub\\PEEPS\\.git;
-GitRepositoriesView.GitDirectories.relative=C\:\\Users\\kho3\\OneDrive\\Documents\\GitHub\\PEEPS\\.git;C\:\\Users\\kimjh\\Documents\\GitHub\\PEEPS\\.git;
->>>>>>> a9568d05bcdbc20adf7c277c01a8892ecc7afbd1
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=a9568d05bcdbc20adf7c277c01a8892ecc7afbd1
+GitRepositoriesView.GitDirectories=/Users/seoa/Documents/GitHub/PEEPS/spring/C\:/Users/seoa/Documents/GitHub/PEEPS/spring/\\Users\\kimjh\\Documents\\GitHub\\PEEPS\\.git;\:/Users/seoa/Documents/GitHub/PEEPS/spring/\\Users\\kho3\\OneDrive\\Documents\\GitHub\\PEEPS\\.git;C\:/Users/seoa/Documents/GitHub/PEEPS/.git\:
+GitRepositoriesView.GitDirectories.relative=C\:\\Users\\kimjh\\Documents\\GitHub\\PEEPS\\.git;\:\\Users\\kho3\\OneDrive\\Documents\\GitHub\\PEEPS\\.git;C\:/Users/seoa/Documents/GitHub/PEEPS/.git\:
 core_autoIgnoreDerivedResources=false
 eclipse.preferences.version=1
