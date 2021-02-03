@@ -63,13 +63,15 @@
 					alt=""> <img
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png"
 					alt="">
-				<div class="send">
 
-					<input type="text" id="message"
-						onkeydown="if(event.keyCode==13){sendMessage();}"
-						placeholder="Type your message" /> <input type="submit"
-						id="sendBtn" value="전송" />
-				</div>
+				<form>
+					<div class="send">
+
+						<input type="text" id="message" placeholder="Type your message" />
+						<input type="submit" id="sendBtn" value="전송" />
+					</div>
+				</form>
+
 
 			</footer>
 		</main>

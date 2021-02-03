@@ -43,13 +43,14 @@
 	sock.onclose = onClose;
 
 	$(document).ready(function() {
-		$("#sendBtn").click(function() {
+		$("#sendBtn").submit(function() {
 			console.log('send message...');
 			sendMessage();
 
 			$('#message').val('');
 
 			$('#message').focus();
+			// .focus() -> 버튼이면, 엔터 사용 시, 클릭 효과
 
 			return false;
 		});

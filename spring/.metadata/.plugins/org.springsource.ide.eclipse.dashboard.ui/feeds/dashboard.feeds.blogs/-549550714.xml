@@ -5,7 +5,38 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2021-02-01T16:05:00Z</updated>
+  <updated>2021-02-03T02:44:00Z</updated>
+  <entry>
+    <title>This Week in Spring - February 2nd, 2020</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/02/02/this-week-in-spring-february-2nd-2020" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2021-02-03:4351</id>
+    <updated>2021-02-03T02:44:00Z</updated>
+    <content type="html">&lt;p&gt;Hi, Spring fans! Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! Can you believe we&amp;rsquo;re already square into the second month of 2021? We&amp;rsquo;re 1/12th of the way through the year already! IT&amp;rsquo;S ALL GOING SO QUICK! So, I won&amp;rsquo;t waste any further time, let&amp;rsquo;s get to the roundup! &lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;This is a fantastic video by the legendary Brian Sam Boden on &lt;a href="https://www.youtube.com/watch?v=XJoJCMfCSTk&amp;feature=emb_title"&gt;&lt;em&gt;building a Spring Boot REST API powered by Redis, with a React front end: Part 1&lt;/em&gt; &lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://blogs.vmware.com/opensource/2021/02/02/2021-a-look-ahead-for-open-source-at-vmware/"&gt;2021: A Look Ahead for Open Source at VMware&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/01/28/a-bootiful-podcast-appdynamics-pavol-loffay"&gt;A Bootiful Podcast: Traceable&amp;rsquo;s Pavol Loffay, creator of the Hypertrace Java agent&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.infoq.com/news/2021/01/graalvm-21-jvm-java/"&gt;GraalVM 21.0 Introduces a JVM Written in Java&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://medium.com/sipios/handle-r2dbc-in-spring-projects-fa96e65ca24d"&gt;Handle R2DBC in Spring Projects, &lt;/a&gt; an article by Thibault MONEGIER du SORBIER&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.meetup.com/seajug/events/276135388/"&gt;I&amp;rsquo;ll be speaking at the Seattle JUG Meetup on February 16th, 2021&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://blogs.oracle.com/developers/new-year-goodies-oracle-jdbc-21100-on-maven-central"&gt;New Year Goodies - Oracle JDBC 21.1.0.0 on Maven Central | Oracle Developers Blog&lt;/a&gt;. I linked to this because, at the bottom of the blog, they also mention that people can expect the reactive Oracle R2DBC driver soon, too! Huzzah!&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.vinsguru.com/rsocket-load-balancing-client-side/"&gt;RSocket Load Balancing - Client Side by Vinsguru&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.infoq.com/articles/running-axon-server-docker-kubernetes/?itm_campaign=rightbar_v2&amp;itm_source=infoq&amp;itm_medium=articles_link&amp;itm_content=link_text"&gt;Running Axon Server in Docker and Kubernetes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/01/27/spring-batch-on-kubernetes-efficient-batch-processing-at-scale"&gt;Spring Batch on Kubernetes: Efficient batch processing at scale&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/01/28/spring-cloud-2020-0-1-aka-ilford-is-available"&gt;Spring Cloud 2020.0.1 (aka Ilford) Is Available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/02/01/spring-integration-aws-2-3-5-release-2-4-0-and-spring-cloud-stream-kinesis-binder-2-0-4-release-2-1-0-available"&gt;Spring Integration AWS 2.3.5.RELEASE &amp;amp; 2.4.0, and Spring Cloud Stream Kinesis Binder 2.0.4.RELEASE &amp;amp; 2.1.0 Available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/02/01/ymnnalft-a-lightweight-sql-data-mapper-with-the-jdbctemplate"&gt;YMNNALFT: A lightweight SQL data mapper with the JdbcTemplate&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/01/27/ymnnalft-the-spring-utils-classes"&gt;YMNNALFT: The Spring Utils Classes&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://twitter.com/JavaAtMicrosoft/status/1354831588916305922"&gt;Last year Azure #Spring Cloud became Generally Available. Here&amp;rsquo;s what has changed since then! &lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://twitter.com/JavaAtMicrosoft/status/1356334244008611840"&gt;Apple announced M1, an impl of AArch64. #OpenJDK was ready for it; had been for 5 years. However there&amp;rsquo;s a layer that¡¯s specific to each OS-CPU combination. However there&amp;rsquo;s a layer that¡¯s specific to each OS-CPU combination. We had volunteers: Microsoft and Azul, who worked together. Microsoft also ported to Win/AArch64 &lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://twitter.com/VMware/status/1356739950620905472"&gt; Today, we¡¯re excited to announce dates for VMware conferences slated for this year &amp;ndash; VMworld, CloudLIVE, Connect, and SpringOne! &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Integration AWS 2.3.5.RELEASE &amp; 2.4.0,  and Spring Cloud Stream Kinesis Binder 2.0.4.RELEASE &amp; 2.1.0 Available</title>
     <link rel="alternate" href="https://spring.io/blog/2021/02/01/spring-integration-aws-2-3-5-release-2-4-0-and-spring-cloud-stream-kinesis-binder-2-0-4-release-2-1-0-available" />
@@ -152,16 +183,16 @@ public class BootifulApplication {&#xD;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
   <entry>
-    <title>A Bootiful Podcast: AppDynamics' Pavol Loffay</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/01/28/a-bootiful-podcast-appdynamics-pavol-loffay" />
+    <title>A Bootiful Podcast: Hypertrace Java Agent creator Pavol Loffay</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/01/28/a-bootiful-podcast-hypertrace-java-agent-creator-pavol-loffay" />
     <category term="engineering" label="Engineering" />
     <author>
       <name>Josh Long</name>
     </author>
     <id>tag:spring.io,2021-01-29:4349</id>
     <updated>2021-01-29T01:13:00Z</updated>
-    <content type="html">&lt;p&gt;Hi, Spring fans! In this episode &lt;a href="http://twitter.com/starbuxman"&gt;Josh Long (@starbuxman)&lt;/a&gt; talks to AppDynamics&amp;rsquo; &lt;a href="http://twitter.com/ploffay"&gt;Pavol Loffay (@ploffay)&lt;/a&gt; about telemetry, observability, and more. &lt;/p&gt;
-&lt;iframe title="AppDynamics' Pavol Loffay" height="122" width="100%" style="border: none;" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/media/player/vm8cv-f8f4ea?from=pb6admin&amp;download=1&amp;version=1&amp;auto=0&amp;share=1&amp;download=1&amp;rtl=0&amp;fonts=Helvetica&amp;skin=1&amp;pfauth=&amp;btn-skin=107"&gt;&lt;/iframe&gt;
+    <content type="html">&lt;p&gt;Hi, Spring fans! In this episode &lt;a href="http://twitter.com/starbuxman"&gt;Josh Long (@starbuxman)&lt;/a&gt; talks to Hypertrace Java Agent creator &lt;a href="http://twitter.com/ploffay"&gt;Pavol Loffay (@ploffay)&lt;/a&gt; about telemetry, observability, and more. &lt;/p&gt;
+&lt;iframe title="Hypertrace Java Agent creator Pavol Loffay" height="122" width="100%" style="border: none;" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/media/player/vm8cv-f8f4ea?from=pb6admin&amp;download=1&amp;version=1&amp;auto=0&amp;share=1&amp;download=1&amp;rtl=0&amp;fonts=Helvetica&amp;skin=1&amp;pfauth=&amp;btn-skin=107"&gt;&lt;/iframe&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
   <entry>
@@ -1696,19 +1727,6 @@ public class BootifulApplication {&#xD;
 &lt;p&gt;This release includes &lt;a href="https://github.com/spring-projects/spring-boot/releases/tag/v2.4.2"&gt;a number bug fixes and dependency upgrades&lt;/a&gt;. Thanks to all those who have contributed with issue reports and pull requests.&lt;/p&gt;&lt;h3&gt;&lt;a href="#how-can-you-help" class="anchor" name="how-can-you-help"&gt;&lt;/a&gt;How can you help?&lt;/h3&gt;
 &lt;p&gt;If you&amp;rsquo;re interested in helping out, check out the &lt;a href="https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution"&gt;&amp;ldquo;ideal for contribution&amp;rdquo; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href="http://stackoverflow.com"&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href="http://stackoverflow.com/tags/spring-boot"&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt; or chat with the community on &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://spring.io/projects/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-boot/docs/2.4.2.RELEASE/reference/html"&gt;Documentation&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-boot"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;&lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>A Bootiful Podcast - Spring Cloud Stream lead Oleg Zhurakousky</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/01/14/a-bootiful-podcast-spring-cloud-stream-lead-oleg-zhurakousky" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2021-01-15:4337</id>
-    <updated>2021-01-15T01:58:00Z</updated>
-    <content type="html">&lt;p&gt;Hi, Spring fans! Welcome to another installment of &lt;em&gt;A Bootiful Podcast&lt;/em&gt;. This week, &lt;a href="http://twitter.com/starbuxman"&gt;Josh Long (@starbuxman)&lt;/a&gt; talks to Spring Cloud Stream &lt;a href="https://twitter.com/z_oleg"&gt;lead Oleg Zhurakousky (@z_oleg)&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;iframe title="Spring Cloud Stream lead Oleg Zhurakousky" height="122" width="100%" style="border: none;" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/media/player/gagc3-f79a60?from=pb6admin&amp;download=1&amp;version=1&amp;auto=0&amp;share=1&amp;download=1&amp;rtl=0&amp;fonts=Helvetica&amp;skin=1&amp;pfauth=&amp;btn-skin=107"&gt;&lt;/iframe&gt;&lt;/p&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>
