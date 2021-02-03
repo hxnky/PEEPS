@@ -18,9 +18,7 @@ public class SocialEmailController {
 	@RequestMapping(value = "/user/idCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public int emailCheck(@RequestParam("email") String email) {
-		
-		System.out.println("컨트롤러 실행됨"+email);
-		
+
 		return oauthService.checkEmail(email);
 	}
 	

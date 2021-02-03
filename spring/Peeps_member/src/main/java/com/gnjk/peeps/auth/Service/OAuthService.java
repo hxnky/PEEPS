@@ -19,6 +19,5 @@ public class OAuthService {
 		dao = template.getMapper(PeepsDao.class);
 		
 		return dao.selectMemberByEmailCount(email);
-		
 	}
 }
