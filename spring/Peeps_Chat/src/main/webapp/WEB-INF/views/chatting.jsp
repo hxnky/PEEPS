@@ -43,7 +43,7 @@
 	sock.onclose = onClose;
 
 	$(document).ready(function() {
-		$("#sendBtn").submit(function() {
+		$("form").submit(function() {
 			console.log('send message...');
 			sendMessage();
 
