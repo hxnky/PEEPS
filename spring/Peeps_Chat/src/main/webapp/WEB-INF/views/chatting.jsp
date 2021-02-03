@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- css -->
-<link rel="styleSheet" href="<c:url value="/css/default.css"/>">
+<link rel="styleSheet"  href="<c:url value="/css/default.css"/>">
 
 <style>
 
@@ -25,32 +25,7 @@
 <body>
 
 	<!-- navi-->
-	<%-- <%@ include file="/WEB-INF/views/nav.jsp"%> --%>
-	<div id="nav">
-
-		<nav>
-			<ul class="icon">
-
-				<li class="left"><span><input type="search"
-						placeholder="서아언니 메롱">
-						<button>
-							<a href="#"><img src="/icon/navi/search.png"></a>
-						</button></span></li>
-
-				<li class="center"><a id="Logo"><img src="/icon/Logo.png"></a></li>
-
-				<li class="right"><a id="Home" href="#"><img
-						src="/icon/navi/023-home.png"></a> <a id="Content" href="#"><img
-						src="/icon/navi/Content.png"></a> <a id="Alarm" href="#"><img
-						src="/icon/navi/008-notification.png"></a> <a id="Chat" href="#"><img
-						src="/icon/navi/050-wechat.png"></a> <a id="MyPage" href="#"><img
-						src="/icon/navi/010-user.png"></a></li>
-
-			</ul>
-
-		</nav>
-
-	</div>
+	<%@ include file="/WEB-INF/views/nav.jsp" %>
 
 	<!---------------------------------------->
 
@@ -62,9 +37,9 @@
 
 				<div class="srch_bar">
 					<div class="stylish-input-group">
-						<span><input type="search" placeholder="@lovely_junghyun">
+						<span><input type="search" placeholder="@lovely_junghyun" style="width: 160px;">
 							<button id="srch_b">
-								<a href=""><img src="/icon/navi/search.png"></a>
+								<a href="#"><img src="<c:url value='/icon/navi/search.png' />"></a>
 							</button></span>
 					</div>
 				</div>
