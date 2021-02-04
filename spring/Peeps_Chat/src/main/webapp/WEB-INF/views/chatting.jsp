@@ -60,11 +60,11 @@
 		var mes = {
 			user : '${user}',
 			to : 'jin', // 현재 페이지 작성자의 id를 작성
-			time : Date.now(),
+			time : 'time.getTime()',// Date.now(),
 			message : $("#message").val()
 		};
 		sock.send(JSON.stringify(mes));
-		console.log('sendMessage()');
+		console.log(JSON.stringify(mes));
 	}
 
 	//evt 파라미터는 websocket이 보내준 데이터다.
@@ -73,7 +73,7 @@
 		mesData = JSON.parse(data);
 		var sessionid = null;
 		var message = null;
-
+		console.log(mesData);
 		//current session id
 		var currentuser_session = $('#sessionuserid').val();
 		console.log('current session id: ' + currentuser_session);
@@ -82,10 +82,7 @@
 		var target = $('#chattingBox-1');
 
 		if (target.length == 0) {
-			$('<div id=\"chattingBox-1\" class=\"chattingBox\"></div>').html(
-					'<h3>${user} : 게시물 작성자-' + mesData.user + '</h3>')
-					.appendTo('body');
-			$('#chattingBox-1').append('<hr>')
+			$('#chattingBox-1').prependTo('#chatdata');
 		}
 
 		// 나와 상대방이 보낸 메세지를 구분하여 출력

@@ -41,7 +41,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 
 		// Dao 클래스 필
 		
-		System.out.println(message.getPayload()); // 나중에 삭제 
+		//System.out.println(message.getPayload()); // 나중에 삭제 
 
 		String friend = (String) session.getAttributes().get("user");
 

@@ -6,7 +6,7 @@ public class Message {
 
 	private String user; 	// 사용자 
 	private String to; 		// 받는사람 
-	private Timestamp time; // 채팅시간 
+	private Timestamp time = new Timestamp(System.currentTimeMillis()); // 채팅시간 
 	private String message; // 채팅내용
 	
 	public Message(String user, String to, Timestamp time, String message) {
