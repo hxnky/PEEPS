@@ -23,4 +23,5 @@ public class ChattingController { // 채팅 화면 (*수정 중)
 
 		return mav;
 	}
+	
 }

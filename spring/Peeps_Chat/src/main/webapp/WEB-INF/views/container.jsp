@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>container_jsp</title>
 </head>
 <body>
 
@@ -51,7 +51,6 @@
 					alt="">
 			</header>
 
-			<!-- <div id="chatArea"></div> -->
 			<div class="well" id="chatdata">
 				<!-- User Session Info Hidden -->
 				<input type="hidden" value='${user}' id="sessionuserid">

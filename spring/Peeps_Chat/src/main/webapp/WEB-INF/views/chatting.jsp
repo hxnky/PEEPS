@@ -12,6 +12,32 @@
 <link rel="styleSheet" href="<c:url value="/css/default.css"/>">
 
 <style>
+
+#right {
+	text-align: right;
+	width: auto;
+	max-width: 90%;
+	display: inline-block;
+	background-color: #F4F4F4;
+	border-radius: 5px;
+	padding: 20px;
+	margin-right: 10px;
+	word-wrap: break-word;
+}
+
+#left {
+	text-align: left;
+	width: auto;
+	max-width: 90%;
+	display: inline-block;
+	background-color: #F2D665;
+	border-radius: 5px;
+	padding: 20px;
+	margin-left: 10px;
+	word-wrap: break-word;
+}
+
+
 </style>
 
 <!-- SocketJS CDN -->
@@ -22,7 +48,7 @@
 </head>
 
 <body>
-
+<%-- 
 	<!-- navi-->
 	<%@ include file="/WEB-INF/views/nav.jsp"%>
 
@@ -31,7 +57,7 @@
 	<!--chatting-->
 	<%@ include file="/WEB-INF/views/container.jsp"%>
 
-
+ --%>
 </body>
 
 <script type="text/javascript">
@@ -60,7 +86,7 @@
 		var mes = {
 			user : '${user}',
 			to : 'jin', // 현재 페이지 작성자의 id를 작성
-			time : 'time.getTime()',// Date.now(),
+			time : '${serverTime}',// Date.now(),
 			message : $("#message").val()
 		};
 		sock.send(JSON.stringify(mes));
@@ -74,36 +100,38 @@
 		var sessionid = null;
 		var message = null;
 		console.log(mesData);
-		//current session id
+		// current session id
 		var currentuser_session = $('#sessionuserid').val();
 		console.log('current session id: ' + currentuser_session);
 
-		// 말풍선
-		var target = $('#chattingBox-1');
-
-		if (target.length == 0) {
-			$('#chattingBox-1').prependTo('#chatdata');
+		/* 
+			var target = $('#chattingBox-1');
+			if (target.length == 0) {
+			$('<div id=\ "chaggingBox-1\ class=\"chattingBox\"></div>').prependTo('#chatdata');
 		}
+			*/
 
 		// 나와 상대방이 보낸 메세지를 구분하여 출력
 		if (mesData.user == currentuser_session) {
-			var printHTML = "<div class='well text_right'>";
+			var printHTML = "<div class='well text_right' id='right'>";
 			printHTML += "<div class='alert alert-info'>";
 			printHTML += "<strong>[" + mesData.user + "] -> " + mesData.message
 					+ "</strong>";
 			printHTML += "</div>";
 			printHTML += "</div>";
 
-			$('#chattingBox-1').append(printHTML);
+			$('#chatdata').append(printHTML);
+			// printHTML을 chatdata 맨 밑에 추가
 		} else {
-			var printHTML = "<div class='well text_left'>";
+			var printHTML = "<div class='well text_left' id='left'>";
 			printHTML += "<div class='alert alert-warning'>";
 			printHTML += "<strong>[" + mesData.user + "] -> " + mesData.message
 					+ "</strong>";
 			printHTML += "</div>";
 			printHTML += "</div>";
 
-			$('#chattingBox-1').append(printHTML);
+			$('#chatdata').append(printHTML);
+			// printHTML을 chatdata 맨 밑에 추가
 		}
 
 		console.log('chatting data: ' + data);
