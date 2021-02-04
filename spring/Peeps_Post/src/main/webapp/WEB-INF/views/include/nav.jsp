@@ -9,6 +9,12 @@
 		<ul>
 			<a href="<c:url value="/write"/>">POST WRITE</a>
 		</ul>
+		<ul>
+			<a href="<c:url value="/postview"/>">POST VIEW</a>
+		</ul>
+		<ul>
+			<a href="<c:url value="/test"/>">TEST PAGE</a>
+		</ul>
 	</div>
 </nav>
 

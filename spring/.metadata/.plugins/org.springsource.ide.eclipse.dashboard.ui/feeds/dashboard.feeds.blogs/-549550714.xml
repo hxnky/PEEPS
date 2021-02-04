@@ -1055,7 +1055,7 @@ class Customer implements Serializable {&#xD;
   &lt;li&gt;&lt;a href="https://spring.io/blog/2021/01/21/bootiful-application-monitoring-with-azure-spring-cloud"&gt;Bootiful Application Monitoring with Azure Spring Cloud&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://twitter.com/JavaAtMicrosoft/status/1352321956138217474"&gt;You can monitor Azure Spring Cloud Spring Boot apps and dependencies without any effort! Brought to you jointly by Microsoft and VMware &lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://spring.io/blog/2021/01/20/ymnnalft-dimensional-metrics-accumulation-with-micrometer"&gt;YMNNALFT: Dimensional Metrics Accumulation with Micrometer&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=j6y-k0j7hd4&amp;feature=share"&gt;Building a Spring Boot and Spring MVC web application&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.youtube.com/watch?v=j6Y-K0J7HD4&amp;feature=share"&gt;Building a Spring Boot and Spring MVC web application&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://developer.okta.com/blog/2021/01/20/reactive-java-microservices"&gt;The Okta blog has a nice post on reactive Java microservices &lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://github.com/trankchung/kubeswitch/"&gt;Kubeswitch v0.2.0 - Kubernetes context and namespace switching&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://www.javavogue.com/2019/02/how-to-create-a-rest-api-with-spring-boot/"&gt;How to create a REST API with Spring Boot&lt;/a&gt;&lt;/li&gt;
