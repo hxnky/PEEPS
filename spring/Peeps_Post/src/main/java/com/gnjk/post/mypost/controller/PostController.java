@@ -5,12 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/test")
-public class TestPageController {
+@RequestMapping("/post")
+public class PostController {
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String getRegForm() {
-		return "mypost/test";
+	public String boardList() {
+		
+		
+		return "post/boardList";
 	}
 
 }

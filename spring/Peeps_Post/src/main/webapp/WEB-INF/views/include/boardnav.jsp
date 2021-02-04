@@ -7,13 +7,13 @@
 			<a href="<c:url value="/"/>">HOME</a>
 		</ul>
 		<ul>
-			<a href="<c:url value="/post"/>">게시글(POST)</a>
+			<a href="<c:url value="/write"/>">POST WRITE</a>
 		</ul>
 		<ul>
-			<a href="<c:url value="/map"/>">지도(MAP)</a>
+			<a href="<c:url value="postview"/>">POST VIEW</a>
 		</ul>
 		<ul>
-			<a href="<c:url value="/guest"/>">방명록(GUEST)</a>
+			<a href="<c:url value="/test"/>">TEST PAGE</a>
 		</ul>
 	</div>
 </nav>

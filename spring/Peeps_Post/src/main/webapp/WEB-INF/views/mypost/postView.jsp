@@ -195,6 +195,7 @@ body {
 	<div class="post_wrap">
 		<form method="post" enctype="multipart/form-data">
 		<table class="post">
+			<!-- 작성자 정보 -->
 			<tr>
 				<td class="post_top_wrap">
 					<div class="post_top">
@@ -204,6 +205,7 @@ body {
 					</div>
 				</td>
 			</tr>
+			<!-- 게시글 제목 -->
 			<tr>
 				<td>
 					<div class="ptitle" name="ptitle">
@@ -211,6 +213,7 @@ body {
 					</div>
 				</td>
 			</tr>
+			<!-- 날짜, 수정 및 삭제 버튼 -->
 			<tr>
 				<td class="post_datenbutton">
 					<%
@@ -223,6 +226,7 @@ body {
 					<input type="button" value="수정">
 				</td>
 			</tr>
+			<!-- 게시물 사진 carousel -->
 			<tr>
 				<td>
 					<div class="postpics">

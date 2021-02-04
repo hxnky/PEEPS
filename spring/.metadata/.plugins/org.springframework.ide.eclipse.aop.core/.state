@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aop-reference-model>
-<aop-project name="Peeps_member"/>
-<aop-project name="Peeps_Chat"/>
 <aop-project name="Peeps_Post"/>
-<aop-project name="Peeps"/>
 </aop-reference-model>

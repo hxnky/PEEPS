@@ -9,8 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class PostViewController {
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public String getRegForm() {
+	public String getRegForm(
+			
+			) {
+		
+		
 		return "mypost/postView";
 	}
+	
+	
 
 }

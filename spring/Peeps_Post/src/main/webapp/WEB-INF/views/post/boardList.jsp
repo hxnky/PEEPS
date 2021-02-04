@@ -5,15 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이 페이지</title>
+<title>게시판</title>
 </head>
 <body>
 
-<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+<%@ include file="/WEB-INF/views/include/boardnav.jsp"%>
 
-<h1>마이 페이지</h1>
-
-
+<h1>게시판 페이지</h1>
 
 </body>
 </html>
