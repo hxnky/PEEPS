@@ -59,7 +59,7 @@ crossorigin="anonymous"></script>
 	line-height: 300%; */
 	font-weight: 800;
 	font-size: 20px;
-	margin-top: 10px;
+	margin-top: 15px;
 }
 
 .followchk {
@@ -127,34 +127,17 @@ crossorigin="anonymous"></script>
 	float: right;
 }
 
-.cmtdiv {
-	margin: 25px 0;
-}
-
-.cmtinputarea {
-	float: right;
-}
-
-.cmttxt {
-	resize: none;
-	width: 555px;
+.cmtinput {
+	width: 500px;
 	height: 50px;
 	border: 2px solid #ccc;
 	border-radius: 5px;
 	display: table-cell;
     vertical-align: middle;
     padding: 10px;
-	margin-right: 10px;
-}
-
-.cmttxt::-webkit-scrollbar {
-	display: none;
-}
-
-.cmtbtn {
-	border: 0px solid;
-	width: 70px;
-	height: 50px;
+    margin: 10px 0;
+    
+    resize: none;
 }
 
 body {
@@ -163,32 +146,18 @@ body {
 }
 </style>
 
-<!--jquery 라이브러리 로드-->
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" 
-		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
-		crossorigin="anonymous">
-</script> 
+<!-- <script>
 
-<script>
-        
-        $(document).ready(function(){
-            
-            // 글자 수 제한
-            $('#cmttxt').keyup(function(){
-                // 현재 입력 문자열의 길이
-                var inputStrLen = $(this).val().length;
-                if(inputStrLen>100){
-                    alert('100자 까지만 입력이 가능합니다.');
-                    var userInput = $(this).val().substr(0,100);
-                    $(this).val(userInput);
-                    inputStrLen = 100;
-                }
-            });
-            
-        });
-    
+	$(document).ready(function(){
+		
+		$('.carousel').carousel({
+			  interval: false,
+			});
+		
+	});
+
 </script>
-
+ -->
 
 <body>
 
@@ -289,17 +258,10 @@ body {
 			<!-- 댓글 입력창 -->
 			<tr>
 				<td>
-				<div class="cmtdiv">
-					<img class="postuserphoto" src="<spring:url value='/resources/img/puppy3.jpg'/>">
-					<span class="id" >hxnky__</span>
-					<span class="cmtinputarea">
 					<textarea rows="10"
-							  class="cmttxt" name="pcmt" id="cmttxt"
+							  class="cmtinput" name="pcmt"
 							  placeholder="댓글을 입력해주세요." required
 					></textarea>
-					<input type="submit" class="cmtbtn" value="등록">
-					</span>
-				</div>
 				</td>
 			</tr>
 			<!-- 댓글창 -->

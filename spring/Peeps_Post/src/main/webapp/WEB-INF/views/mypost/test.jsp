@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 작성 페이지</title>
+<title>PEEPS</title>
 </head>
 <style>
 @import
@@ -35,40 +35,58 @@ body {
 	margin: 80px auto 65px;
 }
 
-.post_top_wrap {
-	background-color: pink;
-	padding-bottom: 15px;
-}
-
-.post_top>span {
-	background-color: yellow;
-}
-
 .postuserphoto {
 	width: 50px;
 	height: 50px;
 	border-radius: 50px;
 }
 
-.postuserphoto, id, followchk {
+.postuserphoto, .id, .followchk {
 	float: left;
+	margin-right: 10px;
+}
+
+.id, .followchk {
+	/* height: 50px;
+	line-height: 300%; */
+	font-weight: 800;
+	font-size: 20px;
+	margin-top: 15px;
+}
+
+.ptitle {
+	width: 800px;
+	height: 50px;
+	font-size: 1.5em;
+	border-top: 2px solid #ccc;
+	border-bottom: 2px solid #ccc;
+	display: table-cell;
+    vertical-align: middle;
+}
+
+.post_datenbutton {
+	padding: 10px;
 }
 
 .pdate {
 	/* text-align: right;  */
-	font-family: 'Nanum Gothic', sans-serif;
+	float: left;
 	font-weight: 800;
-	float: right;
+	font-size: 20px;
+    margin: 10px 0;
 }
 
-.ptitle {
-	border: 1px solid;
-	width: 770px;
-	height: 50px;
-	margin-bottom: 15px;
-	font-size: 1.5em;
-	padding: 5px 15px;
+.post_datenbutton>input {
+	float: right;
+	margin-left: 20px;
+	font-size: 15px;
+	border: 0px solid;
+	width: 80px;
+	height: 40px;
+	font-family: 'Nanum Gothic', sans-serif;
 }
+
+
 
 .post_photoinput {
 	margin: 20px 0;
@@ -108,27 +126,6 @@ body {
 		crossorigin="anonymous">
 </script>    
 
-<script>
-        
-        $(document).ready(function(){
-            
-            // 글자 수 제한
-            $('textarea').keyup(function(){
-                // 현재 입력 문자열의 길이
-                var inputStrLen = $(this).val().length;
-                if(inputStrLen>1500){
-                    alert('1500자 까지만 입력이 가능합니다.');
-                    var userInput = $(this).val().substr(0,1500);
-                    $(this).val(userInput);
-                    inputStrLen = 1500;
-                }
-                $('span').text(inputStrLen);
-            });
-            
-        });
-    
-    </script>
-
 <body>
 
 	<div class="post_wrap">
@@ -137,43 +134,50 @@ body {
 			<tr>
 				<td class="post_top_wrap">
 					<div class="post_top">
-						<img class="postuserphoto" style="vertical-align: middle;" src="<spring:url value='/resources/img/userphoto.png'/>">
-						<span class="id" style="margin-left: 10px;">hxnky__</span>
-						<span class="followchk" style="margin-left: 10px;">·팔로잉</span>
-						<%
-						Date now = new Date();
-						SimpleDateFormat ymd = new SimpleDateFormat("yyyy.MM.dd");
-						SimpleDateFormat hms = new SimpleDateFormat("hh.mm.ss");
-						%>
-						<span class="pdate"><%= ymd.format(now) %></span>
+						<img class="postuserphoto" src="<spring:url value='/resources/img/puppy3.jpg'/>">
+						<span class="id" >hxnky__</span>
+						<span class="followchk" >·팔로잉</span>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<input type="text" class="ptitle" name="ptitle" placeholder="제목을 입력해주세요." required>
+					<div class="ptitle" name="ptitle">
+					나만 없어 댕댕이...
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="post_datenbutton">
+					<%
+						Date now = new Date();
+						SimpleDateFormat ymd = new SimpleDateFormat("yyyy.MM.dd");
+						SimpleDateFormat hms = new SimpleDateFormat("hh.mm.ss");
+					%>
+					<span class="pdate"><%= ymd.format(now) %></span>
+					<input type="button" value="삭제">
+					<input type="button" value="수정">
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<input type="file" accept="image/*" 
-					name="file[]"
-					multiple>
+					<div>
+						<!-- 포토존 시작 -->
+						<!-- 포토존 끝 -->
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<textarea rows="50"  
-							  class="pcontent" name="pcontent"
-							  placeholder="내용을 입력해주세요." required
-					></textarea>
-					<div><span>0</span>/1500</div>
+					<div>
+					
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td>
 					<div class="ploc">
-					위치추가<input type="text">
+						위치
 					</div>
 				</td>
 			</tr>

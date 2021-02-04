@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 작성 페이지</title>
+<title>PEEPS</title>
 </head>
 <style>
 @import
@@ -17,11 +17,6 @@
 </style>
 
 <style>
-body {
-	background-color: #fcf9f6;
-	font-family: 'Nanum Gothic', sans-serif;
-}
-
 .post_wrap {
 	width: 1000px;
 	height: auto;
@@ -78,6 +73,11 @@ body {
 	width: 100px;
 	height: 40px;
 	font-size: 1.1em;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+body {
+	background-color: #fcf9f6;
 	font-family: 'Nanum Gothic', sans-serif;
 }
 </style>
@@ -143,7 +143,8 @@ body {
 			</tr>
 			<tr>
 				<td>
-					<textarea rows="50" class="pcontent"
+					<textarea rows="50"  
+							  class="pcontent" name="pcontent"
 							  placeholder="내용을 입력해주세요." required
 					></textarea>
 					<div><span>0</span>/1500</div>
