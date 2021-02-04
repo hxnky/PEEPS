@@ -123,6 +123,13 @@
 			<version>1.2</version>
 		</dependency>
 
+		<!-- 타임서버 접근 -->
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.6</version>
+		</dependency>
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

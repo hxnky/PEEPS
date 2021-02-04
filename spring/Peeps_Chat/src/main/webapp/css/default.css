@@ -264,8 +264,6 @@ main header h3 {
 
 /* 채팅 공간 */
 #chatdata {
-	padding-left: 0;
-	margin: 0;
 	list-style-type: none;
 	overflow-y: scroll;
 	height: 600px;
