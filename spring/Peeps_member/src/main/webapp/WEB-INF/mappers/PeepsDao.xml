@@ -14,6 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(#{email}, #{id},#{password},#{name},
 		#{code});
 	</insert>
+	
+	
 
 	<!-- 소셜 로그인 시 회원 이메일 있는지 확인 -->
 	<select id="selectMemberByEmailCount" resultType="int">
@@ -21,6 +23,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 이메일 없으면 이메일, 이름, 사진, 로그인 타입 insert 하기 -->
+	<insert id="insertSocialMember"
+		parameterType="com.gnjk.peeps.domain.Peeps" useGeneratedKeys="true"
+		keyProperty="m_idx">
+		insert into member (email, id, password, name, loginType) values (#{email}, #{id},#{password},#{name}, #{loginType});
+	</insert>
+
 
 	<!-- 아이디 중복 확인 -->
 	<select id="selectMemberByIdCount" resultType="int">

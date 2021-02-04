@@ -16,6 +16,7 @@ public interface PeepsDao {
 	Peeps selectLogin(String id, String password);
 	// 이메일 중복 확인
 	int selectMemberByEmailCount(String email);
-	
+	// 소셜 이메일 추가 정보 기입
+	int insertSocialMember(Peeps peeps);
 
 }

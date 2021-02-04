@@ -22,8 +22,9 @@ public class LoginService {
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String chk = request.getParameter("chk");
 
+		
+		
 		dao = template.getMapper(PeepsDao.class);
 
 		boolean loginCheck = false;
@@ -40,6 +41,7 @@ public class LoginService {
 			}
 
 		}
+		
 		return loginCheck;
 	}
 }

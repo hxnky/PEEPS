@@ -29,7 +29,7 @@ public class KakaoConroller {
 		model.addAllAttributes(userInfo);
 		model.addAttribute("token", access_Token);
 
-		return "member/TimeLine";
+		return "member/SocialRegForm";
 
 	}
 

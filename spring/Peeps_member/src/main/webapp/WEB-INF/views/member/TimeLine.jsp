@@ -115,33 +115,5 @@
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 <script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 
-<script>
-// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
-	$(document).ready(function(){
-		// id = "id_reg" / name = "userId"
-		var email = $('#email').text();
-		console.log(email);
-		$.ajax({
-			url : '${pageContext.request.contextPath}/user/idCheck?email='+ email,
-			type : 'get',
-			data: {
-				// email이,,, h3 태그까지,,, 가져와진다 ,,
-			},
-			success : function(data) {						
-				
-				if (data == 1) {
-						console.log("아이디가 DB에 존재합니다. 아이디를 Session에 저장합니다 . . .");
-						// session에 아이디 저장
-						
-					} else{
-						console.log("아이디가 DB에 존재하지 않습니다. DB에 저장합니다 . . .");
-						
-						// DB에 저장하는 ,, 코드 짜기 ,,,
-					}
-				} , error : function() {
-						console.log("실패,,,,");
-				}
-			});
-		});
-</script>
+
 </html>

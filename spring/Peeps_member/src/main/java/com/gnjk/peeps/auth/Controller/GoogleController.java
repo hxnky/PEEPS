@@ -74,7 +74,7 @@ public class GoogleController {
 		System.out.println("이름 : " + userInfo.get("name"));
 		System.out.println("사진 URL : " + userInfo.get("picture"));
 
-		return "member/TimeLine";
+		return "member/SocialRegForm";
 
 	}
 
