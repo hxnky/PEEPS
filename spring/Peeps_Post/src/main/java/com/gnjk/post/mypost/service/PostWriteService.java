@@ -49,6 +49,7 @@ public class PostWriteService {
 		// 파일 업로드 처리 시작
 		int postFileResult = 0;
 		String newFileName = null;
+		File newFile = null;
 		
 //		System.out.println("!!!!!request.getFiles(postfile): " + request.getFiles("postfile"));
 		if(
@@ -72,7 +73,7 @@ public class PostWriteService {
 				
 				try {
 					// 실제 경로에 저장
-					mf.transferTo(new File(saveDirPath, newFileName));
+					mf.transferTo(newFile = new File(saveDirPath, newFileName));
 					
 					PostFile postFile = new PostFile();
 					postFile.setF_name(newFileName);
@@ -84,6 +85,10 @@ public class PostWriteService {
 					
 				} catch (Exception e) {
 					e.printStackTrace();
+					// 현재 저장된 파일 있을 경우 삭제
+					if(newFile != null && newFile.exists()) {
+						newFile.delete();
+					}
 				}
 			} // foreach end
 			
