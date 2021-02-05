@@ -39,9 +39,9 @@ public class ChattingHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage (WebSocketSession session, TextMessage message)  throws Exception {          
 
-		// Dao 클래스 필
+		// Dao 클래스 필요 
 		
-		System.out.println(message.getPayload()); // 나중에 삭제 
+		//System.out.println(message.getPayload()); // 나중에 삭제 
 
 		String friend = (String) session.getAttributes().get("user");
 

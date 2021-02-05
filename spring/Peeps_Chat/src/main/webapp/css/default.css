@@ -266,9 +266,8 @@ main header h3 {
 	color: #5e616a;
 }
 
+/* 채팅 공간 */
 #chatdata {
-	padding-left: 0;
-	margin: 0;
 	list-style-type: none;
 	overflow-y: scroll;
 	height: 600px;
@@ -276,7 +275,7 @@ main header h3 {
 	border-bottom: 2px solid #5e616a;
 }
 
-.text_right {
+/* .text_right {
 	text-align: right;
 	width: auto;
 	max-width: 90%;
@@ -287,7 +286,6 @@ main header h3 {
 	margin-right: 10px;
 	word-wrap: break-word;
 }
-
 .text_left {
 	text-align: left;
 	width: auto;
@@ -298,4 +296,4 @@ main header h3 {
 	padding: 20px;
 	margin-left: 10px;
 	word-wrap: break-word;
-}
+} */
