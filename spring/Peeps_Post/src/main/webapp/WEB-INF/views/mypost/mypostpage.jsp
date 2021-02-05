@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<%@ include file="/WEB-INF/views/include/boardnav.jsp"%>
+<%@ include file="/WEB-INF/views/include/postnav.jsp"%>
 
 <h1>게시판 페이지</h1>
 

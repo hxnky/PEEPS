@@ -6,14 +6,23 @@
 		<ul>
 			<a href="<c:url value="/"/>">HOME</a>
 		</ul>
-		<ul>
+		<%-- <ul>
 			<a href="<c:url value="/write"/>">POST WRITE</a>
 		</ul>
 		<ul>
-			<a href="<c:url value="postview"/>">POST VIEW</a>
+			<a href="<c:url value="/postview"/>">POST VIEW</a>
 		</ul>
 		<ul>
 			<a href="<c:url value="/test"/>">TEST PAGE</a>
+		</ul> --%>
+		<ul>
+			<a href="<c:url value="/post/write"/>">게시글 작성</a>
+		</ul>
+		<ul>
+			<a href="<c:url value="/post/list"/>">게시글 리스트</a>
+		</ul>
+		<ul>
+			<a href="<c:url value="/post/read"/>">(test)게시글 보기</a>
 		</ul>
 	</div>
 </nav>
