@@ -16,24 +16,19 @@
 		<hr>
 		<div class="content">
 		
-		${postWriteRequest}
-		${writeData}
+		<h4>@ModelAttribute("writeData") PostWriteRequest writeRequest</h4>
+		<%-- ${postWriteRequest}<br> --%>
+		<h4>writeData : ${writeData}</h4>
+		<br>
+		
 		
 		<c:if test="${result > 0}">
-		정상적으로 회원가입이 되었습니다.
+		게시글 작성이 정상적으로 완료되었습니다.
 		</c:if>
 		
 		<c:if test="${result eq 0}">
-		회원가입이 정상 처리되지 않았습니다. 다시 시도해주세요.
+		게시글 작성이 정상 처리되지 않았습니다. 다시 시도해주세요.
 		</c:if>
-		
-		<%--
-			if(result>0){
-				out.println("정상적으로 회원가입이 되었습니다.");
-			} else {
-				out.println("회원가입이 정상 처리되지 않았습니다. 다시 시도해주세요.");
-			}
-		--%>
 		
 		</div>
 	</div>

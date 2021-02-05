@@ -63,5 +63,17 @@ public class PostController {
 	
 	// 게시글 삭제처리
 	
+	// TEST파일 업로드 페이지
+	@RequestMapping(value = "/testfileupload", method = RequestMethod.GET)
+	public String testFileUploadGET() {
+		return "/mypost/testFileUploadForm";
+	}
+	
+	// TEST파일 업로드 등록 처리
+	@RequestMapping(value = "/testfileupload", method = RequestMethod.POST)
+	public String testFileUploadPOST() {
+		return "/mypost/testFileUploadView";
+	}
+	
 
 }
