@@ -162,7 +162,7 @@ body {
 			<tr>
 				<td>
 					<input type="file" accept="image/*" 
-					name="file[]" id="file" onchange="fileCheck(this)"
+					name="postfile" id="postfile" onchange="fileCheck(this)"
 					multiple>
 				</td>
 			</tr>

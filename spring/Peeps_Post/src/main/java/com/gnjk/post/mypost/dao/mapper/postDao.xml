@@ -28,6 +28,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(#{member_idx},#{p_title},#{p_content})
 		
 	</insert>
+	
+	<!-- 게시글 파일 등록 -->
+ 	<insert id="insertFiles"
+		parameterType="com.gnjk.post.mypost.domain.PostFile"
+		useGeneratedKeys="true"
+		keyProperty="f_idx"
+	>
+	
+		INSERT INTO file
+		(f_idx, f_name, f_path, f_type, f_size, post_idx)
+		VALUES 
+		<!-- <foreach collection="list" item="item" separator=","> -->
+		(#{f_idx},#{f_name},#{f_path},#{f_type},#{f_size},#{post_idx})
+		<!-- </foreach> -->
+	
+	</insert> 
 
 
 

@@ -5,7 +5,20 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2021-02-03T20:24:00Z</updated>
+  <updated>2021-02-05T04:24:00Z</updated>
+  <entry>
+    <title>A Bootiful Podcast:  RSocket legend and new Reactor team member Oleh Dokuka</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/02/04/a-bootiful-podcast-rsocket-legend-and-new-reactor-team-member-oleh-dokuka" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2021-02-05:4355</id>
+    <updated>2021-02-05T04:24:00Z</updated>
+    <content type="html">&lt;p&gt;Hi, Spring fans! Welcome to another installment of &lt;em&gt;A Bootiful Podcast&lt;/em&gt;! In this episode, &lt;a href="https://twitter.com/starbuxman"&gt;Josh Long (@starbuxman)&lt;/a&gt; talks to RSocket legend and new Reactor team member &lt;a href="https://twitter.com/OlehDokuka"&gt;Oleh Dokuka (@OlehDokuka)&lt;/a&gt; about RSocket routing, the RSocket broker, Netty, HTTP3 and Quick, the &lt;code&gt;RSocketClient&lt;/code&gt;, and so much more. &lt;/p&gt;
+&lt;iframe title="RSocket legend and new Reactor team member Oleh Dokuka " height="122" width="100%" style="border: none;" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/media/player/m4ht5-f9c3eb?from=pb6admin&amp;download=1&amp;version=1&amp;auto=0&amp;share=1&amp;download=1&amp;rtl=0&amp;fonts=Helvetica&amp;skin=1&amp;pfauth=&amp;btn-skin=107"&gt;&lt;/iframe&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Demystifying Spring Cloud Stream producers with Apache Kafka partitions</title>
     <link rel="alternate" href="https://spring.io/blog/2021/02/03/demystifying-spring-cloud-stream-producers-with-apache-kafka-partitions" />
@@ -1918,52 +1931,6 @@ public class BootifulApplication {&#xD;
   &lt;p&gt;Here, you can see that the default client experience of an RSocket service is more like that of an HTTP endpoint or an exchange with a message queue. We&amp;rsquo;re sending request messages to endpoints, which are more like URIs, not distributed methods. That said, if you &lt;em&gt;really&lt;/em&gt; are all about that RPC life and don&amp;rsquo;t mind an &lt;em&gt;optional&lt;/em&gt; extra dependency. You &lt;em&gt;might&lt;/em&gt; &lt;a href="http://github.com/spring-projects-experimental"&gt;consider the &lt;em&gt;experimental&lt;/em&gt; Spring Retrosocket project&lt;/a&gt;, which we launched to support this use case precisely. It provides a Netflix-feign like RPC experience, but for RSocket. &lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Did you like this gem at a glance approach? Did you learn anything? As always, I&amp;rsquo;m keen on hearing from you, so &lt;a href="http://twitter.com/starbuxman"&gt;please sound off on Twitter (@starbuxman) &lt;/a&gt;! I&amp;rsquo;ll be back with another installment of &lt;em&gt;YMNNALFT&lt;/em&gt;, so be sure not to miss that. &lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>What's new in Spring Boot 2.4</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/01/17/what-s-new-in-spring-boot-2-4" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Phil Webb</name>
-    </author>
-    <id>tag:spring.io,2021-01-17:4339</id>
-    <updated>2021-01-17T16:48:00Z</updated>
-    <content type="html">&lt;p&gt;Speaker: &lt;a href="http://twitter.com/phillip_webb"&gt;Phil Webb (@phillip_webb)&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Sorry for the small font! You might want to watch this at a computer in full screen.&lt;/p&gt;
-&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/lgyO9C9zdrg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;&lt;h2&gt;&lt;a href="#timecodes" class="anchor" name="timecodes"&gt;&lt;/a&gt;Timecodes&lt;/h2&gt;
-&lt;p&gt;Use the timecodes below if you want to jump to a specific part of the presentation:&lt;/p&gt;&lt;h3&gt;&lt;a href="#intro" class="anchor" name="intro"&gt;&lt;/a&gt;Intro&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=0027s"&gt;00:27&lt;/a&gt; - Creating a Demo App&lt;/li&gt;
-&lt;/ul&gt;&lt;h3&gt;&lt;a href="#upgrading" class="anchor" name="upgrading"&gt;&lt;/a&gt;Upgrading&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=0444s"&gt;07:24&lt;/a&gt; - Version Number Changes&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=0509s"&gt;08:29&lt;/a&gt; - JUnit Vintage Engine&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=0547s"&gt;09:07&lt;/a&gt; - Legacy Config Data Mode&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=0648s"&gt;10:48&lt;/a&gt; - Logback Property Changes and Property Migrator&lt;/li&gt;
-&lt;/ul&gt;&lt;h3&gt;&lt;a href="#new-features" class="anchor" name="new-features"&gt;&lt;/a&gt;New Features&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=0831s"&gt;13:51&lt;/a&gt; - Java 15 and Startup Logging&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=0903s"&gt;15:03&lt;/a&gt; - Constructor Binding @ConfigurationProperties Updates&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=1091s"&gt;18:11&lt;/a&gt; - ApplicationStartup Metrics (Flight Recorder and JSON)&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=1489s"&gt;24:49&lt;/a&gt; - Changes to Application properties/yaml&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=1846s"&gt;30:46&lt;/a&gt; - Using &amp;lsquo;spring.config.import&amp;rsquo;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=2086s"&gt;34:46&lt;/a&gt; - Importing Files Without an Extension&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=2128s"&gt;35:28&lt;/a&gt; - Origin Chains&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=2314s"&gt;38:34&lt;/a&gt; - Config Tree Support (Kubernetes Volume Mounted Secrets)&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=2451s"&gt;40:51&lt;/a&gt; - Supporting Custom Config Data Import Types&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=2577s"&gt;42:57&lt;/a&gt; - Docker and Buildpack Updates&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://youtu.be/lgyO9C9zdrg?t=2769s"&gt;46:09&lt;/a&gt; - Publishing to a Private Docker Registry&lt;/li&gt;
-&lt;/ul&gt;&lt;h2&gt;&lt;a href="#links" class="anchor" name="links"&gt;&lt;/a&gt;Links&lt;/h2&gt;
-&lt;p&gt;The following links are useful for the presentation:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.4-Release-Notes"&gt;Release Notes&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Building OCI Images [&lt;a href="https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/html/#build-image"&gt;Maven&lt;/a&gt;|&lt;a href="https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/html/#build-image"&gt;Gradle&lt;/a&gt;]&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-boot/blob/master/CONTRIBUTING.adoc"&gt;Contributing Instructions&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://start.spring.io"&gt;start.spring.io&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://github.com/wagoodman/dive"&gt;Docker Image Inspection Tool (dive)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://goharbor.io/"&gt;Private Docker Registry (Harbor)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>

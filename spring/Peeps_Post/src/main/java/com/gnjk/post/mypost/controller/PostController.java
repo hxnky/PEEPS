@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.gnjk.post.mypost.domain.PostWriteRequest;
 import com.gnjk.post.mypost.service.PostWriteService;
@@ -35,7 +36,8 @@ public class PostController {
 	@RequestMapping(value = "/write", method = RequestMethod.POST)
 	public String postWritePOST(
 			@ModelAttribute("writeData") PostWriteRequest writeRequest,
-			HttpServletRequest request,
+//			HttpServletRequest request,
+			MultipartHttpServletRequest request,
 			Model model
 			) {
 		
