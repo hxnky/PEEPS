@@ -1,15 +1,15 @@
 package com.gnjk.chat.domain;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class Message {
 
 	private String user; 	// 사용자 
 	private String to; 		// 받는사람 
-	private Timestamp time; // 채팅시간 
+	private String time; // 채팅시간 
 	private String message; // 채팅내용
 	
-	public Message(String user, String to, Timestamp time, String message) {
+	public Message(String user, String to, String time, String message) {
 		this.user = user;
 		this.to = to;
 		this.time = time;
@@ -32,11 +32,11 @@ public class Message {
 		this.to = to;
 	}
 
-	public Timestamp getTime() {
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(Timestamp time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
