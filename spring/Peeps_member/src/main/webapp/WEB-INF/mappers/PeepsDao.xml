@@ -22,6 +22,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from member where email=#{email}
 	</select>
 
+	<!-- 소셜 로그인 시 회원 이메일이 있다면 로그인 타입이 일치하는지 확인 -->
+	<select id="selectLoginTypeByEmailCount" resultType="String">
+		select loginType from member where email=#{email}
+	</select>
+	
+	
+
 	<!-- 이메일 없으면 이메일, 이름, 사진, 로그인 타입 insert 하기 -->
 	<insert id="insertSocialMember"
 		parameterType="com.gnjk.peeps.domain.Peeps" useGeneratedKeys="true"

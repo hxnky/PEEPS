@@ -64,6 +64,7 @@ public class GoogleController {
 		Map<String, String> userInfo = mapper.readValue(resultJson, new TypeReference<Map<String, String>>() {
 		});
 
+		model.addAttribute("loginType", "google");
 		model.addAttribute("email", userInfo.get("email"));
 		model.addAttribute("name", userInfo.get("name"));
 		model.addAttribute("m_photo", userInfo.get("picture"));

@@ -153,65 +153,84 @@ h4 {
 
 // 아이디 유효성 검사(1 = 중복 / 0 = 중복아님)
 	$(document).ready(function(){
-		var LoginType = "";
+		
+		var loginType = "${loginType}";
 		var email = "${email}";
-
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/user/loginTypeChk?email=' + email,
+			type : 'get',
+			async:false,
+			success : function(data){
+				
+				if(data == "kakao"){
+					LoginType = "kakao";
+				} else if(data == "google"){
+					LoginType = "google";
+				} else{
+					LoginType = "email";
+				}
+			},error : function() {
+					console.log("실패,,,,");
+			}
+		});
+		
+		console.log("저장된 로그인 타입" + loginType);
+		console.log("테이블 로그인 타입" + LoginType);
+		
 		$.ajax({
 			url : '${pageContext.request.contextPath}/user/idCheck?email='+ email,
 			type : 'get',
 			async:false,
-			success : function(data) {						
+			success : function(data) {		
+	
 				
 				if (data == 1) {
-						// 이메일은 중복될 수 없으므로 로그인 불가
-						alert("이미 가입된 이메일입니다. 로그인페이지로 이동합니다.");
+					if(loginType == LoginType){
+						// 로그인 타입이 일치하면 타임라인 페이지
+						// window.location.href = "/peeps/member/TimeLine";
+						console.log("타임라인 페이지");
+					} else{
+						// 아니면 alert
+						alert("해당 이메일로 이미 가입된 계정이 있습니다. 로그인 페이지로 이동합니다.");
 						// login 페이지로 다시 보내기
 						window.location.href = "/peeps/";
-					} else{						
+					}		
+				} else{						
 						console.log("아이디가 DB에 존재하지 않습니다. DB에 저장합니다 . . .");
-						// 이메일, 이름, 아이디, 비밀번호, 로그인 타입 DB에 저장
-						
-						var lt = email.indexOf("gmail");
-						
-						if(lt == -1){
-							// 로그인 타입 카카오로 저장
-							LoginType = "kakao";
-							
-						} else{
-							// 로그인 타입 구글로 저장
-							LoginType = "google";
-						}	
-						
-						$('#sign_btn').click(function(){
-							
-							console.log(LoginType);
-							
-							$.ajax({
-								url : '${pageContext.request.contextPath}/user/reg',
-								type : 'post',
-								data : {
-									"email" : "${email}",
-									"name" : "${name}",
-									"id" : $('.id').val(),
-									"password" : $('.password').val(),
-									"loginType" : LoginType
-								},
-								async:false,
-								success : function(){
-									console("사용자 정보를 DB에 성공적으로 넣었습니다.");
-								},error : function() {
-										console.log("실패,,,,");
-								}
-							});
-						});
 					}				
-				}, error : function() {
+			}, error : function() {
 						console.log("실패,,,,");
 				}
 			});
-		
+			
+			
 
 		
+
+		$('#sign_btn').click(function(){
+			
+			console.log(LoginType);
+			
+			$.ajax({
+				url : '${pageContext.request.contextPath}/user/reg',
+				type : 'post',
+				data : {
+					"email" : "${email}",
+					"name" : "${name}",
+					"id" : $('.id').val(),
+					"password" : $('.password').val(),
+					"loginType" : loginType
+				},
+				async:false,
+				success : function(){
+					console("사용자 정보를 DB에 성공적으로 넣었습니다.");
+					// 타임라인 페이지로 return이 안됨 ,, ㅜㅜ
+				},error : function() {
+						console.log("실패,,,,");
+				}
+			});
+		});
 		
 		
 		});

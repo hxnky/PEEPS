@@ -18,5 +18,7 @@ public interface PeepsDao {
 	int selectMemberByEmailCount(String email);
 	// 소셜 이메일 추가 정보 기입
 	int insertSocialMember(Peeps peeps);
+	// 소셜 로그인 타입 비교
+	String selectLoginTypeByEmailCount(String email);
 
 }

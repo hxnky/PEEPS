@@ -25,6 +25,13 @@ public class OAuthService {
 
 		return dao.selectMemberByEmailCount(email);
 	}
+	
+	public String checkLoginType(String email) {
+		
+		dao = template.getMapper(PeepsDao.class);
+		
+		return dao.selectLoginTypeByEmailCount(email);
+	}
 
 	// 파일을 업로드, 데이터베이스 저장
 	@Transactional

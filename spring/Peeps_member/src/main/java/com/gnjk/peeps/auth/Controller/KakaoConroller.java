@@ -26,6 +26,7 @@ public class KakaoConroller {
 
 		System.out.println("유저 정보 : " + userInfo);
 
+		model.addAttribute("loginType", "kakao");
 		model.addAllAttributes(userInfo);
 		model.addAttribute("token", access_Token);
 

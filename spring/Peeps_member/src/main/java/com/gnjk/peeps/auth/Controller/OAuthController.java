@@ -24,9 +24,17 @@ public class OAuthController {
 	@RequestMapping(value = "/user/idCheck", method = RequestMethod.GET)
 	@ResponseBody
 	public int emailCheck(@RequestParam("email") String email) {
-
+		
 		return oauthService.checkEmail(email);
 	}
+	
+	@RequestMapping(value = "/user/loginTypeChk", method = RequestMethod.GET)
+	@ResponseBody
+	public String loginTypeCheck(@RequestParam("email") String email) {
+		
+		return oauthService.checkLoginType(email);
+	}
+	
 	
 	@RequestMapping(value = "/user/reg", method = RequestMethod.POST)
 	@ResponseBody
