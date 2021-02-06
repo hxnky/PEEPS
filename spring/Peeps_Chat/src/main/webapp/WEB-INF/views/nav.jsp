@@ -20,7 +20,7 @@
 			<ul class="icon">
 
 				<li class="left"><span><input type="search"
-						placeholder="서아언니 메롱">
+						placeholder="@kyung_s2">
 						<button>
 							<a href="#"><img
 								src="<c:url value='/icon/navi/search.png' />"></a>
