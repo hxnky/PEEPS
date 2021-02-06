@@ -82,6 +82,7 @@ aside {
 	font-size: 0;
 	border-radius: 5px;
 	overflow: hidden;
+	margin: 120PX auto;
 }
 
 aside header span {

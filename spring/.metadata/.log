@@ -1976,3 +1976,12 @@ java.lang.ClassFormatError: Illegal field modifiers in class com/gnjk/chat/dao/I
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2021-02-07 01:17:38.709
 !MESSAGE Using platform encoding (MS949 actually) to copy filtered resources, i.e. build is platform dependent!
+
+!ENTRY org.eclipse.wst.html.ui 1 1 2021-02-07 01:20:42.523
+!MESSAGE No line style provider for org.eclipse.wst.html.SCRIPT
+
+!ENTRY org.eclipse.wst.html.ui 1 1 2021-02-07 01:20:42.524
+!MESSAGE No line style provider for org.eclipse.wst.html.SCRIPT
+
+!ENTRY org.eclipse.wst.html.ui 1 1 2021-02-07 01:20:42.525
+!MESSAGE No line style provider for org.eclipse.wst.html.SCRIPT

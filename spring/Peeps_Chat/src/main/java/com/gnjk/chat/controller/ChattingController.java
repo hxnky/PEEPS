@@ -1,5 +1,7 @@
 package com.gnjk.chat.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -32,11 +34,17 @@ public class ChattingController { // 채팅 화면 (*수정 중)
 	private MessageService messageService;
 	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(HttpServletRequest request, Model model) {
+	public String save(ModelAndView mav, HttpServletRequest request) {
 		
 		// 서비스 메소드 호출
-		messageService.save(request);
+		try {
+			messageService.save(request);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		return "redirect:list";
 	}
 	
 }

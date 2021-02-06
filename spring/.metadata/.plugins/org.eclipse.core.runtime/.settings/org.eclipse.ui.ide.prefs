@@ -1,6 +1,7 @@
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
 >>>>>>>=a9568d05bcdbc20adf7c277c01a8892ecc7afbd1
+PROBLEMS_FILTERS_MIGRATE=true
 eclipse.preferences.version=1
 platformState=1609826871024
 quickStart=false

@@ -25,7 +25,7 @@ public class MessageService {
 		String message = request.getParameter("message");
 		
 		// Dao의 파라미터 만들기
-		Message vo = new Message();
+		Message vo = new Message(ch_idx, user, to, time, message);
 		vo.setCh_idx(ch_idx);
 		vo.setUser(user);
 		vo.setTo(to);
