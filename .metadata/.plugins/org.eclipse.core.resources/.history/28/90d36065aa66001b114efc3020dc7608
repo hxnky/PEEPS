@@ -1,0 +1,20 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false" language="java"
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home_jsp</title>
+</head>
+<body>
+
+	<!-- navi-->
+	<%@ include file="/WEB-INF/views/nav.jsp"%>
+
+	<!---------------------------------------->
+
+	<!--chatting-->
+	<%@ include file="/WEB-INF/views/container.jsp"%>
+
+</body>
+</html>

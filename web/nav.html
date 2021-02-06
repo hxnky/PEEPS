@@ -1,0 +1,114 @@
+<!-- 스프링에서 사용 시 맨 위에 추가해주세요
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+-->
+
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기본 네비바</title>
+</head>
+
+<style>
+    /* @charset "UTF-8"; */
+
+/* navi */
+nav ul {
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 60px;
+	width: 100%;
+	background-color: #F5E978;
+	padding: 0px;
+	position: fixed;
+	z-index: 2;
+	list-style-type: none;
+}
+
+.icon {
+	margin: 0px;
+	display: inline-flex;
+	justify-content: space-between;
+}
+
+nav ul li {
+	margin: auto 15px;
+}
+
+.right a {
+	padding: 5px;
+	margin-top: 20px;
+}
+
+input[type="search"] {
+	padding-left: 10px;
+	float: left;
+	height: 30px;
+	border-radius: 30px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border: none;
+}
+
+nav ul li button {
+	background-color: #EEF0ED;
+	height: 30px;
+	border: none;
+	border-radius: 30px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+/*Logo*/
+.center {
+	margin-top: -36px;
+}
+    </style>
+
+<body>
+
+	<!-- nav -->
+	<div id="nav">
+		<nav>
+			<ul class="icon">
+
+				<li class="left"><span><input type="search"
+						placeholder="@kyung_s2">
+						<button>
+							<a href="#"><img src="/icon/navi/search.png"></a>
+                        </button></span></li>
+
+                <li class="center">
+                    <a id="Logo"><img src="/icon/Logo.png"></a></li>
+                    
+				<li class="right">  <a id="Home" href="#"><img src="/icon/navi/023-home.png"></a> <a
+					id="Content" href="#"><img src="/icon/navi/Content.png"></a> <a
+					id="Alarm" href="#"><img src="/icon/navi/008-notification.png"></a> <a
+					id="Chat" href="#"><img src="/icon/navi/050-wechat.png"> </a> <a
+					id="MyPage" href="#"><img src="/icon/navi/010-user.png"></a>
+                </li>
+
+       <!-- 스프링에서 사용할 때는 위에 코드를 이렇게 써야하더라구요..!
+           <li class="right"><a id="Home" href="#"><img
+						src="<c:url value='/icon/navi/023-home.png' />"></a> <a
+					id="Content" href="#"><img
+						src="<c:url value='/icon/navi/Content.png' />"></a> <a
+					id="Alarm" href="#"><img
+						src="<c:url value='/icon/navi/008-notification.png' />"></a> <a
+					id="Chat" href="#"><img
+						src="<c:url value='/icon/navi/050-wechat.png'/>"></a> <a
+					id="MyPage" href="#"><img
+						src="<c:url value='/icon/navi/010-user.png '/>"></a></li>
+        -->
+        
+			</ul>
+		</nav>
+	</div>
+
+</body>
+</html>

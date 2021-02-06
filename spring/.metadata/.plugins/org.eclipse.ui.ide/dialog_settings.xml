@@ -113,8 +113,8 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
-			<item value="C:\Users\kimjh\Documents\GitHub\PEEPS\spring"/>
 			<item value="C:\Users\kho3\OneDrive\Documents\GitHub\PEEPS\spring\Peeps_Chat"/>
+			<item value="C:\Users\kimjh\Documents\GitHub\PEEPS\spring"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
 			<item value=""/>
