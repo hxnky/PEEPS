@@ -1,4 +1,4 @@
-package com.gnjk.peeps.guestbook.controller;
+package com.gnjk.peeps.guestbook;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
