@@ -32,6 +32,16 @@
 		<!-- mybatis-config.xml이 스프링 시작될때 같이 실행되도록 설정하기 -->
 		<property name="configLocation"
 			value="classpath:/mybatis-config.xml"></property>
+
+		<property name="mapperLocations"
+			value="classpath:/com/gnjk/chat/dao/mapper/*.xml" />
 	</bean>
 
+	<bean id="sqlSession" name="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate"
+		destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory"
+			ref="sqlSessionFactory" />
+	</bean>
+	
 </beans>

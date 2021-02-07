@@ -4,9 +4,19 @@
 
 <configuration>
 
-<!-- 매퍼 파일에 com.gnjk.chat.domain 패키지에 있는 클래스를 사용할 때는 클래스 이름만 입력해도 되도록 지정-->
+	<!-- 문서에서 테이블 이름, 컬럼 이름을 변수화 시켜주는 설정 -->
+	<properties>
+		<property name="ch_idx" value="ch_idx" />
+		<property name="user" value="m_idx" />
+		<property name="to" value="rm_idx" />
+		<property name="time" value="ch_time" />
+		<property name="message" value="ch_ms" />
+	</properties>
+
 	<typeAliases>
-		<package name="com.gnjk.chat.domain"/>
+		<package name="com.gnjk.chat.domain" />
 	</typeAliases>
 
 </configuration>
+
+<!-- 매퍼 파일에  com.gnjk.chat.domain 패키지에 있는 클래스를 사용할 때는 클래스 이름만 입력해도 되도록 지정 -->

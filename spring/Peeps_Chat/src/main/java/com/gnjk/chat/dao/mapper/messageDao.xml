@@ -6,6 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="message">
 	<insert id="send" parameterType="Message">
 	insert into chat(ch_idx, user, to, time, message)
-	value(ch_idx, m_idx, rm_idx, ch_time, ch_ms)
+	value(#{ch_idx}, #{m_idx}, #{rm_idx}, #{ch_time}, #{ch_ms})
 	</insert>
 </mapper>
