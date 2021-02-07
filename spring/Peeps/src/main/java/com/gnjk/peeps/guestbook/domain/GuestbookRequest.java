@@ -2,9 +2,13 @@ package com.gnjk.peeps.guestbook.domain;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class guestbookRequest {
+public class GuestbookRequest {
      
+	
+	
+	
 	private String gmessage;
+	
     private MultipartFile gphoto;
     
 	public String getGmessage() {
@@ -21,7 +25,7 @@ public class guestbookRequest {
 	}
 	@Override
 	public String toString() {
-		return "guestbookRequest [gmessage=" + gmessage + ", gphoto=" + gphoto + "]";
+		return "guestbookRequest [gmessage=" + gmessage + ", gphoto=" + gphoto.getOriginalFilename() + "]";
 	}
     
 	

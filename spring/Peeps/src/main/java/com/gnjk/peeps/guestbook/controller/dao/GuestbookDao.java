@@ -1,7 +1,9 @@
 package com.gnjk.peeps.guestbook.controller.dao;
 
-public class GuestbookDao {
-	
+import com.gnjk.peeps.guestbook.domain.GuestbookRequest;
 
+public interface GuestbookDao {
+	
+int insertGbook(GuestbookRequest request);
 
 }

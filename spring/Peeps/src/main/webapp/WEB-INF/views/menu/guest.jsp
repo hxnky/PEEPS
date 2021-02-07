@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>결과 </h1>
 
- ${gRequest}
- ${insertdata}
 </body>
 </html>

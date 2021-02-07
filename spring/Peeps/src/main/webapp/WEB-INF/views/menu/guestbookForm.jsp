@@ -49,18 +49,18 @@ margin-top: 50px;
 	</div>
 	<!--=====================context======================-->
 	<div class="changing" >
-	<form method="POST" enctype="multipart/form-data">
+	<form method="POST" enctype="multipart/  form-data">
 	
 	
 	<div class="ginsert_wrap">
 	
 	<ul>
 	
-	<li><img src="#" class="gimg" ></li>
-	<li><textarea rows="8" cols="80" name="gmessage"></textarea>
+	<li><img src="#" class="gimg" id="gimg"></li>
+	<li><textarea rows="8" cols="80"  id="gmessage" name="gmessage"></textarea>
 	
 	<input type="file"> </li>
-	<li><input type="submit" value="등록" name="gphoto"> </li>
+	<li><input type="submit" value="등록" id="gphoto" name="gphoto"> </li>
 	
 	
 	</ul>
