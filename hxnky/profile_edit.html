@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필 편집</title>
+</head>
+
+<style>
+    body {
+        background-color: #fcf9f6;
+    }
+
+    #total_wrap {
+        margin: 100px auto;
+        height: 800px;
+        width: 1500px;
+    }
+
+    #edit_menu {
+        margin-top: 100px;
+        height: 600px;
+        width: 490px;
+        float: left;
+        text-align: center;
+        border-right: solid 0.2px #CCC;
+    }
+
+    #edit_menu>h1 {
+        margin: 120px auto;
+    }
+
+    #edit_table {
+        margin: 50px;
+        height: 600px;
+        width: 800px;
+        float: right;
+
+    }
+
+    #table_right {
+        font-weight: bold;
+    }
+
+    #table_right>input,
+    #edit_bio {
+        width: 300px;
+        text-align: center;
+        margin: 10px auto;
+    }
+
+    #choose {
+        display: none;
+    }
+
+    #choose_btn {
+        background-color: #fcf9f6;
+        border: 0;
+        outline: 0;
+        font-size: 20px;
+        margin-left: 13px;
+        font-weight: bold;
+    }
+
+    #choose_btn:hover {
+        cursor: pointer;
+    }
+
+    #profile {
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
+        text-align: center;
+    }
+
+    #edit_text {
+        border: solid 0.2px #CCC;
+        border-radius: 5%;
+        height: 30px;
+        width: 300px;
+        font-size: 15px;
+
+    }
+
+    #edit_bio {
+        border: solid 0.2px #CCC;
+        border-radius: 5%;
+        height: 50px;
+        width: 300px;
+        font-size: 15px;
+    }
+
+    #change {
+        margin-left: 420px;
+        width: 80px;
+        height: 30px;
+        font-size: 15px;
+    }
+
+    nav ul {
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        height: 60px;
+        width: 100%;
+        background-color: #F5E978;
+        padding: 0px;
+        position: fixed;
+        z-index: 2;
+        list-style-type: none;
+    }
+
+    .icon {
+        margin: 0px;
+        display: inline-flex;
+        justify-content: space-between;
+    }
+
+    nav ul li {
+        margin: auto 15px;
+    }
+
+    .center {
+        margin-top: -18px;
+    }
+
+    .right a {
+        padding: 5px;
+        margin-top: 20px;
+    }
+
+    input[type="search"] {
+        padding-left: 10px;
+        float: left;
+        height: 20px;
+        border-radius: 30px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border: none;
+    }
+
+    nav ul li button {
+        background-color: #EEF0ED;
+        height: 20px;
+        border: none;
+        border-radius: 30px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+</style>
+
+<body>
+    <div id="nav">
+        <nav>
+            <ul class="icon">
+
+                <li class="left">
+                    <span><input type="search" placeholder="검색">
+                        <button>
+                            <a href="#"><img src="images/icon/navi/search.png"></a>
+                        </button></span>
+                </li>
+
+                <li class="center">
+                    <a id="Logo"><img src="/hyo0/icon/Logo.png"></a>
+                </li>
+
+                <li class="right">
+                    <a id="Home" href="#"><img src="images/icon/navi/023-home.png"></a>
+                    <a id="Content" href="#"><img src="images/icon/navi/Content.png"></a>
+                    <a id="Alarm" href="#"><img src="images/icon/navi/008-notification.png"></a>
+                    <a id="Chat" href="#"><img src="images/icon/navi/050-wechat.png"></a>
+                    <a id="MyPage" href="#"><img src="images/icon/navi/010-user.png"></a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+        <!-- 네비 바 들어갈 부분 -->
+    </div>
+    <div id="total_wrap">
+        <div id="edit_menu">
+            <h1>프로필 편집</h1>
+            <h1>비밀번호 변경</h1>
+            <h1>탈퇴하기</h1>
+        </div>
+        <div id="edit_table">
+            <form>
+                <table id="edit_table">
+                    <tr>
+                        <td id="table_left" rowspan="3"><img id="profile" src="images/profile.png"><br>
+                            <input type="file" id="choose" value="프로필 사진 바꾸기" accept="img/*"><br>
+                            <button id="choose_btn">프로필 사진 바꾸기</button>
+                        </td>
+                        <td id="table_right">아이디 <br>
+                            <input type="text" id="edit_text" name="id" placeholder="사용자 정보 읽어와서 넣기">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="table_right">이름 <br>
+                            <input type="text" id="edit_text" name="name" placeholder="사용자 정보 읽어와서 넣기">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="table_right">소개글 <br> <!-- 텍스트 창이 혼자만 달라서 좀 이상한디,,, -->
+                            <textarea id="edit_bio" name="bio" rows="10" cols="30" placeholder="사용자 정보 읽어와서 넣기"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" id="change" value="변경">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+
+
+</body></html>

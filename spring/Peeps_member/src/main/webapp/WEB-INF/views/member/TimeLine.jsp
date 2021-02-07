@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="apple-touch-icon" sizes="76x76"
 	href="resources/img/apple-icon.png">
-<link rel="icon" type="image/png" href="resources/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>임시 타임라인</title>
 <meta
@@ -49,7 +50,6 @@
 					<div class="wizard-container">
 
 						<div class="card wizard-card" id="wizardProfile">
-							<form id="regForm" method="post" enctype="multipart/form-data">
 								<!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
 
 								<div class="wizard-header">
@@ -67,9 +67,10 @@
 								</div>
 
 								<h1>타 임 라 인</h1>
-								<h3 id="email">${email}</h3>
-								<h3>${name}</h3>
-								<h3>${m_photo}</h3>
+								<h3 id="email"><%=request.getParameter("email") %></h3>
+								<h3 id="name"><%=request.getParameter("data.email")%></h3>
+								<h3 id="m_photo">${m_photo}</h3>
+								
 								<input type="button" value="로그아웃"
 									onclick="location.href='${pageContext.request.contextPath}/logout'">
 
@@ -78,7 +79,6 @@
 										<br>
 									</div>
 								</div>
-							</form>
 						</div>
 					</div>
 					<!-- wizard container -->
@@ -115,5 +115,10 @@
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 <script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 
+<script>
+
+	
+	
+</script>
 
 </html>

@@ -38,7 +38,7 @@ public class RegService {
 			result = dao.insertMember(peeps);
 
 			// 메일발송
-			int mailsendCnt = mailSenderService.send(peeps);
+			int mailsendCnt = mailSenderService.RegSend(peeps);
 			System.out.println(mailsendCnt + "통의 메일이 발송되었습니다.");
 			
 		} catch (Exception e) {

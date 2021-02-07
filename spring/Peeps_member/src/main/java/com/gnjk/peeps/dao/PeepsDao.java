@@ -1,5 +1,7 @@
 package com.gnjk.peeps.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.gnjk.peeps.domain.Peeps;
 
 public interface PeepsDao {
@@ -20,5 +22,9 @@ public interface PeepsDao {
 	int insertSocialMember(Peeps peeps);
 	// 소셜 로그인 타입 비교
 	String selectLoginTypeByEmailCount(String email);
-
+	// 비밀번호 찾아서 수정
+	Integer updatePw(@Param("password") String password, @Param("email") String email, @Param("id") String id);
+	// 유저 정보가 있는지 확인
+	int search_user(@Param("email") String email, @Param("id") String id);
+	
 }

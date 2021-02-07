@@ -22,8 +22,6 @@ public class LoginService {
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-
-		
 		
 		dao = template.getMapper(PeepsDao.class);
 

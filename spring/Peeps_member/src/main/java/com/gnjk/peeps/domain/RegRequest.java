@@ -12,6 +12,7 @@ public class RegRequest {
 	private String name;
 	private String password;
 	private String loginType;
+	private String m_photo;
 
 	public Peeps toPeeps() {
 
@@ -22,6 +23,7 @@ public class RegRequest {
 		peeps.setName(name);
 		peeps.setPassword(password);
 		peeps.setLoginType(loginType);
+		peeps.setM_photo(m_photo);
 
 		return peeps;
 	}
@@ -34,6 +36,7 @@ public class RegRequest {
 		peeps.setId(id);
 		peeps.setName(name);
 		peeps.setLoginType(loginType);
+		peeps.setM_photo(m_photo);
 
 		return peeps;
 	}
@@ -41,15 +44,17 @@ public class RegRequest {
 	@Override
 	public String toString() {
 		return "RegRequest [email=" + email + ", id=" + id + ", name=" + name + ", password=" + password
-				+ ", loginType=" + loginType + "]";
+				+ ", loginType=" + loginType + ", m_photo=" + m_photo + "]";
 	}
 
-	public RegRequest(String email, String id, String name, String password, String loginType) {
+	public RegRequest(String email, String id, String name, String password, String loginType, String m_photo) {
 		super();
 		this.email = email;
 		this.id = id;
 		this.name = name;
 		this.password = password;
 		this.loginType = loginType;
+		this.m_photo = m_photo;
 	}
+
 }

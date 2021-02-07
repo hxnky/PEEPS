@@ -31,6 +31,7 @@
 <link href="<c:url value="/resources/css/reg.css"/>" rel="stylesheet" />
 </head>
 <style>
+
 /* 21.02.01 로그인 css 추가*/
 #login_img {
 	width: 100px;
@@ -136,7 +137,7 @@ td {
 										아이디가 없으신가요? <a href="<c:url value="/member/reg"/>">회원가입 하기</a>
 									</div>
 									<div>
-										비밀번호를 잊으셨나요? <a href="#">비밀번호 찾기</a>
+										비밀번호를 잊으셨나요? <a href="<c:url value="/member/find"/>">비밀번호 찾기</a>
 									</div>
 								</div>
 							</form>

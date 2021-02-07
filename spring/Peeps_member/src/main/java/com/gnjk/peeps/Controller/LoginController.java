@@ -22,6 +22,7 @@ public class LoginController {
 		return "member/LoginForm";
 	}
 
+	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
 
