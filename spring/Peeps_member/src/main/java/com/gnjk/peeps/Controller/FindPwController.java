@@ -1,5 +1,7 @@
 package com.gnjk.peeps.Controller;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,10 @@ public class FindPwController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String memberFindPost(HttpServletResponse response, @ModelAttribute Peeps peeps) throws Exception {
 		
+		PrintWriter out = response.getWriter();
+		
 		findPwService.find_pw(response, peeps);
+		out.print("정보가 수정되었습니다.");
 		
 		return "member/FindView";
 	}

@@ -50,6 +50,10 @@
 	text-align: center;
 }
 
+#profile:hover {
+	cursor: pointer;
+}
+
 #edit_text {
 	border: solid 0.2px #CCC;
 	border-radius: 5%;
@@ -86,9 +90,9 @@
 
 							</button>
 					</a></span></li>
-
-				<li class="center"><a id="Logo"><img
-						src="<c:url value="/resources/images/plus.png"/>"></a></li>
+				<!-- 사진 크기 커서 주석처리 해놓음 -->
+				<!-- 				<li class="center"><a id="Logo"><img -->
+				<%-- 						src="<c:url value="/resources/images/plus.png"/>"></a></li> --%>
 
 				<li class="right"><a id="Home" href="#"><img
 						src="<c:url value="/resources/images/icon/navi/023-home.png"/>"></a>
@@ -115,27 +119,28 @@
 			<h1>탈퇴하기</h1>
 		</div>
 		<div>
-			<form>
+			<form id="edit_form" method="post" enctype="multipart/form-data">
 				<table id="edit_table">
 					<tr>
 						<td id="table_left" rowspan="3"><img id="profile"
-							src="<c:url value="/resources/images/profile.png"/>"><br>
-							<input type="file" id="choose" name="fileProfile" accept="img/*"><br>
-							<button id="choose_btn">프로필 사진 바꾸기</button></td>
+							src="<c:url value="/resources/fileupload/${peeps.m_photo}"/>"><br>
+							<input type="file" id="choose" name="m_photo" accept="img/*"><br>
+							<button type="button" id="choose_btn">프로필 사진 바꾸기</button></td>
 
 						<td id="table_right">아이디 <br> <input type="text"
-							id="edit_text" name="id" placeholder="  사용자 정보 읽어와서 넣기">
+							id="edit_text" name="id" value="${peeps.id}">
+							<input type="text"
+							id="edit_text" name="email" value="${peeps.email}">
 						</td>
 					</tr>
 					<tr>
 						<td id="table_right">이름 <br> <input type="text"
-							id="edit_text" name="name" placeholder="  사용자 정보 읽어와서 넣기">
+							id="edit_text" name="name" value="${peeps.name}">
 						</td>
 					</tr>
 					<tr>
 						<td id="table_right">소개글 <br> <!-- 텍스트 창이 혼자만 달라서 좀 이상한디,,, -->
-							<textarea id="edit_bio" name="bio" rows="10" cols="30"
-								placeholder=" 사용자 정보 읽어와서 넣기"></textarea>
+							<textarea id="edit_bio" name="bio" rows="10" cols="20" value="${peeps.bio}"></textarea>
 						</td>
 					</tr>
 					<tr>
@@ -163,17 +168,35 @@
 		//버튼 클릭시 업로드창 실행
 		$('#choose_btn').click(function() {
 			console.log('fileadd');
-			$("input[name='fileProfile']").click();
+			$("input[name='m_photo']").click();
 
 		})
 
 		//이미지 클릭시 업로드창 실행
 		$('#profile').click(function() {
 			console.log('fileadd');
-			$("input[name='fileProfile']").click();
+			$("input[name='m_photo']").click();
 
 		})
 	});
+
+	// 이미지로 파일 선택 시 미리보기
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+
+			reader.onload = function(e) {
+				$('#profile').attr('src', e.target.result);
+			}
+
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
+
+	$("#choose").change(function() {
+		readURL(this);
+	});
+
 </script>
 
 

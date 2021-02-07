@@ -155,46 +155,60 @@ h4 {
 	$(document)
 			.ready(
 					function() {
-
+						
 						var loginType = "${loginType}";
 						var email = "${email}";
 						var m_photo = "${m_photo}";
 						var name = "${name}";
+						var id = $(".id").val();
 
-					$('#sign_btn').click(function(){
-							
-							console.log(loginType);
-							
-						$.ajax({
-								url : '${pageContext.request.contextPath}/user/reg',
-								type : 'post',
-								data : {
-									"email" : "${email}",
-									"name" : "${name}",
-									"m_photo" : "${m_photo}",
-									"id" : $('.id').val(),
-									"password" : $('.password').val(),
-									"loginType" : loginType
-								},
-								async:false,
-								success : function(data){
-									if(data==1){
-										location.href = "${pageContext.request.contextPath}/user/chk"
-											console.log("사용자 정보를 DB에 성공적으로 넣었습니다.");
-									} else{
-										console.log("DB 안들어감")
-									}
-									
-								},error:function(request,status,error){
+						$('#sign_btn')
+								.click(
+										function() {
 
-									// 통신 실패 시.. 그러니까 404에러나 500에러같은 서버에러가 뜰때 이 함수를 탐.
+											console.log(loginType);
 
-									         alert("code:  "+request.status+"\n"+"message:  "+request.responseText+"\n"+"error:  "+error);
-								}
-							});
-						});
-		
-						$.ajax({
+											$
+													.ajax({
+														url : '${pageContext.request.contextPath}/user/reg',
+														type : 'post',
+														data : {
+															"email" : "${email}",
+															"name" : "${name}",
+															"m_photo" : "${m_photo}",
+															"id" : $('.id')
+																	.val(),
+															"password" : $(
+																	'.password')
+																	.val(),
+															"loginType" : loginType
+														},
+														async : false,
+														success : function(data) {
+															if (data == 1) {
+																console
+																		.log("사용자 정보를 DB에 성공적으로 넣었습니다.");
+																alert("회원가입 되었습니다!");
+																location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
+																// DB는 들어가는데 오류난다.
+															} else {
+																console
+																		.log("DB 안들어감")
+															}
+
+														},
+														error : function(
+																request,
+																status, error) {
+															console
+																	.log("통신 실패");
+
+														}
+													});
+										});
+
+						$
+								.ajax({
 									url : '${pageContext.request.contextPath}/user/loginTypeChk?email='
 											+ email,
 									type : 'get',
@@ -219,7 +233,8 @@ h4 {
 						console.log("현재 로그인 타입" + loginType);
 						console.log("테이블 로그인 타입" + LoginType);
 
-						$.ajax({
+						$
+								.ajax({
 									url : '${pageContext.request.contextPath}/user/idCheck?email='
 											+ email,
 									type : 'get',
@@ -228,9 +243,11 @@ h4 {
 										if (data == 1) {
 											if (loginType == LoginType) {
 												// 로그인 타입이 일치하면 타임라인 페이지
-												location.href = "${pageContext.request.contextPath}/user/chk"
+												//location.href = "${pageContext.request.contextPath}/user/chk"
+												location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
 												console.log("타임라인 페이지");
 												alert(name + "님! 로그인되었습니다.")
+
 											} else {
 												// 아니면 alert
 												alert("해당 이메일로 이미 가입된 계정이 있습니다. 로그인 페이지로 이동합니다.");
@@ -248,23 +265,27 @@ h4 {
 								});
 
 						// 세션으로 저장,,?
-						$
-								.ajax({
-									url : '${pageContext.request.contextPath}/user/chk',
-									type : 'post',
-									async : false,
-									data : {
-										"email" : "${email}",
-										"name" : "${name}",
-										"m_photo" : m_photo
-									},
-									success : function(data) {
-										console.log("타임라인으로 정보 보내기");
-									},
-									error : function() {
-										console.log("실패,,,,");
-									}
-								});
+// 						function check() {
+
+// 							var id = $("#id").val();
+
+// 							$
+// 									.ajax({
+// 										type : "POST",
+// 										url : "${pageContext.request.contextPath}/user/chk", //세션 생성페이지 (setAttribute...)
+// 										data : "id=" + id,
+// 										success : function() {
+// 											conosole.log("세션 생성중")
+											
+
+// 										},
+// 										error : function() {
+// 											console.log("실패,,,,");
+// 										}
+// 									});
+
+// 						}
+// 						;
 
 					});
 </script>

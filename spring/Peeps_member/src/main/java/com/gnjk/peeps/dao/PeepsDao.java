@@ -26,5 +26,9 @@ public interface PeepsDao {
 	Integer updatePw(@Param("password") String password, @Param("email") String email, @Param("id") String id);
 	// 유저 정보가 있는지 확인
 	int search_user(@Param("email") String email, @Param("id") String id);
+	// 유저 정보 불러오기
+	Peeps selectMemberByEmail(String email);
+	// 유저 정보 업데이트
+	int updateMemberInfo(Peeps peeps);
 	
 }

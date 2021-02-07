@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,35 +48,36 @@
 					<div class="wizard-container">
 
 						<div class="card wizard-card" id="wizardProfile">
-								<!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
+							<!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
 
-								<div class="wizard-header">
-									<h3>
-										<b>PEEPS</b> <br>
-									</h3>
+							<div class="wizard-header">
+								<h3>
+									<b>PEEPS</b> <br>
+								</h3>
+							</div>
+
+							<!-- nav css 수정하기 -->
+							<div>
+								<ul>
+									<li id="top_nav">회원가입</li>
+								</ul>
+
+							</div>
+
+							<h1>타 임 라 인</h1>
+							<h3 id="email"><%=request.getParameter("email")%>
+							</h3>
+
+							<button id="edit_btn">프로필 편집</button>
+
+							<input type="button" value="로그아웃"
+								onclick="location.href='${pageContext.request.contextPath}/logout'">
+
+							<div class="wizard-footer height-wizard">
+								<div class="clearfix">
+									<br>
 								</div>
-
-								<!-- nav css 수정하기 -->
-								<div>
-									<ul>
-										<li id="top_nav">회원가입</li>
-									</ul>
-
-								</div>
-
-								<h1>타 임 라 인</h1>
-								<h3 id="email"><%=request.getParameter("email") %></h3>
-								<h3 id="name"><%=request.getParameter("data.email")%></h3>
-								<h3 id="m_photo">${m_photo}</h3>
-								
-								<input type="button" value="로그아웃"
-									onclick="location.href='${pageContext.request.contextPath}/logout'">
-
-								<div class="wizard-footer height-wizard">
-									<div class="clearfix">
-										<br>
-									</div>
-								</div>
+							</div>
 						</div>
 					</div>
 					<!-- wizard container -->
@@ -117,8 +116,16 @@
 
 <script>
 
-	
-	
+var email = $('#email').text();
+
+console.log(email);
+
+	$('#edit_btn')
+			.click(
+					function() {
+						location.href = "${pageContext.request.contextPath}/profile/Info?email="
+								+email;
+					});
 </script>
 
 </html>
