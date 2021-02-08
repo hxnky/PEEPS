@@ -5,19 +5,41 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gnjk.peeps.guestbook.controller.dao.GuestbookDao;
+import com.gnjk.peeps.guestbook.domain.Guestbook;
 import com.gnjk.peeps.guestbook.domain.GuestbookRequest;
 
 @Service
 public class GuestbookInsertService {
 
-	// private GuestbookDao dao;
+	private GuestbookDao dao;
+	
+	@Autowired
+	private SqlSessionTemplate template;
 
 	// 파일 업로드 db저장
 
 	public int guestbook(GuestbookRequest grequest, HttpServletRequest request)// 경로
 	{   
+		// test글저장
+		int gbResult = 0;
+		
+		Guestbook gb = grequest.toGuestBook();
+		
+		try {
+			dao = template.getMapper(GuestbookDao.class);
+			
+			gbResult = dao.insertGbook(gb);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		//웹경로
 		String uploadPath = "/fileipload/guest";
 		//시스템의 실제 경로 

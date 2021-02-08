@@ -36,6 +36,11 @@ margin: 10px;
 margin-top: 50px;
 }
 
+.gimg{
+background-color: white;
+width:70px;
+height:70px; 
+}
 </style>
 
 
@@ -49,7 +54,7 @@ margin-top: 50px;
 	</div>
 	<!--=====================context======================-->
 	<div class="changing" >
-	<form method="POST" enctype="multipart/  form-data">
+	<form method="POST" enctype="multipart/form-data">
 	
 	
 	<div class="ginsert_wrap">
@@ -57,10 +62,10 @@ margin-top: 50px;
 	<ul>
 	
 	<li><img src="#" class="gimg" id="gimg"></li>
-	<li><textarea rows="8" cols="80"  id="gmessage" name="gmessage"></textarea>
+	<li><textarea rows="9" cols="80" id="gmessage" name="gmessage"></textarea><br>
 	
-	<input type="file"> </li>
-	<li><input type="submit" value="등록" id="gphoto" name="gphoto"> </li>
+	<input type="file" id="gphoto" name="gphoto"> </li>
+	<li><input type="submit" value="등록" > </li>
 	
 	
 	</ul>

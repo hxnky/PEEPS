@@ -1,5 +1,7 @@
 package com.gnjk.peeps.guestbook.domain;
 
+import java.awt.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class GuestbookRequest {
@@ -23,6 +25,18 @@ public class GuestbookRequest {
 	public void setGphoto(MultipartFile gphoto) {
 		this.gphoto = gphoto;
 	}
+	
+	// 방명록 저장
+	public Guestbook toGuestBook() {
+		Guestbook gb = new Guestbook();
+		gb.setGmessage(gmessage);
+		gb.setGphoto(gphoto);
+		return gb;
+				
+	}
+	
+	
+
 	@Override
 	public String toString() {
 		return "guestbookRequest [gmessage=" + gmessage + ", gphoto=" + gphoto.getOriginalFilename() + "]";

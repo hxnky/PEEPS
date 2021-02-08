@@ -2,13 +2,16 @@ package com.gnjk.peeps.guestbook.domain;
 
 import java.sql.Timestamp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Guestbook {
 	
 	private int gidx;
 	private String gwriter; 
 	private Timestamp gdate;
 	private String gmessage;
-	private String gphoto;
+	private MultipartFile gphoto;
+	
 	public int getGidx() {
 		return gidx;
 	}
@@ -33,13 +36,15 @@ public class Guestbook {
 	public void setGmessage(String gmessage) {
 		this.gmessage = gmessage;
 	}
-	public String getGphoto() {
+	
+
+
+	public MultipartFile getGphoto() {
 		return gphoto;
 	}
-	public void setGphoto(String gphoto) {
+	public void setGphoto(MultipartFile gphoto) {
 		this.gphoto = gphoto;
 	}
-
 	public Guestbook toGuestbook() {
 		
 		Guestbook guestbook =new Guestbook();

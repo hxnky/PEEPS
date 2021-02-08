@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- 공식사이트에  있음 -->
+
+<mapper namespace="	com.gnjk.peeps.guestbook.controller.dao.GuestbookDao">
+<resultMap id="guestbookResult" type="com.gnjk.peeps.guestbook.domain.Guestbook">
+<id column="gidx" property="gidx"/>
+<result column="gbookidx" property="gbookidx" />
+<result column="gbookwriter" property="gbookwriter" />
+<result column="gbookdate" property="gbookdate" />
+<result column="gbookmessage" property="gbookmessage" />
+<result column="gbookphoto" property="gbookphoto" />
+</resultMap>
+
+
+
+<insert id="insetGbook"
+		parameterType="com.gnjk.peeps.guestbook.domain.Guestbook"
+		useGeneratedKeys="true"
+		keyProperty="gbookidx"
+>
+
+	INSERT INTO guestbook
+		
+
+</insert>
+
+
+</mapper>
