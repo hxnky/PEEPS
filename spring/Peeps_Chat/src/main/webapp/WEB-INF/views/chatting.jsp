@@ -80,6 +80,7 @@
 
 	function sendMessage() {
 		var mes = {
+		//	num : '${ch_idx}',
 			user : '${m_idx}',
 			to : '${rm_idx}',
 			time : '${serverTime}',// Date.now(),

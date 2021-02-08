@@ -30,7 +30,10 @@ public class ChattingController { // 채팅 화면 (*수정 중)
 		mav.addObject("message", ch_ms);
 		mav.addObject("time", ch_time);
 		session.setAttribute("user", m_idx);
-
+		session.setAttribute("to", rm_idx);
+		session.setAttribute("message", ch_ms);
+		session.setAttribute("time", ch_time);
+		
 		return mav;
 	}
 

@@ -35,7 +35,7 @@ public class MessageDao implements IMessageDao {
 		@Inject
 		private SqlSession sqlSession;
 		
-		private static final String NAMESPACE = "m_mapper";
+		private static String NAMESPACE = "com.gnjk.chat.dao.mapper.ChatMapper";
 	
 		@Override
 		public void insertMessage(Message mes) throws Exception {
