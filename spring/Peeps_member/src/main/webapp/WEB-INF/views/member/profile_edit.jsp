@@ -10,6 +10,27 @@
 <link href="<c:url value="/resources/css/edit.css" />" rel="stylesheet">
 </head>
 <style>
+# /*공통인부분*/
+body {
+	background-color: #fcf9f6;
+}
+
+#total_wrap {
+	margin: 100px auto;
+	height: 800px;
+	width: 1500px;
+}
+
+#edit_menu {
+	margin-top: 100px;
+	height: 600px;
+	width: 490px;
+	float: left;
+	text-align: center;
+	border-right: solid 0.2px #CCC;
+}
+
+/*공통 끝*/
 #edit_table {
 	margin: 50px;
 	height: 600px;
@@ -50,10 +71,6 @@
 	text-align: center;
 }
 
-#profile:hover {
-	cursor: pointer;
-}
-
 #edit_text {
 	border: solid 0.2px #CCC;
 	border-radius: 5%;
@@ -76,61 +93,81 @@
 	height: 30px;
 	font-size: 15px;
 }
+
+#menu_btn {
+	margin-top: 80px;
+}
+
+h3 {
+	display: inline;
+}
+
+#menu_btn>button {
+	background-color: #fcf9f6;
+	border: none;
+	font-size: 35px;
+	font-weight: bold;
+	width: 300px;
+	margin: 50px auto;
+}
 </style>
 <body>
-	<div id="nav">
-		<nav>
-			<ul class="icon">
-				<!-- 아이콘 경로 바꾸기 -->
-				<li class="left"><span><input type="search"
-						placeholder="검색"> <a href="/user/find_id">
-							<button type="submit">
-								<img
-									src="<c:url value="/resources/images/icon/navi/search.png"/>">
+<!-- 	<div id="nav"> -->
+<!-- 		<nav> -->
+<!-- 			<ul class="icon"> -->
+<!-- 				아이콘 경로 바꾸기 -->
+<!-- 				<li class="left"><span><input type="search" -->
+<!-- 						placeholder="검색"> <a href="/user/find_id"> -->
+<!-- 							<button type="submit"> -->
+<!-- 								<img -->
+<%-- 									src="<c:url value="/resources/images/icon/navi/search.png"/>"> --%>
 
-							</button>
-					</a></span></li>
-				<!-- 사진 크기 커서 주석처리 해놓음 -->
-				<!-- 				<li class="center"><a id="Logo"><img -->
-				<%-- 						src="<c:url value="/resources/images/plus.png"/>"></a></li> --%>
+<!-- 							</button> -->
+<!-- 					</a></span></li> -->
+<!-- 				사진 크기 커서 주석처리 해놓음 -->
+<!-- 								<li class="center"><a id="Logo"><img -->
+<%-- 										src="<c:url value="/resources/images/plus.png"/>"></a></li> --%>
 
-				<li class="right"><a id="Home" href="#"><img
-						src="<c:url value="/resources/images/icon/navi/023-home.png"/>"></a>
-					<a id="Content" href="#"><img
-						src="<c:url value="/resources/images/icon/navi/Content.png"/>"></a>
-					<a id="Alarm" href="#"><img
-						src="<c:url value="/resources/images/icon/navi/008-notification.png"/>"></a>
-					<a id="Chat" href="#"><img
-						src="<c:url value="/resources/images/icon/navi/050-wechat.png"/>"></a>
-					<a id="MyPage" href="#"><img
-						src="<c:url value="/resources/images/icon/navi/010-user.png"/>"></a>
-				</li>
+<!-- 				<li class="right"><a id="Home" href="#"><img -->
+<%-- 						src="<c:url value="/resources/images/icon/navi/023-home.png"/>"></a> --%>
+<!-- 					<a id="Content" href="#"><img -->
+<%-- 						src="<c:url value="/resources/images/icon/navi/Content.png"/>"></a> --%>
+<!-- 					<a id="Alarm" href="#"><img -->
+<%-- 						src="<c:url value="/resources/images/icon/navi/008-notification.png"/>"></a> --%>
+<!-- 					<a id="Chat" href="#"><img -->
+<%-- 						src="<c:url value="/resources/images/icon/navi/050-wechat.png"/>"></a> --%>
+<!-- 					<a id="MyPage" href="#"><img -->
+<%-- 						src="<c:url value="/resources/images/icon/navi/010-user.png"/>"></a> --%>
+<!-- 				</li> -->
 
-			</ul>
+<!-- 			</ul> -->
 
-		</nav>
+<!-- 		</nav> -->
 
-		<!-- 네비 바 들어갈 부분 -->
-	</div>
+<!-- 		<!-- 네비 바 들어갈 부분 --> -->
+<!-- 	</div> -->
 	<div id="total_wrap">
 		<div id="edit_menu">
-			<h1>프로필 편집</h1>
-			<h1>비밀번호 변경</h1>
-			<h1>탈퇴하기</h1>
+			<div id="menu_btn">
+				<h3 id="email">${peeps.email}</h3>
+				<h3>님</h3>
+				<br>
+				<button id="edit">프로필 편집</button>
+				<button id="pw_ch">비밀번호 변경</button>
+				<button id="delete">탈퇴하기</button>
+			</div>
 		</div>
 		<div>
 			<form id="edit_form" method="post" enctype="multipart/form-data">
 				<table id="edit_table">
 					<tr>
 						<td id="table_left" rowspan="3"><img id="profile"
-							src="<c:url value="/resources/fileupload/${peeps.m_photo}"/>"><br>
-							<input type="file" id="choose" name="m_photo" accept="img/*"><br>
+							src="<c:url value="${peeps.m_photo}"/>"><br> <input
+							type="file" id="choose" name="m_photo" accept="img/*"><br>
 							<button type="button" id="choose_btn">프로필 사진 바꾸기</button></td>
 
 						<td id="table_right">아이디 <br> <input type="text"
 							id="edit_text" name="id" value="${peeps.id}">
-							<input type="text"
-							id="edit_text" name="email" value="${peeps.email}">
 						</td>
 					</tr>
 					<tr>
@@ -139,8 +176,8 @@
 						</td>
 					</tr>
 					<tr>
-						<td id="table_right">소개글 <br> <!-- 텍스트 창이 혼자만 달라서 좀 이상한디,,, -->
-							<textarea id="edit_bio" name="bio" rows="10" cols="20" value="${peeps.bio}"></textarea>
+						<td id="table_right">소개글 <br> <input type="text"
+							id="edit_bio" name="bio" value="${peeps.bio}">
 						</td>
 					</tr>
 					<tr>
@@ -196,8 +233,39 @@
 	$("#choose").change(function() {
 		readURL(this);
 	});
-
 </script>
 
+<script>
+	$(function() {
 
+		var email = $('#email').text();
+
+		$("#edit")
+				.click(
+						function() {
+
+							location.href = "${pageContext.request.contextPath}/profile/Info?email="
+									+ email;
+
+						});
+
+		$("#pw_ch")
+				.click(
+						function() {
+
+							location.href = "${pageContext.request.contextPath}/profile/pw?email="
+									+ email;
+
+						});
+
+		$("#delete")
+				.click(
+						function() {
+
+							location.href = "${pageContext.request.contextPath}/profile/delete?email="
+									+ email;
+
+						});
+	})
+</script>
 </html>

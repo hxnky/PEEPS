@@ -123,8 +123,7 @@ console.log(email);
 	$('#edit_btn')
 			.click(
 					function() {
-						location.href = "${pageContext.request.contextPath}/profile/Info?email="
-								+email;
+						location.href = "${pageContext.request.contextPath}/profile/Info?email="+email;
 					});
 </script>
 

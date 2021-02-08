@@ -1,0 +1,66 @@
+/*공통인부분*/
+body {
+	background-color: #fcf9f6;
+}
+
+#total_wrap {
+	margin: 100px auto;
+	height: 800px;
+	width: 1500px;
+}
+
+#edit_menu {
+	margin-top: 100px;
+	height: 600px;
+	width: 490px;
+	float: left;
+	text-align: center;
+	border-right: solid 0.2px #CCC;
+}
+
+/*공통 끝*/
+#edit_table {
+	margin: 100px auto;
+	height: 600px;
+	width: 650px;
+	float: right;
+}
+
+#change {
+	margin-left: 80px;
+	width: 150px;
+	height: 40px;
+	font-size: 15px;
+}
+
+#change:hover {
+	cursor: pointer;
+}
+
+input {
+	width: 300px;
+	height: 30px;
+	margin: 10px auto;
+}
+
+#pw_menu {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#menu_btn {
+	margin-top: 80px;
+}
+
+h3 {
+	display: inline;
+}
+
+#menu_btn>button {
+	background-color: #fcf9f6;
+	border: none;
+	font-size: 35px;
+	font-weight: bold;
+	width: 300px;
+	margin: 50px auto;
+}

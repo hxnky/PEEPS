@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class EditRequest {
 
+	private int m_idx;
 	private String email;
 	private String id;
 	private String name;
@@ -16,6 +17,7 @@ public class EditRequest {
 	private String password;
 	private String oldPhoto;
 	private MultipartFile m_photo;
+	private String e_password;
 
 	@Override
 	public String toString() {

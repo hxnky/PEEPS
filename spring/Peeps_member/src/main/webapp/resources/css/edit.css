@@ -10,7 +10,7 @@ body {
 }
 
 #edit_menu {
-	margin-top: 50px;
+	margin-top: 100px;
 	height: 600px;
 	width: 490px;
 	float: left;
@@ -18,59 +18,84 @@ body {
 	border-right: solid 0.2px #CCC;
 }
 
-#edit_menu>h1 {
-	margin: 120px auto;
-}
 /*공통 끝*/
-
-/*네비 바*/
-nav ul {
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	height: 60px;
-	width: 100%;
-	background-color: #F5E978;
-	padding: 0px;
-	position: fixed;
-	z-index: 2;
-	list-style-type: none;
+#edit_table {
+	margin: 50px;
+	height: 600px;
+	width: 800px;
+	float: right;
 }
 
-.icon {
-	margin: 0px;
-	display: inline-flex;
-	justify-content: space-between;
+#table_right {
+	font-weight: bold;
 }
 
-nav ul li {
-	margin: auto 15px;
+#table_right>input, #edit_bio {
+	width: 300px;
+	margin: 10px auto;
 }
 
-.center {
-	margin-top: -18px;
+#choose {
+	display: none;
 }
 
-.right a {
-	padding: 5px;
-	margin-top: 20px;
+#choose_btn {
+	background-color: #fcf9f6;
+	border: 0;
+	outline: 0;
+	font-size: 20px;
+	margin-left: 13px;
+	font-weight: bold;
 }
 
-input[type="search"] {
-	padding-left: 10px;
-	float: left;
-	height: 20px;
-	border-radius: 30px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
+#choose_btn:hover {
+	cursor: pointer;
+}
+
+#profile {
+	width: 200px;
+	height: 200px;
+	border-radius: 100%;
+	text-align: center;
+}
+
+#edit_text {
+	border: solid 0.2px #CCC;
+	border-radius: 5%;
+	height: 30px;
+	width: 300px;
+	font-size: 15px;
+}
+
+#edit_bio {
+	border: solid 0.2px #CCC;
+	border-radius: 5%;
+	height: 50px;
+	width: 300px;
+	font-size: 15px;
+}
+
+#change {
+	margin-left: 420px;
+	width: 80px;
+	height: 30px;
+	font-size: 15px;
+}
+
+
+#menu_btn {
+	margin-top: 80px;
+}
+
+h3 {
+	display: inline;
+}
+
+#menu_btn>button {
+	background-color: #fcf9f6;
 	border: none;
-}
-
-nav ul li button {
-	background-color: #EEF0ED;
-	height: 20px;
-	border: none;
-	border-radius: 30px;
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
+	font-size: 35px;
+	font-weight: bold;
+	width: 300px;
+	margin: 50px auto;
 }

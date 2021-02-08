@@ -30,5 +30,8 @@ public interface PeepsDao {
 	Peeps selectMemberByEmail(String email);
 	// 유저 정보 업데이트
 	int updateMemberInfo(Peeps peeps);
-	
+	// 비밀번호가 일치하는지 확인
+	int chk_password(@Param("email") String email, @Param("password") String password);
+	// 비밀번호 업데이트
+	int updatePassword(@Param("email") String email, @Param("password") String password);
 }

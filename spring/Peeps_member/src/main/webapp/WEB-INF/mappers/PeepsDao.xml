@@ -89,12 +89,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 유저 정보 불러오기 -->
 	<select id="selectMemberByEmail" resultMap="memberResult">
-		select * from member where email = #{email}
+		select * from member
+		where email = #{email}
 	</select>
-	
+
 	<!-- 유저 정보 업데이트 -->
-	<update id="updateMemberInfo" parameterType="com.gnjk.peeps.domain.Peeps">
-		update member set m_photo = #{m_photo}, name = #{name}, id=#{id}, bio = #{bio} where email = #{email}
+	<update id="updateMemberInfo"
+		parameterType="com.gnjk.peeps.domain.Peeps">
+		update member set m_photo = #{m_photo}, name = #{name},
+		id=#{id}, bio = #{bio} where email = #{email}
 	</update>
 
+	<!-- 비밀번호 확인 -->
+	<select id="chk_password" resultType="int">
+		select count(*) from member
+		where email=#{email} and password=#{password}
+	</select>
+
+	<!-- 비밀번호 업데이트 -->
+	<update id="updatePassword">
+		update member set password= #{password} where
+		email=#{email}
+	</update>
 </mapper>

@@ -33,29 +33,30 @@ public class EditInfoService {
 
 		int result = 0;
 
-		String uploadPath = "/resources/fileupload";
-		String saveDirPath = request.getSession().getServletContext().getRealPath(uploadPath);
+		String uploadPath = "/fileupload";
 
+		String saveDirPath = request.getSession().getServletContext().getRealPath(uploadPath);
+		
 		String newFileName = null;
 		File newFile = null;
 
+
 		if (!editRequest.getM_photo().isEmpty()) {
+
 			newFileName = editRequest.getId() + System.currentTimeMillis();
 			newFile = new File(saveDirPath, newFileName);
 
 			try {
 				editRequest.getM_photo().transferTo(newFile);
 			} catch (IllegalStateException e) {
-
 				e.printStackTrace();
 			} catch (IOException e) {
-
 				e.printStackTrace();
 			}
-
 		}
 
 		Peeps peeps = editRequest.getToPeeps();
+
 
 		if (newFileName == null) {
 			peeps.setM_photo(editRequest.getOldPhoto());
@@ -64,22 +65,22 @@ public class EditInfoService {
 		}
 
 		try {
-
 			dao = template.getMapper(PeepsDao.class);
 
 			result = dao.updateMemberInfo(peeps);
+
 		} catch (Exception e) {
 			e.printStackTrace();
+
 
 			if (newFile != null && newFile.exists()) {
 				newFile.delete();
 			}
 		}
 
-		// 수정은 되는데 사진 다운이 안된다. Null 발생
-		if (newFile != null && !editRequest.getOldPhoto().equals("profile.png")) {
-			new File(saveDirPath, editRequest.getOldPhoto()).delete();
-		}
+//		if (newFile != null && !editRequest.getOldPhoto().equals("profile.png")) {
+//			new File(saveDirPath, editRequest.getOldPhoto()).delete();
+//		}
 
 		return result;
 	}

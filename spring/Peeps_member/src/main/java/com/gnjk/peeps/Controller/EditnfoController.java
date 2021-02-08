@@ -1,8 +1,5 @@
 package com.gnjk.peeps.Controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,13 +14,14 @@ import com.gnjk.peeps.Service.EditInfoService;
 import com.gnjk.peeps.domain.EditRequest;
 
 @Controller
-@RequestMapping("/profile/Info")
 public class EditnfoController {
+
+	final String URI = "/fileupload/member";
 
 	@Autowired
 	private EditInfoService editService;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/profile/Info", method = RequestMethod.GET)
 	public String editUserInfoPage(@RequestParam("email") String email, Model model) {
 
 		model.addAttribute("peeps", editService.getPeeps(email));
@@ -31,15 +29,10 @@ public class EditnfoController {
 		return "member/profile_edit";
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String editUserInfo(EditRequest editRequest, HttpServletRequest request, Model model,
-			HttpServletResponse response) throws IOException {
-
-		PrintWriter out = response.getWriter();
+	@RequestMapping(value = "/profile/Info", method = RequestMethod.POST)
+	public String editUserInfo(EditRequest editRequest, HttpServletRequest request, Model model) {
 
 		model.addAttribute("result", editService.editPeeps(editRequest, request));
-
-		out.print("정보가 수정되었습니다.");
 
 		return "member/TimeLine";
 
