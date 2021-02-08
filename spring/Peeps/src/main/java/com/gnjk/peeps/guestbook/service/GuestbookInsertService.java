@@ -9,7 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gnjk.peeps.guestbook.controller.dao.GuestbookDao;
+import com.gnjk.peeps.guestbook.dao.GuestbookDao;
 import com.gnjk.peeps.guestbook.domain.Guestbook;
 import com.gnjk.peeps.guestbook.domain.GuestbookRequest;
 

@@ -20,8 +20,8 @@ margin: 0px auto 10px auto;
 }
 .ginsert_wrap>ul>li>img{
 background-color:black;
-white: 50px;
-height: 50px;
+/* white: 50px;
+height: 50px; */
 margin: 10px;
 border-radius: 50px;
 }

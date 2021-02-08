@@ -19,7 +19,7 @@
 
 <body>
 
-	<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+	 <%@ include file="/WEB-INF/views/include/nav.jsp"%> 
 	<!----------------------------------------------------------------------------------------->
 	<div id="main_wrap">
 		<%@ include file="/WEB-INF/views/include/user.jsp"%>
