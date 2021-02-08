@@ -14,15 +14,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(#{email}, #{id},#{password},#{name},
 		#{code});
 	</insert>
-	
-	<!-- 구글 회원가입 -->
-	<insert id="insertGMember"
+
+
+
+	<!-- 소셜 로그인 시 회원 이메일 있는지 확인 -->
+	<select id="selectMemberByEmailCount" resultType="int">
+		select count(*)
+		from member where email=#{email}
+	</select>
+
+	<!-- 소셜 로그인 시 회원 이메일이 있다면 로그인 타입이 일치하는지 확인 -->
+	<select id="selectLoginTypeByEmailCount" resultType="String">
+		select
+		loginType from member where email=#{email}
+	</select>
+
+
+
+	<!-- 이메일 없으면 이메일, 이름, 사진, 로그인 타입 insert 하기 -->
+	<insert id="insertSocialMember"
 		parameterType="com.gnjk.peeps.domain.Peeps" useGeneratedKeys="true"
 		keyProperty="m_idx">
-		insert into member (email, id, name, code) values
-		(#{email}, #{email}, #{name}, 'Y');
+		insert into member (email, id, password, m_photo, name,
+		loginType, verify) values (#{email},
+		#{id},#{password},#{m_photo},#{name}, #{loginType}, 'Y');
 	</insert>
 
+
+	<!-- 아이디 중복 확인 -->
 	<select id="selectMemberByIdCount" resultType="int">
 		select count(*)
 		from member where id=#{id}
@@ -34,6 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from member where m_idx=#{m_idx} and verify='Y'
 	</select>
 
+	<!-- 이메일 인증 상태 업데이트 -->
 	<update id="updateMemberVerify">
 		update member set verify='Y' where m_idx=#{param1}
 		and code=#{param2}
@@ -55,7 +75,45 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		email=#{param1} and password=#{param2}
 	</select>
 
+	<!-- 아이디 검색 -->
+	<select id="search_user" resultType="int">
+		select count(*) from member
+		where email = #{email} and id = #{id}
+	</select>
 
+	<!-- 비밀번호 찾기 실행 시 비밀번호 변경 -->
+	<select id="updatePw" parameterType="map">
+		update member set
+		password=#{password} where email = #{email} and id = #{id}
+	</select>
 
+	<!-- 유저 정보 불러오기 -->
+	<select id="selectMemberByEmail" resultMap="memberResult">
+		select * from member
+		where email = #{email}
+	</select>
 
+	<!-- 유저 정보 업데이트 -->
+	<update id="updateMemberInfo"
+		parameterType="com.gnjk.peeps.domain.Peeps">
+		update member set m_photo = #{m_photo}, name = #{name},
+		id=#{id}, bio = #{bio} where email = #{email}
+	</update>
+
+	<!-- 비밀번호 확인 -->
+	<select id="chk_password" resultType="int">
+		select count(*) from member
+		where email=#{email} and password=#{password}
+	</select>
+
+	<!-- 비밀번호 업데이트 -->
+	<update id="updatePassword">
+		update member set password= #{password} where
+		email=#{email}
+	</update>
+	
+	<!-- 회원 정보 삭제 -->
+	<delete id="deletePeeps">
+		delete from member where email=#{email} and password=#{password}
+	</delete>
 </mapper>

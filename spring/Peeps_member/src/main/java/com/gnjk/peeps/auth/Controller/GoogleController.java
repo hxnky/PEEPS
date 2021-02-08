@@ -2,15 +2,10 @@ package com.gnjk.peeps.auth.Controller;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -20,17 +15,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.gnjk.peeps.auth.Service.GoogleService;
 import com.gnjk.peeps.auth.domain.GoogleRequest;
 import com.gnjk.peeps.auth.domain.GoogleResponse;
-import com.gnjk.peeps.domain.RegRequest;
 
 @Controller
-@RequestMapping("/glogin")
 public class GoogleController {
-
-	@Autowired
-	private GoogleService googleService;
 
 	final static String GOOGLE_AUTH_BASE_URL = "https://accounts.google.com/o/oauth2/v2/auth";
 	final static String GOOGLE_TOKEN_BASE_URL = "https://oauth2.googleapis.com/token";
@@ -38,7 +27,7 @@ public class GoogleController {
 	private String clientId = "932809958130-576t52vbv3m0dq8ei051noieo4lhauc1.apps.googleusercontent.com";
 	private String clientSecret = "7wyexcIGQj61JPsW2xNG5mXo";
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping("/glogin")
 	public String googleAuth(Model model, @RequestParam(value = "code") String authCode)
 			throws JsonProcessingException {
 
@@ -75,29 +64,19 @@ public class GoogleController {
 		Map<String, String> userInfo = mapper.readValue(resultJson, new TypeReference<Map<String, String>>() {
 		});
 
+		model.addAttribute("loginType", "google");
 		model.addAttribute("email", userInfo.get("email"));
 		model.addAttribute("name", userInfo.get("name"));
 		model.addAttribute("m_photo", userInfo.get("picture"));
 		model.addAttribute("token", result.getAccessToken());
 
 		System.out.println(userInfo);
-		System.out.println(userInfo.get("email"));
-		System.out.println(userInfo.get("name"));
-		System.out.println(userInfo.get("picture"));
+		System.out.println("이메일 : " + userInfo.get("email"));
+		System.out.println("이름 : " + userInfo.get("name"));
+		System.out.println("사진 URL : " + userInfo.get("picture"));
 
-		return "member/TimeLine";
+		return "member/SocialRegForm";
 
-	}
-
-	@RequestMapping(method = RequestMethod.POST)
-	public String memberReg(@ModelAttribute("regData") RegRequest regRequest, HttpServletRequest request, Model model) {
-
-		System.out.println(regRequest);
-		int result = googleService.memberReg(regRequest, request);
-
-		model.addAttribute("result", result);
-
-		return "member/RegView";
 	}
 
 }

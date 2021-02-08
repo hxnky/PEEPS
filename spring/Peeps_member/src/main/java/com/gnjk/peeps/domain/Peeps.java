@@ -19,14 +19,18 @@ public class Peeps {
 	private String code;
 	private char verify;
 
+	// 21.02.04 소셜 로그인 타입 추가
+	private String loginType;
+
 	@Override
 	public String toString() {
 		return "Peeps [m_idx=" + m_idx + ", email=" + email + ", password=" + password + ", name=" + name + ", id=" + id
-				+ ", m_photo=" + m_photo + ", bio=" + bio + ", code=" + code + ", verify=" + verify + "]";
+				+ ", m_photo=" + m_photo + ", bio=" + bio + ", code=" + code + ", verify=" + verify + ", loginType="
+				+ loginType + "]";
 	}
 
 	public Peeps(String m_idx, String email, String password, String name, String id, String m_photo, String bio,
-			String code, char verify) {
+			String code, char verify, String loginType) {
 		super();
 		this.m_idx = m_idx;
 		this.email = email;
@@ -37,6 +41,7 @@ public class Peeps {
 		this.bio = bio;
 		this.code = code;
 		this.verify = verify;
+		this.loginType = loginType;
 	}
 
 	public Peeps() {
@@ -61,7 +66,7 @@ public class Peeps {
 		this.code = new String(sb);
 
 	}
-	
+
 	public LoginInfo toLoginInfo() {
 		return new LoginInfo(id, name, m_photo, bio);
 	}

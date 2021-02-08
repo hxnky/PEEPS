@@ -22,24 +22,27 @@ public class LoginService {
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String chk = request.getParameter("chk");
-
+		
 		dao = template.getMapper(PeepsDao.class);
 
 		boolean loginCheck = false;
 
 		Peeps peeps = dao.selectLogin(email, password);
+		
+		System.out.println(peeps);
 
 		if (peeps != null) {
 			if (peeps.getVerify() == 'Y') {
 				request.getSession().setAttribute("loginInfo", peeps.toLoginInfo());
 				loginCheck = true;
 			} else {
+				System.out.println("미인증계정");
 				loginCheck = true;
 				request.setAttribute("msg", "인증되지 않은 계정입니다. 이메일을 확인해주세요!");
 			}
 
 		}
+		
 		return loginCheck;
 	}
 }

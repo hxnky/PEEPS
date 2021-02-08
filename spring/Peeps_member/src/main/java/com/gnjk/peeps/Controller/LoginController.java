@@ -1,5 +1,8 @@
 package com.gnjk.peeps.Controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,9 +25,14 @@ public class LoginController {
 		return "member/LoginForm";
 	}
 
+	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
 
+		String email = request.getParameter("email");
+		
+		model.addAttribute("email", email);
+		
 		model.addAttribute("loginCheck", loginService.login(request, response));
 
 		return "member/TimeLine";
