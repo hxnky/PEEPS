@@ -41,7 +41,7 @@ public class MessageDao implements IMessageDao {
 		public void insertMessage(Message mes) throws Exception {
 			
 			sqlSession.insert(NAMESPACE+".insertMessage", mes);
-			
+			System.out.println("insertMessage 성공");
 		}
 		
 		// private static final String NAMESPACE = "m_mapper";

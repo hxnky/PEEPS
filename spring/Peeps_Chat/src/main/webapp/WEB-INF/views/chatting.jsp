@@ -57,6 +57,33 @@
 </body>
 
 <script type="text/javascript">
+	function getTimeStamp() {
+		var d = new Date();
+		var t = leadingZeros(d.getFullYear(), 4) + '-'
+				// d.getFullYear()를 4자리
+				+ leadingZeros(d.getMonth() + 1, 2) + '-'
+				// d.getMonth()를 1~2자리
+				+ leadingZeros(d.getDate(), 2) + ' ' +
+				leadingZeros(d.getHours(), 2) + ':'
+				+ leadingZeros(d.getMinutes(), 2) + ':'
+				+ leadingZeros(d.getSeconds(), 2);
+
+		return t;
+	}
+
+	// n을 digits자리로
+	function leadingZeros(n, digits) {
+		var zero = '';
+		n = n.toString();
+
+		// n의 길이가 digits보다 짧(작)으면
+		if (n.length < digits) {
+			for (i = 0; i < digits - n.length; i++)
+				zero += '0';
+		}
+		return zero + n;
+	}
+
 	//websocket을 지정한 URL로 연결
 	var sock = new SockJS("<c:url value="/chat"/>");
 	//websocket 서버에서 메시지를 보내면 자동으로 실행된다.
@@ -79,11 +106,13 @@
 	});
 
 	function sendMessage() {
+		var t = getTimeStamp();
+		
 		var mes = {
-		//	num : '${ch_idx}',
+			num : '${ch_idx}',
 			user : '${m_idx}',
 			to : '${rm_idx}',
-			time : '${serverTime}',// Date.now(),
+			time : t, // Date.now(),
 			message : $("#message").val()
 		};
 		sock.send(JSON.stringify(mes));
@@ -93,19 +122,25 @@
 
 	//evt 파라미터는 websocket이 보내준 데이터다.
 	function onMessage(evt) { // 변수 안에 function자체를 넣음.
-		var data = evt.data;
+		var data = evt.data; // 전달받은 데이터
 		mesData = JSON.parse(data);
 		var sessionid = null;
 		var message = null;
 
+		mesData.user = 'kim';
+		mesData.to = 'nam';
+		
 		// current session id
 		var currentuser_session = $('#sessionuserid').val();
 
+		currentuser_session = 'kim';
+		
 		// 내가 보낸 메세지 -> 오른쪽에 div 생성
 		if (mesData.user == currentuser_session) {
 			var printHTML = "<div id='right'>";
-			printHTML += "<strong>[" + mesData.user + "] -> " + mesData.message
-					+ "</strong>";
+			printHTML += "<strong>" + mesData.user + "</strong> <br>";
+			printHTML += "<strong>" + mesData.message + "</strong> <br>";
+			printHTML += "<strong>" + mesData.time + "</strong>";
 			printHTML += "</div>";
 
 			$('#chatdata').append(printHTML);
@@ -113,8 +148,9 @@
 		} else {
 			// 상대방이 보낸 메세지 -> 왼쪽에 div 생성
 			var printHTML = "<div id='left'>";
-			printHTML += "<strong>[" + mesData.user + "] -> " + mesData.message
-					+ "</strong>";
+			printHTML += "<strong>" + mesData.user + "</strong> <br>";
+			printHTML += "<strong>" + mesData.message + "</strong> <br>";
+			printHTML += "<strong>" + mesData.time + "</strong>";
 			printHTML += "</div>";
 
 			$('#chatdata').append(printHTML);
