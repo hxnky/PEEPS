@@ -38,12 +38,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 </select>
 
-<insert id="insertGbook"
+<!-- <insert id="insertGbook"
 					parameterType="com.gnjk.peeps.guestbook.domain.Guestbook"
 					useGeneratedKeys="true"
 					keyProperty="idx"
 	>
 		 INSERT INTO guestbook (gbookmessage ,gbookphoto) VALUES (#{gmessage},#{gphoto});
-	</insert>
+	</insert> -->
 
 </mapper>

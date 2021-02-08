@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.gnjk.peeps.guestbook.dao.GuestbookDao;
 import com.gnjk.peeps.guestbook.domain.Guestbook;
@@ -27,6 +28,7 @@ public class GuestbookInsertService {
 	{   
 		// test글저장
 		int gbResult = 0;
+		
 		
 		Guestbook gb = grequest.toGuestBook();
 		
