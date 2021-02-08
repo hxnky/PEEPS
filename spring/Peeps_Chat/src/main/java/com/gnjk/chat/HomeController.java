@@ -52,7 +52,7 @@ public class HomeController {
 		model.addAttribute("serverTime", dateAsString);
 		*/
 		
-		return "chatting";
+		return "home";
 	}
 	
 }

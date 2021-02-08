@@ -3,6 +3,8 @@ package com.gnjk.chat.handler;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.socket.CloseStatus;
@@ -10,18 +12,23 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.gnjk.chat.dao.MessageDao;
 import com.gnjk.chat.domain.Message;
 import com.google.gson.Gson;
 
 // TextWebSocketHandler를 상속받은 핸들러 클래스는 자동으로 아래 3개의 메소드가 오버라이드 됨.
 public class ChattingHandler extends TextWebSocketHandler {
 
+	@Inject
+	private MessageDao dao;
+	
 	private static final Logger logger = LoggerFactory.getLogger(ChattingHandler.class);
 
 	// session 저장 (연결된 세션 리스트)
 	private List<WebSocketSession> connectedSessionList = new ArrayList<WebSocketSession>();
 
-	//client 접속 -------------------------- 
+	// client 접속 -------------------------- 
+	// 웹소켓 클라이언트가 연결되면 호출 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
@@ -76,6 +83,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 
 
 	// 전송 오류 메세지 ------------------------------------
+	// 웹소켓 클라이언트와의 연결에 문제 발생 시 생
 	@Override
 	public void handleTransportError (WebSocketSession session, Throwable exception)throws Exception {
 

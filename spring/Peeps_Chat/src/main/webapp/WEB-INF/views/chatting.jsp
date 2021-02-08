@@ -41,7 +41,7 @@
 </head>
 
 <body>
-
+<%-- 
 	<!-- navi-->
 	<%@ include file="/WEB-INF/views/nav.jsp"%>
 
@@ -49,13 +49,13 @@
 
 	<!--chatting-->
 	<%@ include file="/WEB-INF/views/container.jsp"%>
-
+ --%>
 
 </body>
 
 <script type="text/javascript">
 	//websocket을 지정한 URL로 연결
-	var sock = new SockJS("<c:url value="/chat"/>");
+	var sock = new SockJS("<c:url value="/chat"/>"); //  ws://localhost:8080/chatting(context path)/chat
 	//websocket 서버에서 메시지를 보내면 자동으로 실행된다.
 	sock.onmessage = onMessage;
 	//websocket 과 연결을 끊고 싶을때 실행하는 메소드
@@ -87,7 +87,9 @@
 		console.log('메세지 소켓에 전송');
 	}
 
-	//evt 파라미터는 websocket이 보내준 데이터다.
+	// evt 파라미터는 websocket이 보내준 데이터다.
+	// 서버에서 메세지 받으면 실행 
+	// 브라우저는 onMessage() 함수를 통해 서버가 전송한 데이터를 받
 	function onMessage(evt) { // 변수 안에 function자체를 넣음.
 		var data = evt.data;
 		mesData = JSON.parse(data);
@@ -96,7 +98,6 @@
 
 		//current session id
 		var currentuser_session = $('#sessionuserid').val();
-		console.log('current session id: ' + currentuser_session);
 
 		// 말풍선
 		var target = $('#chattingBox-1');
@@ -109,29 +110,31 @@
 		}
 
 		// 내가 보낸 메세지 -> 오른쪽에 div 생성
-		if (msgData.user == currentuser_session) {
+		if (mesData.user == currentuser_session) {
 			var printHTML = "<div id='right'>";
-			printHTML += "<strong>[" + msgData.user + "] -> " + msgData.message
-								+ "</strong>";
-			printHTML += "</div>";
-
-			$('#chattingBox-1').append(printHTML);
-		} else {
-			var printHTML = "<div class='well text_left'>";
-			printHTML += "<div class='alert alert-warning'>";
-			printHTML += "<strong>[" + msgData.user + "] -> " + msgData.message
+			printHTML += "<strong>[" + mesData.user + "] -> " + mesData.message
 					+ "</strong>";
 			printHTML += "</div>";
+
+			$('#chatdata').append(printHTML);
+			// printHTML을 chatdata 맨 밑에 추가
+		} else {
+			// 상대방이 보낸 메세지 -> 왼쪽에 div 생성
+			var printHTML = "<div id='left'>";
+			printHTML += "<strong>[" + mesData.user + "] -> " + mesData.message
+					+ "</strong>";
 			printHTML += "</div>";
 
-			$('#chattingBox-1').append(printHTML);
+			$('#chatdata').append(printHTML);
+			// printHTML을 chatdata 맨 밑에 추가
 		}
 
-		console.log('chatting data: ' + data);
+		console.log('소켓이 보낸 메세지' + data);
 
 		/* sock.close(); */
 	}
 
+	// 연결이 종료되면 실행 
 	function onClose(evt) {
 		$("#data").append("연결 끊김");
 	}

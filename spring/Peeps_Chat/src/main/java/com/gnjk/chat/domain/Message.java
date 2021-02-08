@@ -1,21 +1,31 @@
 package com.gnjk.chat.domain;
 
-import java.time.LocalDateTime;
-
 public class Message {
 
+	// 21.02.06 채팅 번호 추가
+	private int ch_idx;	// 채팅 번호
 	private String user; 	// 사용자 
 	private String to; 		// 받는사람 
-	private String time; // 채팅시간 
+	private String time; // 채팅시간
+	// private Timestamp time = new Timestamp(System.currentTimeMillis()); // 채팅시간 
 	private String message; // 채팅내용
 	
-	public Message(String user, String to, String time, String message) {
+	public Message(int ch_idx, String user, String to, String time, String message) {
+		this.ch_idx = ch_idx;
 		this.user = user;
 		this.to = to;
 		this.time = time;
 		this.message = message;
 	}
+	
+	public int getCh_idx() {
+		return ch_idx;
+	}
 
+	public void setCh_idx(int ch_idx) {
+		this.ch_idx = ch_idx;
+	}
+	
 	public String getUser() {
 		return user;
 	}
@@ -50,14 +60,8 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return "Message [user=" + user + ", to=" + to + ", time=" + time + ", message=" + message + "]";
+		return "Message [ch_idx=" + ch_idx + ", user=" + user + ", to=" + to + ", time=" + time + ", message=" + message
+				+ "]";
 	}
-
-	
-	
-	
-	
-	
-	
 	
 }
