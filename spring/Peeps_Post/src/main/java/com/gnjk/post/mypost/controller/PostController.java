@@ -20,6 +20,12 @@ public class PostController {
 	@Autowired
 	private PostWriteService writeService;
 	
+	// 테스트 페이지
+		@RequestMapping(value = "/test", method = RequestMethod.GET)
+		public String testtPage() {
+			return "/mypost/test";
+		}
+	
 	// 게시글 페이지
 	@RequestMapping(method = RequestMethod.GET)
 	public String postPage() {

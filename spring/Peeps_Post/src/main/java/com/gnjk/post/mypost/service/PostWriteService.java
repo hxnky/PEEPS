@@ -34,6 +34,7 @@ public class PostWriteService {
 		int postResult = 0;
 		
 		Post post = writeRequest.toPost();
+		System.out.println("위치 주소 : "+post.getP_loc());
 		
 		try {
 		// 데이터베이스 입력
@@ -51,25 +52,30 @@ public class PostWriteService {
 		String newFileName = null;
 		File newFile = null;
 		
-//		System.out.println("!!!!!request.getFiles(postfile): " + request.getFiles("postfile"));
+		System.out.println("확인용: "+request.getFiles("postformfile").size());
+		System.out.println("확인용: "+request.getFiles("postformfile").get(0).getSize());
+		
+		
 		if(
-				request.getFiles("postfile") !=null 
-				&& !request.getFiles("postfile").isEmpty()
+//				request.getFiles("postformfile") !=null 
+//				&& !request.getFiles("postformfile").isEmpty()
+				request.getFiles("postformfile").get(0).getSize() > 0
 				&& postResult > 0
 				) {
 			System.out.println("!!!파일 업로드 if구문 진입");
-			List<MultipartFile> postfileList = request.getFiles("postfile");
+			List<MultipartFile> postfileList = request.getFiles("postformfile");
+			
 			// 웹 경로
 			String uploadPath = "/resources/fileupload/postfile";
 			// 실제 경로
 			String saveDirPath = request.getSession().getServletContext().getRealPath(uploadPath);
 			
 			for (MultipartFile mf : postfileList) {
+				
 				newFileName = writeRequest.getUserIdx() 
 						+ post.getP_idx()	// 방금 insert된 게시글 idx
 						+ mf.getOriginalFilename()
 						+ System.currentTimeMillis();
-				System.out.println("newFileName : "+newFileName);
 				
 				try {
 					// 실제 경로에 저장

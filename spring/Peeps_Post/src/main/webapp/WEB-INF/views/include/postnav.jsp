@@ -25,7 +25,7 @@
 			<a href="<c:url value="/post/read"/>">(test)게시글 보기</a>
 		</ul>
 		<ul>
-			<a href="<c:url value="/post/testfileupload"/>">(test)파일 업로드</a>
+			<a href="<c:url value="/post/test"/>">(test)</a>
 		</ul>
 	</div>
 </nav>

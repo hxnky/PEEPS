@@ -52,7 +52,7 @@ public class PostWriteRequest {
 		post.setMember_idx(userIdx);
 		post.setP_title(ptitle);
 		post.setP_content(pcontent);
-//		post.setP_loc(ploc);
+		post.setP_loc(ploc);
 //		썸네일 선택시 set 필요
 		
 		return post;
