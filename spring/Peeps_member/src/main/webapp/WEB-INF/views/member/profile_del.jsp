@@ -159,7 +159,7 @@ h3 {
 	<!-- 		</nav> -->
 
 	<!-- 		<!-- 네비 바 들어갈 부분 -->
-	-->
+
 	<!-- 	</div> -->
 	<div id="total_wrap">
 		<div id="edit_menu">
@@ -177,7 +177,7 @@ h3 {
 				<table id="edit_table">
 					<tr>
 
-						<td>${peeps.name}님!<br> 탈퇴하시면 계정을 다시 복구할 수 없습니다. <br>
+						<td><%=request.getParameter("email")%>님!<br> 탈퇴하시면 계정을 다시 복구할 수 없습니다. <br>
 							그래도 탈퇴하시겠어요?
 
 						</td>
@@ -187,6 +187,7 @@ h3 {
 							<div class="dropdown">
 								<button onclick="myFunction()" class="dropbtn" type="button">탈퇴 사유를
 									선택해주세요</button>
+									<!-- 어떤 div를 선택했는지 알기 -> 상위에 띄우면 더 좋음 -->
 								<div id="myDropdown" class="dropdown-content">
 									<div id="sub_dd">자주 사용하지 않음</div>
 									<div id="sub_dd">삭제하고 싶은 내용이 있음</div>
@@ -196,7 +197,7 @@ h3 {
 					</tr>
 					<tr>
 						<td>비밀번호 입력 <br> <input type="password" id="password"
-							name="pasword" placeholder="비밀번호를 입력하세요">
+							name="password" placeholder="비밀번호를 입력하세요">
 						</td>
 					</tr>
 					<tr>

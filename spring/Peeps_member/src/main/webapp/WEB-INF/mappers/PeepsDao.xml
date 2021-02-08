@@ -111,4 +111,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update member set password= #{password} where
 		email=#{email}
 	</update>
+	
+	<!-- 회원 정보 삭제 -->
+	<delete id="deletePeeps">
+		delete from member where email=#{email} and password=#{password}
+	</delete>
 </mapper>

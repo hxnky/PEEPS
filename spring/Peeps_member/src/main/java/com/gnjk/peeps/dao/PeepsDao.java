@@ -34,4 +34,6 @@ public interface PeepsDao {
 	int chk_password(@Param("email") String email, @Param("password") String password);
 	// 비밀번호 업데이트
 	int updatePassword(@Param("email") String email, @Param("password") String password);
+	// 회원 정보 삭제
+	int deletePeeps(@Param("email") String email, @Param("password") String password);
 }
