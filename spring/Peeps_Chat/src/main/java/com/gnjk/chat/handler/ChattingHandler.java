@@ -3,6 +3,8 @@ package com.gnjk.chat.handler;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.socket.CloseStatus;
@@ -10,12 +12,16 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.gnjk.chat.dao.MessageDao;
 import com.gnjk.chat.domain.Message;
 import com.google.gson.Gson;
 
 // TextWebSocketHandler를 상속받은 핸들러 클래스는 자동으로 아래 3개의 메소드가 오버라이드 됨.
 public class ChattingHandler extends TextWebSocketHandler {
 
+	@Inject
+	private MessageDao dao;
+	
 	private static final Logger logger = LoggerFactory.getLogger(ChattingHandler.class);
 
 	// session 저장 (연결된 세션 리스트)
@@ -25,7 +31,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
-		String friend = (String) session.getAttributes().get("user");
+		String friend = (String) session.getAttributes().get("m_idx");
 
 		// 접속한 세션 정보 리스트에 저장 
 		connectedSessionList.add(session);
@@ -43,7 +49,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 		
 		//System.out.println(message.getPayload()); // 나중에 삭제 
 
-		String friend = (String) session.getAttributes().get("user");
+		String friend = (String) session.getAttributes().get("m_idx");
 
 		// Json -> java 객체 
 		Gson gson = new Gson();
@@ -61,12 +67,11 @@ public class ChattingHandler extends TextWebSocketHandler {
 
 	}
 
-
 	// client 접속 종료 --------------------------
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 
-		String friend = (String) session.getAttributes().get("user");
+		String friend = (String) session.getAttributes().get("m_idx");
 
 		logger.info(session.getId()+"("+friend +")"+ "님이 접속을 종료하였습니다.");  // 나중에 삭제 
 

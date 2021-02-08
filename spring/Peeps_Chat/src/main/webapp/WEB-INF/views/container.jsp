@@ -29,7 +29,7 @@
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg"
 					alt="">
 					<div>
-						<h2>Prénom Nom</h2>
+						<h2>${rm_idx}</h2>
 						<h3>
 							<span class="status orange"></span> offline
 						</h3>
@@ -43,7 +43,7 @@
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg"
 					alt="">
 				<div>
-					<h2>Chat with Vincent Porter</h2>
+					<h2>${rm_idx}</h2> <input type="Text" name="rm_idx">
 					<h3>already 1902 messages</h3>
 				</div>
 				<img
@@ -53,7 +53,7 @@
 
 			<div class="well" id="chatdata">
 				<!-- User Session Info Hidden -->
-				<input type="hidden" value='${user}' id="sessionuserid">
+				<input type="hidden" value="${m_idx}" id="sessionuserid">
 			</div>
 
 			<footer>
@@ -66,7 +66,7 @@
 				<form method = "post">
 					<div class="send">
 
-						<input type="text" id="message" name="message" placeholder="Type your message" />
+						<input type="text" id="message"name="ch_ms" placeholder="Type your message" />
 						<input type="submit" id="sendBtn" value="전송" />
 					</div>
 				</form>
