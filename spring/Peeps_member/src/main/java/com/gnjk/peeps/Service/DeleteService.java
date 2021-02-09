@@ -17,8 +17,10 @@ public class DeleteService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public void Delete(Peeps peeps, HttpServletResponse response) {
+	public int Delete(Peeps peeps, HttpServletResponse response) {
 
+		int result = 0;
+		
 		dao = template.getMapper(PeepsDao.class);
 
 		String email = peeps.getEmail();
@@ -28,16 +30,17 @@ public class DeleteService {
 		System.out.println(email);
 		System.out.println(password);
 		
-		if (dao.chk_password(email, password) == 0) {
+		result = dao.chk_password(email, password);
+		
+		if (result == 0) {
 			System.out.println("회원 정보가 존재하지 않습니다.");
-			// 알림창 뜨게
 		} else {
-
+			// 먼저 실행됨
 			dao.deletePeeps(email, password);
-			System.out.println("회원 정보 삭제 완료");
+			System.out.println("회원 삭제 완료");
 		}
 		
-		
+		return result;
 	}
 
 }

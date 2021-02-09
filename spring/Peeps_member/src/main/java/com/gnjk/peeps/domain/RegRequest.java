@@ -28,18 +28,7 @@ public class RegRequest {
 		return peeps;
 	}
 
-	public Peeps toGPeeps() {
-
-		Peeps peeps = new Peeps();
-
-		peeps.setEmail(email);
-		peeps.setId(id);
-		peeps.setName(name);
-		peeps.setLoginType(loginType);
-		peeps.setM_photo(m_photo);
-
-		return peeps;
-	}
+	
 
 	@Override
 	public String toString() {

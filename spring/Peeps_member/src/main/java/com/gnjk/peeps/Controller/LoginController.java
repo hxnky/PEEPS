@@ -1,10 +1,10 @@
 package com.gnjk.peeps.Controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,13 +27,19 @@ public class LoginController {
 
 	
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, HttpServletResponse response, Model model) throws IOException {
+	public String login(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) throws IOException {
 
 		String email = request.getParameter("email");
 		
-		model.addAttribute("email", email);
+		request.getAttribute("msg");
 		
+		request.getSession().getAttribute("loginInfo");
+		
+		session.setAttribute("email", email);
+		
+		model.addAttribute("email", email);
 		model.addAttribute("loginCheck", loginService.login(request, response));
+		model.addAttribute("loginInfo", request.getSession().getAttribute("loginInfo"));
 
 		return "member/TimeLine";
 

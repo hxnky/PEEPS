@@ -6,10 +6,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.UUID;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -88,6 +96,7 @@ public class KakaoService {
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 		HashMap<String, Object> userInfo = new HashMap<>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
+		
 		try {
 			URL url = new URL(reqURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -119,6 +128,25 @@ public class KakaoService {
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
 			String m_photo = properties.getAsJsonObject().get("profile_image").getAsString();
 
+			// 사진 주소
+			URI uri = URI.create(m_photo); 
+			
+			// 사진 파일 다운로드
+			RestTemplate rt = new RestTemplate();
+			ResponseEntity<byte[]> res = rt.getForEntity(uri, byte[].class);
+			byte[] buffer = res.getBody();
+			
+			// 로컬 서버에 저장
+			String fileName = UUID.randomUUID().toString(); // 랜덤 이름!
+			String ext = "." + StringUtils.getFilenameExtension(m_photo); // 확장자 추출
+			Path target  = Paths.get("C:\\Users\\hanky\\Desktop\\bit\\PEEPS\\peeps_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Peeps_member\\fileupload", fileName+ext);
+			
+			try {
+				FileCopyUtils.copy(buffer, target.toFile());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 			userInfo.put("name", name);
 			userInfo.put("email", email);
 			userInfo.put("m_photo", m_photo);

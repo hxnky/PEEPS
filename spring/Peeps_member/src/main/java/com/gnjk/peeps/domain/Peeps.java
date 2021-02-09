@@ -46,6 +46,8 @@ public class Peeps {
 
 	public Peeps() {
 		getRandomString();
+		getRandomid();
+		getRandompw();
 	}
 
 	private void getRandomString() {
@@ -65,6 +67,42 @@ public class Peeps {
 		System.out.println("난수 생성 : " + sb);
 		this.code = new String(sb);
 
+	}
+	
+	private void getRandomid() {
+		Random r = new Random(System.nanoTime());
+		// 난수 문자열 10자리
+		StringBuffer sb = new StringBuffer();
+
+		for (int i = 0; i < 10; i++) {
+			if (r.nextBoolean()) {
+				// 숫자 발생 -> sb에 추가
+				sb.append(r.nextInt(10));
+			} else {
+				// 문자 발생 -> sb에 추가
+				sb.append((char) (r.nextInt(26) + 97));
+			}
+		}
+		System.out.println("난수 생성 : " + sb);
+		this.id = new String(sb);
+	}
+	
+	private void getRandompw() {
+		Random r = new Random(System.nanoTime());
+		// 난수 문자열 10자리
+		StringBuffer sb = new StringBuffer();
+
+		for (int i = 0; i < 10; i++) {
+			if (r.nextBoolean()) {
+				// 숫자 발생 -> sb에 추가
+				sb.append(r.nextInt(10));
+			} else {
+				// 문자 발생 -> sb에 추가
+				sb.append((char) (r.nextInt(26) + 97));
+			}
+		}
+		System.out.println("난수 생성 : " + sb);
+		this.password = new String(sb);
 	}
 
 	public LoginInfo toLoginInfo() {

@@ -29,7 +29,7 @@ public class LoginService {
 
 		Peeps peeps = dao.selectLogin(email, password);
 		
-		System.out.println(peeps);
+		System.out.println("로그인 : "+peeps);
 
 		if (peeps != null) {
 			if (peeps.getVerify() == 'Y') {

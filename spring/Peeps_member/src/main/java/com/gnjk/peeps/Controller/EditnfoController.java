@@ -24,7 +24,10 @@ public class EditnfoController {
 	@RequestMapping(value = "/profile/Info", method = RequestMethod.GET)
 	public String editUserInfoPage(@RequestParam("email") String email, Model model) {
 
+		int result = 2;
+		
 		model.addAttribute("peeps", editService.getPeeps(email));
+		model.addAttribute("result", result);
 
 		return "member/profile_edit";
 	}
@@ -34,7 +37,7 @@ public class EditnfoController {
 
 		model.addAttribute("result", editService.editPeeps(editRequest, request));
 
-		return "member/TimeLine";
+		return "member/profile_edit";
 
 	}
 

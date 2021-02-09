@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.gnjk.peeps.dao.PeepsDao;
 import com.gnjk.peeps.domain.Peeps;
-import com.gnjk.peeps.domain.RegRequest;
+import com.gnjk.peeps.domain.SocialRequest;
 
 @Service
 public class OAuthService {
@@ -35,11 +35,11 @@ public class OAuthService {
 
 	// 파일을 업로드, 데이터베이스 저장
 	@Transactional
-	public int socialMemberReg(RegRequest regRequest, HttpServletRequest request) {
+	public int socialMemberReg(SocialRequest socialRequest, HttpServletRequest request) {
 
 		int result = 0;
 
-		Peeps peeps = regRequest.toPeeps();
+		Peeps peeps = socialRequest.toSPeeps();
 
 		try {
 			// 데이터 베이스 입력

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gnjk.peeps.auth.Service.OAuthService;
-import com.gnjk.peeps.domain.RegRequest;
+import com.gnjk.peeps.domain.SocialRequest;
 
 @Controller
 public class OAuthController {
@@ -38,12 +38,13 @@ public class OAuthController {
 
 	@PostMapping(value = "/user/reg")
 	@ResponseBody
-	public int memberReg(@ModelAttribute("regData") RegRequest regRequest, HttpServletRequest request, Model model) {
+	public int memberReg(@ModelAttribute("socialData") SocialRequest socialRequest, HttpServletRequest request,
+			Model model) {
 
 		System.out.println("컨트롤러 실행됨");
-		System.out.println(regRequest);
+		System.out.println(socialRequest);
 
-		int result = oauthService.socialMemberReg(regRequest, request);
+		int result = oauthService.socialMemberReg(socialRequest, request);
 
 		System.out.println(result);
 

@@ -151,32 +151,21 @@ h4 {
 <script>
 	$(function(){
 		
-		var email = $('#email').val();
-		console.log(email);
-		
-		$("#sign_btn").click(function(){
-			$.ajax({
-				url : "${pageContext.request.contextPath}/member/find",
-				type : "POST",
-				data : {
-					id : $("#id").val(),
-					email : $("#email").val()
-				},
-				success : function(data) {
-					if(data==1){
-						alert("메일을 발송하였습니다.");
-						console.log("보내짐");
-						location.href = "${pageContext.request.contextPath}/TimeLime?email="+email
-					} else{
-						alert("회원 정보가 일치하지 않습니다.");
-						location.href = "${pageContext.request.contextPath}/member/find"
-					}
-					
-					
-				},
-			})
-		});
-	})
+
+			if(${result}==1){
+			
+				// 이메일을 받아와야함
+				alert("메일을 발송하였습니다. 메일을 확인해주세요");
+				console.log("보내짐");
+				location.href = "${pageContext.request.contextPath}/";
+			} else if(${result}==0){
+				alert("회원 정보가 없거나 일치하지 않습니다. 다시 확인해주세요");
+				location.href = "${pageContext.request.contextPath}/member/find";
+			} else{
+				console.log("비밀번호 찾기 진입");
+			}
+
+	});
 </script>
 
 </html>
