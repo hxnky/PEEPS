@@ -51,6 +51,21 @@ public class OAuthService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+//		if (peeps != null) {
+//			try {
+//				// 데이터 베이스 입력
+//				dao = template.getMapper(PeepsDao.class);
+//
+//				// 회원 DB insert
+//				dao.insertSocialMember(peeps);
+//
+//				result = 1;
+//
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
 
 		return result;
 	}

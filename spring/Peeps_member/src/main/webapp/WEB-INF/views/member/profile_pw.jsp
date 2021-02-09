@@ -113,7 +113,7 @@ h3 {
 	<!-- 		</nav> -->
 
 	<!-- 		<!-- 네비 바 들어갈 부분 -->
-	-->
+
 	<!-- 	</div> -->
 	<div id="total_wrap">
 		<div id="edit_menu">
@@ -206,53 +206,41 @@ h3 {
 									+ email;
 
 						});
+	});
+</script>
+
+<script>
 		
 		$('#change').click(function(){
 			
+			var email = $('#email').text();
 			console.log(email);
 			
 			if($('#chk_password').val() != $('#edit_password').val()){
 				alert("변경 비밀번호가 일치하지 않습니다.");
-				// 페이지 넘어감
 				location.href = "${pageContext.request.contextPath}/profile/pw?email="+ email;
-			}else{
-				$.ajax({
-					url : '${pageContext.request.contextPath}/profile/pw',
-					type:'post',
-					data: {
-						"email" : email,
-						"password" : $('#now_password').val(),
-						"e_password" : $('#edit_password').val()
-					},
-					async : false,
-					succes : function(data){
-						if(data === 1){
-							console.log("데이터 보내기 성공");
-							alert("비밀번호가 변경되었습니다.");
-							location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
-						} else{
-							console.log("데이터는 갔는데 변경은 안됨")
-						}
-					}, error : function(request, status, error){
-						console.log("데이터 보내기 실패");
-					}
-				})
-				
+
 			}
+		});
+
+
+	
+	$(document).ready(
 			
-			
-			
-		})
-		
-		
-		
-		
-		
-	});
-	
-	
-	
-	
+			function() {
+				var email = $('#email').text();
+				
+					if(${result} == 1){
+						console.log("데이터 보내기 성공");
+						alert("비밀번호가 변경되었습니다. 다시 로그인해주세요");
+						location.href = "${pageContext.request.contextPath}/";
+					} else if(${result} == 1){
+						alert("회원 비밀번호가 일치하지 않습니다.");
+						console.log("데이터는 갔는데 변경은 안됨");
+					} else{
+						console.log("비밀번호 변경 진입")
+					}
+			});
 </script>
 
 

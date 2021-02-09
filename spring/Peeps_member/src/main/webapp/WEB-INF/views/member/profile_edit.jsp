@@ -149,7 +149,7 @@ h3 {
 	<div id="total_wrap">
 		<div id="edit_menu">
 			<div id="menu_btn">
-				<h3 id="email">${peeps.email}</h3>
+				<h3 id="email"><%=request.getParameter("email")%></h3>
 				<h3>님</h3>
 				<br>
 				<button id="edit">프로필 편집</button>
@@ -266,6 +266,33 @@ h3 {
 									+ email;
 
 						});
+		
+		
 	})
 </script>
+
+<script>
+$(function() {
+	var email = $('#email').text();
+	
+	console.log(email);
+
+	// 페이지 이동할때 email에 값이 안들어감 --> result는 제대로 나옴
+	if(${result} == 1){
+		alert("정보가 수정되었습니다.");
+		location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
+	} else if(${result} == 0){
+		alert("아이디가 중복됩니다.");
+		location.href = "${pageContext.request.contextPath}/profile/Info?email="+ email;
+	} else{
+		console.log("정보 수정 진입");
+	}
+	
+});
+
+	
+
+</script>
+
+
 </html>

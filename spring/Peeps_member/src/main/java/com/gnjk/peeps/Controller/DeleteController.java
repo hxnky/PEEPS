@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,16 +22,20 @@ public class DeleteController {
 	private DeleteService deleteService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String DeletePage() {
+	public String DeletePage(Model model) {
+		
+		int result = 2;
+		
+		model.addAttribute("result", result);
 		
 		return "member/profile_del";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String EditPwPost(HttpServletResponse response, @ModelAttribute Peeps peeps) throws IOException{
+	public String EditPwPost(HttpServletResponse response, @ModelAttribute Peeps peeps, Model model) throws IOException{
 		
-		deleteService.Delete(peeps, response);
+		model.addAttribute("result", deleteService.Delete(peeps, response));
 		
-		return "member/LoginForm";
+		return "member/profile_del";
 	}
 }

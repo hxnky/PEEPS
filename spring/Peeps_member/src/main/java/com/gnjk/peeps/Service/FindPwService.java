@@ -1,7 +1,5 @@
 package com.gnjk.peeps.Service;
 
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,8 +20,10 @@ public class FindPwService {
 	@Autowired
 	private MailSenderService mailSenderService;
 
-	public void find_pw(HttpServletResponse response, Peeps peeps) throws Exception {
+	public int find_pw(HttpServletResponse response, Peeps peeps) throws Exception {
 
+		int result = 0;
+		
 		dao = template.getMapper(PeepsDao.class);
 
 		String email = peeps.getEmail();
@@ -32,11 +32,10 @@ public class FindPwService {
 		System.out.println(email + ", " + id);
 
 		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
 
 		if (dao.search_user(email, id) == 0) {
-			out.print("회원 정보가 존재하지 않습니다.");
-			out.close();
+			System.out.println("회원 정보가 존재하지 않습니다.");
+
 		} else {
 
 			String password = "";
@@ -50,13 +49,13 @@ public class FindPwService {
 
 			dao.updatePw(password, email, id);
 
-			mailSenderService.PwSend(peeps);
-
-			out.print("메일 발송 완료");
-			out.close();
+			result = mailSenderService.PwSend(peeps);
 
 		}
-
+		
+		System.out.println(result);
+		
+		return result;
 	}
 
 }

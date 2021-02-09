@@ -18,6 +18,7 @@ public class EditRequest {
 	private String oldPhoto;
 	private MultipartFile m_photo;
 	private String e_password;
+	private String c_password;
 
 	@Override
 	public String toString() {

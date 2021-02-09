@@ -1,6 +1,7 @@
 package com.gnjk.peeps.Controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,6 +14,16 @@ public class TimeLineController {
 		return "member/TimeLine";
 	}
 
+	@RequestMapping(value = "/member/SocialReg")
+	public String socialReg(Model model) {
+		
+		int result = 2;
+		
+		model.addAttribute("result", result);
+		
+		return "member/SocialRegForm";
+	}
+	
 //	@RequestMapping(value = "/user/chk", method = RequestMethod.POST)
 //	public String Timeline(HttpServletRequest request, Model model) {
 //

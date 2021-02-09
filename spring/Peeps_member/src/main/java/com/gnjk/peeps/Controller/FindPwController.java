@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,17 +20,21 @@ public class FindPwController {
 	private FindPwService findPwService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String memberFindGet() {
+	public String memberFindGet(Model model) {
 
+		int result = 2;
+		
+		model.addAttribute("result", result);
+		
 		return "member/FindPw";
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public String memberFindPost(HttpServletResponse response, @ModelAttribute Peeps peeps) throws Exception {
+	public String memberFindPost(HttpServletResponse response, @ModelAttribute Peeps peeps, Model model) throws Exception {
 		
-		findPwService.find_pw(response, peeps);
+		model.addAttribute("result", findPwService.find_pw(response, peeps));
 		
-		return "member/FindView";
+		return "member/FindPw";
 	}
 
 }

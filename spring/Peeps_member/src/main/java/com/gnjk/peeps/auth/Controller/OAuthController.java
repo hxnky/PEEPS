@@ -38,7 +38,7 @@ public class OAuthController {
 
 	@PostMapping(value = "/user/reg")
 	@ResponseBody
-	public int memberReg(@ModelAttribute("regData") RegRequest regRequest, HttpServletRequest request, Model model) {
+	public String memberReg(@ModelAttribute("regData") RegRequest regRequest, HttpServletRequest request, Model model) {
 
 		System.out.println("컨트롤러 실행됨");
 		System.out.println(regRequest);
@@ -49,7 +49,7 @@ public class OAuthController {
 
 		model.addAttribute("result", result);
 
-		return result;
+		return "member/SocialReg";
 	}
 
 }

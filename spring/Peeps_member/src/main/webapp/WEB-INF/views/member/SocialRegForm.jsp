@@ -162,51 +162,6 @@ h4 {
 						var name = "${name}";
 						var id = $(".id").val();
 
-						$('#sign_btn')
-								.click(
-										function() {
-
-											console.log(loginType);
-
-											$
-													.ajax({
-														url : '${pageContext.request.contextPath}/user/reg',
-														type : 'post',
-														data : {
-															"email" : "${email}",
-															"name" : "${name}",
-															"m_photo" : "${m_photo}",
-															"id" : $('.id')
-																	.val(),
-															"password" : $(
-																	'.password')
-																	.val(),
-															"loginType" : loginType
-														},
-														async : false,
-														success : function(data) {
-															if (data == 1) {
-																console
-																		.log("사용자 정보를 DB에 성공적으로 넣었습니다.");
-																alert("회원가입 되었습니다!");
-																location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
-																// DB는 들어가는데 오류난다.
-															} else {
-																console
-																		.log("DB 안들어감")
-															}
-
-														},
-														error : function(
-																request,
-																status, error) {
-															console
-																	.log("통신 실패");
-
-														}
-													});
-										});
-
 						$
 								.ajax({
 									url : '${pageContext.request.contextPath}/user/loginTypeChk?email='
@@ -288,5 +243,56 @@ h4 {
 // 						;
 
 					});
+</script>
+
+<script>
+$('#sign_btn')
+.click(
+		function() {
+			
+			var loginType = "${loginType}";
+			var email = "${email}";
+			var m_photo = "${m_photo}";
+			var name = "${name}";
+			var id = $(".id").val();
+
+			console.log(loginType);
+
+			$
+					.ajax({
+						url : '${pageContext.request.contextPath}/user/reg',
+						type : 'post',
+						data : {
+							"email" : "${email}",
+							"name" : "${name}",
+							"m_photo" : "${m_photo}",
+							"id" : $('.id')
+									.val(),
+							"password" : $(
+									'.password')
+									.val(),
+							"loginType" : loginType
+						},
+						async : false,
+						success : function(data) {
+							if (data == 1) {
+								console.log("사용자 정보를 DB에 성공적으로 넣었습니다.");
+								alert("회원가입 되었습니다!");
+								location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
+								// DB는 들어가는데 안들어갔다고 뜨고 400 오류
+							} else {
+								console.log("DB 안들어감")
+							}
+
+						},
+						error : function(
+								request,
+								status, error) {
+							console
+									.log("통신 실패");
+
+						}
+					});
+		});
 </script>
 </html>
