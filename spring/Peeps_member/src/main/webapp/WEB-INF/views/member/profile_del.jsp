@@ -183,14 +183,20 @@ h3 {
 					<tr>
 						<td>탈퇴하시는 이유가 무엇인가요? <br>
 							<div class="dropdown">
-								< onclick="myFunction()" class="dropbtn" type="button">탈퇴
-									사유를 선택해주세요</button>
+								<select class="dropbtn">
+									<option>탈퇴 사유를 선택해주세요</option>
+									<option>자주 사용하지 않음</option>
+									<option>삭제하고 싶은 내용이 있음</option>
+									<option>이 SNS가 별로임</option>
+								
+								</select>
 								<!-- 어떤 div를 선택했는지 알기 -> 상위에 띄우면 더 좋음 -->
-								<div id="myDropdown" class="dropdown-content">
-									<div id="sub_dd">자주 사용하지 않음</div>
-									<div id="sub_dd">삭제하고 싶은 내용이 있음</div>
-									<div id="sub_dd">이 SNS가 별로임</div>
-								</div>
+<!-- 								<div id="myDropdown" class="dropdown-content"> -->
+<!-- 									<div id="sub_dd">탈퇴 사유를 선택해주세요</div> -->
+<!-- 									<div id="sub_dd">자주 사용하지 않음</div> -->
+<!-- 									<div id="sub_dd">삭제하고 싶은 내용이 있음</div> -->
+<!-- 									<div id="sub_dd">이 SNS가 별로임</div> -->
+<!-- 								</div> -->
 							</div></td>
 					</tr>
 					<tr>
@@ -278,7 +284,7 @@ h3 {
 
             $('.dropbtn').change(function() {
 
-                var selectedText = $(".dropbtn div:selected").text();
+                var selectedText = $(".dropbtn option:selected").text();
 
                 $('.dropbtn').val(selectedText);
 

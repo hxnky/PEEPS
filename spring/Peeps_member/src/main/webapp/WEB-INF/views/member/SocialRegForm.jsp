@@ -69,51 +69,7 @@ h4 {
 
 							<!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
 
-							<div class="wizard-header">
-								<h3>
-									<b>PEEPS</b> <br>
-								</h3>
-							</div>
-
-							<!-- nav css 수정하기 -->
-							<div>
-								<ul>
-									<li id="top_nav">추가 정보</li>
-								</ul>
-
-							</div>
-							<form method="post">
-								<div>
-									<h4>${name}님!가입을위해추가정보를설정해주세요!</h4>
-
-									<br>
-									<!-- 표 만들기 -->
-
-									<table>
-										<tr>
-											<td rowspan="2"><img id="login_img"
-												src="${pageContext.request.contextPath}/resources/images/plus.png"></td>
-											<td>
-												<div class="form-group-left">
-													<input type="text" class="id" id="login_text" name="id"
-														placeholder="아이디">
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="form-group-right">
-													<input type="password" class="password" id="login_text"
-														name="password" placeholder="비밀번호 ">
-												</div>
-											</td>
-										</tr>
-									</table>
-
-								</div>
-
-								<input type="submit" id="sign_btn" value="설정 완료" />
-							</form>
+							<div class="wizard-header"></div>
 							<div class="wizard-footer height-wizard">
 								<div class="clearfix">
 									<br>
@@ -160,10 +116,15 @@ h4 {
 						var email = "${email}";
 						var m_photo = "${m_photo}";
 						var name = "${name}";
-						var id = $(".id").val();
+						
+						
 
-						$
-								.ajax({
+						console.log(loginType);
+						console.log(email);
+						console.log(m_photo);
+						console.log(name);
+					
+						$.ajax({
 									url : '${pageContext.request.contextPath}/user/loginTypeChk?email='
 											+ email,
 									type : 'get',
@@ -201,8 +162,7 @@ h4 {
 												//location.href = "${pageContext.request.contextPath}/user/chk"
 												location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
 												console.log("타임라인 페이지");
-												alert(name + "님! 로그인되었습니다.")
-
+												alert(name + "님! 로그인되었습니다.");
 											} else {
 												// 아니면 alert
 												alert("해당 이메일로 이미 가입된 계정이 있습니다. 로그인 페이지로 이동합니다.");
@@ -212,87 +172,56 @@ h4 {
 										} else {
 											console
 													.log("아이디가 DB에 존재하지 않습니다. DB에 저장합니다 . . .");
+											$
+											.ajax({
+												url : '${pageContext.request.contextPath}/user/reg',
+												type : 'post',
+												data : {
+													"email" : "${email}",
+													"name" : "${name}",
+													"m_photo" : "${m_photo}",
+													"loginType" : loginType
+												},
+												async : false,
+												success : function(data) {
+													if(data==1){
+														location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
+														console.log("타임라인 페이지");
+														alert(name + "님! 환영합니다!! 아이디와 비밀번호를 설정에서 변경해주세요!");
+													} else{
+														console.log("DB 실패");
+													}
+															
+												},
+												error : function(
+														request,
+														status, error) {
+													console
+															.log("통신 실패");
+
+												}
+											});
+
 										}
 									},
 									error : function() {
 										console.log("실패,,,,");
 									}
 								});
+						
+						
 
-						// 세션으로 저장,,?
-// 						function check() {
-
-// 							var id = $("#id").val();
-
-// 							$
-// 									.ajax({
-// 										type : "POST",
-// 										url : "${pageContext.request.contextPath}/user/chk", //세션 생성페이지 (setAttribute...)
-// 										data : "id=" + id,
-// 										success : function() {
-// 											conosole.log("세션 생성중")
-											
-
-// 										},
-// 										error : function() {
-// 											console.log("실패,,,,");
-// 										}
-// 									});
-
+// 						if (${result} == 1) {
+// 							console.log("사용자 정보를 DB에 성공적으로 넣었습니다.");
+// 							alert("회원가입 되었습니다!");
+// 							location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
+// 							// DB는 들어가는데 안들어갔다고 뜨고 400 오류
+// 						} else{
+// 							console.log("실패");
 // 						}
-// 						;
+
 
 					});
 </script>
 
-<script>
-$('#sign_btn')
-.click(
-		function() {
-			
-			var loginType = "${loginType}";
-			var email = "${email}";
-			var m_photo = "${m_photo}";
-			var name = "${name}";
-			var id = $(".id").val();
-
-			console.log(loginType);
-
-			$
-					.ajax({
-						url : '${pageContext.request.contextPath}/user/reg',
-						type : 'post',
-						data : {
-							"email" : "${email}",
-							"name" : "${name}",
-							"m_photo" : "${m_photo}",
-							"id" : $('.id')
-									.val(),
-							"password" : $(
-									'.password')
-									.val(),
-							"loginType" : loginType
-						},
-						async : false,
-						success : function(data) {
-							if (data == 1) {
-								console.log("사용자 정보를 DB에 성공적으로 넣었습니다.");
-								alert("회원가입 되었습니다!");
-								location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
-								// DB는 들어가는데 안들어갔다고 뜨고 400 오류
-							} else {
-								console.log("DB 안들어감")
-							}
-
-						},
-						error : function(
-								request,
-								status, error) {
-							console
-									.log("통신 실패");
-
-						}
-					});
-		});
-</script>
 </html>

@@ -14,7 +14,7 @@ public class TimeLineController {
 		return "member/TimeLine";
 	}
 
-	@RequestMapping(value = "/member/SocialReg")
+	@RequestMapping(value = "/member/SocialReg", method = RequestMethod.GET)
 	public String socialReg(Model model) {
 		
 		int result = 2;

@@ -21,6 +21,8 @@ public class KakaoConroller {
 	@RequestMapping(value = "/login")
 	public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) {
 
+		int result = 2;
+		
 		String access_Token = kakaoService.getAccessToken(code);
 		HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
 
@@ -28,9 +30,11 @@ public class KakaoConroller {
 
 		model.addAttribute("loginType", "kakao");
 		model.addAllAttributes(userInfo);
-		model.addAttribute("token", access_Token);
+		session.setAttribute("userInfo",userInfo);
+		session.setAttribute("token", access_Token);
 		
-
+		model.addAttribute("result", result);
+		
 		return "member/SocialRegForm";
 
 	}

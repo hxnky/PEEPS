@@ -2,6 +2,8 @@ package com.gnjk.peeps.auth.Controller;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,9 +30,11 @@ public class GoogleController {
 	private String clientSecret = "7wyexcIGQj61JPsW2xNG5mXo";
 
 	@RequestMapping("/glogin")
-	public String googleAuth(Model model, @RequestParam(value = "code") String authCode)
+	public String googleAuth(Model model, @RequestParam(value = "code") String authCode, HttpSession session)
 			throws JsonProcessingException {
 
+		int result = 2;
+		
 		// HTTP Request를 위한 RestTemplate
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -50,12 +54,12 @@ public class GoogleController {
 				String.class);
 
 		// Token Request
-		GoogleResponse result = mapper.readValue(resultEntity.getBody(), new TypeReference<GoogleResponse>() {
+		GoogleResponse Result = mapper.readValue(resultEntity.getBody(), new TypeReference<GoogleResponse>() {
 		});
 
 		// ID Token만 추출 (사용자의 정보는 jwt로 인코딩 되어있다)
 		// resttemplate의 경우 String으로 값이 들어오면 알아서 encode를 해준다.
-		String jwtToken = result.getIdToken();
+		String jwtToken = Result.getIdToken();
 		String requestUrl = UriComponentsBuilder.fromHttpUrl("https://oauth2.googleapis.com/tokeninfo")
 				.queryParam("id_token", jwtToken).toUriString();
 
@@ -64,11 +68,14 @@ public class GoogleController {
 		Map<String, String> userInfo = mapper.readValue(resultJson, new TypeReference<Map<String, String>>() {
 		});
 
+		session.setAttribute("userInfo", userInfo);
+		
 		model.addAttribute("loginType", "google");
 		model.addAttribute("email", userInfo.get("email"));
 		model.addAttribute("name", userInfo.get("name"));
 		model.addAttribute("m_photo", userInfo.get("picture"));
-		model.addAttribute("token", result.getAccessToken());
+		model.addAttribute("token", Result.getAccessToken());
+		model.addAttribute("result", result);
 
 		System.out.println(userInfo);
 		System.out.println("이메일 : " + userInfo.get("email"));

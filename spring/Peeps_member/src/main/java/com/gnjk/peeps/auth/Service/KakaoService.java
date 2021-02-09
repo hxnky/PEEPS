@@ -119,6 +119,14 @@ public class KakaoService {
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
 			String m_photo = properties.getAsJsonObject().get("profile_image").getAsString();
 
+			
+			
+			
+			
+			
+			
+			
+			
 			userInfo.put("name", name);
 			userInfo.put("email", email);
 			userInfo.put("m_photo", m_photo);
