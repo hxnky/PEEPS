@@ -75,13 +75,10 @@
 }
 
 #preview {
-	background-color: red;
 	width: 800px;
+	min-height: 50px;
 	margin: 15px 0px;
-}
-
-.previewdiv {
-	background-color: yellow;
+	border: 1px solid #ccc;
 }
 
 .plocwrap {
@@ -218,11 +215,11 @@ body {
         //파일명이 길면 파일명...으로 처리
         var fileName = f.name;
         if(fileName.length > 10){
-          fileName = fileName.substring(0,10)+"...";
+          fileName = fileName.substring(0,8)+"...";
         }
         
         //div에 이미지 추가
-        var str = '<div class="previewdiv" style="display: inline-flex; padding: 10px;"><li>';
+        var str = '<div class="previewdiv" style="display: inline-flex; padding: 10px;"><li style="list-style: none;">';
         str += '<span>'+fileName+'</span><br>';
         
         //이미지 파일 미리보기

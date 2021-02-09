@@ -35,6 +35,7 @@ public class PostWriteService {
 		
 		Post post = writeRequest.toPost();
 		System.out.println("위치 주소 : "+post.getP_loc());
+		System.out.println("썸네일 이름 : "+post.getP_thumbnail());
 		
 		try {
 		// 데이터베이스 입력
@@ -72,10 +73,16 @@ public class PostWriteService {
 			
 			for (MultipartFile mf : postfileList) {
 				
-				newFileName = writeRequest.getUserIdx() 
+				System.out.println("멤버idx : "+post.getMember_idx());
+				newFileName = post.getMember_idx()
 						+ post.getP_idx()	// 방금 insert된 게시글 idx
 						+ mf.getOriginalFilename()
 						+ System.currentTimeMillis();
+				
+				if(newFileName == post.getP_thumbnail()) {
+					// 뷰페이지에서 받아온 썸네일 파일 이름과 같으면
+					// post db table의 썸네일 컬럼에 업데이트
+				}
 				
 				try {
 					// 실제 경로에 저장
@@ -86,6 +93,7 @@ public class PostWriteService {
 					postFile.setPost_idx(post.getP_idx());
 
 					System.out.println("!!!postFile : "+postFile);
+					// 파일 DB insert
 					postFileResult = dao.insertFiles(postFile);
 					System.out.println("!!!!postFileResult : "+postFileResult);
 					

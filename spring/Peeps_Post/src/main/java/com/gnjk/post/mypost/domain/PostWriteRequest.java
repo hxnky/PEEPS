@@ -11,6 +11,7 @@ public class PostWriteRequest {
 	private String ptitle;
 	private String pcontent;
 	private String ploc;
+	private String pthumbnail;
 	
 	private List<MultipartFile> postfiles;
 	
@@ -46,6 +47,13 @@ public class PostWriteRequest {
 	public void setPostfiles(List<MultipartFile> postfiles) {
 		this.postfiles = postfiles;
 	}
+	
+	public String getPthumbnail() {
+		return pthumbnail;
+	}
+	public void setPthumbnail(String pthumbnail) {
+		this.pthumbnail = pthumbnail;
+	}
 	// 게시글 저장
 	public Post toPost() {
 		Post post = new Post();
@@ -54,6 +62,7 @@ public class PostWriteRequest {
 		post.setP_content(pcontent);
 		post.setP_loc(ploc);
 //		썸네일 선택시 set 필요
+		post.setP_thumbnail(pthumbnail);
 		
 		return post;
 	}

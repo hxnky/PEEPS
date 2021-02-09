@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>PEEPS</title>
+<title>test</title>
 </head>
 <style>
 @import
@@ -75,13 +75,10 @@
 }
 
 #preview {
-	background-color: red;
 	width: 800px;
+	min-height: 50px;
 	margin: 15px 0px;
-}
-
-.previewdiv {
-	background-color: yellow;
+	border: 1px solid #ccc;
 }
 
 .plocwrap {
@@ -131,117 +128,99 @@ body {
                 }
                 $('#textnumber').text(inputStrLen);
             });
-            
-            // 파일 개수 제한
-            /* $("input[type = 'submit']").click(function(){
-                var $fileUpload = $("input[type='file']");
-                if (parseInt($fileUpload.get(0).files.length) > 20){
-                   alert("이미지는 20개까지 업로드 가능합니다.");
-                return false;
-                }
-             }); */
              
         });
         
-     // 이미지 이외 파일 제한
-    	/* function fileCheck(obj) {
-    	    var file_kind = obj.value.lastIndexOf('.');
-    		var file_name = obj.value.substring(file_kind+1,obj.length);
-    		var file_type = file_name.toLowerCase();
-    		var check_file_type=new Array();
-    		check_file_type=['jpg','gif','png','jpeg','bmp','tif'];
-    		
-    		if(check_file_type.indexOf(file_type)==-1) {
-    			alert('이미지만 업로드 할 수 있습니다.');
-    			var parent_Obj=obj.parentNode;
-    			var node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
-
-    			document.getElementById("postformfile").value = "";    //초기화를 위한 추가 코드
-    			document.getElementById("postformfile").select();        //초기화를 위한 추가 코드
-    			document.selection.clear();                            //일부 브라우저 미지원
-    			return false;
-    		}
-    	} */
+     // 썸네일 선택
+     $(document).on('click', '.prvimg', function(){
+    	 // input pthumbnail의 value에 파일 이름 저장
+    	 var idx = $('.prvimg').index(this);
+    	 alert("이미지 클릭"+idx);
+    	 var selectedfileName = $("input[type='file']")[0].files[idx].name;
+    	 console.log(selectedfileName);
+    	 $('.pthumbnail').val(selectedfileName);
+    	 
+     });
      
-     // test 파일 미리보기
+    	
+     // 파일 미리보기
       $(document).ready(function (e){
-    $("input[type='file']").change(function(e){
-
-      //div 내용 비워주기
-      $('#preview').empty();
-
-      var files = e.target.files;
-      var arr =Array.prototype.slice.call(files);
-      
-      // 이미지 개수 제한
-      if(e.target.files.length>20){
-    	  alert("이미지는 20개까지 업로드 가능합니다.")
-    	  $("input[type='file']").val("");
-    	  return false;
-      }
-      
-     //업로드 가능 파일인지 체크
-      for(var i=0;i<files.length;i++){
-        if(!checkExtension(files[i].name,files[i].size)){
-          return false;
-        }
-      }
-      
-      preview(arr);
-      
-      
-    });//file change
-    
-    function checkExtension(fileName,fileSize){
-
-      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-      /* var maxSize = 20971520;  //20MB
-      
-      if(fileSize >= maxSize){
-        alert('파일 사이즈 초과');
-        $("input[type='file']").val("");  //파일 초기화
-        return false;
-      } */
-      
-      // 이미지 이외 파일 업로드 제한
-      if(regex.test(fileName)){
-        alert('이미지만 업로드 가능합니다.');
-        $("input[type='file']").val("");  //파일 초기화
-        return false;
-      }
-      return true;
-    }
-    
-    function preview(arr){
-      arr.forEach(function(f){
-        
-        //파일명이 길면 파일명...으로 처리
-        var fileName = f.name;
-        if(fileName.length > 10){
-          fileName = fileName.substring(0,10)+"...";
-        }
-        
-        //div에 이미지 추가
-        var str = '<div class="previewdiv" style="display: inline-flex; padding: 10px;"><li>';
-        str += '<span>'+fileName+'</span><br>';
-        
-        //이미지 파일 미리보기
-        if(f.type.match('image.*')){
-          var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
-          reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-            //str += '<button type="button" class="delBtn" value="'+f.name+'" style="background: red">x</button><br>';
-            str += '<img src="'+e.target.result+'" title="'+f.name+'" width=140 height=140 />';
-            str += '</li></div>';
-            $(str).appendTo('#preview');
-          } 
-          reader.readAsDataURL(f);
-        }/*  else{
-          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
-          $(str).appendTo('#preview');
-        } */
-      });//arr.forEach
-    }
-  });
+		    $("input[type='file']").change(function(e){
+		
+		      //div 내용 비워주기
+		      $("#preview").empty();
+		
+		      var files = e.target.files;
+		      var arr =Array.prototype.slice.call(files);
+		      
+		      // 이미지 개수 제한
+		      if(e.target.files.length>20){
+		    	  alert("이미지는 20개까지 업로드 가능합니다.")
+		    	  $("input[type='file']").val("");
+		    	  return false;
+		      }
+		      
+		     //업로드 가능 파일인지 체크
+		      for(var i=0;i<files.length;i++){
+		        if(!checkExtension(files[i].name,files[i].size)){
+		          return false;
+		        }
+		      }
+		      
+		      preview(arr);
+		      
+		    });//file change
+		    
+		    function checkExtension(fileName,fileSize){
+		
+		      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+		      /* var maxSize = 20971520;  //20MB
+		      
+		      if(fileSize >= maxSize){
+		        alert('파일 사이즈 초과');
+		        $("input[type='file']").val("");  //파일 초기화
+		        return false;
+		      } */
+		      
+		      // 이미지 이외 파일 업로드 제한
+		      if(regex.test(fileName)){
+		        alert('이미지만 업로드 가능합니다.');
+		        $("input[type='file']").val("");  //파일 초기화
+		        return false;
+		      }
+		      return true;
+		    }
+		    
+		    function preview(arr){
+		      arr.forEach(function(f){
+		        
+		        //파일명이 길면 파일명...으로 처리
+		        var fileName = f.name;
+		        if(fileName.length > 10){
+		          fileName = fileName.substring(0,8)+"...";
+		        }
+		        
+		        //div에 이미지 추가
+		        var str = '<div class="previewdiv" id="id'+fileName+'" style="display: inline-flex; padding: 10px;"><li style="list-style: none;">';
+		        str += '<span>'+fileName+'</span><br>'; 
+		        
+		        //이미지 파일 미리보기
+		        if(f.type.match('image.*')){
+		          var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+		          reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+		            //str += '<button type="button" class="delBtn" value="'+f.name+'" style="background: red">x</button><br>';
+		            str += '<img src="'+e.target.result+'" class="prvimg" title="'+f.name+'" width=140 height=140 />';
+		            str += '</li></div>';
+		            $(str).appendTo('#preview');
+		          } 
+		          reader.readAsDataURL(f);
+		        }
+		      });//arr.forEach
+		      
+		    }
+  		});
+    	
+    	
     
 </script>
 
@@ -273,9 +252,10 @@ body {
 			</tr>
 			<tr>
 				<td>
+					<input type="hidden" class="pthumbnail" name="pthumbnail" value="">
 					<div>
 						<input type="file" accept="image/*" 
-						name="postformfile" id="postformfile" onchange="fileCheck(this)"
+						name="postformfile" id="postformfile"
 						multiple>
 					</div>
 					<div id="preview">
