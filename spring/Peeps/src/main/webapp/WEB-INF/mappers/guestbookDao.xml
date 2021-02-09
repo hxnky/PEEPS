@@ -4,8 +4,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- 1.공백있어도 오류남 -->
 
 <mapper namespace="	com.gnjk.peeps.guestbook.dao.GuestbookDao"><!--2.sql->beansmap sql<-beansmap  -->
-<!-- sql를 beans로 메핑 할때 컬럼의 이름과 객체가가진 이름을 동일하게 해주면 바로 반환해준다 ,만약 틀린경우 컬럼이름의 setter를 찾아주는데  resurtmap를 통해 매핑해준다. 결과를 받아 올 수있다.
-<resultMap id="guestbookResult" type="com.gnjk.peeps.guestbook.domain.Guestbook">
+<!--  sql를 beans로 메핑 할때 컬럼의 이름과 객체가가진 이름을 동일하게 해주면 바로 반환해준다 ,만약 틀린경우 컬럼이름의 setter를 찾아주는데  resurtmap를 통해 매핑해준다. 결과를 받아 올 수있다. -->
+<!-- <resultMap id="guestbookResult" type="com.gnjk.peeps.guestbook.domain.Guestbook">
 
 <id column="gidx" property="gidx"/>
 <result column="gbookidx" property="gbookidx" />
@@ -14,8 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <result column="gbookmessage" property="gbookmessage" />
 <result column="gbookphoto" property="gbookphoto" />
 </resultMap>
- -->
 
+ -->
 
 <!-- 
 <insert id="insetGbook"
@@ -34,16 +34,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="selectAll"
 		resultType="com.gnjk.peeps.guestbook.domain.Guestbook"
 >
- 		select * from guestbook order by gbookidx
+ 		select * from guestbook order by gidx
 
 </select>
 
-<!-- <insert id="insertGbook"
+ <insert id="insertGbook"
 					parameterType="com.gnjk.peeps.guestbook.domain.Guestbook"
 					useGeneratedKeys="true"
 					keyProperty="idx"
 	>
-		 INSERT INTO guestbook (gbookmessage ,gbookphoto) VALUES (#{gmessage},#{gphoto});
-	</insert> -->
+		 INSERT INTO guestbook (gwriter,gmessage ,gphoto) VALUES (#{gwriter},#{gmessage},#{gphoto});
+	</insert> 
 
 </mapper>

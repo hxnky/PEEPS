@@ -4,8 +4,8 @@
   <div id="nav_wrap">
             <hr>
             <div class="menuselect">
-                <a href="#"><img src="<c:url value='/WEB-INF/icon/navi/006-newsfeed.png'/>"></a>
-                <a href="<c:url value="/guestbook"/>"><img src="<c:url value='/WEB-INF/icon/navi/017-friends.png'/>"></a>
-                <a href="#"><img src="<c:url value='/WEB-INF/icon/navi/018-location%20pin.png'/>"></a>
+                <a href="#"><img src="<c:url value='/icon/navi/006-newsfeed.png'/>"></a>
+                <a href="<c:url value="/guestbook"/>"><img src="<c:url value='/icon/navi/017-friends.png'/>"></a>
+                <a href="#"><img src="<c:url value='/icon/navi/018-location%20pin.png'/>"></a>
             </div>
         </div>

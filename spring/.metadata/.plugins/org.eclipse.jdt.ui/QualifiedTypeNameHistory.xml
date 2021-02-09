@@ -17,10 +17,13 @@
 <fullyQualifiedTypeName name="com.gnjk.peeps.guestbook.controller.dao.GuestbookDao"/>
 <fullyQualifiedTypeName name="org.mybatis.spring.SqlSessionTemplate"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
-<fullyQualifiedTypeName name="com.gnjk.peeps.guestbook.domain.Guestbook"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="com.mysql.cj.log.Log"/>
 <fullyQualifiedTypeName name="com.gnjk.peeps.guestbook.domain.GuestbookRequest"/>
 <fullyQualifiedTypeName name="java.net.URI"/>
 <fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="com.gnjk.peeps.guestbook.dao.GuestbookDao"/>
+<fullyQualifiedTypeName name="com.gnjk.peeps.guestbook.domain.Guestbook"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
 </qualifiedTypeNameHistroy>

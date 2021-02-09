@@ -61,7 +61,9 @@ height:70px;
 	
 	<ul>
 	
-	<li><img src="#" class="gimg" id="gimg"></li>
+	<li><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340" class="gimg" id="gwiter" name="gwiter" >
+	id<input type="text" id="gwiter" name="gwiter">
+	</li>
 	<li><textarea rows="9" cols="80" id="gmessage" name="gmessage"></textarea><br>
 	
 	<input type="file" id="gphoto" name="gphoto"> </li>
