@@ -1,5 +1,9 @@
 package com.gnjk.peeps.auth.Controller;
 
+import java.io.IOException;
+import java.net.URI;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -7,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
@@ -34,7 +40,7 @@ public class GoogleController {
 			throws JsonProcessingException {
 
 		int result = 2;
-		
+
 		// HTTP Request를 위한 RestTemplate
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -68,7 +74,31 @@ public class GoogleController {
 		Map<String, String> userInfo = mapper.readValue(resultJson, new TypeReference<Map<String, String>>() {
 		});
 
+		// 구글은 확장자 없어서 오류난다 --> <c:if>로 분기 만들어서 img 경로 다르게 사용하기
+//		// 사진 주소
+//		String m_photo = userInfo.get("picture");
+//		URI uri = URI.create(m_photo);
+//
+//		// 사진 파일 다운로드
+//		RestTemplate rt = new RestTemplate();
+//		ResponseEntity<byte[]> res = rt.getForEntity(uri, byte[].class);
+//		byte[] buffer = res.getBody();
+//
+//		// 로컬 서버에 저장
+//		// String fileName = UUID.randomUUID().toString(); // 랜덤 이름!
+//		String ext = "." + StringUtils.getFilenameExtension(m_photo); // 확장자 추출
+//		Path target = Paths.get(
+//				"C:\\Users\\hanky\\Desktop\\bit\\PEEPS\\peeps_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Peeps_member\\fileupload",
+//				m_photo + ".jpg");
+//
+//		try {
+//			FileCopyUtils.copy(buffer, target.toFile());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+
 		session.setAttribute("userInfo", userInfo);
+		session.setAttribute("access_Token", Result.getAccessToken());
 		
 		model.addAttribute("loginType", "google");
 		model.addAttribute("email", userInfo.get("email"));
@@ -76,7 +106,11 @@ public class GoogleController {
 		model.addAttribute("m_photo", userInfo.get("picture"));
 		model.addAttribute("token", Result.getAccessToken());
 		model.addAttribute("result", result);
-
+		
+		session.setAttribute("email", userInfo.get("email"));
+		session.setAttribute("name", userInfo.get("name"));
+		session.setAttribute("loginType","google");
+		
 		System.out.println(userInfo);
 		System.out.println("이메일 : " + userInfo.get("email"));
 		System.out.println("이름 : " + userInfo.get("name"));

@@ -1,7 +1,6 @@
 package com.gnjk.peeps.Service;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.gnjk.peeps.dao.PeepsDao;
 import com.gnjk.peeps.domain.EditRequest;
-import com.gnjk.peeps.domain.Peeps;
 
 @Service
 public class EditPwService {

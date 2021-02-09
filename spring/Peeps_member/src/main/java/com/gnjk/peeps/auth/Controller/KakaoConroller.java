@@ -24,7 +24,7 @@ public class KakaoConroller {
 		int result = 2;
 		
 		String access_Token = kakaoService.getAccessToken(code);
-		HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
+		HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token, session);
 
 		System.out.println("유저 정보 : " + userInfo);
 
@@ -42,10 +42,8 @@ public class KakaoConroller {
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {
 
-		kakaoService.kakaoLogout((String) session.getAttribute("access_Token"));
-
-		session.removeAttribute("access_Token");
-		session.removeAttribute("userId");
+		System.out.println("로그아웃되었습니다.");
+		session.invalidate();
 
 		return "redirect:/";
 	}

@@ -3,6 +3,7 @@ package com.gnjk.peeps.Controller;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,9 +33,11 @@ public class DeleteController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String EditPwPost(HttpServletResponse response, @ModelAttribute Peeps peeps, Model model) throws IOException{
+	public String EditPwPost(HttpServletResponse response, @ModelAttribute Peeps peeps, Model model, HttpSession session) throws IOException{
 		
 		model.addAttribute("result", deleteService.Delete(peeps, response));
+		
+		session.invalidate();
 		
 		return "member/profile_del";
 	}

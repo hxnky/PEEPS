@@ -124,6 +124,7 @@ h3 {
 				<button id="edit">프로필 편집</button>
 				<button id="pw_ch">비밀번호 변경</button>
 				<button id="delete">탈퇴하기</button>
+				<button id="log_out">로그아웃</button>
 			</div>
 		</div>
 		<div>
@@ -206,6 +207,12 @@ h3 {
 									+ email;
 
 						});
+		
+		$("#log_out").click(function() {
+
+			location.href = "${pageContext.request.contextPath}/logout";
+
+		});
 	});
 </script>
 

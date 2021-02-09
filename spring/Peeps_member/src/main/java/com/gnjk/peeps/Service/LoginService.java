@@ -2,6 +2,7 @@ package com.gnjk.peeps.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class LoginService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public boolean login(HttpServletRequest request, HttpServletResponse response) {
+	public boolean login(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -29,7 +30,11 @@ public class LoginService {
 
 		Peeps peeps = dao.selectLogin(email, password);
 		
-		System.out.println(peeps);
+		System.out.println("로그인 : "+peeps);
+		
+		session.setAttribute("peeps", peeps);
+		session.setAttribute("email", peeps.getEmail());
+
 
 		if (peeps != null) {
 			if (peeps.getVerify() == 'Y') {

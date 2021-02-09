@@ -1,7 +1,7 @@
 package com.gnjk.peeps.Controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,11 +22,11 @@ public class EditnfoController {
 	private EditInfoService editService;
 
 	@RequestMapping(value = "/profile/Info", method = RequestMethod.GET)
-	public String editUserInfoPage(@RequestParam("email") String email, Model model) {
+	public String editUserInfoPage(@RequestParam("email") String email, Model model, HttpSession session) {
 
 		int result = 2;
 		
-		model.addAttribute("peeps", editService.getPeeps(email));
+		model.addAttribute("peeps", editService.getPeeps(email, session));
 		model.addAttribute("result", result);
 
 		return "member/profile_edit";

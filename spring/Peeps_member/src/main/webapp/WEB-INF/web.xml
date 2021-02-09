@@ -31,6 +31,20 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<!-- for images, js file mapping -->
+
+	<servlet-mapping>
+
+		<servlet-name>default</servlet-name>
+
+		<url-pattern>/fileupload/*</url-pattern>
+
+		<url-pattern>/js/*</url-pattern>
+
+	</servlet-mapping>
+
+
+
 	<!-- encoding Filter 등록 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>

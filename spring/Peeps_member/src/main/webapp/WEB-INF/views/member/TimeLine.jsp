@@ -65,9 +65,10 @@
 							</div>
 
 							<h1>타 임 라 인</h1>
-							<h3 id="email"><%=request.getParameter("email")%>
+							<h3 id="email"><%=session.getAttribute("email") %>
 							</h3>
-
+							<%=session.getAttribute("peeps") %>
+							${loginType }
 							<button id="edit_btn">프로필 편집</button>
 
 							<input type="button" value="로그아웃"

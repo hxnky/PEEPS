@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,19 @@ public class EditInfoService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public Peeps getPeeps(@RequestParam("email") String email) {
+	public Peeps getPeeps(@RequestParam("email") String email, HttpSession session) {
 
 		dao = template.getMapper(PeepsDao.class);
 
-		return dao.selectMemberByEmail(email);
+		Peeps peeps = dao.selectMemberByEmail(email);
+		
+		session.setAttribute("peeps", peeps);
+		session.setAttribute("m_idx", peeps.getM_idx());
+		session.setAttribute("email", peeps.getEmail());
+		session.setAttribute("id", peeps.getId());
+		session.setAttribute("loginType", peeps.getLoginType());
+		
+		return peeps;
 	}
 
 	public int editPeeps(EditRequest editRequest, HttpServletRequest request) {
