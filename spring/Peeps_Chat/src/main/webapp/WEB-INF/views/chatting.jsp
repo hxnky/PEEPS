@@ -106,18 +106,21 @@
 	});
 
 	function sendMessage() {
-		var t = getTimeStamp();
 		
 		var mes = {
 			num : '${ch_idx}',
 			user : '${m_idx}',
 			to : '${rm_idx}',
-			time : t, // Date.now(),
+			time : '${ch_time}', // Date.now(),
 			message : $("#message").val()
 		};
+		
+		// user = 'kim';
+		// to = 'nam';
+		
 		sock.send(JSON.stringify(mes));
 		console.log(JSON.stringify(mes));
-		console.log('메세지 소켓에 전송');
+		console.log('위 메세지 소켓에 전송');
 	}
 
 	//evt 파라미터는 websocket이 보내준 데이터다.
@@ -127,20 +130,23 @@
 		var sessionid = null;
 		var message = null;
 
-		mesData.user = 'kim';
-		mesData.to = 'nam';
+		var t = getTimeStamp(mesData.time);
 		
+		// mesData.user = 'kim';
+		// mesData.to = 'nam';
+		
+		console.log('mesData' + ' : ' + mesData.message);
 		// current session id
-		var currentuser_session = $('#sessionuserid').val();
+		var currentuser_session = $('#sessionuserid').val();	// value='${m_idx}' 
 
-		currentuser_session = 'kim';
+		// currentuser_session = 'kim';
 		
 		// 내가 보낸 메세지 -> 오른쪽에 div 생성
 		if (mesData.user == currentuser_session) {
 			var printHTML = "<div id='right'>";
 			printHTML += "<strong>" + mesData.user + "</strong> <br>";
 			printHTML += "<strong>" + mesData.message + "</strong> <br>";
-			printHTML += "<strong>" + mesData.time + "</strong>";
+			printHTML += "<strong>" + t + "</strong>";
 			printHTML += "</div>";
 
 			$('#chatdata').append(printHTML);
@@ -150,7 +156,7 @@
 			var printHTML = "<div id='left'>";
 			printHTML += "<strong>" + mesData.user + "</strong> <br>";
 			printHTML += "<strong>" + mesData.message + "</strong> <br>";
-			printHTML += "<strong>" + mesData.time + "</strong>";
+			printHTML += "<strong>" + t + "</strong>";
 			printHTML += "</div>";
 
 			$('#chatdata').append(printHTML);

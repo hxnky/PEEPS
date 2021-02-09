@@ -53,7 +53,7 @@
 
 			<div class="well" id="chatdata">
 				<!-- User Session Info Hidden -->
-				${m_idx}<input type="hidden" value="${m_idx}" id="sessionuserid">
+				${m_idx}<input type="hidden" value='${m_idx}' id="sessionuserid">
 			</div>
 
 			<footer>
@@ -66,11 +66,10 @@
 				<form method = "post">
 					<div class="send">
 
-						<input type="text" id="message"name="ch_ms" placeholder="Type your message" />
+						<input type="text" id="message" name="ch_ms" placeholder="Type your message" />
 						<input type="submit" id="sendBtn" value="전송" />
 					</div>
 				</form>
-
 
 			</footer>
 		</main>

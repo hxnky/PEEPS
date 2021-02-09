@@ -36,6 +36,9 @@
 		</property>
 	</bean>
 
+	<!-- XML Mapper 인식하게 설정 -->
+	<!-- <property name="mapperLocations" value="com.gnjk.chat.dao.mapper"></property> -->
+
 	<!-- mybatis와 스프링 연동작을 하기위한 SqlsessionFactory == DB연결 및 SQL의 실행을 대한객체 -->
 	<!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
 		<property name="dataSource" ref="dataSource"></property> -->

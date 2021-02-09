@@ -14,7 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 
 	<insert id="insertMessage">
 		insert into CHAT(ch_idx, m_idx, rm_idx, ch_time, ch_ms)
-		value (#{ch_idx}, #{m_idx}, #{rm_idx}, #{ch_time}, #{ch_ms})
+		values (#{ch_idx}, #{m_idx}, #{rm_idx}, #{ch_time}, #{ch_ms})
 	</insert>
 	
 <!-- 	<update id=update" parameterType="project">

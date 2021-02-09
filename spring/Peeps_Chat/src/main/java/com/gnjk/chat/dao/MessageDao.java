@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.gnjk.chat.domain.Message;
 
 //객체를 자동 생성하고 데이터베이스 예외를 스프링 예외로 변환해서 출력하도록 하는 어노테이션
-@Repository
+@Repository	// Dao라고 명시 (Dao를 스프링에서 인식시켜줌)
 public class MessageDao implements IMessageDao {
 	
 	/*
@@ -32,15 +32,15 @@ public class MessageDao implements IMessageDao {
 		// 상수는 대문자로 이름을 만들기
 		// 
 		
-		@Inject
+		@Inject	// 의존 관계를 자동으로 연결(JAVA 제공) -- @autowired(Spring 제공)
 		private SqlSession sqlSession;
 		
-		private static String NAMESPACE = "com.gnjk.chat.dao.mapper.ChatMapper";
+		private static String namespace = "com.gnjk.chat.dao.mapper.ChatMapper";
 	
 		@Override
 		public void insertMessage(Message mes) throws Exception {
 			
-			sqlSession.insert(NAMESPACE+".insertMessage", mes);
+			sqlSession.insert(namespace+".insertMessage", mes);
 			System.out.println("insertMessage 성공");
 		}
 		

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -46,19 +47,20 @@ public class ChattingHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
-		//String friend = (String) session.getAttributes().get("m_idx");
-
-		log(session.getId() + " 연결 성공");
+		// String friend = (String) session.getAttributes().get("m_idx");
+		
 		users.put(session.getId(), session);
 		// 접속한 세션 정보 리스트에 저장 
 		connectedSessionList.add(session);
-
+		
+		log(session.getId() + " 연결 성공");
 		// logger.info(session.getId()+"("+friend +")"+ "님이 접속하였습니다.");  // 채팅 구현할 때는 지우기
 	}
 
 
 	// 메세지 전송 ------------------------ (추가 수정 필요) 
 	// jsp 파일에서 클라이언트가 현재 접속중인 닉네임을 웹소켓을 통해서 서버로 보내면 이 메소드가 실행 
+	// @RequestMapping("/ChattingMapper")
 	@Override
 	protected void handleTextMessage (WebSocketSession session, TextMessage message)  throws Exception {          
 		/*
@@ -102,18 +104,42 @@ public class ChattingHandler extends TextWebSocketHandler {
 		}
 		 */
 
-		Map<String, Object> map = null;
+		 // Map<String, Object> map = null;
+/*
+		
+		//session.getPrincipal().getName() + "||" +
 		Message mes = Message.convertMessage(message.getPayload());
 		System.out.println("1 : " + mes.toString());	// 마지막 줄 message를 mes로 바꿈
-
+		
+		// Date t = new Date();
+		
 		for(WebSocketSession sockSession : connectedSessionList) {
 			map = sockSession.getAttributes();
 
 			Gson gson = new Gson();
 			String msgJson = gson.toJson(message);
 			sockSession.sendMessage(new TextMessage(msgJson));
+			
+		//	mes.setM_idx("kim");
+		//	mes.setRm_idx("nam");
+		//	mes.setCh_time(t);
+		//	mes.setCh_ms(msgJson);
+*/
+		 
+		// String friend = (String) session.getAttributes().get("m_idx");
+		 
+		 Gson gson = new Gson();
+		 Message mes = gson.fromJson(message.getPayload(), Message.class);
+		 
+		 System.out.println("1 : " + mes.toString());
+		 
+		 TextMessage sendmes = new TextMessage(gson.toJson(mes));
+		 
+		 for(WebSocketSession sockSession : connectedSessionList) {
+			 sockSession.sendMessage(sendmes);
+			 
 		}
-
+		// dao.insertMessage(mes);
 	}
 
 	// client 접속 종료 --------------------------
@@ -126,7 +152,6 @@ public class ChattingHandler extends TextWebSocketHandler {
 		log(session.getId() + "연결 종료");
 		// 세션 삭제
 		connectedSessionList.remove(session);
-		users.remove(session.getId());
 	}
 
 	// 전송 오류 메세지 ------------------------------------
@@ -136,5 +161,5 @@ public class ChattingHandler extends TextWebSocketHandler {
 		log(session.getId() + "exception 발생 :" + exception.getMessage());
 
 	}
-
+	
 }
