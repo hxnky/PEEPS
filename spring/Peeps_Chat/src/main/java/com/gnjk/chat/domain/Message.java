@@ -14,15 +14,15 @@ public class Message {
 	// private Timestamp time = new Timestamp(System.currentTimeMillis()); // 채팅시간 
 	private String ch_ms; // 채팅 내용
 	
-/*
+
 	public static Message convertMessage(String source) {
 		Message mes = new Message();
 		Gson gson = new Gson();
 		mes = gson.fromJson(source,  Message.class);
 		return mes;
 	}
-*/
-	
+
+	/*
 	public Message(int ch_idx, String m_idx, String rm_idx, Date ch_time, String ch_ms) {
 		super();
 		this.ch_idx = ch_idx;
@@ -31,6 +31,7 @@ public class Message {
 		this.ch_time = ch_time;
 		this.ch_ms = ch_ms;
 	}
+	*/
 	
 	@Override
 	public String toString() {

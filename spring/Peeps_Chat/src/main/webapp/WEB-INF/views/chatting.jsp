@@ -47,66 +47,54 @@
 	<%-- 
 	<!-- navi-->
 	<%@ include file="/WEB-INF/views/nav.jsp"%>
-
 	<!---------------------------------------->
-
 	<!--chatting-->
 	<%@ include file="/WEB-INF/views/container.jsp"%>
-
  --%>
 </body>
 
 <script type="text/javascript">
-	function getTimeStamp() {
-		var d = new Date();
-		var t = leadingZeros(d.getFullYear(), 4) + '-'
-				// d.getFullYear()를 4자리
-				+ leadingZeros(d.getMonth() + 1, 2) + '-'
-				// d.getMonth()를 1~2자리
-				+ leadingZeros(d.getDate(), 2) + ' ' +
-				leadingZeros(d.getHours(), 2) + ':'
-				+ leadingZeros(d.getMinutes(), 2) + ':'
-				+ leadingZeros(d.getSeconds(), 2);
+	connect();
 
-		return t;
-	}
+	/*   var data = evt.data; // 전달받은 데이터
+	 mesData = JSON.parse(data);
+	 var sessionid = null;
+	 var message = null;
+	 */
 
-	// n을 digits자리로
-	function leadingZeros(n, digits) {
-		var zero = '';
-		n = n.toString();
-
-		// n의 길이가 digits보다 짧(작)으면
-		if (n.length < digits) {
-			for (i = 0; i < digits - n.length; i++)
-				zero += '0';
-		}
-		return zero + n;
-	}
-
-	//websocket을 지정한 URL로 연결
-	var sock = new SockJS("<c:url value="/chat"/>");
 	//websocket 서버에서 메시지를 보내면 자동으로 실행된다.
-	sock.onmessage = onMessage;
+	//sock.onmessage = appendMessage;
 	//websocket 과 연결을 끊고 싶을때 실행하는 메소드
-	sock.onclose = onClose;
+	//sock.onclose = onClose;
+	//websocket을 지정한 URL로 연결
+	function connect() {
+		sock = new SockJS("<c:url value="/chat"/>");
+		sock.onopen = function() {
+			console.log('open');
+		};
 
-	$(document).ready(function() {
-		$("form").submit(function() {
-			console.log('메세지 입력 완료');
-			sendMessage();
-
-			$('#message').val('');
-
-			$('#message').focus();
-			// .focus() -> 버튼이면, 엔터 사용 시, 클릭 효과
-
-			return false;
-		});
-	});
-
-	function sendMessage() {
+		sock.onmessage = function(evt) {
+			var data = evt.data;
+			console.log(data);
+			var obj = JSON.parse(data);
+			console.log(obj);
+			appendMessage(obj.ch_ms);
+		};
 		
+		sock.onclose = onClose;
+		/*   
+		   sock.onopen = function() {
+		      console.log('console open');
+		   };
+		   sock.onclose = function() {
+		      appendMessage("연결 끊김");
+		      console.log('consloe close');
+		   }
+		 */
+	}
+
+	function send() {
+		/*
 		var mes = {
 			num : '${ch_idx}',
 			user : '${m_idx}',
@@ -114,53 +102,117 @@
 			time : '${ch_time}', // Date.now(),
 			message : $("#message").val()
 		};
-		
+		 */
+
+		var mes = $("#message").val();
+		if (mes != "") {
+			message = {};
+			message.ch_ms = $("#message").val()
+			message.ch_idx = '${ch_idx}'
+			message.rm_idx = '${rm_idx}'
+			message.m_idx = '${m_idx}'
+			message.ch_time = '${ch_time}'
+		}
 		// user = 'kim';
 		// to = 'nam';
-		
-		sock.send(JSON.stringify(mes));
-		console.log(JSON.stringify(mes));
+
+		sock.send(JSON.stringify(message));
+		$("#message").val("");
+		console.log(JSON.stringify(message));
 		console.log('위 메세지 소켓에 전송');
 	}
 
-	//evt 파라미터는 websocket이 보내준 데이터다.
-	function onMessage(evt) { // 변수 안에 function자체를 넣음.
-		var data = evt.data; // 전달받은 데이터
-		mesData = JSON.parse(data);
-		var sessionid = null;
-		var message = null;
+	function getTimeStamp() {
+		var d = new Date();
+		var t = leadingZeros(d.getFullYear(), 4) + '-'
+		// d.getFullYear()를 4자리
+		+ leadingZeros(d.getMonth() + 1, 2) + '-'
+		// d.getMonth()를 1~2자리
+		+ leadingZeros(d.getDate(), 2) + ' ' + leadingZeros(d.getHours(), 2)
+				+ ':' + leadingZeros(d.getMinutes(), 2) + ':'
+				+ leadingZeros(d.getSeconds(), 2);
+		return t;
+	}
+	// n을 digits자리로
+	function leadingZeros(n, digits) {
 
-		var t = getTimeStamp(mesData.time);
-		
-		// mesData.user = 'kim';
-		// mesData.to = 'nam';
-		
-		console.log('mesData' + ' : ' + mesData.message);
-		// current session id
-		var currentuser_session = $('#sessionuserid').val();	// value='${m_idx}' 
+		var zero = '';
+		n = n.toString();
+		// n의 길이가 digits보다 짧(작)으면
+		if (n.length < digits) {
+			for (i = 0; i < digits - n.length; i++)
+				zero += '0';
+		}
+		return zero + n;
 
-		// currentuser_session = 'kim';
-		
-		// 내가 보낸 메세지 -> 오른쪽에 div 생성
-		if (mesData.user == currentuser_session) {
-			var printHTML = "<div id='right'>";
-			printHTML += "<strong>" + mesData.user + "</strong> <br>";
-			printHTML += "<strong>" + mesData.message + "</strong> <br>";
-			printHTML += "<strong>" + t + "</strong>";
-			printHTML += "</div>";
+	}
+	//websocket을 지정한 URL로 연결
+	//var sock = new SockJS("<c:url value="/chat"/>");
+	//websocket 서버에서 메시지를 보내면 자동으로 실행된다.
+	//sock.onmessage = onMessage;
+	//websocket 과 연결을 끊고 싶을때 실행하는 메소드
+	//sock.onclose = onClose;
+	/*
+	$(document).ready(function() {
+		$("form").submit(function() {
+			console.log('메세지 입력 완료');
+			sendMessage();
+			$('#message').val('');
+			$('#message').focus();
+			// .focus() -> 버튼이면, 엔터 사용 시, 클릭 효과
+			return false;
+		});
+	});
+	 */
 
-			$('#chatdata').append(printHTML);
-			// printHTML을 chatdata 맨 밑에 추가
+	function appendMessage(mes) { // 변수 안에 function자체를 넣음.
+
+		if (mes == "") {
+			return false;
 		} else {
-			// 상대방이 보낸 메세지 -> 왼쪽에 div 생성
-			var printHTML = "<div id='left'>";
-			printHTML += "<strong>" + mesData.user + "</strong> <br>";
-			printHTML += "<strong>" + mesData.message + "</strong> <br>";
-			printHTML += "<strong>" + t + "</strong>";
-			printHTML += "</div>";
+			var t = getTimeStamp();
 
-			$('#chatdata').append(printHTML);
-			// printHTML을 chatdata 맨 밑에 추가
+			console.log('mes' + ' : ' + mes.message);
+			// current session id
+			//		var currentuser_session = $('#sessionuserid').val(); // value='${m_idx}' 
+
+			// currentuser_session = 'kim';
+
+			// current session id
+			var currentuser_session = $('#sessionuserid').val(); // value='' 
+
+			// currentuser_session = 'kim';
+
+			// 내가 보낸 메세지 -> 오른쪽에 div 생성
+			if (mesData.user == currentuser_session) {
+				var printHTML = "<div id='right'>";
+				printHTML += "<strong> ${m_idx} </strong> <br>";
+				printHTML += "<strong>" + mes + "</strong> <br>";
+				printHTML += "<strong>" + t + "</strong>";
+				printHTML += "</div>";
+
+				$('#chatdata').append(printHTML);
+				// printHTML을 chatdata 맨 밑에 추가
+			} else {
+				// 상대방이 보낸 메세지 -> 왼쪽에 div 생성
+				var printHTML = "<div id='left'>";
+				printHTML += "<strong> ${m_idx} </strong> <br>";
+				printHTML += "<strong>" + mes + "</strong> <br>";
+				printHTML += "<strong>" + t + "</strong>";
+				printHTML += "</div>";
+
+				$('#chatdata').append(printHTML);
+				// printHTML을 chatdata 맨 밑에 추가
+			}
+
+			/*   var data = evt.data; // 전달받은 데이터
+			   mesData = JSON.parse(data);
+			   var sessionid = null;
+			   var message = null;
+			 */
+
+			// mesData.user = 'kim';
+			// mesData.to = 'nam';
 		}
 
 		console.log('소켓이 보낸 메세지' + data);
@@ -168,8 +220,30 @@
 		/* sock.close(); */
 	}
 
+	$(document).ready(function() {
+		$('#message').keypress(function(event) {
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if (keycode == '13') {
+				send();
+			}
+			event.stopPropagation();
+		});
+
+		$('#sendBtn').click(function() {
+			send();
+		});/* $('#enterBtn').click(function() { connect(); }); $('#exitBtn').click(function() { disconnect(); }); */
+	});
+
 	function onClose(evt) {
-		$("#data").append("연결 끊김");
-	}
+		appendMessage("연결 끊김");
+		console.log('consloe close');
+	};
+	/*
+	sock.onclose = onClose;
+	function onClose(evt) {
+		appendMessage("연결을 끊었습니다.");
+		console.log('close');
+	};
+	 */
 </script>
 </html>

@@ -34,13 +34,13 @@ public class ChattingHandler extends TextWebSocketHandler {
 	}
 	// session 저장 (연결된 세션 리스트)
 	private List<WebSocketSession> connectedSessionList = new ArrayList<WebSocketSession>();
-/*	
+	/*	
 	private List<WebSocketSession> connectedSessionList;
 	public ChattingHandler() {
 		connectedSessionList = new ArrayList<WebSocketSession>();
 	}
-*/
-	
+	 */
+
 	private Map<String, WebSocketSession> users = new ConcurrentHashMap<String, WebSocketSession>();
 
 	//client 접속 -------------------------- 
@@ -48,11 +48,11 @@ public class ChattingHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
 		// String friend = (String) session.getAttributes().get("m_idx");
-		
+
 		users.put(session.getId(), session);
 		// 접속한 세션 정보 리스트에 저장 
 		connectedSessionList.add(session);
-		
+
 		log(session.getId() + " 연결 성공");
 		// logger.info(session.getId()+"("+friend +")"+ "님이 접속하였습니다.");  // 채팅 구현할 때는 지우기
 	}
@@ -65,24 +65,18 @@ public class ChattingHandler extends TextWebSocketHandler {
 	protected void handleTextMessage (WebSocketSession session, TextMessage message)  throws Exception {          
 		/*
 		// Dao 클래스 필요
-
 		//System.out.println(message.getPayload()); // 나중에 삭제 
-
 		String friend = (String) session.getAttributes().get("m_idx");
-
 		// Json -> java 객체 
 		Gson gson = new Gson();
 		// 현재 접속중인 닉네임은 message.getPayload()라는 함수를 통해 메세지에 담긴 텍스트값을 얻을 수 있다.
 		Message mes = gson.fromJson( message.getPayload(), Message.class);
 		System.out.println(mes);
-
 		// 전달 메세지_ 메세지객체 -> Json 
 		TextMessage sendmessge = new TextMessage(gson.toJson(mes));
-
 		// 메세지 보내기 
 		for(WebSocketSession sockSession : connectedSessionList) {
 			sockSession.sendMessage(sendmessge);
-
 		}
 		 */
 		/*
@@ -91,7 +85,6 @@ public class ChattingHandler extends TextWebSocketHandler {
 		Message mes = gson.fromJson( message.getPayload(), Message.class);
 		System.out.println(mes.toString());
 		TextMessage sendmessge = new TextMessage(gson.toJson(mes));
-
 		sockSession.sendMessage(sendmessge);
 		 */	
 		/*
@@ -104,41 +97,46 @@ public class ChattingHandler extends TextWebSocketHandler {
 		}
 		 */
 
-		 // Map<String, Object> map = null;
-/*
-		
+		 Map<String, Object> map = null;
+		/*
+
 		//session.getPrincipal().getName() + "||" +
 		Message mes = Message.convertMessage(message.getPayload());
 		System.out.println("1 : " + mes.toString());	// 마지막 줄 message를 mes로 바꿈
-		
+
 		// Date t = new Date();
-		
+
 		for(WebSocketSession sockSession : connectedSessionList) {
 			map = sockSession.getAttributes();
-
 			Gson gson = new Gson();
 			String msgJson = gson.toJson(message);
 			sockSession.sendMessage(new TextMessage(msgJson));
-			
+
 		//	mes.setM_idx("kim");
 		//	mes.setRm_idx("nam");
 		//	mes.setCh_time(t);
 		//	mes.setCh_ms(msgJson);
-*/
-		 
+		 */
+
 		// String friend = (String) session.getAttributes().get("m_idx");
-		 
-		 Gson gson = new Gson();
-		 Message mes = gson.fromJson(message.getPayload(), Message.class);
-		 
-		 System.out.println("1 : " + mes.toString());
-		 
-		 TextMessage sendmes = new TextMessage(gson.toJson(mes));
-		 
-		 for(WebSocketSession sockSession : connectedSessionList) {
-			 sockSession.sendMessage(sendmes);
-			 
+
+		// Gson gson = new Gson();
+		// Message mes = gson.fromJson(message.getPayload(), Message.class);
+
+		Message mes = Message.convertMessage(message.getPayload());
+		System.out.println("1 : " + mes.toString());
+
+		for(WebSocketSession sockSession : connectedSessionList) {
+			map = sockSession.getAttributes();
+			Gson gson = new Gson();
+			String msgJson = gson.toJson(message);
+			sockSession.sendMessage(new TextMessage(msgJson));
 		}
+		// TextMessage sendmes = new TextMessage(gson.toJson(mes));
+
+		// for(WebSocketSession sockSession : connectedSessionList) {
+		//	sockSession.sendMessage(sendmes);
+		// }
 		// dao.insertMessage(mes);
 	}
 
@@ -161,5 +159,5 @@ public class ChattingHandler extends TextWebSocketHandler {
 		log(session.getId() + "exception 발생 :" + exception.getMessage());
 
 	}
-	
+
 }
