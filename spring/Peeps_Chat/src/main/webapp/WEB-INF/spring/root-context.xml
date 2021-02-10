@@ -20,38 +20,6 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="com.mysql.cj.jdbc.Driver"></property>
-		<property name="url"
-			value="jdbc:mysql://127.0.0.1:3306/peeps?serverTimezone=Asia/Seoul"></property>
-		<property name="username" value="root"></property>
-		<property name="password" value="root"></property>
-	</bean>
-
-	<bean id="sqlSessionFactory"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="configuration">
-			<bean class="org.apache.ibatis.session.Configuration">
-				<property name="mapUnderscoreToCamelCase" value="true" />
-			</bean>
-		</property>
-	</bean>
-
-	<!-- XML Mapper 인식하게 설정 -->
-	<!-- <property name="mapperLocations" value="com.gnjk.chat.dao.mapper"></property> -->
-
-	<!-- mybatis와 스프링 연동작을 하기위한 SqlsessionFactory == DB연결 및 SQL의 실행을 대한객체 -->
-	<!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
-		<property name="dataSource" ref="dataSource"></property> -->
-	<!-- mybatis-config.xml이 스프링 시작될때 같이 실행되도록 설정하기 -->
-	<!-- <property name="configLocation" value="classpath:/mybatis-config.xml"></property> 
-		<property name="mapperLocations" value="classpath:/com/gnjk/chat/dao/mapper/*.xml" 
-		/> </bean> -->
-
-	<bean id="sqlSession" name="sqlSession"
-		class="org.mybatis.spring.SqlSessionTemplate"
-		destroy-method="clearCache">
-		<constructor-arg name="sqlSessionFactory"
-			ref="sqlSessionFactory" />
 	</bean>
 
 </beans>
