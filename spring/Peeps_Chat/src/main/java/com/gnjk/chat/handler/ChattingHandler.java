@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -20,6 +23,8 @@ public class ChattingHandler extends TextWebSocketHandler {
 		System.out.println(new Date() + " : " +logmsg);
 	}
 
+	private static final Logger logger = LoggerFactory.getLogger(ChattingHandler.class);
+	
 	private List<WebSocketSession> connectedSessionList;
 	public ChattingHandler() {
 		connectedSessionList = new ArrayList<WebSocketSession>();
@@ -35,6 +40,8 @@ public class ChattingHandler extends TextWebSocketHandler {
 		users.put(chatMember, session);
 		connectedSessionList.add(session);
 
+		logger.info("{} 연결되었습니다.", session.getId()+":"+chatMember);
+		
 		log(session.getId() + " getId() 연결 성공 ");
 		
 	}
@@ -43,6 +50,8 @@ public class ChattingHandler extends TextWebSocketHandler {
 	protected void handleTextMessage (WebSocketSession session, TextMessage message) throws Exception {          
 		
 		String chatMember = (String) session.getAttributes().get("m_idx");
+		
+		logger.info("{}로 부터 {}를 전달 받았습니다.", chatMember, message.getPayload());
 		
 		 Gson gson = new Gson();
 		 Message mes = gson.fromJson(message.getPayload(), Message.class);
@@ -63,6 +72,9 @@ public class ChattingHandler extends TextWebSocketHandler {
 		
 		connectedSessionList.remove(session);
 		users.remove(session.getId());
+		
+		logger.info("{} 연결이 끊김", session.getId()+chatMember);
+		System.out.println("채팅 퇴장 : " + chatMember);
 	}
 	
 	@Override

@@ -75,7 +75,7 @@
 	function sendMessage() {
 
 		var mes = {
-			ch_idx : 'ch_idx',
+			ch_idx : '1',
 			m_idx : '${m_idx}',
 			rm_idx : 'rm_idx',
 			ch_ms : $("#message").val(),
