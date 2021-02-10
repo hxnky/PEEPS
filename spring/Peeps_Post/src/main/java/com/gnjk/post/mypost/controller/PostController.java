@@ -56,6 +56,11 @@ public class PostController {
 	}
 	
 	// 게시글 목록페이지
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String postList() {
+		
+		return "/mypost/postList";
+	}
 	
 	// 게시글 조회
 	// TEST

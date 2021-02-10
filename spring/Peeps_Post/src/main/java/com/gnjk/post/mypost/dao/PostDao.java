@@ -14,5 +14,5 @@ public interface PostDao {
 	
 	// 게시글 파일 등록
 	int insertFiles(PostFile postfile);
-
+	
 }

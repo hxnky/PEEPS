@@ -53,8 +53,8 @@ public class PostWriteService {
 		String newFileName = null;
 		File newFile = null;
 		
-		System.out.println("확인용: "+request.getFiles("postformfile").size());
-		System.out.println("확인용: "+request.getFiles("postformfile").get(0).getSize());
+//		System.out.println("확인용: "+request.getFiles("postformfile").size());
+//		System.out.println("확인용: "+request.getFiles("postformfile").get(0).getSize());
 		
 		
 		if(
@@ -63,6 +63,7 @@ public class PostWriteService {
 				request.getFiles("postformfile").get(0).getSize() > 0
 				&& postResult > 0
 				) {
+			
 			System.out.println("!!!파일 업로드 if구문 진입");
 			List<MultipartFile> postfileList = request.getFiles("postformfile");
 			
@@ -74,14 +75,19 @@ public class PostWriteService {
 			for (MultipartFile mf : postfileList) {
 				
 				System.out.println("멤버idx : "+post.getMember_idx());
-				newFileName = post.getMember_idx()
-						+ post.getP_idx()	// 방금 insert된 게시글 idx
-						+ mf.getOriginalFilename()
-						+ System.currentTimeMillis();
+				newFileName = System.currentTimeMillis()
+//						+ post.getMember_idx()
+//						+ post.getP_idx()	// 방금 insert된 게시글 idx
+						+ mf.getOriginalFilename();
 				
-				if(newFileName == post.getP_thumbnail()) {
+				String nfnSubstr = newFileName.substring(13);
+				System.out.println("nfnSubstr : "+nfnSubstr);
+				
+				if(nfnSubstr.equals(post.getP_thumbnail())) {
 					// 뷰페이지에서 받아온 썸네일 파일 이름과 같으면
-					// post db table의 썸네일 컬럼에 업데이트
+					post.setP_thumbnail(newFileName);
+					System.out.println("썸네일 파일 이름 : "+post.getP_thumbnail());
+					
 				}
 				
 				try {
@@ -105,7 +111,6 @@ public class PostWriteService {
 					}
 				}
 			} // foreach end
-			
 		} 
 		
 		return postResult;
