@@ -1,130 +1,240 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html>
-<html>
+<html lang="">
+
 <head>
-<meta charset="UTF-8">
-<link rel="apple-touch-icon" sizes="76x76"
-	href="resources/img/apple-icon.png">
-<link rel="icon" type="image/png" href="resources/img/favicon.png">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>PEEPS 비밀번호 찾기 결과</title>
-<meta
-	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
-	name='viewport' />
-<meta name="viewport" content="width=device-width" />
-
-<!--     Fonts and icons     -->
-<link
-	href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css"
-	rel="stylesheet">
-
-<!-- CSS Files -->
-<link href="<c:url value="/resources/css/bootstrap.min.css" />"
-	rel="stylesheet">
-<link href="<c:url value="/resources/css/gsdk-bootstrap-wizard.css"/>"
-	rel="stylesheet" />
-
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="<c:url value="/resources/css/demo.css"/>" rel="stylesheet" />
-<link href="<c:url value="/resources/css/reg.css"/>" rel="stylesheet" />
-</head>
-<style>
-/*21.02.01 회원가입 확인 css 추가*/
-.contents {
-	margin: 30px auto;
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title></title>
+<style type="text/css">
+nav ul {
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 60px;
+	width: 100%;
+	background-color: #F5E978;
+	padding: 0px;
+	position: fixed;
+	z-index: 2;
+	list-style-type: none;
 }
 
-.content {
-	width: 500px;
+.icon {
+	margin: 0px;
+	display: inline-flex;
+	justify-content: space-between;
+}
+
+nav ul li {
+	margin: auto 15px;
+}
+
+.center {
+	margin-top: -18px;
+}
+
+.right a {
+	padding: 5px;
+	margin-top: 20px;
+}
+
+input[type="search"] {
+	padding-left: 10px;
+	float: left;
+	height: 20px;
+	border-radius: 30px;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border: none;
+}
+
+nav ul li button {
+	background-color: #EEF0ED;
+	height: 20px;
+	border: none;
+	border-radius: 30px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+body {
+	background-color: #fcf9f6;
+}
+
+#total_wrap {
+	margin: 150px 0 0 500px;
+}
+
+#profile {
+	width: 100px;
+	height: 100px;
+}
+
+#follow {
+	height: 40px;
+	width: 100px;
+	background: #F5E978;
+	border: 0.2px solid #CCC;
+	border-radius: 5px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#follow:hover {
+	cursor: pointer;
+}
+
+#unfollow {
+	height: 40px;
+	width: 100px;
+	background: #CCC;
+	border: 0.2px solid #CCC;
+	border-radius: 5px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#unfollow:hover {
+	cursor: pointer;
+}
+
+#find_peeps {
+	width: 900px;
+	height: 100px;
 	text-align: center;
-	margin: 30px auto;
+	margin-top: 10px;
+	/*마지막으로 출력되는 리스트만 이 속성이 없어야함*/
+	border-bottom: 0.2px solid #CCC;
+}
+
+#id {
+	font-size: 30px;
+	font-weight: bold;
+}
+
+#name {
+	font-size: 20px;
+	color: #DDD;
+}
+
+a:link {
+	color: black;
+	text-decoration: none;
+}
+
+a:visited {
+	color: black;
+	text-decoration: none;
 }
 </style>
+</head>
+
 <body>
-	<div class="image-container set-full-height"
-		style="background-color: #fcf9f6">
-		<div class="logo-container">
-			<!-- 로고 넣기 -->
-			<a href="<c:url value = "/" />"><img id="logo"
-				src="${pageContext.request.contextPath}/resources/images/plus.png">
-			</a>
-		</div>
+	<div id="nav">
+		<nav>
+			<ul class="icon">
 
-		<!--   Big container   -->
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2">
+				<li class="left"><span><input type="search" id="search"
+						placeholder="검색" required="required">
+						<button id="keyword" type="submit">
+							<img
+								src="<c:url value="/resources/images/icon/navi/search.png"/>">
 
-					<!--      Wizard container        -->
-					<div class="wizard-container">
+						</button> </span></li>
 
-						<div class="card wizard-card" id="wizardProfile">
-							<div class="wizard-header">
-								<h3>
-									<b>PEEPS</b> <br>
-								</h3>
-							</div>
+				<!-- 				<li class="center"><a id="Logo"><img -->
+				<!-- 						src="/hyo0/icon/Logo.png"></a></li> -->
 
-							<!-- nav css 수정하기 -->
-							<div>
-								<ul>
-									<li id="top_nav">회원가입 확인</li>
-								</ul>
+				<li class="right"><a id="Home" href="#"><img
+						src="<c:url value="/resources/images/icon/navi/023-home.png"/>"></a>
+					<a id="Content" href="#"><img
+						src="<c:url value="/resources/images/icon/navi/Content.png"/>"></a>
+					<a id="Alarm" href="#"><img
+						src="<c:url value="/resources/images/icon/navi/008-notification.png"/>"></a>
+					<a id="Chat" href="#"><img
+						src="<c:url value="/resources/images/icon/navi/050-wechat.png"/>"></a>
+					<a id="MyPage" href="#"> <c:set var="loginType"
+							value="${loginType }" /> <c:choose>
+							<c:when test="${loginType eq 'email' }">
 
-							</div>
-							<div class="contents">
-								<div class="content">
+								<img id="MyPage_img"
+									src="<c:url value="/fileupload/${peeps.m_photo}"/>">
+							</c:when>
+							<c:when test="${loginType ne 'email' }">
+								<img id="MyPage_img" src="<c:url value="${peeps.m_photo}"/>">
 
-									<h2>{$peeps.id}님!</h2>
+							</c:when>
 
-<%-- 									<c:if test="${result != null}"> --%>
-										<h3>
-											<br> 임시 비밀번호가 전송되었습니다. <br> 이메일을 확인해주세요 💛
-										</h3>
+						</c:choose>
+				</a></li>
+			</ul>
 
-										<button id="login_btn" type="button"
-											onclick="location.href='${pageContext.request.contextPath}' ">로그인 하기</button>
-<%-- 									</c:if> --%>
+		</nav>
 
-<%-- 									<c:if test="${result == null}"> --%>
-<!-- 										<br> -->
-<!--                                         	회원가입이 정상 처리되지 않았습니다. <br> -->
-<!--                                         	다시 시도해주세요. -->
-<%--                                     </c:if> --%>
-
-								</div>
-							</div>
-
-						</div>
-					</div>
-					<!-- wizard container -->
-				</div>
-			</div>
-			<!-- end row -->
-		</div>
-		<!--  big container -->
-
-
-		<div class="footer">
-			PEEPS<i class="fa fa-heart heart"></i>GNJKK
-		</div>
 
 	</div>
+	<!-- 네비 바 -->
+
+	<div id="total_wrap">
+		<div>
+			<table id="find_peeps">
+				<c:forEach items="${peepslist}" var="peep" varStatus="i">
+					<tr>
+						<td rowspan="2"><a href="#"> <c:set var="loginType"
+									value="${peep.loginType}" /> <c:choose>
+									<c:when test="${loginType eq 'email' }">
+										<img id="profile"
+											src="<c:url value="/fileupload/${peep.m_photo}"/>">
+									</c:when>
+									<c:when test="${loginType ne 'email' }">
+										<img id="profile" src="<c:url value="${peep.m_photo}"/>">
+									</c:when>
+
+								</c:choose>
+						</a></td>
+						<td id="id"><a href="#">{peep.id}</a></td>
+						<td rowspan="2"><button id="follow">팔로우</button>
+							<button id="unfollow">언팔로우</button></td>
+					</tr>
+					<tr>
+						<td id="name"><a href="#">{peep.name}</a></td>
+						<td>${peep.peepslist }</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+	</div>
+
+
 
 </body>
-<!--   Core JS Files   -->
-<script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
-	type="text/javascript"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"
-	type="text/javascript"></script>
-<script src="<c:url value="/resources/js/jquery.bootstrap.wizard.js"/>"
-	type="text/javascript"></script>
+<script>
+$("#keyword")
+.click(
+		function() {
 
-<!--  Plugin for the Wizard -->
-<script src="<c:url value="/resources/js/gsdk-bootstrap-wizard.js"/>"></script>
+			var keyword = $('#search').val();
 
-<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
-<script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
+			console.log(keyword);
+			
+			$.ajax({
+				url : '${pageContext.request.contextPath}/user/finduser?keyword='+ keyword,
+				type : 'get',
+				async : false,
+				success : function(data) {
+					location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
+				},
+				error : function() {
+					console.log("실패,,,,");
+				}
+			});
+
+		});
+
+</script>
 </html>

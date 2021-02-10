@@ -1,5 +1,6 @@
 package com.gnjk.peeps.domain;
 
+import java.util.List;
 import java.util.Random;
 
 import lombok.Getter;
@@ -21,6 +22,9 @@ public class Peeps {
 
 	// 21.02.04 소셜 로그인 타입 추가
 	private String loginType;
+
+	// 21.02.11 리스트 출력
+	private List<Peeps> peepslist;
 
 	@Override
 	public String toString() {
@@ -68,7 +72,7 @@ public class Peeps {
 		this.code = new String(sb);
 
 	}
-	
+
 	private void getRandomid() {
 		Random r = new Random(System.nanoTime());
 		// 난수 문자열 10자리
@@ -86,7 +90,7 @@ public class Peeps {
 		System.out.println("난수 생성 : " + sb);
 		this.id = new String(sb);
 	}
-	
+
 	private void getRandompw() {
 		Random r = new Random(System.nanoTime());
 		// 난수 문자열 10자리

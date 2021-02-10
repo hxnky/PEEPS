@@ -25,8 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 소셜 로그인 시 회원 이메일이 있다면 로그인 타입이 일치하는지 확인 -->
 	<select id="selectLoginTypeByEmailCount" resultType="String">
-		select
-		loginType from member where email=#{email}
+		select loginType from member where email=#{email}
 	</select>
 
 
@@ -111,9 +110,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update member set password= #{password} where
 		email=#{email}
 	</update>
-	
+
 	<!-- 회원 정보 삭제 -->
 	<delete id="deletePeeps">
-		delete from member where email=#{email} and password=#{password}
+		delete from member where email=#{email} and
+		password=#{password}
 	</delete>
+
+	<!-- 해당 단어가 들어가는 유저 검색 -->
+	<select id="searchMember" resultMap="memberResult">
+		select * from member
+		<where>
+			<include refid="searchId" />
+			<include refid="searchName" />
+		</where>
+	</select>
+
+	<!-- 아이디와 이름 해당하면 다 검색 -->
+	<sql id="searchId">
+		or id like concat('%',#{keyword},'%')
+	</sql>
+
+	<sql id="searchName">
+		or name like concat('%',#{keyword},'%')
+	</sql>
+
 </mapper>

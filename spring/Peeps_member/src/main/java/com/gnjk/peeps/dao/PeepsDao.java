@@ -1,5 +1,7 @@
 package com.gnjk.peeps.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.gnjk.peeps.domain.Peeps;
@@ -36,4 +38,6 @@ public interface PeepsDao {
 	int updatePassword(@Param("email") String email, @Param("password") String password);
 	// 회원 정보 삭제
 	int deletePeeps(@Param("email") String email, @Param("password") String password);
+	// 일치하는 회원 정보 출력
+	List<Peeps> searchMember(String keyword);
 }

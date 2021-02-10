@@ -174,14 +174,13 @@ nav ul li a img {
 		<nav>
 			<ul class="icon">
 				<!--아이콘 경로 바꾸기 -->
-				<li class="left"><span><input type="search"
-						placeholder="검색"> <a href="/user/find_id">
-							<button type="submit">
-								<img
-									src="<c:url value="/resources/images/icon/navi/search.png"/>">
+				<li class="left"><span><input type="search" id="search"
+						placeholder="검색" required="required">
+						<button id="keyword" type="submit">
+							<img
+								src="<c:url value="/resources/images/icon/navi/search.png"/>">
 
-							</button>
-					</a></span></li>
+						</button> </span></li>
 				<!-- 				사진 크기 커서 주석처리 해놓음 -->
 				<!-- 								<li class="center"><a id="Logo"><img -->
 				<%-- 										src="<c:url value="/resources/images/plus.png"/>"></a></li> --%>
@@ -204,7 +203,7 @@ nav ul li a img {
 				<c:when test="${loginType ne 'email' }">
 					<img id="MyPage_img" src="<c:url value="${peeps.m_photo}"/>">
 					</a>
-					</li>
+				</li>
 				</c:when>
 
 				</c:choose>
@@ -379,7 +378,6 @@ $(function() {
 	
 	console.log(email);
 
-	// 페이지 이동할때 email에 값이 안들어감 --> result는 제대로 나옴
 	if(${result} == 1){
 		alert("정보가 수정되었습니다.");
 		location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
@@ -391,8 +389,30 @@ $(function() {
 	}
 	
 });
+</script>
 
-	
+<script>
+$("#keyword")
+.click(
+		function() {
+
+			var keyword = $('#search').val();
+
+			console.log(keyword);
+			
+			$.ajax({
+				url : '${pageContext.request.contextPath}/user/finduser?keyword='+ keyword,
+				type : 'get',
+				async : false,
+				success : function(data) {
+					location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
+				},
+				error : function() {
+					console.log("실패,,,,");
+				}
+			});
+
+		});
 
 </script>
 
