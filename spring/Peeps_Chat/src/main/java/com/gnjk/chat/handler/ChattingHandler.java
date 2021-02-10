@@ -9,9 +9,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -22,6 +19,8 @@ import com.gnjk.chat.domain.Message;
 import com.google.gson.Gson;
 
 // TextWebSocketHandler를 상속받은 핸들러 클래스는 자동으로 아래 3개의 메소드가 오버라이드 됨.
+
+//@Component
 public class ChattingHandler extends TextWebSocketHandler {
 
 	@Inject
@@ -33,13 +32,12 @@ public class ChattingHandler extends TextWebSocketHandler {
 		System.out.println(new Date() + " : " +logmsg);
 	}
 	// session 저장 (연결된 세션 리스트)
-	private List<WebSocketSession> connectedSessionList = new ArrayList<WebSocketSession>();
-	/*	
+	// private List<WebSocketSession> connectedSessionList = new ArrayList<WebSocketSession>();
+
 	private List<WebSocketSession> connectedSessionList;
 	public ChattingHandler() {
 		connectedSessionList = new ArrayList<WebSocketSession>();
 	}
-	 */
 
 	private Map<String, WebSocketSession> users = new ConcurrentHashMap<String, WebSocketSession>();
 
@@ -55,6 +53,8 @@ public class ChattingHandler extends TextWebSocketHandler {
 
 		log(session.getId() + " 연결 성공");
 		// logger.info(session.getId()+"("+friend +")"+ "님이 접속하였습니다.");  // 채팅 구현할 때는 지우기
+
+		// session.close();
 	}
 
 
@@ -62,7 +62,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 	// jsp 파일에서 클라이언트가 현재 접속중인 닉네임을 웹소켓을 통해서 서버로 보내면 이 메소드가 실행 
 	// @RequestMapping("/ChattingMapper")
 	@Override
-	protected void handleTextMessage (WebSocketSession session, TextMessage message)  throws Exception {          
+	protected void handleTextMessage (WebSocketSession session, TextMessage message) throws Exception {          
 		/*
 		// Dao 클래스 필요
 		//System.out.println(message.getPayload()); // 나중에 삭제 
@@ -97,7 +97,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 		}
 		 */
 
-		 Map<String, Object> map = null;
+		Map<String, Object> map = null;
 		/*
 
 		//session.getPrincipal().getName() + "||" +
@@ -124,7 +124,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 		// Message mes = gson.fromJson(message.getPayload(), Message.class);
 
 		Message mes = Message.convertMessage(message.getPayload());
-		System.out.println("1 : " + mes.toString());
+		System.out.println("1 : " + mes);
 
 		for(WebSocketSession sockSession : connectedSessionList) {
 			map = sockSession.getAttributes();
@@ -150,13 +150,15 @@ public class ChattingHandler extends TextWebSocketHandler {
 		log(session.getId() + "연결 종료");
 		// 세션 삭제
 		connectedSessionList.remove(session);
+		users.remove(session.getId());
+		session.close();
 	}
 
 	// 전송 오류 메세지 ------------------------------------
 	@Override
-	public void handleTransportError (WebSocketSession session, Throwable exception)throws Exception {
+	public void handleTransportError (WebSocketSession session, Throwable exception) throws Exception {
 
-		log(session.getId() + "exception 발생 :" + exception.getMessage());
+		log(session.getId() + "exception 발생 : " + exception.getMessage());
 
 	}
 
