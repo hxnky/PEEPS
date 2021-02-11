@@ -2,6 +2,8 @@ package com.gnjk.peeps.Service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,21 +19,17 @@ public class FindUserService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public List<Peeps> SearchPeeps(String keyword) {
+	public List<Peeps> SearchPeeps(String keyword, HttpSession session) {
 
 		dao = template.getMapper(PeepsDao.class);
-		
-		System.out.println("키워드"+keyword);
+
+		System.out.println("키워드" + keyword);
 
 		List<Peeps> peepslist = dao.searchMember(keyword);
-		
+
 		System.out.println(peepslist);
-		
-		
-//		model.addAttribute("s_m_photo", peeps.getM_photo());
-//		model.addAttribute("s_id", peeps.getId());
-//		model.addAttribute("s_name", peeps.getName());
-//		model.addAttribute("s_loginType", peeps.getLoginType());
+
+		//session.setAttribute("peepslist", peepslist);
 
 		return peepslist;
 	}

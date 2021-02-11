@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -180,7 +179,7 @@ nav ul li a img {
 							<img
 								src="<c:url value="/resources/images/icon/navi/search.png"/>">
 
-						</button> </span></li>
+						</button></span></li>
 				<!-- 				사진 크기 커서 주석처리 해놓음 -->
 				<!-- 								<li class="center"><a id="Logo"><img -->
 				<%-- 										src="<c:url value="/resources/images/plus.png"/>"></a></li> --%>
@@ -198,15 +197,15 @@ nav ul li a img {
 							<c:when test="${loginType eq 'email' }">
 
 								<img id="MyPage_img"
-									src="<c:url value="/fileupload/${peeps.m_photo}"/>"></a></li>
-				</c:when>
-				<c:when test="${loginType ne 'email' }">
-					<img id="MyPage_img" src="<c:url value="${peeps.m_photo}"/>">
-					</a>
-				</li>
-				</c:when>
+									src="<c:url value="/fileupload/${peeps.m_photo}"/>">
+							</c:when>
+							<c:when test="${loginType ne 'email' }">
+								<img id="MyPage_img" src="<c:url value="${peeps.m_photo}"/>">
 
-				</c:choose>
+							</c:when>
+
+						</c:choose>
+				</a></li>
 			</ul>
 
 		</nav>
@@ -230,7 +229,7 @@ nav ul li a img {
 				<table id="edit_table">
 					<tr>
 						<td id="table_left" rowspan="3"><c:set var="loginType"
-								value="${loginType }" /> <c:choose>
+								value="${loginType}" /> <c:choose>
 								<c:when test="${loginType eq 'email' }">
 									<img id="profile"
 										src="<c:url value="/fileupload/${peeps.m_photo}"/>">
@@ -404,6 +403,12 @@ $("#keyword")
 				url : '${pageContext.request.contextPath}/user/finduser?keyword='+ keyword,
 				type : 'get',
 				async : false,
+				data : {
+					"peepslist" : "${peepslist}",
+					"s_name" : "${name}",
+					"s_m_photo" : "${m_photo}",
+					"s_loginType" : "${loginType}"
+				},
 				success : function(data) {
 					location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
 				},

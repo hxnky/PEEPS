@@ -62,6 +62,12 @@ nav ul li button {
 	border-bottom-left-radius: 0;
 }
 
+nav ul li a img {
+	border-radius: 100%;
+	width: 30px;
+	height: 30px;
+}
+
 body {
 	background-color: #fcf9f6;
 }
@@ -73,6 +79,7 @@ body {
 #profile {
 	width: 100px;
 	height: 100px;
+	border-radius: 100%;
 }
 
 #follow {
@@ -115,6 +122,7 @@ body {
 #id {
 	font-size: 30px;
 	font-weight: bold;
+	width: 300px;
 }
 
 #name {
@@ -138,17 +146,17 @@ a:visited {
 	<div id="nav">
 		<nav>
 			<ul class="icon">
-
+				<!--아이콘 경로 바꾸기 -->
 				<li class="left"><span><input type="search" id="search"
 						placeholder="검색" required="required">
 						<button id="keyword" type="submit">
 							<img
 								src="<c:url value="/resources/images/icon/navi/search.png"/>">
 
-						</button> </span></li>
-
-				<!-- 				<li class="center"><a id="Logo"><img -->
-				<!-- 						src="/hyo0/icon/Logo.png"></a></li> -->
+						</button></span></li>
+				<!-- 				사진 크기 커서 주석처리 해놓음 -->
+				<!-- 								<li class="center"><a id="Logo"><img -->
+				<%-- 										src="<c:url value="/resources/images/plus.png"/>"></a></li> --%>
 
 				<li class="right"><a id="Home" href="#"><img
 						src="<c:url value="/resources/images/icon/navi/023-home.png"/>"></a>
@@ -179,15 +187,15 @@ a:visited {
 
 	</div>
 	<!-- 네비 바 -->
-
 	<div id="total_wrap">
 		<div>
-			<table id="find_peeps">
-				<c:forEach items="${peepslist}" var="peep" varStatus="i">
+			<c:forEach items="${peepslist}" var="peep" varStatus="i">
+				<table id="find_peeps">
+
 					<tr>
 						<td rowspan="2"><a href="#"> <c:set var="loginType"
 									value="${peep.loginType}" /> <c:choose>
-									<c:when test="${loginType eq 'email' }">
+									<c:when test="${loginType eq 'email'}">
 										<img id="profile"
 											src="<c:url value="/fileupload/${peep.m_photo}"/>">
 									</c:when>
@@ -197,44 +205,59 @@ a:visited {
 
 								</c:choose>
 						</a></td>
-						<td id="id"><a href="#">{peep.id}</a></td>
+						<td id="id"><a href="#">${peep.id}</a></td>
 						<td rowspan="2"><button id="follow">팔로우</button>
 							<button id="unfollow">언팔로우</button></td>
 					</tr>
 					<tr>
-						<td id="name"><a href="#">{peep.name}</a></td>
-						<td>${peep.peepslist }</td>
+						<td id="name"><a href="#">${peep.name}</a></td>
 					</tr>
-				</c:forEach>
-			</table>
+
+				</table>
+			</c:forEach>
 		</div>
 	</div>
 
 
 
 </body>
+<!--   Core JS Files   -->
+<script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
+	type="text/javascript"></script>
+<script src="<c:url value="/resources/js/bootstrap.min.js"/>"
+	type="text/javascript"></script>
+<script src="<c:url value="/resources/js/jquery.bootstrap.wizard.js"/>"
+	type="text/javascript"></script>
 <script>
-$("#keyword")
-.click(
-		function() {
+	$("#keyword")
+			.click(
+					function() {
 
-			var keyword = $('#search').val();
+						var keyword = $('#search').val();
 
-			console.log(keyword);
-			
-			$.ajax({
-				url : '${pageContext.request.contextPath}/user/finduser?keyword='+ keyword,
-				type : 'get',
-				async : false,
-				success : function(data) {
-					location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
-				},
-				error : function() {
-					console.log("실패,,,,");
-				}
-			});
+						console.log(keyword);
 
-		});
+						$
+								.ajax({
+									url : '${pageContext.request.contextPath}/user/finduser?keyword='
+											+ keyword,
+									type : 'get',
+									async : false,
+									data : {
+										"peepslist" : "${peepslist}",
+										"s_name" : "${name}",
+										"s_m_photo" : "${m_photo}",
+										"s_loginType" : "${loginType}"
+									},
+									success : function(data) {
+										location.href = "${pageContext.request.contextPath}/member/FindView?keyword="
+												+ keyword;
+									},
+									error : function() {
+										console.log("실패,,,,");
+									}
+								});
 
+					});
 </script>
 </html>
