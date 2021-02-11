@@ -1,13 +1,18 @@
 package com.gnjk.chat.handler;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -36,12 +41,20 @@ public class ChattingHandler extends TextWebSocketHandler {
 
 		String chatMember = (String) session.getAttributes().get("m_idx");
 
-		users.put(session.getId(), session);
+		users.put(chatMember, session);
 		//		connectedSessionList.add(session);
 
 		logger.info("{} 연결되었습니다. chatMember {}", session.getId()+":"+chatMember);
 
 		log(session.getId() + " getId() 연결 성공 ");
+		
+		/*
+		 * @RequestMapping("/chatting") public ModelAndView content() { ModelAndView mv
+		 * = new ModelAndView(); mv.setViewName("/chatting"); mv.addObject("m_idx",
+		 * session.getId());
+		 * 
+		 * return mv; }
+		 */
 
 	}
 
@@ -88,6 +101,25 @@ public class ChattingHandler extends TextWebSocketHandler {
 
 		log(session.getId() + "exception 발생 : " + exception.getMessage());
 
+	}
+	
+	@RequestMapping(value = "/")
+	public ModelAndView idx(
+			ModelAndView mav, 
+			@RequestParam("m_idx") String m_idx,
+			HttpSession session) throws IOException {
+
+		mav.setViewName("chatting");
+		
+		// session.setAttribute("m_idx", "hyo0");
+
+		mav.addObject("m_idx", m_idx);
+		mav.addObject("rm_idx", "seoa");
+
+		session.setAttribute("m_idx", m_idx);
+	//	session.setAttribute("m_idx", Message.class);
+		// 세션이 연결 중일 때 유지
+		return mav;
 	}
 
 }

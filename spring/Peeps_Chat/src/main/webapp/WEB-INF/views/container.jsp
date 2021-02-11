@@ -53,7 +53,7 @@
 
 			<div class="well" id="chatdata">
 				<!-- User Session Info Hidden -->
-				${m_idx}<input type="hidden" value='${m_idx}' id="sessionuserid">
+				${m_idx}<input type="hidden" value="${m_idx}" id="sessionuserid">
 			</div>
 
 			<footer>
