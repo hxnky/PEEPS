@@ -89,6 +89,7 @@
 		sock.send(JSON.stringify(mes));
 		console.log(JSON.stringify(mes));
 		console.log('위 메세지 소켓에 전송');
+		$("#message").val("");
 	}
 
 	function onMessage(evt) {
