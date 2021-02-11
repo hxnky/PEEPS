@@ -23,10 +23,8 @@ public class ChattingController {
 
 		mav.addObject("m_idx", m_idx);
 		mav.addObject("rm_idx", "rm_idx");
-		mav.addObject("ch_time", ch_time);
 
 		session.setAttribute("m_idx", m_idx);
-		session.setAttribute("ch_time", ch_time);
 		return mav;
 	}
 
