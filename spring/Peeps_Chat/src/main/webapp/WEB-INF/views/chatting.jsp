@@ -75,12 +75,15 @@
 
 		//	var t = getTimeStamp();
 
+		var date = new Date();		// 자바스크립트 Date 객체
+		var str = date.toJSON();	// Date 객체를 JSON 형식의 문자열로 변환
+		
 		var mes = {
 			ch_idx : '1',
 			m_idx : 'm_idx',
 			rm_idx : 'rm_idx',
 			ch_ms : $("#message").val(),
-		//		ch_time : t
+			ch_time :  str
 		}
 
 		sock.send(JSON.stringify(mes));
@@ -88,44 +91,17 @@
 		console.log('위 메세지 소켓에 전송');
 	}
 
-	function getTimeStamp() {
-		var d = new Date();
-		var t = leadingZeros(d.getFullYear(), 4) + '-'
-				+ leadingZeros(d.getMonth() + 1, 2) + '-'
-				+ leadingZeros(d.getDate(), 2) + ' '
-
-				+ leadingZeros(d.getHours(), 2) + ':'
-				+ leadingZeros(d.getMinutes(), 2) + ':'
-				+ leadingZeros(d.getSeconds(), 2);
-		return t;
-	}
-
-	function leadingZeros(n, digits) {
-
-		var zero = '';
-		n = n.toString();
-
-		if (n.length < digits) {
-			for (i = 0; i < digits - n.length; i++)
-				zero += '0';
-		}
-		return zero + n;
-
-	}
-
 	function onMessage(evt) {
 		var data = evt.data;
 		var obj = JSON.parse(data);
-
-		var t = getTimeStamp();
-
+		
 		var currentuser_session = $('#sessionuserid').val();
 
 		if (sessionuserid == currentuser_session) {
 			var printHTML = "<div id='right'>";
 			printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
 			printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
-			printHTML += "<strong>" + t + "</strong>";
+			printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
 			printHTML += "</div>";
 
 			$('#chatdata').append(printHTML);
@@ -134,7 +110,7 @@
 			var printHTML = "<div id='left'>";
 			printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
 			printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
-			printHTML += "<strong>" + t + "</strong>";
+			printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
 			printHTML += "</div>";
 
 			$('#chatdata').append(printHTML);
