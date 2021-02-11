@@ -1,9 +1,8 @@
 package com.gnjk.chat.handler;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -24,11 +23,11 @@ public class ChattingHandler extends TextWebSocketHandler {
 	}
 
 	private static final Logger logger = LoggerFactory.getLogger(ChattingHandler.class);
-	
-	private List<WebSocketSession> connectedSessionList;
-	public ChattingHandler() {
-		connectedSessionList = new ArrayList<WebSocketSession>();
-	}
+
+	//	private List<WebSocketSession> connectedSessionList;
+	//	public ChattingHandler() {
+	//		connectedSessionList = new ArrayList<WebSocketSession>();
+	//	}
 
 	private Map<String, WebSocketSession> users = new HashMap<String, WebSocketSession>();
 
@@ -36,47 +35,54 @@ public class ChattingHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
 		String chatMember = (String) session.getAttributes().get("m_idx");
-		
-		users.put(chatMember, session);
-		connectedSessionList.add(session);
 
-		logger.info("{} 연결되었습니다.", session.getId()+":"+chatMember);
-		
+		users.put(session.getId(), session);
+		//		connectedSessionList.add(session);
+
+		logger.info("{} 연결되었습니다. chatMember {}", session.getId()+":"+chatMember);
+
 		log(session.getId() + " getId() 연결 성공 ");
-		
+
 	}
-	
+
 	@Override
 	protected void handleTextMessage (WebSocketSession session, TextMessage message) throws Exception {          
-		
+
 		String chatMember = (String) session.getAttributes().get("m_idx");
-		
+
 		logger.info("{}로 부터 {}를 전달 받았습니다.", chatMember, message.getPayload());
-		
-		 Gson gson = new Gson();
-		 Message mes = gson.fromJson(message.getPayload(), Message.class);
+
+		Gson gson = new Gson();
+		Message mes = gson.fromJson(message.getPayload(), Message.class);
 
 		TextMessage sendmes = new TextMessage(gson.toJson(mes));
 
+		Iterator<String> sessionIds = users.keySet().iterator();
+		String sessionId = "";
+		while (sessionIds.hasNext()) {
+			sessionId = sessionIds.next();
+			users.get(sessionId).sendMessage(sendmes);
+		}
+		/*	
 		 for(WebSocketSession sockSession : connectedSessionList) {			 
 			sockSession.sendMessage(sendmes);
 		 }
-		 
+		 */	 
 	}
-	
+
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 
 		String chatMember = (String) session.getAttributes().get("m_idx");
 		log(session.getId() + " 연결 종료 " + chatMember);
-		
-		connectedSessionList.remove(session);
+
+//		connectedSessionList.remove(session);
 		users.remove(session.getId());
-		
-		logger.info("{} 연결이 끊김", session.getId()+chatMember);
+
+		logger.info("{} 연결이 끊김 chatMember : {}", session.getId()+chatMember);
 		System.out.println("채팅 퇴장 : " + chatMember);
 	}
-	
+
 	@Override
 	public void handleTransportError (WebSocketSession session, Throwable exception) throws Exception {
 

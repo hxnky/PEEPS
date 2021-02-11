@@ -80,15 +80,15 @@
 		
 		var mes = {
 			ch_idx : '1',
-			m_idx : 'm_idx',
+			m_idx : $('#sessionuserid').val(),
 			rm_idx : 'rm_idx',
-			ch_ms : $("#message").val(),
+			ch_ms : $('#message').val(),
 			ch_time :  str
 		}
 		sock.send(JSON.stringify(mes));
 		console.log(JSON.stringify(mes));
 		console.log('위 메세지 소켓에 전송');
-		$("#message").val("");
+		$('#message').val("");
 	}
 	
 	function onMessage(evt) {
