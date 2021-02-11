@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>container_jsp</title>
 </head>
 <body>
 
@@ -29,7 +29,7 @@
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg"
 					alt="">
 					<div>
-						<h2>Prénom Nom</h2>
+						<h2>${rm_idx}</h2>
 						<h3>
 							<span class="status orange"></span> offline
 						</h3>
@@ -43,7 +43,7 @@
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg"
 					alt="">
 				<div>
-					<h2>Chat with Vincent Porter</h2>
+					<h2 name="rm_idx">${rm_idx}</h2>
 					<h3>already 1902 messages</h3>
 				</div>
 				<img
@@ -51,10 +51,9 @@
 					alt="">
 			</header>
 
-			<!-- <div id="chatArea"></div> -->
 			<div class="well" id="chatdata">
 				<!-- User Session Info Hidden -->
-				<input type="hidden" value='${user}' id="sessionuserid">
+				${m_idx}<input type="hidden" value='${"m_idx"}' id="sessionuserid">
 			</div>
 
 			<footer>
@@ -64,14 +63,12 @@
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png"
 					alt="">
 
-				<form>
+				
 					<div class="send">
 
-						<input type="text" id="message" placeholder="Type your message" />
-						<input type="submit" id="sendBtn" value="전송" />
+						<input type="text" id="message" name="ch_ms" placeholder="Type your message" />
+						<button type="button" id="sendBtn" >전송</button>
 					</div>
-				</form>
-
 
 			</footer>
 		</main>

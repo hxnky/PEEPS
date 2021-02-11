@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html lang="">
 
@@ -21,6 +24,7 @@
 	margin: 30px;
 	word-wrap: break-word;
 }
+
 #left {
 	text-align: left;
 	width: auto;
@@ -30,7 +34,6 @@
 	margin: 30px;
 	word-wrap: break-word;
 }
-
 </style>
 
 <!-- SocketJS CDN -->
@@ -41,102 +44,98 @@
 </head>
 
 <body>
-<%-- 
-	<!-- navi-->
-	<%@ include file="/WEB-INF/views/nav.jsp"%>
-
-	<!---------------------------------------->
-
-	<!--chatting-->
-	<%@ include file="/WEB-INF/views/container.jsp"%>
- --%>
-
 </body>
 
-<script type="text/javascript">
-	//websocket을 지정한 URL로 연결
-	var sock = new SockJS("<c:url value="/chat"/>"); //  ws://localhost:8080/chatting(context path)/chat
-	//websocket 서버에서 메시지를 보내면 자동으로 실행된다.
+<script>
+	sock = new SockJS("<c:url value="/chat"/>");
+
+	sock.onopen = onOpen;
 	sock.onmessage = onMessage;
-	//websocket 과 연결을 끊고 싶을때 실행하는 메소드
 	sock.onclose = onClose;
 
 	$(document).ready(function() {
-		$("#sendBtn").submit(function() {
-			console.log('메세지 입력 완료');
+		$('#message').keypress(function(event) {
+			var keycode = (event.keyCode ? event.keyCode : event.which);
+			if (keycode == '13') {
+				sendMessage();
+			}
+			event.stopPropagation();
+		});
+
+		$('#sendBtn').click(function() {
 			sendMessage();
-
-			$('#message').val('');
-
-			$('#message').focus();
-			// .focus() -> 버튼이면, 엔터 사용 시, 클릭 효과
-
-			return false;
+			console.log("sendMessage() - 메서드 실행 ");
 		});
 	});
 
+	function onOpen() {
+		console.log('open');
+	};
+
 	function sendMessage() {
-		var msg = {
-			user : '${user}',
-			to : '@daily_SeoA', // 현재 페이지 작성자의 id를 작성
-			time : '${serverTime}',// Date.now(),
-			message : $("#message").val()
-		};
+		//	var t = getTimeStamp();
+
+		var date = new Date();		// 자바스크립트 Date 객체
+		var str = date.toJSON();	// Date 객체를 JSON 형식의 문자열로 변환
+		
+		var mes = {
+			ch_idx : '1',
+			m_idx : 'm_idx',
+			rm_idx : 'rm_idx',
+			ch_ms : $("#message").val(),
+			ch_time :  str
+		}
+		
+		$.ajax({
+			url : '/chat',
+			type : 'post',
+			data : mes,                         
+			dataType : "json", // 받을 데이터 방식 
+			success : function(data){
+					//alert(data);
+					console.log("ajax로 데이터 전송");
+			 	},
+			error:function(e){
+				console.log("ajax로 통신 실패 ");
+			} 
+			});
+
 		sock.send(JSON.stringify(mes));
 		console.log(JSON.stringify(mes));
-		console.log('메세지 소켓에 전송');
+		console.log('위 메세지 소켓에 전송');
 	}
 
-	// evt 파라미터는 websocket이 보내준 데이터다.
-	// 서버에서 메세지 받으면 실행 
-	// 브라우저는 onMessage() 함수를 통해 서버가 전송한 데이터를 받
-	function onMessage(evt) { // 변수 안에 function자체를 넣음.
+	function onMessage(evt) {
 		var data = evt.data;
-		mesData = JSON.parse(data);
-		var sessionid = null;
-		var message = null;
-
-		//current session id
+		var obj = JSON.parse(data);
+		
 		var currentuser_session = $('#sessionuserid').val();
 
-		// 말풍선
-		var target = $('#chattingBox-1');
-
-		if (target.length == 0) {
-			$('<div id=\"chattingBox-1\" class=\"chattingBox\"></div>').html(
-					'<h3>${user} : 게시물 작성자-' + msgData.user + '</h3>')
-					.appendTo('body');
-			$('#chattingBox-1').append('<hr>')
-		}
-
-		// 내가 보낸 메세지 -> 오른쪽에 div 생성
-		if (mesData.user == currentuser_session) {
+		if (obj.m_idx == currentuser_session) {
 			var printHTML = "<div id='right'>";
-			printHTML += "<strong>[" + mesData.user + "] -> " + mesData.message
-					+ "</strong>";
+			printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
+			printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
+			printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
 			printHTML += "</div>";
 
 			$('#chatdata').append(printHTML);
-			// printHTML을 chatdata 맨 밑에 추가
+
 		} else {
-			// 상대방이 보낸 메세지 -> 왼쪽에 div 생성
 			var printHTML = "<div id='left'>";
-			printHTML += "<strong>[" + mesData.user + "] -> " + mesData.message
-					+ "</strong>";
+			printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
+			printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
+			printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
 			printHTML += "</div>";
 
 			$('#chatdata').append(printHTML);
-			// printHTML을 chatdata 맨 밑에 추가
+
 		}
-
+		$("#message").val("");
 		console.log('소켓이 보낸 메세지' + data);
+	};
 
-		/* sock.close(); */
-	}
-
-	// 연결이 종료되면 실행 
-	function onClose(evt) {
-		$("#data").append("연결 끊김");
-	}
+	function onClose() {
+		console.log('console close');
+	};
 </script>
 </html>
