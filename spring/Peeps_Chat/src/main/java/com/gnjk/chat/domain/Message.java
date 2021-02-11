@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class Message {
 
-	// 21.02.06 채팅 번호 추가
 	private int ch_idx;	// 채팅 번호
 	private String m_idx; 	// 사용자 
 	private String rm_idx; 		// 받는 사람 

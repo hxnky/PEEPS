@@ -40,13 +40,15 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 </head>
 
 <body>
 </body>
 
 <script>
+
 	sock = new SockJS("<c:url value="/chat"/>");
 
 	sock.onopen = onOpen;
@@ -72,9 +74,7 @@
 	};
 
 	function sendMessage() {
-
 		//	var t = getTimeStamp();
-
 		var date = new Date();		// 자바스크립트 Date 객체
 		var str = date.toJSON();	// Date 객체를 JSON 형식의 문자열로 변환
 		
@@ -85,43 +85,38 @@
 			ch_ms : $("#message").val(),
 			ch_time :  str
 		}
-
 		sock.send(JSON.stringify(mes));
 		console.log(JSON.stringify(mes));
 		console.log('위 메세지 소켓에 전송');
 		$("#message").val("");
 	}
-
+	
 	function onMessage(evt) {
 		var data = evt.data;
 		var obj = JSON.parse(data);
 		
 		var currentuser_session = $('#sessionuserid').val();
-
 		if (sessionuserid == currentuser_session) {
 			var printHTML = "<div id='right'>";
 			printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
 			printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
 			printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
 			printHTML += "</div>";
-
 			$('#chatdata').append(printHTML);
-
 		} else {
 			var printHTML = "<div id='left'>";
 			printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
 			printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
 			printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
 			printHTML += "</div>";
-
 			$('#chatdata').append(printHTML);
-
 		}
 		console.log('소켓이 보낸 메세지' + data);
 	};
-
+	
 	function onClose() {
 		console.log('console close');
 	};
+	
 </script>
 </html>

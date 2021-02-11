@@ -63,13 +63,13 @@
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png"
 					alt="">
 
-				
-					<div class="send">
 
-						<input type="text" id="message" name="ch_ms" placeholder="Type your message" />
-						<input type="submit" id="sendBtn" value="전송" />
-					</div>
-				
+				<div class="send">
+					<input type="text" id="message" name="ch_ms"
+						placeholder="Type your message" />
+					<button type="button" id="sendBtn">전송</button>
+				</div>
+
 
 			</footer>
 		</main>
