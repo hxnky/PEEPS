@@ -47,7 +47,7 @@
 <body>
 
 	<%-- <c:set var="profile" value='<%=session.getAttribute("login")%>' /> --%>
-
+</body>
 	<script>
 	
 	// 웹소켓 연결
@@ -125,5 +125,5 @@
 			console.log('console close');
 		};
 	</script>
-</body>
+
 </html>

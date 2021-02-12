@@ -16,13 +16,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- where 조건에 room_idx 같을때 and 해야하는지 헷갈림... -->
-	<select id = "isRoom" resultType = "ChatRoom">
-		select * from CHATROOM WHERE m_idx = #{m_idx} 
+	<select id = "isRoom" resultType = "String">
+		select * from CHATROOM WHERE m_idx = #{m_idx}
 	</select>
 	
-	<select id = "getRecentMessage" resultType="Message">
+	<select id = "getRecentMessage" resultType="String">
 		select chat.*, rm_idx from CHAT chat
-		where room_idx = #{room_idx} order by ch_idx DESC limit 1;
+		where room_idx = #{room_idx} order by ch_idx DESC limit 1
 	</select>
 	
 </mapper>

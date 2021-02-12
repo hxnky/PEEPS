@@ -25,7 +25,7 @@
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
 			/WEB-INF/spring/appServlet/servlet-context.xml
-			/WEB-INF/spring/web-socket.xml
+			/WEB-INF/spring/appServlet/web-socket.xml
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
@@ -34,7 +34,7 @@
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>/*</url-pattern>
 	</servlet-mapping>
 
 </web-app>

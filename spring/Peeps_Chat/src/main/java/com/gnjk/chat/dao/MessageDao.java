@@ -22,7 +22,7 @@ public class MessageDao implements IMessageDao {
 	
 	// 채팅방 select
 	@Override
-	public ChatRoom isRoom(ChatRoom vo) throws Exception {
+	public ChatRoom isRoom(ChatRoom vo)throws Exception {
 		ChatRoom room = null;
 		// sqlSession.selectOne(매퍼이름.id, 매개변수)
 		//				insert, delete, update, selectList
