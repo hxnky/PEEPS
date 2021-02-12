@@ -46,88 +46,84 @@
 
 <body>
 
-	<%-- <c:set var="m_idx" value='<%=session.getAttribute("m_idx")%>' /> --%>
-	"<c:set var="m_idx" value="session.getAttribute(m_idx)"/>"
-</body>
+	<%-- <c:set var="profile" value='<%=session.getAttribute("login")%>' /> --%>
 
-<script>
-	sock = new SockJS("<c:url value="/chat"/>");
-
-	sock.onopen = onOpen;
-	sock.onmessage = onMessage;
-	sock.onclose = onClose;
-
-	$(document).ready(function() {
-		$('#message').keypress(function(event) {
-			var keycode = (event.keyCode ? event.keyCode : event.which);
-			if (keycode == '13') {
+	<script>
+	
+	// 웹소켓 연결
+		sock = new SockJS("<c:url value="/chat"/>");
+		sock.onopen = onOpen;
+		sock.onmessage = onMessage;
+		sock.onclose = onClose;
+		$(document).ready(function() {
+			$('#message').keypress(function(event) {
+				var keycode = (event.keyCode ? event.keyCode : event.which);
+				// 엔터로 메세지 전송
+				if (keycode == '13') {
+					sendMessage();
+				}
+				event.stopPropagation();
+			});
+			// 버튼 클릭으로 메세지 전송
+			$('#sendBtn').click(function() {
 				sendMessage();
-			}
-			event.stopPropagation();
+			});
 		});
-
-		$('#sendBtn').click(function() {
-			sendMessage();
-		});
-	});
-
-	function onOpen() {
-		console.log('open');
-	};
-
-	function sendMessage() {
-		//	var t = getTimeStamp();
-		var date = new Date(); // 자바스크립트 Date 객체
-		var str = date.toJSON(); // Date 객체를 JSON 형식의 문자열로 변환
-
-		var m = $("#message").val();
-		if(m != ""){
-			mes = {};
-			mes.ch_idx = '1',
-			mes.m_idx = '{m_idx}',
-			mes.rm_idx = 'rm_idx',
-			mes.ch_ms = $('#message').val(),
-			mes.ch_time = str
-		} else {
-			return false;
-		}
-		sock.send(JSON.stringify(mes));
-		console.log(JSON.stringify(mes));
-		console.log('위 메세지 소켓에 전송');
-		$('#message').val("");
-	}
-
-	function onMessage(evt) {
-		var data = evt.data;
-		var obj = JSON.parse(data);
-
-		if (data == '') {
-			return false;
-		} else {
-			var currentuser_session = $('#sessionuserid').val();
-
-			if (obj.m_idx == currentuser_session) {
-				var printHTML = "<div id='right'>";
-				printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
-				printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
-				printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
-				printHTML += "</div>";
-				$('#chatdata').append(printHTML);
+		
+		function onOpen() {
+			console.log('open');
+		};
+		
+		function sendMessage() {
+			var date = new Date(); // 자바스크립트 Date 객체
+			var str = date.toJSON(); // Date 객체를 JSON 형식의 문자열로 변환
+			var m = $("#message").val();
+			if (m != "") {
+				mes = {};
+			//	mes.ch_idx = '${ch_idx}',
+				mes.m_idx = $('#sessionuserid').val(),
+				mes.rm_idx = $('#test').val(),
+				mes.ch_ms = $('#message').val(),
+				mes.ch_time = str
 			} else {
-				var printHTML = "<div id='left'>";
-				printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
-				printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
-				printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
-				printHTML += "</div>";
-				$('#chatdata').append(printHTML);
+				return false;
 			}
-			console.log('소켓이 보낸 메세지' + data);
+			
+			sock.send(JSON.stringify(mes));
+			console.log(JSON.stringify(mes));
+			console.log('위 메세지 소켓에 전송');
+			$('#message').val("");
 		}
-
-	};
-
-	function onClose() {
-		console.log('console close');
-	};
-</script>
+		
+		// 데이터를 받았을 때
+		function onMessage(evt) {
+			var data = evt.data;
+			var obj = JSON.parse(data);
+			if (data == '') {
+				return false;
+			} else {
+				var currentuser_session = $('#sessionuserid').val();
+				if (obj.m_idx == currentuser_session) {
+					var printHTML = "<div id='right'>";
+					printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
+					printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
+					printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
+					printHTML += "</div>";
+					$('#chatdata').append(printHTML);
+				} else {
+					var printHTML = "<div id='left'>";
+					printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
+					printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
+					printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
+					printHTML += "</div>";
+					$('#chatdata').append(printHTML);
+				}
+				console.log('소켓이 보낸 메세지' + data);
+			}
+		};
+		function onClose() {
+			console.log('console close');
+		};
+	</script>
+</body>
 </html>

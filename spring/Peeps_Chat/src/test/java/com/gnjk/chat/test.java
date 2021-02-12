@@ -1,0 +1,35 @@
+package com.gnjk.chat;
+
+import java.sql.Connection;
+
+import javax.sql.DataSource;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(
+        locations ={"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
+public class test {
+
+	@Autowired
+	private DataSource ds;
+	@Test
+	public void test() throws Exception {
+		try(Connection con = ds.getConnection()){
+            System.out.println("dataSource설정 성공");
+            System.out.println(con);
+        }catch(Exception e){
+            System.out.println("실패");
+            e.printStackTrace();
+        }
+
+	}
+
+}

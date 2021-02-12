@@ -44,7 +44,7 @@
 					alt="">
 				<div>
 					<h2 name="rm_idx">${rm_idx}</h2>
-					<h3>already 1902 messages</h3>
+					<h3><input value="${rm_idx}" id="test"/></h3>
 				</div>
 				<img
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png"
