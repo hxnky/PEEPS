@@ -19,7 +19,7 @@ public class FindUserController {
 	@RequestMapping(value = "/user/finduser", method = RequestMethod.GET)
 	public String findUser(@RequestParam("keyword") String keyword, HttpSession session) {
 
-		session.setAttribute("peepslist", findUserService.SearchPeeps(keyword, session));
+		session.setAttribute("peepslist", findUserService.SearchPeeps(keyword,session));
 
 		return "member/FindView";
 	}

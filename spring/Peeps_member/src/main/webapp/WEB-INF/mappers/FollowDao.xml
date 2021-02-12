@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gnjk.peeps.dao.FollowDao">
+
+	<!-- 팔로우 상태인지 확인 -->
+	<select id="CheckFollow" resultType="int">
+		select count(*) from follow
+		where following_id=#{y_idx} and follower_id = #{m_idx}
+	</select>
+
+	<!-- 팔로우 -->
+	<insert id="insertFollow"
+		parameterType="com.gnjk.peeps.domain.Follow">
+		insert into follow (following_id, follower_id) values
+		(#{y_idx}, #{m_idx})
+	</insert>
+
+	<!-- 언팔로우 -->
+	<delete id="deleteFollow">
+		delete from follow where following_id=#{y_idx} and
+		follower_id= #{m_idx}
+	</delete>
+
+
+</mapper>

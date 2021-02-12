@@ -25,11 +25,26 @@ public class FindUserService {
 
 		System.out.println("키워드" + keyword);
 
+//		Map<String, Object> listMap = new HashMap<String, Object>();
+//		listMap.put("keyword", keyword);
+
 		List<Peeps> peepslist = dao.searchMember(keyword);
+
+		System.out.println(peepslist.size());
+		
+		
+
+		for (int i = 0; i < peepslist.size(); i++) {
+			String m = i + "번째 인덱스 : " + peepslist.get(i).getM_idx();
+			System.out.println(m);
+			System.out.println("----------------------------------");
+			System.out.println(i + "번째 인덱스 : " + peepslist.get(i).getM_idx());
+			session.setAttribute(i+"_m_idx", peepslist.get(i).getM_idx());
+		}
 
 		System.out.println(peepslist);
 
-		//session.setAttribute("peepslist", peepslist);
+		// session.setAttribute("peepslist", peepslist);
 
 		return peepslist;
 	}

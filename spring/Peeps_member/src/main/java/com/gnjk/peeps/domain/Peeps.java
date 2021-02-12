@@ -28,7 +28,7 @@ public class Peeps {
 
 	@Override
 	public String toString() {
-		return "Peeps [m_idx=" + m_idx + ", email=" + email + ", password=" + password + ", name=" + name + ", id=" + id
+		return "[m_idx=" + m_idx + ", email=" + email + ", password=" + password + ", name=" + name + ", id=" + id
 				+ ", m_photo=" + m_photo + ", bio=" + bio + ", code=" + code + ", verify=" + verify + ", loginType="
 				+ loginType + "]";
 	}

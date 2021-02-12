@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
 <!DOCTYPE html>
@@ -184,14 +185,13 @@ a:visited {
 
 		</nav>
 
-
 	</div>
 	<!-- 네비 바 -->
 	<div id="total_wrap">
 		<div>
-			<c:forEach items="${peepslist}" var="peep" varStatus="i">
-				<table id="find_peeps">
-
+			<%-- 						<jsp:setProperty property="${peep.m_idx}" name="m_idx" /> --%>
+			<table id="find_peeps">
+				<c:forEach items="${peepslist}" var="peep" varStatus="i">
 					<tr>
 						<td rowspan="2"><a href="#"> <c:set var="loginType"
 									value="${peep.loginType}" /> <c:choose>
@@ -202,19 +202,46 @@ a:visited {
 									<c:when test="${loginType ne 'email' }">
 										<img id="profile" src="<c:url value="${peep.m_photo}"/>">
 									</c:when>
-
 								</c:choose>
 						</a></td>
 						<td id="id"><a href="#">${peep.id}</a></td>
-						<td rowspan="2"><button id="follow">팔로우</button>
-							<button id="unfollow">언팔로우</button></td>
+						<td rowspan="2"><c:choose>
+								<c:when test="${peep.id eq id}">
+									<div id="fix">
+										<a href="/profile/Info"><button id="follow">프로필편집</button></a>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div id="fix">
+										<c:choose>
+											<c:when test="${chk_result eq 1}">
+												<form action="${pageContext.request.contextPath}/unfollow" name="form" method="post">
+													<input type="hidden" value="${peep.m_idx}" name="y_idx">
+													<input type="hidden" value="${m_idx}" name="m_idx">
+													<button id="unfollow" type="submit">언팔로우</button></td>
+						</form>
+						</c:when>
+						<c:otherwise>
+							<form action="${pageContext.request.contextPath}/follow" name="form" method="post">
+								<input type="hidden" value="${peep.m_idx}" name="y_idx">
+								<input type="hidden" value="${m_idx}" name="m_idx">
+								<button id="follow" type="submit">팔로우</button>
+							</form>
+						</c:otherwise>
+						</c:choose>
+						</div>
+						</c:otherwise>
+						</c:choose>
 					</tr>
 					<tr>
-						<td id="name"><a href="#">${peep.name}</a></td>
+						<td id="name"><a href="#">${peep.name}</a><input
+							type="hidden" id="y_idx" value="${peep.m_idx}"></td>
 					</tr>
+				</c:forEach>
+			</table>
 
-				</table>
-			</c:forEach>
+
+
 		</div>
 	</div>
 
@@ -224,10 +251,7 @@ a:visited {
 <!--   Core JS Files   -->
 <script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
 	type="text/javascript"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"
-	type="text/javascript"></script>
-<script src="<c:url value="/resources/js/jquery.bootstrap.wizard.js"/>"
-	type="text/javascript"></script>
+
 <script>
 	$("#keyword")
 			.click(
@@ -243,12 +267,6 @@ a:visited {
 											+ keyword,
 									type : 'get',
 									async : false,
-									data : {
-										"peepslist" : "${peepslist}",
-										"s_name" : "${name}",
-										"s_m_photo" : "${m_photo}",
-										"s_loginType" : "${loginType}"
-									},
 									success : function(data) {
 										location.href = "${pageContext.request.contextPath}/member/FindView?keyword="
 												+ keyword;
@@ -259,5 +277,40 @@ a:visited {
 								});
 
 					});
+</script>
+
+<script>
+	$(function() {
+
+		var m_idx = "${m_idx}"
+
+		console.log(m_idx);
+		var y_idx = $('#y_idx').val();
+		console.log(y_idx);
+
+		$.ajax({
+			url : '${pageContext.request.contextPath}/user/followchk',
+			type : 'get',
+			data : {
+				"m_idx" : "${m_idx}",
+				"y_idx" : $('#y_idx').val()
+			},
+			async : false,
+			success : function(data) {
+				if (data == 1) {
+					console.log("팔로우 목록 존재");
+					// 언팔로우 버튼
+				} else {
+					console.log("팔로우 목록에 없음");
+					// 팔로우 버튼
+				}
+
+			},
+			error : function(request, status, error) {
+				console.log("통신 실패");
+
+			}
+		});
+	});
 </script>
 </html>
