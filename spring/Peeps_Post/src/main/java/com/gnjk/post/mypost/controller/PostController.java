@@ -1,16 +1,16 @@
 package com.gnjk.post.mypost.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.gnjk.post.mypost.domain.PostWriteRequest;
+import com.gnjk.post.mypost.service.PostListService;
 import com.gnjk.post.mypost.service.PostWriteService;
 
 @Controller
@@ -19,6 +19,9 @@ public class PostController {
 	
 	@Autowired
 	private PostWriteService writeService;
+	
+	@Autowired
+	private PostListService listService;
 	
 	// 테스트 페이지
 		@RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -57,7 +60,12 @@ public class PostController {
 	
 	// 게시글 목록페이지
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public String postList() {
+	public String postList(
+			@RequestParam(value = "p", defaultValue = "1") int page,
+			Model model
+			) {
+		
+		model.addAttribute("listView", listService.getPostListView(page));
 		
 		return "/mypost/postList";
 	}

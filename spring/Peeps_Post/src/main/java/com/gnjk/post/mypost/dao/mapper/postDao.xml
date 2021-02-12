@@ -6,46 +6,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.gnjk.post.mypost.dao.PostDao">
 
 	<!-- @@test 게시글 조회 -->
-	<select id=""
-		parameterType="com.gnjk.post.mypost.domain.Post"
-		resultType="com.gnjk.post.mypost.domain.Post"
-	>
-	
-	select * from post
-	
-	</select>
-	
+<!-- 	<select id="" parameterType="com.gnjk.post.mypost.domain.Post"
+		resultType="com.gnjk.post.mypost.domain.Post">
+
+		select * from post
+	</select> -->
+
 	<!-- 게시글 등록 -->
 	<insert id="insertPost"
 		parameterType="com.gnjk.post.mypost.domain.Post"
-		useGeneratedKeys="true"
-		keyProperty="p_idx"
-		>
-		
+		useGeneratedKeys="true" keyProperty="p_idx">
+
 		INSERT INTO post
 		(member_idx, p_title, p_content, p_loc, p_thumbnail)
-		VALUES 
+		VALUES
 		(#{member_idx},#{p_title},#{p_content},#{p_loc},#{p_thumbnail})
-		
+
 	</insert>
-	
+
 	<!-- 게시글 파일 등록 -->
- 	<insert id="insertFiles"
+	<insert id="insertFiles"
 		parameterType="com.gnjk.post.mypost.domain.PostFile"
-		useGeneratedKeys="true"
-		keyProperty="f_idx"
-	>
-	
+		useGeneratedKeys="true" keyProperty="f_idx">
+
 		INSERT INTO file
 		(f_idx, f_name, f_path, f_type, f_size, post_idx)
-		VALUES 
+		VALUES
 		<!-- <foreach collection="list" item="item" separator=","> -->
 		(#{f_idx},#{f_name},#{f_path},#{f_type},#{f_size},#{post_idx})
 		<!-- </foreach> -->
+
+	</insert>
 	
-	</insert> 
+	<!-- 게시글 썸네일 update -->
+	<update id="updatePostThumbnail">
+		update post 
+		set p_thumbnail=#{param2}
+		where p_idx=#{param1}
+	</update>
 
+	<!-- 게시글의 총 수 -->
+	<select id="selectTotalPostCount" resultType="int">
+		select count(*) from post 
+		where member_idx=#{param}
+	</select>
 
+	<!-- 게시글 리스트 -->
+	<select id="selectPostList"
+			parameterType="list"
+			resultType="com.gnjk.post.mypost.domain.Post"
+			>
+		select * from post 
+		where member_idx=#{param1}
+	</select>
 
 
 

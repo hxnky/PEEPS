@@ -113,6 +113,10 @@ public class PostWriteService {
 			} // foreach end
 		} 
 		
+		// 게시글 썸네일 db update
+		int postThumbnailResult = 0;
+		postThumbnailResult = dao.updatePostThumbnail(post.getP_idx(), post.getP_thumbnail());
+		
 		return postResult;
 	}
 	
