@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +11,7 @@
 </head>
 <body>
 
-	<div id="container">
+<div id="container">
 		<aside>
 			<header>
 
@@ -36,7 +39,7 @@
 					</div></li>
 			</ul>
 		</aside>
-
+		
 		<main>
 			<header>
 				<img
@@ -53,25 +56,27 @@
 
 			<div class="well" id="chatdata">
 				<!-- User Session Info Hidden -->
-				${m_idx}<input type="hidden" value='${"m_idx"}' id="sessionuserid">
+				${m_idx}<input type="hidden" value="seoa" id="sessionuserid">
 			</div>
-
+			
 			<footer>
 				<img
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png"
 					alt=""> <img
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png"
 					alt="">
-
-				
+					
 					<div class="send">
 
 						<input type="text" id="message" name="ch_ms" placeholder="Type your message" />
 						<button type="button" id="sendBtn" >전송</button>
 					</div>
-
+				
 			</footer>
+
 		</main>
+
+		
 	</div>
 
 </body>

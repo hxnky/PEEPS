@@ -13,12 +13,16 @@ C:\Users\hanky\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.
 /Spring_openProject/src/main/java
 C:\Users\hanky\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1924685571.index
 \Peeps_member\src\main\java
+/Users/seoa/Documents/GitHub/PEEPS/spring/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1327093355.index
+/Spring-Socket-Chat/src/main/java
 C:\Users\hanky\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2262979896.index
 \Peeps_member\src
 /Users/seoa/Documents/GitHub/PEEPS/spring/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1179724077.index
 /Peeps_Chat2/src/main/java
 /Users/seoa/Documents/GitHub/PEEPS/spring/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/3060120045.index
 /Spring_openProject/src/main/java
+/Users/seoa/Documents/GitHub/PEEPS/spring/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/1218513234.index
+/Spring-Socket-Chat/src/main/java
 /Users/seoa/Documents/GitHub/PEEPS/spring/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/241843522.index
 /Peeps/src/main/java
 /Users/seoa/Documents/GitHub/PEEPS/spring/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2919156931.index

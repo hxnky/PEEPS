@@ -43,7 +43,7 @@
 
 </head>
 
-<body>
+<body>}
 </body>
 
 <script>
@@ -52,7 +52,10 @@
 	sock.onopen = onOpen;
 	sock.onmessage = onMessage;
 	sock.onclose = onClose;
-
+	
+	//var a = ${m_idx}
+	//console.log(a);
+	
 	$(document).ready(function() {
 		$('#message').keypress(function(event) {
 			var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -65,6 +68,8 @@
 		$('#sendBtn').click(function() {
 			sendMessage();
 			console.log("sendMessage() - 메서드 실행 ");
+		
+			
 		});
 	});
 
@@ -80,14 +85,14 @@
 		
 		var mes = {
 			ch_idx : '1',
-			m_idx : 'm_idx',
-			rm_idx : 'rm_idx',
+			m_idx : 'seoa',
+			rm_idx : 'to someone',
 			ch_ms : $("#message").val(),
 			ch_time :  str
 		}
-		
+
 		$.ajax({
-			url : '/chat',
+			url : 'http://localhost:8080/chat',
 			type : 'post',
 			data : mes,                         
 			dataType : "json", // 받을 데이터 방식 
@@ -99,43 +104,46 @@
 				console.log("ajax로 통신 실패 ");
 			} 
 			});
-
+		
 		sock.send(JSON.stringify(mes));
 		console.log(JSON.stringify(mes));
 		console.log('위 메세지 소켓에 전송');
 	}
 
 	function onMessage(evt) {
-		var data = evt.data;
-		var obj = JSON.parse(data);
+				var data = evt.data;
+				var obj = JSON.parse(data);
+				
+				var currentuser_session = $('#sessionuserid').val();
 		
-		var currentuser_session = $('#sessionuserid').val();
-
-		if (obj.m_idx == currentuser_session) {
-			var printHTML = "<div id='right'>";
-			printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
-			printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
-			printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
-			printHTML += "</div>";
-
-			$('#chatdata').append(printHTML);
-
-		} else {
-			var printHTML = "<div id='left'>";
-			printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
-			printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
-			printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
-			printHTML += "</div>";
-
-			$('#chatdata').append(printHTML);
-
-		}
-		$("#message").val("");
-		console.log('소켓이 보낸 메세지' + data);
+				if (obj.m_idx == currentuser_session) { //m_idx = seoa
+					var printHTML = "<div id='right'>";
+					printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
+					printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
+					printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
+					printHTML += "</div>";
+		
+					$('#chatdata').append(printHTML);
+		
+				} else {
+					var printHTML = "<div id='left'>";
+					printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
+					printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
+					printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
+					printHTML += "</div>";
+		
+					$('#chatdata').append(printHTML);
+		
+			  }
+			$("#message").val("");
+			console.log('소켓이 보낸 메세지' + data);
 	};
 
 	function onClose() {
 		console.log('console close');
 	};
+	
+	
+	
 </script>
 </html>

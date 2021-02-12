@@ -6,9 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -35,12 +40,12 @@ public class ChattingHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
-		String m_idx  = (String) session.getId();
+		String sessionId  = (String) session.getId();
 		
-		users.put(m_idx , session);
+		users.put(sessionId , session);
 		connectedSessionList.add(session);
 
-		logger.info("{} 연결되었습니다.", session.getId()+":"+m_idx );
+		logger.info("{} 연결되었습니다.", session.getId()+":"+ sessionId );
 		
 		log(session.getId() + " getId() 연결 성공 ");
 		
@@ -50,9 +55,9 @@ public class ChattingHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage (WebSocketSession session, TextMessage message) throws Exception {          
 		
-		String m_idx  = (String) session.getId();
+		String sessionId  = (String) session.getId();
 		
-		logger.info("{}로 부터 {}를 전달 받았습니다.", m_idx , message.getPayload());
+		logger.info("{}로 부터 {}를 전달 받았습니다.", sessionId , message.getPayload());
 		
 		 Gson gson = new Gson();
 		 Message mes = gson.fromJson(message.getPayload(), Message.class);
@@ -65,17 +70,18 @@ public class ChattingHandler extends TextWebSocketHandler {
 		 
 	}
 	
+	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 
-		String m_idx  = (String) session.getId();   // "m_idx"
-		log(session.getId() + " 연결 종료 " + m_idx );
+		String sessionId  = (String) session.getId();   // "m_idx"
+		log(session.getId() + " 연결 종료 " + sessionId );
 		
 		connectedSessionList.remove(session);
 		users.remove(session.getId());
 		
-		logger.info("{} 연결이 끊김", session.getId()+m_idx );
-		System.out.println("채팅 퇴장 : " + m_idx );
+		logger.info("{} 연결이 끊김", session.getId()+ sessionId );
+		System.out.println("채팅 퇴장 : " + sessionId );
 	}
 	
 	@Override
