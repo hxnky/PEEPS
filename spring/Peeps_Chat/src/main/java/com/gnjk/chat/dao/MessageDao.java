@@ -3,19 +3,22 @@ package com.gnjk.chat.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.gnjk.chat.domain.ChatRoom;
 import com.gnjk.chat.domain.Message;
 
 // @Repository : 스프링에서 DAO 인식
-@Repository
+@Service
 public class MessageDao implements IMessageDao {
 
 	// @Inject(JAVA제공), @Autowired(스프링제공) : 의존 관계 자동 연결
-	@Autowired
+	@Inject
 	private SqlSession session;
 
 	private static String namespace = "com.gnjk.chat.dao.mapper.ChatMapper";
@@ -48,77 +51,70 @@ public class MessageDao implements IMessageDao {
 	public void insertMessage(Message vo)throws Exception {
 		session.insert(namespace + ".insertMessage", vo);
 	}
-	
-	// 메세지 리스트 select
-	@Override
-	public List<Message> getMessageList(String str) throws Exception {
-
-		return session.selectList(namespace+".getMessageList" , str);
-
-	}
-	
-	// 채팅방 리스트 select
-	@Override
-	public List<ChatRoom> getRoomList(String str) throws Exception {
-
-		return session.selectList(namespace+".getRoomList",str);
-	}
-	
-	// 훔,,,
-	@Override
-	public List<ChatRoom> getRoomList2(String str) throws Exception {
-
-		return session.selectList(namespace+".getRoomList2" , str);
-	}
-	
-	// 최근 메세지 select
-	@Override
-	public Message getRecentMessage(String str) throws Exception {
-
-		return session.selectOne(namespace+".getRecentMessage" , str);
-	}
-	
-	// 메세지 읽은 시각
-	@Override
-	public void updateReadTime(int room_idx, String m_idx, String rm_idx) throws Exception {
-
-		HashMap<String, Object> map = new HashMap<String, Object> ();
-
-		map.put("room_idx", room_idx);
-		map.put("m_idx", m_idx);
-		map.put("rm_idx", rm_idx);
-
-		session.update(namespace+".updateReadTime" , map);
-	}
-	
-	// 읽지 않은 메세지 select => memberVO에 넣어야... 할 수도.....
-	@Override
-	public int getUnReadCount(int room_idx, String m_idx, String rm_idx)throws Exception {
-
-		HashMap<String, Object> map = new HashMap<String, Object> ();
-
-		map.put("room_idx", room_idx);
-		map.put("m_idx", m_idx);
-		map.put("rm_idx", rm_idx);
-
-		// Map으로 select 구문의 결과를 받는 경우, 컬럼이름이 키, 데이터가 값
-		return session.selectOne(namespace+".getUnReadCount" , map);
-
-	}
-
-	@Override
-	public int getAllCount(String str) {
-
-		HashMap<String, Object> map = new HashMap<String, Object> ();
-
-		map.put("rm_idx", str);
-		if(session.selectOne(namespace+".getAllCount" ,map) ==null) {
-			return 0;
-		}else {
-			return session.selectOne(namespace+".getAllCount" ,map);
-		}
-
-	}
+	/*
+	 * // 메세지 리스트 select
+	 * 
+	 * @Override public List<Message> getMessageList(String str) throws Exception {
+	 * 
+	 * return session.selectList(namespace+".getMessageList" , str);
+	 * 
+	 * }
+	 * 
+	 * // 채팅방 리스트 select
+	 * 
+	 * @Override public List<ChatRoom> getRoomList(String str) throws Exception {
+	 * 
+	 * return session.selectList(namespace+".getRoomList",str); }
+	 * 
+	 * // 훔,,,
+	 * 
+	 * @Override public List<ChatRoom> getRoomList2(String str) throws Exception {
+	 * 
+	 * return session.selectList(namespace+".getRoomList2" , str); }
+	 * 
+	 * // 최근 메세지 select
+	 * 
+	 * @Override public Message getRecentMessage(String str) throws Exception {
+	 * 
+	 * return session.selectOne(namespace+".getRecentMessage" , str); }
+	 * 
+	 * // 메세지 읽은 시각
+	 * 
+	 * @Override public void updateReadTime(int room_idx, String m_idx, String
+	 * rm_idx) throws Exception {
+	 * 
+	 * HashMap<String, Object> map = new HashMap<String, Object> ();
+	 * 
+	 * map.put("room_idx", room_idx); map.put("m_idx", m_idx); map.put("rm_idx",
+	 * rm_idx);
+	 * 
+	 * session.update(namespace+".updateReadTime" , map); }
+	 * 
+	 * // 읽지 않은 메세지 select => memberVO에 넣어야... 할 수도.....
+	 * 
+	 * @Override public int getUnReadCount(int room_idx, String m_idx, String
+	 * rm_idx)throws Exception {
+	 * 
+	 * HashMap<String, Object> map = new HashMap<String, Object> ();
+	 * 
+	 * map.put("room_idx", room_idx); map.put("m_idx", m_idx); map.put("rm_idx",
+	 * rm_idx);
+	 * 
+	 * // Map으로 select 구문의 결과를 받는 경우, 컬럼이름이 키, 데이터가 값 return
+	 * session.selectOne(namespace+".getUnReadCount" , map);
+	 * 
+	 * }
+	 * 
+	 * @Override public int getAllCount(String str) {
+	 * 
+	 * HashMap<String, Object> map = new HashMap<String, Object> ();
+	 * 
+	 * map.put("rm_idx", str); if(session.selectOne(namespace+".getAllCount" ,map)
+	 * ==null) { return 0; }else { return session.selectOne(namespace+".getAllCount"
+	 * ,map); }
+	 * 
+	 * }
+	 */
 
 
 }

@@ -45,12 +45,10 @@
 </head>
 
 <body>
-
 	<%-- <c:set var="profile" value='<%=session.getAttribute("login")%>' /> --%>
-</body>
-	<script>
 	
-	// 웹소켓 연결
+	<script>
+		// 웹소켓 연결
 		sock = new SockJS("<c:url value="/chat"/>");
 		sock.onopen = onOpen;
 		sock.onmessage = onMessage;
@@ -69,32 +67,31 @@
 				sendMessage();
 			});
 		});
-		
+
 		function onOpen() {
 			console.log('open');
 		};
-		
+
 		function sendMessage() {
 			var date = new Date(); // 자바스크립트 Date 객체
 			var str = date.toJSON(); // Date 객체를 JSON 형식의 문자열로 변환
 			var m = $("#message").val();
 			if (m != "") {
 				mes = {};
-			//	mes.ch_idx = '${ch_idx}',
-				mes.m_idx = $('#sessionuserid').val(),
-				mes.rm_idx = $('#test').val(),
-				mes.ch_ms = $('#message').val(),
-				mes.ch_time = str
+				//	mes.ch_idx = '${ch_idx}',
+				mes.m_idx = $('#sessionuserid').val(), mes.rm_idx = $('#test')
+						.val(), mes.ch_ms = $('#message').val(),
+						mes.ch_time = str
 			} else {
 				return false;
 			}
-			
+
 			sock.send(JSON.stringify(mes));
 			console.log(JSON.stringify(mes));
 			console.log('위 메세지 소켓에 전송');
 			$('#message').val("");
 		}
-		
+
 		// 데이터를 받았을 때
 		function onMessage(evt) {
 			var data = evt.data;
@@ -125,5 +122,6 @@
 			console.log('console close');
 		};
 	</script>
-
+	
+</body>
 </html>

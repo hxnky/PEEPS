@@ -7,9 +7,6 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-	<bean class="com.gnjk.chat.handler.ChattingHandler"
-		id="chattinghandler" />
-
 	<websocket:handlers>
 		<websocket:mapping path="/chat"
 			handler="chattinghandler" />
@@ -19,4 +16,7 @@
 		</websocket:handshake-interceptors>
 		<websocket:sockjs />
 	</websocket:handlers>
+	<bean class="com.gnjk.chat.handler.ChattingHandler"
+		id="chattinghandler" />
+		
 </beans>

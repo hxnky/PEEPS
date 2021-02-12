@@ -14,7 +14,7 @@ import org.springframework.web.socket.WebSocketSession;
 
 @Controller
 public class ChattingController { 
-
+	
 	@RequestMapping(value="/chatting", method=RequestMethod.GET) // .jsp 파일 이름 !! chatting.jsp로 보낼거
 	public ModelAndView chat(
 			ModelAndView mav, 

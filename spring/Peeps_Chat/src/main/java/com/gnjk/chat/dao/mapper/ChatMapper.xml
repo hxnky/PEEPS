@@ -5,6 +5,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.gnjk.chat.dao.mapper.ChatMapper">
 
+	<resultMap id="mesResult"
+	type="com.gnjk.chat.domain">
+		<id column="room_idx" property="room_idx" />
+		<result column="m_idx" property="m_idx" />
+		<result column="rm_idx" property="rm_idx" />
+	</resultMap>
+
 	 <insert id = "createRoom">
 	 	insert into CHATROOM (room_idx, m_idx, rm_idx)
 	 	values (#{room_idx}, #{m_idx}, #{rm_idx})
@@ -16,13 +23,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<!-- where 조건에 room_idx 같을때 and 해야하는지 헷갈림... -->
-	<select id = "isRoom" resultType = "String">
+	<select id = "isRoom" resultMap = "mesResult">
 		select * from CHATROOM WHERE m_idx = #{m_idx}
 	</select>
 	
-	<select id = "getRecentMessage" resultType="String">
+	<!-- <select id = "getRecentMessage" resultType="String">
 		select chat.*, rm_idx from CHAT chat
 		where room_idx = #{room_idx} order by ch_idx DESC limit 1
-	</select>
+	</select> -->
 	
 </mapper>
