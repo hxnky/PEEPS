@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.gnjk.chat.domain.ChatRoom;
 import com.gnjk.chat.domain.Message;
 
-@Repository
 public interface IMessageDao {
 
 	public void createRoom(ChatRoom vo)throws Exception;

@@ -14,14 +14,14 @@ import com.gnjk.chat.domain.ChatRoom;
 import com.gnjk.chat.domain.Message;
 
 // @Repository : 스프링에서 DAO 인식
-@Service
+@Repository
 public class MessageDao implements IMessageDao {
 
 	// @Inject(JAVA제공), @Autowired(스프링제공) : 의존 관계 자동 연결
 	@Inject
 	private SqlSession session;
 
-	private static String namespace = "com.gnjk.chat.dao.mapper.ChatMapper";
+	private static String namespace = "com.gnjk.chat.mapper.ChatMapper";
 	
 	// 채팅방 select
 	@Override

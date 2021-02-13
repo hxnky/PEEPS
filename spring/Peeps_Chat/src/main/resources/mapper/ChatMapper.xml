@@ -3,27 +3,27 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.gnjk.chat.dao.mapper.ChatMapper">
+<mapper namespace="com.gnjk.chat.mapper.ChatMapper">
 
-	<resultMap id="mesResult"
+	<!-- <resultMap id="mesResult"
 	type="com.gnjk.chat.domain">
 		<id column="room_idx" property="room_idx" />
 		<result column="m_idx" property="m_idx" />
 		<result column="rm_idx" property="rm_idx" />
 	</resultMap>
-
-	 <insert id = "createRoom">
+ -->
+	 <insert id = "createRoom" parameterType = "com.gnjk.chat.domain.ChatRoom">
 	 	insert into CHATROOM (room_idx, m_idx, rm_idx)
 	 	values (#{room_idx}, #{m_idx}, #{rm_idx})
 	 </insert>
 	 
-	<insert id = "insertMessage">
+	<insert id = "insertMessage" parameterType = "com.gnjk.chat.domain.Message">
 		insert into CHAT(ch_idx, m_idx, rm_idx, ch_time, ch_ms)
 		values (#{ch_idx}, #{m_idx}, #{rm_idx}, #{ch_time}, #{ch_ms})
 	</insert>
 	
 	<!-- where 조건에 room_idx 같을때 and 해야하는지 헷갈림... -->
-	<select id = "isRoom" resultMap = "mesResult">
+	<select id = "isRoom" resultMap = "com.gnjk.chat.domain.ChatRoom">
 		select * from CHATROOM WHERE m_idx = #{m_idx}
 	</select>
 	
