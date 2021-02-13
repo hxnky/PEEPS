@@ -1,11 +1,31 @@
 package com.gnjk.peeps.guestbook.dao;
 
-import com.gnjk.peeps.guestbook.domain.Guestbook;
-import com.gnjk.peeps.guestbook.domain.GuestbookRequest;
 
+
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
+
+import com.gnjk.peeps.guestbook.domain.Guestbook;
+import com.gnjk.peeps.guestbook.domain.LoginInfo;
+
+
+@Repository
 public interface GuestbookDao {
+    
 	
-	// 방명록 등록
-	int insertGbook(Guestbook gbookMessage);
+	
+	List<Guestbook> selectGbookList();
+	
+	
+	int insertGbook(Guestbook gbook);
+	
+	int deletGbook();
+	
+	int editGbook();
+	
+	LoginInfo selectById();
 
 }

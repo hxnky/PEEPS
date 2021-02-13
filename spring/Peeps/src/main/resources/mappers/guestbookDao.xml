@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- 1.공백있어도 오류남 -->
+
+<mapper namespace="com.gnjk.peeps.guestbook.dao.GuestbookDao">
+	<insert id="insertGbook" parameterType="com.gnjk.peeps.guestbook.domain.Guestbook" useGeneratedKeys="true" keyProperty="gidx">
+		INSERT INTO guestbook (gwriter, gmessage, gphoto) values (#{gwriter}, #{gmessage}, #{gphoto})
+	</insert>
+
+</mapper>

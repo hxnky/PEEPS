@@ -5,7 +5,7 @@
 
 <head>
 
-<title>방명록</title>
+<title>방명록 리스트</title>
 <%@ include file="/WEB-INF/views/include/basicset.jsp"%>
 
 
@@ -52,32 +52,15 @@ height: 50px; */
 	</div>
 	<!--=====================context======================-->
 	<div class="changing">
-		<form method="POST" enctype="multipart/form-data">
-
-
-			<div class="ginsert_wrap">
-
-				<ul>
-
-					<li><img
-						src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"
-						class="gimg"></li>
-					<li><textarea rows="9" cols="80" id="gmessage" name="gmessage"></textarea><br>
-
-						<input type="file" id="gphoto" name="gphoto"></li>
-					<li><input type="submit" value="등록"></li>
-
-
-				</ul>
-			
-
-
-
-
-
-
-			</div>
-		</form>
+		<table>
+		<tr>
+		<td>gwriter</td>
+		<td>gmessage</td>
+		<td>gphoto</td>
+		<td>gdate</td>
+		</tr>
+		</table>
+		
 	</div>
 
 

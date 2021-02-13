@@ -77,11 +77,11 @@ nav ul li button {
 	top: 0px;
 	left: 0px;
 	right: 0px;
-	background-color: aquamarine;
+	
 }
 
 #nav_wrap {
-	background-color: aqua;
+	
 	margin: 0 auto;
 }
 
@@ -97,14 +97,7 @@ nav ul li button {
 	outline: none;
 }
 
-/* .jumbotron {
-        height: 400px;
-        width: 1150px;
-        margin: 100px auto 0px auto;
-        text-align: center;
-        background-color: #F5E978;
-    }
-*/
+
 #profile_wrap>img {
 	width: 200px;
 	border-radius: 100%;
@@ -119,7 +112,7 @@ nav ul li button {
 	display: inline-block;
 	text-align: center;
 	margin-right: 40px;
-	background-color: aqua;
+	
 }
 
 #pro_btn {
@@ -138,7 +131,7 @@ nav ul li button {
 	width: 300px;
 	height: 35px;
 	font-size: 20px;
-	background-color: fuchsia;
+	
 }
 
 #pro_name {
@@ -152,7 +145,7 @@ nav ul li button {
 }
 
 .menuselect a img {
-	background-color: aqua;
+	
 	width: 50px;
 	height: 50px;
 	margin: 10px;

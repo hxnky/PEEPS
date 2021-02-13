@@ -1,7 +1,5 @@
 package com.gnjk.peeps.guestbook.domain;
 
-
-
 import org.springframework.web.multipart.MultipartFile;
 
 public class GuestbookRequest {
@@ -34,12 +32,13 @@ public class GuestbookRequest {
 		this.gwriter = gwriter;
 	}
 
-	// 방명록 저장
+	// DB 저장 방명록 저장
 	public Guestbook toGuestbook() {
 
 		Guestbook guestbook = new Guestbook();
-		guestbook.setGwriter(gwriter);
+		guestbook.setGwriter("test");
 		guestbook.setGmessage(gmessage);
+		
 
 		return guestbook;
 
@@ -47,7 +46,7 @@ public class GuestbookRequest {
 
 	@Override
 	public String toString() {
-		return "GuestbookRequest [gwriter=" + gwriter + ", gmessage=" + gmessage + ", gphoto=" + gphoto + "]";
+		return "GuestbookRequest [gwriter=" + gwriter + ", gmessage=" + gmessage + ", gphoto=" + gphoto.getOriginalFilename() + "]";
 	}
 
 }

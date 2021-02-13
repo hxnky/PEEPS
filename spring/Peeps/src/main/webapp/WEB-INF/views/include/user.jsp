@@ -4,7 +4,7 @@
    
         <div class="jumbotron">
             <div id="profile_wrap">
-                <img src="../hxnky/assets/img/chick.jpg">
+                <img src="<c:url value='/navi/chick.jsp' />">
                 <div id="pro_btn">
                     <ul>
                         <li>아이디</li>

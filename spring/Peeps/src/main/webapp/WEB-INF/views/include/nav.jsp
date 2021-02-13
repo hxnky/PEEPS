@@ -17,7 +17,7 @@
 						</button></span></li>
 
 				<li class="center"><a id="Logo"><img
-						src="<c:url value='/icon/navi/Logo.png' />"></a></li>
+						src="<c:url value='/icon/Logo.png' />"></a></li>
 
 				<li class="right"><a id="Home" href="#"><img
 						src="<c:url value='/icon/navi/023-home.png' />"></a> <a
