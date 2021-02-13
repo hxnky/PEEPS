@@ -86,7 +86,7 @@ td {
 												src="${pageContext.request.contextPath}/resources/images/plus.png"></td>
 											<td>
 												<div class="form-group-left">
-													<input type="email" id="login_text" name="email"
+													<input type="email" id="email" name="email"
 														placeholder="이메일">
 												</div>
 											</td>
@@ -137,7 +137,8 @@ td {
 										아이디가 없으신가요? <a href="<c:url value="/member/reg"/>">회원가입 하기</a>
 									</div>
 									<div>
-										비밀번호를 잊으셨나요? <a href="<c:url value="/member/find"/>">비밀번호 찾기</a>
+										비밀번호를 잊으셨나요? <a href="<c:url value="/member/find"/>">비밀번호
+											찾기</a>
 									</div>
 								</div>
 							</form>
@@ -170,4 +171,23 @@ td {
 
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 <script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
+
+<script>
+$(document).ready(function() {
+	
+	var result = ${l_result};
+	var email = $('#email').val();
+	
+	if(result == 2){
+		alert("로그인 되었습니다.");
+		location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
+	} else if(result == 1){
+		alert("미인증 계정입니다. 이메일을 확인해주세요.");
+	} else{
+		alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+	}
+	
+});
+
+</script>
 </html>

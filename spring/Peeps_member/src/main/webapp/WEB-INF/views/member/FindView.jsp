@@ -1,16 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
-
 <!DOCTYPE html>
-<html lang="">
+<html lang="ko">
 
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title></title>
+<title>아이디 검색</title>
 <style type="text/css">
 nav ul {
 	top: 0px;
@@ -85,7 +82,17 @@ body {
 
 #follow {
 	height: 40px;
-	width: 100px;
+	width: 120px;
+	background: #F5E978;
+	border: 0.2px solid #CCC;
+	border-radius: 5px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+#edit_btn {
+	height: 40px;
+	width: 120px;
 	background: #F5E978;
 	border: 0.2px solid #CCC;
 	border-radius: 5px;
@@ -99,7 +106,7 @@ body {
 
 #unfollow {
 	height: 40px;
-	width: 100px;
+	width: 120px;
 	background: #CCC;
 	border: 0.2px solid #CCC;
 	border-radius: 5px;
@@ -116,7 +123,6 @@ body {
 	height: 100px;
 	text-align: center;
 	margin-top: 10px;
-	/*마지막으로 출력되는 리스트만 이 속성이 없어야함*/
 	border-bottom: 0.2px solid #CCC;
 }
 
@@ -139,6 +145,13 @@ a:link {
 a:visited {
 	color: black;
 	text-decoration: none;
+}
+
+#user_no{
+	
+	font-size: 50px;
+	font-weight: bold;
+
 }
 </style>
 </head>
@@ -189,60 +202,69 @@ a:visited {
 	<!-- 네비 바 -->
 	<div id="total_wrap">
 		<div>
-			<%-- 						<jsp:setProperty property="${peep.m_idx}" name="m_idx" /> --%>
-			<table id="find_peeps">
-				<c:forEach items="${peepslist}" var="peep" varStatus="i">
-					<tr>
-						<td rowspan="2"><a href="#"> <c:set var="loginType"
-									value="${peep.loginType}" /> <c:choose>
-									<c:when test="${loginType eq 'email'}">
-										<img id="profile"
-											src="<c:url value="/fileupload/${peep.m_photo}"/>">
-									</c:when>
-									<c:when test="${loginType ne 'email' }">
-										<img id="profile" src="<c:url value="${peep.m_photo}"/>">
-									</c:when>
-								</c:choose>
-						</a></td>
-						<td id="id"><a href="#">${peep.id}</a></td>
-						<td rowspan="2"><c:choose>
-								<c:when test="${peep.id eq id}">
-									<div id="fix">
-										<a href="/profile/Info"><button id="follow">프로필편집</button></a>
-									</div>
+			<c:choose>
+				<c:when test="${peepsCnt == 0}">
+					<div id="user_no">일치하는 유저가 없습니다</div>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${peepslist}" var="peep" varStatus="i">
+						<table id="find_peeps">
+
+							<tr>
+								<td rowspan="2"><a href="#"> <c:set var="loginType"
+											value="${peep.loginType}" /> <c:choose>
+											<c:when test="${loginType eq 'email'}">
+												<img id="profile"
+													src="<c:url value="/fileupload/${peep.m_photo}"/>">
+											</c:when>
+											<c:when test="${loginType ne 'email' }">
+												<img id="profile" src="<c:url value="${peep.m_photo}"/>">
+											</c:when>
+										</c:choose>
+								</a></td>
+								<td id="id"><a href="#">${peep.id}</a></td>
+								<td rowspan="2">
+							<c:choose>
+										<c:when test="${peep.id eq id}">
+											<div id="fix">
+												<button id="edit_btn">프로필편집</button>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div id="fix">
+												<c:choose>
+													<c:when test="${chk_result eq 1}">
+														<form action="${pageContext.request.contextPath}/unfollow"
+															name="form" method="post">
+															<input type="hidden" value="${peep.m_idx}" id="y_idx"
+																name="y_idx"> <input type="hidden"
+																value="${m_idx}" name="m_idx">
+															<button id="unfollow" type="submit">언팔로우</button></td>
+								</form>
 								</c:when>
 								<c:otherwise>
-									<div id="fix">
-										<c:choose>
-											<c:when test="${chk_result eq 1}">
-												<form action="${pageContext.request.contextPath}/unfollow" name="form" method="post">
-													<input type="hidden" value="${peep.m_idx}" name="y_idx">
-													<input type="hidden" value="${m_idx}" name="m_idx">
-													<button id="unfollow" type="submit">언팔로우</button></td>
-						</form>
-						</c:when>
-						<c:otherwise>
-							<form action="${pageContext.request.contextPath}/follow" name="form" method="post">
-								<input type="hidden" value="${peep.m_idx}" name="y_idx">
-								<input type="hidden" value="${m_idx}" name="m_idx">
-								<button id="follow" type="submit">팔로우</button>
-							</form>
-						</c:otherwise>
-						</c:choose>
-						</div>
-						</c:otherwise>
-						</c:choose>
-					</tr>
-					<tr>
-						<td id="name"><a href="#">${peep.name}</a><input
-							type="hidden" id="y_idx" value="${peep.m_idx}"></td>
-					</tr>
-				</c:forEach>
-			</table>
-
-
-
+									<form action="${pageContext.request.contextPath}/follow"
+										name="form" method="post">
+										<input type="hidden" value="${peep.m_idx}" id="y_idx"
+											name="y_idx"> <input type="hidden" value="${m_idx}"
+											name="m_idx">
+										<button id="follow" type="submit">팔로우</button>
+									</form>
+								</c:otherwise>
+								</c:choose>
 		</div>
+		</c:otherwise>
+		</c:choose>
+		</tr>
+		<tr>
+			<td id="name"><a href="#">${peep.name}</a></td>
+		</tr>
+
+		</table>
+		</c:forEach>
+		</c:otherwise>
+		</c:choose>
+	</div>
 	</div>
 
 
@@ -288,6 +310,7 @@ a:visited {
 		var y_idx = $('#y_idx').val();
 		console.log(y_idx);
 
+		// 리스트 m_idx 요소 뽑아서 y_idx에 넣어야 함
 		$.ajax({
 			url : '${pageContext.request.contextPath}/user/followchk',
 			type : 'get',
@@ -312,5 +335,17 @@ a:visited {
 			}
 		});
 	});
+</script>
+
+<script>
+	var email = "${email}";
+
+	console.log(email);
+
+	$('#edit_btn')
+			.click(
+					function() {
+						location.href = "${pageContext.request.contextPath}/profile/Info?email=" + email;
+					});
 </script>
 </html>

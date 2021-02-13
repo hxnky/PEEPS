@@ -30,18 +30,15 @@ public class LoginController {
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model, HttpSession session) throws IOException {
 
 		String email = request.getParameter("email");
-		
-		request.getAttribute("msg");
+		session.setAttribute("email", email);
 		
 		request.getSession().getAttribute("loginInfo");
-		
-		session.setAttribute("email", email);
 		
 		model.addAttribute("email", email);
 		model.addAttribute("loginCheck", loginService.login(request, response, session));
 		model.addAttribute("loginInfo", request.getSession().getAttribute("loginInfo"));
 
-		return "member/TimeLine";
+		return "member/LoginForm";
 
 	}
 

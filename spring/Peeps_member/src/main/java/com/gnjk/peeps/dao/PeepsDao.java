@@ -40,4 +40,6 @@ public interface PeepsDao {
 	int deletePeeps(@Param("email") String email, @Param("password") String password);
 	// 일치하는 회원 정보 출력
 	List<Peeps> searchMember(String keyword);
+	// 일치하는 회원 수 출력
+	int searchMemberCnt(String keyword);
 }

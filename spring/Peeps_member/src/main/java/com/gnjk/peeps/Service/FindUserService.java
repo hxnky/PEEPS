@@ -29,10 +29,12 @@ public class FindUserService {
 //		listMap.put("keyword", keyword);
 
 		List<Peeps> peepslist = dao.searchMember(keyword);
+		int peepsCnt = dao.searchMemberCnt(keyword);
 
+		System.out.println(peepsCnt);
 		System.out.println(peepslist.size());
 		
-		
+		session.setAttribute("peepsCnt", peepsCnt);
 
 		for (int i = 0; i < peepslist.size(); i++) {
 			String m = i + "번째 인덱스 : " + peepslist.get(i).getM_idx();

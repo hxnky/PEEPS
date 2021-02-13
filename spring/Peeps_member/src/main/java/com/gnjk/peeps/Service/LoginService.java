@@ -23,31 +23,35 @@ public class LoginService {
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		
+
 		dao = template.getMapper(PeepsDao.class);
 
 		boolean loginCheck = false;
 
 		Peeps peeps = dao.selectLogin(email, password);
-		
-		System.out.println("로그인 : "+peeps);
-		
-		session.setAttribute("peeps", peeps);
-		session.setAttribute("email", peeps.getEmail());
 
+		System.out.println("로그인 : " + peeps);
+
+		if (peeps == null) {
+			System.out.println("정보가 없습니다.");
+			session.setAttribute("l_result", 0);
+		}
 
 		if (peeps != null) {
 			if (peeps.getVerify() == 'Y') {
 				request.getSession().setAttribute("loginInfo", peeps.toLoginInfo());
 				loginCheck = true;
+				session.setAttribute("l_result", 2);
 			} else {
 				System.out.println("미인증계정");
 				loginCheck = true;
-				request.setAttribute("msg", "인증되지 않은 계정입니다. 이메일을 확인해주세요!");
+				session.setAttribute("l_result", 1);
 			}
 
 		}
-		
+
+		session.setAttribute("peeps", peeps);
+
 		return loginCheck;
 	}
 }
