@@ -119,6 +119,10 @@
 	text-align: center;
 	margin: auto;
 }
+
+.postidx {
+	color: black;
+}
 </style>
 
 <body>
@@ -225,10 +229,12 @@
 				<c:forEach items="${listView.postList}" var="post">
 				<div class="col-sm-4">
 					<div class="panel panel-primary">
-						<div class="panel-heading">${post.p_title}</div>
+						<div class="panel-heading">
+							<a class="postidx" href="postNO=${post.p_idx}">${post.p_title}</a>
+						</div>
 						<div class="panel-body">
-							<img src="<c:url value="/resources/fileupload/postfile/${post.p_thumbnail}"/>"
-								class="img-responsive" style="width: 325px; height: 325px;" alt="Image">
+							<a class="postidx" href="postNO=${post.p_idx}"><img src="<c:url value="/resources/fileupload/postfile/${post.p_thumbnail}"/>"
+								class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>
 						</div>
 						<div class="panel-footer">${post.p_date}
 						</div>
