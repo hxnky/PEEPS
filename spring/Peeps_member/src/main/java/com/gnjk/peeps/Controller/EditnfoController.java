@@ -33,9 +33,9 @@ public class EditnfoController {
 	}
 
 	@RequestMapping(value = "/profile/Info", method = RequestMethod.POST)
-	public String editUserInfo(EditRequest editRequest, HttpServletRequest request, Model model) {
+	public String editUserInfo(EditRequest editRequest, HttpServletRequest request, Model model, HttpSession session) {
 
-		model.addAttribute("result", editService.editPeeps(editRequest, request));
+		model.addAttribute("result", editService.editPeeps(editRequest, request, session));
 
 		return "member/profile_edit";
 

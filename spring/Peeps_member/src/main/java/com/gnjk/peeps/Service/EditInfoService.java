@@ -38,7 +38,7 @@ public class EditInfoService {
 		return peeps;
 	}
 
-	public int editPeeps(EditRequest editRequest, HttpServletRequest request) {
+	public int editPeeps(EditRequest editRequest, HttpServletRequest request, HttpSession session) {
 
 		int result = 0;
 
@@ -66,7 +66,11 @@ public class EditInfoService {
 
 		Peeps peeps = editRequest.getToPeeps();
 
-
+		System.out.println(editRequest);
+		System.out.println(peeps);
+		System.out.println(editRequest.getOldPhoto());
+		
+		
 		if (newFileName == null) {
 			peeps.setM_photo(editRequest.getOldPhoto());
 		} else {
@@ -90,6 +94,13 @@ public class EditInfoService {
 //		if (newFile != null && !editRequest.getOldPhoto().equals("profile.png")) {
 //			new File(saveDirPath, editRequest.getOldPhoto()).delete();
 //		}
+		
+		// 수정 후 세션 다시 저장
+		session.setAttribute("peeps", peeps);
+		session.setAttribute("id", peeps.getId());
+		session.setAttribute("name", peeps.getName());
+		session.setAttribute("m_photo", peeps.getM_photo());
+		session.setAttribute("bio", peeps.getBio());
 
 		return result;
 	}

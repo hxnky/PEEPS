@@ -233,10 +233,12 @@ nav ul li a img {
 								<c:when test="${loginType eq 'email' }">
 									<img id="profile"
 										src="<c:url value="/fileupload/${peeps.m_photo}"/>">
+										<input type="hidden" name = "oldPhoto" value="${peeps.m_photo}">
 									<br>
 								</c:when>
 								<c:when test="${loginType ne 'email' }">
 									<img id="profile" src="<c:url value="${peeps.m_photo}"/>">
+									<input type="hidden" name = "oldPhoto" value="${peeps.m_photo}">
 									<br>
 								</c:when>
 
