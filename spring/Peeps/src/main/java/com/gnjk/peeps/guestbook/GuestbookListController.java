@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gnjk.peeps.guestbook.domain.GuestbookListView;
+import com.gnjk.peeps.guestbook.domain.SearchParam;
 import com.gnjk.peeps.guestbook.service.GuestbookListService;
 
 @Controller
@@ -17,11 +18,12 @@ public class GuestbookListController {
 	private GuestbookListService listService;
 	
 	@RequestMapping("guestbook/list")
-	public String guestbookList(@RequestParam(value = "p",defaultValue ="1")int page,Model model) {
-		
+	public String guestbookList(SearchParam param,Model model) {
+	
+		System.out.println("검색 :"+param);
 		//GuestbookListView listView =listService.getListView(page);
 		//System.out.println(listView);
-		model.addAttribute("listView",listService.getListView(page));
+		model.addAttribute("listView",listService.getListView(param));
 		return "/menu/list";
 	}
 }

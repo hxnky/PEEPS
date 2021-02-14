@@ -86,6 +86,14 @@ table.upmsg_table {
 .paging {
 	text-align: center;
 }
+.gserchbox{
+text-align: center;
+margin:15px 0;
+padding:10px;
+}
+.footer{
+height:100px;  
+}
 </style>
 
 
@@ -123,17 +131,23 @@ table.upmsg_table {
 
 	</c:forEach>
 	
-	
- 			
-
-
-		
-
-
-
-
 
 	</div>
+	
+	<div class="gserchbox">
+	   <form>
+	    검색  타입
+	    <select name="searchType">
+	    <option value="myid" >내가 쓴 글</option>
+	    <option value="id" >아이디</option>
+	    </select> 
+	    검색 키워드 
+	    <input type="text" name="keyword">
+	    <input type="submit" value="검색 " >
+	   </form>
+	
+	</div>
+	
 	<div class="paging">
 				<c:if test="${listView.totalGbCount>0}">
 					<c:forEach begin="1" end="${listView.totalPageCount}" var="num">
@@ -143,6 +157,8 @@ table.upmsg_table {
 				    </c:forEach>
 				</c:if>
 			</div> 
+			
+			<div class="footer"> </div>
 
 
 </body>
