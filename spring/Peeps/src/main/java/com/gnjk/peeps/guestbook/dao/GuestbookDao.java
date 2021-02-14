@@ -17,10 +17,15 @@ public interface GuestbookDao {
     
 	
 	
-	List<Guestbook> selectGbookList();
 	
 	
+	//방명록 작성 
 	int insertGbook(Guestbook gbook);
+	
+	//방명록의 총 수 
+	int selectTotalCount();
+	//방명록 리스트(페이지 번호에 맞는 )
+	List<Guestbook> selectGbookList(int startRow, int cntPerPage);
 	
 	int deletGbook();
 	

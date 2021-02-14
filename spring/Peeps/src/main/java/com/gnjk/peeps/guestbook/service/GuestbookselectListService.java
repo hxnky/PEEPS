@@ -17,7 +17,7 @@ public class GuestbookselectListService {
 		
 		dao= template.getMapper(GuestbookDao.class);
 		
-		return dao.selectGbookList();
+		return null;
 	}
 
 }

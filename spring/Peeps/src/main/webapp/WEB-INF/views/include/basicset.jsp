@@ -5,12 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="<c:url value="/css/bootstrap/bootstrap.min.css"/>">
+<link rel="stylesheet"
+	href="<c:url value="/css/bootstrap/bootstrap.min.css"/>">
 
 <link rel="styleSheet" href="<c:url value="/css/default.css"/>">
 
 
- <style>
+<style>
 nav ul {
 	top: 0px;
 	left: 0px;
@@ -77,11 +78,9 @@ nav ul li button {
 	top: 0px;
 	left: 0px;
 	right: 0px;
-	
 }
 
 #nav_wrap {
-	
 	margin: 0 auto;
 }
 
@@ -97,7 +96,6 @@ nav ul li button {
 	outline: none;
 }
 
-
 #profile_wrap>img {
 	width: 200px;
 	border-radius: 100%;
@@ -112,7 +110,6 @@ nav ul li button {
 	display: inline-block;
 	text-align: center;
 	margin-right: 40px;
-	
 }
 
 #pro_btn {
@@ -131,7 +128,6 @@ nav ul li button {
 	width: 300px;
 	height: 35px;
 	font-size: 20px;
-	
 }
 
 #pro_name {
@@ -145,7 +141,6 @@ nav ul li button {
 }
 
 .menuselect a img {
-	
 	width: 50px;
 	height: 50px;
 	margin: 10px;
@@ -167,18 +162,16 @@ nav ul li button {
 }
 
 .jumbotron {
-    padding: 30px 15px;
-    margin-bottom: 30px;
-    color: inherit;
-    background-color: #eee;
-    height: 400px;
-    width: 1150px;
-    margin: 100px auto 0px auto;
-    text-align: center;
-    background-color: #F5E978;
+	padding: 30px 15px;
+	margin-bottom: 30px;
+	color: inherit;
+	background-color: #eee;
+	height: 400px;
+	width: 1150px;
+	margin: 100px auto 0px auto;
+	text-align: center;
+	background-color: #F5E978;
 }
-
-
 
 .container {
 	padding-right: 15px;
@@ -187,11 +180,11 @@ nav ul li button {
 	margin-left: auto;
 }
 
-.changing{
-  border: 3px solid red;
-    height: 1000px;
-   /*  height: auto; */
-    width: 1150px;
-   margin: 0px auto 0px auto;
+.changing {
+	border: 3px solid red;
+	/*  height: 1000px; */
+	height: auto;
+	width: 1150px;
+	margin: 0px auto 0px auto;
 }
-</style> 
+</style>

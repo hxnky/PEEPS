@@ -1,6 +1,7 @@
 package com.gnjk.peeps.guestbook.domain;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 
 
@@ -45,6 +46,11 @@ public class Guestbook {
 	public void setGphoto( String gphoto) {
 		this.gphoto = gphoto;
 	}
+	
+	public Date getToDate() {
+		return new Date(this.gdate.getTime());
+	}//페리징에서 사용
+	
 	
 
 

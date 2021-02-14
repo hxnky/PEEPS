@@ -4,8 +4,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- 1.공백있어도 오류남 -->
 
 <mapper namespace="com.gnjk.peeps.guestbook.dao.GuestbookDao">
-	<insert id="insertGbook" parameterType="com.gnjk.peeps.guestbook.domain.Guestbook" useGeneratedKeys="true" keyProperty="gidx">
-		INSERT INTO guestbook (gwriter, gmessage, gphoto) values (#{gwriter}, #{gmessage}, #{gphoto})
+
+	<resultMap id="guestbookListResult"
+		type="com.gnjk.peeps.guestbook.domain.Guestbook">
+		<id column="gidx" property="gidx" />
+		<result column="gwriter" property="gwriter" />
+		<result column="gdate" property="gdate" />
+		<result column="gmessage" property="gmessage" />
+		<result column="gphoto" property="gphoto" />
+	</resultMap>
+	
+	<!-- 방명록 작성 -->
+	<insert id="insertGbook"
+		parameterType="com.gnjk.peeps.guestbook.domain.Guestbook"
+		useGeneratedKeys="true" keyProperty="gidx">
+		INSERT INTO guestbook
+		(gwriter,gmessage, gphoto) values (#{gwriter}, #{gmessage}, #{gphoto})
 	</insert>
+	<!-- 방명록의 총수 -->
+	<select id="selectTotalCount" resultType="int">
+		select count(*) from
+		guestbook;
+	</select>
+	<select id="selectGbookList" resultMap="guestbookListResult">
+		select * from guestbook
+		limit #{param1},#{param2};
+	</select>
 
 </mapper>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%> 
 <!DOCTYPE html>
 <html lang="">
 
@@ -14,7 +16,7 @@
 <style>
 .ginsert_wrap {
 	background-color: #eef0ed;
-	height: 250px;
+	height: auto;
 	width: 800px;
 	margin: 0px auto 10px auto;
 }
@@ -38,6 +40,51 @@ height: 50px; */
 	background-color: white;
 	width: 70px;
 	height: 70px;
+	margin: 10px;
+	border-radius: 50px;
+}
+
+.upgphoto, .upgid {
+	float: left;
+}
+
+.gdate {
+	float: right;
+	margin: 15px
+}
+
+.upgtable {
+	/* background-color: aqua; */
+	margin: 100px;
+}
+
+/* .upgbinfo {
+	
+	border: 1px solid red;
+	width: 720px;
+	height: 100px; 
+	margin: 0px auto;
+} */
+.upmsg {
+	/* border: 1px solid black; */
+	width: 600px;
+	margin: 30px auto;
+	padding-top: 10px;
+	height: auto;
+}
+
+table.upmsg_table {
+	/* background-color: aqua; */
+	margin: 30px;
+	font-size: 20px;
+}
+
+.nowpage {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+.paging {
+	text-align: center;
 }
 </style>
 
@@ -52,16 +99,50 @@ height: 50px; */
 	</div>
 	<!--=====================context======================-->
 	<div class="changing">
-		<table>
-		<tr>
-		<td>gwriter</td>
-		<td>gmessage</td>
-		<td>gphoto</td>
-		<td>gdate</td>
-		</tr>
-		</table>
+
+	<c:forEach items="${listView.gbList}" var="guestbook">
+	<div class="ginsert_wrap">
+	
+		<div class="upgbinfo">
+			<span class="upgphoto"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340" class="gimg"> </span> 
+			<span class="upgid"> <h4> ${guestbook.gwriter} ${guestbook.gidx} </h4></span> 
+		    <span class="gdate"><fmt:formatDate value="${guestbook.gdate}"
+									pattern="yyyy.MM.dd." /></span>
+		    
+		</div>
+
+		<div class="upmsg">
 		
+			<table class="upmsg_table">
+				<tr><td>${guestbook.gmessage}</td></tr>
+				<tr><td><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"> ${guestbook.gphoto}</td></tr>
+			</table>
+
+		</div>
+	</div><!-- ginsert_wrap" -->
+
+	</c:forEach>
+	
+	
+ 			
+
+
+		
+
+
+
+
+
 	</div>
+	<div class="paging">
+				<c:if test="${listView.totalGbCount>0}">
+					<c:forEach begin="1" end="${listView.totalPageCount}" var="num">
+				[ <a
+							href="<c:url value="/guestbook/list"/>?p=${num}&searchType=${param.searchType}&keyword=${param.keyword}"
+							class="${listView.pageNumber eq num ? 'nowpage' : ''}">${num}</a> ] 				
+				    </c:forEach>
+				</c:if>
+			</div> 
 
 
 </body>
