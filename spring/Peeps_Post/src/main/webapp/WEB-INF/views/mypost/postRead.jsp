@@ -234,6 +234,14 @@ body {
 					</span>
 					<input type="button" value="삭제">
 					<input type="button" value="수정">
+					
+					<a
+					href="javascript:deletePost(${readView.post.p_idx});"
+					>삭제</a>
+					<a
+					href="#"
+					>수정</a>
+					
 				</td>
 			</tr>
 			<!-- 게시물 사진 carousel -->
@@ -350,6 +358,15 @@ body {
 		</table>
 		</form>
 	</div>
+	
+	<script>
+		function deletePost(pidx) {
+			
+			if(confirm('삭제하시겠습니까?')){
+				location.href = '<c:url value="/post/deletePNO=" />'+pidx;
+			} // /post/post/delete?pidx
+		}
+	</script>
 
 </body>
 </html>

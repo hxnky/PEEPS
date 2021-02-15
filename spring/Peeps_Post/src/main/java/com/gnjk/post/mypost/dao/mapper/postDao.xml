@@ -78,7 +78,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where post_idx=#{param}
 	</select>
 	
-	<!-- 회원 id 조회 -->
+	<!-- 게시글 삭제 -->
+	<delete id="deletePostByIdx">
+		delete from post where p_idx=#{pidx}
+	</delete>
 
 
 </mapper>

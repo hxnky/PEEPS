@@ -26,12 +26,14 @@ public interface PostDao {
 	// 게시글 리스트(페이지 번호에 맞는)
 	List<Post> selectPostList(int memberidx, int startRow, int cntPerPage);
 	
-	
 	// 게시글 상세보기 조회
 	Post selectPost(int pidx);
 	
 	// 게시글 파일 조회
 	List<PostFile> selectPostFileList(int pidx);
+	
+	// 게시글 삭제
+	int deletePostByIdx(int pidx);
 	
 	
 	

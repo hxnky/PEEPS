@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.gnjk.post.mypost.domain.PostWriteRequest;
+import com.gnjk.post.mypost.service.PostDeleteService;
 import com.gnjk.post.mypost.service.PostListService;
 import com.gnjk.post.mypost.service.PostReadService;
 import com.gnjk.post.mypost.service.PostWriteService;
@@ -27,6 +28,9 @@ public class PostController {
 	
 	@Autowired
 	private PostReadService readService;
+	
+	@Autowired
+	private PostDeleteService deleteService;
 	
 	// 테스트 페이지
 		@RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -100,18 +104,18 @@ public class PostController {
 	// 게시글 수정처리
 	
 	// 게시글 삭제처리
-	
-	// TEST파일 업로드 페이지
-	@RequestMapping(value = "/testfileupload", method = RequestMethod.GET)
-	public String testFileUploadGET() {
-		return "/mypost/testFileUploadForm";
+	@RequestMapping(value = "/deletePNO={pidx}", method = RequestMethod.GET)
+	public String deletePost(
+			@PathVariable("pidx") int pidx,
+			Model model
+			) {
+//		System.out.println("글 번호 : "+pidx);
+		
+		model.addAttribute("result", deleteService.deletePost(pidx));
+		
+		return "/mypost/postDelete";
 	}
 	
-	// TEST파일 업로드 등록 처리
-	@RequestMapping(value = "/testfileupload", method = RequestMethod.POST)
-	public String testFileUploadPOST() {
-		return "/mypost/testFileUploadView";
-	}
 	
 
 }
