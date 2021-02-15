@@ -227,7 +227,7 @@ a:visited {
 										<c:otherwise>
 											<div id="fix">
 												<c:choose>
-													<c:when test="${chk_result eq 1}">
+													<c:when test="${peep.chk_result eq 1}">
 														<form action="${pageContext.request.contextPath}/unfollow"
 															name="form" method="post">
 															<input type="hidden" value="${peep.m_idx}" id="y_idx"
@@ -293,42 +293,6 @@ a:visited {
 								});
 
 					});
-</script>
-
-<script>
-	$(function() {
-
-		var m_idx = "${m_idx}"
-
-		console.log(m_idx);
-		var y_idx = $('#y_idx').val();
-		console.log(y_idx);
-
-		// 리스트 m_idx 요소 뽑아서 y_idx에 넣어야 함
-		$.ajax({
-			url : '${pageContext.request.contextPath}/user/followchk',
-			type : 'get',
-			data : {
-				"m_idx" : "${m_idx}",
-				"y_idx" : $('#y_idx').val()
-			},
-			async : false,
-			success : function(data) {
-				if (data == 1) {
-					console.log("팔로우 목록 존재");
-					// 언팔로우 버튼
-				} else {
-					console.log("팔로우 목록에 없음");
-					// 팔로우 버튼
-				}
-
-			},
-			error : function(request, status, error) {
-				console.log("통신 실패");
-
-			}
-		});
-	});
 </script>
 
 <script>

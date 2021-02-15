@@ -129,6 +129,7 @@
 	border: 1px solid #888;
 	border-radius: 10px;
 	padding: 20px 60px;
+	overflow: auto;
 }
 
 #my_modal .modal_close_btn {
@@ -182,7 +183,7 @@
 
 #unfollow {
 	height: 30px;
-	width: 40px;
+	width: 100px;
 	background: #CCC;
 	border: 0.2px solid #CCC;
 	border-radius: 5px;
@@ -232,7 +233,7 @@ a:visited {
 				<c:set var="loginType" value="${loginType}" />
 				<c:choose>
 					<c:when test="${loginType eq 'email'}">
-						<img id="profile" src="<c:url value="/fileupload/${m_photo}"/>">
+						<img id="profile" src="<c:url value="/fileupload/${peeps.m_photo}"/>">
 					</c:when>
 					<c:when test="${loginType ne 'email' }">
 						<img id="profile" src="<c:url value="${m_photo}"/>">
@@ -291,8 +292,8 @@ a:visited {
 							<td>
 								<div id="fix">
 									<c:choose>
-										<c:when test="${chk_result eq 1}">
-											<form action="${pageContext.request.contextPath}/unfollow"
+										<c:when test="${follower.chk_result eq 1}">
+											<form action="${pageContext.request.contextPath}/mypage/unfollow"
 												name="form" method="post">
 												<input type="hidden" value="${follower.m_idx}" id="y_idx"
 													name="y_idx"> <input type="hidden" value="${m_idx}"
@@ -301,7 +302,7 @@ a:visited {
 											</form>
 										</c:when>
 										<c:otherwise>
-											<form action="${pageContext.request.contextPath}/follow"
+											<form action="${pageContext.request.contextPath}/mypage/follow"
 												name="form" method="post">
 												<input type="hidden" value="${follower.m_idx}" id="y_idx"
 													name="y_idx"> <input type="hidden" value="${m_idx}"
@@ -328,38 +329,38 @@ a:visited {
 				<div id="user_no">팔로잉이 없습니다.</div>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${FollowingList}" var="follower" varStatus="i">
+				<c:forEach items="${FollowingList}" var="following" varStatus="i">
 					<table id="find_peeps">
 						<tr>
 							<td rowspan="2"><a href="#"> <c:set var="loginType"
-										value="${follower.loginType}" /> <c:choose>
+										value="${following.loginType}" /> <c:choose>
 										<c:when test="${loginType eq 'email'}">
 											<img id="profile_modal"
-												src="<c:url value="/fileupload/${follower.m_photo}"/>">
+												src="<c:url value="/fileupload/${following.m_photo}"/>">
 										</c:when>
 										<c:when test="${loginType ne 'email' }">
 											<img id="profile_modal"
-												src="<c:url value="${follower.m_photo}"/>">
+												src="<c:url value="${following.m_photo}"/>">
 										</c:when>
 									</c:choose>
 							</a></td>
-							<td rowspan="2" id="id"><a href="#">${follower.id}</a></td>
+							<td rowspan="2" id="id"><a href="#">${following.id}</a></td>
 							<td rowspan="2">
 								<div id="fix">
 									<c:choose>
-										<c:when test="${chk_result eq 1}">
-											<form action="${pageContext.request.contextPath}/unfollow"
+										<c:when test="${following.chk_result eq 1}">
+											<form action="${pageContext.request.contextPath}/mypage/unfollow"
 												name="form" method="post">
-												<input type="hidden" value="${follower.m_idx}" id="y_idx"
+												<input type="hidden" value="${following.m_idx}" id="y_idx"
 													name="y_idx"> <input type="hidden" value="${m_idx}"
 													name="m_idx">
 												<button id="unfollow" type="submit">언팔로우</button>
 											</form>
 										</c:when>
 										<c:otherwise>
-											<form action="${pageContext.request.contextPath}/follow"
+											<form action="${pageContext.request.contextPath}/mypage/follow"
 												name="form" method="post">
-												<input type="hidden" value="${follower.m_idx}" id="y_idx"
+												<input type="hidden" value="${following.m_idx}" id="y_idx"
 													name="y_idx"> <input type="hidden" value="${m_idx}"
 													name="m_idx">
 												<button id="follow" type="submit">팔로우</button>
@@ -385,9 +386,6 @@ a:visited {
 
 		console.log(email);
 
-		// 		location.href = "${pageContext.request.contextPath}/mypage/following";
-		// 		location.href = "${pageContext.request.contextPath}/mypage/follower";
-
 		$("#edit")
 				.click(
 						function() {
@@ -397,60 +395,8 @@ a:visited {
 
 						});
 
-		// 		$("#following_btn").click(function() {
-		// 			document.getElementById("modal").style.display = "block";
-		// 		});
-
-		// 		$("#follower_btn").click(function() {
-		// 			document.getElementById("wer_modal").style.display = "block";
-
-		// 		});
-
-		// 		document.getElementById("wer_modal_close_btn").onclick = function() {
-		// 			document.getElementById("wer_modal").style.display = "none";
-		// 		}
-
-		// 		document.getElementById("modal_close_btn").onclick = function() {
-		// 			document.getElementById("modal").style.display = "none";
-		// 		}
 	});
 </script>
-<script>
-	$(function() {
-
-		var m_idx = "${m_idx}"
-
-		console.log(m_idx);
-		var y_idx = $('#y_idx').val();
-		console.log(y_idx);
-
-		// 리스트 m_idx 요소 뽑아서 y_idx에 넣어야 함
-		$.ajax({
-			url : '${pageContext.request.contextPath}/user/followchk',
-			type : 'get',
-			data : {
-				"m_idx" : "${m_idx}",
-				"y_idx" : $('#y_idx').val()
-			},
-			async : false,
-			success : function(data) {
-				if (data == 1) {
-					console.log("팔로우 목록 존재");
-					// 언팔로우 버튼
-				} else {
-					console.log("팔로우 목록에 없음");
-					// 팔로우 버튼
-				}
-
-			},
-			error : function(request, status, error) {
-				console.log("통신 실패");
-
-			}
-		});
-	});
-</script>
-
 <script>
 	function modal(id) {
 		var zIndex = 9999;
@@ -503,4 +449,6 @@ a:visited {
 		modal('my_modal_wer');
 	});
 </script>
+
+
 </html>

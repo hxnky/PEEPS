@@ -3,11 +3,13 @@ package com.gnjk.peeps.domain;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Generated;
+
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
 public class Peeps {
 
 	private String m_idx;
@@ -22,16 +24,11 @@ public class Peeps {
 
 	// 21.02.04 소셜 로그인 타입 추가
 	private String loginType;
+	
+	// 21.02.15 팔로우 체크
+	private int chk_result;
 
-	// 21.02.11 리스트 출력
-	private List<Peeps> peepslist;
-
-	@Override
-	public String toString() {
-		return "[m_idx=" + m_idx + ", email=" + email + ", password=" + password + ", name=" + name + ", id=" + id
-				+ ", m_photo=" + m_photo + ", bio=" + bio + ", code=" + code + ", verify=" + verify + ", loginType="
-				+ loginType + "]";
-	}
+	
 
 	public Peeps(String m_idx, String email, String password, String name, String id, String m_photo, String bio,
 			String code, char verify, String loginType) {
@@ -111,6 +108,13 @@ public class Peeps {
 
 	public LoginInfo toLoginInfo() {
 		return new LoginInfo(id, name, m_photo, bio);
+	}
+
+	@Override
+	public String toString() {
+		return "Peeps [m_idx=" + m_idx + ", email=" + email + ", password=" + password + ", name=" + name + ", id=" + id
+				+ ", m_photo=" + m_photo + ", bio=" + bio + ", code=" + code + ", verify=" + verify + ", loginType="
+				+ loginType + ", chk_result=" + chk_result + "]";
 	}
 
 }

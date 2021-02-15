@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 팔로우 상태인지 확인 -->
 	<select id="CheckFollow" resultType="int">
 		select count(*) from follow
-		where following_id=#{y_idx} and follower_id = #{m_idx}
+		where following_id=#{follow_idx} and follower_id = #{m_idx}
 	</select>
 
 	<!-- 팔로우 -->

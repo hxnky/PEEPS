@@ -88,11 +88,15 @@ public class MyPageService {
 
 			followingList.add(dao.selectMemberByIdx(f_idx));
 
+			int chk_result = f_dao.CheckFollow(m_idx, f_idx);
+
+			followingList.get(i).setChk_result(chk_result);
+
 			System.out.println(followingList);
 		}
 
 		System.out.println("팔로잉 목록 : " + followingList);
-		
+
 		return followingList;
 	}
 
@@ -104,23 +108,93 @@ public class MyPageService {
 
 		List<Integer> follower_peeps = f_dao.followerList(m_idx);
 		List<Peeps> followerList = new ArrayList<Peeps>();
-		
+
 		System.out.println(follower_peeps);
 
-		for(int i=0; i<follower_peeps.size(); i++) {
-			
+		for (int i = 0; i < follower_peeps.size(); i++) {
+
 			int f_idx = follower_peeps.get(i);
 
 			System.out.println(f_idx);
 
 			followerList.add(dao.selectMemberByIdx(f_idx));
+			
+			int chk_result = f_dao.CheckFollow(m_idx, f_idx);
+
+			followerList.get(i).setChk_result(chk_result);
 
 			System.out.println("팔로워 목록 : " + followerList);
-			
-			
+
 		}
 
 		return followerList;
 	}
 
+	// 팔로우
+	public int My_follow(int m_idx, int y_idx, HttpSession session) {
+
+		int f_result = 0;
+
+		f_dao = template.getMapper(FollowDao.class);
+
+		f_result = f_dao.insertFollow(m_idx, y_idx);
+
+		List<Peeps> followerList = (List<Peeps>) session.getAttribute("FollowerList");
+
+		for (int i = 0; i < followerList.size(); i++) {
+
+			int follow_idx = Integer.parseInt(followerList.get(i).getM_idx());
+
+			if (follow_idx == y_idx) {
+				followerList.get(i).setChk_result(f_result);
+				System.out.println("result 바꾸기 성공");
+			} else {
+				System.out.println("해당 인덱스가 아님");
+			}
+
+		}
+
+		System.out.println("팔로잉 리스트 수정됨 : " + followerList);
+
+		return f_result;
+	}
+	
+	// 언팔로우
+	public int My_unfollow(int m_idx, int y_idx, HttpSession session) {
+
+		int u_result = 0;
+
+		f_dao = template.getMapper(FollowDao.class);
+
+		u_result = f_dao.deleteFollow(m_idx, y_idx);
+		
+		List<Peeps> followingList = (List<Peeps>) session.getAttribute("FollowingList");
+		
+		for(int i = 0; i<followingList.size(); i++) {
+			
+			int follow_idx = Integer.parseInt(followingList.get(i).getM_idx());
+			
+			if(follow_idx == y_idx) {
+				if(u_result == 1) {
+					followingList.get(i).setChk_result(0);
+				} else {
+					followingList.get(i).setChk_result(1);
+				}
+				
+				
+				
+			} else {
+				System.out.println("해당 인덱스가 아님");
+			}
+			
+			System.out.println("팔로워 수정됨 : " + followingList);
+		}
+
+		return u_result;
+	}
+
+	
+	
+	
+	
 }

@@ -1,13 +1,16 @@
 package com.gnjk.peeps.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.javassist.expr.NewArray;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gnjk.peeps.dao.FollowDao;
 import com.gnjk.peeps.dao.PeepsDao;
 import com.gnjk.peeps.domain.Peeps;
 
@@ -15,6 +18,7 @@ import com.gnjk.peeps.domain.Peeps;
 public class FindUserService {
 
 	private PeepsDao dao;
+	private FollowDao f_dao;
 
 	@Autowired
 	private SqlSessionTemplate template;
@@ -22,26 +26,32 @@ public class FindUserService {
 	public List<Peeps> SearchPeeps(String keyword, HttpSession session) {
 
 		dao = template.getMapper(PeepsDao.class);
+		f_dao = template.getMapper(FollowDao.class);
 
 		System.out.println("키워드" + keyword);
-
-//		Map<String, Object> listMap = new HashMap<String, Object>();
-//		listMap.put("keyword", keyword);
 
 		List<Peeps> peepslist = dao.searchMember(keyword);
 		int peepsCnt = dao.searchMemberCnt(keyword);
 
-		System.out.println(peepsCnt);
-		System.out.println(peepslist.size());
-		
 		session.setAttribute("peepsCnt", peepsCnt);
-
+		
 		for (int i = 0; i < peepslist.size(); i++) {
-			String m = i + "번째 인덱스 : " + peepslist.get(i).getM_idx();
-			System.out.println(m);
-			System.out.println("----------------------------------");
-			System.out.println(i + "번째 인덱스 : " + peepslist.get(i).getM_idx());
-			session.setAttribute(i+"_m_idx", peepslist.get(i).getM_idx());
+			
+			int follow_idx = Integer.parseInt(peepslist.get(i).getM_idx());
+			
+			System.out.println("아이디 검색 인덱스");
+			System.out.println(follow_idx);
+			
+			int m_idx = ((Integer)(session.getAttribute("m_idx"))).intValue();
+			System.out.println(m_idx);
+			
+			int chk_result = f_dao.CheckFollow(m_idx, follow_idx);
+			
+			System.out.println(chk_result);
+			
+			//peepslist.get(i).setChkfollow(f_dao.CheckFollow(m_idx, follow_idx));
+			
+			peepslist.get(i).setChk_result(chk_result);
 		}
 
 		System.out.println(peepslist);

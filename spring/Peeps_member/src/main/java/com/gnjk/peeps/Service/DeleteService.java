@@ -25,6 +25,7 @@ public class DeleteService {
 		int result = 0;
 		
 		dao = template.getMapper(PeepsDao.class);
+		f_dao = template.getMapper(FollowDao.class);
 
 		String email = peeps.getEmail();
 		String password = peeps.getPassword();
@@ -43,8 +44,7 @@ public class DeleteService {
 			dao.deletePeeps(email, password);
 			System.out.println(m_idx);
 			
-			// 널포인터 발생
-			//f_dao.deleteFollowList(m_idx);
+			f_dao.deleteFollowList(m_idx);
 			System.out.println("회원 삭제 완료");
 		}
 		
