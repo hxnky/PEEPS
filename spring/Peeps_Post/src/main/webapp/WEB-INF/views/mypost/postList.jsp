@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,11 +127,13 @@
 }
 </style>
 
+
 <body>
-	<div id="top_wrap">
+<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+	<!-- <div id="top_wrap">
 		<nav class="navbar navbar-default">
 			<div class="container-fluid">
-				<!-- Brand and toggle get grouped for better mobile display -->
+				Brand and toggle get grouped for better mobile display
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed"
 						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -140,7 +144,7 @@
 					<a class="navbar-brand" href="#">Brand</a>
 				</div>
 
-				<!-- Collect the nav links, forms, and other content for toggling -->
+				Collect the nav links, forms, and other content for toggling
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
@@ -180,12 +184,12 @@
 							</ul></li>
 					</ul>
 				</div>
-				<!-- /.navbar-collapse -->
+				/.navbar-collapse
 			</div>
-			<!-- /.container-fluid -->
+			/.container-fluid
 
 		</nav>
-	</div>
+	</div> -->
 	<!---------------------------------------->
 	<div id="main_wrap">
 		<div class="jumbotron">
@@ -230,13 +234,24 @@
 				<div class="col-sm-4">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<a class="postidx" href="postNO=${post.p_idx}">${post.p_title}</a>
+							<a id="ptitle" class="postidx" href="postNO=${post.p_idx}">
+								<!-- 제목 20자 이상 초과시 자르기 -->
+								<c:choose>
+									<c:when test="${fn:length(post.p_title) > 20}">
+									<c:out value="${fn:substring(post.p_title,0,20)}"/>...
+									</c:when>
+									<c:otherwise>
+									<c:out value="${post.p_title}"></c:out>
+									</c:otherwise>
+								</c:choose>
+							</a>
 						</div>
 						<div class="panel-body">
 							<a class="postidx" href="postNO=${post.p_idx}"><img src="<c:url value="/resources/fileupload/postfile/${post.p_thumbnail}"/>"
 								class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>
 						</div>
-						<div class="panel-footer">${post.p_date}
+						<div class="panel-footer"><fmt:formatDate value="${post.p_date}"
+									pattern="yyyy.MM.dd." />
 						</div>
 					</div>
 				</div>

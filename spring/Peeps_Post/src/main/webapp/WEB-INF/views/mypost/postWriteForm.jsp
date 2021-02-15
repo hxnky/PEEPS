@@ -116,7 +116,7 @@ body {
         
         $(document).ready(function(){
             
-            // 글자 수 제한
+            // 게시글 글자 수 제한
             $('textarea').keyup(function(){
                 // 현재 입력 문자열의 길이
                 var inputStrLen = $(this).val().length;
@@ -127,6 +127,19 @@ body {
                     inputStrLen = 1500;
                 }
                 $('#textnumber').text(inputStrLen);
+            });
+            
+            // 제목 글자 수 제한
+            $('.ptitle').keyup(function(){
+                // 현재 입력 문자열의 길이
+                var inputStrLen = $(this).val().length;
+                if(inputStrLen>30){
+                    alert('30자 까지만 입력이 가능합니다.');
+                    var userInput = $(this).val().substr(0,30);
+                    $(this).val(userInput);
+                    inputStrLen = 30;
+                }
+                /* $('#textnumber').text(inputStrLen); */
             });
              
         });
