@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.gnjk.post.mypost.domain.PostWriteRequest;
 import com.gnjk.post.mypost.service.PostDeleteService;
+import com.gnjk.post.mypost.service.PostEditService;
 import com.gnjk.post.mypost.service.PostListService;
 import com.gnjk.post.mypost.service.PostReadService;
 import com.gnjk.post.mypost.service.PostWriteService;
@@ -31,6 +32,9 @@ public class PostController {
 	
 	@Autowired
 	private PostDeleteService deleteService;
+	
+	@Autowired
+	private PostEditService editService;
 	
 	// 테스트 페이지
 		@RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -101,8 +105,19 @@ public class PostController {
 	}
 	
 	// 게시글 수정페이지
+	@RequestMapping(value = "/editPNO={p_idx}", method = RequestMethod.GET)
+	public String postEditForm(
+			@PathVariable("p_idx") int pidx,
+			Model model
+			) {
+		
+		model.addAttribute("editView", editService.getPost(pidx));
+		
+		return "/mypost/postEditForm";
+	}
 	
 	// 게시글 수정처리
+	
 	
 	// 게시글 삭제처리
 	@RequestMapping(value = "/deletePNO={pidx}", method = RequestMethod.GET)

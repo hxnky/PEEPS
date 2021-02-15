@@ -223,11 +223,6 @@ body {
 			<!-- 날짜, 수정 및 삭제 버튼 -->
 			<tr>
 				<td class="post_datenbutton">
-					<%
-						Date now = new Date();
-						SimpleDateFormat ymd = new SimpleDateFormat("yyyy.MM.dd");
-						SimpleDateFormat hms = new SimpleDateFormat("hh.mm.ss");
-					%>
 					<span class="pdate">
 						<fmt:formatDate value="${readView.post.p_date}"
 										pattern="yyyy.MM.dd."/>
@@ -239,9 +234,8 @@ body {
 					href="javascript:deletePost(${readView.post.p_idx});"
 					>삭제</a>
 					<a
-					href="#"
+					href="<c:url value="/post/editPNO=${readView.post.p_idx}" />"
 					>수정</a>
-					
 				</td>
 			</tr>
 			<!-- 게시물 사진 carousel -->
