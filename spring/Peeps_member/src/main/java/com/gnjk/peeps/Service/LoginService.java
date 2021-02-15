@@ -42,10 +42,14 @@ public class LoginService {
 				request.getSession().setAttribute("loginInfo", peeps.toLoginInfo());
 				loginCheck = true;
 				session.setAttribute("l_result", 2);
-			} else {
+			} else if(peeps.getVerify() == 'N') {
 				System.out.println("미인증계정");
 				loginCheck = true;
 				session.setAttribute("l_result", 1);
+			} else {
+				System.out.println("탈퇴 계정");
+				loginCheck = true;
+				session.setAttribute("l_result", 3);
 			}
 
 		}

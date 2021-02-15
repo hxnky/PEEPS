@@ -35,7 +35,7 @@ public class DeleteController {
 	@RequestMapping(method = RequestMethod.POST)
 	public String EditPwPost(HttpServletResponse response, @ModelAttribute Peeps peeps, Model model, HttpSession session) throws IOException{
 		
-		model.addAttribute("result", deleteService.Delete(peeps, response));
+		model.addAttribute("result", deleteService.Delete(peeps, response, session));
 		
 		session.invalidate();
 		

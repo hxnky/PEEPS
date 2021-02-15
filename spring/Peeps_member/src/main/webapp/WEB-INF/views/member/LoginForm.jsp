@@ -183,8 +183,10 @@ $(document).ready(function() {
 		location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
 	} else if(result == 1){
 		alert("미인증 계정입니다. 이메일을 확인해주세요.");
-	} else{
+	} else if(result == 0){
 		alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+	} else {
+		alert("탈퇴된 계정입니다.");
 	}
 	
 });

@@ -24,5 +24,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		follower_id= #{m_idx}
 	</delete>
 
+	<!-- 팔로워 수 체크 -->
+	<select id="FollowerCnt" resultType="int">
+		select count(*) from follow
+		where following_id =#{m_idx}
+	</select>
+
+	<!-- 팔로잉 수 체크 -->
+	<select id="FollowingCnt" resultType="int">
+		select count(following_id)
+		from follow where follower_id =#{m_idx}
+	</select>
+
+	<!-- 팔로워 인덱스 가져오기 -->
+	<select id="followerList" resultType="int">
+		select follower_id from
+		follow
+		where following_id =#{m_idx}
+	</select>
+
+	<!-- 팔로잉 인덱스 가져오기 -->
+	<select id="followingList" resultType="int">
+		select following_id
+		from
+		follow where follower_id =#{m_idx}
+	</select>
+	
+	<!-- 회원 탈퇴 시 팔로우 목록 삭제 -->
+	<delete id="deleteFollowList">
+		delete from follow where follower_id =#{m_idx} or following_id = #{m_idx}
+	</delete>
 
 </mapper>

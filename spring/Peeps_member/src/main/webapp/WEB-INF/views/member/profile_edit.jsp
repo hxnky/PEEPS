@@ -111,6 +111,7 @@ h3 {
 	margin: 50px auto;
 }
 
+/*네비*/
 nav ul {
 	top: 0px;
 	left: 0px;
@@ -162,7 +163,7 @@ nav ul li button {
 	border-bottom-left-radius: 0;
 }
 
-nav ul li a img {
+#MyPage_img {
 	border-radius: 100%;
 	width: 30px;
 	height: 30px;
@@ -192,20 +193,17 @@ nav ul li a img {
 						src="<c:url value="/resources/images/icon/navi/008-notification.png"/>"></a>
 					<a id="Chat" href="#"><img
 						src="<c:url value="/resources/images/icon/navi/050-wechat.png"/>"></a>
-					<a id="MyPage" href="#"> <c:set var="loginType"
-							value="${loginType }" /> <c:choose>
-							<c:when test="${loginType eq 'email' }">
+					<c:set var="loginType" value="${loginType }" /> <c:choose>
+						<c:when test="${loginType eq 'email' }">
+							<img id="MyPage_img"
+								src="<c:url value="/fileupload/${peeps.m_photo}"/>">
+						</c:when>
+						<c:when test="${loginType ne 'email' }">
+							<img id="MyPage_img" src="<c:url value="${peeps.m_photo}"/>">
 
-								<img id="MyPage_img"
-									src="<c:url value="/fileupload/${peeps.m_photo}"/>">
-							</c:when>
-							<c:when test="${loginType ne 'email' }">
-								<img id="MyPage_img" src="<c:url value="${peeps.m_photo}"/>">
+						</c:when>
 
-							</c:when>
-
-						</c:choose>
-				</a></li>
+					</c:choose></li>
 			</ul>
 
 		</nav>
@@ -233,12 +231,12 @@ nav ul li a img {
 								<c:when test="${loginType eq 'email' }">
 									<img id="profile"
 										src="<c:url value="/fileupload/${peeps.m_photo}"/>">
-										<input type="hidden" name = "oldPhoto" value="${peeps.m_photo}">
+									<input type="hidden" name="oldPhoto" value="${peeps.m_photo}">
 									<br>
 								</c:when>
 								<c:when test="${loginType ne 'email' }">
 									<img id="profile" src="<c:url value="${peeps.m_photo}"/>">
-									<input type="hidden" name = "oldPhoto" value="${peeps.m_photo}">
+									<input type="hidden" name="oldPhoto" value="${peeps.m_photo}">
 									<br>
 								</c:when>
 
@@ -338,6 +336,15 @@ nav ul li a img {
 
 		var email = $('#email').text();
 
+		$("#MyPage_img")
+		.click(
+				function() {
+
+					location.href = "${pageContext.request.contextPath}/mypage?email="
+							+ email;
+
+				});
+		
 		$("#edit")
 				.click(
 						function() {

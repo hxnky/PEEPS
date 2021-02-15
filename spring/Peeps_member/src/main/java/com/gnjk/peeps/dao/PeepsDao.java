@@ -42,4 +42,6 @@ public interface PeepsDao {
 	List<Peeps> searchMember(String keyword);
 	// 일치하는 회원 수 출력
 	int searchMemberCnt(String keyword);
+	// 인덱스로 회원 정보 가져오기
+	Peeps selectMemberByIdx(int f_idx);
 }

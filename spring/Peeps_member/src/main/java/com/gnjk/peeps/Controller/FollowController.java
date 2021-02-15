@@ -20,7 +20,7 @@ public class FollowController {
 	@GetMapping("user/followchk")
 	@ResponseBody
 	// y_idx 말고 리스트 인덱스가 다 들어가게 바꿔야할듯
-	public int FollowChk(@RequestParam("m_idx") String m_idx, @RequestParam("y_idx") String y_idx,
+	public int FollowChk(@RequestParam("m_idx") int m_idx, @RequestParam("y_idx") int y_idx,
 			HttpSession session) {
 
 		int chk_result = 0;
@@ -35,7 +35,7 @@ public class FollowController {
 	}
 
 	@PostMapping("/follow")
-	public String Follow(@RequestParam("m_idx") String m_idx, @RequestParam("y_idx") String y_idx, HttpSession session) {
+	public String Follow(@RequestParam("m_idx") int m_idx, @RequestParam("y_idx") int y_idx, HttpSession session) {
 		
 		int f_result = 0;
 
@@ -50,7 +50,7 @@ public class FollowController {
 	}
 
 	@PostMapping("/unfollow")
-	public String UnFollow(@RequestParam("m_idx") String m_idx, @RequestParam("y_idx") String y_idx, HttpSession session) {
+	public String UnFollow(@RequestParam("m_idx") int m_idx, @RequestParam("y_idx") int y_idx, HttpSession session) {
 		
 		int u_result = 0;
 

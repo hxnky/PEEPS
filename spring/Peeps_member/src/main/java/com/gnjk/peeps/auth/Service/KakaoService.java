@@ -130,6 +130,7 @@ public class KakaoService {
 
 			session.setAttribute("email", email);
 			session.setAttribute("name", name);
+			session.setAttribute("m_photo", m_photo);
 			session.setAttribute("loginType", "kakao");
 
 			userInfo.put("name", name);

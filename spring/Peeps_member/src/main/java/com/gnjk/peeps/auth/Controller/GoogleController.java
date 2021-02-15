@@ -100,15 +100,16 @@ public class GoogleController {
 		session.setAttribute("userInfo", userInfo);
 		session.setAttribute("access_Token", Result.getAccessToken());
 		
-		model.addAttribute("loginType", "google");
-		model.addAttribute("email", userInfo.get("email"));
-		model.addAttribute("name", userInfo.get("name"));
-		model.addAttribute("m_photo", userInfo.get("picture"));
+//		model.addAttribute("loginType", "google");
+//		model.addAttribute("email", userInfo.get("email"));
+//		model.addAttribute("name", userInfo.get("name"));
+//		model.addAttribute("m_photo", userInfo.get("picture"));
 		model.addAttribute("token", Result.getAccessToken());
 		model.addAttribute("result", result);
 		
 		session.setAttribute("email", userInfo.get("email"));
 		session.setAttribute("name", userInfo.get("name"));
+		session.setAttribute("m_photo", userInfo.get("picture"));
 		session.setAttribute("loginType","google");
 		
 		System.out.println(userInfo);

@@ -28,13 +28,13 @@ public class EditInfoService {
 		dao = template.getMapper(PeepsDao.class);
 
 		Peeps peeps = dao.selectMemberByEmail(email);
-		
+
 		session.setAttribute("peeps", peeps);
-		session.setAttribute("m_idx", peeps.getM_idx());
+		session.setAttribute("m_idx", new Integer(peeps.getM_idx()));
 		session.setAttribute("email", peeps.getEmail());
 		session.setAttribute("id", peeps.getId());
 		session.setAttribute("loginType", peeps.getLoginType());
-		
+
 		return peeps;
 	}
 
@@ -45,10 +45,9 @@ public class EditInfoService {
 		String uploadPath = "/fileupload";
 
 		String saveDirPath = request.getSession().getServletContext().getRealPath(uploadPath);
-		
+
 		String newFileName = null;
 		File newFile = null;
-
 
 		if (!editRequest.getM_photo().isEmpty()) {
 
@@ -69,8 +68,7 @@ public class EditInfoService {
 		System.out.println(editRequest);
 		System.out.println(peeps);
 		System.out.println(editRequest.getOldPhoto());
-		
-		
+
 		if (newFileName == null) {
 			peeps.setM_photo(editRequest.getOldPhoto());
 		} else {
@@ -85,7 +83,6 @@ public class EditInfoService {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-
 			if (newFile != null && newFile.exists()) {
 				newFile.delete();
 			}
@@ -94,7 +91,7 @@ public class EditInfoService {
 //		if (newFile != null && !editRequest.getOldPhoto().equals("profile.png")) {
 //			new File(saveDirPath, editRequest.getOldPhoto()).delete();
 //		}
-		
+
 		// 수정 후 세션 다시 저장
 		session.setAttribute("peeps", peeps);
 		session.setAttribute("id", peeps.getId());

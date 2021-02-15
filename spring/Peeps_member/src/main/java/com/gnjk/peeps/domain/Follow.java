@@ -1,5 +1,7 @@
 package com.gnjk.peeps.domain;
 
+import java.util.List;
+
 import com.google.protobuf.Timestamp;
 
 import lombok.Getter;
@@ -13,6 +15,9 @@ public class Follow {
 	private Timestamp f_time;
 	private int following_id;
 	private int follower_id;
+	
+	private List<Follow> followinglist;
+	private List<Follow> followerlist;
 
 	@Override
 	public String toString() {

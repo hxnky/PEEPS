@@ -60,7 +60,7 @@ nav ul li button {
 	border-bottom-left-radius: 0;
 }
 
-nav ul li a img {
+#MyPage_img {
 	border-radius: 100%;
 	width: 30px;
 	height: 30px;
@@ -71,7 +71,7 @@ body {
 }
 
 #total_wrap {
-	margin: 150px 0 0 500px;
+	margin: 150px 0 0 350px;
 }
 
 #profile {
@@ -147,11 +147,9 @@ a:visited {
 	text-decoration: none;
 }
 
-#user_no{
-	
+#user_no {
 	font-size: 50px;
 	font-weight: bold;
-
 }
 </style>
 </head>
@@ -180,20 +178,17 @@ a:visited {
 						src="<c:url value="/resources/images/icon/navi/008-notification.png"/>"></a>
 					<a id="Chat" href="#"><img
 						src="<c:url value="/resources/images/icon/navi/050-wechat.png"/>"></a>
-					<a id="MyPage" href="#"> <c:set var="loginType"
-							value="${loginType }" /> <c:choose>
-							<c:when test="${loginType eq 'email' }">
+					<c:set var="loginType" value="${loginType }" /> <c:choose>
+						<c:when test="${loginType eq 'email' }">
+							<img id="MyPage_img"
+								src="<c:url value="/fileupload/${peeps.m_photo}"/>">
+						</c:when>
+						<c:when test="${loginType ne 'email' }">
+							<img id="MyPage_img" src="<c:url value="${peeps.m_photo}"/>">
 
-								<img id="MyPage_img"
-									src="<c:url value="/fileupload/${peeps.m_photo}"/>">
-							</c:when>
-							<c:when test="${loginType ne 'email' }">
-								<img id="MyPage_img" src="<c:url value="${peeps.m_photo}"/>">
+						</c:when>
 
-							</c:when>
-
-						</c:choose>
-				</a></li>
+					</c:choose></li>
 			</ul>
 
 		</nav>
@@ -223,8 +218,7 @@ a:visited {
 										</c:choose>
 								</a></td>
 								<td id="id"><a href="#">${peep.id}</a></td>
-								<td rowspan="2">
-							<c:choose>
+								<td rowspan="2"><c:choose>
 										<c:when test="${peep.id eq id}">
 											<div id="fix">
 												<button id="edit_btn">프로필편집</button>
@@ -239,32 +233,32 @@ a:visited {
 															<input type="hidden" value="${peep.m_idx}" id="y_idx"
 																name="y_idx"> <input type="hidden"
 																value="${m_idx}" name="m_idx">
-															<button id="unfollow" type="submit">언팔로우</button></td>
-								</form>
-								</c:when>
-								<c:otherwise>
-									<form action="${pageContext.request.contextPath}/follow"
-										name="form" method="post">
-										<input type="hidden" value="${peep.m_idx}" id="y_idx"
-											name="y_idx"> <input type="hidden" value="${m_idx}"
-											name="m_idx">
-										<button id="follow" type="submit">팔로우</button>
-									</form>
-								</c:otherwise>
-								</c:choose>
-		</div>
-		</c:otherwise>
-		</c:choose>
-		</tr>
-		<tr>
-			<td id="name"><a href="#">${peep.name}</a></td>
-		</tr>
+															<button id="unfollow" type="submit">언팔로우</button>
+														</form>
+													</c:when>
+													<c:otherwise>
+														<form action="${pageContext.request.contextPath}/follow"
+															name="form" method="post">
+															<input type="hidden" value="${peep.m_idx}" id="y_idx"
+																name="y_idx"> <input type="hidden"
+																value="${m_idx}" name="m_idx">
+															<button id="follow" type="submit">팔로우</button>
+														</form>
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</c:otherwise>
+									</c:choose></td>
+							</tr>
+							<tr>
+								<td id="name"><a href="#">${peep.name}</a></td>
+							</tr>
 
-		</table>
-		</c:forEach>
-		</c:otherwise>
-		</c:choose>
-	</div>
+						</table>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+		</div>
 	</div>
 
 
@@ -345,7 +339,17 @@ a:visited {
 	$('#edit_btn')
 			.click(
 					function() {
-						location.href = "${pageContext.request.contextPath}/profile/Info?email=" + email;
+						location.href = "${pageContext.request.contextPath}/profile/Info?email="
+								+ email;
+					});
+
+	$("#MyPage_img")
+			.click(
+					function() {
+
+						location.href = "${pageContext.request.contextPath}/mypage?email="
+								+ email;
+
 					});
 </script>
 </html>

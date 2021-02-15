@@ -14,7 +14,7 @@ public class FollowService {
 	
 	private FollowDao dao;
 	
-	public int followChk(String m_idx, String y_idx) {
+	public int followChk(int m_idx, int y_idx) {
 		
 		dao = template.getMapper(FollowDao.class);
 		
@@ -22,7 +22,7 @@ public class FollowService {
 	}
 
 
-	public int follow(String m_idx, String y_idx) {
+	public int follow(int m_idx, int y_idx) {
 		
 		int f_result = 0;
 		
@@ -33,7 +33,7 @@ public class FollowService {
 		return f_result;
 	}
 	
-public int unfollow(String m_idx, String y_idx) {
+public int unfollow(int m_idx, int y_idx) {
 		
 		int u_result = 0;
 		
