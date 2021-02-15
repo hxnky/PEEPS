@@ -11,6 +11,8 @@
 </head>
 <body>
 
+	
+
 <div id="container">
 		<aside>
 			<header>
@@ -56,18 +58,24 @@
 
 			<div class="well" id="chatdata">
 				<!-- User Session Info Hidden -->
-				${m_idx}<input type="hidden" value="seoa" id="sessionuserid">
+				<input type="hidden" value=${m_idx}  id="sessionuserid">
+				<div class="msgImg">
+				<div class ="clearBoth"></div>
+				</div>
+				
+				
 			</div>
-			
+			<!--  <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png"
+					alt="">    -->
 			<footer>
 				<img
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png"
-					alt=""> <img
+					alt=""> 
+					<img
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png"
 					alt="">
 					
 					<div class="send">
-
 						<input type="text" id="message" name="ch_ms" placeholder="Type your message" />
 						<button type="button" id="sendBtn" >전송</button>
 					</div>

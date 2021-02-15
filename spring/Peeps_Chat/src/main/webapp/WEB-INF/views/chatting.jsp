@@ -43,7 +43,7 @@
 
 </head>
 
-<body>}
+<body>
 </body>
 
 <script>
@@ -52,9 +52,7 @@
 	sock.onopen = onOpen;
 	sock.onmessage = onMessage;
 	sock.onclose = onClose;
-	
-	//var a = ${m_idx}
-	//console.log(a);
+
 	
 	$(document).ready(function() {
 		$('#message').keypress(function(event) {
@@ -67,10 +65,17 @@
 
 		$('#sendBtn').click(function() {
 			sendMessage();
-			console.log("sendMessage() - 메서드 실행 ");
-		
+			console.log("sendMessage() - 메서드 실행 ");	
 			
+			re
 		});
+	
+	   //$('#sendFileBtn').click(function() {
+		//	fileSend();
+		//	console.log("fileSend() - 메서드 실행 ");
+		//});
+		
+		
 	});
 
 	function onOpen() {
@@ -79,20 +84,23 @@
 
 	function sendMessage() {
 		//	var t = getTimeStamp();
-
 		var date = new Date();		// 자바스크립트 Date 객체
 		var str = date.toJSON();	// Date 객체를 JSON 형식의 문자열로 변환
-		
+			
 		var mes = {
 			ch_idx : '1',
-			m_idx : 'seoa',
-			rm_idx : 'to someone',
+			m_idx : '${m_idx}',
+			rm_idx : '${rm_idx}', 
 			ch_ms : $("#message").val(),
 			ch_time :  str
 		}
 
+		if(mes != ""){
+			
+	
+		/*
 		$.ajax({
-			url : 'http://localhost:8080/chat',
+			url : '/chat',
 			type : 'post',
 			data : mes,                         
 			dataType : "json", // 받을 데이터 방식 
@@ -104,19 +112,27 @@
 				console.log("ajax로 통신 실패 ");
 			} 
 			});
+		*/
 		
 		sock.send(JSON.stringify(mes));
 		console.log(JSON.stringify(mes));
 		console.log('위 메세지 소켓에 전송');
+	
+	} else {
+		return false;
 	}
-
+		
+	} 
+	
 	function onMessage(evt) {
 				var data = evt.data;
 				var obj = JSON.parse(data);
 				
 				var currentuser_session = $('#sessionuserid').val();
 		
-				if (obj.m_idx == currentuser_session) { //m_idx = seoa
+				if(obj != ""){
+				
+				if (obj.m_idx == currentuser_session) { //m_idx = m_idx
 					var printHTML = "<div id='right'>";
 					printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
 					printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
@@ -133,16 +149,16 @@
 					printHTML += "</div>";
 		
 					$('#chatdata').append(printHTML);
-		
 			  }
-			$("#message").val("");
-			console.log('소켓이 보낸 메세지' + data);
+				}else {
+					return false;
+				}
 	};
 
 	function onClose() {
 		console.log('console close');
 	};
-	
+
 	
 	
 </script>
