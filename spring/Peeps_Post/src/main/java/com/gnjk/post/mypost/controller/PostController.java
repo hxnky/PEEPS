@@ -64,7 +64,8 @@ public class PostController {
 		
 		model.addAttribute("result", result);
 		
-		return "/mypost/postWriteView";
+		/* return "/mypost/postWriteView"; */
+		return "redirect:/post/list";
 	}
 	
 	// 게시글 목록페이지
@@ -113,7 +114,7 @@ public class PostController {
 		
 		model.addAttribute("result", deleteService.deletePost(pidx));
 		
-		return "/mypost/postDelete";
+		return "redirect:/post/list";
 	}
 	
 	
