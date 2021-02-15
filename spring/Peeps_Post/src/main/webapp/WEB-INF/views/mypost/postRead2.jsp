@@ -123,7 +123,7 @@ crossorigin="anonymous"></script>
 	margin: 15px auto;
 	width: 800px;
 	height: 800px;
-	background-color: #ccc;
+	background-color: #eef0ed;
 }
 
 .content {
@@ -243,47 +243,25 @@ body {
 					<!-- carousel 시작 -->
 					<div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="false">
 					  <ol class="carousel-indicators">
-					  	<!-- 캐러셀 인디케이터 시작 -->
-					    <!-- <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+					    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+					    <!-- 캐러셀 인디케이터 시작 -->
 					    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-					    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li> -->
-					    
-					    <c:forEach items="${readView.postfileList}" var="postfile">
-					    	<c:set var="i" value="${0+i}"/>
-					    	<c:choose>
-					    		<c:when test="${readView.post.p_thumbnail == postfile.f_name}">
-					    			<li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" class="active"></li>
-					    			<c:set var="i" value="${i+1}"/>
-					    		</c:when>
-					    		<c:otherwise>
-					    			<li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}"></li>
-					    			<c:set var="i" value="${i+1}"/>
-					    		</c:otherwise>
-					    	</c:choose>
-					    </c:forEach>
+					    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
 					  	<!-- 캐러셀 인디케이터 끝 -->
 					  </ol>
 					  
 					  <div class="carousel-inner">
-					  
+					    <div class="carousel-item active">
+					      <img src="<c:url value="/resources/fileupload/postfile/${readView.post.p_thumbnail}"/>" 
+					      	   class="d-block w-100" alt="...">
+					    </div>
 					    <!-- 이미지 반복 시작 -->
-					    <c:forEach items="${readView.postfileList}" var="postfile">
-					    	<c:choose>
-					    		<c:when test="${readView.post.p_thumbnail == postfile.f_name}">
-						    		<div class="carousel-item active">
-										<img src="<c:url value="/resources/fileupload/postfile/${postfile.f_name}"/>" 
-									      	 class="d-block w-100" alt="...">
-									</div>	
-					    		</c:when>
-					    		<c:otherwise>
-						    		<div class="carousel-item">
-										<img src="<c:url value="/resources/fileupload/postfile/${postfile.f_name}"/>" 
-											 class="d-block w-100" alt="...">
-									</div>
-					    		</c:otherwise>
-					    	</c:choose>
-					    </c:forEach>
-					   
+					    <div class="carousel-item">
+					      <img src="<spring:url value='/resources/img/city.jpg'/>" class="d-block w-100" alt="...">
+					    </div>
+					    <div class="carousel-item">
+					      <img src="<spring:url value='/resources/img/wizard.jpg'/>" class="d-block w-100" alt="...">
+					    </div>
 					    <!-- 이미지 반복 끝 -->
 					  </div>
 					  

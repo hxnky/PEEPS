@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.gnjk.post.mypost.domain.PostWriteRequest;
 import com.gnjk.post.mypost.service.PostListService;
+import com.gnjk.post.mypost.service.PostReadService;
 import com.gnjk.post.mypost.service.PostWriteService;
 
 @Controller
@@ -23,6 +24,9 @@ public class PostController {
 	
 	@Autowired
 	private PostListService listService;
+	
+	@Autowired
+	private PostReadService readService;
 	
 	// 테스트 페이지
 		@RequestMapping(value = "/test", method = RequestMethod.GET)
@@ -71,20 +75,22 @@ public class PostController {
 		return "/mypost/postList";
 	}
 	
-	// 게시글 조회
-	// TEST
+	// TEST게시글 보기 페이지
 	@RequestMapping(value = "/read", method = RequestMethod.GET)
 	public String postRead() {
 		
 		return "/mypost/postRead";
 	}
 	
+	// 게시글 조회
 	@RequestMapping(value = "/postNO={p_idx}", method = RequestMethod.GET)
 	public String postReadGET(
 			@PathVariable("p_idx") int postidx,
 			Model model
 			) {
-		System.out.println("글 번호 : "+postidx);
+//		System.out.println("글 번호 : "+postidx);
+		
+		model.addAttribute("readView", readService.getPostReadView(postidx));
 		
 		return "/mypost/postRead";
 	}
