@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+<%@ include file="/WEB-INF/views/include/indexnav.jsp"%>
 
 <h1>마이 페이지</h1>
 
