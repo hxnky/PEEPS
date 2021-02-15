@@ -79,7 +79,7 @@ public class GuestbookInsertService {
   		dao = template.getMapper(GuestbookDao.class);//dao에입력
 		gbResult = dao.insertGbook(guestbook);
 			
-			gbResult = dao.insertGbook(guestbook);
+		
 			
 			
 		

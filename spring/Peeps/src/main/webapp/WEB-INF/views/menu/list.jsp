@@ -86,14 +86,6 @@ table.upmsg_table {
 .paging {
 	text-align: center;
 }
-.gserchbox{
-text-align: center;
-margin:15px 0;
-padding:10px;
-}
-.footer{
-height:100px;  
-}
 </style>
 
 
@@ -113,7 +105,7 @@ height:100px;
 	
 		<div class="upgbinfo">
 			<span class="upgphoto"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340" class="gimg"> </span> 
-			<span class="upgid"> <h4> ${guestbook.gwriter} ${guestbook.gidx} </h4></span> 
+			<span class="upgid"> <h4> ${guestbook.gwriter}  </h4></span> 
 		    <span class="gdate"><fmt:formatDate value="${guestbook.gdate}"
 									pattern="yyyy.MM.dd." /></span>
 		    
@@ -121,9 +113,15 @@ height:100px;
 
 		<div class="upmsg">
 		
-			<table class="upmsg_table">
-				<tr><td>${guestbook.gmessage}</td></tr>
+			<table class="upmsg_table" border="1px">
+				<tr><td>${guestbook.gmessage}</td>
+				    <td><a href="javascript:deleteMsg(${guestbook.gidx});">삭제</a>
+				   
+				    	<a href="<c:url value="/guestbook/edit?idx=${guestbook.gidx}"/>">수정</a>
+				    </td>
+				</tr>
 				<tr><td><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"> ${guestbook.gphoto}</td></tr>
+			
 			</table>
 
 		</div>
@@ -131,36 +129,41 @@ height:100px;
 
 	</c:forEach>
 	
+	
+ 			
+
+
+		
+
+
+
+
 
 	</div>
-	
-	<div class="gserchbox">
-	   <form>
-	    검색  타입
-	    <select name="searchType">
-	    <option value="myid" >내가 쓴 글</option>
-	    <option value="id" >아이디</option>
-	    </select> 
-	    검색 키워드 
-	    <input type="text" name="keyword">
-	    <input type="submit" value="검색 " >
-	   </form>
-	
-	</div>
-	
 	<div class="paging">
 				<c:if test="${listView.totalGbCount>0}">
 					<c:forEach begin="1" end="${listView.totalPageCount}" var="num">
 				[ <a
-							href="<c:url value="/guestbook/list"/>?p=${num}&searchType=${param.searchType}&keyword=${param.keyword}"
+							href="<c:url value="/guestbook/list"/>?p=${num}"
 							class="${listView.pageNumber eq num ? 'nowpage' : ''}">${num}</a> ] 				
 				    </c:forEach>
 				</c:if>
 			</div> 
-			
-			<div class="footer"> </div>
 
+<script >
+
+function deleteMsg(gidx){
+
+	if (confirm('방명록을 삭제하시겠습니까?')) {
+		location.href = '<c:url value="/guestbook/delete?gidx="/>' + gidx;
+	} // /op/member/delete?idx
+
+	
+}
+</script>
 
 </body>
+
+
 
 </html>

@@ -21,49 +21,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INSERT INTO guestbook
 		(gwriter,gmessage, gphoto) values (#{gwriter}, #{gmessage}, #{gphoto})
 	</insert>
+	
 	<!-- 방명록의 총수 -->
 	<select id="selectTotalCount" resultType="int">
-		select count(*) from guestbook;
+		select count(*) from
+		guestbook;
 	</select>
 	
-	<select id="selectGbookList" parameterType="map" resultMap="guestbookListResult">
-		
-		select * from guestbook 
-		<where>
-		<if test="searchParam != null">
-		  <if test="searchParam.searchType == 'myid'">
-		  gwriter = #{gwriter}
-		  </if>
-		  <if test="searchParam.searchType == 'id'">
-		  <include refid="searchId"/>
-		  </if>
-		
-		</if>
-		
-		</where>
-		
-		limit #{index},#{count};
+	<select id="selectGbookList" resultMap="guestbookListResult">
+		select * from guestbook
+		limit #{param1},#{param2};
 	</select>
 	
-	<!-- 검색한 방명록  총수 -->
-	<select id="selectSearchGbookCount" parameterType="com.gnjk.peeps.guestbook.domain.SearchParam" resultType="int">
-		select count(*) from guestbook 
-		<where>
-		<if test="searchParam.searchType == 'myid'">
-		 gwriter = #{gwriter}
-		</if>
-		<if test="searchParam.searchType == 'id'">
-		 <include refid="searchId"/>
-		</if>
-		</where>
-			
-	</select>
-	<sql id="searchId">
-		or gwriter like	concat('%',#{searchParam.keyword},'%')
-	</sql>
+	<!-- 방명록 삭제 -->
+	<delete id="deleteGuestbookIdx"> <!-- DML의 경과는 무조건 숫자타입  -->
+	 
+	delete from guestbook where gidx=#{gidx}
 	
-	
-	
+	</delete>
 	
 
 </mapper>
