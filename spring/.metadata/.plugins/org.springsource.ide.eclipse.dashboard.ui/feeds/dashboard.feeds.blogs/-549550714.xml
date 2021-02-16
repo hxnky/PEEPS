@@ -5,7 +5,22 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2021-02-12T03:23:00Z</updated>
+  <updated>2021-02-16T12:07:00Z</updated>
+  <entry>
+    <title>Spring Framework 5.3.4 and 5.2.13 available now</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/02/16/spring-framework-5-3-4-and-5-2-13-available-now" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>St?phane Nicoll</name>
+    </author>
+    <id>tag:spring.io,2021-02-16:4362</id>
+    <updated>2021-02-16T12:07:00Z</updated>
+    <content type="html">&lt;p&gt;On behalf of the team and everyone who has contributed, I am pleased to announce that Spring Framework &lt;code&gt;5.3.4&lt;/code&gt; and &lt;code&gt;5.2.13&lt;/code&gt; are available now.&lt;/p&gt;
+&lt;p&gt;Spring Framework &lt;code&gt;5.3.4&lt;/code&gt; includes &lt;a href="https://github.com/spring-projects/spring-framework/releases/tag/v5.3.4"&gt;62 fixes and improvements&lt;/a&gt;. Spring Framework &lt;code&gt;5.2.13&lt;/code&gt; includes &lt;a href="https://github.com/spring-projects/spring-framework/releases/tag/v5.2.13.RELEASE"&gt;18 selected fixes and improvements&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Stay tuned for follow-up Spring Boot releases later this week.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://projects.spring.io/spring-framework/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-framework"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-framework/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-framework/docs/5.3.4/spring-framework-reference"&gt;Documentation&lt;/a&gt;&lt;/p&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Authorization Server 0.1.0 available now</title>
     <link rel="alternate" href="https://spring.io/blog/2021/02/11/spring-authorization-server-0-1-0-available-now" />
@@ -2000,31 +2015,6 @@ class Customer implements Serializable {&#xD;
     <content type="html">&lt;p&gt;Spring Cloud Task 2.2.5 includes fixes for the following vulnerability:&lt;/p&gt;
 &lt;p&gt;CVE-2020-5428&lt;br/&gt;In applications using Spring Cloud Task 2.2.4.RELEASE and below, may contain code that is vulnerable to SQL injection when exercising certain lookup queries in the TaskExplorer. &lt;/p&gt;
 &lt;p&gt;Users of Spring Cloud Task 2.2.4.RELEASE and below are encouraged to upgrade to Spring Cloud Task 2.2.5.RELEASE or 2.3.0.&lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Cloud Data Flow 2.7.1 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/01/25/spring-cloud-data-flow-2-7-1-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Janne Valkealahti</name>
-    </author>
-    <id>tag:spring.io,2021-01-25:4344</id>
-    <updated>2021-01-25T15:00:00Z</updated>
-    <content type="html">&lt;p&gt;Spring Cloud Data Flow team is pleased to announce the release of &lt;em&gt;2.7.1&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;2.7.1&lt;/em&gt; is a maintenance release fixing following issues:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;UI bug fixes&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;Cloudfoundry Java Client&lt;/em&gt; has been updated to &lt;em&gt;4.13.0&lt;/em&gt; fixing its memory leak&lt;/li&gt;
-  &lt;li&gt;Using &lt;em&gt;Spring Boot 2.3.7&lt;/em&gt; and &lt;em&gt;Cloud Hoxton.SR9&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;Spring Cloud Task&lt;/em&gt; updated to &lt;em&gt;2.2.5&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;Dataflow server contains fixes for docker, metrics and some endpoints&lt;/li&gt;
-  &lt;li&gt;More detailed list can be found from &lt;a href="https://github.com/spring-cloud/spring-cloud-dataflow/releases/tag/v2.7.1"&gt;GitHub 2.7.1&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;There is also releases for &lt;a href="https://github.com/spring-cloud/spring-cloud-dataflow/releases/tag/v2.6.5"&gt;GitHub 2.6.5&lt;/a&gt; and &lt;a href="https://github.com/spring-cloud/spring-cloud-dataflow/releases/tag/v2.5.4.RELEASE"&gt;GitHub 2.5.4&lt;/a&gt; with updated &lt;em&gt;Spring Cloud Task&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;These releases fixes &lt;a href="https://tanzu.vmware.com/security/cve-2020-5427"&gt;CVE-2020-5427&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;We&amp;rsquo;ve switched &lt;a href="https://dataflow.spring.io/docs/applications/"&gt;Pre-packaged Applications&lt;/a&gt; in our import links to point to &lt;em&gt;3.x&lt;/em&gt; versions.&lt;/p&gt;&lt;h2&gt;&lt;a href="#stay-in-touch-hellip" class="anchor" name="stay-in-touch-hellip"&gt;&lt;/a&gt;Stay in touch&amp;hellip;&lt;/h2&gt;
-&lt;p&gt;As always, we welcome feedback and contributions, so please reach out to us on &lt;a href="https://stackoverflow.com/questions/tagged/spring-cloud-dataflow"&gt;Stack Overflow&lt;/a&gt; or &lt;a href="https://github.com/spring-cloud/spring-cloud-dataflow/issues"&gt;GitHub&lt;/a&gt; or via &lt;a href="https://gitter.im/spring-cloud/spring-cloud-dataflow"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>

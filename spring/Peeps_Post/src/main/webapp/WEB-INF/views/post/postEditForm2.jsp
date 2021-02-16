@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>test</title>
+<title>게시글 수정 페이지</title>
 </head>
 <style>
 @import
@@ -116,7 +116,7 @@ body {
         
         $(document).ready(function(){
             
-            // 글자 수 제한
+            // 게시글 글자 수 제한
             $('textarea').keyup(function(){
                 // 현재 입력 문자열의 길이
                 var inputStrLen = $(this).val().length;
@@ -129,74 +129,39 @@ body {
                 $('#textnumber').text(inputStrLen);
             });
             
-            // 파일 개수 제한
-            /* $("input[type = 'submit']").click(function(){
-                var $fileUpload = $("input[type='file']");
-                if (parseInt($fileUpload.get(0).files.length) > 20){
-                   alert("이미지는 20개까지 업로드 가능합니다.");
-                return false;
+            // 제목 글자 수 제한
+            $('.ptitle').keyup(function(){
+                // 현재 입력 문자열의 길이
+                var inputStrLen = $(this).val().length;
+                if(inputStrLen>30){
+                    alert('30자 까지만 입력이 가능합니다.');
+                    var userInput = $(this).val().substr(0,30);
+                    $(this).val(userInput);
+                    inputStrLen = 30;
                 }
-             }); */
+                /* $('#textnumber').text(inputStrLen); */
+            });
              
         });
         
-     // 이미지 이외 파일 제한
-    	/* function fileCheck(obj) {
-    	    var file_kind = obj.value.lastIndexOf('.');
-    		var file_name = obj.value.substring(file_kind+1,obj.length);
-    		var file_type = file_name.toLowerCase();
-    		var check_file_type=new Array();
-    		check_file_type=['jpg','gif','png','jpeg','bmp','tif'];
-    		
-    		if(check_file_type.indexOf(file_type)==-1) {
-    			alert('이미지만 업로드 할 수 있습니다.');
-    			var parent_Obj=obj.parentNode;
-    			var node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
-
-    			document.getElementById("postformfile").value = "";    //초기화를 위한 추가 코드
-    			document.getElementById("postformfile").select();        //초기화를 위한 추가 코드
-    			document.selection.clear();                            //일부 브라우저 미지원
-    			return false;
-    		}
-    	} */
-    	
-    	
- 		// test파일 개별 취소 
- 		$(document).on('click', '.previewdiv li .cancelbtn', function(){
- 			// 미리보기 삭제
- 			var idx = $('.previewdiv li .cancelbtn').index(this);
- 			$('.previewdiv').eq(idx).remove();
- 			
- 			// 파일에서 삭제
- 			/* var fileList = $("input[type='file']")[0].files;
- 			console.log(fileList);
- 			
- 			var selectedfile = $("input[type='file']")[0].files[idx];
- 			console.log(selectedfile); */
- 			
-	 		// as an array, u have more freedom to transform the file list using array functions.
-	 		const fileListArr = Array.from($("input[type='file']")[0].files);
-	 		console.log("처음에 받은 파일 리스트 : ",fileListArr);
-	 		/* fileListArr.splice(idx, 1); // here u remove the file
-	 		console.log("해당 인덱스 삭제 후 파일 리스트: ",fileListArr); */
-	 		
-	 		console.log("삭제하려는 인덱스 : ",$("input[type='file']")[0].files[idx]);
- 			
- 		});
-    		
-    	/* btnRemove = document.getElementById("cancelbtn");
-    	btnRemove.addEventListener('click', function(){
-    		var index = li.index();
-    		storedFiles.splice(index, 1);
-    			
-    	}); */
+     // 썸네일 선택
+     $(document).on('click', '.prvimg', function(){
+    	 // input pthumbnail의 value에 파일 이름 저장
+    	 var idx = $('.prvimg').index(this);
+    	 alert("이미지 클릭"+idx);
+    	 var selectedfileName = $("input[type='file']")[0].files[idx].name;
+    	 console.log(selectedfileName);
+    	 $('.pthumbnail').val(selectedfileName);
+    	 
+     });
+     
     	
      // 파일 미리보기
       $(document).ready(function (e){
 		    $("input[type='file']").change(function(e){
 		
 		      //div 내용 비워주기
-		      $('#preview').empty();
+		      $("#preview").empty();
 		
 		      var files = e.target.files;
 		      var arr =Array.prototype.slice.call(files);
@@ -257,20 +222,20 @@ body {
 		          var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
 		          reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
 		            //str += '<button type="button" class="delBtn" value="'+f.name+'" style="background: red">x</button><br>';
-		            str += '<img src="'+e.target.result+'" title="'+f.name+'" width=140 height=140 />';
-		            str += '<br><input type="button" class="cancelbtn" value="취소">';
+		            str += '<img src="'+e.target.result+'" class="prvimg" title="'+f.name+'" width=140 height=140 />';
 		            str += '</li></div>';
 		            $(str).appendTo('#preview');
 		          } 
 		          reader.readAsDataURL(f);
-		        }/*  else{
-		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
-		          $(str).appendTo('#preview');
-		        } */
+		        }
 		      });//arr.forEach
 		      
 		    }
+		    
+		    
   		});
+     
+     
     	
     	
     
@@ -284,26 +249,34 @@ body {
 		<table class="post">
 			<tr>
 				<td>
-					<input type="hidden" name="userIdx" value="1234">
+					<input type="hidden" name="userIdx" value="1">
 				</td>
 			</tr>
 			<tr>
 				<td class="pdate_wrap">
-					<%
+					<%-- <%
 					Date now = new Date();
 					SimpleDateFormat ymd = new SimpleDateFormat("yyyy.MM.dd");
 					SimpleDateFormat hms = new SimpleDateFormat("hh.mm.ss");
 					%>
-					<div class="pdate"><%= ymd.format(now) %></div>
+					<div class="pdate"><%= ymd.format(now) %></div> --%>
+					<div class="pdate">
+						<fmt:formatDate value="${editView.post.p_date}"
+										pattern="yyyy.MM.dd."/>
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<input type="text" class="ptitle" name="ptitle" placeholder="제목을 입력해주세요." required>
+					<input type="text" class="ptitle" name="ptitle" 
+						   placeholder="제목을 입력해주세요." 
+						   value="${editView.post.p_title}"
+						   required>
 				</td>
 			</tr>
 			<tr>
 				<td>
+					<input type="hidden" class="pthumbnail" name="pthumbnail" value="">
 					<div>
 						<input type="file" accept="image/*" 
 						name="postformfile" id="postformfile"
@@ -317,18 +290,20 @@ body {
 				<td>
 					<textarea rows="50"  
 							  class="pcontent" name="pcontent"
-							  placeholder="내용을 입력해주세요." required
-					></textarea>
+							  placeholder="내용을 입력해주세요." 
+							  required
+					>${editView.post.p_content}</textarea>
 					<div><span id="textnumber">0</span>/1500</div>
 				</td>
 			</tr>
+			<!-- 위치 추가 시작 -->
 			<tr>
 				<td>
 					<div class="plocwrap">
 					<input type="button" class="searchlocbtn" 
 					onclick="sample5_execDaumPostcode()" value="위치 추가">
 					<input type="text" id="sample5_address" name="ploc" class="searchlocBox" 
-						onfocus="this.blur()"
+						onfocus="this.blur()" value="${editView.post.p_loc}"
 					readonly>
 					<br>
 					<div id="map"
@@ -364,6 +339,9 @@ body {
 				
 									// 주소 정보를 해당 필드에 넣는다.
 									document.getElementById("sample5_address").value = addr;
+									console.log("위치 value : "+document.getElementById("sample5_address").value);
+									console.log("addr : "+addr);
+									
 									// 주소로 상세 정보를 검색
 									geocoder.addressSearch(data.address, function(results,
 											status) {

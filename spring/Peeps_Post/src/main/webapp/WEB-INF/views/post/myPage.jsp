@@ -9,12 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 리스트</title>
-</head>
 <!--jquery 라이브러리 로드-->
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" 
-		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
-		crossorigin="anonymous">
-</script> -->
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -130,67 +128,7 @@
 
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp"%>
-	<!-- <div id="top_wrap">
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				Brand and toggle get grouped for better mobile display
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Brand</a>
-				</div>
 
-				Collect the nav links, forms, and other content for toggling
-				<div class="collapse navbar-collapse"
-					id="bs-example-navbar-collapse-1">
-					<ul class="nav navbar-nav">
-						<li><a href="#">Link</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
-								<span class="caret"></span>
-						</a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Separated link</a></li>
-								<li class="divider"></li>
-								<li><a href="#">One more separated link</a></li>
-							</ul></li>
-					</ul>
-					<form class="navbar-form navbar-left" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Search">
-						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
-					</form>
-					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Link</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
-								<span class="caret"></span>
-						</a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li><a href="#">Separated link</a></li>
-							</ul></li>
-					</ul>
-				</div>
-				/.navbar-collapse
-			</div>
-			/.container-fluid
-
-		</nav>
-	</div> -->
-	<!---------------------------------------->
 	<div id="main_wrap">
 		<div class="jumbotron">
 			<div id="profile_wrap">
@@ -220,7 +158,7 @@
 		</div>
 		<div id="nav_wrap">
 			<div class="menuselect">
-				<button onclick="location.href='list'">게시물</button>
+				<button onclick="location.href='jhS2'">게시물</button> <!-- test 회원 아이디 들어가야 함 -->
 				<button onclick="javascript:menulist(1);">지도</button>
 				<button onclick="javascript:menulist(2);">방명록</button>
 
@@ -230,7 +168,7 @@
 		<div class="container">
 			<div class="row">
 			<!-- 게시글 목록 시작 -->
-				<c:forEach items="${listView.postList}" var="post">
+				<%-- <c:forEach items="${listView.postList}" var="post">
 				<div class="col-sm-4">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
@@ -255,7 +193,7 @@
 						</div>
 					</div>
 				</div>
-				</c:forEach>
+				</c:forEach> --%>
 			<!-- 게시글 목록 끝 -->	
 			</div>
 		</div>
@@ -278,5 +216,49 @@
 			</ul>
 		</nav>
 	</div>
+	
+	<script>
+	// 뷰컨트롤러 통해 페이지 번호 받기
+	function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
+	return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+
+    var p = getParameterByName('p');
+    console.log(p);
+	
+	$(document).ready(function(){
+		
+		$.ajax({
+			url: 'http://localhost:8080/post/rest/member/post/list?p='+p,
+			type: 'GET',
+			success: function(data){
+				console.log("ajax로 받아온 데이터 : ", data);
+				var list = $(data.postList);
+				console.log(list);
+				
+				$.each(list, function(index, item){
+					
+					var date = new Date(item.p_date).toLocaleDateString();
+					
+					console.log("날짜: ", date);
+					
+					var html = '<div class="col-sm-4">';
+					   html += '<div class="panel panel-primary">';
+					   html += '<div class="panel-heading">';  /* href="postNO=${post.p_idx}" */
+					   html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+item.p_title;
+					   html += '</a></div><div class="panel-body">';
+					   html += '<a class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">';
+					   html += '<img src="<c:url value="/resources/fileupload/postfile/'+item.p_thumbnail+'"/>" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
+					   html += '</div><div class="panel-footer">'+date+'</div></div></div>';
+					   
+					   $('.row').append(html);
+				});
+			}
+			
+		});
+	});
+	
+	</script>
 </body>
 </html>

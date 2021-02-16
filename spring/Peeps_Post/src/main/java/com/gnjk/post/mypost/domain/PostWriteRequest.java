@@ -61,8 +61,6 @@ public class PostWriteRequest {
 		post.setP_title(ptitle);
 		post.setP_content(pcontent);
 		post.setP_loc(ploc);
-//		썸네일 선택시 set 필요
-		post.setP_thumbnail(pthumbnail);
 		
 		return post;
 	}

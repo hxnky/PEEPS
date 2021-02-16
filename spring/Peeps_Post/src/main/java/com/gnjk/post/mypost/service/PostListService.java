@@ -37,6 +37,7 @@ public class PostListService {
 			int endRow = startRow+cntPerPage-1;
 			
 			int totalPostCount = dao.selectTotalPostCount(member_idx);
+			
 			System.out.println("postTotalCount : "+ totalPostCount);
 			
 			List<Post> postList = dao.selectPostList(member_idx, startRow, cntPerPage);

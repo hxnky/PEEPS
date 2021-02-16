@@ -18,9 +18,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		useGeneratedKeys="true" keyProperty="p_idx">
 
 		INSERT INTO post
-		(member_idx, p_title, p_content, p_loc, p_thumbnail)
+		(member_idx, p_title, p_content, p_loc)
 		VALUES
-		(#{member_idx},#{p_title},#{p_content},#{p_loc},#{p_thumbnail})
+		(#{member_idx},#{p_title},#{p_content},#{p_loc})
 
 	</insert>
 
