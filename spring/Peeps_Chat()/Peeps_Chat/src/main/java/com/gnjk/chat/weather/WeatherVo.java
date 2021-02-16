@@ -1,10 +1,7 @@
 package com.gnjk.chat.weather;
 
-import java.sql.Date;
-
 public class WeatherVo {
 	int seq;
-	Date insertime; 
 	String baseDate;
 	String baseTime;
 	String SKY;
@@ -14,11 +11,9 @@ public class WeatherVo {
 	public WeatherVo() {
 	}
 	
-
-	public WeatherVo(int seq, Date insertime, String baseDate, String baseTime, String SKY, String PTY, String T3H) {
+	public WeatherVo(int seq,String baseDate, String baseTime, String SKY, String PTY, String T3H) {
 		super();
 		this.seq = seq;
-		this.insertime = insertime;
 		this.baseDate = baseDate;
 		this.baseTime = baseTime;
 		this.SKY = SKY;
@@ -31,12 +26,6 @@ public class WeatherVo {
 	}
 	public void setSeq(int seq) {
 		this.seq = seq;
-	}
-	public Date getInsertime() {
-		return insertime;
-	}
-	public void setInsertime(Date insertime) {
-		this.insertime = insertime;
 	}
 	public String getBaseDate() {
 		return baseDate;

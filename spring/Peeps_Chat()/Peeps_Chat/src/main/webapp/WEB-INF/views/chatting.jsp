@@ -52,8 +52,8 @@
 
 	sock.onopen = onOpen;
 	sock.onmessage = onMessage;
-	sock.onclose = onClose;	
-	
+	sock.onclose = onClose;
+
 	$(document).ready(function() {
 		$('#message').keypress(function(event) {
 			var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -65,134 +65,135 @@
 
 		$('#sendBtn').click(function() {
 			sendMessage();
-			console.log("sendMessage() - 메서드 실행 ");	
-		});		
-		
-		$.ajax({
-			url : "requestObject",
-			type : "POST",
-		    success: function(msg) {
-		 
-		       var text = msg.responseText,
-		       text = text.replace(/(<([^>]+)>)/ig,""); //HTML 태그 모두 공백으로 대체
-		       text = '[' + text + ']';
-		       var json = $.parseJSON(text);
-		       
-		       var rain_state = json[0].response.body.items.item[1].obsrValue;
-		       var rain = json[0].response.body.items.item[3].obsrValue;
-		       var sky = json[0].response.body.items.item[4].obsrValue;
-		       var temperature = json[0].response.body.items.item[5].obsrValue;
-		       
-		           if(rain_state != 0) {
-		               switch(rain_state) {
-		                   case 1:   // 비
-		                           $("#chatdata").css({"background":"url(/icon/sun.jpg)"});
-		                           console.log('비');
-		                       break;
-		                   case 2:   // 비/눈
-		                      $("#chatdata").css({"background":"url(/icon/snow.jpg)"});
-		                      console.log('비/눈);
-		                       break;
-		                   case 3:   // 눈
-		                      $("#chatdata").css({"background":"url(/icon/snow.jpg)"});
-		                      console.log(' 눈');
-		                       break;
-		               }
-		           }else {
-		               switch(sky) {
-		                   case 1:   // 맑음
-		                      $("#chatdata").css({"background":"url(/icon/sun.jpg')"});
-		                      console.log('맑음');
-		                       break;
-		                   case 3:   // 구름 많음
-		                      $("#chatdata").css({"background":"url(/icon/snow.jpg')"});
-		                      console.log('구름 많음');
-		                       break;
-		                   case 4:   // 흐림
-		                      $("#chatdata").css({"background":"url(/icon/navi/search.png')"});
-		                      console.log('흐림');
-		                       break;
-		                   }    
-		               } //if 종료
-		               $("#chatdata").css({"background":"url(/icon/sun.jpg')"});
-		               console.log('날씨 해당 없음');
-		        } //success func 종료
-		    })    
-		}
+			console.log("sendMessage() - 메서드 실행 ");
+		});
 
-		
-		
-		
-		
-		
-		
 	});
 
 	function onOpen() {
 		console.log('open');
+
+		var today = new Date();
+		var hours = today.getHours();
+		var minutes = today.getMinutes();
+		if (minutes < 30) {
+			hours = hours - 1;
+			if (hours < 0) {
+				hours = 23;
+			}
+		}
+		if (hours < 10) {
+			hours = '0' + hours;
+		}
+
+		var realTime = hours + "00";
+
+		$.ajax({
+			url : "chattingData",
+			type : "GET",
+			success : function(msg) {
+
+				var text = JSON.stringify(msg);
+
+				if (text.baseTime == realTime) {
+					switch (text.pty) {
+					case 1: // 비
+						document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)"
+						console.log('비');
+						break;
+					case 2: // 비/눈
+						document.getElementById('chatdata').style.background =  "url(/chat/icon/snow.jpg)"
+						console.log('비/눈');
+						break;
+					case 3: // 눈
+						document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+						console.log('눈');
+						break;
+					case 4: // 소나기
+						document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+						console.log('소나기');
+						break;
+					}
+				} else {
+					switch (text.sky) {
+					case 1: // 맑음
+						document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)"
+						console.log('맑음');
+						break;
+					case 3: // 구름 많음
+						document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+						console.log('구름 많음');
+						break;
+					case 4: // 흐림
+						document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+						console.log('흐림');
+						break;
+					}
+				} // if 종료
+				console.log('날씨 해당 없음');
+				document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)";	
+			} //success func 종료
+		}) // ajax 종료
 	};
 
 	function sendMessage() {
 		//	var t = getTimeStamp();
-		var date = new Date();		// 자바스크립트 Date 객체
-		var str = date.toJSON();	// Date 객체를 JSON 형식의 문자열로 변환
-			
+		var date = new Date(); // 자바스크립트 Date 객체
+		var str = date.toJSON(); // Date 객체를 JSON 형식의 문자열로 변환
+
 		var mes = {
 			ch_idx : '1',
 			m_idx : '${m_idx}',
-			rm_idx : '${rm_idx}', 
+			rm_idx : '${rm_idx}',
 			ch_ms : $("#message").val(),
-			ch_time :  str
+			ch_time : str
 		}
 
-		if(mes != ""){
-		
-		sock.send(JSON.stringify(mes));
-		console.log(JSON.stringify(mes));
-		console.log('위 메세지 소켓에 전송');
-	
-	} else {
-		return false;
+		if (mes != "") {
+
+			sock.send(JSON.stringify(mes));
+			console.log(JSON.stringify(mes));
+			console.log('위 메세지 소켓에 전송');
+
+		} else {
+			return false;
+		}
+
 	}
-		
-	} 
-	
+
 	function onMessage(evt) {
-				var data = evt.data;
-				var obj = JSON.parse(data);
-				
-				var currentuser_session = $('#sessionuserid').val();
-		
-				if(obj != ""){
-				
-				if (obj.m_idx == currentuser_session) { //m_idx = m_idx
-					var printHTML = "<div id='right'>";
-					printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
-					printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
-					printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
-					printHTML += "</div>";
-		
-					$('#chatdata').append(printHTML);
-		
-				} else {
-					var printHTML = "<div id='left'>";
-					printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
-					printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
-					printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
-					printHTML += "</div>";
-		
-					$('#chatdata').append(printHTML);
-			  }
-				}else {
-					return false;
-				}
+		var data = evt.data;
+		var obj = JSON.parse(data);
+
+		var currentuser_session = $('#sessionuserid').val();
+
+		if (obj != "") {
+
+			if (obj.m_idx == currentuser_session) { //m_idx = m_idx
+				var printHTML = "<div id='right'>";
+				printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
+				printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
+				printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
+				printHTML += "</div>";
+
+				$('#chatdata').append(printHTML);
+
+			} else {
+				var printHTML = "<div id='left'>";
+				printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
+				printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
+				printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
+				printHTML += "</div>";
+
+				$('#chatdata').append(printHTML);
+			}
+		} else {
+			return false;
+		}
 	};
 
 	function onClose() {
 		console.log('console close');
 	};
-
-	
-	
 </script>
 </html>

@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gnjk.chat.weather.Weather;
-import com.gnjk.chat.weather.WeatherVo;
-
 /**
  * Handles requests for the application home page.
  */
@@ -39,9 +36,7 @@ public class HomeController {
 
 		mav.addObject("m_idx", "사용자 아이디");
 		mav.addObject("rm_idx", "받는 사람");
-
-
-
+		
 		session.setAttribute("m_idx", "사용자 아이디");
 
 		return mav;
