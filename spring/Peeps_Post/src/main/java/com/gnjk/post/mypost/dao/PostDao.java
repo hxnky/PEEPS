@@ -35,6 +35,7 @@ public interface PostDao {
 	// 게시글 삭제
 	int deletePostByIdx(int pidx);
 	
+	//21.02.17 댓글 Dao 추가 한경
 	// 댓글 등록
 	int insertCmt(Comment comment);
 	
@@ -43,5 +44,11 @@ public interface PostDao {
 	
 	// 댓글 수정
 	int updateCmt(int cmt_idx, String cmt_content);
+
+	// 댓글 삭제
+	int deleteCmt(int cmt_idx);
+	
+	// 댓글 수 조회
+	int CountCmt(int post_idx);
 	
 }

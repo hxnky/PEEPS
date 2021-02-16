@@ -115,6 +115,9 @@ public class PostController {
 			) {
 //		System.out.println("글 번호 : "+postidx);
 		
+		// 21.02.17 한경 댓글 수 조회 추가
+		model.addAttribute("CountCmt", commentService.CountCmt(postidx));
+		
 		model.addAttribute("readView", readService.getPostReadView(postidx));
 		
 		return "/mypost/postRead";
@@ -148,6 +151,7 @@ public class PostController {
 		return "redirect:/post/list";
 	}
 	
+	// 21.02.17 한경 댓글 관련 컨트롤러 추가 
 	// 댓글 목록 조회
 	@GetMapping(value="/cmt/select")
 	@ResponseBody
@@ -177,4 +181,15 @@ public class PostController {
 		
 		return commentService.cmtEdit(cmt_idx, cmt_content);
 	}
+	
+	// 댓글 삭제
+	@PostMapping(value="/cmt/del")
+	@ResponseBody
+	public int cmtDel(int post_idx, int idx) {
+		
+		System.out.println("댓글 삭제 진입");
+		
+		return commentService.cmtDel(idx, post_idx);
+	}
+	
 }

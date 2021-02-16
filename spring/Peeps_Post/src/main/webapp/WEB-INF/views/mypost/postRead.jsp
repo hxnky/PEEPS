@@ -348,7 +348,7 @@ body {
 							class="location" style="margin: 0 5px;">111</span> <img
 							style="width: 30px; height: 30px;"
 							src="<spring:url value='/resources/img/cmtpic.png'/>"> <span
-							class="location" style="margin-left: 5px;">3</span>
+							class="location" style="margin-left: 5px;">${CountCmt}</span>
 						</span>
 					</div>
 				</td>
@@ -370,12 +370,11 @@ body {
 
 				</td>
 			</tr>
-			<!-- 댓글 출력 -->
+			<!-- 21.02.17 댓글 출력 한경 -->
 			<tr>
 				<td>
 					<hr>
 					<div class="comment">
-							
 					</div>
 				</td>
 			</tr>
@@ -391,7 +390,7 @@ body {
 		}
 	</script>
 
-	<!-- 댓글 작성 -->
+	<!-- 21.02.17 댓글 조회 한경 -->
 <script>
 
 	loadComment();
@@ -413,7 +412,7 @@ body {
 				$('.comment').empty();
 
 				$.each(data, function(index, cmt){
-					$('.comment').append("<div id='cmt'><input type='hidden' id='cmt_idx' value='"+cmt.cmt_idx+"'> <img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> 아이디 넣기 "+cmt.cmt_content+"<button id='cmt_edit'>수정</button>  <button id='cmt_del'>삭제</button></div>");
+					$('.comment').append("<div id='cmt'><input type='hidden' id='cmt_idx' value='"+cmt.cmt_idx+"'> <img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> 아이디 넣기 "+cmt.cmt_content+"<button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button></div>");
 				});
 				
 			},
@@ -424,65 +423,84 @@ body {
 			
 		});
 		
-		function editComment(cmt_idx, ){
+		// 수정 버튼 누르면 폼 생기게
+		function editComment(){
+			
+			var html="";
+			
 			
 		}
 		
 		
 	}
 </script>
+
+<!-- 21.02.17 댓글 작성/ 삭제 한경 -->
 <script>
-
-// 댓글 작성
-$("#cmtbtn").click(function() {
+$(function() {
 	
-	var cmt = $('#cmttxt').val();
+	// 댓글 작성
+	$("#cmtbtn").click(function() {
+		
+		var cmt = $('#cmttxt').val();
 
-	$.ajax({
-		url : '${pageContext.request.contextPath}/post/cmt/insert',
-		type : 'post',
-		async : false,
-		data : {
-			"post_idx" : "${readView.post.p_idx}",
-			"member_idx" : "${m_idx}",
-			"cmt_content" : cmt
-		},
-		success : function(data) {
-			console.log("작성 완료");
-			$('#cmttxt').val('');
-			loadComment();
-		},
-		error : function() {
-			console.log("작성 실패,,,,");
-		}
+		$.ajax({
+			url : '${pageContext.request.contextPath}/post/cmt/insert',
+			type : 'post',
+			async : false,
+			data : {
+				"post_idx" : "${readView.post.p_idx}",
+				"member_idx" : "${m_idx}",
+				"cmt_content" : cmt
+			},
+			success : function(data) {
+				console.log("작성 완료");
+				$('#cmttxt').val('');
+				loadComment();
+			},
+			error : function() {
+				console.log("작성 실패,,,,");
+			}
+		});
 	});
-});
 
 
-// 댓글 수정
-$("#cmt_edit").click(function() {
+	// 댓글 삭제
+	$(document).on("click", "#cmt_del", function(){
+		
+		var idx = $('.comment #cmt #cmt_del').index(this);
+		
+		console.log(idx);
+		
+		$('.comment #cmt').eq(idx).remove();
+
+		$.ajax({
+			url : '${pageContext.request.contextPath}/post/cmt/del',
+			type : 'post',
+			async : false,
+			data : {
+				"post_idx" : "${readView.post.p_idx}",
+				"idx" : idx
+			},
+			success : function(data) {
+				if(data==1){
+					console.log("삭제 완료");
+					loadComment();
+				} else{
+					console.log("삭제 실패");
+				}
+				
+			},
+			error : function() {
+				console.log("수정 실패,,,,");
+			}
+		});
+	});
 	
-	var cmt_content = $('#cmttxt').val();
-	var cmt_idx = $('#cmt_idx').val();
+	// 댓글 수정
+	
+})
 
-	$.ajax({
-		url : '${pageContext.request.contextPath}/post/cmt/edit',
-		type : 'post',
-		async : false,
-		data : {
-			"cmt_idx" : cmt_idx,
-			"cmt_content" : cmt_content
-		},
-		success : function(data) {
-			console.log("cmt_idx");
-			console.log("수정 완료");
-			loadComment();
-		},
-		error : function() {
-			console.log("수정 실패,,,,");
-		}
-	});
-});
 
 </script>
 

@@ -10,6 +10,7 @@ import com.gnjk.post.mypost.dao.PostDao;
 import com.gnjk.post.mypost.domain.Comment;
 import com.gnjk.post.mypost.domain.CommentRequest;
 
+// 21.02.17 댓글 서비스 추가 한경
 @Service
 public class CommentService {
 	
@@ -18,6 +19,7 @@ public class CommentService {
 	@Autowired
 	private SqlSessionTemplate template;
 	
+	// 댓글 조회
 	public List<Comment> cmtSelect(int post_idx){
 		
 		dao = template.getMapper(PostDao.class);
@@ -25,6 +27,7 @@ public class CommentService {
 		return dao.selectCmtList(post_idx);
 	}
 
+	// 댓글 작성
 	public int cmtInsert(CommentRequest request) {
 		
 		dao = template.getMapper(PostDao.class);
@@ -35,11 +38,10 @@ public class CommentService {
 		
 		result = dao.insertCmt(comment);
 		
-		int post_idx = comment.getPost_idx();
-		
 		return result;
 	}
 
+	// 댓글 수정 -- 미완성
 	public int cmtEdit(int cmt_idx, String cmt_content) {
 		
 		dao = template.getMapper(PostDao.class);
@@ -47,6 +49,34 @@ public class CommentService {
 		int result = 0;
 		
 		result = dao.updateCmt(cmt_idx, cmt_content);
+		
+		return result;
+	}
+	
+	// 댓글 삭제
+	public int cmtDel(int idx, int post_idx) {
+		
+		dao = template.getMapper(PostDao.class);
+		
+		int result = 0;
+		
+		List<Comment> comment = dao.selectCmtList(post_idx);
+		
+		int cmt_idx = comment.get(idx).getCmt_idx();
+		
+		result = dao.deleteCmt(cmt_idx);
+		
+		return result;
+	}
+	
+	// 댓글 수 조회
+	public int CountCmt(int post_idx) {
+		
+		dao = template.getMapper(PostDao.class);
+		
+		int result = 0;
+		
+		result = dao.CountCmt(post_idx);
 		
 		return result;
 	}

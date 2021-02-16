@@ -78,6 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from post where p_idx=#{pidx}
 	</delete>
 
+	<!-- 21.02.17 댓글 쿼리 추가 한경 -->
 	<!-- 댓글 등록 -->
 	<insert id="insertCmt"
 		parameterType="com.gnjk.post.mypost.domain.Comment"
@@ -101,7 +102,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 댓글 수정 -->
 	<update id="updateCmt"
 		parameterType="com.gnjk.post.mypost.domain.Comment">
-		update comment set cmt_content=#{cmt_content} where cmt_idx=#{cmt_idx}
+		update comment set cmt_content=#{cmt_content} where
+		cmt_idx=#{cmt_idx}
 	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="deleteCmt">
+		delete from comment where cmt_idx=#{cmt_idx}
+	</delete>
+
+	<!-- 댓글 수 조회 -->
+	<select id="CountCmt" resultType="int">
+		select count(*) from comment
+		where post_idx=#{post_idx}
+	</select>
 
 </mapper>
