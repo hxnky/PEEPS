@@ -28,6 +28,10 @@ public interface GuestbookDao {
 	List<Guestbook> selectGbookList(int startRow, int cntPerPage);
     //방명록삭제 
 	int deleteGuestbookIdx(int gidx);
+    //방명록 정보 조회: gidx로 조회
+	Guestbook selectGuestbookIdx(int gidx);
+    //방명록 정보 업데이트
+	int updateGuestbook(Guestbook guestbook);
 	
 
 }

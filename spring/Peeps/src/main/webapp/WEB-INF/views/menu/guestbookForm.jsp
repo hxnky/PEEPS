@@ -14,8 +14,8 @@
 <style>
 .ginsert_wrap {
 	background-color: #eef0ed;
-	height: 250px;
-	width: 800px;
+	height: 270px;
+	width: 850px;
 	margin: 0px auto 10px auto;
 }
 

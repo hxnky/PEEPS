@@ -117,10 +117,10 @@ table.upmsg_table {
 				<tr><td>${guestbook.gmessage}</td>
 				    <td><a href="javascript:deleteMsg(${guestbook.gidx});">삭제</a>
 				   
-				    	<a href="<c:url value="/guestbook/edit?idx=${guestbook.gidx}"/>">수정</a>
+				    	<a href="<c:url value="/guestbook/edit?gidx=${guestbook.gidx}"/>">수정</a>
 				    </td>
 				</tr>
-				<tr><td><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"> ${guestbook.gphoto}</td></tr>
+				<tr><td><img src="<c:url value="/fileupload/guestbook/${guestbook.gphoto}"/>"> </td></tr>
 			
 			</table>
 

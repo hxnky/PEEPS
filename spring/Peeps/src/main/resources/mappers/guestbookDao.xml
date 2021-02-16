@@ -40,5 +40,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</delete>
 	
+	
+	<select id="selectGuestbookIdx" resultMap="guestbookListResult">
+	 select * from guestbook where gidx=#{gidx}
+	</select>
+	
+	<update id="updateGuestbook" parameterType="com.gnjk.peeps.guestbook.domain.Guestbook">
+	
+	update guestbook set gmessage=#{gmessage},gphoto=#{gphoto} where gidx=#{gidx} 
+	
+	</update>
+	
 
 </mapper>

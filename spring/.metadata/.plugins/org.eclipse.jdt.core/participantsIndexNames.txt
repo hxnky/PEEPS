@@ -1,27 +1,19 @@
 INDEX VERSION 1.131
 C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\938116217.index
 \Peeps\src\main\java
-C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3989681041.index
-\Peeps2\src\main\java
 C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2699156089.index
 \Peeps_Post\src\main\java
 C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3790770749.index
 \Peeps\src\main\java
-C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3389377117.index
-\Peeps1\src\main\java
 C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1953769438.index
 \Peeps_Chat\src\main\java
 C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2785315309.index
 \Peeps_Post\src\main\java
 C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1924685571.index
 \Peeps_member\src\main\java
-C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\215470581.index
-\Peeps2\src\main\java
 C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3305858760.index
 \Peeps\src\main\java
 C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2509147163.index
 \Peeps_member\src\main\java
-C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3643667246.index
-\Peeps2\src\main\java
 C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2567265282.index
 \Peeps_Post\src\main\java
