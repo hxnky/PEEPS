@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gnjk.chat.dao.mapper.ChatMapper">
+
+	<!-- 
+	<select id="selectList" resultMap="ResultMap">
+		select ch_idx
+		from chat
+	</select>
+	 -->
+	 
+	<insert id="insertMessage">
+		insert into CHAT(ch_idx, m_idx, rm_idx, ch_time, ch_ms)
+		values (#{ch_idx}, #{m_idx}, #{rm_idx}, #{ch_time}, #{ch_ms})
+	</insert>
+	
+<!-- 	<update id=update" parameterType="project">
+		update chat set
+			ch_idx = #{ch_idx},
+			m_idx = #{m_idx},
+			rm_idx = #{rm_idx},
+			ch_time = #{ch_time},
+			ch_ms = #{ch_ms}
+	</update>
+ -->
+ 
+</mapper>
