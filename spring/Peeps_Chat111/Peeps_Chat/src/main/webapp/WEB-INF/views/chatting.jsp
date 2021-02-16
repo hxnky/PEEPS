@@ -40,8 +40,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -52,7 +51,8 @@
 
 	sock.onopen = onOpen;
 	sock.onmessage = onMessage;
-	sock.onclose = onClose;	
+	sock.onclose = onClose;
+
 	
 	$(document).ready(function() {
 		$('#message').keypress(function(event) {
@@ -66,64 +66,14 @@
 		$('#sendBtn').click(function() {
 			sendMessage();
 			console.log("sendMessage() - 메서드 실행 ");	
-		});		
-		
-		$.ajax({
-			url : "requestObject",
-			type : "POST",
-		    success: function(msg) {
-		 
-		       var text = msg.responseText,
-		       text = text.replace(/(<([^>]+)>)/ig,""); //HTML 태그 모두 공백으로 대체
-		       text = '[' + text + ']';
-		       var json = $.parseJSON(text);
-		       
-		       var rain_state = json[0].response.body.items.item[1].obsrValue;
-		       var rain = json[0].response.body.items.item[3].obsrValue;
-		       var sky = json[0].response.body.items.item[4].obsrValue;
-		       var temperature = json[0].response.body.items.item[5].obsrValue;
-		       
-		           if(rain_state != 0) {
-		               switch(rain_state) {
-		                   case 1:   // 비
-		                           $("#chatdata").css({"background":"url(/icon/sun.jpg)"});
-		                           console.log('비');
-		                       break;
-		                   case 2:   // 비/눈
-		                      $("#chatdata").css({"background":"url(/icon/snow.jpg)"});
-		                      console.log('비/눈);
-		                       break;
-		                   case 3:   // 눈
-		                      $("#chatdata").css({"background":"url(/icon/snow.jpg)"});
-		                      console.log(' 눈');
-		                       break;
-		               }
-		           }else {
-		               switch(sky) {
-		                   case 1:   // 맑음
-		                      $("#chatdata").css({"background":"url(/icon/sun.jpg')"});
-		                      console.log('맑음');
-		                       break;
-		                   case 3:   // 구름 많음
-		                      $("#chatdata").css({"background":"url(/icon/snow.jpg')"});
-		                      console.log('구름 많음');
-		                       break;
-		                   case 4:   // 흐림
-		                      $("#chatdata").css({"background":"url(/icon/navi/search.png')"});
-		                      console.log('흐림');
-		                       break;
-		                   }    
-		               } //if 종료
-		               $("#chatdata").css({"background":"url(/icon/sun.jpg')"});
-		               console.log('날씨 해당 없음');
-		        } //success func 종료
-		    })    
-		}
-
-		
-		
-		
-		
+			
+			re
+		});
+	
+	   //$('#sendFileBtn').click(function() {
+		//	fileSend();
+		//	console.log("fileSend() - 메서드 실행 ");
+		//});
 		
 		
 	});
@@ -147,10 +97,12 @@
 
 		if(mes != ""){
 		
+		
 		sock.send(JSON.stringify(mes));
 		console.log(JSON.stringify(mes));
 		console.log('위 메세지 소켓에 전송');
-	
+
+		
 	} else {
 		return false;
 	}
