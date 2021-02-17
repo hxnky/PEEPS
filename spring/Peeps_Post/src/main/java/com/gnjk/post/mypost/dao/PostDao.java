@@ -5,9 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.gnjk.post.mypost.domain.Comment;
-import com.gnjk.post.mypost.domain.CommentRequest;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostFile;
+import com.gnjk.post.mypost.domain.Reply;
 
 public interface PostDao {
 	
@@ -53,4 +53,16 @@ public interface PostDao {
 	// 댓글 수 조회
 	int CountCmt(int post_idx);
 	
+	// 대댓글 조회
+	List<Reply> selectReList(int cmt_idx);
+	
+	// 대댓글 등록
+	int insertReply(Reply reply);
+	
+	// 대댓글 수정
+	int updateReply(int re_idx, String re_content);
+	
+	// 대댓글 삭제
+	int deleteReply(int re_idx);
+
 }

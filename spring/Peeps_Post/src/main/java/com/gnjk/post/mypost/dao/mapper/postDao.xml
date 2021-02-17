@@ -116,4 +116,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where post_idx=#{post_idx}
 	</select>
 
+	<!-- 대댓글 조회 -->
+	<select id="selectReList" parameterType="list"
+		resultType="com.gnjk.post.mypost.domain.Reply">
+		select * from reply where comment_idx=#{cmt_idx}
+	</select>
+	
+	<!-- 대댓글 작성 -->
+	<insert id="insertReply"
+		parameterType="com.gnjk.post.mypost.domain.Reply"
+		useGeneratedKeys="true" keyProperty="re_idx">
+
+		INSERT INTO reply
+		(comment_idx,
+		member_idx, re_content)
+		VALUES
+		(#{comment_idx}, #{member_idx},
+		#{re_content})
+
+	</insert>
+	
+	<!-- 대댓글 수정 -->
+	<update id="updateReply">
+		update reply set re_content=#{re_content} where
+		re_idx=#{re_idx}
+	</update>
+	
+	<!-- 대댓글 삭제 -->
+	<delete id="deleteReply">
+		delete from reply where re_idx=#{re_idx}
+	</delete>
+	
 </mapper>

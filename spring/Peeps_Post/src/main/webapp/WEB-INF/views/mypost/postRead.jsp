@@ -176,28 +176,52 @@ body {
 	width: 800px;
 	height: 50px;
 	border: none;
-	border-radius: 5px;
 	display: table-cell;
 	vertical-align: middle;
 	padding: 10px;
 	margin-right: 10px;
 }
 
-#cmt_edit, #cmt_del{
+#cmt_re, #cmt_edit, #cmt_del{
 	background-color: white;
 	border : 0.1px solid #CCC;
 	border-radius: 10px;
 }
 
-#cmt{
-	height: 50px;
-	margin : 10px auto;
+.cmt, #cmt{
+	margin-bottom: 10px;
 }
 
 #load_cmt{
-	width : 500px;
+	width : 300px;
 	border : none;
-	    margin: 12px auto;
+	margin: 12px auto;
+}
+
+#reply{
+	height: 40px;
+	margin : 15px auto;
+	margin-left: 30px;
+}
+
+#load_re{
+	width : 300px;
+	border : none;
+	margin: 12px auto;
+}
+
+#re_edit, #re_del{
+	background-color: white;
+	border : 0.1px solid #CCC;
+	border-radius: 10px;
+}
+
+#editForm{
+	margin: 20px auto;
+}
+
+#cmttxt_edit{
+	width : 400px;
 }
 </style>
 
@@ -393,8 +417,8 @@ body {
 				<td>
 					<hr>
 					<div class="comment">
-						
 					</div>
+					
 				</td>
 			</tr>
 		</table>
@@ -433,23 +457,57 @@ body {
 
 				$.each(data, function(index, cmt){
 					
-					// member_idx가 동일할 때만 수정/삭제 버튼 표시
 					if(cmt.member_idx == member_idx){
-						$('.comment').append("<div id='cmt'><input type='hidden' id='cmt_idx' value='"+cmt.cmt_idx+"'> <img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'> <button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button></div>");
+						$('.comment').append("<div class='cmt' id='cmt_"+cmt.cmt_idx+"'><input type='hidden' id='cmt_idx' value='"+cmt.cmt_idx+"'> <img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'> <button id='cmt_re' type='submit'>답글</button> <button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button><br><input type='hidden' id='replytext'></div>");
 					} else{
-						$('.comment').append("<div id='cmt'><input type='hidden' id='cmt_idx' value='"+cmt.cmt_idx+"'> <img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'></div>");
+						$('.comment').append("<div class='cmt' id='cmt'><input type='hidden' id='cmt_idx' value='"+cmt.cmt_idx+"'> <img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button></div>");
 
 					}
 					
+					// 대댓글
+					$.ajax({
+						url : '${pageContext.request.contextPath}/post/reply/select',
+						type: 'get',
+						data : {"cmt_idx" : cmt.cmt_idx},
+						success : function(data){
+							
+							var reply = data;
+							
+							console.log(reply);
+							
+							$('.reply').empty();
+
+							$.each(data, function(index, reply){
+								console.log(cmt.cmt_idx);
+								console.log(reply.re_idx);
+								
+								if(cmt.cmt_idx == reply.comment_idx){
+									if(reply.member_idx == member_idx){
+									$('#cmt_'+reply.comment_idx).append("<div id='reply'><input type='hidden' id='re_idx' value='"+reply.re_idx+"'><input type='hidden' id='cmt_idx' value='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_re' value='"+reply.re_content+"'><button id='re_edit' type='submit'>수정</button>  <button id='re_del' type='submit'>삭제</button></div>");
+									} else{
+										$('#cmt_'+reply.comment_idx).append("<div id='reply'><input type='hidden' id='re_idx' value='"+reply.re_idx+"'><input type='hidden' id='cmt_idx' value='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_re' value='"+reply.re_content+"'></div>");
+									}
+								}								
+							});
+							
+						},
+						error : function() {
+							console.log("대댓글 실패,,,,");
+						}
+						
+						
+					});
+
 				});
 				
 			},
 			error : function() {
-				console.log("실패,,,,");
+				console.log("댓글 실패,,,,");
 			}
 			
 			
 		});
+		
 		
 		
 	}
@@ -457,18 +515,57 @@ body {
 	// 수정 버튼 누르면 폼 생기게
 	function editComment(idx){
 		
+		var origin = $('.comment .cmt #load_cmt').eq(idx).val();
+		
 		console.log(idx);
 		
-		var html="<div class='cmtdiv'>";
+		var html="<div class='editForm'>";
 		html += "<img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'>";
 		html += "아이디";
 		html += "</span>";
-		html += "<span id='cmtinputarea'> <textarea rows='10' name='cmt_content' class='cmttxt' id='cmttxt_edit' placeholder='수정할 댓글을 입력해주세요' required></textarea>";
-		html += "<input type='submit' id='cmt_edit_btn' value='수정'></span></div>";
+		html += "<span id='cmtinputarea'> <textarea rows='10' name='cmt_content' class='cmttxt' id='cmttxt_edit' placeholder='"+origin+"' required></textarea>";
+		html += "<input type='submit' id='cmt_edit_btn' value='수정'><input type='submit' id='cmt_cancle_btn' value='취소'></span></div>";
 		
-		$('.comment #cmt').eq(idx).replaceWith(html);
+		$('.comment .cmt').eq(idx).replaceWith(html);
 		
 	}
+	
+	// 답글 누르면 폼 생기게
+	function replyForm(idx){
+		
+		
+		
+		console.log(idx);
+		
+		var html="<div class='editForm'>";
+		html += "<img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'>";
+		html += "아이디";
+		html += "</span>";
+		html += "<span id='cmtinputarea'> <textarea rows='10' name='cmt_content' class='cmttxt' id='reply_insert' placeholder='답글을 입력해주세요' required></textarea>";
+		html += "<input type='submit' id='reply_insert_btn' value='등록'><input type='submit' id='reply_cancle_btn' value='취소'></span></div>";
+		
+		$('.comment .cmt').eq(idx).append(html);
+
+	}
+	
+	// 답글 수정 누르면 폼 생기게
+	function replyEdit(idx){
+		
+		var origin = $('.comment .cmt #reply #load_re').eq(idx).val();
+
+		console.log(idx);
+		
+		var html="<div class='editForm'>";
+		html += "<img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'>";
+		html += "아이디";
+		html += "</span>";
+		html += "<span id='cmtinputarea'> <textarea rows='10' name='cmt_content' class='cmttxt' id='reply_insert' placeholder='"+origin+"' required></textarea>";
+		html += "<input type='submit' id='reply_insert_btn' value='등록'><input type='submit' id='reply_cancle_btn' value='취소'></span></div>";
+		
+		$('.comment .cmt #reply').eq(idx).replaceWith(html);
+		
+	}
+	
 </script>
 
 <!-- 21.02.17 댓글 작성/ 삭제 한경 -->
@@ -479,38 +576,45 @@ $(function() {
 	$("#cmtbtn").click(function() {
 		
 		var cmt = $('#cmttxt').val();
+		
+		if(cmt.trim() == ""){
+            alert("내용을 입력해주세요");
+           
+        } else{
+        	$.ajax({
+    			url : '${pageContext.request.contextPath}/post/cmt/insert',
+    			type : 'post',
+    			async : false,
+    			data : {
+    				"post_idx" : "${readView.post.p_idx}",
+    				"member_idx" : "${m_idx}",
+    				"cmt_content" : cmt
+    			},
+    			success : function(data) {
+    				console.log("작성 완료");
+    				$('#cmttxt').val('');
+    				loadComment();
+    			},
+    			error : function() {
+    				console.log("작성 실패,,,,");
+    			}
+    		});
+        }
 
-		$.ajax({
-			url : '${pageContext.request.contextPath}/post/cmt/insert',
-			type : 'post',
-			async : false,
-			data : {
-				"post_idx" : "${readView.post.p_idx}",
-				"member_idx" : "${m_idx}",
-				"cmt_content" : cmt
-			},
-			success : function(data) {
-				console.log("작성 완료");
-				$('#cmttxt').val('');
-				loadComment();
-			},
-			error : function() {
-				console.log("작성 실패,,,,");
-			}
-		});
+		
 	});
 
 
 	// 댓글 삭제
 	$(document).on("click", "#cmt_del", function(){
 		
-		var idx = $('.comment #cmt #cmt_del').index(this);
+		var idx = $('.comment .cmt #cmt_del').index(this);
 		
 		console.log(idx);
 		
-		if(confirm('삭제하시겠습니까?')){
+		if(confirm('댓글을 삭제하시겠습니까?')){
 			
-			$('.comment #cmt').eq(idx).remove();
+			$('.comment .cmt').eq(idx).remove();
 
 			$.ajax({
 				url : '${pageContext.request.contextPath}/post/cmt/del',
@@ -539,10 +643,10 @@ $(function() {
 	});
 	
 	// 댓글 수정
-	
+	// 수정 취소 추가
 	$(document).on("click", "#cmt_edit", function(){
 		
-		var idx = $('.comment #cmt #cmt_edit').index(this);
+		var idx = $('.comment .cmt #cmt_edit').index(this);
 		
 		
 		console.log(idx);
@@ -554,32 +658,263 @@ $(function() {
 			
 			var cmt = $('#cmttxt_edit').val();
 			
-			console.log(cmt);
+			if(cmt.trim() == ""){
+	            alert("내용을 입력해주세요");
+			} else{
+				$.ajax({
+					url : '${pageContext.request.contextPath}/post/cmt/edit',
+					type : 'post',
+					async : false,
+					data : {
+						"post_idx" : "${readView.post.p_idx}",
+						"idx" : idx,
+						"cmt_content" : cmt
+					},
+					success : function(data) {
+						console.log("수정 완료");
+						$('#cmttxt_edit').val('');
+						loadComment();
+					},
+					error : function() {
+						console.log("수정 실패,,,,");
+					}
+				});
+			}
 			
+			
+			
+		});
+		
+		// 수정 취소
+		$("#cmt_cancle_btn").click(function() {
+			loadComment();
+		});
+		
+	});
+	
+	
+	
+})
+
+
+</script>
+
+<script>
+$(function() {
+	
+	
+	//대댓글 작성
+	$(document).on("click", "#cmt_re", function(){
+		
+		var idx = $('.comment .cmt #cmt_re').index(this);
+		
+		
+		replyForm(idx);
+		
+			$("#reply_insert_btn").click(function() {
+				
+				var reply = $('#reply_insert').val();
+				
+				if(reply.trim() == ""){
+		            alert("내용을 입력해주세요");
+				} else{
+					// cmt_idx 찾기
+					$.ajax({
+						url : '${pageContext.request.contextPath}/post/find/idx',
+						type : 'post',
+						async : false,
+						data : {
+							"post_idx" : "${readView.post.p_idx}",
+							"idx" : idx
+						},
+						success : function(data) {
+							
+							var cmtidx = data;
+
+							$.ajax({
+								url : '${pageContext.request.contextPath}/post/reply/insert',
+								type : 'post',
+								data : {
+									"comment_idx" : cmtidx,
+									"member_idx" : "${m_idx}",
+									"re_content" : reply
+								},
+								success : function(data) {
+									console.log("대댓글 작성 완료");
+									$('#reply_insert').val('');
+									loadComment();
+								},
+								error : function() {
+									console.log("대댓글 작성 실패,,,,");
+								}
+							});
+						
+							
+						},
+						error : function() {
+							console.log("idx 얻기 실패,,,,");
+						}
+
+					});
+							
+
+				}
+			});
+					
+				
+		
+		// 작성 취소
+		$("#reply_cancle_btn").click(function() {
+			loadComment();
+		});
+		
+		
+	});
+	
+	// 대댓글 수정
+	$(document).on("click", "#re_edit", function(){
+		
+		var idx = $('.comment .cmt #reply #re_edit').index(this);
+		
+		console.log(idx);
+		
+		replyEdit(idx);
+	
+		
+		$("#reply_insert_btn").click(function() {
+			
+			var reply = $('#reply_insert').val();
+			
+			if(reply.trim() == ""){
+	            alert("내용을 입력해주세요");
+			} else{
+				
+				// cmt_idx 찾기
+				$.ajax({
+					url : '${pageContext.request.contextPath}/post/find/idx',
+					type : 'post',
+					async : false,
+					data : {
+						"post_idx" : "${readView.post.p_idx}",
+						"idx" : idx
+					},
+					success : function(data) {
+						
+						var cmtidx = data;
+						
+						console.log(cmtidx);
+						console.log(idx);
+						console.log(reply);
+
+						$.ajax({
+							url : '${pageContext.request.contextPath}/post/reply/edit',
+							type : 'post',
+							async : false,
+							data : {
+								"cmt_idx" : cmtidx,
+								"idx" : idx,
+								"re_content" : reply
+							},
+							success : function(data) {
+								console.log("대댓글 수정 완료");
+								$('#cmttxt_edit').val('');
+								loadComment();
+							},
+							error : function() {
+								console.log("대댓글  실패,,,,");
+							}
+						});
+					
+						
+					},
+					error : function() {
+						console.log("idx 얻기 실패,,,,");
+					}
+
+				});
+	
+			}
+			
+			
+			
+		});
+		
+		// 수정 취소
+		$("#reply_cancle_btn").click(function() {
+			loadComment();
+		});
+	
+	});
+	
+	// 대댓글 삭제
+	$(document).on("click", "#re_del", function(){
+		
+		var idx = $('.comment .cmt #reply #re_del').index(this);
+		
+		console.log(idx);
+		
+		if(confirm('댓글을 삭제하시겠습니까?')){
+			
+			$('.comment .cmt #reply').eq(idx).remove();
+
+			
+			// cmt_idx 찾기
 			$.ajax({
-				url : '${pageContext.request.contextPath}/post/cmt/edit',
+				url : '${pageContext.request.contextPath}/post/find/idx',
 				type : 'post',
 				async : false,
 				data : {
 					"post_idx" : "${readView.post.p_idx}",
-					"idx" : idx,
-					"cmt_content" : cmt
+					"idx" : idx
 				},
 				success : function(data) {
-					console.log("수정 완료");
-					$('#cmttxt_edit').val('');
-					loadComment();
+					
+					var cmtidx = data;
+					
+					console.log(cmtidx);
+					console.log(idx);
+
+					$.ajax({
+						url : '${pageContext.request.contextPath}/post/reply/del',
+						type : 'post',
+						async : false,
+						data : {
+							"cmt_idx" : cmtidx,
+							"idx" : idx
+						},
+						success : function(data) {
+							if(data==1){
+								console.log("대댓글 삭제 완료");
+								loadComment();
+							} else{
+								console.log("삭제 실패");
+							}
+							
+						},
+						error : function() {
+							console.log("수정 실패,,,,");
+						}
+					});
+					
 				},
 				error : function() {
-					console.log("수정 실패,,,,");
+					console.log("idx 얻기 실패,,,,");
 				}
+
 			});
+
 			
-		});
+			
+			
+			
+			
+		}
+		
 		
 	});
+	
 })
-
+	
 
 </script>
 

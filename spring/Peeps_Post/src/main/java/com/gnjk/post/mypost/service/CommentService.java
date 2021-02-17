@@ -20,11 +20,21 @@ public class CommentService {
 	private SqlSessionTemplate template;
 
 	// 댓글 조회
+	// 인덱스로 아이디 검사해서 list.add
 	public List<Comment> cmtSelect(int post_idx) {
 
 		dao = template.getMapper(PostDao.class);
 
 		return dao.selectCmtList(post_idx);
+	}
+	
+	public int findCmt_idx(int post_idx, int idx) {
+		
+		List<Comment> comment = dao.selectCmtList(post_idx);
+
+		int cmt_idx = comment.get(idx).getCmt_idx();
+		
+		return cmt_idx;
 	}
 
 	// 댓글 작성

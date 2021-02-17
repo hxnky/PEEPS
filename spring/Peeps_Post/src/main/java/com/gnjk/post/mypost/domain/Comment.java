@@ -14,19 +14,19 @@ public class Comment {
 	private int cmt_idx;
 	private int post_idx;
 	private int member_idx;
-	private Timestamp dmt_date;
+	private Timestamp cmt_date;
 	private String cmt_content;
 
-	// 오류남,,
-//	public Date getToDate() {
-//		
-//		return new Date(this.dmt_date.getTime());
-//	}
+	// 데이터 형식 바꿔야할듯
+	public Date getToDate() {
+		
+		return new Date(this.cmt_date.getTime());
+	}
 
 	@Override
 	public String toString() {
-		return "Comment [cmt_idx=" + cmt_idx + ", post_idx=" + post_idx + ", member_idx=" + member_idx + ", dmt_date="
-				+ dmt_date + ", cmt_content=" + cmt_content + "]";
+		return "Comment [cmt_idx=" + cmt_idx + ", post_idx=" + post_idx + ", member_idx=" + member_idx + ", cmt_date="
+				+ cmt_date + ", cmt_content=" + cmt_content + "]";
 	}
 
 //	public Comment(int cmt_idx, int post_idx, int member_idx, Timestamp dmt_date, String cmt_content) {
