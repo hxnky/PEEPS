@@ -114,15 +114,44 @@
 	margin: 10px auto;
 }
 
-.pagediv {
+/* .pagediv {
 	background-color: aqua;
 	text-align: center;
 	margin: auto;
+} */
+
+.paging {
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+.paging>span {
+	padding: 5px 10px;
+	border-radius: 4px;
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	font-size: 1.2em;
 }
 
 .postidx {
 	color: black;
 }
+
+.col-sm-4 {
+	width: 383px;
+}
+
+.row {
+	/* margin: auto;
+	width: 1150px; */
+}
+
+.container {
+	/* max-width: 100%; 
+	height: auto; */
+	width: 1150px;
+}
+
 </style>
 
 
@@ -168,32 +197,7 @@
 		<div class="container">
 			<div class="row">
 			<!-- 게시글 목록 시작 -->
-				<%-- <c:forEach items="${listView.postList}" var="post">
-				<div class="col-sm-4">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<a id="ptitle" class="postidx" href="postNO=${post.p_idx}">
-								<!-- 제목 20자 이상 초과시 자르기 -->
-								<c:choose>
-									<c:when test="${fn:length(post.p_title) > 20}">
-									<c:out value="${fn:substring(post.p_title,0,20)}"/>...
-									</c:when>
-									<c:otherwise>
-									<c:out value="${post.p_title}"></c:out>
-									</c:otherwise>
-								</c:choose>
-							</a>
-						</div>
-						<div class="panel-body">
-							<a class="postidx" href="postNO=${post.p_idx}"><img src="<c:url value="/resources/fileupload/postfile/${post.p_thumbnail}"/>"
-								class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>
-						</div>
-						<div class="panel-footer"><fmt:formatDate value="${post.p_date}"
-									pattern="yyyy.MM.dd." />
-						</div>
-					</div>
-				</div>
-				</c:forEach> --%>
+				
 			<!-- 게시글 목록 끝 -->	
 			</div>
 		</div>
@@ -201,21 +205,27 @@
 
 	</div>
 	<!-- 목록 끝 -->
-	<div class="pagediv">
+	<!-- 페이징 -->
+	<div class="paging">
+	</div>
+	
+	<!-- <div class="pagediv">
 		<nav aria-label="Page navigation example">
 			<ul class="pagination">
 				<li class="page-item"><a class="page-link" href="#"
 					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 				</a></li>
+				페이지 번호 영역
 				<li class="page-item"><a class="page-link" href="#">1</a></li>
 				<li class="page-item"><a class="page-link" href="#">2</a></li>
 				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				
 				<li class="page-item"><a class="page-link" href="#"
 					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 				</a></li>
 			</ul>
 		</nav>
-	</div>
+	</div> -->
 	
 	<script>
 	// 뷰컨트롤러 통해 페이지 번호 받기
@@ -239,14 +249,26 @@
 				
 				$.each(list, function(index, item){
 					
-					var date = new Date(item.p_date).toLocaleDateString();
+					var date = item.p_date-540*60*1000;
+						
+					date = new Date(date).toLocaleDateString();
 					
 					console.log("날짜: ", date);
+					
+					var pt = item.p_title;
+					
+					/* 글자수 20자 이상이면 자르기 */
+					if(pt.length > 20){
+						pt = pt.substring(0, 15);
+						pt = pt+"...";
+						console.log(pt);
+					} 
 					
 					var html = '<div class="col-sm-4">';
 					   html += '<div class="panel panel-primary">';
 					   html += '<div class="panel-heading">';  /* href="postNO=${post.p_idx}" */
-					   html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+item.p_title;
+					   /* html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+item.p_title; */
+					   html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+pt;
 					   html += '</a></div><div class="panel-body">';
 					   html += '<a class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">';
 					   html += '<img src="<c:url value="/resources/fileupload/postfile/'+item.p_thumbnail+'"/>" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
@@ -254,6 +276,16 @@
 					   
 					   $('.row').append(html);
 				});
+				// 페이징 처리
+				 if (data.totalPostCount>0){
+					 console.log('totalPageCount :' + data.totalPageCount);
+					for(var i=1; i <= data.totalPageCount; i++){	/* test 계정아이디 들어가야 함 */			
+						 var html2 =' <span><a href="<c:url value="/main/jhS2"/>?p='+i+'">'+i+'</a></span> ';																		
+						 $('.paging').append(html2);
+					}										 
+				 };	
+			},error : function(request, status, error) {
+				console.log("에러 발생 : code = " +request.status + "message =" + request.responseText + "error : " + error);
 			}
 			
 		});
