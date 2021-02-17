@@ -26,6 +26,8 @@ public interface GuestbookDao {
 	int selectTotalCount();
 	//방명록 리스트(페이지 번호에 맞는 )
 	List<Guestbook> selectGbookList(int startRow, int cntPerPage);
+	//방명록 리스트 json
+	List<Guestbook> selectGbookList2();
     //방명록삭제 
 	int deleteGuestbookIdx(int gidx);
     //방명록 정보 조회: gidx로 조회

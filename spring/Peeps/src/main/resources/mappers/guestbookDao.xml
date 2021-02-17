@@ -51,5 +51,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</update>
 	
+	<select id="selectGbookList2" resultMap="guestbookListResult" >
+	select * from guestbook 
+	</select>
 
 </mapper>

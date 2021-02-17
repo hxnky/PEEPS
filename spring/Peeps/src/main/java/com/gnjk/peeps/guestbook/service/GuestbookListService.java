@@ -40,5 +40,13 @@ public class GuestbookListService {
 			e.printStackTrace();
 		}
 		return listView;
+		
+		
+	}
+	
+	public List<Guestbook> getGbookList(){
+		dao=template.getMapper(GuestbookDao.class);
+		return dao.selectGbookList2();
+		
 	}
 }

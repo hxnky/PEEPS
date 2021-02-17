@@ -5,7 +5,75 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2021-02-12T03:23:00Z</updated>
+  <updated>2021-02-16T19:23:00Z</updated>
+  <entry>
+    <title>This Week in Spring - February 16th, 2021</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/02/16/this-week-in-spring-february-16th-2021" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2021-02-16:4364</id>
+    <updated>2021-02-16T19:23:00Z</updated>
+    <content type="html">&lt;p&gt;Hi, Spring fans! Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! This week is fixing to be a really fun one! &lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll be speaking at the &lt;a href="https://www.meetup.com/seajug/events/276135388/"&gt;&lt;strong&gt;Seattle JUG&lt;/strong&gt; tonight&lt;/a&gt;. It&amp;rsquo;s free, online, virtual, etc. Join us, won&amp;rsquo;t you? &lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ll also be speaking at the legendary &lt;a href="http://DevNexus.com"&gt;&lt;strong&gt;Devnexus&lt;/strong&gt;&lt;/a&gt; event this week. Do &lt;em&gt;not&lt;/em&gt; miss that. Or the show. It&amp;rsquo;s free, being held virtually, online, and a &lt;em&gt;ton of us&lt;/em&gt; from the Spring team will be there. &lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ve got a lot of good stuff to get to this week so let&amp;rsquo;s dive in!&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;My buddy, the amazing and inestimable, Tanzu observability engineer Tommy Ludwig, and I wrote a little blog, &lt;a href="https://spring.io/blog/2021/02/09/metrics-and-tracing-better-together"&gt;&lt;em&gt;Metrics and Tracing: Better Together&lt;/em&gt;&lt;/a&gt;. It&amp;rsquo;s chock full of Tommy&amp;rsquo;s brilliance and my terrible terrible puns. Don&amp;rsquo;t miss it!&lt;/li&gt;
+  &lt;li&gt;In last week&amp;rsquo;s installment of &lt;a href="https://spring.io/blog/2021/02/11/a-bootiful-podcast-doordash-tech-lead-manager-zohaib-sibte-hassan-on-spring-boot-kotlin-grpc-and-more"&gt;&lt;em&gt;A Bootiful Podcast&lt;/em&gt;, I talked to Doordash tech lead manager Zohaib Sibte Hassan on Spring Boot, Kotlin, GRPC, and more&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://blogs.vmware.com/opensource/2021/02/09/an-open-source-approach-to-decentralized-transactions/"&gt;An Open Source Approach to Decentralized Transactions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;This looks cool: a way to &lt;a href="https://twitter.com/serceman/status/1359477990501937156?s=12"&gt;inspect RSocket frames from within Chrome&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://blogs.vmware.com/opensource/2021/02/11/musings-on-supply-chain-security/"&gt;Musings on Supply Chain Security&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://tanzu.vmware.com/modern-apps"&gt;Paving the Road to Modern Apps, by VMware Tanzu&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://rieckpil.de/testing-spring-boot-applications-masterclass/"&gt;Philip Riecks has an interesting new tutorial, &lt;em&gt;Testing Spring Boot Applications Masterclass&lt;/em&gt;, for sale.&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/02/11/spring-authorization-server-0-1-0-available-now"&gt;Spring Authorization Server 0.1.0 available now&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/02/11/spring-cloud-hoxton-sr10-has-been-released"&gt;Spring Cloud Hoxton.SR10 has been released&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/02/16/spring-framework-5-3-4-and-5-2-13-available-now"&gt;Spring Framework 5.3.4 and 5.2.13 available now&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/02/11/spring-security-5-4-4-5-3-8-and-5-2-9-released"&gt;Spring Security 5.4.4, 5.3.8, and 5.2.9 released&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/02/16/spring-vault-2-3-1-available"&gt;Spring Vault 2.3.1 available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://twitter.com/VMware/status/1360490905782931456"&gt;Mark your calendar for these 2021 VMware conferences - SpringOne, VMworld, CloudLIVE, Connect. &lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Vault 2.3.1 available</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/02/16/spring-vault-2-3-1-available" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Mark Paluch</name>
+    </author>
+    <id>tag:spring.io,2021-02-16:4363</id>
+    <updated>2021-02-16T15:18:00Z</updated>
+    <content type="html">&lt;div class="paragraph"&gt;
+&lt;p&gt;On behalf of the community, I&amp;#8217;d like to announce the availability of the Spring Vault service release &lt;code&gt;2.3.1&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;This release ships with mostly bugfixes, dependency upgrades, and selected features.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;For a complete list of changes, see the &lt;a href="https://github.com/spring-projects/spring-vault/releases/tag/2.3.1"&gt;2.3.1 changelog&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;a href="http://projects.spring.io/spring-vault/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-vault"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-vault/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-vault/releases/tag/2.3.1"&gt;Release &lt;code&gt;2.3.1&lt;/code&gt; on GitHub&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-vault/docs/2.3.1/reference/html/"&gt;Documentation for &lt;code&gt;2.3.1&lt;/code&gt;&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-vault"&gt;Stack Overflow&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Framework 5.3.4 and 5.2.13 available now</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/02/16/spring-framework-5-3-4-and-5-2-13-available-now" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>St?phane Nicoll</name>
+    </author>
+    <id>tag:spring.io,2021-02-16:4362</id>
+    <updated>2021-02-16T12:07:00Z</updated>
+    <content type="html">&lt;p&gt;On behalf of the team and everyone who has contributed, I am pleased to announce that Spring Framework &lt;code&gt;5.3.4&lt;/code&gt; and &lt;code&gt;5.2.13&lt;/code&gt; are available now.&lt;/p&gt;
+&lt;p&gt;Spring Framework &lt;code&gt;5.3.4&lt;/code&gt; includes &lt;a href="https://github.com/spring-projects/spring-framework/releases/tag/v5.3.4"&gt;62 fixes and improvements&lt;/a&gt;. Spring Framework &lt;code&gt;5.2.13&lt;/code&gt; includes &lt;a href="https://github.com/spring-projects/spring-framework/releases/tag/v5.2.13.RELEASE"&gt;18 selected fixes and improvements&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Stay tuned for follow-up Spring Boot releases later this week.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://projects.spring.io/spring-framework/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-framework"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-framework/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-framework/docs/5.3.4/spring-framework-reference"&gt;Documentation&lt;/a&gt;&lt;/p&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Authorization Server 0.1.0 available now</title>
     <link rel="alternate" href="https://spring.io/blog/2021/02/11/spring-authorization-server-0-1-0-available-now" />
@@ -1946,85 +2014,6 @@ class Customer implements Serializable {&#xD;
   &lt;li&gt;&lt;a href="https://twitter.com/VMwareTanzu/status/1351951632158875652"&gt;VMwareTanzu KubeAcademy¡¯s expert instructors design and deliver each course to give you practical #Kubernetes training. &lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://twitter.com/cloudfoundry/status/1351963315614879746"&gt; Learn how CF Protect helps recover data in Cloud Foundry &lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>What's New in Azure Spring Cloud after GA?</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/01/25/what-s-new-in-azure-spring-cloud-after-ga" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2021-01-26:4346</id>
-    <updated>2021-01-26T03:20:00Z</updated>
-    <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;This post was written by our friend on the Azure Spring Cloud team, the amazing &lt;a href="https://twitter.com/liangkylie"&gt;Kylie Liang (@liangkylie)&lt;/a&gt;. I interviewed her for the &lt;a href="http://bootifulpodcast.fm"&gt;&lt;em&gt;Bootiful Podcast&lt;/em&gt;&lt;/a&gt; in April 2019, too! -Josh&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;2020 was a busy year for Azure Spring Cloud service. Microsoft and VMware co-announced Azure Spring Cloud General Availability (GA). We were excited to see how Azure Spring Cloud helped customers focus on code and let us take care of the underlying infrastructure management, operation, and maintenance. We continue to prioritize our work according to customers¡¯ requests and feedback. For example, 7 more regions were enabled, and Azure Spring Cloud service is now available in &lt;a href="https://docs.microsoft.com/azure/spring-cloud/spring-cloud-faq?pivots=programming-language-java#in-which-regions-is-azure-spring-cloud-available"&gt;18&lt;/a&gt; regions of Asia Pacific, Australia, Canada, China, Europe, India, Korea, United Arab Emirates, United Kingdom, and the United States. In this blog, I¡¯ll share more about the newest features and enhancements since GA. &lt;/p&gt;&lt;h2&gt;&lt;a href="#full-apm-capabilities-w-application-insights-java-in-process-agent" class="anchor" name="full-apm-capabilities-w-application-insights-java-in-process-agent"&gt;&lt;/a&gt;Full APM Capabilities w/ Application Insights Java in-process Agent&lt;/h2&gt;
-&lt;p&gt;Application Insights is an extensible Application Performance Management (APM) service for developers and DevOps professionals. With its latest Java in-process agent you can enjoy full APM functionalities besides distributed tracing. For example, you can monitor real-time live metrics without any code changes and obtain insights into application dependencies ? MySQL, PostgreSQL, JDBC, Redis, JMS, Kafka, Netty / WebFlux, etc. Learn more &lt;a href="https://spring.io/blog/2021/01/21/bootiful-application-monitoring-with-azure-spring-cloud"&gt;from here&lt;/a&gt; about effortlessly monitoring applications and dependencies in Azure Spring Cloud!&lt;/p&gt;
-&lt;p&gt;As you know, there is always the possibility that a service may be down or having high latency when a service invokes another service. This may lead to exhaustion of the threads as they might be waiting for other requests to complete. With the implementation of the Circuit Breaker pattern, you can prevent failures from cascading and provide fallback behavior until a failing service is restored to normal operation. The new Spring Cloud Circuit Breaker framework unifies all implementations of its metrics data pipeline into Micrometer. Resilience4j is a new option for Spring developers to implement the Circuit Breaker pattern. Resilience4j works well with Spring Boot and using Micrometer libraries, it can produce metrics for monitoring. After enabling &lt;a href="https://docs.microsoft.com/azure/spring-cloud/spring-cloud-howto-circuit-breaker-metrics"&gt;Application Insights java in-process agent and dimension collection for Resilience4j metrics&lt;/a&gt;, you can collect Spring Cloud Resilience4j Circuit Breaker Metrics and display them in the Metrics blade of Application Insights. &lt;/p&gt;
-&lt;img src ="https://github.com/joshlong/blog-images/raw/master/whats-new-in-azure-spring-cloud-after-ga-25-jan-2021/Picture1.png" /&gt;&lt;h2&gt;&lt;a href="#get-outbound-public-ip-to-secure-the-communication-with-external-resources" class="anchor" name="get-outbound-public-ip-to-secure-the-communication-with-external-resources"&gt;&lt;/a&gt;Get outbound public IP to secure the communication with external resources&lt;/h2&gt;
-&lt;p&gt;Some network environments are locked down via a Firewall and allow only whitelisted IP addresses inbound to their internal network. Learn how to get &lt;a href="https://docs.microsoft.com/azure/spring-cloud/spring-cloud-howto-outbound-public-ip"&gt;static outbound public IP addresses&lt;/a&gt; of Azure Spring Cloud applications to communicate with external resources, such as databases, storage, and key vaults. &lt;/p&gt;
-&lt;p&gt;Below is an example to whitelist an Azure Spring Cloud app in Azure Database for MySQL. Azure Database for MySQL provides access security using a firewall to protect your data. You can explicitly add all the outbound IPs of your Azure Spring Cloud apps. &lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;To find the outbound public IP addresses currently used by your Azure Spring Cloud service instance in the Azure portal, click &lt;strong&gt;Networking&lt;/strong&gt; in your instance&amp;rsquo;s left-hand navigation pane. They are listed in the &lt;strong&gt;Outbound IP addresses&lt;/strong&gt; field. &lt;br/&gt; &lt;img src ="https://github.com/joshlong/blog-images/raw/master/whats-new-in-azure-spring-cloud-after-ga-25-jan-2021/Picture2.png" /&gt;&lt;/li&gt;
-  &lt;li&gt;On the MySQL server page, under Settings heading, click &lt;strong&gt;Connection Security&lt;/strong&gt; and add above outbound IPs one-by-one. &lt;br/&gt;&lt;img src ="https://github.com/joshlong/blog-images/raw/master/whats-new-in-azure-spring-cloud-after-ga-25-jan-2021/Picture3.png" /&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;h2&gt;&lt;a href="#vs-code-extension-for-azure-spring-cloud" class="anchor" name="vs-code-extension-for-azure-spring-cloud"&gt;&lt;/a&gt;VS Code extension for Azure Spring Cloud&lt;/h2&gt;
-&lt;p&gt;Besides feature requests for the Azure Spring Cloud service, we also received requests from developers about how to deploy and manage apps in their familiar environment. You can now use &lt;a href="https://docs.microsoft.com/azure/spring-cloud/spring-cloud-tutorial-intellij-deploy-apps"&gt;Azure Toolkit for IntelliJ&lt;/a&gt; or &lt;a href="http://asc-vscode/"&gt;Azure Spring Cloud extension for VS Code&lt;/a&gt; to quickly create, manage and deploy apps to Azure Spring Cloud. &lt;/p&gt;
-&lt;img src ="https://github.com/joshlong/blog-images/raw/master/whats-new-in-azure-spring-cloud-after-ga-25-jan-2021/Picture4.gif" /&gt;&lt;h2&gt;&lt;a href="#what-is-upcoming" class="anchor" name="what-is-upcoming"&gt;&lt;/a&gt;What is Upcoming&lt;/h2&gt;
-&lt;p&gt;Security, elastic scaling, and monitoring are key tenets of Azure Spring Cloud. In the following months, you will see more updates for:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Managed Virtual Network&lt;/strong&gt;: allows users to be in control of inbound and outbound network communications for Azure Spring Cloud and enables Azure Spring Cloud to interact with systems in on-premises data centers or Azure services in virtual networks.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Autoscale&lt;/strong&gt;: automates the upscaling or downscaling of the application based on load or schedule ? thus providing cost-efficiency and better performance.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;E2E TLS&lt;/strong&gt;: allows users to encrypt and securely transmit sensitive data among applications or from app to the backend.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Azure RBAC&lt;/strong&gt; for managed Spring Cloud Config Server/Service Registry: allows users to authenticate with AAD (Azure Active Directory) token for accessing to managed Spring Cloud Config Server/Service Registry by Azure Spring Cloud service.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Integration with 3rd party APM solutions&lt;/strong&gt;: enables out-of-box experience w/ 3rd party Application Performance Monitoring (APM) tools such as New Relic, App Dynamics and Dynatrace for Azure Spring Cloud apps.&lt;/li&gt;
-&lt;/ul&gt;&lt;h2&gt;&lt;a href="#get-started" class="anchor" name="get-started"&gt;&lt;/a&gt;Get Started&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://docs.microsoft.com/azure/spring-cloud/spring-cloud-quickstart?tabs=Azure-CLI&amp;pivots=programming-language-java"&gt;Step by step tutorials&lt;/a&gt;: Learn the basics of Azure Spring Cloud with well-known Spring sample apps.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://docs.microsoft.com/learn/modules/azure-spring-cloud-workshop/"&gt;Online workshop&lt;/a&gt;: Go through tasks to deploy Spring Boot microservices to Azure Spring Cloud with Azure database for MySQL.&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://docs.microsoft.com/azure/spring-cloud/spring-cloud-troubleshoot"&gt;Troubleshooting tips&lt;/a&gt;: Read common tips for troubleshooting Azure Spring Cloud server- and client-side issues.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We are excited about the improving developer experience we are creating for Azure Spring Cloud service. Your feedback has been instrumental in shaping these features, keep the feedback coming. &lt;a href="mailto:AzureSpringCloud-Talk@service.microsoft.com"&gt;Contact us&lt;/a&gt; if you have feedback or questions. &lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Cloud Task 2.2.5 Release!</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/01/25/spring-cloud-task-2-2-5-release" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Glenn Renfro</name>
-    </author>
-    <id>tag:spring.io,2021-01-25:4345</id>
-    <updated>2021-01-25T16:41:00Z</updated>
-    <content type="html">&lt;p&gt;Spring Cloud Task 2.2.5 includes fixes for the following vulnerability:&lt;/p&gt;
-&lt;p&gt;CVE-2020-5428&lt;br/&gt;In applications using Spring Cloud Task 2.2.4.RELEASE and below, may contain code that is vulnerable to SQL injection when exercising certain lookup queries in the TaskExplorer. &lt;/p&gt;
-&lt;p&gt;Users of Spring Cloud Task 2.2.4.RELEASE and below are encouraged to upgrade to Spring Cloud Task 2.2.5.RELEASE or 2.3.0.&lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Cloud Data Flow 2.7.1 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/01/25/spring-cloud-data-flow-2-7-1-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Janne Valkealahti</name>
-    </author>
-    <id>tag:spring.io,2021-01-25:4344</id>
-    <updated>2021-01-25T15:00:00Z</updated>
-    <content type="html">&lt;p&gt;Spring Cloud Data Flow team is pleased to announce the release of &lt;em&gt;2.7.1&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;2.7.1&lt;/em&gt; is a maintenance release fixing following issues:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;UI bug fixes&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;Cloudfoundry Java Client&lt;/em&gt; has been updated to &lt;em&gt;4.13.0&lt;/em&gt; fixing its memory leak&lt;/li&gt;
-  &lt;li&gt;Using &lt;em&gt;Spring Boot 2.3.7&lt;/em&gt; and &lt;em&gt;Cloud Hoxton.SR9&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;Spring Cloud Task&lt;/em&gt; updated to &lt;em&gt;2.2.5&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;Dataflow server contains fixes for docker, metrics and some endpoints&lt;/li&gt;
-  &lt;li&gt;More detailed list can be found from &lt;a href="https://github.com/spring-cloud/spring-cloud-dataflow/releases/tag/v2.7.1"&gt;GitHub 2.7.1&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;There is also releases for &lt;a href="https://github.com/spring-cloud/spring-cloud-dataflow/releases/tag/v2.6.5"&gt;GitHub 2.6.5&lt;/a&gt; and &lt;a href="https://github.com/spring-cloud/spring-cloud-dataflow/releases/tag/v2.5.4.RELEASE"&gt;GitHub 2.5.4&lt;/a&gt; with updated &lt;em&gt;Spring Cloud Task&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;These releases fixes &lt;a href="https://tanzu.vmware.com/security/cve-2020-5427"&gt;CVE-2020-5427&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;We&amp;rsquo;ve switched &lt;a href="https://dataflow.spring.io/docs/applications/"&gt;Pre-packaged Applications&lt;/a&gt; in our import links to point to &lt;em&gt;3.x&lt;/em&gt; versions.&lt;/p&gt;&lt;h2&gt;&lt;a href="#stay-in-touch-hellip" class="anchor" name="stay-in-touch-hellip"&gt;&lt;/a&gt;Stay in touch&amp;hellip;&lt;/h2&gt;
-&lt;p&gt;As always, we welcome feedback and contributions, so please reach out to us on &lt;a href="https://stackoverflow.com/questions/tagged/spring-cloud-dataflow"&gt;Stack Overflow&lt;/a&gt; or &lt;a href="https://github.com/spring-cloud/spring-cloud-dataflow/issues"&gt;GitHub&lt;/a&gt; or via &lt;a href="https://gitter.im/spring-cloud/spring-cloud-dataflow"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>
