@@ -327,7 +327,7 @@ body {
 	    		success : function(data){
 	    					
 	    		console.log("ajax 데이터 : ",data);								/* test 계정 아이디 */
-	    		/* window.location.href="http://localhost:8080/post/main/jhS2"; */
+	    		window.location.href="http://localhost:8080/post/main/jhS2"; 
 	    					
 	    		},error: function(e){
 	    		console.log("ajax전송에러");	

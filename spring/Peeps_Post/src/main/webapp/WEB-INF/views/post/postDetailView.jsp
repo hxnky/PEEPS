@@ -99,13 +99,16 @@ crossorigin="anonymous"></script>
     /* margin: 7px 0; */
 }
 
-.post_datenbutton>input {
+.deleteBtn, .editBtn {
+	background-color: #ccc;
 	float: right;
 	margin-left: 20px;
 	font-size: 15px;
 	border: 0px solid;
 	width: 80px;
 	height: 40px;
+	text-align: center;
+	padding: 10px;
 }
 
 .carousel-inner>div {
@@ -169,6 +172,33 @@ pre {
 	font-family: 'Nanum Gothic', sans-serif;
 }
 
+a:link {
+	text-decoration: none;
+	color: white;
+}
+a:visited {
+	text-decoration: none;
+	color: white;
+}
+a:active {
+	text-decoration: none;
+	color: white;
+}
+a:hover {
+	text-decoration: none;
+	color: white;
+}
+
+.oneImg {
+	text-align: center;
+	margin: 20px 0;
+	background-color: #ccc;
+}
+
+.oneImg>img {
+	height: 800px;
+}
+
 body {
 	background-color: #fcf9f6;
 	font-family: 'Nanum Gothic', sans-serif;
@@ -211,13 +241,11 @@ body {
 						<%-- <fmt:formatDate value="${readView.post.p_date}"
 										pattern="yyyy.MM.dd."/> --%>
 					</span>
-					<input type="button" value="삭제">
-					<input type="button" value="수정">
 					
-					<a
+					<a class="deleteBtn"
 					href="javascript:deletePost(${readView.post.p_idx});"
 					>삭제</a>
-					<a
+					<a class="editBtn"
 					href="<c:url value="/post/editPNO=${readView.post.p_idx}" />"
 					>수정</a>
 				</td>
@@ -236,7 +264,7 @@ body {
 				<td>
 					<div class="content">
 					<%-- ${readView.post.p_content} --%>
-					${fn:replace(readView.post.p_content, cn, br)}
+					<%-- ${fn:replace(readView.post.p_content, cn, br)} --%>
 					</div>
 				</td>
 			</tr>
@@ -348,8 +376,14 @@ body {
 				success: function(data){
 					console.log("게시물파일 ajax success", data);
 					
-					if(data.length > 0){
-						console.log("data길이가 0 이상");
+					if(data.length == 1){
+						console.log("이미지 1개");
+						var html = '<div class="oneImg"><img src="<c:url value="/resources/fileupload/postfile/'+data[0].f_name+'"/>"></div>';
+						$('.postpics').append(html); 
+					} 
+					
+					if(data.length > 1){
+						console.log("이미지 2개 이상");
 						
 						var html = '<div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="false">';
 						   html += '<ol class="carousel-indicators"></ol>';
@@ -364,18 +398,31 @@ body {
 						$('.postpics').append(html);
 						
 						var firstImg = $(data).first();
+						var index = 0;
+						
 						$.each(firstImg, function(index, item){
 							console.log("첫번째 이미지 : ",firstImg);
-						
-						var html1 = '<div class="carousel-item active">';
-						   html1 += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" class="d-block w-100" alt="..."></div>';
-							$('.carousel-inner').append(html1);
+							
+							/* var idcHtml1 = '<li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="'+index+''" class="active"></li>';
+							index = index+1;
+							$('.carousel-indicators').append(idcHtml1); */
+							
+							var html1 = '<div class="carousel-item active">';
+							   html1 += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" class="d-block w-100" alt="..."></div>';
+								$('.carousel-inner').append(html1);
 						})
 						
 						var anthrImg = $(data).not(firstImg);
 						$.each(anthrImg, function(index, item){
 							console.log("나머지 이미지 : ",anthrImg);
 							
+							/* var idcHtml2 = '<li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="'+index+'"></li>';
+							index = index+1;
+							$('.carousel-indicators').append(idcHtml2); */
+							
+							var html2 = '<div class="carousel-item">';
+								html2 += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" class="d-block w-100" alt="..."></div>';
+								$('.carousel-inner').append(html2);
 						})
 					}
 					

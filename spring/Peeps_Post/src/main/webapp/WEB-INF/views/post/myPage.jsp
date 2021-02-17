@@ -152,6 +152,40 @@
 	width: 1150px;
 }
 
+.pageBtn:link {
+	text-decoration: none;
+	color: gray;
+}
+.pageBtn:visited {
+	text-decoration: none;
+	color: gray;
+}
+.pageBtn:active {
+	text-decoration: none;
+	color: gray;
+}
+.pageBtn:hover {
+	text-decoration: none;
+	color: gray;
+}
+
+#ptitle:link {
+	text-decoration: none;
+	color: white;
+}
+#ptitle:visited {
+	text-decoration: none;
+	color: white;
+}
+#ptitle:active {
+	text-decoration: none;
+	color: white;
+}
+#ptitle:hover {
+	text-decoration: none;
+	color: white;
+}
+
 </style>
 
 
@@ -280,7 +314,7 @@
 				 if (data.totalPostCount>0){
 					 console.log('totalPageCount :' + data.totalPageCount);
 					for(var i=1; i <= data.totalPageCount; i++){	/* test 계정아이디 들어가야 함 */			
-						 var html2 =' <span><a href="<c:url value="/main/jhS2"/>?p='+i+'">'+i+'</a></span> ';																		
+						 var html2 =' <span><a class="pageBtn" href="<c:url value="/main/jhS2"/>?p='+i+'">'+i+'</a></span> ';																		
 						 $('.paging').append(html2);
 					}										 
 				 };	
