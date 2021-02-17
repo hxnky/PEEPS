@@ -70,6 +70,12 @@ aside {
 	font-size: 15px;
 	vertical-align: top;
 }
+a #photo {
+	margin : -20px 0 0 -20px;
+}
+a #aside_photo {
+	margin-top : -10px;
+}
 
 #container {
 	width: 900px;
@@ -80,15 +86,6 @@ aside {
 	font-size: 0;
 	border-radius: 5px;
 	overflow: hidden;
-}
-
-aside header span {
-	border-bottom: 1px solid #c4c4c4;
-	width: 130px;
-	display: inline-flex;
-	margin: 50px -80px 10px 100px;
-	list-style-type: none;
-	text-decoration-line: underline;
 }
 
 #srch_b {
@@ -228,7 +225,7 @@ aside li h3 {
 
 main header {
 	height: 50px;
-	padding: 30px 20px 30px 40px;
+	padding: 20px 20px 20px 10px;
 }
 
 main header>* {

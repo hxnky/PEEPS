@@ -88,52 +88,53 @@
 
 		var realTime = hours + "00";
 
-		$.ajax({
-			url : "chattingData",
-			type : "GET",
-			success : function(msg) {
+		$
+				.ajax({
+					url : "chattingData",
+					type : "GET",
+					success : function(msg) {
 
-				var text = JSON.stringify(msg);
+						var text = JSON.stringify(msg);
 
-				if (text.baseTime == realTime) {
-					switch (text.pty) {
-					case 1: // 비
-						document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)"
-						console.log('비');
-						break;
-					case 2: // 비/눈
-						document.getElementById('chatdata').style.background =  "url(/chat/icon/snow.jpg)"
-						console.log('비/눈');
-						break;
-					case 3: // 눈
-						document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
-						console.log('눈');
-						break;
-					case 4: // 소나기
-						document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
-						console.log('소나기');
-						break;
-					}
-				} else {
-					switch (text.sky) {
-					case 1: // 맑음
-						document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)"
-						console.log('맑음');
-						break;
-					case 3: // 구름 많음
-						document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
-						console.log('구름 많음');
-						break;
-					case 4: // 흐림
-						document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
-						console.log('흐림');
-						break;
-					}
-				} // if 종료
-				console.log('날씨 해당 없음');
-				document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)";	
-			} //success func 종료
-		}) // ajax 종료
+						if (text.baseTime == realTime) {
+							switch (text.pty) {
+							case 1: // 비
+								document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)"
+								console.log('비');
+								break;
+							case 2: // 비/눈
+								document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+								console.log('비/눈');
+								break;
+							case 3: // 눈
+								document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+								console.log('눈');
+								break;
+							case 4: // 소나기
+								document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+								console.log('소나기');
+								break;
+							}
+						} else {
+							switch (text.sky) {
+							case 1: // 맑음
+								document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)"
+								console.log('맑음');
+								break;
+							case 3: // 구름 많음
+								document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+								console.log('구름 많음');
+								break;
+							case 4: // 흐림
+								document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+								console.log('흐림');
+								break;
+							}
+						} // if 종료
+						console.log('날씨 해당 없음');
+						document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)";
+					} //success func 종료
+				}) // ajax 종료
 	};
 
 	function sendMessage() {
@@ -149,16 +150,15 @@
 			ch_time : str
 		}
 
-		if (mes != "") {
-
+		if (mes.ch_ms == "") {
+			return false;	// 메세지 없이 전송 X
+		} else {
 			sock.send(JSON.stringify(mes));
 			console.log(JSON.stringify(mes));
 			console.log('위 메세지 소켓에 전송');
-
-		} else {
-			return false;
+			 $("#message").val("");
 		}
-
+		
 	}
 
 	function onMessage(evt) {
@@ -187,9 +187,8 @@
 
 				$('#chatdata').append(printHTML);
 			}
-		} else {
-			return false;
 		}
+		
 	};
 
 	function onClose() {
