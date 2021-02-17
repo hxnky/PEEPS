@@ -183,6 +183,8 @@
             $('#chatdata').append(printHTML);
          }
       
+		$('#chatdata').scrollTop($('#chatdata')[0].scrollHeight);
+      
    };
 
    function onClose() {

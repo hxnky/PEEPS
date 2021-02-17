@@ -24,7 +24,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       values (#{m_idx},#{rm_idx},#{ch_time},#{ch_ms}) 
    </insert>
    
-   
+ <!--   <select id="getMessageData" resultType = "com.gnjk.chat.domain.Message">
+   	select rm_idx, ch_time, ch_ms
+   	from chat.chat
+   	where m_idx = #{m_idx}
+   </select> -->
    <!-- where 조건에 room_idx 같을때 and 해야하는지 헷갈림...
    <select id = "isRoom" resultMap = "com.gnjk.chat.domain.ChatRoom">
       select * from CHATROOM WHERE m_idx = #{m_idx}

@@ -20,7 +20,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import com.gnjk.chat.dao.mybatisMessageDao;
+import com.gnjk.chat.dao.MessageDao;
 import com.gnjk.chat.domain.Message;
 import com.google.gson.Gson;
 
@@ -47,7 +47,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 	static String fileUploadSession = "";
 	
 	@Autowired
-	private mybatisMessageDao dao;
+	private MessageDao dao;
 	
 	
 	// =============================================================
@@ -65,7 +65,16 @@ public class ChattingHandler extends TextWebSocketHandler {
 		map.put(session.getId(), session);
 		hash.add(map);
 
-		logger.info("{} 연결되었습니다.", session.getId()+":"+ sessionId );
+		logger.info("{} 연결되었습니다.", session.getId()+":"+ sessionId);
+		
+		//map.put(session.getRemoteAddress().getHostName(), session);
+		//hash.add(map);
+		
+		//logger.info("연결 IP : {}", session.getRemoteAddress().getHostName() + ":" + session);
+		
+		// sIP = session.getRemoteAddress().getHostName();
+		
+		//dao.getMessageData(sessionId);
 		
 		log(session.getId() + " getId() 연결 성공 ");
 
