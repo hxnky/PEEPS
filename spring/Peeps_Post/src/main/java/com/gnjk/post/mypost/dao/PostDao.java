@@ -60,7 +60,7 @@ public interface PostDao {
 	int insertReply(Reply reply);
 	
 	// 대댓글 수정
-	int updateReply(int re_idx, String re_content);
+	int updateReply(@Param("re_idx") int re_idx, @Param("re_content") String re_content);
 	
 	// 대댓글 삭제
 	int deleteReply(int re_idx);

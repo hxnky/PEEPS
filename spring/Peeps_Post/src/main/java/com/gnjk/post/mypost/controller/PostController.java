@@ -165,21 +165,21 @@ public class PostController {
 	// 댓글 수정
 	@PostMapping(value = "/cmt/edit")
 	@ResponseBody
-	public int cmtEdit(int post_idx, int idx, String cmt_content) {
+	public int cmtEdit(int cmt_idx, String cmt_content) {
 
 		System.out.println("댓글 수정 진입");
 
-		return commentService.cmtEdit(post_idx, idx, cmt_content);
+		return commentService.cmtEdit(cmt_idx, cmt_content);
 	}
 
 	// 댓글 삭제
 	@PostMapping(value = "/cmt/del")
 	@ResponseBody
-	public int cmtDel(int post_idx, int idx) {
+	public int cmtDel(int cmt_idx) {
 
 		System.out.println("댓글 삭제 진입");
 
-		return commentService.cmtDel(idx, post_idx);
+		return commentService.cmtDel(cmt_idx);
 	}
 
 	// 대댓글 조회
@@ -192,20 +192,6 @@ public class PostController {
 		return replyService.selectReList(cmt_idx);
 	}
 	
-	// cmt_idx 찾기
-	@PostMapping(value="/find/idx")
-	@ResponseBody
-	public int findIdx(int post_idx, int idx, Model model) {
-		
-		System.out.println("cmt_idx 찾기");
-		
-		int cmt_idx = commentService.findCmt_idx(post_idx, idx);
-		
-		model.addAttribute("cmtIdx", cmt_idx);
-		
-		return cmt_idx;
-	}
-
 	// 대댓글 달기
 	@PostMapping(value = "/reply/insert")
 	@ResponseBody
@@ -216,24 +202,24 @@ public class PostController {
 		return replyService.InsertReply(request);
 	}
 
-	// 댓글 수정
+	// 대댓글 수정
 	@PostMapping(value = "/reply/edit")
 	@ResponseBody
-	public int EditReply(int comment_idx, int idx, String re_content) {
+	public int EditReply(int re_idx, String re_content) {
 
 		System.out.println("대댓글 수정 진입");
 
-		return replyService.EditReply(comment_idx, idx, re_content);
+		return replyService.EditReply(re_idx, re_content);
 	}
 
-	// 댓글 삭제
+	// 대댓글 삭제
 	@PostMapping(value = "/reply/del")
 	@ResponseBody
-	public int DelReply(int comment_idx, int idx) {
+	public int DelReply(int re_idx) {
 
 		System.out.println("대댓글 삭제 진입");
 
-		return replyService.DelReply(idx, comment_idx);
+		return replyService.DelReply(re_idx);
 	}
 
 }

@@ -42,15 +42,13 @@ public class ReplyService {
 	}
 
 	// 대댓글 수정
-	public int EditReply(int cmt_idx, int idx, String re_content) {
+	public int EditReply(int re_idx, String re_content) {
 
 		dao = template.getMapper(PostDao.class);
-
+		
 		int result = 0;
-
-		List<Reply> reply = dao.selectReList(cmt_idx);
-
-		int re_idx = reply.get(idx).getRe_idx();
+		
+		System.out.println(re_idx);
 
 		System.out.println("댓글 수정 : " + re_content);
 
@@ -60,16 +58,11 @@ public class ReplyService {
 	}
 
 	// 대댓글 삭제
-	public int DelReply(int idx, int cmt_idx) {
+	public int DelReply(int re_idx) {
 
 		dao = template.getMapper(PostDao.class);
 
 		int result = 0;
-
-		List<Reply> reply = dao.selectReList(cmt_idx);
-
-
-		int re_idx = reply.get(idx).getRe_idx();
 
 		result = dao.deleteReply(re_idx);
 
