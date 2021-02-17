@@ -24,20 +24,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	</insert>
 
-	<!-- 게시글 파일 등록 -->
-	<insert id="insertFiles"
-		parameterType="com.gnjk.post.mypost.domain.PostFile"
-		useGeneratedKeys="true" keyProperty="f_idx">
-
-		INSERT INTO file
-		(f_idx, f_name, f_path, f_type, f_size, post_idx)
-		VALUES
-		<!-- <foreach collection="list" item="item" separator=","> -->
-		(#{f_idx},#{f_name},#{f_path},#{f_type},#{f_size},#{post_idx})
-		<!-- </foreach> -->
-
-	</insert>
-	
 	<!-- 게시글 썸네일 update -->
 	<update id="updatePostThumbnail">
 		update post 
@@ -57,11 +43,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			resultType="com.gnjk.post.mypost.domain.Post"
 			>
 		select * from post 
-		where member_idx=#{param1}
+		where member_idx=#{param1} limit #{param2},#{param3}
 	</select>
 
 	<!-- 게시글 조회 -->
-	<select id="selectPost"
+	<select id="selectPostDetail"
 			resultType="com.gnjk.post.mypost.domain.Post"
 	>
 	select * from post 
