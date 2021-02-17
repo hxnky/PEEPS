@@ -175,11 +175,11 @@ public class PostController {
 	// 댓글 수정
 	@PostMapping(value="/cmt/edit")
 	@ResponseBody
-	public int cmtEdit(int cmt_idx, String cmt_content) {
+	public int cmtEdit(int post_idx, int idx, String cmt_content) {
 		
 		System.out.println("댓글 수정 진입");
 		
-		return commentService.cmtEdit(cmt_idx, cmt_content);
+		return commentService.cmtEdit(post_idx, idx, cmt_content);
 	}
 	
 	// 댓글 삭제

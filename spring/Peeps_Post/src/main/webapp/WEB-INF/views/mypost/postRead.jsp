@@ -173,7 +173,7 @@ body {
 
 .comment {
 	resize: none;
-	width: 900px;
+	width: 800px;
 	height: 50px;
 	border: none;
 	border-radius: 5px;
@@ -193,6 +193,12 @@ body {
 	height: 50px;
 	margin : 10px auto;
 }
+
+#load_cmt{
+	width : 500px;
+	border : none;
+	    margin: 12px auto;
+}
 </style>
 
 <!--jquery 라이브러리 로드-->
@@ -207,6 +213,18 @@ body {
 
 		// 글자 수 제한
 		$('#cmttxt').keyup(function() {
+			// 현재 입력 문자열의 길이
+			var inputStrLen = $(this).val().length;
+			if (inputStrLen > 100) {
+				alert('100자 까지만 입력이 가능합니다.');
+				var userInput = $(this).val().substr(0, 100);
+				$(this).val(userInput);
+				inputStrLen = 100;
+			}
+		});
+		
+		// 댓글 글자 수 제한
+		$('#cmttxt_edit').keyup(function() {
 			// 현재 입력 문자열의 길이
 			var inputStrLen = $(this).val().length;
 			if (inputStrLen > 100) {
@@ -375,6 +393,7 @@ body {
 				<td>
 					<hr>
 					<div class="comment">
+						
 					</div>
 				</td>
 			</tr>
@@ -397,6 +416,7 @@ body {
 	
 	function loadComment(){
 		
+		var member_idx = ${m_idx};
 		var post_idx = ${readView.post.p_idx};
 		
 		$.ajax({
@@ -412,7 +432,15 @@ body {
 				$('.comment').empty();
 
 				$.each(data, function(index, cmt){
-					$('.comment').append("<div id='cmt'><input type='hidden' id='cmt_idx' value='"+cmt.cmt_idx+"'> <img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> 아이디 넣기 "+cmt.cmt_content+"<button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button></div>");
+					
+					// member_idx가 동일할 때만 수정/삭제 버튼 표시
+					if(cmt.member_idx == member_idx){
+						$('.comment').append("<div id='cmt'><input type='hidden' id='cmt_idx' value='"+cmt.cmt_idx+"'> <img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'> <button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button></div>");
+					} else{
+						$('.comment').append("<div id='cmt'><input type='hidden' id='cmt_idx' value='"+cmt.cmt_idx+"'> <img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'></div>");
+
+					}
+					
 				});
 				
 			},
@@ -423,14 +451,22 @@ body {
 			
 		});
 		
-		// 수정 버튼 누르면 폼 생기게
-		function editComment(){
-			
-			var html="";
-			
-			
-		}
 		
+	}
+	
+	// 수정 버튼 누르면 폼 생기게
+	function editComment(idx){
+		
+		console.log(idx);
+		
+		var html="<div class='cmtdiv'>";
+		html += "<img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'>";
+		html += "아이디";
+		html += "</span>";
+		html += "<span id='cmtinputarea'> <textarea rows='10' name='cmt_content' class='cmttxt' id='cmttxt_edit' placeholder='수정할 댓글을 입력해주세요' required></textarea>";
+		html += "<input type='submit' id='cmt_edit_btn' value='수정'></span></div>";
+		
+		$('.comment #cmt').eq(idx).replaceWith(html);
 		
 	}
 </script>
@@ -499,6 +535,44 @@ $(function() {
 	
 	// 댓글 수정
 	
+	$(document).on("click", "#cmt_edit", function(){
+		
+		var idx = $('.comment #cmt #cmt_edit').index(this);
+		
+		
+		console.log(idx);
+		
+		editComment(idx);
+	
+		
+		$("#cmt_edit_btn").click(function() {
+			
+			var cmt = $('#cmttxt_edit').val();
+			
+			console.log(cmt);
+			
+			$.ajax({
+				url : '${pageContext.request.contextPath}/post/cmt/edit',
+				type : 'post',
+				async : false,
+				data : {
+					"post_idx" : "${readView.post.p_idx}",
+					"idx" : idx,
+					"cmt_content" : cmt
+				},
+				success : function(data) {
+					console.log("수정 완료");
+					$('#cmttxt_edit').val('');
+					loadComment();
+				},
+				error : function() {
+					console.log("수정 실패,,,,");
+				}
+			});
+			
+		});
+		
+	});
 })
 
 

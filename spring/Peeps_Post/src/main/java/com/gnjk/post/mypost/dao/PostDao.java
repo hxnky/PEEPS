@@ -2,6 +2,8 @@ package com.gnjk.post.mypost.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.gnjk.post.mypost.domain.Comment;
 import com.gnjk.post.mypost.domain.CommentRequest;
 import com.gnjk.post.mypost.domain.Post;
@@ -43,7 +45,7 @@ public interface PostDao {
 	List<Comment> selectCmtList(int post_idx);
 	
 	// 댓글 수정
-	int updateCmt(int cmt_idx, String cmt_content);
+	int updateCmt(@Param("cmt_idx") int cmt_idx, @Param("cmt_content") String cmt_content);
 
 	// 댓글 삭제
 	int deleteCmt(int cmt_idx);
