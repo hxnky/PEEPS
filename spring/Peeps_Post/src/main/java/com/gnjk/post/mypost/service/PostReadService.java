@@ -30,7 +30,7 @@ public class PostReadService {
 			System.out.println("게시글 번호: "+p_idx);
 			
 			// 게시글 조회
-			Post postselectResult = dao.selectPost(p_idx);
+			Post postselectResult = dao.selectPostDetail(p_idx);
 			System.out.println("게시글 조회 결과: "+postselectResult);
 			
 			// 게시글 파일 조회
