@@ -508,29 +508,34 @@ $(function() {
 		
 		console.log(idx);
 		
-		$('.comment #cmt').eq(idx).remove();
+		if(confirm('삭제하시겠습니까?')){
+			
+			$('.comment #cmt').eq(idx).remove();
 
-		$.ajax({
-			url : '${pageContext.request.contextPath}/post/cmt/del',
-			type : 'post',
-			async : false,
-			data : {
-				"post_idx" : "${readView.post.p_idx}",
-				"idx" : idx
-			},
-			success : function(data) {
-				if(data==1){
-					console.log("삭제 완료");
-					loadComment();
-				} else{
-					console.log("삭제 실패");
+			$.ajax({
+				url : '${pageContext.request.contextPath}/post/cmt/del',
+				type : 'post',
+				async : false,
+				data : {
+					"post_idx" : "${readView.post.p_idx}",
+					"idx" : idx
+				},
+				success : function(data) {
+					if(data==1){
+						console.log("삭제 완료");
+						loadComment();
+					} else{
+						console.log("삭제 실패");
+					}
+					
+				},
+				error : function() {
+					console.log("수정 실패,,,,");
 				}
-				
-			},
-			error : function() {
-				console.log("수정 실패,,,,");
-			}
-		});
+			});
+		}
+		
+		
 	});
 	
 	// 댓글 수정
