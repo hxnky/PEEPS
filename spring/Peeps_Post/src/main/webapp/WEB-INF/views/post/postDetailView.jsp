@@ -164,6 +164,11 @@ crossorigin="anonymous"></script>
 	height: 50px;
 }
 
+pre {
+	font-size: 1.2em;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
 body {
 	background-color: #fcf9f6;
 	font-family: 'Nanum Gothic', sans-serif;
@@ -175,26 +180,6 @@ body {
 		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
 		crossorigin="anonymous">
 </script> 
-
-<script>
-        
-        $(document).ready(function(){
-            
-            // 글자 수 제한
-            $('#cmttxt').keyup(function(){
-                // 현재 입력 문자열의 길이
-                var inputStrLen = $(this).val().length;
-                if(inputStrLen>100){
-                    alert('100자 까지만 입력이 가능합니다.');
-                    var userInput = $(this).val().substr(0,100);
-                    $(this).val(userInput);
-                    inputStrLen = 100;
-                }
-            });
-            
-        });
-    
-</script>
 
 
 <body>
@@ -216,7 +201,6 @@ body {
 			<tr>
 				<td>
 					<div class="ptitle" name="ptitle">
-					${readView.post.p_title}
 					</div>
 				</td>
 			</tr>
@@ -224,8 +208,8 @@ body {
 			<tr>
 				<td class="post_datenbutton">
 					<span class="pdate">
-						<fmt:formatDate value="${readView.post.p_date}"
-										pattern="yyyy.MM.dd."/>
+						<%-- <fmt:formatDate value="${readView.post.p_date}"
+										pattern="yyyy.MM.dd."/> --%>
 					</span>
 					<input type="button" value="삭제">
 					<input type="button" value="수정">
@@ -241,65 +225,10 @@ body {
 			<!-- 게시물 사진 carousel -->
 			<tr>
 				<td>
-					<div class="postpics">
 					<!-- carousel 시작 -->
-					<div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="false">
-					  <ol class="carousel-indicators">
-					  	<!-- 캐러셀 인디케이터 시작 -->
-					    <!-- <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
-					    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-					    <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li> -->
-					    
-					    <c:forEach items="${readView.postfileList}" var="postfile">
-					    	<c:set var="i" value="${0+i}"/>
-					    	<c:choose>
-					    		<c:when test="${readView.post.p_thumbnail == postfile.f_name}">
-					    			<li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}" class="active"></li>
-					    			<c:set var="i" value="${i+1}"/>
-					    		</c:when>
-					    		<c:otherwise>
-					    			<li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${i}"></li>
-					    			<c:set var="i" value="${i+1}"/>
-					    		</c:otherwise>
-					    	</c:choose>
-					    </c:forEach>
-					  	<!-- 캐러셀 인디케이터 끝 -->
-					  </ol>
-					  
-					  <div class="carousel-inner">
-					  
-					    <!-- 이미지 반복 시작 -->
-					    <c:forEach items="${readView.postfileList}" var="postfile">
-					    	<c:choose>
-					    		<c:when test="${readView.post.p_thumbnail == postfile.f_name}">
-						    		<div class="carousel-item active">
-										<img src="<c:url value="/resources/fileupload/postfile/${postfile.f_name}"/>" 
-									      	 class="d-block w-100" alt="...">
-									</div>	
-					    		</c:when>
-					    		<c:otherwise>
-						    		<div class="carousel-item">
-										<img src="<c:url value="/resources/fileupload/postfile/${postfile.f_name}"/>" 
-											 class="d-block w-100" alt="...">
-									</div>
-					    		</c:otherwise>
-					    	</c:choose>
-					    </c:forEach>
-					   
-					    <!-- 이미지 반복 끝 -->
-					  </div>
-					  
-					  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-					    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					    <span class="visually-hidden">Previous</span>
-					  </a>
-					  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-					    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-					    <span class="visually-hidden">Next</span>
-					  </a>
+					<div class="postpics">
 					</div>
 					<!-- carousel 종료 -->
-					</div>
 				</td>
 			</tr>
 			<!-- 게시글 내용 -->
@@ -315,14 +244,14 @@ body {
 			<tr>
 				<td>
 					<div>
-						<img style="width: 30px; height: 30px;" src="<spring:url value='/resources/img/locpic.png'/>">
-						<span class="location" style="margin-left: 5px;">${readView.post.p_loc}</span>
+						<span class="locSpan">
+						</span>
 						
 						<span class="rightside">
 						<img style="width: 30px; height: 30px;" src="<spring:url value='/resources/img/likespic.png'/>">
-						<span class="location" style="margin: 0 5px;">111</span>
+						<span class="likes" style="margin: 0 5px;"></span>
 						<img style="width: 30px; height: 30px;" src="<spring:url value='/resources/img/cmtpic.png'/>">
-						<span class="location" style="margin-left: 5px;">3</span>
+						<span class="comment" style="margin-left: 5px;">3</span>
 						</span>
 					</div>
 				</td>
@@ -354,6 +283,111 @@ body {
 	</div>
 	
 	<script>
+	
+	    $(document).ready(function(){
+	        
+	        // 글자 수 제한
+	        $('#cmttxt').keyup(function(){
+	            // 현재 입력 문자열의 길이
+	            var inputStrLen = $(this).val().length;
+	            if(inputStrLen>100){
+	                alert('100자 까지만 입력이 가능합니다.');
+	                var userInput = $(this).val().substr(0,100);
+	                $(this).val(userInput);
+	                inputStrLen = 100;
+	            }
+	        });
+	        
+	     	// 게시물 idx 받기
+			function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+				var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
+				return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
+			}
+	     	
+			var postIdx = getParameterByName('idx');
+			console.log("포스트인덱스 : ",postIdx);
+			
+			// 컨트롤러로 값 넘기기 (회원 게시글 데이터 받기)
+			$.ajax({
+				url : "http://localhost:8080/post/rest/member/post/detail?idx="+ postIdx,
+				type : 'GET',
+				success : function(data) {
+			
+					console.log(data.p_title);
+					$('.ptitle').append(data.p_title);
+					
+					var date = data.p_date-540*60*1000;
+					date = new Date(date).toLocaleDateString();
+					
+					console.log("date : ",date);
+					$('.pdate').append(date);
+					
+					var pcontent = '<pre>'+data.p_content+'</pre>';
+					$('.content').append(pcontent);
+					
+					console.log("위치 : ", data.p_loc);
+					
+					if (data.p_loc != ""){
+						var plocHtml = '<img style="width: 30px; height: 30px;" src="<c:url value="/resources/img/locpic.png"/>">';
+						   plocHtml += '<span class="location" style="margin-left: 5px;">'+data.p_loc+'</span>';
+						$('.locSpan').append(plocHtml);
+					}
+					
+					$('.likes').append(data.p_likes);
+				},
+				error : function(e) {
+					console.log("게시글내용ajax에러");
+					console.log(e);
+				}
+			});	// 게시글 ajax 끝
+			
+			// 컨트롤러로 값 넘기기 (회원 게시글 이미지 데이터 받기)
+			$.ajax({
+				url : "http://localhost:8080/post/rest/member/post/detail/image?idx="+ postIdx,
+				type : 'GET',
+				success: function(data){
+					console.log("게시물파일 ajax success", data);
+					
+					if(data.length > 0){
+						console.log("data길이가 0 이상");
+						
+						var html = '<div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="false">';
+						   html += '<ol class="carousel-indicators"></ol>';
+						   html += '<div class="carousel-inner"></div>';
+						   html += '<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">';
+						   html += '<span class="carousel-control-prev-icon" aria-hidden="true"></span>';
+						   html += '<span class="visually-hidden">Previous</span></a>';
+						   html += '<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">';
+						   html += '<span class="carousel-control-next-icon" aria-hidden="true"></span>';
+						   html += '<span class="visually-hidden">Next</span>';
+						   html += '</a></div>';
+						$('.postpics').append(html);
+						
+						var firstImg = $(data).first();
+						$.each(firstImg, function(index, item){
+							console.log("첫번째 이미지 : ",firstImg);
+						
+						var html1 = '<div class="carousel-item active">';
+						   html1 += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" class="d-block w-100" alt="..."></div>';
+							$('.carousel-inner').append(html1);
+						})
+						
+						var anthrImg = $(data).not(firstImg);
+						$.each(anthrImg, function(index, item){
+							console.log("나머지 이미지 : ",anthrImg);
+							
+						})
+					}
+					
+				},
+				error : function(e){
+					console.log("게시글파일ajax에러");
+					console.log(e);
+				}
+			})
+	        
+	    });
+	    
 		function deletePost(pidx) {
 			
 			if(confirm('삭제하시겠습니까?')){
