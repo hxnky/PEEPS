@@ -75,6 +75,15 @@ public class PostController {
 		
 		return listService.getDetailImgs(postIdx);
 	}
+	
+	// 게시글 삭제 
+	@GetMapping("/delete")
+	public int deletePost(
+			@RequestParam("idx") int postIdx
+			) {
+		
+		return deleteService.postDelete(postIdx);
+	}
 
 	// 게시글 내용 등록 처리
 //	@RequestMapping(value = "/write", method = RequestMethod.POST)
@@ -94,13 +103,6 @@ public class PostController {
 //		return "redirect:/post/list";
 //	}
 
-	// TEST게시글 보기 페이지
-	@RequestMapping(value = "/read", method = RequestMethod.GET)
-	public String postRead() {
-
-		return "/mypost/postRead";
-	}
-
 	// 게시글 조회
 //	@RequestMapping(value = "/postNO={p_idx}", method = RequestMethod.GET)
 //	public String postReadGET(
@@ -115,24 +117,14 @@ public class PostController {
 //	}
 
 	// 게시글 수정페이지
-	@RequestMapping(value = "/editPNO={p_idx}", method = RequestMethod.GET)
-	public String postEditForm(@PathVariable("p_idx") int pidx, Model model) {
+//	@RequestMapping(value = "/editPNO={p_idx}", method = RequestMethod.GET)
+//	public String postEditForm(@PathVariable("p_idx") int pidx, Model model) {
+//
+//		model.addAttribute("editView", editService.getPost(pidx));
+//
+//		return "/mypost/postEditForm";
+//	}
 
-		model.addAttribute("editView", editService.getPost(pidx));
 
-		return "/mypost/postEditForm";
-	}
-
-	// 게시글 수정처리
-
-	// 게시글 삭제처리
-	@RequestMapping(value = "/deletePNO={pidx}", method = RequestMethod.GET)
-	public String deletePost(@PathVariable("pidx") int pidx, Model model) {
-//		System.out.println("글 번호 : "+pidx);
-
-		model.addAttribute("result", deleteService.deletePost(pidx));
-
-		return "redirect:/post/list";
-	}
 
 }

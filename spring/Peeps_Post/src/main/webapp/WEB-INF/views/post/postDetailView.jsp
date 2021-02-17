@@ -241,13 +241,15 @@ body {
 						<%-- <fmt:formatDate value="${readView.post.p_date}"
 										pattern="yyyy.MM.dd."/> --%>
 					</span>
-					
-					<a class="deleteBtn"
+					<span class="deBtn">
+					<%-- <a class="deleteBtn"
 					href="javascript:deletePost(${readView.post.p_idx});"
 					>삭제</a>
 					<a class="editBtn"
 					href="<c:url value="/post/editPNO=${readView.post.p_idx}" />"
-					>수정</a>
+					>수정</a> --%>
+					</span>
+					
 				</td>
 			</tr>
 			<!-- 게시물 사진 carousel -->
@@ -340,7 +342,11 @@ body {
 				url : "http://localhost:8080/post/rest/member/post/detail?idx="+ postIdx,
 				type : 'GET',
 				success : function(data) {
-			
+					
+					var Btn = '<a class="deleteBtn" href="javascript:deletePost('+data.p_idx+');">삭제</a>';
+					   Btn += '<a class="editBtn" href="<c:url value="/main/post/edit?idx='+data.p_idx+'" />">수정</a>';
+					$('.deBtn').append(Btn);
+					   
 					console.log(data.p_title);
 					$('.ptitle').append(data.p_title);
 					
@@ -438,9 +444,19 @@ body {
 		function deletePost(pidx) {
 			
 			if(confirm('삭제하시겠습니까?')){
-				location.href = '<c:url value="/post/deletePNO=" />'+pidx;
-			} // /post/post/delete?pidx
-		}
+				
+				$.ajax({
+					url: "http://localhost:8080/post/rest/member/post/delete?idx="+pidx,
+					type: 'GET',
+					success : function(data){						/* test 회원계정 */
+						window.location.href="http://localhost:8080/post/main/jhS2";
+						console.log(pidx+'번 게시물 삭제 완료');
+					}
+					
+				});
+				
+			} 
+		};
 	</script>
 
 </body>
