@@ -6,6 +6,7 @@
 <head>
 
 <title>방명록</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <%@ include file="/WEB-INF/views/include/basicset.jsp"%>
 
 
@@ -52,7 +53,7 @@ height: 50px; */
 	</div>
 	<!--=====================context======================-->
 	<div class="changing">
-		<form method="POST" enctype="multipart/form-data">
+		<form method="POST" id="insertGForm" enctype="multipart/form-data">
 
 
 			<div class="ginsert_wrap">
@@ -66,19 +67,62 @@ height: 50px; */
 
 						<input type="file" id="gphoto" name="gphoto"></li>
 					<li><input type="submit" value="등록"></li>
+					
 
 
 				</ul>
-			
 
 
 
 
 
 
-			</div>
+
+			</div>	`
 		</form>
+		<input type="button" value="등록2" id="btn">
 	</div>
+	<script>
+	$(document).ready(function(){
+		
+		$('#btn').click(function() {
+
+			var photoFile =$('#gphoto');
+			
+			var file1 =photoFile[0].files[0];
+		
+			
+			//console.log(file1);
+			
+			var formData = new FormData();
+			formData.append("gmessage",$('gmessage').val);
+			formData.append("gphoto",file1);
+			
+			//console.log(formData);
+			
+			$.ajax({
+				url : '/peeps/guestbook',
+				type : 'post',
+				data : formData,
+				enctype : 'multipart/form-data',
+				processData : false,
+				contentType : false,
+				cache : false ,
+				success : function(data){
+					console.log(data);
+				}
+			});
+			
+			
+			
+			
+		
+		});
+		
+		
+		
+	});
+	</script>
 
 
 </body>

@@ -1,6 +1,7 @@
 package com.gnjk.peeps.guestbook.service;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +60,7 @@ public class GuestbookInsertService {
 			/* 파일 저장  하다가 생길 db오류 catch*/
 			try {
 				grequest.getGphoto().transferTo(newFile);//파일이 있다면 지워진다
-				
+			
 			
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
