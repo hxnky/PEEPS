@@ -183,7 +183,7 @@
             $('#chatdata').append(printHTML);
          }
       
-		$('#chatdata').scrollTop($('#chatdata')[0].scrollHeight);
+		$('#chatdata').scrollTop($('#chatdata')[0].scrollHeight);	// 맨 밑으로 자동 스크롤
       
    };
 
