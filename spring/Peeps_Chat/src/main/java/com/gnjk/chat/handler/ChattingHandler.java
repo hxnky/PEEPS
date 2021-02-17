@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.gnjk.chat.domain.Message;
+import com.gnjk.chat.service.MessageSendService;
 import com.google.gson.Gson;
 
 public class ChattingHandler extends TextWebSocketHandler {
@@ -50,7 +52,12 @@ public class ChattingHandler extends TextWebSocketHandler {
 	static int fileUploadIdx = 0;
 	static String fileUploadSession = "";
 	
+	@Autowired
+	private MessageSendService sendService;
+	
+	
 	// =============================================================
+	// 클라이언트 입장 
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 
@@ -72,6 +79,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 	
 	
 	// =============================================================
+	
 	@Override
 	protected void handleTextMessage (WebSocketSession session, TextMessage message) throws Exception {          
 		
@@ -83,14 +91,21 @@ public class ChattingHandler extends TextWebSocketHandler {
 		 Message mes = gson.fromJson(message.getPayload(), Message.class);
 
 		TextMessage sendmes = new TextMessage(gson.toJson(mes));
+		
+		System.out.println("sendmes : " + sendmes);
 
 		 for(WebSocketSession sockSession : connectedSessionList) {			 
 			sockSession.sendMessage(sendmes);
 		 }
 		 
+		 sendService.insertMessage(message);
+		 
+		
 	}
+
 	
 	// =============================================================
+	// 파일 저장을 위한 함수 
 	//  BhandleBinaryMessage 메소드가 추가
 	// 매개변수 BinaryMessage의 데이터를 ByteBuffer로 받아서 파일을 저장하고
 	// 현재 방에 존재하는 세션에게만 ByteBuffer데이터를 전송
@@ -173,5 +188,6 @@ public class ChattingHandler extends TextWebSocketHandler {
 		log(session.getId() + "exception 발생 : " + exception.getMessage());
 
 	}
-
+	
+	
 }

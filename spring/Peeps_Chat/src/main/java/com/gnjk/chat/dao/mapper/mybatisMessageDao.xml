@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.gnjk.chat.mapper.ChatMapper">
+<mapper namespace="com.gnjk.chat.dao.mybatisMessageDao">
 
    <!-- <resultMap id="mesResult"
    type="com.gnjk.chat.domain">
@@ -19,15 +19,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     -->
     
-   <insert id = "insertMessage" parameterType = "com.gnjk.chat.domain.Message">
-      insert into CHAT(ch_idx, m_idx, rm_idx, ch_time, ch_ms)
-      values (#{ch_idx}, #{m_idx}, #{rm_idx}, #{ch_time}, #{ch_ms})
+   <insert id ="insertMessage" parameterType ="com.gnjk.chat.domain.Message">
+      insert into chat.chat(ch_idx, m_idx, rm_idx, ch_time, ch_ms)
+      values (#{ch_idx},#{m_idx},#{rm_idx},#{ch_time},#{ch_ms}) 
    </insert>
    
-   <!-- where 조건에 room_idx 같을때 and 해야하는지 헷갈림... -->
+   
+   <!-- where 조건에 room_idx 같을때 and 해야하는지 헷갈림...
    <select id = "isRoom" resultMap = "com.gnjk.chat.domain.ChatRoom">
       select * from CHATROOM WHERE m_idx = #{m_idx}
    </select>
+    -->
    
    <!-- <select id = "getRecentMessage" resultType="String">
       select chat.*, rm_idx from CHAT chat

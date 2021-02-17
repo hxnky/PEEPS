@@ -113,6 +113,10 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="/Users/seoa/Documents/GitHub/classproject/spring_project/FirstSpring"/>
+			<item value="/Users/seoa/Documents/GitHub/Spring_openproject/project/Spring-Socket-Chat"/>
+			<item value="/Users/seoa/Documents/GitHub/Spring_openproject/project/Spring_openProject"/>
+			<item value="/Users/seoa/Documents/GitHub/PEEPS/spring"/>
 			<item value="C:\Users\kho3\OneDrive\Documents\GitHub\PEEPS\spring\Peeps_Chat"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
@@ -127,5 +131,12 @@
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
 			<item value="C:\Users\pc\Documents\GitHub\PEEPS"/>
 		</list>
+	</section>
+	<section name="SaveAsDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="132"/>
+		<item key="DIALOG_Y_ORIGIN" value="186"/>
+		<item key="DIALOG_WIDTH" value="590"/>
+		<item key="DIALOG_HEIGHT" value="528"/>
+		<item key="DIALOG_FONT_NAME" value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont"/>
 	</section>
 </section>
