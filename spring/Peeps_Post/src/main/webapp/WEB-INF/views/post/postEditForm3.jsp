@@ -114,10 +114,6 @@
 	width: 250px;
 }
 
-.displayNone {
-	display: none;
-}
-
 body {
 	background-color: #fcf9f6;
 	font-family: 'Nanum Gothic', sans-serif;
@@ -195,8 +191,9 @@ body {
 					<!-- 위치 주소 표시 -->
 					<span class="addr"></span>
 					<br>
-					<div id="map" 
+					<div id="map"
 						style="width: 800px; height: 300px; margin-top: 10px;"></div>
+				
 					<script
 						src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 					<script
@@ -248,11 +245,7 @@ body {
 					// 내용
 					$('.pcontent').append(data.p_content);
 					
-					// 기존 위치 없을 경우 지도 display:none
-					if(data.p_loc == ""){
-						var element = document.getElementById('map');
-						element.classList.add('displayNone');
-					}
+					
 					// 위치
 					var locHtml = '<input type="text" id="sample5_address" name="ploc" class="searchlocBox" onfocus="this.blur()" value="'+data.p_loc+'" readonly>';
 					$('.addr').append(locHtml);

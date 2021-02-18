@@ -4,11 +4,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-
-<div id="map" style="width: 800px; height: 300px; margin-top: 10px;"></div>
-						
-<div id="map"style="width: 800px; height: 300px; margin-top: 10px; display: none;"></div>
-
+<div class="plocwrap">
+	<input type="button" class="searchlocbtn" 
+	onclick="sample5_execDaumPostcode()" value="위치 추가">
+	<!-- 위치 주소 표시 -->
+	<span class="addr"></span>
+	<br>
+	<div class="mapDiv">
+		<div id="map" style="width: 800px; height: 300px; margin-top: 10px;"></div>
+		<div id="map"style="width: 800px; height: 300px; margin-top: 10px; display: none;"></div>
+	</div>
+</div>
 <!DOCTYPE html>
 <html>
 <head>
