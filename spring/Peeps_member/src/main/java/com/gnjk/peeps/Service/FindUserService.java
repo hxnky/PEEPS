@@ -1,11 +1,9 @@
 package com.gnjk.peeps.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.javassist.expr.NewArray;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,12 +21,13 @@ public class FindUserService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public List<Peeps> SearchPeeps(String keyword, HttpSession session) {
+	public List<Peeps> SearchPeeps(String keyword, int m_idx, HttpSession session) {
 
 		dao = template.getMapper(PeepsDao.class);
 		f_dao = template.getMapper(FollowDao.class);
 
 		System.out.println("키워드" + keyword);
+		session.setAttribute("keyword", keyword);
 
 		List<Peeps> peepslist = dao.searchMember(keyword);
 		int peepsCnt = dao.searchMemberCnt(keyword);
@@ -42,7 +41,6 @@ public class FindUserService {
 			System.out.println("아이디 검색 인덱스");
 			System.out.println(follow_idx);
 			
-			int m_idx = ((Integer)(session.getAttribute("m_idx"))).intValue();
 			System.out.println(m_idx);
 			
 			int chk_result = f_dao.CheckFollow(m_idx, follow_idx);

@@ -5,21 +5,23 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gnjk.peeps.Service.FindPwService;
 import com.gnjk.peeps.domain.Peeps;
 
 @Controller
-@RequestMapping("/member/find")
 public class FindPwController {
 
 	@Autowired
 	private FindPwService findPwService;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping("/member/find")
 	public String memberFindGet(Model model) {
 
 		int result = 2;
@@ -29,12 +31,13 @@ public class FindPwController {
 		return "member/FindPw";
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
-	public String memberFindPost(HttpServletResponse response, @ModelAttribute Peeps peeps, Model model) throws Exception {
+	@PostMapping("/user/fintPW")
+	@ResponseBody
+	public int memberFindPost(String email, String id, HttpServletResponse response, @ModelAttribute Peeps peeps) throws Exception {
 		
-		model.addAttribute("result", findPwService.find_pw(response, peeps));
+		System.out.println("비밀번호 변경 진입");
 		
-		return "member/FindPw";
+		return findPwService.find_pw(email, id, response, peeps);
 	}
 
 }

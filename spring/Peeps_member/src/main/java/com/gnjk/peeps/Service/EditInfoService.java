@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gnjk.peeps.dao.PeepsDao;
 import com.gnjk.peeps.domain.EditRequest;
@@ -23,24 +22,34 @@ public class EditInfoService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public Peeps getPeeps(@RequestParam("email") String email, HttpSession session) {
+	public int getPeeps(String email, HttpSession session) {
 
 		dao = template.getMapper(PeepsDao.class);
+		System.out.println(email);
+		int result = 0;
 
 		Peeps peeps = dao.selectMemberByEmail(email);
+		System.out.println("프로필 편집 페이지");
+		System.out.println(peeps);
 
-		session.setAttribute("peeps", peeps);
-		session.setAttribute("m_idx", new Integer(peeps.getM_idx()));
-		session.setAttribute("email", peeps.getEmail());
-		session.setAttribute("id", peeps.getId());
-		session.setAttribute("loginType", peeps.getLoginType());
+		if(peeps != null) {
+			session.setAttribute("peeps", peeps);
+//			session.setAttribute("m_idx", new Integer(peeps.getM_idx()));
+//			session.setAttribute("email", peeps.getEmail());
+//			session.setAttribute("id", peeps.getId());
+//			session.setAttribute("loginType", peeps.getLoginType());
+			
+			result = 1;
+		}
 
-		return peeps;
+		return result;
 	}
 
 	public int editPeeps(EditRequest editRequest, HttpServletRequest request, HttpSession session) {
 
 		int result = 0;
+		
+		//System.out.println(editRequest);
 
 		String uploadPath = "/fileupload";
 
@@ -88,16 +97,12 @@ public class EditInfoService {
 			}
 		}
 
-//		if (newFile != null && !editRequest.getOldPhoto().equals("profile.png")) {
-//			new File(saveDirPath, editRequest.getOldPhoto()).delete();
-//		}
+		if (newFile != null && !editRequest.getOldPhoto().equals("profile.png")) {
+			new File(saveDirPath, editRequest.getOldPhoto()).delete();
+		}
 
 		// 수정 후 세션 다시 저장
 		session.setAttribute("peeps", peeps);
-		session.setAttribute("id", peeps.getId());
-		session.setAttribute("name", peeps.getName());
-		session.setAttribute("m_photo", peeps.getM_photo());
-		session.setAttribute("bio", peeps.getBio());
 
 		return result;
 	}

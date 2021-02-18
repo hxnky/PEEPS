@@ -20,16 +20,12 @@ public class DeleteService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public int Delete(Peeps peeps, HttpServletResponse response, HttpSession session) {
+	public int Delete(String email, String password, int m_idx) {
 
 		int result = 0;
 		
 		dao = template.getMapper(PeepsDao.class);
 		f_dao = template.getMapper(FollowDao.class);
-
-		String email = peeps.getEmail();
-		String password = peeps.getPassword();
-		int m_idx = ((Integer)(session.getAttribute("m_idx"))).intValue();
 		
 		System.out.println("탈퇴 서비스");
 		System.out.println(email);

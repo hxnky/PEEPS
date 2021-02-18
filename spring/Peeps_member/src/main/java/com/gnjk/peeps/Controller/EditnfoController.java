@@ -5,10 +5,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gnjk.peeps.Service.EditInfoService;
 import com.gnjk.peeps.domain.EditRequest;
@@ -16,29 +16,44 @@ import com.gnjk.peeps.domain.EditRequest;
 @Controller
 public class EditnfoController {
 
-	final String URI = "/fileupload/member";
-
 	@Autowired
 	private EditInfoService editService;
 
-	@RequestMapping(value = "/profile/Info", method = RequestMethod.GET)
-	public String editUserInfoPage(@RequestParam("email") String email, Model model, HttpSession session) {
+	// 프로필 편집 진입 시 소셜회원의 정보도 얻기 위해
+	@GetMapping("/profile/chk")
+	@ResponseBody
+	public int editUserInfoPage(String email, HttpSession session) {
 
-		int result = 2;
-		
-		model.addAttribute("peeps", editService.getPeeps(email, session));
-		model.addAttribute("result", result);
-
-		return "member/profile_edit";
+		return editService.getPeeps(email, session);
 	}
 
-	@RequestMapping(value = "/profile/Info", method = RequestMethod.POST)
-	public String editUserInfo(EditRequest editRequest, HttpServletRequest request, Model model, HttpSession session) {
+	// 프로필 편집 페이지
+	@GetMapping("/profile/Info")
+	public String EditPage() {
 
-		model.addAttribute("result", editService.editPeeps(editRequest, request, session));
+		return "/member/profile_edit";
+	}
 
-		return "member/profile_edit";
+	// 프로필 편집
+	@PostMapping("/profile/edit")
+	@ResponseBody
+	public int editUserInfo(EditRequest editRequest, HttpServletRequest request, HttpSession session) {
+
+		System.out.println("프로필 편집");
+
+		return editService.editPeeps(editRequest, request, session);
 
 	}
+
+	// 프로필 편집
+//	@PostMapping("/profile/edit")
+//	@ResponseBody
+//	public int editUserInfo(String email, String id, String name, String bio, String m_photo, String oidPhoto) {
+//
+//		System.out.println("프로필 편집");
+//
+//		return 0;
+//
+//	}
 
 }

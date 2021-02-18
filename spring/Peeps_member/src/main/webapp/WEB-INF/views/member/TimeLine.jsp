@@ -65,10 +65,6 @@
 							</div>
 
 							<h1>타 임 라 인</h1>
-							<h3 id="email"><%=session.getAttribute("email") %>
-							</h3>
-							<%=session.getAttribute("peeps") %>
-							${loginType }
 							<button id="edit_btn">프로필 편집</button>
 
 							<input type="button" value="로그아웃"
@@ -117,14 +113,28 @@
 
 <script>
 
-var email = $('#email').text();
+var email = "${peeps.email}";
 
 console.log(email);
 
 	$('#edit_btn')
 			.click(
 					function() {
-						location.href = "${pageContext.request.contextPath}/profile/Info?email="+email;
+						
+						$.ajax({
+							url : '${pageContext.request.contextPath}/profile/chk',
+							type : 'get',
+							data : {
+								"email" : email,
+							},
+							async : false,
+							success : function(data) {
+								location.href = "${pageContext.request.contextPath}/profile/Info";
+							},error : function(request,status, error) {
+								console.log("통신 실패");
+
+							}
+						});
 					});
 </script>
 

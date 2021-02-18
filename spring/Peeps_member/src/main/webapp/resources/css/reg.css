@@ -6,6 +6,15 @@
 	font-family: 'Nanum Gothic ', sans-serif ;
 }
 
+#top_nav {
+	width: 500px;
+	background-color: #D9D9D9;
+	text-align: center;
+	height: 35px;
+	padding: 7px 0px;
+	list-style: none;
+}
+
 #login_btn {
 	border: white;
 	height: 40px;
@@ -28,15 +37,6 @@
 	align-items: center;
 	border-radius: 5px;
 	max-width: 99%;
-}
-
-#top_nav {
-	width: 500px;
-	background-color: #D9D9D9;
-	text-align: center;
-	height: 35px;
-	padding: 7px 0px;
-	list-style: none;
 }
 
 .login_text{

@@ -128,39 +128,36 @@ h3 {
 			</div>
 		</div>
 		<div>
-			<form method="post">
-				<table id="edit_table">
-					<tr>
+			<table id="edit_table">
+				<tr>
 
-						<td id="pw_menu">현재 비밀번호 <br> <input type="password"
-							id="now_password" name="password">
-						</td>
-					</tr>
-					<tr>
-						<td id="pw_menu">변경할 비밀번호 <br> <input type="password"
-							id="edit_password" name="e_password">
-						</td>
-					</tr>
-					<tr>
-						<td id="pw_menu">비밀번호 확인<br> <input type="password"
-							id="chk_password" name="c_password">
-						</td>
-					</tr>
-					<tr>
-						<td><input type="submit" id="change" value="비밀번호 변경">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<h4>
-								비밀번호를 잊으셨나요? <a
-									href="${pageContext.request.contextPath}/member/find">비밀번호
-									찾기</a>
-							</h4>
-						</td>
-					</tr>
-				</table>
-			</form>
+					<td id="pw_menu">현재 비밀번호 <br> <input type="password"
+						id="now_password" name="password">
+					</td>
+				</tr>
+				<tr>
+					<td id="pw_menu">변경할 비밀번호 <br> <input type="password"
+						id="edit_password" name="e_password">
+					</td>
+				</tr>
+				<tr>
+					<td id="pw_menu">비밀번호 확인<br> <input type="password"
+						id="chk_password" name="c_password">
+					</td>
+				</tr>
+				<tr>
+					<td><button id="change">비밀번호 변경</button></td>
+				</tr>
+				<tr>
+					<td>
+						<h4>
+							비밀번호를 잊으셨나요? <a
+								href="${pageContext.request.contextPath}/member/find">비밀번호
+								찾기</a>
+						</h4>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 
@@ -217,37 +214,49 @@ h3 {
 </script>
 
 <script>
+	$(document).on("click", "#change", function(){
 		
-		$('#change').click(function(){
+		var password = $('#now_password').val();
+		var email = "${peeps.email}";
+		var c_password = $('#chk_password').val();
+		var e_password = $('#edit_password').val();
+		
+		
+		if($('#chk_password').val() != $('#edit_password').val()){
+			alert("변경 비밀번호가 일치하지 않습니다.");
+		} else{				
 			
-			var email = $('#email').text();
-			console.log(email);
 			
-			if($('#chk_password').val() != $('#edit_password').val()){
-				alert("변경 비밀번호가 일치하지 않습니다.");
-				location.href = "${pageContext.request.contextPath}/profile/pw?email="+ email;
+					console.log(password);
+					console.log(c_password);
+					console.log(e_password);
+					
+					$.ajax({
+						url : '${pageContext.request.contextPath}/user/editpw',
+						type : 'post',
+						data : {
+							"email" : email,
+							"password" : password,
+							"c_password" : c_password,
+							"e_password" : e_password
+						},
+						async : false,
+						success : function(data) {
+							if (data == 1) {
+								alert("비밀번호가 변경되었습니다. 다시 로그인해주세요");
+								location.href = "${pageContext.request.contextPath}/";
+							} else {
+								alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요");
+							}
+						},error : function(request,status, error) {
+							console.log("통신 실패");
 
-			}
-		});
-
-
-	
-	$(document).ready(
-			
-			function() {
-				var email = $('#email').text();
+						}
+					});
 				
-					if(${result} == 1){
-						console.log("데이터 보내기 성공");
-						alert("비밀번호가 변경되었습니다. 다시 로그인해주세요");
-						location.href = "${pageContext.request.contextPath}/";
-					} else if(${result} == 1){
-						alert("회원 비밀번호가 일치하지 않습니다.");
-						console.log("데이터는 갔는데 변경은 안됨");
-					} else{
-						console.log("비밀번호 변경 진입")
-					}
-			});
+		}
+		
+	})
 </script>
 
 

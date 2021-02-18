@@ -20,22 +20,20 @@ public class FindPwService {
 	@Autowired
 	private MailSenderService mailSenderService;
 
-	public int find_pw(HttpServletResponse response, Peeps peeps) throws Exception {
+	public int find_pw(String email, String id, HttpServletResponse response, Peeps peeps) throws Exception {
 
 		int result = 0;
 		
 		dao = template.getMapper(PeepsDao.class);
-
-		String email = peeps.getEmail();
-		String id = peeps.getId();
-
+		
 		System.out.println(email + ", " + id);
 
 		response.setContentType("text/html;charset=utf-8");
 
 		if (dao.search_user(email, id) == 0) {
 			System.out.println("회원 정보가 존재하지 않습니다.");
-
+			
+			result = 0;
 		} else {
 
 			String password = "";
@@ -49,8 +47,12 @@ public class FindPwService {
 
 			dao.updatePw(password, email, id);
 
-			result = mailSenderService.PwSend(peeps);
-
+			if(mailSenderService.PwSend(peeps)==0) {
+				result = 0;
+			} else {
+				result = 1;
+			}
+			
 		}
 		
 		System.out.println(result);

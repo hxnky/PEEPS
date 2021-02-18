@@ -34,13 +34,22 @@ public class RegService {
 			// 데이터 베이스 입력
 			dao = template.getMapper(PeepsDao.class);
 
-			// 회원 DB insert
-			result = dao.insertMember(peeps);
+			// email 중복인지 확인
+			if (dao.selectMemberByEmailCount(peeps.getEmail()) == 1) {
+				result = 1;
+				// 아이디 중복인지 확인
+			} else if (dao.selectMemberByIdCount(peeps.getId()) == 1) {
+				result = 2;
+			} else {
+				// 회원 DB insert
+				result = dao.insertMember(peeps);
 
-			// 메일발송
-			int mailsendCnt = mailSenderService.RegSend(peeps);
-			System.out.println(mailsendCnt + "통의 메일이 발송되었습니다.");
-			
+				// 메일발송
+				int mailsendCnt = mailSenderService.RegSend(peeps);
+				System.out.println(mailsendCnt + "통의 메일이 발송되었습니다.");
+				result = 3;
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

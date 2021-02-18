@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.gnjk.peeps.auth.domain.GoogleRequest;
 import com.gnjk.peeps.auth.domain.GoogleResponse;
+import com.gnjk.peeps.domain.Peeps;
 
 @Controller
 public class GoogleController {
@@ -74,43 +75,26 @@ public class GoogleController {
 		Map<String, String> userInfo = mapper.readValue(resultJson, new TypeReference<Map<String, String>>() {
 		});
 
-		// 구글은 확장자 없어서 오류난다 --> <c:if>로 분기 만들어서 img 경로 다르게 사용하기
-//		// 사진 주소
-//		String m_photo = userInfo.get("picture");
-//		URI uri = URI.create(m_photo);
-//
-//		// 사진 파일 다운로드
-//		RestTemplate rt = new RestTemplate();
-//		ResponseEntity<byte[]> res = rt.getForEntity(uri, byte[].class);
-//		byte[] buffer = res.getBody();
-//
-//		// 로컬 서버에 저장
-//		// String fileName = UUID.randomUUID().toString(); // 랜덤 이름!
-//		String ext = "." + StringUtils.getFilenameExtension(m_photo); // 확장자 추출
-//		Path target = Paths.get(
-//				"C:\\Users\\hanky\\Desktop\\bit\\PEEPS\\peeps_spring\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Peeps_member\\fileupload",
-//				m_photo + ".jpg");
-//
-//		try {
-//			FileCopyUtils.copy(buffer, target.toFile());
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
 
-		session.setAttribute("userInfo", userInfo);
+
+		session.setAttribute("loginInfo", userInfo);
 		session.setAttribute("access_Token", Result.getAccessToken());
 		
-//		model.addAttribute("loginType", "google");
-//		model.addAttribute("email", userInfo.get("email"));
-//		model.addAttribute("name", userInfo.get("name"));
-//		model.addAttribute("m_photo", userInfo.get("picture"));
+
 		model.addAttribute("token", Result.getAccessToken());
 		model.addAttribute("result", result);
 		
-		session.setAttribute("email", userInfo.get("email"));
-		session.setAttribute("name", userInfo.get("name"));
-		session.setAttribute("m_photo", userInfo.get("picture"));
-		session.setAttribute("loginType","google");
+		
+		Peeps peeps = new Peeps();
+		
+		peeps.setEmail(userInfo.get("email"));
+		peeps.setName(userInfo.get("name"));
+		peeps.setM_photo(userInfo.get("picture"));
+		peeps.setLoginType("google");
+		
+		System.out.println(peeps);
+		
+		session.setAttribute("peeps", peeps);
 		
 		System.out.println(userInfo);
 		System.out.println("이메일 : " + userInfo.get("email"));

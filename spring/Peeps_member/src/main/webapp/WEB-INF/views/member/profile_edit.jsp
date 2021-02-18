@@ -47,7 +47,7 @@ body {
 	margin: 10px auto;
 }
 
-#choose {
+.choose {
 	display: none;
 }
 
@@ -71,7 +71,7 @@ body {
 	text-align: center;
 }
 
-#edit_text {
+.edit_text {
 	border: solid 0.2px #CCC;
 	border-radius: 5%;
 	height: 30px;
@@ -79,7 +79,7 @@ body {
 	font-size: 15px;
 }
 
-#edit_bio {
+.edit_bio {
 	border: solid 0.2px #CCC;
 	border-radius: 5%;
 	height: 50px;
@@ -194,11 +194,11 @@ nav ul li button {
 					<a id="Chat" href="#"><img
 						src="<c:url value="/resources/images/icon/navi/050-wechat.png"/>"></a>
 					<c:set var="loginType" value="${loginType }" /> <c:choose>
-						<c:when test="${loginType eq 'email' }">
+						<c:when test="${peeps.loginType eq 'email' }">
 							<img id="MyPage_img"
 								src="<c:url value="/fileupload/${peeps.m_photo}"/>">
 						</c:when>
-						<c:when test="${loginType ne 'email' }">
+						<c:when test="${peeps.loginType ne 'email' }">
 							<img id="MyPage_img" src="<c:url value="${peeps.m_photo}"/>">
 
 						</c:when>
@@ -213,7 +213,7 @@ nav ul li button {
 	<div id="total_wrap">
 		<div id="edit_menu">
 			<div id="menu_btn">
-				<h3 id="email"><%=session.getAttribute("email")%></h3>
+				<h3 id="email">${peeps.email}</h3>
 				<h3>님</h3>
 				<br>
 				<button id="edit">프로필 편집</button>
@@ -223,39 +223,43 @@ nav ul li button {
 			</div>
 		</div>
 		<div>
-			<form id="edit_form" method="post" enctype="multipart/form-data">
+			<form id="edit_photo" enctype="multipart/form-data">
+				<input type="hidden" id="email" name="email" value="${peeps.email }">
 				<table id="edit_table">
 					<tr>
 						<td id="table_left" rowspan="3"><c:set var="loginType"
-								value="${loginType}" /> <c:choose>
-								<c:when test="${loginType eq 'email' }">
+								value="${peeps.loginType}" /> <c:choose>
+								<c:when test="${peeps.loginType eq 'email' }">
 									<img id="profile"
 										src="<c:url value="/fileupload/${peeps.m_photo}"/>">
-									<input type="hidden" name="oldPhoto" value="${peeps.m_photo}">
+									<input type="hidden" id="oldPhoto" name="oldPhoto"
+										value="${peeps.m_photo}">
 									<br>
 								</c:when>
 								<c:when test="${loginType ne 'email' }">
 									<img id="profile" src="<c:url value="${peeps.m_photo}"/>">
-									<input type="hidden" name="oldPhoto" value="${peeps.m_photo}">
+									<input type="hidden" id="oldPhoto" name="oldPhoto"
+										value="${peeps.m_photo}">
 									<br>
 								</c:when>
 
-							</c:choose> <input type="file" id="choose" name="m_photo" accept="img/*"><br>
+							</c:choose> <input type="file" class="choose" id="m_photo" name="m_photo"
+							accept="img/*"><br>
 							<button type="button" id="choose_btn">프로필 사진 바꾸기</button></td>
 
 						<td id="table_right">아이디 <br> <input type="text"
-							id="edit_text" name="id" value="${peeps.id}">
+							class="edit_text" id="id" name="id" value="${peeps.id}">
 						</td>
 					</tr>
 					<tr>
 						<td id="table_right">이름 <br> <c:set var="loginType"
-								value="${loginType }" /> <c:choose>
+								value="${loginType}" /> <c:choose>
 								<c:when test="${loginType eq 'email' }">
-									<input type="text" id="edit_text" name="name"
+									<input type="text" class="edit_text" id="name" name="name"
 										value="${peeps.name}">
 								</c:when>
 								<c:when test="${loginType ne 'email' }">
-									<input type="text" id="edit_text" name="name"
+									<input type="text" class="edit_text" id="name" name="name"
 										value="${peeps.name}" readonly="readonly">
 								</c:when>
 
@@ -264,15 +268,15 @@ nav ul li button {
 					</tr>
 					<tr>
 						<td id="table_right">소개글 <br> <input type="text"
-							id="edit_bio" name="bio" value="${peeps.bio}">
+							class="edit_bio" id="bio" name="bio" value="${peeps.bio}">
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="submit" id="change" value="변경">
-						</td>
+						<td colspan="2"></td>
 					</tr>
 				</table>
 			</form>
+			<button id="change">변경</button>
 		</div>
 	</div>
 
@@ -289,10 +293,10 @@ nav ul li button {
 
 <script>
 	$(function() {
-		
+
 		var loginType = "${loginType}";
-		
-		if(loginType=="email"){
+
+		if (loginType == "email") {
 			//버튼 클릭시 업로드창 실행
 			$('#choose_btn').click(function() {
 				console.log('fileadd');
@@ -306,8 +310,6 @@ nav ul li button {
 				$("input[name='m_photo']").click();
 
 			})
-		}else{
-			console.log("소셜 로그인");
 		}
 
 		// 이미지로 파일 선택 시 미리보기
@@ -328,29 +330,18 @@ nav ul li button {
 		})
 
 	});
-		
 </script>
 
 <script>
 	$(function() {
 
-		var email = $('#email').text();
+		var email = "${peeps.email}";
 
 		$("#MyPage_img")
-		.click(
-				function() {
-
-					location.href = "${pageContext.request.contextPath}/mypage?email="
-							+ email;
-
-				});
-		
-		$("#edit")
 				.click(
 						function() {
 
-							location.href = "${pageContext.request.contextPath}/profile/Info?email="
-									+ email;
+							location.href = "${pageContext.request.contextPath}/mypage?email="+ ${peeps.m_idx};
 
 						});
 
@@ -371,63 +362,102 @@ nav ul li button {
 									+ email;
 
 						});
-		
+
 		$("#log_out").click(function() {
 
-					location.href = "${pageContext.request.contextPath}/logout";
+			location.href = "${pageContext.request.contextPath}/logout";
 
-				});
+		});
 	})
 </script>
 
 <script>
-$(function() {
-	var email = $('#email').text();
-	
-	console.log(email);
+	$("#edit")
+			.click(
+					function() {
 
-	if(${result} == 1){
-		alert("정보가 수정되었습니다.");
-		location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
-	} else if(${result} == 0){
-		alert("아이디가 중복됩니다.");
-		location.href = "${pageContext.request.contextPath}/profile/Info?email="+ email;
-	} else{
-		console.log("정보 수정 진입");
-	}
-	
-});
+						var email = "${peeps.email}";
+
+						$
+								.ajax({
+									url : '${pageContext.request.contextPath}/profile/chk',
+									type : 'get',
+									data : {
+										"email" : email,
+									},
+									async : false,
+									success : function(data) {
+										location.href = "${pageContext.request.contextPath}/profile/Info";
+									},
+									error : function(request, status, error) {
+										console.log("통신 실패");
+
+									}
+								});
+					});
+</script>
+<script>
+	$("#change").click(function() {
+
+		var data = $('#edit_photo')[0];
+		var form_data = new FormData(data);
+
+		$.ajax({
+			url : '${pageContext.request.contextPath}/profile/edit',
+			type : 'post',
+			data : form_data,
+			dataType : 'json',
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			async : true,
+			success : function(data) {
+
+				console.log("수정 완료");
+				if (data == 1) {
+					alert("수정 완료");
+					//location.href = "${pageContext.request.contextPath}profile/Info?email="+ email;
+				} else {
+					alert("계정을 찾을 수 없습니다. 이메일 또는 아이디를 확인해주세요");
+				}
+
+			},
+			error : function(request, status, error) {
+				console.log("통신 실패");
+
+			}
+		});
+	});
 </script>
 
 <script>
-$("#keyword")
-.click(
-		function() {
+	$("#keyword")
+			.click(
+					function() {
 
-			var keyword = $('#search').val();
+						var m_idx = ${peeps.m_idx};
+						var keyword = $('#search').val();
 
-			console.log(keyword);
-			
-			$.ajax({
-				url : '${pageContext.request.contextPath}/user/finduser?keyword='+ keyword,
-				type : 'get',
-				async : false,
-				data : {
-					"peepslist" : "${peepslist}",
-					"s_name" : "${name}",
-					"s_m_photo" : "${m_photo}",
-					"s_loginType" : "${loginType}"
-				},
-				success : function(data) {
-					location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
-				},
-				error : function() {
-					console.log("실패,,,,");
-				}
-			});
+						console.log(keyword);
 
-		});
+						$
+								.ajax({
+									url : '${pageContext.request.contextPath}/user/finduser',
+									type : 'get',
+									async : false,
+									data : {
+										"keyword":keyword,
+										"m_idx" : m_idx
+									},
+									success : function(data) {
+										location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
+									},
+									error : function() {
+										console.log("실패,,,,");
+									}
+								});
 
+					});
 </script>
 
 </html>

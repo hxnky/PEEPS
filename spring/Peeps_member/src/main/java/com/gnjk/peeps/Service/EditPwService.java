@@ -19,17 +19,12 @@ public class EditPwService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public int EditPw(EditRequest editRequest, HttpServletResponse response) throws IOException {
+	public int EditPw(String email, String password, String e_password, String c_password) {
 
 		int result = 0;
 
 		dao = template.getMapper(PeepsDao.class);
-
-		String email = editRequest.getEmail();
-		String password = editRequest.getPassword();
-		String e_password = editRequest.getE_password();
-		String c_password = editRequest.getC_password();
-
+		
 		System.out.println("비번찾기 서비스");
 		System.out.println(email);
 		System.out.println(password);

@@ -21,6 +21,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
+import com.gnjk.peeps.domain.Peeps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -92,7 +93,7 @@ public class KakaoService {
 	}
 
 	public HashMap<String, Object> getUserInfo(String access_Token, HttpSession session) {
-
+		
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 		HashMap<String, Object> userInfo = new HashMap<>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
@@ -128,14 +129,22 @@ public class KakaoService {
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
 			String m_photo = properties.getAsJsonObject().get("profile_image").getAsString();
 
-			session.setAttribute("email", email);
-			session.setAttribute("name", name);
-			session.setAttribute("m_photo", m_photo);
-			session.setAttribute("loginType", "kakao");
+			Peeps peeps = new Peeps();
+			
+			peeps.setEmail(email);
+			peeps.setName(name);
+			peeps.setM_photo(m_photo);
+			peeps.setLoginType("kakao");
+			
+			System.out.println(peeps);
+			
+			session.setAttribute("peeps", peeps);
+			
 
 			userInfo.put("name", name);
 			userInfo.put("email", email);
 			userInfo.put("m_photo", m_photo);
+			session.setAttribute("loginInfo", userInfo);
 
 		} catch (IOException e) {
 			e.printStackTrace();

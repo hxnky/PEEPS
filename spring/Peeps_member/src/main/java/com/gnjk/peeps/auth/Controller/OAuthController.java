@@ -28,6 +28,13 @@ public class OAuthController {
 
 		return oauthService.checkEmail(email);
 	}
+	
+	@GetMapping("/user/photoChk")
+	@ResponseBody
+	public String photoCheck(String m_photo) {
+
+		return oauthService.checkPhoto(m_photo);
+	}
 
 	@RequestMapping(value = "/user/loginTypeChk", method = RequestMethod.GET)
 	@ResponseBody
@@ -41,7 +48,7 @@ public class OAuthController {
 	public int memberReg(@ModelAttribute("socialData") SocialRequest socialRequest, HttpServletRequest request,
 			Model model) {
 
-		System.out.println("컨트롤러 실행됨");
+		System.out.println("소셜 멤버 저장");
 		System.out.println(socialRequest);
 
 		int result = oauthService.socialMemberReg(socialRequest, request);
@@ -49,6 +56,19 @@ public class OAuthController {
 		System.out.println(result);
 
 		model.addAttribute("result", result);
+
+		return result;
+	}
+	
+	@PostMapping(value = "/user/photoUpdate")
+	@ResponseBody
+	public int m_photoUpdate(String email, String m_photo, String name) {
+
+		System.out.println("소셜 사진 변경");
+
+		int result = oauthService.m_photoUpdate(email, m_photo, name);
+
+		System.out.println(result);
 
 		return result;
 	}

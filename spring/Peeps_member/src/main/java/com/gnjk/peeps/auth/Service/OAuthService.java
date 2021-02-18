@@ -25,12 +25,19 @@ public class OAuthService {
 
 		return dao.selectMemberByEmailCount(email);
 	}
-	
+
 	public String checkLoginType(String email) {
-		
+
 		dao = template.getMapper(PeepsDao.class);
-		
+
 		return dao.selectLoginTypeByEmailCount(email);
+	}
+
+	public String checkPhoto(String m_photo) {
+
+		dao = template.getMapper(PeepsDao.class);
+
+		return dao.selectM_photoByEmailCount(m_photo);
 	}
 
 	// 파일을 업로드, 데이터베이스 저장
@@ -54,4 +61,25 @@ public class OAuthService {
 
 		return result;
 	}
+
+	// 사진 정보 수정
+	public int m_photoUpdate(String email, String m_photo, String name) {
+		
+		int result = 0;
+		
+		try {
+			
+			// 데이터 베이스 입력
+			dao = template.getMapper(PeepsDao.class);
+
+						// 회원 DB insert
+			result = dao.m_photoUpdate(email, m_photo, name);
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
 }

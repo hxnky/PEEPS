@@ -174,38 +174,36 @@ h3 {
 			</div>
 		</div>
 		<div>
-			<form id="del_form" method="post">
-				<table id="edit_table">
-					<tr>
+			<table id="edit_table">
+				<tr>
 
-						<td><%=request.getParameter("email")%>님!<br> 탈퇴하시면 계정을
-							다시 복구할 수 없습니다. <br> 그래도 탈퇴하시겠어요?</td>
-					</tr>
-					<tr>
-						<td>탈퇴하시는 이유가 무엇인가요? <br>
-							<div class="dropdown">
-								<select class="dropbtn">
-									<option>탈퇴 사유를 선택해주세요</option>
-									<option>자주 사용하지 않음</option>
-									<option>삭제하고 싶은 내용이 있음</option>
-									<option>이 SNS가 별로임</option>
+					<td><%=request.getParameter("email")%>님!<br> 탈퇴하시면 계정을 다시
+						복구할 수 없습니다. <br> 그래도 탈퇴하시겠어요?</td>
+				</tr>
+				<tr>
+					<td>탈퇴하시는 이유가 무엇인가요? <br>
+						<div class="dropdown">
+							<select class="dropbtn">
+								<option>탈퇴 사유를 선택해주세요</option>
+								<option>자주 사용하지 않음</option>
+								<option>삭제하고 싶은 내용이 있음</option>
+								<option>이 SNS가 별로임</option>
 
-								</select>
+							</select>
 
-							</div></td>
-					</tr>
-					<tr>
-						<td>비밀번호 입력 <br> <input type="password" id="password"
-							name="password" placeholder="비밀번호를 입력하세요">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<button type="submit" id="mem_del">탈퇴하기</button>
-						</td>
-					</tr>
-				</table>
-			</form>
+						</div></td>
+				</tr>
+				<tr>
+					<td>비밀번호 입력 <br> <input type="password" id="password"
+						name="password" placeholder="비밀번호를 입력하세요">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<button id="mem_del">탈퇴하기</button>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 
@@ -302,25 +300,44 @@ h3 {
 		$("#mem_del").click(function(){
 			var result = confirm('정말 탈퇴하시겠습니까?');
 			if(result){
+				
+				var password = $('#password').val();
+				var email = "${peeps.email}";
+				var m_idx = "${peeps.m_idx}";
+				m_idx = Number(m_idx);
+				
+				console.log(password);
+				console.log(m_idx);
+				
+				$.ajax({
+					url : '${pageContext.request.contextPath}/user/del',
+					type : 'post',
+					data : {
+						"email" : email,
+						"password" : password,
+						"m_idx" : m_idx
+					},
+					async : false,
+					success : function(data) {
+						if (data == 1) {
+							alert("탈퇴되었습니다.");
+							location.href = "${pageContext.request.contextPath}/";
+						} else {
+							alert("비밀번호가 일치하지 않습니다.");
+						}
+					},error : function(request,status, error) {
+						console.log("통신 실패");
+
+					}
+				});
+				
 				$('#del_form').submit();
 			}
 		})
-		
-		
-		var email = $('#email').text();
-		
-			if(${result}==1){
-				alert("탈퇴되었습니다.");
-				console.log("보내짐");
-				location.href = "${pageContext.request.contextPath}/";
-			} else if(${result}==0){
-				alert("비밀번호를 잘못 입력하셨습니다.");
-				location.href = "${pageContext.request.contextPath}/profile/delete?email="+ email;
-			} else{
-				console.log("탈퇴하기 진입");
-			}
 
 	});
 </script>
+
+
 
 </html>

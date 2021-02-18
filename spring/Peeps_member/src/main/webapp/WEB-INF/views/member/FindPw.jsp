@@ -31,6 +31,15 @@
 <link href="<c:url value="/resources/css/reg.css"/>" rel="stylesheet" />
 </head>
 <style>
+#top_nav {
+	width: 500px;
+	background-color: #D9D9D9;
+	text-align: center;
+	height: 35px;
+	padding: 7px 0px;
+	list-style: none;
+	margin-left : -40px;
+}
 /* 21.02.01 로그인 css 추가*/
 #login_img {
 	width: 100px;
@@ -82,7 +91,6 @@ h4 {
 								</ul>
 							</div>
 							<h4>찾으시려는 계정의 이메일과 아이디를 입력해주세요!</h4>
-							<form id="FindForm" method="post">
 								<div>
 									<!-- 표 만들기 -->
 
@@ -109,8 +117,7 @@ h4 {
 									</table>
 								</div>
 
-								<input type="submit" id="sign_btn" value="비밀번호 찾기" />
-							</form>
+							<input type="submit" id="sign_btn" value="비밀번호 찾기" />
 							<div class="wizard-footer height-wizard">
 								<div class="clearfix">
 									<br>
@@ -148,24 +155,46 @@ h4 {
 <script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+
 <script>
-	$(function(){
+	// 비밀번호 찾기
+	$("#sign_btn").click(function() {
 		
+		var email = $('#email').val();
+		var id = $('#id').val();
+		
+		console.log(email);
+		console.log(id);
+		
+		if(email.trim()==""){
+			alert("이메일을 입력해주세요");
+		} else if(id.trim()==""){
+			alert("아이디를 입력해주세요!");
+		}else{
+			$.ajax({
+				url : '${pageContext.request.contextPath}/user/fintPW',
+				type : 'post',
+				data : {
+					"email" : email,
+					"id" : id,
+				},
+				async : false,
+				success : function(data) {
+					if (data == 1) {
+						alert("임시 비밀번호가 메일로 전송되었습니다.");
+						location.href = "${pageContext.request.contextPath}/";
+					} else {
+						alert("계정을 찾을 수 없습니다. 이메일 또는 아이디를 확인해주세요");
+					}
 
-			if(${result}==1){
-			
-				// 이메일을 받아와야함
-				alert("메일을 발송하였습니다. 메일을 확인해주세요");
-				console.log("보내짐");
-				location.href = "${pageContext.request.contextPath}/";
-			} else if(${result}==0){
-				alert("회원 정보가 없거나 일치하지 않습니다. 다시 확인해주세요");
-				location.href = "${pageContext.request.contextPath}/member/find";
-			} else{
-				console.log("비밀번호 찾기 진입");
-			}
+				},error : function(request,status, error) {
+					console.log("통신 실패");
 
+				}
+			});
+		}
+
+				
 	});
 </script>
-
 </html>

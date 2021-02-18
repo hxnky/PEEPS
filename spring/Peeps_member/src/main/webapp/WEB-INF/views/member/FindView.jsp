@@ -71,8 +71,9 @@ body {
 }
 
 #total_wrap {
-	margin: 150px 0 0 350px;
-}
+	margin: 150px auto;
+	left: 50%;
+	}
 
 #profile {
 	width: 100px;
@@ -118,11 +119,12 @@ body {
 	cursor: pointer;
 }
 
-#find_peeps {
+.find_peeps {
 	width: 900px;
 	height: 100px;
 	text-align: center;
 	margin-top: 10px;
+	margin-left : 300px;
 	border-bottom: 0.2px solid #CCC;
 }
 
@@ -160,7 +162,7 @@ a:visited {
 			<ul class="icon">
 				<!--아이콘 경로 바꾸기 -->
 				<li class="left"><span><input type="search" id="search"
-						placeholder="검색" required="required">
+						value="${keyword}" required="required">
 						<button id="keyword" type="submit">
 							<img
 								src="<c:url value="/resources/images/icon/navi/search.png"/>">
@@ -196,14 +198,13 @@ a:visited {
 	</div>
 	<!-- 네비 바 -->
 	<div id="total_wrap">
-		<div>
 			<c:choose>
 				<c:when test="${peepsCnt == 0}">
 					<div id="user_no">일치하는 유저가 없습니다</div>
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${peepslist}" var="peep" varStatus="i">
-						<table id="find_peeps">
+						<table class="find_peeps" id="${peep.m_idx }">
 
 							<tr>
 								<td rowspan="2"><a href="#"> <c:set var="loginType"
@@ -219,7 +220,7 @@ a:visited {
 								</a></td>
 								<td id="id"><a href="#">${peep.id}</a></td>
 								<td rowspan="2"><c:choose>
-										<c:when test="${peep.id eq id}">
+										<c:when test="${peep.id eq peeps.id}">
 											<div id="fix">
 												<button id="edit_btn">프로필편집</button>
 											</div>
@@ -228,22 +229,12 @@ a:visited {
 											<div id="fix">
 												<c:choose>
 													<c:when test="${peep.chk_result eq 1}">
-														<form action="${pageContext.request.contextPath}/unfollow"
-															name="form" method="post">
-															<input type="hidden" value="${peep.m_idx}" id="y_idx"
-																name="y_idx"> <input type="hidden"
-																value="${m_idx}" name="m_idx">
-															<button id="unfollow" type="submit">언팔로우</button>
-														</form>
+														<button class="f_btn" id="unfollow" type="submit"
+															onclick="unfollow(${peep.m_idx})">언팔로우</button>
 													</c:when>
 													<c:otherwise>
-														<form action="${pageContext.request.contextPath}/follow"
-															name="form" method="post">
-															<input type="hidden" value="${peep.m_idx}" id="y_idx"
-																name="y_idx"> <input type="hidden"
-																value="${m_idx}" name="m_idx">
-															<button id="follow" type="submit">팔로우</button>
-														</form>
+														<button class="f_btn" id="follow" type="submit"
+															onclick="follow(${peep.m_idx})">팔로우</button>
 													</c:otherwise>
 												</c:choose>
 											</div>
@@ -258,7 +249,6 @@ a:visited {
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>
-		</div>
 	</div>
 
 
@@ -269,51 +259,163 @@ a:visited {
 	type="text/javascript"></script>
 
 <script>
-	$("#keyword")
+// 검색 결과 load
+function load_Find(){
+	
+	var m_idx = ${peeps.m_idx};
+	var keyword = "${keyword}";
+	
+	$
+	.ajax({
+		url : '${pageContext.request.contextPath}/user/loaduser?keyword=' + keyword,
+		type : 'get',
+		async : false,
+		data : {
+			"m_idx" : m_idx
+		},
+		success : function(data) {
+			console.log(data);		
+			
+			$('#total_wrap').load(location.href + '#fix');
+			//location.reload();
+			console.log("새로고침");
+		},
+		error : function() {
+			console.log("실패,,,,");
+		}
+	});
+}
+
+// 팔로우 function
+function follow(y_idx){
+	
+	var idx = $('.find_peeps #fix .f_btn').index(this);
+	var m_idx = ${peeps.m_idx};
+	//var y_idx = document.getElementsByClassName('find_peeps')[idx].id;
+	
+	console.log(y_idx);
+	console.log(idx);
+	
+	$
+	.ajax({
+		url : '${pageContext.request.contextPath}/follow',
+		type : 'post',
+		async : false,
+		data : {
+			"y_idx": y_idx,
+			"m_idx" : m_idx
+		},
+		success : function(data) {
+			console.log("팔로우");	
+			load_Find();
+		},
+		error : function() {
+			console.log("실패,,,,");
+		}
+	});
+
+	
+}
+
+// 언팔로우 function
+function unfollow(y_idx){
+	
+	var idx = $('#total_wrap .find_peeps #fix .f_btn').index(this);
+	var m_idx = ${peeps.m_idx};
+	//var y_idx = document.getElementsByClassName('find_peeps')[idx].id;
+	
+	console.log(y_idx);
+	console.log(idx);
+	
+	$
+	.ajax({
+		url : '${pageContext.request.contextPath}/unfollow',
+		type : 'post',
+		async : false,
+		data : {
+			"y_idx": y_idx,
+			"m_idx" : m_idx
+		},
+		success : function(data) {
+			console.log("언팔로우");
+			load_Find();
+			
+		},
+		error : function() {
+			console.log("실패,,,,");
+		}
+	});
+
+}
+</script>
+
+<script>
+$("#keyword")
+.click(
+		function() {
+
+			var m_idx = ${peeps.m_idx};
+			var keyword = $('#search').val();
+
+			console.log(keyword);
+
+			$
+					.ajax({
+						url : '${pageContext.request.contextPath}/user/finduser',
+						type : 'get',
+						async : false,
+						data : {
+							"keyword":keyword,
+							"m_idx" : m_idx
+						},
+						success : function(data) {
+							location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
+						},
+						error : function() {
+							console.log("실패,,,,");
+						}
+					});
+
+		});
+</script>
+
+<script>
+
+var email = "${peeps.email}";
+	var m_idx= ${peeps.m_idx};
+
+	$('#edit_btn')
+	.click(
+			function() {
+				
+				$.ajax({
+					url : '${pageContext.request.contextPath}/profile/chk',
+					type : 'get',
+					data : {
+						"email" : email,
+					},
+					async : false,
+					success : function(data) {
+						location.href = "${pageContext.request.contextPath}/profile/Info";
+					},error : function(request,status, error) {
+						console.log("통신 실패");
+
+					}
+				});
+			});
+
+	$("#MyPage_img")
 			.click(
 					function() {
-
-						var keyword = $('#search').val();
-
-						console.log(keyword);
-
-						$
-								.ajax({
-									url : '${pageContext.request.contextPath}/user/finduser?keyword='
-											+ keyword,
-									type : 'get',
-									async : false,
-									success : function(data) {
-										location.href = "${pageContext.request.contextPath}/member/FindView?keyword="
-												+ keyword;
-									},
-									error : function() {
-										console.log("실패,,,,");
-									}
-								});
+						location.href = "${pageContext.request.contextPath}/mypage?m_idx="+ m_idx;
 
 					});
 </script>
 
 <script>
-	var email = "${email}";
+	// 검색 목록 누르면 그 사람 마이페이지로 이동
+	function loadMyPage(idx) {
 
-	console.log(email);
-
-	$('#edit_btn')
-			.click(
-					function() {
-						location.href = "${pageContext.request.contextPath}/profile/Info?email="
-								+ email;
-					});
-
-	$("#MyPage_img")
-			.click(
-					function() {
-
-						location.href = "${pageContext.request.contextPath}/mypage?email="
-								+ email;
-
-					});
+	}
 </script>
 </html>

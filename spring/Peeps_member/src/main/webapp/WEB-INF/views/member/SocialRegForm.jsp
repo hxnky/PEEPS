@@ -107,24 +107,22 @@ h4 {
 <script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 
 <script>
-	// 아이디 유효성 검사(1 = 중복 / 0 = 중복아님)
 	$(document)
 			.ready(
 					function() {
-						
-						var loginType = "${loginType}";
-						var email = "${email}";
-						var m_photo = "${m_photo}";
-						var name = "${name}";
-						
-						
+
+						var loginType = "${peeps.loginType}";
+						var email = "${peeps.email}";
+						var m_photo = "${peeps.m_photo}";
+						var name = "${peeps.name}";
 
 						console.log(loginType);
 						console.log(email);
 						console.log(m_photo);
 						console.log(name);
-					
-						$.ajax({
+
+						$
+								.ajax({
 									url : '${pageContext.request.contextPath}/user/loginTypeChk?email='
 											+ email,
 									type : 'get',
@@ -158,11 +156,68 @@ h4 {
 									success : function(data) {
 										if (data == 1) {
 											if (loginType == LoginType) {
-												// 로그인 타입이 일치하면 타임라인 페이지
-												//location.href = "${pageContext.request.contextPath}/user/chk"
-												location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
-												console.log("타임라인 페이지");
-												alert(name + "님! 로그인되었습니다.");
+												
+												// 사진 정보 확인
+												$
+														.ajax({
+															url : '${pageContext.request.contextPath}/user/photoChk?email='
+																	+ email,
+															type : 'get',
+															async : false,
+															success : function(data) {
+
+																if(data == m_photo){
+																	location.href = "${pageContext.request.contextPath}/TimeLine?email="
+																		+ email;
+																console
+																		.log("타임라인 페이지");
+																alert(name
+																		+ "님! 로그인되었습니다.");
+																} else{
+																	console.log("사진 정보 업데이트 필요");
+																	
+																	$
+																	.ajax({
+																		url : '${pageContext.request.contextPath}/user/photoUpdate',
+																		type : 'post',
+																		data : {
+																			"email" : "${peeps.email}",
+																			"m_photo" : "${peeps.m_photo}",
+																			"name": "${peeps.name}"
+																		},
+																		async : false,
+																		success : function(data) {
+																			if (data == 1) {
+																				location.href = "${pageContext.request.contextPath}/TimeLine?email="
+																						+ email;
+																				console
+																						.log("타임라인 페이지");
+																				alert(name
+																						+ "님! 로그인 되었습니다!");
+																			} else {
+																				console
+																						.log("DB 실패");
+																			}
+
+																		},
+																		error : function(
+																				request,
+																				status, error) {
+																			console
+																					.log("통신 실패");
+
+																		}
+																	});
+																}
+																
+																
+															},
+															error : function() {
+																console
+																		.log("사진 대조 실패,,,,");
+															}
+														});
+
 											} else {
 												// 아니면 alert
 												alert("해당 이메일로 이미 가입된 계정이 있습니다. 로그인 페이지로 이동합니다.");
@@ -173,34 +228,38 @@ h4 {
 											console
 													.log("아이디가 DB에 존재하지 않습니다. DB에 저장합니다 . . .");
 											$
-											.ajax({
-												url : '${pageContext.request.contextPath}/user/reg',
-												type : 'post',
-												data : {
-													"email" : "${email}",
-													"name" : "${name}",
-													"m_photo" : "${m_photo}",
-													"loginType" : loginType
-												},
-												async : false,
-												success : function(data) {
-													if(data==1){
-														location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
-														console.log("타임라인 페이지");
-														alert(name + "님! 환영합니다!! 아이디와 비밀번호를 설정에서 변경해주세요!");
-													} else{
-														console.log("DB 실패");
-													}
-															
-												},
-												error : function(
-														request,
-														status, error) {
-													console
-															.log("통신 실패");
+													.ajax({
+														url : '${pageContext.request.contextPath}/user/reg',
+														type : 'post',
+														data : {
+															"email" : "${peeps.email}",
+															"name" : "${peeps.name}",
+															"m_photo" : "${peeps.m_photo}",
+															"loginType" : loginType
+														},
+														async : false,
+														success : function(data) {
+															if (data == 1) {
+																location.href = "${pageContext.request.contextPath}/TimeLine?email="
+																		+ email;
+																console
+																		.log("타임라인 페이지");
+																alert(name
+																		+ "님! 환영합니다!! 아이디와 비밀번호를 설정에서 변경해주세요!");
+															} else {
+																console
+																		.log("DB 실패");
+															}
 
-												}
-											});
+														},
+														error : function(
+																request,
+																status, error) {
+															console
+																	.log("통신 실패");
+
+														}
+													});
 
 										}
 									},
@@ -208,18 +267,6 @@ h4 {
 										console.log("실패,,,,");
 									}
 								});
-						
-						
-
-// 						if (${result} == 1) {
-// 							console.log("사용자 정보를 DB에 성공적으로 넣었습니다.");
-// 							alert("회원가입 되었습니다!");
-// 							location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
-// 							// DB는 들어가는데 안들어갔다고 뜨고 400 오류
-// 						} else{
-// 							console.log("실패");
-// 						}
-
 
 					});
 </script>

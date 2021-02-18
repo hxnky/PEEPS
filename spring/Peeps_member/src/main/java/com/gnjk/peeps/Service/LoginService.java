@@ -19,43 +19,37 @@ public class LoginService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public boolean login(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
+	public int login(String email, String password, HttpSession session) {
 
 		dao = template.getMapper(PeepsDao.class);
 
 		boolean loginCheck = false;
-
+		int result = 0;
+		
 		Peeps peeps = dao.selectLogin(email, password);
 
 		System.out.println("로그인 : " + peeps);
 
 		if (peeps == null) {
 			System.out.println("정보가 없습니다.");
-			session.setAttribute("l_result", 0);
+			result = 0;
 		}
 
 		if (peeps != null) {
 			if (peeps.getVerify() == 'Y') {
-				request.getSession().setAttribute("loginInfo", peeps.toLoginInfo());
+				session.setAttribute("loginInfo", peeps.toLoginInfo());
 				loginCheck = true;
-				session.setAttribute("l_result", 2);
+				result = 2;
 			} else if(peeps.getVerify() == 'N') {
 				System.out.println("미인증계정");
 				loginCheck = true;
-				session.setAttribute("l_result", 1);
-			} else {
-				System.out.println("탈퇴 계정");
-				loginCheck = true;
-				session.setAttribute("l_result", 3);
+				result = 1;
 			}
 
 		}
 
 		session.setAttribute("peeps", peeps);
 
-		return loginCheck;
+		return result;
 	}
 }
