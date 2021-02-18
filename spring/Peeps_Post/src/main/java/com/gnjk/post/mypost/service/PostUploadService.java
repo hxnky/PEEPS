@@ -30,7 +30,7 @@ public class PostUploadService {
 	private SqlSessionTemplate template;
 
 	// 게시글 저장
-	public int upload(PostWriteRequest writeRequest, HttpServletRequest request, Model model) {
+	public int uploadPost(PostWriteRequest writeRequest, HttpServletRequest request, Model model) {
 		int postResult = 0;
 
 		MultipartFile[] files = writeRequest.getPostformfile();

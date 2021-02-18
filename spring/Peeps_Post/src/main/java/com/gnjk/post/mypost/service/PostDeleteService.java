@@ -14,7 +14,7 @@ public class PostDeleteService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public int postDelete(int pidx) {
+	public int deletePost(int pidx) {
 		
 		dao = template.getMapper(PostDao.class);
 		
