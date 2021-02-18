@@ -33,6 +33,10 @@ public interface PostDao {
 	// 게시글 삭제
 	int deletePostByIdx(int pidx);
 	
+	// 게시글 update
+	int updatePost(Post post);
+	
+	
 	
 	
 }

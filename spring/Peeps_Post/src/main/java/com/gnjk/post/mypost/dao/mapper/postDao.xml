@@ -5,13 +5,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.gnjk.post.mypost.dao.PostDao">
 
-	<!-- @@test 게시글 조회 -->
-<!-- 	<select id="" parameterType="com.gnjk.post.mypost.domain.Post"
-		resultType="com.gnjk.post.mypost.domain.Post">
-
-		select * from post
-	</select> -->
-
 	<!-- 게시글 등록 -->
 	<insert id="insertPost"
 		parameterType="com.gnjk.post.mypost.domain.Post"
@@ -50,9 +43,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectPostDetail"
 			resultType="com.gnjk.post.mypost.domain.Post"
 	>
-	select * from post 
-	where p_idx=#{param}
-	
+		select * from post 
+		where p_idx=#{param}
 	</select>
 
 	<!-- 게시글 파일 조회 -->
@@ -60,14 +52,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			parameterType="list"
 			resultType="com.gnjk.post.mypost.domain.PostFile"
 	>
-	select * from file
-	where post_idx=#{param}
+		select * from file
+		where post_idx=#{param}
 	</select>
 	
 	<!-- 게시글 삭제 -->
 	<delete id="deletePostByIdx">
 		delete from post where p_idx=#{pidx}
 	</delete>
+	
+	<!-- 게시글 수정 -->
+	<update id="updatePost" parameterType="com.gnjk.post.mypost.domain.Post">
+		update post 
+		set p_title=#{p_title}, p_content=#{p_content}, p_loc=#{p_loc}
+		where p_idx=#{p_idx}
+	</update>
 
 
 </mapper>

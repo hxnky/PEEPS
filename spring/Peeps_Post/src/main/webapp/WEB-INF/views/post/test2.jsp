@@ -5,6 +5,10 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 
+<div id="map" style="width: 800px; height: 300px; margin-top: 10px;"></div>
+						
+<div id="map"style="width: 800px; height: 300px; margin-top: 10px; display: none;"></div>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +89,6 @@
 	min-height: 50px;
 	margin: 15px 0px;
 	border: 1px solid #ccc;
-	font-size: 0;
 }
 
 .selProductFile {
@@ -111,7 +114,6 @@
 	border: 0px solid;
 	background-color: transparent;
 	cursor: default;
-	width: 250px;
 }
 
 body {
@@ -131,13 +133,8 @@ body {
 	<div class="post_wrap">
 		<form method="post" enctype="multipart/form-data" id="uploadForm">
 		<table class="post">
-		<!-- 게시글과 회원 idx -->
 			<tr>
-				<td class="postInfo">							
-				</td>
-			</tr>
-			<tr>
-				<td>								<!-- test 회원idx  -->
+				<td>							<!-- test 회원idx  -->
 					<input type="hidden" name="userIdx" value="1">
 				</td>
 			</tr>
@@ -145,12 +142,18 @@ body {
 			<tr>
 				<td class="pdate_wrap">
 					<div class="pdate">
+					<!-- var date = item.p_date-540*60*1000;
+						
+					date = new Date(date).toLocaleDateString();
+					
+					console.log("날짜: ", date); -->
 					</div>
 				</td>
 			</tr>
 			<!-- 제목 -->
 			<tr>
 				<td class="ptitleTd">
+					<input type="text" class="ptitle" name="ptitle" placeholder="제목을 입력해주세요." required>
 				</td>
 			</tr>
 			<!-- 파일 -->
@@ -167,8 +170,6 @@ body {
 					</div>
 					<!-- 파일 프리뷰 -->
 					<div id="preview" class="preview">
-					<span class="oldPrv"></span>
-					<span class="newPrv"></span>
         			</div>
 				</td>
 			</tr>
@@ -186,19 +187,91 @@ body {
 			<tr>
 				<td>
 					<div class="plocwrap">
+					<span class="addr">
 					<input type="button" class="searchlocbtn" 
 					onclick="sample5_execDaumPostcode()" value="위치 추가">
-					<!-- 위치 주소 표시 -->
-					<span class="addr"></span>
+					<input type="text" id="sample5_address" name="ploc" class="searchlocBox" 
+						onfocus="this.blur()" value="${editView.post.p_loc}"
+					readonly>
+					</span>
 					<br>
-					<div class="mapDiv">
-						
-					</div>
-					
+					<div id="map"
+						style="width: 800px; height: 300px; margin-top: 10px;"></div>
+				
 					<script
 						src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 					<script
 						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed6849fd6d5d015aebf82a3eb747333&libraries=services"></script>
+					<script>
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+						mapOption = {
+							center : new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+							draggable: false, // 확대축소 & 드래그 막기
+							level : 3
+						// 지도의 확대 레벨
+						};
+						
+						//지도를 미리 생성
+						var map = new daum.maps.Map(mapContainer, mapOption);
+						//주소-좌표 변환 객체를 생성
+						var geocoder = new daum.maps.services.Geocoder();
+						//마커를 미리 생성
+						var marker = new daum.maps.Marker({
+							position : new daum.maps.LatLng(37.537187, 127.005476),
+							map : map
+						});
+						
+						/* 게시글에 저장된 위치를 지도로 표시 */
+						// 주소로 좌표를 검색합니다
+						geocoder.addressSearch('${editView.post.p_loc}', function(result, status) {
+
+						    // 정상적으로 검색이 완료됐으면 
+						     if (status === kakao.maps.services.Status.OK) {
+
+						        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+						        // 결과값으로 받은 위치를 마커로 표시합니다
+						        var marker = new kakao.maps.Marker({
+						            map: map,
+						            position: coords
+						        });
+
+						        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+						        map.setCenter(coords);
+						    } 
+						});    
+				
+						function sample5_execDaumPostcode() {
+							new daum.Postcode({
+								oncomplete : function(data) {
+									var addr = data.address; // 최종 주소 변수
+				
+									// 주소 정보를 해당 필드에 넣는다.
+									document.getElementById("sample5_address").value = addr;
+									// 주소로 상세 정보를 검색
+									geocoder.addressSearch(data.address, function(results,
+											status) {
+										// 정상적으로 검색이 완료됐으면
+										if (status === daum.maps.services.Status.OK) {
+				
+											var result = results[0]; //첫번째 결과의 값을 활용
+				
+											// 해당 주소에 대한 좌표를 받아서
+											var coords = new daum.maps.LatLng(result.y,
+													result.x);
+											// 지도를 보여준다.
+											mapContainer.style.display = "block";
+											map.relayout();
+											// 지도 중심을 변경한다.
+											map.setCenter(coords);
+											// 마커를 결과값으로 받은 위치로 옮긴다.
+											marker.setPosition(coords)
+										}
+									});
+								}
+							}).open();
+						}
+					</script>
 					</div>
 				</td>
 			</tr>
@@ -213,10 +286,11 @@ body {
 		</form>
 		
 		<script>
-		var postLoc = "";
+		var oldImage_list = [];
+		var deleteImage_list = [];
+		
 		$(document).ready(function() {
-			
-			// 뷰컨트롤러 통해서 게시물 idx 받기
+			// 회원idx 받기
 			function getParameterByName(name) {
 				name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 				var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
@@ -224,152 +298,21 @@ body {
 			}
 			
 			var postIdx = getParameterByName('idx');
-			// 게시글 데이터 받아오기
+			
 			$.ajax({
 				url : "http://localhost:8080/post/rest/member/post/detail?idx="+ postIdx,
 				type : 'GET',
-				async: false,
-				success : function(data){
-					console.log("ajax 데이터 받아오기 성공");
-					
-					// 게시글 인덱스
-					console.log("ajax p_idx : ", data.p_idx);
-					var pIndex = '<input type="hidden" name="postIdx" value="'+data.p_idx+'">';
-					$('.postInfo').append(pIndex);
-					// 날짜
-					var date = data.p_date-540*60*1000;
-					date = new Date(date).toLocaleDateString();
-					$('.pdate').append(date);
-					// 제목
-					var ptitleHtml = '<input type="text" class="ptitle" name="ptitle" placeholder="제목을 입력해주세요." value="'+data.p_title+'" required>';
-					$('.ptitleTd').append(ptitleHtml);
-					// 내용
-					$('.pcontent').append(data.p_content);
-					
-					// 위치 있을 경우
-					if(data.p_loc != ""){
-						var addrHtml = '<input type="text" id="sample5_address" name="ploc" class="searchlocBox" onfocus="this.blur()" value="'+data.p_loc+'" readonly>';
-						$('.addr').append(addrHtml);	
-						
-						var plocHtml = '<div id="map" style="width: 800px; height: 300px; margin-top: 10px;"></div>';
-					    $('.mapDiv').append(plocHtml);
-					 // 주소 변수 저장
-						postLoc = data.p_loc;
-						/* console.log("ajax 안의 postLoc :", postLoc); */
-					}
-					
-					 
-					
-					
-				}
-			});
-			
-			// 게시글 이미지 데이터 받아오기
-			$.ajax({
-				url : "http://localhost:8080/post/rest/member/post/detail/image?idx="+ postIdx,
-				type : 'GET',
 				success : function(data){
 					
-					$.each(data,function(index, item){
-						var prvImgHtml = '<a href="javascript:void(0);" onclick=\"deleteOldImageAction('+ index + ');\" id="img_id_'+ index+ '" class="img_event" >';
-						   prvImgHtml += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" style="width:160px; height:160px;" id="post-images" alt="postImages"></a>';
-						
-						   oldImage_list.push(item.f_name);
-						   
-						   $('.oldPrv').append(prvImgHtml);
-						   /* console.log("예전 이미지 인덱스 : ", index); */
-					})
-					
-				}, 
-				error : function(e){
-					console.log(e);
 				}
-			
-			});
-			
-			// 위치 주소 있을 경우 
-			if(postLoc != ""){
-				console.log("위치 주소 있을 경우");
-				/* 게시글에 저장된 위치를 지도로 표시 */
-				// 주소로 좌표를 검색합니다
-				/* geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) { */
-					geocoder.addressSearch(postLoc, function(result, status) {
-				    // 정상적으로 검색이 완료됐으면 
-				     if (status === kakao.maps.services.Status.OK) {
-
-				        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-				        // 결과값으로 받은 위치를 마커로 표시합니다
-				        var marker = new kakao.maps.Marker({
-				            map: map,
-				            position: coords
-				        });
-
-				        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-				        map.setCenter(coords);
-				    } 
-				});  
-			} 
-			
-			
-			
-		}); // document.ready 끝
+			})
+		});
 		
-			// 지도 API
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-			mapOption = {
-				center : new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-				draggable: false, // 확대축소 & 드래그 막기
-				level : 3
-			// 지도의 확대 레벨
-			};
-			
-			//지도를 미리 생성
-			var map = new daum.maps.Map(mapContainer, mapOption);
-			//주소-좌표 변환 객체를 생성
-			var geocoder = new daum.maps.services.Geocoder();
-			//마커를 미리 생성
-			var marker = new daum.maps.Marker({
-				position : new daum.maps.LatLng(37.537187, 127.005476),
-				map : map
-			});
-
-			function sample5_execDaumPostcode() {
-				new daum.Postcode({
-					oncomplete : function(data) {
-						var addr = data.address; // 최종 주소 변수
-
-						// 주소 정보를 해당 필드에 넣는다.
-						document.getElementById("sample5_address").value = addr;
-						// 주소로 상세 정보를 검색
-						geocoder.addressSearch(data.address, function(results,
-								status) {
-							// 정상적으로 검색이 완료됐으면
-							if (status === daum.maps.services.Status.OK) {
-
-								var result = results[0]; //첫번째 결과의 값을 활용
-
-								// 해당 주소에 대한 좌표를 받아서
-								var coords = new daum.maps.LatLng(result.y,
-										result.x);
-								// 지도를 보여준다.
-								mapContainer.style.display = "block";
-								map.relayout();
-								// 지도 중심을 변경한다.
-								map.setCenter(coords);
-								// 마커를 결과값으로 받은 위치로 옮긴다.
-								marker.setPosition(coords)
-							}
-						});
-					}
-				}).open();
-			}
-			
-			
+		</script>
 		
-		var oldImage_list = [];
-		var deleteImage_list = [];
-        var image_list = []; // 새롭게 추가,삭제한 파일들의 배열
+		<script>
+        
+        var image_list = [];
         
      // 뷰에서 선택한 이미지를 삭제 (추가한 이미지)
     	function deleteNewImageAction(index) {
@@ -386,22 +329,6 @@ body {
 
     	}; 
     	
-    	// 뷰에서 선택한 이미지를 삭제 (기존 이미지)
-    	function deleteOldImageAction(index) {
-    		console.log('테스트 4-2');
-    		
-    		console.log("index :" + index);
-    		
-    		deleteImage_list.push(oldImage_list[index]);
-    		console.log(deleteImage_list);
-    		
-    		var target = $('#img_id_' + index);
-    		console.log(target);
-
-    		$(target).remove();
-    			
-    	};
-    	
     	 //폼 데이터 전송 메서드
 	    function actionForm(){		
 	    		
@@ -410,6 +337,7 @@ body {
 	    	var uploadForm = $('#uploadForm')[0];
 	    			
 	    	var formData = new FormData(uploadForm);
+	    	
 	    	
 	    	var ptchk = formData.get('ptitle');
 	    	var pcchk = formData.get('pcontent');
@@ -420,22 +348,12 @@ body {
 	    	
 	    	console.log("이미지 리스트 : ", image_list);
 	    	
-	    	// 이미지 파일 있을 경우 (새롭게 추가된 이미지)
+	    	// 이미지 파일 있을 경우
 	    	if(image_list.length > 0){
 	    		formData.delete("postformfile");
 		    	for(var i=0; i<image_list.length; i++){	
 		    		formData.append("postformfile", image_list[i]);
 		    	}		
-	    	}
-	    	
-	    	console.log("삭제된 리스트 : ", deleteImage_list);
-	    	
-	    	// 삭제된 이미지 파일 있을 경우 (기존 이미지)
-	    	if(deleteImage_list.length > 0){
-	    		for(var i=0; i<deleteImage_list.length; i++){
-	    			formData.append("deleteImage", deleteImage_list[i])
-	    			console.log("삭제된 이미지 : ", deleteImage_list[i]);
-	    		}
 	    	}
 	    	
 	    	// 폼 데이터 확인
@@ -448,7 +366,7 @@ body {
 	    			
 	    	//ajax로 폼데이터 전송
 	    	$.ajax({
-	    		url : 'http://localhost:8080/post/rest/member/post/edit',
+	    		url : 'http://localhost:8080/post/rest/member/post/upload',
 	    		type : 'POST',
 	    		data : formData,
 	    		processData: false,
@@ -518,7 +436,7 @@ body {
 				var filesArr = Array.prototype.slice.call(files);
 				console.log("filesArr : ", filesArr);
 							
-				var index = 100;
+				var index = 0;
 				
 				filesArr.forEach(function(f) {
 							if (!f.type.match("image.*")) {
@@ -558,7 +476,7 @@ body {
 	        
 	    } // window.onload 끝
 	    
-	 
+        
         
         
      	

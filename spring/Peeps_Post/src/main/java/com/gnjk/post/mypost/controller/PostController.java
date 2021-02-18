@@ -7,24 +7,20 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.gnjk.post.mypost.domain.Post;
+import com.gnjk.post.mypost.domain.PostEditRequest;
 import com.gnjk.post.mypost.domain.PostFile;
 import com.gnjk.post.mypost.domain.PostListView;
 import com.gnjk.post.mypost.domain.PostWriteRequest;
 import com.gnjk.post.mypost.service.PostDeleteService;
 import com.gnjk.post.mypost.service.PostEditService;
 import com.gnjk.post.mypost.service.PostListService;
-import com.gnjk.post.mypost.service.PostReadService;
 import com.gnjk.post.mypost.service.PostUploadService;
 
 @RestController
@@ -45,7 +41,7 @@ public class PostController {
 	@ResponseBody
 	public int uploadPost(PostWriteRequest writeRequest, HttpServletRequest request, Model model) {
 
-		return uploadService.upload(writeRequest, request, model);
+		return uploadService.uploadPost(writeRequest, request, model);
 	}
 
 	// 게시글 리스트 출력
@@ -80,8 +76,20 @@ public class PostController {
 			@RequestParam("idx") int postIdx
 			) {
 		
-		return deleteService.postDelete(postIdx);
+		return deleteService.deletePost(postIdx);
 	}
+	
+	// 수정한 게시글 업데이트 
+	@PostMapping("/edit")
+//	@ResponseBody
+	public int updatePost(
+			PostEditRequest editRequest,
+			HttpServletRequest request,
+			Model model
+			) {
+		return editService.editPost(editRequest, request, model);
+	}
+	
 
 	// 게시글 내용 등록 처리
 //	@RequestMapping(value = "/write", method = RequestMethod.POST)
