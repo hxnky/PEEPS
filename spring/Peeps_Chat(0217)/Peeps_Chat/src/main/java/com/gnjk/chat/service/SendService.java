@@ -1,7 +1,5 @@
 package com.gnjk.chat.service;
 
-import java.util.List;
-
 import com.gnjk.chat.domain.Message;
 
 public interface SendService {

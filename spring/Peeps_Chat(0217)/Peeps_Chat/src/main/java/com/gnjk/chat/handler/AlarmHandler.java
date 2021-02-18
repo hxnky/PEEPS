@@ -7,11 +7,15 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.gnjk.chat.dao.AlarmDao;
+import com.gnjk.chat.domain.Alarm;
+import com.google.gson.Gson;
 import com.mysql.cj.util.StringUtils;
 
 public class AlarmHandler extends TextWebSocketHandler {
@@ -23,6 +27,9 @@ public class AlarmHandler extends TextWebSocketHandler {
 	
 	// 1 : 1
 	Map<String, WebSocketSession> userMap = new HashMap<String, WebSocketSession>();
+	
+	@Autowired
+	private AlarmDao dao;
 	
 	// 서버 접속 성공
 	@Override
@@ -47,35 +54,41 @@ public class AlarmHandler extends TextWebSocketHandler {
 			String[] strs = mes.split(",");
 			
 			if(strs != null && strs.length == 5) {
-				String cmd = strs[0];
+				String type = strs[0];
 				String sender = strs[1];	// 댓글, 좋아요, 팔로우 한 사람
 				String receiver = strs[2];	// 알람을 받을 사람
 				String r_Id = strs[3];
-				String seq = strs[4];
+				String post = strs[4];
 				
 				// 작성자가 로그인 했다면
 				WebSocketSession writer = userMap.get(r_Id);
 				
-				if("comment".equals(cmd) && writer != null) {
+				Gson gson = new Gson();
+				Alarm alarmData = gson.fromJson(message.getPayload(), Alarm.class);
+				
+				if("comment".equals(type) && writer != null) {
 					
 					TextMessage msg
 						// = new TextMessage(sender + " 님이 " + "<a type='external' href='/mentor/menteeboard/menteeboardView?seq="+seq+"&pg=1'>" + seq + "</a> 번 게시글에 댓글을 남겼습니다!");
 							 = new TextMessage(sender + " 님이 회원님의 게시물에 댓글을 남겼습니다!");
 					writer.sendMessage(msg);
+					dao.insertAlarm(alarmData);
 					
-				} else if("like".equals(cmd) && writer != null) {
+				} else if("like".equals(type) && writer != null) {
 					
 					TextMessage msg
-					 = new TextMessage(sender + " 님이 회원님의 게시물에 좋아요를 눌렀습니다!");
+					 = new TextMessage(sender + " 님이 <a type = 'external' href=''/"  + post + " 게시물에 좋아요를 눌렀습니다!");
 					
 					writer.sendMessage(msg);
+					dao.insertAlarm(alarmData);
 					
-			} else if("follow".equals(cmd) && writer != null) {
+			} else if("follow".equals(type) && writer != null) {
 					
 					TextMessage msg
 						 = new TextMessage(sender + " 님이 " +  receiver + " 님을 팔로우 했습니다!");
 					
 					writer.sendMessage(msg);
+					dao.insertAlarm(alarmData);
 					
 				}
 			} 
