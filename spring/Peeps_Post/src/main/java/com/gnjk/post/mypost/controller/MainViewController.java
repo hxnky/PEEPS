@@ -30,6 +30,7 @@ public class MainViewController {
 	}
 	
 	// 게시글 수정 폼
+	@RequestMapping("/main/post/edit")
 	public String goEditForm(
 			@RequestParam("idx") int postIdx
 			) {
