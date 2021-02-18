@@ -281,8 +281,6 @@ body {
 			<tr>
 				<td>
 					<div class="content">
-					<%-- ${readView.post.p_content} --%>
-					<%-- ${fn:replace(readView.post.p_content, cn, br)} --%>
 					</div>
 				</td>
 			</tr>

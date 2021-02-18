@@ -87,11 +87,11 @@
 	border: 1px solid #ccc;
 }
 
-.selProductFile {
+/* .selProductFile {
 	width: 180px;
 	height: 180px;
 	margin: 10px;
-}
+} */
 
 .plocwrap {
 	margin: 10px 0;
@@ -110,6 +110,7 @@
 	border: 0px solid;
 	background-color: transparent;
 	cursor: default;
+	width: 250px;
 }
 
 body {
@@ -135,7 +136,7 @@ body {
 		<form method="post" enctype="multipart/form-data" id="uploadForm">
 		<table class="post">
 			<tr>
-				<td>
+				<td>							<!-- test 회원idx  -->
 					<input type="hidden" name="userIdx" value="1">
 				</td>
 			</tr>
@@ -159,14 +160,14 @@ body {
 			<!-- 파일 -->
 			<tr>
 				<td>
-					<input type="hidden" class="pthumbnail" name="pthumbnail" value="">
+					<!-- <input type="hidden" class="pthumbnail" name="pthumbnail" value=""> -->
 					<div>
 						<input type="file" accept="image/*" 
 						name="postformfile" id="postformfile"
 						multiple>
 						<%-- <a href="javascript:" onclick="fileUploadAction();" class="my_button">
-						<img id="imguploadbtn" src="<c:url value="/resources/img/imguploadbtn.png"/>"/> --%>
-						</a>
+						<img id="imguploadbtn" src="<c:url value="/resources/img/imguploadbtn.png"/>"/> </a>--%>
+						
 					</div>
 					<!-- 파일 프리뷰 -->
 					<div id="preview" class="preview">
