@@ -236,8 +236,9 @@ body {
 					
 					// 게시글 인덱스
 					console.log("ajax p_idx : ", data.p_idx);
-					var pIndex = '<input type="hidden" name="postIdx" value="'+data.p_idx+'">';
-					$('.postInfo').append(pIndex);
+					var pInfo = '<input type="hidden" name="postIdx" value="'+data.p_idx+'">';
+					   pInfo += '<input type="hidden" name="postIdx" value="'+data.p_thumbnail+'">';
+					$('.postInfo').append(pInfo);
 					// 날짜
 					var date = data.p_date-540*60*1000;
 					date = new Date(date).toLocaleDateString();
@@ -276,6 +277,7 @@ body {
 						   prvImgHtml += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" style="width:160px; height:160px;" id="post-images" alt="postImages"></a>';
 						
 						   oldImage_list.push(item.f_name);
+						   oldImg_original.push(item.f_name);
 						   
 						   $('.oldPrv').append(prvImgHtml);
 						   /* console.log("예전 이미지 인덱스 : ", index); */
@@ -368,7 +370,7 @@ body {
 			}
 			
 			
-		
+		var oldImg_original = [];
 		var oldImage_list = [];
 		var deleteImage_list = [];
         var image_list = []; // 새롭게 추가,삭제한 파일들의 배열
@@ -440,6 +442,12 @@ body {
 	    		}
 	    	}
 	    	
+	    	// 기존 이미지 원본 리스트 저장
+	    	for(var i=0; i<oldImg_original.length; i++){
+	    		formData.append("oldOriginalImg", oldImg_original[i])
+    			console.log("기존 원본 이미지 : ", oldImg_original[i]);
+	    	}
+	    	
 	    	// 폼 데이터 확인
 	    	for (var key of formData.keys()) {
 	    		console.log("키 : ",key);
@@ -457,8 +465,8 @@ body {
 	    		contentType: false,
 	    		success : function(data){
 	    					
-	    		console.log("ajax 데이터 : ",data);								/* test 계정 아이디 */
-	    		window.location.href="http://localhost:8080/post/main/jhS2"; 
+	    		console.log("ajax 데이터 : ",data);			/* test 계정 아이디 */
+	    		/* window.location.href="http://localhost:8080/post/main/jhS2";  */
 	    					
 	    		},error: function(e){
 	    		console.log("ajax전송에러");	
