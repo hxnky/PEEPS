@@ -114,7 +114,7 @@ public class PostUploadService {
 				}
 			} // foreach end
 			
-			// 게시글 썸네일 db update
+			// 게시글 썸네일 이름 update
 			dao.updatePostThumbnail(post.getP_idx(), post.getP_thumbnail());
 		} // 파일 저장 시작 if end
 
