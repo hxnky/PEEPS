@@ -232,13 +232,6 @@ body {
 		      
 		    }
 		    
-		    
-  		});
-     
-     
-    	
-    	
-    
 </script>
 
 
@@ -307,7 +300,7 @@ body {
 					readonly>
 					<br>
 					<div id="map"
-						style="width: 800px; height: 300px; margin-top: 10px; display: none"></div>
+						style="width: 800px; height: 300px; margin-top: 10px;"></div>
 				
 					<script
 						src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -331,7 +324,27 @@ body {
 							position : new daum.maps.LatLng(37.537187, 127.005476),
 							map : map
 						});
-				
+						
+						/* 게시글에 저장된 위치를 지도로 표시 */
+						// 주소로 좌표를 검색합니다
+						geocoder.addressSearch('${editView.post.p_loc}', function(result, status) {
+
+						    // 정상적으로 검색이 완료됐으면 
+						     if (status === kakao.maps.services.Status.OK) {
+
+						        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+						        // 결과값으로 받은 위치를 마커로 표시합니다
+						        var marker = new kakao.maps.Marker({
+						            map: map,
+						            position: coords
+						        });
+
+						        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+						        map.setCenter(coords);
+						    } 
+						});    
+						
 						function sample5_execDaumPostcode() {
 							new daum.Postcode({
 								oncomplete : function(data) {
