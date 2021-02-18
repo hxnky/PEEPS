@@ -215,7 +215,7 @@ body {
 		var postLoc = "";
 		$(document).ready(function() {
 			
-			// 회원idx 받기
+			// 뷰컨트롤러 통해서 게시물 idx 받기
 			function getParameterByName(name) {
 				name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 				var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
@@ -233,7 +233,7 @@ body {
 					
 					// 게시글 인덱스
 					console.log("ajax p_idx : ", data.p_idx);
-					var pIndex = '<input type="hidden" name="pidx" value="'+data.p_idx+'">';
+					var pIndex = '<input type="hidden" name="postIdx" value="'+data.p_idx+'">';
 					$('.postInfo').append(pIndex);
 					// 날짜
 					var date = data.p_date-540*60*1000;
