@@ -27,6 +27,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from file
 	where post_idx=#{param}
 	</select>
+	
+	<!-- 수정하면서 삭제한 게시글의 기존 이미지 삭제  -->
+	<delete id="deleteBeforeImage">
+		delete from file where f_name=#{deleteImage}
+	</delete>
 
 
 </mapper>
