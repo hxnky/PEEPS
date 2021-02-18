@@ -36,8 +36,6 @@ public class PostController {
 	@Autowired
 	private PostUploadService uploadService;
 	@Autowired
-	private PostReadService readService;
-	@Autowired
 	private PostDeleteService deleteService;
 	@Autowired
 	private PostEditService editService;

@@ -29,6 +29,13 @@ public class MainViewController {
 		return "post/postDetailView";
 	}
 	
+	// 게시글 수정 폼
+	public String goEditForm(
+			@RequestParam("idx") int postIdx
+			) {
+		return "post/postEditForm";
+	}
+	
 
 
 }
