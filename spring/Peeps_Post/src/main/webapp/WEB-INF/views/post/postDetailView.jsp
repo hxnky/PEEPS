@@ -193,10 +193,26 @@ a:hover {
 	text-align: center;
 	margin: 20px 0;
 	background-color: #ccc;
+	width: 800px;
+	min-height: 800px;
+	position: relative;
+	
 }
 
 .oneImg>img {
-	height: 800px;
+	/* height: 800px; */
+	/* min-width: 800px; */
+	position: absolute;
+	max-height: 100%;
+	max-width: 100%;
+	/* width: auto; */
+	min-width: 800px;
+	height: auto;
+	margin:auto;
+    top:0; 
+    bottom:0; 
+    left:0; 
+    right:0;
 }
 
 body {
