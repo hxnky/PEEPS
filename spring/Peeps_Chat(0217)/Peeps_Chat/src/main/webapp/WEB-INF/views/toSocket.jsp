@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <style>
 #alarm_mask {
@@ -33,6 +34,14 @@
 	webkitTransform: translate(-50%, -50%);
 }
 </style>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script
+   src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script
+   src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+</head>
+
 <body>
 </body>
 
@@ -83,7 +92,7 @@
 			}
 	}) */
 	
-	   sock = new SockJS("<c:url value="/chat"/>");
+	   sock = new SockJS("<c:url value="/alarm"/>");
 
 	   sock.onopen = onOpen;
 	   sock.onmessage = onMessage;
