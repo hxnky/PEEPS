@@ -87,10 +87,10 @@ public class PostController {
 			HttpServletRequest request,
 			Model model
 			) {
+		
 		return editService.editPost(editRequest, request, model);
 	}
 	
-
 	// 게시글 내용 등록 처리
 //	@RequestMapping(value = "/write", method = RequestMethod.POST)
 //	public String postWritePOST(
