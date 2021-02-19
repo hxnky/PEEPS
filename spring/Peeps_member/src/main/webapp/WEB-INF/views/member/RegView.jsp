@@ -47,8 +47,9 @@
 		style="background-color: #fcf9f6">
 		<div class="logo-container">
 			<!-- 로고 넣기 -->
-			<img id="logo"
+			<a href="<c:url value = "/" />"><img id="logo"
 				src="${pageContext.request.contextPath}/resources/images/plus.png">
+			</a>
 		</div>
 
 		<!--   Big container   -->

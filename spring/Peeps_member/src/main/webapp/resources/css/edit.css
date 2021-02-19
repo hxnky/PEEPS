@@ -1,0 +1,101 @@
+/*공통인부분*/
+body {
+	background-color: #fcf9f6;
+}
+
+#total_wrap {
+	margin: 100px auto;
+	height: 800px;
+	width: 1500px;
+}
+
+#edit_menu {
+	margin-top: 100px;
+	height: 600px;
+	width: 490px;
+	float: left;
+	text-align: center;
+	border-right: solid 0.2px #CCC;
+}
+
+/*공통 끝*/
+#edit_table {
+	margin: 50px;
+	height: 600px;
+	width: 800px;
+	float: right;
+}
+
+#table_right {
+	font-weight: bold;
+}
+
+#table_right>input, #edit_bio {
+	width: 300px;
+	margin: 10px auto;
+}
+
+#choose {
+	display: none;
+}
+
+#choose_btn {
+	background-color: #fcf9f6;
+	border: 0;
+	outline: 0;
+	font-size: 20px;
+	margin-left: 13px;
+	font-weight: bold;
+}
+
+#choose_btn:hover {
+	cursor: pointer;
+}
+
+#profile {
+	width: 200px;
+	height: 200px;
+	border-radius: 100%;
+	text-align: center;
+}
+
+#edit_text {
+	border: solid 0.2px #CCC;
+	border-radius: 5%;
+	height: 30px;
+	width: 300px;
+	font-size: 15px;
+}
+
+#edit_bio {
+	border: solid 0.2px #CCC;
+	border-radius: 5%;
+	height: 50px;
+	width: 300px;
+	font-size: 15px;
+}
+
+#change {
+	margin-left: 420px;
+	width: 80px;
+	height: 30px;
+	font-size: 15px;
+}
+
+
+#menu_btn {
+	margin-top: 80px;
+}
+
+h3 {
+	display: inline;
+}
+
+#menu_btn>button {
+	background-color: #fcf9f6;
+	border: none;
+	font-size: 35px;
+	font-weight: bold;
+	width: 300px;
+	margin: 50px auto;
+}

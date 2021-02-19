@@ -28,7 +28,7 @@
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
 		p:defaultEncoding="utf-8"
-		p:maxUploadSize="10000000" />
+		p:maxUploadSize="10000000" /> <!-- 10mb -->
 		
 	<!-- @Transactional 애노테이션 활성화 설정 -->
 	<!-- <tx:annotation-driven /> -->

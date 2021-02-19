@@ -29,8 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="selectGbookList" resultMap="guestbookListResult">
-		select * from guestbook
-		limit #{param1},#{param2};
+		select * from guestbook order by gdate desc limit #{param1},#{param2};
 	</select>
 	
 	<!-- 방명록 삭제 -->

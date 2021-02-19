@@ -2,6 +2,7 @@ package com.gnjk.peeps.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,10 @@ public class LoginService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public boolean login(HttpServletRequest request, HttpServletResponse response) {
+	public boolean login(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String chk = request.getParameter("chk");
 
 		dao = template.getMapper(PeepsDao.class);
 
@@ -30,16 +30,32 @@ public class LoginService {
 
 		Peeps peeps = dao.selectLogin(email, password);
 
+		System.out.println("로그인 : " + peeps);
+
+		if (peeps == null) {
+			System.out.println("정보가 없습니다.");
+			session.setAttribute("l_result", 0);
+		}
+
 		if (peeps != null) {
 			if (peeps.getVerify() == 'Y') {
 				request.getSession().setAttribute("loginInfo", peeps.toLoginInfo());
 				loginCheck = true;
-			} else {
+				session.setAttribute("l_result", 2);
+			} else if(peeps.getVerify() == 'N') {
+				System.out.println("미인증계정");
 				loginCheck = true;
-				request.setAttribute("msg", "인증되지 않은 계정입니다. 이메일을 확인해주세요!");
+				session.setAttribute("l_result", 1);
+			} else {
+				System.out.println("탈퇴 계정");
+				loginCheck = true;
+				session.setAttribute("l_result", 3);
 			}
 
 		}
+
+		session.setAttribute("peeps", peeps);
+
 		return loginCheck;
 	}
 }

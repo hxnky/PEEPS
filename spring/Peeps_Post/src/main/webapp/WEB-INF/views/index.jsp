@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이 페이지</title>
 </head>
 <body>
 
-<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+<%@ include file="/WEB-INF/views/include/indexnav.jsp"%>
 
-<h1>게시글 인덱스 페이지</h1>
+<h1>마이 페이지</h1>
 
 
 

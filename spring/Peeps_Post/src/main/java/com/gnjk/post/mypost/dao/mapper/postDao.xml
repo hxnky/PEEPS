@@ -6,33 +6,145 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.gnjk.post.mypost.dao.PostDao">
 
 	<!-- @@test 게시글 조회 -->
-	<select id=""
-		parameterType="com.gnjk.post.mypost.domain.Post"
-		resultType="com.gnjk.post.mypost.domain.Post"
-	>
-	
-	select * from post
-	
-	</select>
-	
+	<!-- <select id="" parameterType="com.gnjk.post.mypost.domain.Post" resultType="com.gnjk.post.mypost.domain.Post"> 
+		select * from post </select> -->
+
 	<!-- 게시글 등록 -->
 	<insert id="insertPost"
 		parameterType="com.gnjk.post.mypost.domain.Post"
-		useGeneratedKeys="true"
-		keyProperty="p_idx"
-		>
-		
+		useGeneratedKeys="true" keyProperty="p_idx">
+
 		INSERT INTO post
-		(member_idx, p_title, p_content)
-		VALUES 
-		(#{member_idx},#{p_title},#{p_content})
-		
+		(member_idx,
+		p_title, p_content, p_loc, p_thumbnail)
+		VALUES
+		(#{member_idx},#{p_title},#{p_content},#{p_loc},#{p_thumbnail})
+
 	</insert>
 
+	<!-- 게시글 파일 등록 -->
+	<insert id="insertFiles"
+		parameterType="com.gnjk.post.mypost.domain.PostFile"
+		useGeneratedKeys="true" keyProperty="f_idx">
 
+		INSERT INTO file
+		(f_idx, f_name, f_path, f_type, f_size, post_idx)
+		VALUES
+		<!-- <foreach collection="list" item="item" separator=","> -->
+		(#{f_idx},#{f_name},#{f_path},#{f_type},#{f_size},#{post_idx})
+		<!-- </foreach> -->
 
+	</insert>
 
+	<!-- 게시글 썸네일 update -->
+	<update id="updatePostThumbnail">
+		update post
+		set p_thumbnail=#{param2}
+		where
+		p_idx=#{param1}
+	</update>
 
+	<!-- 게시글의 총 수 -->
+	<select id="selectTotalPostCount" resultType="int">
+		select count(*)
+		from post
+		where member_idx=#{param}
+	</select>
 
+	<!-- 게시글 리스트 -->
+	<select id="selectPostList" parameterType="list"
+		resultType="com.gnjk.post.mypost.domain.Post">
+		select * from post
+		where member_idx=#{param1}
+	</select>
 
+	<!-- 게시글 조회 -->
+	<select id="selectPost"
+		resultType="com.gnjk.post.mypost.domain.Post">
+		select * from post
+		where p_idx=#{param}
+
+	</select>
+
+	<!-- 게시글 파일 조회 -->
+	<select id="selectPostFileList" parameterType="list"
+		resultType="com.gnjk.post.mypost.domain.PostFile">
+		select * from file
+		where post_idx=#{param}
+	</select>
+
+	<!-- 게시글 삭제 -->
+	<delete id="deletePostByIdx">
+		delete from post where p_idx=#{pidx}
+	</delete>
+
+	<!-- 21.02.17 댓글 쿼리 추가 한경 -->
+	<!-- 댓글 등록 -->
+	<insert id="insertCmt"
+		parameterType="com.gnjk.post.mypost.domain.Comment"
+		useGeneratedKeys="true" keyProperty="cmt_idx">
+
+		INSERT INTO comment
+		(post_idx,
+		member_idx, cmt_content)
+		VALUES
+		(#{post_idx}, #{member_idx},
+		#{cmt_content})
+
+	</insert>
+
+	<!-- 댓글 조회 -->
+	<select id="selectCmtList" parameterType="list"
+		resultType="com.gnjk.post.mypost.domain.Comment">
+		select * from comment where post_idx=#{post_idx}
+	</select>
+
+	<!-- 댓글 수정 -->
+	<update id="updateCmt">
+		update comment set cmt_content=#{cmt_content} where
+		cmt_idx=#{cmt_idx}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="deleteCmt">
+		delete from comment where cmt_idx=#{cmt_idx}
+	</delete>
+
+	<!-- 댓글 수 조회 -->
+	<select id="CountCmt" resultType="int">
+		select count(*) from comment
+		where post_idx=#{post_idx}
+	</select>
+
+	<!-- 대댓글 조회 -->
+	<select id="selectReList" parameterType="list"
+		resultType="com.gnjk.post.mypost.domain.Reply">
+		select * from reply where comment_idx=#{cmt_idx}
+	</select>
+	
+	<!-- 대댓글 작성 -->
+	<insert id="insertReply"
+		parameterType="com.gnjk.post.mypost.domain.Reply"
+		useGeneratedKeys="true" keyProperty="re_idx">
+
+		INSERT INTO reply
+		(comment_idx,
+		member_idx, re_content)
+		VALUES
+		(#{comment_idx}, #{member_idx},
+		#{re_content})
+
+	</insert>
+	
+	<!-- 대댓글 수정 -->
+	<update id="updateReply">
+		update reply set re_content=#{re_content} where
+		re_idx=#{re_idx}
+	</update>
+	
+	<!-- 대댓글 삭제 -->
+	<delete id="deleteReply">
+		delete from reply where re_idx=#{re_idx}
+	</delete>
+	
 </mapper>

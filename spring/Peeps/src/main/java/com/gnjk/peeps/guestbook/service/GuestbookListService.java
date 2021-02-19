@@ -30,6 +30,7 @@ public class GuestbookListService {
 			int cntPerPage = 10; // 한 페이지에 노출할 게시물의 개수
 			int startRow = (pageNumber - 1) * cntPerPage;
 			int endRow = startRow + cntPerPage - 1;
+			
 
 			List<Guestbook> gbList = dao.selectGbookList(startRow, cntPerPage); // 범위에 대한 리스트
 			System.out.println(gbList);

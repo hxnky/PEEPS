@@ -19,27 +19,31 @@ public class KakaoConroller {
 	private KakaoService kakaoService;
 
 	@RequestMapping(value = "/login")
-	public String kakaoLogin(@RequestParam("code") String code, Model model) {
+	public String kakaoLogin(@RequestParam("code") String code, Model model, HttpSession session) {
 
+		int result = 2;
+		
 		String access_Token = kakaoService.getAccessToken(code);
-		HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token);
+		HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_Token, session);
 
 		System.out.println("유저 정보 : " + userInfo);
 
+		model.addAttribute("loginType", "kakao");
 		model.addAllAttributes(userInfo);
-		model.addAttribute("token", access_Token);
-
-		return "member/TimeLine";
+		session.setAttribute("userInfo",userInfo);
+		session.setAttribute("token", access_Token);
+		
+		model.addAttribute("result", result);
+		
+		return "member/SocialRegForm";
 
 	}
 
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {
 
-		kakaoService.kakaoLogout((String) session.getAttribute("access_Token"));
-
-		session.removeAttribute("access_Token");
-		session.removeAttribute("userId");
+		System.out.println("로그아웃되었습니다.");
+		session.invalidate();
 
 		return "redirect:/";
 	}

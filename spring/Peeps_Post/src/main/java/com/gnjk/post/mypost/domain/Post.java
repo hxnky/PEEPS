@@ -67,8 +67,6 @@ public class Post {
 		return new Date(this.p_date.getTime());
 	}
 	
-	// 난수 발생 for 파일 처리
-	
 	// LoginInfo
 	
 	@Override

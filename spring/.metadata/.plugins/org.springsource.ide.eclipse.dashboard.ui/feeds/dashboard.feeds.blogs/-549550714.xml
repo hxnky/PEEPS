@@ -5,7 +5,47 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2021-02-18T16:55:00Z</updated>
+  <updated>2021-02-19T02:29:00Z</updated>
+  <entry>
+    <title>Spring Boot 2.5.0-M2 available now</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/02/18/spring-boot-2-5-0-m2-available-now" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Phil Webb</name>
+    </author>
+    <id>tag:spring.io,2021-02-19:4370</id>
+    <updated>2021-02-19T02:29:00Z</updated>
+    <content type="html">&lt;p&gt;Continuing our monthly milestone release cadence, I am pleased to announce that the second milestone of Spring Boot 2.5 has been released and is available from our &lt;a href="https://repo.spring.io/milestone/"&gt;milestone repository&lt;/a&gt;. This release &lt;a href="https://github.com/spring-projects/spring-boot/releases/tag/v2.5.0-M2"&gt;adds a number of new features and bug fixes&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Highlights of this milestone include:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Layered WARs support for use with Docker&lt;/li&gt;
+  &lt;li&gt;Custom Buildpack Builder Support&lt;/li&gt;
+  &lt;li&gt;Jetty 10 Support&lt;/li&gt;
+  &lt;li&gt;Early Support for Gradle 7&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We&amp;rsquo;ve also made some significant behind-the-scenes changes to do with the way that &lt;code&gt;schema.sql&lt;/code&gt; and &lt;code&gt;data.sql&lt;/code&gt; files are processed. If you use those features, please try the milestone and let us know if you find any issues.&lt;/p&gt;
+&lt;p&gt;For a complete list of changes and upgrade instructions, please see the &lt;a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.5.0-M2-Release-Notes"&gt;Spring Boot 2.5-M2 Release Notes&lt;/a&gt; on the wiki and the &lt;a href="https://docs.spring.io/spring-boot/docs/2.5.0-M2/reference/html/"&gt;updated reference documentation&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you want to get started with 2.5 and try out the new features, you can bootstrap a new project on &lt;a href="https://start.spring.io/#!type=maven-project&amp;language=java&amp;platformVersion=2.5.0.M2&amp;packaging=jar&amp;jvmVersion=11&amp;groupId=com.example&amp;artifactId=demo&amp;name=demo&amp;description=Demo%20project%20for%20Spring%20Boot&amp;packageName=com.example.demo"&gt;start.spring.io&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://spring.io/projects/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-boot/docs/2.5.0-M2/reference/html/"&gt;Documentation&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-boot"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;&lt;/p&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
+  <entry>
+    <title>A Bootiful Podcast: Gitlab's Reshmi Krishna on the developer lifecycle</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/02/18/a-bootiful-podcast-gitlab-s-reshmi-krishna-on-the-developer-lifecycle" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2021-02-19:4369</id>
+    <updated>2021-02-19T01:46:00Z</updated>
+    <content type="html">&lt;p&gt;Hi, Spring fans! In this episode, &lt;a href="http://twitter.com/starbuxman"&gt;Josh Long (@starbuxman)&lt;/a&gt; talks to &lt;a href="http://twitter.com/reshmi9k"&gt;Gitlab&amp;rsquo;s Reshmi Krishna (@reshmi9k)&lt;/a&gt; about the developer lifecycle, cloud-native computing, working at Gitlab and Pivotal, and more.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://about.gitlab.com/handbook/"&gt;the Gitlab handbook&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://twitter.com/gitlab"&gt;Gitlab&amp;rsquo;s Twitter&lt;/a&gt; account&lt;/li&gt;
+&lt;/ul&gt;
+&lt;iframe title="Gitlab's Reshmi Krishna on the developer lifecycle" height="122" width="100%" style="border: none;" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/media/player/bhsrm-fb2728?from=pb6admin&amp;download=1&amp;version=1&amp;auto=0&amp;share=1&amp;download=1&amp;rtl=0&amp;fonts=Helvetica&amp;skin=1&amp;pfauth=&amp;btn-skin=107"&gt;&lt;/iframe&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Boot 2.4.3 is now available</title>
     <link rel="alternate" href="https://spring.io/blog/2021/02/18/spring-boot-2-4-3-is-now-available" />
@@ -1174,105 +1214,6 @@ So, it is highly recommended to bump your projects to this latest versions.&lt;/
 &lt;div class="paragraph"&gt;
 &lt;p&gt;&lt;a href="https://github.com/spring-cloud/spring-cloud-stream-binder-aws-kinesis"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-cloud/spring-cloud-stream-binder-aws-kinesis/blob/master/spring-cloud-stream-binder-kinesis-docs/src/main/asciidoc/contributing.adoc"&gt;Contributing&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-cloud-stream"&gt;Help&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-cloud-stream"&gt;Chat&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>YMNNALFT: A lightweight SQL data mapper with the JdbcTemplate</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/02/01/ymnnalft-a-lightweight-sql-data-mapper-with-the-jdbctemplate" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2020-12-30:4324</id>
-    <updated>2021-02-01T11:00:00Z</updated>
-    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;You May Not Need Another Library For That&lt;/em&gt; (YMNNALFT)! I&amp;rsquo;ve spent a lot of time since 2016 illuminating (or trying to, anyway!) some of the more enormous opportunities in the Spring ecosystem in &lt;a href="http://bit.ly/spring-tips-playlist"&gt;my Spring Tips videos&lt;/a&gt;. Today, however, I come to you in a different spirit, wanting to focus on the little, sometimes hidden, gems that do fantastic things and that might spare you an additional third-party dependency and its implied complexity. &lt;/p&gt;
-&lt;p&gt;I think the first use I had for Spring, more than 15 years ago, was the &lt;code&gt;JdbcTemplate&lt;/code&gt;, which eliminated the eye-watering and verbose work of using JDBC directly. As you might know, JDBC stands for &amp;ldquo;Just Don&amp;rsquo;t Break, Compiler!&amp;rdquo; and was designed to test the JVM limit of 65535 bytes of bytecode per method by providing an API that consistently requires more lines of code than that to do even basic things. &lt;/p&gt;
-&lt;p&gt;Thus just in. I&amp;rsquo;m being told that JDBC is, in fact, the Java Database Connectivity API. Moving on&amp;hellip; &lt;/p&gt;
-&lt;p&gt;I couldn&amp;rsquo;t use Spring as a framework in the project at the time, but I &lt;em&gt;could&lt;/em&gt; bring in Spring as a sort of library. I brought it in initially to get access to the &lt;code&gt;JdbcTemplate&lt;/code&gt;, and the concept of the various &lt;code&gt;*Template&lt;/code&gt; objects as a whole. &lt;/p&gt;
-&lt;p&gt;A template object is an excellent example of the inversion-of-control principle. You let the template object do 90% of the work and provide it with a callback to be invoked when the template needs your input on something. Templates invert the application flow; they do the tedious stuff and then involve you only when it&amp;rsquo;s time to do the thing you want to do. They&amp;rsquo;re kind of like &lt;em&gt;mini-frameworks&lt;/em&gt;. &lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;JdbcTemplate&lt;/code&gt; is one of the best-known templates in the Java ecosystem, and for a good reason. JDBC is a low-level API in the Java ecosystem for working with SQL databases. It&amp;rsquo;s powerful, and it has dominated for &lt;em&gt;decades&lt;/em&gt;. But it is, at the end of the day, &lt;em&gt;very&lt;/em&gt; low level. You&amp;rsquo;re not going to get very far writing this code yourself. &lt;/p&gt;
-&lt;p&gt;The alternatives were brittle (at the time) technologies like Hibernate, Apache OJB, any of the various, mildly incompatible JDO implementations, iBatis, or - &lt;em&gt;gasp!&lt;/em&gt; - EJB 1.x or 2.x persistent entity beans. Most of these were way too top-heavy for the work I was trying to do. I loved iBatis (and continue to love its &lt;a href="http://mybatis.org/spring-boot-starter/mybatis-spring-boot-autoconfigure/"&gt;successor MyBatis&lt;/a&gt;), but I found I could get far with just the &lt;code&gt;JdbcTemplate&lt;/code&gt;. &lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;JdbcTemplate&lt;/code&gt; is part of a rich class arrangement and various abstractions for working with SQL databases. Nowadays, there&amp;rsquo;s even a non-blocking, reactive alternative to JDBC available to the Spring developer: &lt;a href="https://R2DBC.io"&gt;R2DBC&lt;/a&gt;. Most data access logic today uses JDBC (indirectly, if nothing else), alas, so let&amp;rsquo;s look at an example of that. &lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;
-  &lt;p&gt;JDBC on &lt;a href="http://start.spring.io"&gt;the Spring Initializr&lt;/a&gt; - &lt;code&gt;org.springframework.boot&lt;/code&gt; : &lt;code&gt;spring-boot-starter-jdbc&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;
-  &lt;p&gt;H2 on &lt;a href="http://start.spring.io"&gt;the Spring Initializr&lt;/a&gt; - &lt;code&gt;com.h2database&lt;/code&gt; : &lt;code&gt;h2&lt;/code&gt; &lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Here&amp;rsquo;s the code:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;package bootiful.data;&#xD;
-&#xD;
-import lombok.SneakyThrows;&#xD;
-import org.springframework.boot.SpringApplication;&#xD;
-import org.springframework.boot.autoconfigure.SpringBootApplication;&#xD;
-import org.springframework.boot.context.event.ApplicationReadyEvent;&#xD;
-import org.springframework.context.ApplicationListener;&#xD;
-import org.springframework.context.annotation.Bean;&#xD;
-import org.springframework.core.io.ClassPathResource;&#xD;
-import org.springframework.core.io.Resource;&#xD;
-import org.springframework.jdbc.core.JdbcTemplate;&#xD;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;&#xD;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;&#xD;
-import org.springframework.util.FileCopyUtils;&#xD;
-&#xD;
-import javax.sql.DataSource;&#xD;
-import java.io.InputStreamReader;&#xD;
-import java.io.Reader;&#xD;
-import java.util.List;&#xD;
-&#xD;
-@SpringBootApplication&#xD;
-public class BootifulApplication {&#xD;
-&#xD;
-	public static void main(String[] args) {&#xD;
-		SpringApplication.run(BootifulApplication.class, args);&#xD;
-	}&#xD;
-&#xD;
-	@Bean&#xD;
-	DataSource dataSource() {&#xD;
-		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build();&#xD;
-	}&#xD;
-&#xD;
-	@SneakyThrows&#xD;
-	private String loadSql() {&#xD;
-		Resource resource = new ClassPathResource(&amp;quot;/initialization.sql&amp;quot;);&#xD;
-		try (Reader r = new InputStreamReader(resource.getInputStream())) {&#xD;
-			return FileCopyUtils.copyToString(r);&#xD;
-		}&#xD;
-	}&#xD;
-&#xD;
-	@Bean&#xD;
-	ApplicationListener&amp;lt;ApplicationReadyEvent&amp;gt; ready(DataSource dataSource) {&#xD;
-		return event -&amp;gt; {&#xD;
-			String sql = loadSql();&#xD;
-			String[] names = new String[] { &amp;quot;Spencer&amp;quot;, &amp;quot;Violetta&amp;quot;, &amp;quot;Madhura&amp;quot;, &amp;quot;Yuxin&amp;quot;, &amp;quot;St?phane&amp;quot;, &amp;quot;Dr. Syer&amp;quot; };&#xD;
-			JdbcTemplate template = new JdbcTemplate(dataSource);&#xD;
-			template.execute(sql);&#xD;
-			for (var name : names) {&#xD;
-				template.update(&amp;quot;insert into CUSTOMER(name) values(?)&amp;quot;, name);&#xD;
-			}&#xD;
-			List&amp;lt;Customer&amp;gt; results = template.query(&amp;quot;select * from CUSTOMER&amp;quot;,&#xD;
-					(resultSet, i) -&amp;gt; new Customer(resultSet.getInt(&amp;quot;id&amp;quot;), resultSet.getString(&amp;quot;name&amp;quot;)));&#xD;
-			results.forEach(System.out::println);&#xD;
-		};&#xD;
-	}&#xD;
-&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you don&amp;rsquo;t mind rolling up your sleeves and slinging a little SQL (and why would you? SQL is &lt;em&gt;awesome&lt;/em&gt;!), then you&amp;rsquo;ll feel right at home using the &lt;code&gt;JdbcTemplate&lt;/code&gt; and the various commands classes in the JDBC module. If not, Spring continues to meet you where you today with rich integrations for JDBC-centric data access technologies like JOOQ, Hibernate, JPA, MyBatis, Spring Data JPA, Spring Data JDBC, and a slew of other options. &lt;/p&gt;
-&lt;p&gt;Did you like this gem at a glance approach? Did you learn anything? As always, I&amp;rsquo;m keen on hearing from you, so &lt;a href="http://twitter.com/starbuxman"&gt;please sound off on Twitter (@starbuxman) &lt;/a&gt;! I&amp;rsquo;ll be back with another installment of &lt;em&gt;YMNNALFT&lt;/em&gt;, so be sure not to miss that. &lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>A Bootiful Podcast: Hypertrace Java Agent creator Pavol Loffay</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/01/28/a-bootiful-podcast-hypertrace-java-agent-creator-pavol-loffay" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2021-01-29:4349</id>
-    <updated>2021-01-29T01:13:00Z</updated>
-    <content type="html">&lt;p&gt;Hi, Spring fans! In this episode &lt;a href="http://twitter.com/starbuxman"&gt;Josh Long (@starbuxman)&lt;/a&gt; talks to Hypertrace Java Agent creator &lt;a href="http://twitter.com/ploffay"&gt;Pavol Loffay (@ploffay)&lt;/a&gt; about telemetry, observability, and more. &lt;/p&gt;
-&lt;iframe title="Hypertrace Java Agent creator Pavol Loffay" height="122" width="100%" style="border: none;" scrolling="no" data-name="pb-iframe-player" src="https://www.podbean.com/media/player/vm8cv-f8f4ea?from=pb6admin&amp;download=1&amp;version=1&amp;auto=0&amp;share=1&amp;download=1&amp;rtl=0&amp;fonts=Helvetica&amp;skin=1&amp;pfauth=&amp;btn-skin=107"&gt;&lt;/iframe&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>

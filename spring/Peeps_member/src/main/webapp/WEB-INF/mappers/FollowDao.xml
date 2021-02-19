@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gnjk.peeps.dao.FollowDao">
+
+	<!-- 팔로우 상태인지 확인 -->
+	<select id="CheckFollow" resultType="int">
+		select count(*) from follow
+		where following_id=#{follow_idx} and follower_id = #{m_idx}
+	</select>
+
+	<!-- 팔로우 -->
+	<insert id="insertFollow"
+		parameterType="com.gnjk.peeps.domain.Follow">
+		insert into follow (following_id, follower_id) values
+		(#{y_idx}, #{m_idx})
+	</insert>
+
+	<!-- 언팔로우 -->
+	<delete id="deleteFollow">
+		delete from follow where following_id=#{y_idx} and
+		follower_id= #{m_idx}
+	</delete>
+
+	<!-- 팔로워 수 체크 -->
+	<select id="FollowerCnt" resultType="int">
+		select count(*) from follow
+		where following_id =#{m_idx}
+	</select>
+
+	<!-- 팔로잉 수 체크 -->
+	<select id="FollowingCnt" resultType="int">
+		select count(following_id)
+		from follow where follower_id =#{m_idx}
+	</select>
+
+	<!-- 팔로워 인덱스 가져오기 -->
+	<select id="followerList" resultType="int">
+		select follower_id from
+		follow
+		where following_id =#{m_idx}
+	</select>
+
+	<!-- 팔로잉 인덱스 가져오기 -->
+	<select id="followingList" resultType="int">
+		select following_id
+		from
+		follow where follower_id =#{m_idx}
+	</select>
+	
+	<!-- 회원 탈퇴 시 팔로우 목록 삭제 -->
+	<delete id="deleteFollowList">
+		delete from follow where follower_id =#{m_idx} or following_id = #{m_idx}
+	</delete>
+
+</mapper>

@@ -16,6 +16,13 @@
 <style>
 .ginsert_wrap {
 	background-color: #eef0ed;
+	height: 270px;
+	width: 850px;
+	margin: 0px auto 10px auto;
+}
+
+.ginsert_wrap2 {
+	background-color: #eef0ed;
 	height: auto;
 	width: 800px;
 	margin: 0px auto 10px auto;
@@ -86,6 +93,10 @@ table.upmsg_table {
 .paging {
 	text-align: center;
 }
+.gbutton{
+float: right;
+margin: 10px;
+}
 </style>
 
 
@@ -99,17 +110,42 @@ table.upmsg_table {
 	</div>
 	<!--=====================context======================-->
 	<div class="changing">
+	<form method="POST" id="insertGForm" enctype="multipart/form-data">
+
+
+			<div class="ginsert_wrap">
+
+				<ul>
+
+					<li><img
+						src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"
+						class="gimg"></li>
+					<li><textarea rows="9" cols="80" id="gmessage" name="gmessage"></textarea><br>
+
+						<input type="file" id="gphoto" name="gphoto"></li>
+					<li><input type="submit" value="등록" id="gbnt"></li>
+					
+				</ul>
+
+			</div>	`
+		</form>
+	
 
 	<c:forEach items="${listView.gbList}" var="guestbook">
-	<div class="ginsert_wrap">
+	<div class="ginsert_wrap2">
 	
 		<div class="upgbinfo">
 			<span class="upgphoto"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340" class="gimg"> </span> 
-			<span class="upgid"> <h4> ${guestbook.gwriter}  </h4></span> 
+			<span class="upgid"> <h4> ${guestbook.gwriter}  </h4></span>
 		    <span class="gdate"><fmt:formatDate value="${guestbook.gdate}"
 									pattern="yyyy.MM.dd." /></span>
+			
 		    
 		</div>
+		<div class="gbutton"> 
+	         <button type="button">삭제</button>
+	         <button type="button">수정</button>
+	         </div>
 
 		<div class="upmsg">
 		
@@ -151,7 +187,48 @@ table.upmsg_table {
 			</div> 
 
 <script >
+$(document).ready(function(){
+	
+	$('#gbnt').click(function() {
 
+		var photoFile =$('#gphoto');
+		
+		var file1 =photoFile[0].files[0];
+	
+		
+		//console.log(file1);
+		
+		var formData = new FormData();
+		formData.append("gmessage",$('#gmessage').val);
+		formData.append("gphoto",file1);
+		
+		//console.log(formData);
+		
+		$.ajax({
+			url : '/peeps/guestbook/',
+			type : 'post',
+			data : formData,
+			async : false,
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			cache : false ,
+			success : function(data){
+				console.log(data);
+				console.log("작성완료");
+				alert("방명록 작성 ");
+			}
+		});
+		
+		
+		
+		
+	
+	});
+	
+	
+	
+});
 function deleteMsg(gidx){
 
 	if (confirm('방명록을 삭제하시겠습니까?')) {

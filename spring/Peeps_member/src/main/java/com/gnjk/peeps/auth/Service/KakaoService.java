@@ -6,10 +6,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -17,8 +27,6 @@ import com.google.gson.JsonParser;
 
 @Service
 public class KakaoService {
-
-
 
 	public String getAccessToken(String authorize_code) {
 
@@ -83,11 +91,12 @@ public class KakaoService {
 
 	}
 
-	public HashMap<String, Object> getUserInfo(String access_Token) {
+	public HashMap<String, Object> getUserInfo(String access_Token, HttpSession session) {
 
 		// 요청하는 클라이언트마다 가진 정보가 다를 수 있기에 HashMap타입으로 선언
 		HashMap<String, Object> userInfo = new HashMap<>();
 		String reqURL = "https://kapi.kakao.com/v2/user/me";
+
 		try {
 			URL url = new URL(reqURL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -118,6 +127,11 @@ public class KakaoService {
 			String name = properties.getAsJsonObject().get("nickname").getAsString();
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
 			String m_photo = properties.getAsJsonObject().get("profile_image").getAsString();
+
+			session.setAttribute("email", email);
+			session.setAttribute("name", name);
+			session.setAttribute("m_photo", m_photo);
+			session.setAttribute("loginType", "kakao");
 
 			userInfo.put("name", name);
 			userInfo.put("email", email);
@@ -156,7 +170,5 @@ public class KakaoService {
 			e.printStackTrace();
 		}
 	}
-
-	
 
 }
