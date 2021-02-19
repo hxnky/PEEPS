@@ -356,20 +356,25 @@ a:hover {
 									</c:choose>
 							</a></td>
 							<td id="id"><a href="/peeps/mypage/${follower.m_idx}">${follower.id}</a></td>
-							<td>
-								<div id="fix" class="${follower.m_idx}">
-									<c:choose>
-										<c:when test="${follower.chk_result eq 1}">
-											<button class="f_btn" id="unfollow" type="submit"
-												onclick="unfollow(${follower.m_idx})">언팔로우</button>
-										</c:when>
-										<c:otherwise>
-											<button class="f_btn" id="follow" type="submit"
-												onclick="follow(${follower.m_idx})">팔로우</button>
-										</c:otherwise>
-									</c:choose>
-								</div>
-							</td>
+							<td><c:choose>
+									<c:when test="${peeps.m_idx eq follower.m_idx }">
+										<button id="edit">프로필 편집</button>
+									</c:when>
+									<c:otherwise>
+										<div id="fix" class="${follower.m_idx}">
+											<c:choose>
+												<c:when test="${follower.chk_result eq 1}">
+													<button class="f_btn" id="unfollow" type="submit"
+														onclick="unfollow(${follower.m_idx})">언팔로우</button>
+												</c:when>
+												<c:otherwise>
+													<button class="f_btn" id="follow" type="submit"
+														onclick="follow(${follower.m_idx})">팔로우</button>
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</c:otherwise>
+								</c:choose></td>
 						</tr>
 					</table>
 				</c:forEach>
@@ -401,21 +406,27 @@ a:hover {
 										</c:when>
 									</c:choose>
 							</a></td>
-							<td rowspan="2" id="id"><a href="/peeps/mypage/${following.m_idx}">${following.id}</a></td>
-							<td rowspan="2">
-								<div id="fix" class="${following.m_idx}">
-									<c:choose>
-										<c:when test="${following.chk_result eq 1}">
-											<button class="f_btn" id="unfollow" type="submit"
-												onclick="unfollow(${following.m_idx})">언팔로우</button>
-										</c:when>
-										<c:otherwise>
-											<button class="f_btn" id="follow" type="submit"
-												onclick="follow(${following.m_idx})">팔로우</button>
-										</c:otherwise>
-									</c:choose>
-								</div>
-							</td>
+							<td rowspan="2" id="id"><a
+								href="/peeps/mypage/${following.m_idx}">${following.id}</a></td>
+							<td rowspan="2"><c:choose>
+									<c:when test="${peeps.m_idx eq following.m_idx }">
+										<button id="edit">프로필 편집</button>
+									</c:when>
+									<c:otherwise>
+										<div id="fix" class="${following.m_idx}">
+											<c:choose>
+												<c:when test="${following.chk_result eq 1}">
+													<button class="f_btn" id="unfollow" type="submit"
+														onclick="unfollow(${following.m_idx})">언팔로우</button>
+												</c:when>
+												<c:otherwise>
+													<button class="f_btn" id="follow" type="submit"
+														onclick="follow(${following.m_idx})">팔로우</button>
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</c:otherwise>
+								</c:choose></td>
 						</tr>
 					</table>
 				</c:forEach>

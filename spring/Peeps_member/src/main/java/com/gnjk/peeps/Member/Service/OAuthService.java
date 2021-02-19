@@ -33,11 +33,11 @@ public class OAuthService {
 		return dao.selectLoginTypeByEmailCount(email);
 	}
 
-	public String checkPhoto(String m_photo) {
+	public String checkPhoto(String email) {
 
 		dao = template.getMapper(MemberDao.class);
 
-		return dao.selectM_photoByEmailCount(m_photo);
+		return dao.selectM_photoByEmailCount(email);
 	}
 
 	// 파일을 업로드, 데이터베이스 저장
@@ -80,6 +80,14 @@ public class OAuthService {
 		}
 		
 		return result;
+	}
+
+	// 소셜 회원 정보 세션에 저장
+	public Peeps selectSocialInfo(String email) {
+		
+		dao = template.getMapper(MemberDao.class);
+		
+		return dao.selectMemberByEmail(email);
 	}
 
 }

@@ -156,7 +156,6 @@ h4 {
 									success : function(data) {
 										if (data == 1) {
 											if (loginType == LoginType) {
-												
 												// 사진 정보 확인
 												$
 														.ajax({
@@ -164,53 +163,89 @@ h4 {
 																	+ email,
 															type : 'get',
 															async : false,
-															success : function(data) {
+															success : function(
+																	data) {
 
-																if(data == m_photo){
-																	location.href = "${pageContext.request.contextPath}/TimeLine?email="
-																		+ email;
-																console
-																		.log("타임라인 페이지");
-																alert(name
-																		+ "님! 로그인되었습니다.");
-																} else{
-																	console.log("사진 정보 업데이트 필요");
-																	
+																if (data == m_photo) {
+
 																	$
-																	.ajax({
-																		url : '${pageContext.request.contextPath}/user/photoUpdate',
-																		type : 'post',
-																		data : {
-																			"email" : "${peeps.email}",
-																			"m_photo" : "${peeps.m_photo}",
-																			"name": "${peeps.name}"
-																		},
-																		async : false,
-																		success : function(data) {
-																			if (data == 1) {
-																				location.href = "${pageContext.request.contextPath}/TimeLine?email="
-																						+ email;
-																				console
-																						.log("타임라인 페이지");
-																				alert(name
-																						+ "님! 로그인 되었습니다!");
-																			} else {
-																				console
-																						.log("DB 실패");
-																			}
+																			.ajax({
+																				url : '${pageContext.request.contextPath}/user/socialInfo',
+																				type : 'get',
+																				async : false,
+																				data : {
+																					"email" : email
+																				},
+																				success : function(
+																						data) {
+																					location.href = "${pageContext.request.contextPath}/TimeLine?email="
+																							+ email;
+																					console
+																							.log("타임라인 페이지");
+																					alert(name
+																							+ "님! 로그인되었습니다.");
+																				},
+																				error : function() {
+																					console
+																							.log("실패,,,,");
+																				}
+																			});
+																} else {
+																	console
+																			.log("사진 정보 업데이트 필요");
 
-																		},
-																		error : function(
-																				request,
-																				status, error) {
-																			console
-																					.log("통신 실패");
+																	$
+																			.ajax({
+																				url : '${pageContext.request.contextPath}/user/photoUpdate',
+																				type : 'post',
+																				data : {
+																					"email" : "${peeps.email}",
+																					"m_photo" : "${peeps.m_photo}",
+																					"name" : "${peeps.name}"
+																				},
+																				async : false,
+																				success : function(
+																						data) {
+																					if (data == 1) {
+																						$
+																								.ajax({
+																									url : '${pageContext.request.contextPath}/user/socialInfo',
+																									type : 'get',
+																									async : false,
+																									data : {
+																										"email" : email
+																									},
+																									success : function(
+																											data) {
+																										location.href = "${pageContext.request.contextPath}/TimeLine?email="
+																												+ email;
+																										console
+																												.log("타임라인 페이지");
+																										alert(name
+																												+ "님! 로그인되었습니다.");
+																									},
+																									error : function() {
+																										console
+																												.log("실패,,,,");
+																									}
+																								});
+																					} else {
+																						console
+																								.log("DB 실패");
+																					}
 
-																		}
-																	});
+																				},
+																				error : function(
+																						request,
+																						status,
+																						error) {
+																					console
+																							.log("통신 실패");
+
+																				}
+																			});
 																}
-																
-																
+
 															},
 															error : function() {
 																console
@@ -240,12 +275,29 @@ h4 {
 														async : false,
 														success : function(data) {
 															if (data == 1) {
-																location.href = "${pageContext.request.contextPath}/TimeLine?email="
-																		+ email;
-																console
-																		.log("타임라인 페이지");
-																alert(name
-																		+ "님! 환영합니다!! 아이디와 비밀번호를 설정에서 변경해주세요!");
+																$
+																		.ajax({
+																			url : '${pageContext.request.contextPath}/user/socialInfo',
+																			type : 'get',
+																			async : false,
+																			data : {
+																				"email" : email
+																			},
+																			success : function(
+																					data) {
+																				location.href = "${pageContext.request.contextPath}/TimeLine?email="
+																						+ email;
+																				console
+																						.log("타임라인 페이지");
+																				alert(name
+																						+ "님! 환영합니다!! 아이디와 비밀번호를 설정에서 변경해주세요!");
+																			},
+																			error : function() {
+																				console
+																						.log("실패,,,,");
+																			}
+																		});
+
 															} else {
 																console
 																		.log("DB 실패");

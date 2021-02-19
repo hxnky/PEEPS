@@ -39,8 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="com.gnjk.peeps.Member.domain.Peeps" useGeneratedKeys="true"
 		keyProperty="m_idx">
 		insert into member (email, id, password, m_photo, name,
-		loginType, verify) values (#{email},
-		#{id},#{password},#{m_photo},#{name}, #{loginType}, 'Y');
+		loginType, verify, code) values (#{email},
+		#{id},#{password},#{m_photo},#{name}, #{loginType}, 'Y', #{code});
 	</insert>
 
 

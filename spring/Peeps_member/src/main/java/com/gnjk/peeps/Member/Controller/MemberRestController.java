@@ -169,9 +169,9 @@ public class MemberRestController {
 	
 	// 소셜 사진 정보 확인
 	@GetMapping("/user/photoChk")
-	public String photoCheck(String m_photo) {
+	public String photoCheck(String email) {
 
-		return oauthService.checkPhoto(m_photo);
+		return oauthService.checkPhoto(email);
 	}
 
 	// 소셜 로그인 타입 체크
@@ -197,6 +197,15 @@ public class MemberRestController {
 		int result = oauthService.m_photoUpdate(email, m_photo, name);
 
 		return result;
+	}
+	
+	// 소셜 회원 정보
+	@GetMapping(value = "/user/socialInfo")
+	public Peeps SocialInfo(String email, HttpSession session) {
+
+		session.setAttribute("peeps", oauthService.selectSocialInfo(email));
+		
+		return oauthService.selectSocialInfo(email);
 	}
 
 }
