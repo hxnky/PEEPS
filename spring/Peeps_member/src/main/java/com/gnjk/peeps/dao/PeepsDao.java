@@ -60,7 +60,7 @@ public interface PeepsDao {
 	int searchMemberCnt(String keyword);
 
 	// 인덱스로 회원 정보 가져오기
-	Peeps selectMemberByIdx(int f_idx);
+	Peeps selectMemberByIdx(int m_idx);
 
 	// 회원 사진 정보 확인
 	String selectM_photoByEmailCount(String m_photo);

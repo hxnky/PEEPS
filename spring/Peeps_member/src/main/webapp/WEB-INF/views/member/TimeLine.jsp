@@ -65,6 +65,7 @@
 							</div>
 
 							<h1>타 임 라 인</h1>
+							${peeps }
 							<button id="edit_btn">프로필 편집</button>
 
 							<input type="button" value="로그아웃"

@@ -1,15 +1,10 @@
 package com.gnjk.peeps.Service;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gnjk.peeps.dao.PeepsDao;
-import com.gnjk.peeps.domain.EditRequest;
 
 @Service
 public class EditPwService {

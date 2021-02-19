@@ -22,21 +22,32 @@ public class MyPageService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public Peeps getPeeps(String email, HttpSession session) {
+	// idx 로 바꾸기
+	public Peeps getPeeps(int m_idx, HttpSession session) {
 
 		dao = template.getMapper(PeepsDao.class);
 
-		Peeps peeps = dao.selectMemberByEmail(email);
-		session.setAttribute("peeps", peeps);
-		session.setAttribute("m_idx", new Integer(peeps.getM_idx()));
-		session.setAttribute("email", peeps.getEmail());
-		session.setAttribute("id", peeps.getId());
-		session.setAttribute("loginType", peeps.getLoginType());
-		session.setAttribute("name", peeps.getName());
+		Peeps peeps = dao.selectMemberByIdx(m_idx);
+		
+		session.setAttribute("page_peeps", peeps);
 
 		return peeps;
 	}
 
+	public boolean chk_follow(int idx, int m_idx) {
+		
+		f_dao = template.getMapper(FollowDao.class);
+		
+		boolean follow_chk = false;
+		
+		if(f_dao.CheckFollow(m_idx, idx)==1) {
+			follow_chk = true;
+		}
+			
+		return follow_chk;
+	}
+	
+	// 팔로워 수
 	public int getFollower(int m_idx, HttpSession session) {
 
 		f_dao = template.getMapper(FollowDao.class);
@@ -51,6 +62,7 @@ public class MyPageService {
 
 	}
 
+	// 팔로잉 수
 	public int getFollowing(int m_idx, HttpSession session) {
 
 		f_dao = template.getMapper(FollowDao.class);
@@ -64,13 +76,34 @@ public class MyPageService {
 		return following;
 
 	}
+	
+	// 팔로우
+	public int Follow(int m_idx, int y_idx) {
+		
+		f_dao = template.getMapper(FollowDao.class);
+		
+		return f_dao.insertFollow(m_idx, y_idx);
+	}
+	
+	// 언팔로우
+	public int unFollow(int m_idx, int y_idx) {
+		
+		f_dao = template.getMapper(FollowDao.class);
+		
+		return f_dao.deleteFollow(m_idx, y_idx);
+	}
+
 
 	// 팔로워 인덱스 가져와서 ListPeeps 하기
-	public List<Peeps> getFollowingList(int m_idx) {
+	public List<Peeps> getFollowingList(int m_idx, HttpSession session) {
 
 		f_dao = template.getMapper(FollowDao.class);
 		dao = template.getMapper(PeepsDao.class);
+		
+		int following = f_dao.FollowingCnt(m_idx);
 
+		session.setAttribute("following", following);
+		
 		// 인덱스 가져오기
 		List<Integer> following_peeps = f_dao.followingList(m_idx);
 
@@ -101,11 +134,14 @@ public class MyPageService {
 	}
 
 	// 팔로우 인덱스 가져와서 ListPeeps 하기
-	public List<Peeps> getFollowerList(int m_idx) {
+	public List<Peeps> getFollowerList(int m_idx, HttpSession session) {
 
 		f_dao = template.getMapper(FollowDao.class);
 		dao = template.getMapper(PeepsDao.class);
-
+		
+		int follower = f_dao.FollowerCnt(m_idx);
+		session.setAttribute("follower", follower);
+		
 		List<Integer> follower_peeps = f_dao.followerList(m_idx);
 		List<Peeps> followerList = new ArrayList<Peeps>();
 
@@ -129,70 +165,6 @@ public class MyPageService {
 
 		return followerList;
 	}
-
-	// 팔로우
-	public int My_follow(int m_idx, int y_idx, HttpSession session) {
-
-		int f_result = 0;
-
-		f_dao = template.getMapper(FollowDao.class);
-
-		f_result = f_dao.insertFollow(m_idx, y_idx);
-
-		List<Peeps> followerList = (List<Peeps>) session.getAttribute("FollowerList");
-
-		for (int i = 0; i < followerList.size(); i++) {
-
-			int follow_idx = Integer.parseInt(followerList.get(i).getM_idx());
-
-			if (follow_idx == y_idx) {
-				followerList.get(i).setChk_result(f_result);
-				System.out.println("result 바꾸기 성공");
-			} else {
-				System.out.println("해당 인덱스가 아님");
-			}
-
-		}
-
-		System.out.println("팔로잉 리스트 수정됨 : " + followerList);
-
-		return f_result;
-	}
-	
-	// 언팔로우
-	public int My_unfollow(int m_idx, int y_idx, HttpSession session) {
-
-		int u_result = 0;
-
-		f_dao = template.getMapper(FollowDao.class);
-
-		u_result = f_dao.deleteFollow(m_idx, y_idx);
-		
-		List<Peeps> followingList = (List<Peeps>) session.getAttribute("FollowingList");
-		
-		for(int i = 0; i<followingList.size(); i++) {
-			
-			int follow_idx = Integer.parseInt(followingList.get(i).getM_idx());
-			
-			if(follow_idx == y_idx) {
-				if(u_result == 1) {
-					followingList.get(i).setChk_result(0);
-				} else {
-					followingList.get(i).setChk_result(1);
-				}
-				
-				
-				
-			} else {
-				System.out.println("해당 인덱스가 아님");
-			}
-			
-			System.out.println("팔로워 수정됨 : " + followingList);
-		}
-
-		return u_result;
-	}
-
 	
 	
 	

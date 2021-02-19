@@ -162,7 +162,7 @@ a:visited {
 			<ul class="icon">
 				<!--아이콘 경로 바꾸기 -->
 				<li class="left"><span><input type="search" id="search"
-						value="${keyword}" required="required">
+						placeholder="${keyword}" required="required">
 						<button id="keyword" type="submit">
 							<img
 								src="<c:url value="/resources/images/icon/navi/search.png"/>">
@@ -207,7 +207,7 @@ a:visited {
 						<table class="find_peeps" id="${peep.m_idx }">
 
 							<tr>
-								<td rowspan="2"><a href="#"> <c:set var="loginType"
+								<td rowspan="2"><a href="mypage/${peep.m_idx}"> <c:set var="loginType"
 											value="${peep.loginType}" /> <c:choose>
 											<c:when test="${loginType eq 'email'}">
 												<img id="profile"
@@ -289,12 +289,9 @@ function load_Find(){
 // 팔로우 function
 function follow(y_idx){
 	
-	var idx = $('.find_peeps #fix .f_btn').index(this);
 	var m_idx = ${peeps.m_idx};
-	//var y_idx = document.getElementsByClassName('find_peeps')[idx].id;
 	
 	console.log(y_idx);
-	console.log(idx);
 	
 	$
 	.ajax({
@@ -320,12 +317,9 @@ function follow(y_idx){
 // 언팔로우 function
 function unfollow(y_idx){
 	
-	var idx = $('#total_wrap .find_peeps #fix .f_btn').index(this);
 	var m_idx = ${peeps.m_idx};
-	//var y_idx = document.getElementsByClassName('find_peeps')[idx].id;
 	
 	console.log(y_idx);
-	console.log(idx);
 	
 	$
 	.ajax({
@@ -405,17 +399,20 @@ var email = "${peeps.email}";
 			});
 
 	$("#MyPage_img")
-			.click(
-					function() {
-						location.href = "${pageContext.request.contextPath}/mypage?m_idx="+ m_idx;
+	.click(
+			function() {
 
-					});
+				location.href = "${pageContext.request.contextPath}/mypage?m_idx="+ ${peeps.m_idx};
+
+			});
 </script>
 
 <script>
 	// 검색 목록 누르면 그 사람 마이페이지로 이동
-	function loadMyPage(idx) {
-
+	function loadMyPage(m_idx) {
+		location.href = "${pageContext.request.contextPath}/mypage/"+ m_idx;
 	}
+		
+		
 </script>
 </html>

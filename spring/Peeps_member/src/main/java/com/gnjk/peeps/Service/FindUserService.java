@@ -36,7 +36,7 @@ public class FindUserService {
 		
 		for (int i = 0; i < peepslist.size(); i++) {
 			
-			int follow_idx = Integer.parseInt(peepslist.get(i).getM_idx());
+			int follow_idx = peepslist.get(i).getM_idx();
 			
 			System.out.println("아이디 검색 인덱스");
 			System.out.println(follow_idx);

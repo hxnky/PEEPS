@@ -336,12 +336,13 @@ nav ul li button {
 	$(function() {
 
 		var email = "${peeps.email}";
+		var m_idx = ${peeps.m_idx};
 
 		$("#MyPage_img")
 				.click(
 						function() {
 
-							location.href = "${pageContext.request.contextPath}/mypage?email="+ ${peeps.m_idx};
+							location.href = "${pageContext.request.contextPath}/mypage/"+ m_idx;
 
 						});
 

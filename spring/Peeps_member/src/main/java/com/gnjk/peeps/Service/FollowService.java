@@ -31,7 +31,7 @@ public class FollowService {
 
 		for (int i = 0; i < peepslist.size(); i++) {
 
-			int follow_idx = Integer.parseInt(peepslist.get(i).getM_idx());
+			int follow_idx = peepslist.get(i).getM_idx();
 
 			if (follow_idx == y_idx) {
 				peepslist.get(i).setChk_result(f_result);
@@ -59,7 +59,7 @@ public class FollowService {
 		
 		for(int i = 0; i<peepslist.size(); i++) {
 			
-			int follow_idx = Integer.parseInt(peepslist.get(i).getM_idx());
+			int follow_idx = peepslist.get(i).getM_idx();
 			
 			if(follow_idx == y_idx) {
 				if(u_result == 1) {

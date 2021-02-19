@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class Peeps {
 
-	private String m_idx;
+	private int m_idx;
 	private String email;
 	private String password;
 	private String name;
@@ -30,7 +30,7 @@ public class Peeps {
 
 	
 
-	public Peeps(String m_idx, String email, String password, String name, String id, String m_photo, String bio,
+	public Peeps(int m_idx, String email, String password, String name, String id, String m_photo, String bio,
 			String code, char verify, String loginType) {
 		super();
 		this.m_idx = m_idx;

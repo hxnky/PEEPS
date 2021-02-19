@@ -114,17 +114,12 @@
 	margin: 10px auto;
 }
 
-.pagediv {
-	background-color: aqua;
-	text-align: center;
-	margin: auto;
-}
-
 /*중간 위치 모달창*/
 #my_modal {
 	display: none;
 	width: 600px;
-	height: 400px; padding : 20px 60px;
+	height: 400px;
+	padding: 20px 60px;
 	background-color: #fefefe;
 	border: 1px solid #888;
 	border-radius: 10px;
@@ -197,7 +192,7 @@
 
 #find_peeps {
 	width: 500px;
-	height: 80px;
+	height: 30px;
 	text-align: center;
 	margin-top: 10px;
 }
@@ -223,6 +218,17 @@ a:visited {
 	text-align: center;
 	line-height: 300px;
 }
+
+#fix {
+	margin: 50px auto;
+}
+
+#edit{
+	width: 200px;
+	border: 0.2px solid #CCC;
+	border-radius: 5%;
+	font-size: 20px;
+}
 </style>
 
 <body>
@@ -230,20 +236,38 @@ a:visited {
 	<div id="main_wrap">
 		<div class="jumbotron">
 			<div id="profile_wrap">
-				<c:set var="loginType" value="${loginType}" />
+				<c:set var="loginType" value="${page_peeps.loginType}" />
 				<c:choose>
 					<c:when test="${loginType eq 'email'}">
-						<img id="profile" src="<c:url value="/fileupload/${peeps.m_photo}"/>">
+						<img id="profile"
+							src="<c:url value="/fileupload/${page_peeps.m_photo}"/>">
 					</c:when>
 					<c:when test="${loginType ne 'email' }">
-						<img id="profile" src="<c:url value="${m_photo}"/>">
+						<img id="profile" src="<c:url value="${page_peeps.m_photo}"/>">
 					</c:when>
 				</c:choose>
-				<div id="pro_btn">
-					<ul>
-						<li>${peeps.id }</li>
-						<li><button id="edit">프로필 편집</button></li>
-					</ul>
+				<div id="pro_btn" class="${page_peeps.m_idx}">
+					<c:choose>
+						<c:when test="${peeps.m_idx eq page_peeps.m_idx }">
+							<ul>
+								<li>${page_peeps.id }</li>
+								<li><button id="edit">프로필 편집</button></li>
+							</ul>
+						</c:when>
+						<c:otherwise>
+							<c:choose>
+								<c:when test="${follow_chk == true}">
+									<button class="p_f_btn" id="unfollow" type="submit"
+										onclick="unfollow(${page_peeps.m_idx})">언팔로우</button>
+								</c:when>
+								<c:otherwise>
+									<button class="p_f_btn" id="follow" type="submit"
+										onclick="follow(${page_peeps.m_idx})">팔로우</button>
+								</c:otherwise>
+							</c:choose>
+						</c:otherwise>
+					</c:choose>
+
 
 					<ul>
 						<li>게시물</li>
@@ -255,8 +279,8 @@ a:visited {
 							<button id="following_btn">${following }</button>
 						</li>
 					</ul>
-					<div id="pro_name">${peeps.name}</div>
-					<div id="pro_bio">${peeps.bio }</div>
+					<div id="pro_name">${page_peeps.name}</div>
+					<div id="pro_bio">${page_peeps.bio }</div>
 				</div>
 			</div>
 		</div>
@@ -274,7 +298,6 @@ a:visited {
 			<c:otherwise>
 				<c:forEach items="${FollowerList}" var="follower" varStatus="i">
 					<table id="find_peeps">
-
 						<tr>
 							<td><a href="#"> <c:set var="loginType"
 										value="${follower.loginType}" /> <c:choose>
@@ -290,25 +313,15 @@ a:visited {
 							</a></td>
 							<td id="id"><a href="#">${follower.id}</a></td>
 							<td>
-								<div id="fix">
+								<div id="fix" class="${follower.m_idx}">
 									<c:choose>
 										<c:when test="${follower.chk_result eq 1}">
-											<form action="${pageContext.request.contextPath}/mypage/unfollow"
-												name="form" method="post">
-												<input type="hidden" value="${follower.m_idx}" id="y_idx"
-													name="y_idx"> <input type="hidden" value="${m_idx}"
-													name="m_idx">
-												<button id="unfollow" type="submit">언팔로우</button>
-											</form>
+											<button class="f_btn" id="unfollow" type="submit"
+												onclick="unfollow(${follower.m_idx})">언팔로우</button>
 										</c:when>
 										<c:otherwise>
-											<form action="${pageContext.request.contextPath}/mypage/follow"
-												name="form" method="post">
-												<input type="hidden" value="${follower.m_idx}" id="y_idx"
-													name="y_idx"> <input type="hidden" value="${m_idx}"
-													name="m_idx">
-												<button id="follow" type="submit">팔로우</button>
-											</form>
+											<button class="f_btn" id="follow" type="submit"
+												onclick="follow(${follower.m_idx})">팔로우</button>
 										</c:otherwise>
 									</c:choose>
 								</div>
@@ -330,7 +343,7 @@ a:visited {
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${FollowingList}" var="following" varStatus="i">
-					<table id="find_peeps">
+					<table id="find_peeps" id="${following.m_idx}">
 						<tr>
 							<td rowspan="2"><a href="#"> <c:set var="loginType"
 										value="${following.loginType}" /> <c:choose>
@@ -346,25 +359,15 @@ a:visited {
 							</a></td>
 							<td rowspan="2" id="id"><a href="#">${following.id}</a></td>
 							<td rowspan="2">
-								<div id="fix">
+								<div id="fix" class="${following.m_idx}">
 									<c:choose>
 										<c:when test="${following.chk_result eq 1}">
-											<form action="${pageContext.request.contextPath}/mypage/unfollow"
-												name="form" method="post">
-												<input type="hidden" value="${following.m_idx}" id="y_idx"
-													name="y_idx"> <input type="hidden" value="${m_idx}"
-													name="m_idx">
-												<button id="unfollow" type="submit">언팔로우</button>
-											</form>
+											<button class="f_btn" id="unfollow" type="submit"
+												onclick="unfollow(${following.m_idx})">언팔로우</button>
 										</c:when>
 										<c:otherwise>
-											<form action="${pageContext.request.contextPath}/mypage/follow"
-												name="form" method="post">
-												<input type="hidden" value="${following.m_idx}" id="y_idx"
-													name="y_idx"> <input type="hidden" value="${m_idx}"
-													name="m_idx">
-												<button id="follow" type="submit">팔로우</button>
-											</form>
+											<button class="f_btn" id="follow" type="submit"
+												onclick="follow(${following.m_idx})">팔로우</button>
 										</c:otherwise>
 									</c:choose>
 								</div>
@@ -380,6 +383,7 @@ a:visited {
 
 <script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
 	type="text/javascript"></script>
+
 <script>
 	$(function() {
 		var email = "${email}";
@@ -398,6 +402,14 @@ a:visited {
 	});
 </script>
 <script>
+
+//팔로잉 load
+function load_Following(){
+	
+	$('#main_wrap').load(location.href + '#profile_wrap');
+
+}
+
 	function modal(id) {
 		var zIndex = 9999;
 		var modal = $('#' + id);
@@ -436,6 +448,7 @@ a:visited {
 				.find('.modal_close_btn').on('click', function() {
 					bg.remove();
 					modal.hide();
+					load_Following();					
 				});
 	}
 
@@ -449,6 +462,90 @@ a:visited {
 		modal('my_modal_wer');
 	});
 </script>
+
+<script>
+
+
+// 팔로우 -> 언팔로우
+function FtoU(y_idx){
+			
+			var html="<div id='fix' class='"+y_idx+"'><div class='f_btn' id='unfollow' type='submit' onclick='unfollow("+y_idx+")'>언팔로우</button></div>";
+			
+			$('#my_modal #find_peeps .'+y_idx).replaceWith(html);
+			$('#my_modal_wer #find_peeps .'+y_idx).replaceWith(html);
+			$('#main_wrap #jumbotron #profile_wrap .'+y_idx).replaceWith(html);
+}
+
+//팔로우 -> 언팔로우
+function UtoF(y_idx){
+			
+			var html="<div id='fix' class='"+y_idx+"'><div class='f_btn' id='follow' type='submit' onclick='follow("+y_idx+")'>팔로우</button></div>";
+			
+			$('#my_modal #find_peeps .'+y_idx).replaceWith(html);
+			$('#my_modal_wer #find_peeps .'+y_idx).replaceWith(html);
+			$('#main_wrap #jumbotron #profile_wrap .'+y_idx).replaceWith(html);
+}
+
+
+// 모달창 팔로우 function
+function follow(y_idx){
+	
+	var m_idx = ${peeps.m_idx};
+	
+	console.log(y_idx);
+	
+	$
+	.ajax({
+		url : '${pageContext.request.contextPath}/mypage/follow',
+		type : 'post',
+		async : false,
+		data : {
+			"y_idx": y_idx,
+			"m_idx" : m_idx
+		},
+		success : function(data) {
+			console.log("팔로우");	
+			FtoU(y_idx);
+		},
+		error : function() {
+			console.log("실패,,,,");
+		}
+	});
+
+	
+}
+
+// 모달창 언팔로우 function
+function unfollow(y_idx){
+	
+	var m_idx = ${peeps.m_idx};
+	
+	console.log(y_idx);
+	
+	$
+	.ajax({
+		url : '${pageContext.request.contextPath}/mypage/unfollow',
+		type : 'post',
+		async : false,
+		data : {
+			"y_idx": y_idx,
+			"m_idx" : m_idx
+		},
+		success : function(data) {
+			console.log("언팔로우");
+			UtoF(y_idx);
+			
+		},
+		error : function() {
+			console.log("실패,,,,");
+		}
+	});
+
+}
+
+// 
+</script>
+
 
 
 </html>
