@@ -86,6 +86,14 @@
 	margin-right: 40px;
 }
 
+#pro_btn>ul>li {
+	list-style: none;
+	font-size: 30px;
+	display: inline-block;
+	text-align: center;
+	margin-right: 40px;
+}
+
 #pro_btn {
 	margin: -180px -300px 0px 0px;
 }
@@ -128,7 +136,7 @@
 }
 
 #my_modal .modal_close_btn {
-	position: absolute;
+	position: fixed;
 	top: 10px;
 	right: 10px;
 }
@@ -213,6 +221,11 @@ a:visited {
 	text-decoration: none;
 }
 
+a:hover {
+	color: black;
+	text-decoration: underline;
+}
+
 #user_no {
 	font-size: 30px;
 	text-align: center;
@@ -223,11 +236,34 @@ a:visited {
 	margin: 50px auto;
 }
 
-#edit{
+#edit {
 	width: 200px;
 	border: 0.2px solid #CCC;
 	border-radius: 5%;
-	font-size: 20px;
+	font-size: 25px;
+	font-weight: bold;
+	background-color: #fcf9f6;
+}
+
+#follower_btn, #following_btn {
+	background-color: #F5E978;
+	border: none;
+}
+
+#pro_unfollow, #pro_follow {
+	width: 200px;
+	border: 0.2px solid #CCC;
+	font-size: 25px;
+	font-weight: bold;
+	border-radius: 5%;
+}
+
+#pro_follow {
+	background-color: #fcf9f6;
+}
+
+#pro_unfollow {
+	background-color: #CCC;
 }
 </style>
 
@@ -257,12 +293,20 @@ a:visited {
 						<c:otherwise>
 							<c:choose>
 								<c:when test="${follow_chk == true}">
-									<button class="p_f_btn" id="unfollow" type="submit"
-										onclick="unfollow(${page_peeps.m_idx})">언팔로우</button>
+									<ul>
+										<li>${page_peeps.id }</li>
+										<li>
+											<button class="p_f_btn" id="pro_unfollow" type="submit"
+												onclick="proUnfollow(${page_peeps.m_idx})">언팔로우</button>
+										</li>
+									</ul>
 								</c:when>
 								<c:otherwise>
-									<button class="p_f_btn" id="follow" type="submit"
-										onclick="follow(${page_peeps.m_idx})">팔로우</button>
+									<ul>
+										<li>${page_peeps.id }</li>
+										<li><button class="p_f_btn" id="pro_follow" type="submit"
+												onclick="proFollow(${page_peeps.m_idx})">팔로우</button></li>
+									</ul>
 								</c:otherwise>
 							</c:choose>
 						</c:otherwise>
@@ -299,8 +343,8 @@ a:visited {
 				<c:forEach items="${FollowerList}" var="follower" varStatus="i">
 					<table id="find_peeps">
 						<tr>
-							<td><a href="#"> <c:set var="loginType"
-										value="${follower.loginType}" /> <c:choose>
+							<td><a href="/peeps/mypage/${follower.m_idx}"> <c:set
+										var="loginType" value="${follower.loginType}" /> <c:choose>
 										<c:when test="${loginType eq 'email'}">
 											<img id="profile_modal"
 												src="<c:url value="/fileupload/${follower.m_photo}"/>">
@@ -311,7 +355,7 @@ a:visited {
 										</c:when>
 									</c:choose>
 							</a></td>
-							<td id="id"><a href="#">${follower.id}</a></td>
+							<td id="id"><a href="/peeps/mypage/${follower.m_idx}">${follower.id}</a></td>
 							<td>
 								<div id="fix" class="${follower.m_idx}">
 									<c:choose>
@@ -345,8 +389,8 @@ a:visited {
 				<c:forEach items="${FollowingList}" var="following" varStatus="i">
 					<table id="find_peeps" id="${following.m_idx}">
 						<tr>
-							<td rowspan="2"><a href="#"> <c:set var="loginType"
-										value="${following.loginType}" /> <c:choose>
+							<td rowspan="2"><a href="/peeps/mypage/${following.m_idx}">
+									<c:set var="loginType" value="${following.loginType}" /> <c:choose>
 										<c:when test="${loginType eq 'email'}">
 											<img id="profile_modal"
 												src="<c:url value="/fileupload/${following.m_photo}"/>">
@@ -357,7 +401,7 @@ a:visited {
 										</c:when>
 									</c:choose>
 							</a></td>
-							<td rowspan="2" id="id"><a href="#">${following.id}</a></td>
+							<td rowspan="2" id="id"><a href="/peeps/mypage/${following.m_idx}">${following.id}</a></td>
 							<td rowspan="2">
 								<div id="fix" class="${following.m_idx}">
 									<c:choose>
@@ -427,8 +471,7 @@ function load_Following(){
 			backgroundColor : 'rgba(0,0,0,0.500)'
 		}).appendTo('body');
 
-		modal
-				.css(
+		modal.css(
 						{
 							position : 'fixed',
 							boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
@@ -466,7 +509,7 @@ function load_Following(){
 <script>
 
 
-// 팔로우 -> 언팔로우
+// 모달 팔로우 -> 언팔로우
 function FtoU(y_idx){
 			
 			var html="<div id='fix' class='"+y_idx+"'><div class='f_btn' id='unfollow' type='submit' onclick='unfollow("+y_idx+")'>언팔로우</button></div>";
@@ -476,7 +519,7 @@ function FtoU(y_idx){
 			$('#main_wrap #jumbotron #profile_wrap .'+y_idx).replaceWith(html);
 }
 
-//팔로우 -> 언팔로우
+// 모달 팔로우 -> 언팔로우
 function UtoF(y_idx){
 			
 			var html="<div id='fix' class='"+y_idx+"'><div class='f_btn' id='follow' type='submit' onclick='follow("+y_idx+")'>팔로우</button></div>";
@@ -486,6 +529,22 @@ function UtoF(y_idx){
 			$('#main_wrap #jumbotron #profile_wrap .'+y_idx).replaceWith(html);
 }
 
+
+//팔로우 -> 언팔로우
+function pro_FtoU(y_idx){
+			
+			var html="<div id='probtn' class='"+y_idx+"'><button id='pro_unfollow' onclick='proUnfollow("+y_idx+")'>언팔로우</button>";
+
+			$('#main_wrap #jumbotron #profile_wrap .'+y_idx).replaceWith(html);
+}
+
+// 팔로우 -> 언팔로우
+function pro_UtoF(y_idx){
+			
+			var html="<div id='probtn' class='"+y_idx+"'><button id='pro_follow' onclick='proFollow("+y_idx+")'>팔로우</button>";
+			
+			$('#main_wrap #jumbotron #profile_wrap .'+y_idx).replaceWith(html);
+}
 
 // 모달창 팔로우 function
 function follow(y_idx){
@@ -543,9 +602,72 @@ function unfollow(y_idx){
 
 }
 
-// 
+// 프로필 팔로우
+function proFollow(y_idx){
+	
+	var m_idx = ${peeps.m_idx};
+	
+	console.log(y_idx);
+	
+	$
+	.ajax({
+		url : '${pageContext.request.contextPath}/mypage/follow',
+		type : 'post',
+		async : false,
+		data : {
+			"y_idx": y_idx,
+			"m_idx" : m_idx
+		},
+		success : function(data) {
+			console.log("팔로우");	
+			pro_FtoU(y_idx);
+			load_Following();
+		},
+		error : function() {
+			console.log("실패,,,,");
+		}
+	});
+
+	
+}
+
+// 프로필 언팔로우
+function proUnfollow(y_idx){
+	
+	var m_idx = ${peeps.m_idx};
+	
+	console.log(y_idx);
+	
+	$
+	.ajax({
+		url : '${pageContext.request.contextPath}/mypage/unfollow',
+		type : 'post',
+		async : false,
+		data : {
+			"y_idx": y_idx,
+			"m_idx" : m_idx
+		},
+		success : function(data) {
+			console.log("언팔로우");
+			pro_UtoF(y_idx);
+			load_Following();
+			
+		},
+		error : function() {
+			console.log("실패,,,,");
+		}
+	});
+
+}
+
+
 </script>
 
-
+<script>
+	// 목록 누르면 그 사람 마이페이지로 이동
+	function loadMyPage(m_idx) {
+		location.href = "${pageContext.request.contextPath}/mypage/"+ m_idx;
+	}	
+</script>
 
 </html>

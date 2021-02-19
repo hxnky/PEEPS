@@ -136,7 +136,6 @@ body {
 
 #name {
 	font-size: 20px;
-	color: #DDD;
 }
 
 a:link {
@@ -207,7 +206,7 @@ a:visited {
 						<table class="find_peeps" id="${peep.m_idx }">
 
 							<tr>
-								<td rowspan="2"><a href="mypage/${peep.m_idx}"> <c:set var="loginType"
+								<td rowspan="2"><a onclick="loadMyPage(${peep.m_idx})"> <c:set var="loginType"
 											value="${peep.loginType}" /> <c:choose>
 											<c:when test="${loginType eq 'email'}">
 												<img id="profile"
@@ -218,7 +217,7 @@ a:visited {
 											</c:when>
 										</c:choose>
 								</a></td>
-								<td id="id"><a href="#">${peep.id}</a></td>
+								<td id="id"><a onclick="loadMyPage(${peep.m_idx})">${peep.id}</a></td>
 								<td rowspan="2"><c:choose>
 										<c:when test="${peep.id eq peeps.id}">
 											<div id="fix">
@@ -242,7 +241,7 @@ a:visited {
 									</c:choose></td>
 							</tr>
 							<tr>
-								<td id="name"><a href="#">${peep.name}</a></td>
+								<td id="name"><a onclick="loadMyPage(${peep.m_idx})">${peep.name}</a></td>
 							</tr>
 
 						</table>
