@@ -97,7 +97,8 @@ public class ChattingHandler extends TextWebSocketHandler {
 
 		System.out.println("sendmes : " + sendmes);
 
-		 for(WebSocketSession sockSession : connectedSessionList) {			 
+		// 웹소켓 연결됐을 때
+		 for(WebSocketSession sockSession : connectedSessionList) {	 
 			sockSession.sendMessage(sendmes);
 		 }
 		 

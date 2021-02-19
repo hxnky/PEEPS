@@ -16,7 +16,6 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.gnjk.chat.dao.AlarmDao;
 import com.gnjk.chat.domain.Alarm;
 import com.google.gson.Gson;
-import com.mysql.cj.util.StringUtils;
 
 public class AlarmHandler extends TextWebSocketHandler {
 	
@@ -50,49 +49,24 @@ public class AlarmHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
 		String mes = message.getPayload();
-		if(StringUtils.isNullOrEmpty(mes)) {
-			String[] strs = mes.split(",");
-			
-			if(strs != null && strs.length == 5) {
-				String type = strs[0];
-				String sender = strs[1];	// 댓글, 좋아요, 팔로우 한 사람
-				String receiver = strs[2];	// 알람을 받을 사람
-				String r_Id = strs[3];
-				String post = strs[4];
-				
+		
 				// 작성자가 로그인 했다면
-				WebSocketSession writer = userMap.get(r_Id);
+				// WebSocketSession writer = userMap.get(peeps.m_idx);
 				
 				Gson gson = new Gson();
 				Alarm alarmData = gson.fromJson(message.getPayload(), Alarm.class);
 				
-				if("comment".equals(type) && writer != null) {
-					
-					TextMessage msg
-						// = new TextMessage(sender + " 님이 " + "<a type='external' href='/mentor/menteeboard/menteeboardView?seq="+seq+"&pg=1'>" + seq + "</a> 번 게시글에 댓글을 남겼습니다!");
-							 = new TextMessage(sender + " 님이 회원님의 게시물에 댓글을 남겼습니다!");
-					writer.sendMessage(msg);
-					dao.insertAlarm(alarmData);
-					
-				} else if("like".equals(type) && writer != null) {
-					
-					TextMessage msg
-					 = new TextMessage(sender + " 님이 <a type = 'external' href=''/"  + post + " 게시물에 좋아요를 눌렀습니다!");
-					
-					writer.sendMessage(msg);
-					dao.insertAlarm(alarmData);
-					
-			} else if("follow".equals(type) && writer != null) {
-					
-					TextMessage msg
-						 = new TextMessage(sender + " 님이 " +  receiver + " 님을 팔로우 했습니다!");
-					
-					writer.sendMessage(msg);
-					dao.insertAlarm(alarmData);
-					
-				}
-			} 
-		}
+				TextMessage sendmes = new TextMessage(gson.toJson(alarmData));
+				
+				System.out.println("alarm : " + sendmes);
+
+				// 웹소켓에 연결됐을 때,
+				 for(WebSocketSession sockSession : sessions) {	 
+					sockSession.sendMessage(sendmes);
+				 }
+					// writer.sendMessage(msg);
+					// dao.insertAlarm(alarmData);
+	
 	}
 
 	@Override
