@@ -1,0 +1,109 @@
+/*중간 위치 모달창*/
+#my_modal {
+	display: none;
+	width: 600px;
+	height: 400px;
+	padding: 20px 60px;
+	background-color: #fefefe;
+	border: 1px solid #888;
+	border-radius: 10px;
+	padding: 20px 60px;
+	overflow: auto;
+}
+
+#my_modal .modal_close_btn {
+	position: fixed;
+	top: 10px;
+	right: 10px;
+}
+
+#my_modal_wer {
+	display: none;
+	width: 600px;
+	height: 400px;
+	padding: 20px 60px;
+	background-color: #fefefe;
+	border: 1px solid #888;
+	border-radius: 10px;
+	overflow: auto;
+}
+
+#my_modal_wer .modal_close_btn {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+
+#my_modal_header {
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+}
+/* 모달창 테이블*/
+#profile_modal {
+	width: 60px;
+	height: 60px;
+	border-radius: 100%;
+	border: 0.1px solid #CCC;
+}
+
+#follow, #modal_edit {
+	width: 120px;
+	height: 40px;
+	background: #F5E978;
+	border: 0.2px solid #CCC;
+	border-radius: 5px;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 1px 6px;
+}
+
+#follow:hover {
+	cursor: pointer;
+}
+
+#modal_edit:hover{
+	cursor: pointer;
+}
+
+#unfollow {
+	width: 120px;
+	height: 40px; background : #CCC;
+	border: 0.2px solid #CCC;
+	border-radius: 5px;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 1px 6px;
+	background: #CCC;
+}
+
+#unfollow:hover {
+	cursor: pointer;
+}
+
+#find_peeps {
+	width: 500px;
+	text-align: center;
+	margin-top: 10px;
+}
+
+#id {
+	font-size: 20px;
+	font-weight: bold;
+	width: 200px;
+}
+
+a:link {
+	color: black;
+	text-decoration: none;
+}
+
+a:visited {
+	color: black;
+	text-decoration: none;
+}
+
+a:hover {
+	color: black;
+	cursor: pointer;
+}

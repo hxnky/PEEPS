@@ -8,207 +8,11 @@
 <title>프로필 편집</title>
 
 <link href="<c:url value="/resources/css/edit.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 </head>
-<style>
-# /*공통인부분*/
-body {
-	background-color: #fcf9f6;
-}
-
-#total_wrap {
-	margin: 100px auto;
-	height: 800px;
-	width: 1500px;
-}
-
-#edit_menu {
-	margin-top: 100px;
-	height: 600px;
-	width: 490px;
-	float: left;
-	text-align: center;
-	border-right: solid 0.2px #CCC;
-}
-
-/*공통 끝*/
-#edit_table {
-	margin: 50px;
-	height: 600px;
-	width: 800px;
-	float: right;
-}
-
-#table_right {
-	font-weight: bold;
-}
-
-#table_right>input, #edit_bio {
-	width: 300px;
-	margin: 10px auto;
-}
-
-.choose {
-	display: none;
-}
-
-#choose_btn {
-	background-color: #fcf9f6;
-	border: 0;
-	outline: 0;
-	font-size: 20px;
-	margin-left: 13px;
-	font-weight: bold;
-}
-
-#choose_btn:hover {
-	cursor: pointer;
-}
-
-#profile {
-	width: 200px;
-	height: 200px;
-	border-radius: 100%;
-	text-align: center;
-}
-
-.edit_text {
-	border: solid 0.2px #CCC;
-	border-radius: 5%;
-	height: 30px;
-	width: 300px;
-	font-size: 15px;
-}
-
-.edit_bio {
-	border: solid 0.2px #CCC;
-	border-radius: 5%;
-	height: 50px;
-	width: 300px;
-	font-size: 15px;
-}
-
-#change {
-	margin-left: 420px;
-	width: 80px;
-	height: 30px;
-	font-size: 15px;
-}
-
-#menu_btn {
-	margin-top: 80px;
-}
-
-h3 {
-	display: inline;
-}
-
-#menu_btn>button {
-	background-color: #fcf9f6;
-	border: none;
-	font-size: 35px;
-	font-weight: bold;
-	width: 300px;
-	margin: 50px auto;
-}
-
-/*네비*/
-nav ul {
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	height: 60px;
-	/* 	width: 100%; */
-	background-color: #F5E978;
-	padding: 0px;
-	position: fixed;
-	z-index: 2;
-	list-style-type: none;
-}
-
-.icon {
-	margin: 0px;
-	display: inline-flex;
-	justify-content: space-between;
-}
-
-nav ul li {
-	margin: auto 15px;
-}
-
-.center {
-	margin-top: -18px;
-}
-
-.right a {
-	padding: 5px;
-	margin-top: 20px;
-}
-
-input[type="search"] {
-	padding-left: 10px;
-	float: left;
-	height: 20px;
-	border-radius: 30px;
-	border-top-right-radius: 0;
-	border-bottom-right-radius: 0;
-	border: none;
-}
-
-nav ul li button {
-	background-color: #EEF0ED;
-	height: 20px;
-	border: none;
-	border-radius: 30px;
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-}
-
-#MyPage_img {
-	border-radius: 100%;
-	width: 30px;
-	height: 30px;
-}
-</style>
 <body>
 	<div id="nav">
-		<nav>
-			<ul class="icon">
-				<!--아이콘 경로 바꾸기 -->
-				<li class="left"><span><input type="search" id="search"
-						placeholder="검색" required="required">
-						<button id="keyword" type="submit">
-							<img
-								src="<c:url value="/resources/images/icon/navi/search.png"/>">
-
-						</button></span></li>
-				<!-- 				사진 크기 커서 주석처리 해놓음 -->
-				<!-- 								<li class="center"><a id="Logo"><img -->
-				<%-- 										src="<c:url value="/resources/images/plus.png"/>"></a></li> --%>
-
-				<li class="right"><a id="Home" href="#"><img
-						src="<c:url value="/resources/images/icon/navi/023-home.png"/>"></a>
-					<a id="Content" href="#"><img
-						src="<c:url value="/resources/images/icon/navi/Content.png"/>"></a>
-					<a id="Alarm" href="#"><img
-						src="<c:url value="/resources/images/icon/navi/008-notification.png"/>"></a>
-					<a id="Chat" href="#"><img
-						src="<c:url value="/resources/images/icon/navi/050-wechat.png"/>"></a>
-					<c:set var="loginType" value="${loginType }" /> <c:choose>
-						<c:when test="${peeps.loginType eq 'email' }">
-							<img id="MyPage_img"
-								src="<c:url value="/fileupload/${peeps.m_photo}"/>">
-						</c:when>
-						<c:when test="${peeps.loginType ne 'email' }">
-							<img id="MyPage_img" src="<c:url value="${peeps.m_photo}"/>">
-
-						</c:when>
-
-					</c:choose></li>
-			</ul>
-
-		</nav>
-
-		<!-- 네비 바 들어갈 부분 -->
+		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
 	</div>
 	<div id="total_wrap">
 		<div id="edit_menu">
@@ -224,7 +28,6 @@ nav ul li button {
 		</div>
 		<div>
 			<form id="edit_photo" enctype="multipart/form-data">
-				<input type="hidden" id="email" name="email" value="${peeps.email }">
 				<table id="edit_table">
 					<tr>
 						<td id="table_left" rowspan="3"><c:set var="loginType"
@@ -330,47 +133,20 @@ nav ul li button {
 		})
 
 	});
+
+	// 댓글 글자 수 제한
+	$('#bio').keyup(function() {
+		// 현재 입력 문자열의 길이
+		var inputStrLen = $(this).val().length;
+		if (inputStrLen > 50) {
+			alert('50자 까지만 입력이 가능합니다.');
+			var userInput = $(this).val().substr(0, 50);
+			$(this).val(userInput);
+			inputStrLen = 50;
+		}
+	});
 </script>
 
-<script>
-	$(function() {
-
-		var email = "${peeps.email}";
-		var m_idx = ${peeps.m_idx};
-
-		$("#MyPage_img")
-				.click(
-						function() {
-
-							location.href = "${pageContext.request.contextPath}/mypage/"+ m_idx;
-
-						});
-
-		$("#pw_ch")
-				.click(
-						function() {
-
-							location.href = "${pageContext.request.contextPath}/profile/pw?email="
-									+ email;
-
-						});
-
-		$("#delete")
-				.click(
-						function() {
-
-							location.href = "${pageContext.request.contextPath}/profile/delete?email="
-									+ email;
-
-						});
-
-		$("#log_out").click(function() {
-
-			location.href = "${pageContext.request.contextPath}/logout";
-
-		});
-	})
-</script>
 
 <script>
 	$("#edit")
@@ -396,6 +172,38 @@ nav ul li button {
 									}
 								});
 					});
+
+	var email = "${peeps.email}";
+	var m_idx = ${peeps.m_idx};
+
+	$("#MyPage_img").click(function() {
+
+		location.href = "${pageContext.request.contextPath}/mypage/" + m_idx;
+
+	});
+
+	$("#pw_ch")
+			.click(
+					function() {
+
+						location.href = "${pageContext.request.contextPath}/profile/pw?email="
+								+ email;
+
+					});
+
+	$("#delete")
+			.click(
+					function() {
+
+						location.href = "${pageContext.request.contextPath}/profile/delete?email="
+								+ email;
+
+					});
+
+	$("#log_out").click(function() {
+
+		location.href = "${pageContext.request.contextPath}/logout";
+	});
 </script>
 <script>
 	$("#change").click(function() {
@@ -432,33 +240,37 @@ nav ul li button {
 </script>
 
 <script>
-	$("#keyword")
-			.click(
-					function() {
+$("#keyword")
+.click(
+		function() {
 
-						var m_idx = ${peeps.m_idx};
-						var keyword = $('#search').val();
+			var m_idx = ${peeps.m_idx};
+			var keyword = $('#search').val();
 
-						console.log(keyword);
+			if(keyword.trim()==""){
+				alert("한 글자 이상 입력하세요");
+			} else{
+				$
+				.ajax({
+					url : '${pageContext.request.contextPath}/user/finduser',
+					type : 'get',
+					async : false,
+					data : {
+						"keyword":keyword,
+						"m_idx" : m_idx
+					},
+					success : function(data) {
+						location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
+					},
+					error : function() {
+						console.log("실패,,,,");
+					}
+				});
 
-						$
-								.ajax({
-									url : '${pageContext.request.contextPath}/user/finduser',
-									type : 'get',
-									async : false,
-									data : {
-										"keyword":keyword,
-										"m_idx" : m_idx
-									},
-									success : function(data) {
-										location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
-									},
-									error : function() {
-										console.log("실패,,,,");
-									}
-								});
+			}
 
-					});
+			
+		});
 </script>
 
 </html>

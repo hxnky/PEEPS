@@ -2,8 +2,8 @@
 	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap')
 	;
 
-*{
-	font-family: 'Nanum Gothic ', sans-serif ;
+* {
+	font-family: 'Nanum Gothic ', sans-serif;
 }
 
 #top_nav {
@@ -39,7 +39,7 @@
 	max-width: 99%;
 }
 
-.login_text{
+.login_text {
 	width: 300px;
 	height: 35px;
 	border: solid 0.2px #CCC;
@@ -48,8 +48,8 @@
 }
 
 table {
-        margin: 0px auto;
-    }
+	margin: 0px auto;
+}
 
 .form-group-left, .form-group-right {
 	display: inline-block;
@@ -57,9 +57,9 @@ table {
 	margin: 10px auto;
 }
 
-#find{
-        text-align: center;
-    }
+#find {
+	text-align: center;
+}
 
 .brand {
 	padding: 7px 0px;
@@ -97,4 +97,10 @@ label {
 #or_wrap>ul>li>hr {
 	width: 150px;
 	border: 1px solid #AAA;
+}
+
+#reg {
+	margin: 0px auto;
+	height: 130px;
+	width: 100px;
 }

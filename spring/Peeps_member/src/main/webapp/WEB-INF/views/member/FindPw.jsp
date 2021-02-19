@@ -32,7 +32,7 @@
 </head>
 <style>
 #top_nav {
-	width: 500px;
+	width:  750px;
 	background-color: #D9D9D9;
 	text-align: center;
 	height: 35px;
@@ -157,7 +157,6 @@ h4 {
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 
 <script>
-	// 비밀번호 찾기
 	$("#sign_btn").click(function() {
 		
 		var email = $('#email').val();
@@ -172,7 +171,7 @@ h4 {
 			alert("아이디를 입력해주세요!");
 		}else{
 			$.ajax({
-				url : '${pageContext.request.contextPath}/user/fintPW',
+				url : '${pageContext.request.contextPath}/user/findPW',
 				type : 'post',
 				data : {
 					"email" : email,

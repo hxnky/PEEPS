@@ -103,9 +103,8 @@ public class MemberRestController {
 	}
 	
 	// 비밀번호 찾기
-	@PostMapping("/user/fintPW")
+	@PostMapping("/user/findPW")
 	public int memberFindPost(String email, String id, HttpServletResponse response, @ModelAttribute Peeps peeps) throws Exception{
-		
 		
 		return findPwService.find_pw(email, id, response, peeps);
 	}

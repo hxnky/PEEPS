@@ -21,10 +21,8 @@
 	rel="stylesheet">
 
 <!-- CSS Files -->
-<link href="<c:url value="/resources/css/bootstrap.min.css" />"
-	rel="stylesheet">
-<link href="<c:url value="/resources/css/gsdk-bootstrap-wizard.css"/>"
-	rel="stylesheet" />
+<link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/gsdk-bootstrap-wizard.css"/>" rel="stylesheet" />
 
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="<c:url value="/resources/css/demo.css"/>" rel="stylesheet" />
@@ -65,9 +63,8 @@
 
 							</div>
 							<div id="login_wrap">
-								<!-- 표 만들기 -->
 								<form id=regForm>
-									<table>
+									<table id="reg">
 										<tr>
 											<td>
 												<div class="form-group-left">

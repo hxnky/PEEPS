@@ -8,11 +8,6 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 </head>
-<!--jquery 라이브러리 로드-->
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" 
-		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
-		crossorigin="anonymous">
-</script> -->
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -25,41 +20,15 @@
 자바스크립트 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+<link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/modal.css" />" rel="stylesheet">
 <style>
-.container-fluid {
-	height: 50px;
-	text-align: center;
-	width: 1100px;
-	color: black;
-	max-width: 100%;
-}
+@import
+	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap')
+	;
 
-#top_wrap {
-	margin: 0px auto;
-	position: fixed;
-	z-index: 999;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-}
-
-#nav_wrap {
-	width: 1150px;
-	margin: 30px auto;
-	text-align: center;
-}
-
-#my_nav {
-	margin: auto;
-}
-
-.menuselect>button {
-	width: 370px;
-	height: 95px;
-	font-size: 30px;
-	border: none;
-	outline: none;
+body {
+	font-family: 'Nanum Gothic', sans-serif;
 }
 
 .jumbotron {
@@ -68,22 +37,19 @@
 	margin: 100px auto 0px auto;
 	text-align: center;
 	background-color: #F5E978;
+	font-weight: bold;
 }
 
-#profile_wrap>img {
-	width: 200px;
+#pro_img{
+	width: 500px;
+}
+
+#pro_img>img {
+	height: 250px; 
+	width : 250px;
 	border-radius: 100%;
-	margin-left: -750px;
-	margin-top: 50px;
 	border: 1px solid #CCC;
-}
-
-#pro_btn>ul>li {
-	list-style: none;
-	font-size: 30px;
-	display: inline-block;
-	text-align: center;
-	margin-right: 40px;
+	margin: 20px auto;
 }
 
 #pro_btn>ul>li {
@@ -95,7 +61,7 @@
 }
 
 #pro_btn {
-	margin: -180px -300px 0px 0px;
+	margin: -250px -300px 0px 0px;
 }
 
 #foll_btn {
@@ -112,128 +78,18 @@
 	font-size: 20px;
 }
 
-#pro_name {
-	font-size: 20px;
+#pro_name, #pro_bio {
+	font-size: 25px;
 	margin: 10px auto;
-}
-
-#pro_bio {
-	font-size: 20px;
-	margin: 10px auto;
-}
-
-/*중간 위치 모달창*/
-#my_modal {
-	display: none;
-	width: 600px;
-	height: 400px;
-	padding: 20px 60px;
-	background-color: #fefefe;
-	border: 1px solid #888;
-	border-radius: 10px;
-	padding: 20px 60px;
-	overflow: auto;
-}
-
-#my_modal .modal_close_btn {
-	position: fixed;
-	top: 10px;
-	right: 10px;
-}
-
-#my_modal_wer {
-	display: none;
-	width: 600px;
-	height: 400px;
-	padding: 20px 60px;
-	background-color: #fefefe;
-	border: 1px solid #888;
-	border-radius: 10px;
-	overflow: auto;
-}
-
-#my_modal_wer .modal_close_btn {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-}
-
-#my_modal_header {
-	text-align: center;
-	font-size: 20px;
-}
-/* 모달창 테이블*/
-#profile_modal {
-	width: 60px;
-	height: 60px;
-	border-radius: 100%;
-	border: 0.1px solid #CCC;
-}
-
-#follow {
-	height: 30px;
-	width: 100px;
-	background: #F5E978;
-	border: 0.2px solid #CCC;
-	border-radius: 5px;
-	font-size: 20px;
-	font-weight: bold;
-}
-
-#follow:hover {
-	cursor: pointer;
-}
-
-#unfollow {
-	height: 30px;
-	width: 100px;
-	background: #CCC;
-	border: 0.2px solid #CCC;
-	border-radius: 5px;
-	font-size: 20px;
-	font-weight: bold;
-}
-
-#unfollow:hover {
-	cursor: pointer;
-}
-
-#find_peeps {
 	width: 500px;
-	height: 30px;
-	text-align: center;
-	margin-top: 10px;
-}
-
-#id {
-	font-size: 20px;
-	font-weight: bold;
-	width: 200px;
-}
-
-a:link {
-	color: black;
-	text-decoration: none;
-}
-
-a:visited {
-	color: black;
-	text-decoration: none;
-}
-
-a:hover {
-	color: black;
-	text-decoration: underline;
+	text-align: left;
+	word-break: break-all;
 }
 
 #user_no {
 	font-size: 30px;
 	text-align: center;
 	line-height: 300px;
-}
-
-#fix {
-	margin: 50px auto;
 }
 
 #edit {
@@ -268,20 +124,25 @@ a:hover {
 </style>
 
 <body>
+	<div id="nav">
+		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+	</div>
 	<!-------------네비 넣기------------------>
 	<div id="main_wrap">
 		<div class="jumbotron">
 			<div id="profile_wrap">
-				<c:set var="loginType" value="${page_peeps.loginType}" />
-				<c:choose>
-					<c:when test="${loginType eq 'email'}">
-						<img id="profile"
-							src="<c:url value="/fileupload/${page_peeps.m_photo}"/>">
-					</c:when>
-					<c:when test="${loginType ne 'email' }">
-						<img id="profile" src="<c:url value="${page_peeps.m_photo}"/>">
-					</c:when>
-				</c:choose>
+				<div id="pro_img">
+					<c:set var="loginType" value="${page_peeps.loginType}" />
+					<c:choose>
+						<c:when test="${loginType eq 'email'}">
+							<img id="profile"
+								src="<c:url value="/fileupload/${page_peeps.m_photo}"/>">
+						</c:when>
+						<c:when test="${loginType ne 'email' }">
+							<img id="profile" src="<c:url value="${page_peeps.m_photo}"/>">
+						</c:when>
+					</c:choose>
+				</div>
 				<div id="pro_btn" class="${page_peeps.m_idx}">
 					<c:choose>
 						<c:when test="${peeps.m_idx eq page_peeps.m_idx }">
@@ -358,7 +219,7 @@ a:hover {
 							<td id="id"><a href="/peeps/mypage/${follower.m_idx}">${follower.id}</a></td>
 							<td><c:choose>
 									<c:when test="${peeps.m_idx eq follower.m_idx }">
-										<button id="edit">프로필 편집</button>
+										<button id="modal_edit">프로필 편집</button>
 									</c:when>
 									<c:otherwise>
 										<div id="fix" class="${follower.m_idx}">
@@ -394,8 +255,8 @@ a:hover {
 				<c:forEach items="${FollowingList}" var="following" varStatus="i">
 					<table id="find_peeps" id="${following.m_idx}">
 						<tr>
-							<td rowspan="2"><a href="/peeps/mypage/${following.m_idx}">
-									<c:set var="loginType" value="${following.loginType}" /> <c:choose>
+							<td><a href="/peeps/mypage/${following.m_idx}"> <c:set
+										var="loginType" value="${following.loginType}" /> <c:choose>
 										<c:when test="${loginType eq 'email'}">
 											<img id="profile_modal"
 												src="<c:url value="/fileupload/${following.m_photo}"/>">
@@ -408,9 +269,9 @@ a:hover {
 							</a></td>
 							<td rowspan="2" id="id"><a
 								href="/peeps/mypage/${following.m_idx}">${following.id}</a></td>
-							<td rowspan="2"><c:choose>
+							<td><c:choose>
 									<c:when test="${peeps.m_idx eq following.m_idx }">
-										<button id="edit">프로필 편집</button>
+										<button id="modal_edit">프로필 편집</button>
 									</c:when>
 									<c:otherwise>
 										<div id="fix" class="${following.m_idx}">
@@ -440,22 +301,55 @@ a:hover {
 	type="text/javascript"></script>
 
 <script>
-	$(function() {
-		var email = "${email}";
+	var email = "${peeps.email}";
 
-		console.log(email);
+	console.log(email);
 
-		$("#edit")
-				.click(
-						function() {
+	$('#edit')
+			.click(
+					function() {
 
-							location.href = "${pageContext.request.contextPath}/profile/Info?email="
-									+ email;
+						$
+								.ajax({
+									url : '${pageContext.request.contextPath}/profile/chk',
+									type : 'get',
+									data : {
+										"email" : email,
+									},
+									async : false,
+									success : function(data) {
+										location.href = "${pageContext.request.contextPath}/profile/Info";
+									},
+									error : function(request, status, error) {
+										console.log("통신 실패");
 
+									}
+								});
+					});
+	
+	$('#modal_edit')
+	.click(
+			function() {
+
+				$
+						.ajax({
+							url : '${pageContext.request.contextPath}/profile/chk',
+							type : 'get',
+							data : {
+								"email" : email,
+							},
+							async : false,
+							success : function(data) {
+								location.href = "${pageContext.request.contextPath}/profile/Info";
+							},
+							error : function(request, status, error) {
+								console.log("통신 실패");
+
+							}
 						});
-
-	});
+			});
 </script>
+
 <script>
 
 //팔로잉 load
@@ -465,6 +359,7 @@ function load_Following(){
 
 }
 
+// 모달창
 	function modal(id) {
 		var zIndex = 9999;
 		var modal = $('#' + id);
@@ -523,7 +418,7 @@ function load_Following(){
 // 모달 팔로우 -> 언팔로우
 function FtoU(y_idx){
 			
-			var html="<div id='fix' class='"+y_idx+"'><div class='f_btn' id='unfollow' type='submit' onclick='unfollow("+y_idx+")'>언팔로우</button></div>";
+			var html="<div id='fix' class='"+y_idx+"'><button class='f_btn' id='unfollow' type='submit' onclick='unfollow("+y_idx+")'>언팔로우</button></div>";
 			
 			$('#my_modal #find_peeps .'+y_idx).replaceWith(html);
 			$('#my_modal_wer #find_peeps .'+y_idx).replaceWith(html);
@@ -533,7 +428,7 @@ function FtoU(y_idx){
 // 모달 팔로우 -> 언팔로우
 function UtoF(y_idx){
 			
-			var html="<div id='fix' class='"+y_idx+"'><div class='f_btn' id='follow' type='submit' onclick='follow("+y_idx+")'>팔로우</button></div>";
+			var html="<div id='fix' class='"+y_idx+"'><button class='f_btn' id='follow' type='submit' onclick='follow("+y_idx+")'>팔로우</button></div>";
 			
 			$('#my_modal #find_peeps .'+y_idx).replaceWith(html);
 			$('#my_modal_wer #find_peeps .'+y_idx).replaceWith(html);
@@ -680,5 +575,37 @@ function proUnfollow(y_idx){
 		location.href = "${pageContext.request.contextPath}/mypage/"+ m_idx;
 	}	
 </script>
+<script>
+$("#keyword")
+.click(
+		function() {
 
+			var m_idx = ${peeps.m_idx};
+			var keyword = $('#search').val();
+
+			if(keyword.trim()==""){
+				alert("한 글자 이상 입력하세요");
+			} else{
+				$
+				.ajax({
+					url : '${pageContext.request.contextPath}/user/finduser',
+					type : 'get',
+					async : false,
+					data : {
+						"keyword":keyword,
+						"m_idx" : m_idx
+					},
+					success : function(data) {
+						location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
+					},
+					error : function() {
+						console.log("실패,,,,");
+					}
+				});
+
+			}
+
+			
+		});
+</script>
 </html>
