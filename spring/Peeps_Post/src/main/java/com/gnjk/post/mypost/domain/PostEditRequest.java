@@ -13,7 +13,7 @@ public class PostEditRequest {
 	private String ploc;	// 게시글 위치정보
 	private MultipartFile postformfile[];	// 게시글 이미지
 	private String deleteImage[];  // 삭제할 기존 이미지
-	private String oldOriginalImg[]; // 기존 원본 이미지 
+	private String oldImage[]; // 기존 원본 이미지 
 	
 	public int getUserIdx() {
 		return userIdx;
@@ -57,11 +57,11 @@ public class PostEditRequest {
 	public void setDeleteImage(String[] deleteImage) {
 		this.deleteImage = deleteImage;
 	}
-	public String[] getOldOriginalImg() {
-		return oldOriginalImg;
+	public String[] getOldImage() {
+		return oldImage;
 	}
-	public void setOldOriginalImg(String[] oldOriginalImg) {
-		this.oldOriginalImg = oldOriginalImg;
+	public void setOsldImage(String[] oldImage) {
+		this.oldImage = oldImage;
 	}
 	// editRequest -> post
 	public Post toPost() {
