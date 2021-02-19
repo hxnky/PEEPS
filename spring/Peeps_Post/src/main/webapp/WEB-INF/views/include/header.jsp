@@ -9,7 +9,7 @@
 					<nav id="nav">
 						<a href="<c:url value="/"/>">Home</a>
 						<a href="<c:url value="/main/jhS2"/>">마이 페이지</a>
-						<a href="<c:url value="/main/list"/>">Donation</a>
+											<!-- test 회원 계정 -->
 					</nav>
 				</div>
 			</header>
