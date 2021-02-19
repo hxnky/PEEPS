@@ -140,8 +140,8 @@
 			<!-- 버튼 -->
 			<tr>
 				<td class="post_cnclorsubmt">
-					<input type="button" value="취소">
-					<input type="button" value="등록" id="submitbtn" onclick="javascript:actionForm();">
+					<input type="button" class="resetBtn" value="취소">
+					<input type="button" class="sbmtBtn" value="등록" id="submitbtn" onclick="javascript:actionForm();">
 				</td>
 			</tr>
 		</table>
@@ -152,7 +152,7 @@
 		// 파일 업로드 이미지 버튼 클릭 시 
         function uploadImgBtnClick(){
         	$('#postformfile').trigger('click');
-        }
+        };
         
         var image_list = [];
         
@@ -167,8 +167,8 @@
     			
     			if(image_list[i].name == delFname){
     				image_list.splice(i,1);
-    			}
-    		}
+    			};
+    		};
 			
     		/* console.log("index :" + index);
     		image_list.splice(index, 1); */
@@ -196,7 +196,7 @@
 	    	if(ptchk == "" || pcchk == ""){
 	    		alert("제목과 내용은 필수로 입력하셔야 합니다.")
 	    		return false;
-	    	} 
+	    	}; 
 	    	
 	    	console.log("이미지 리스트 : ", image_list);
 	    	
@@ -205,16 +205,16 @@
 	    		formData.delete("postformfile");
 		    	for(var i=0; i<image_list.length; i++){	
 		    		formData.append("postformfile", image_list[i]);
-		    	}		
-	    	}
+		    	};	
+	    	};
 	    	
 	    	// 폼 데이터 확인
 	    	for (var key of formData.keys()) {
 	    		console.log("키 : ",key);
-	    	}
+	    	};
 	    	for (var value of formData.values()) {
 	    		console.log("밸류 : ", value);
-	    	}			
+	    	};			
 	    			
 	    	//ajax로 폼데이터 전송
 	    	$.ajax({
@@ -249,7 +249,7 @@
 	                    var userInput = $(this).val().substr(0,1500);
 	                    $(this).val(userInput);
 	                    inputStrLen = 1500;
-	                }
+	                };
 	                $('#textnumber').text(inputStrLen);
 	            });
 	            
@@ -262,7 +262,7 @@
 	                    var userInput = $(this).val().substr(0,30);
 	                    $(this).val(userInput);
 	                    inputStrLen = 30;
-	                }
+	                };
 	                /* $('#textnumber').text(inputStrLen); */
 	            });
 	            
@@ -280,8 +280,8 @@
 			    	  alert("이미지는 20개까지 업로드 가능합니다.")
 			    	  $("input[type='file']").val("");
 			    	  return false;
-			      }
-
+			      };
+				
 				var files = e.target.files;
 				console.log("files---------- : ",files);
 
@@ -290,22 +290,37 @@
 							
 				var index = 0;
 				
+				// 이미지 20개 제한
+				var tempList = [];
+				
+				for(var list in image_list){
+					tempList.push(image_list);
+				}
+				tempList.push(filesArr);
+				console.log("템프리스트 : ", tempList);
+				console.log("템프리스트 인덱스 0 :",tempList[0]);
+				
+				if(tempList.length > 20){
+					alert("이미지는 20개까지 업로드 가능합니다.");
+					return false;
+				}
+				
 				filesArr.forEach(function(f) {
 							if (!f.type.match("image.*")) {
 								alert('이미지 파일만 가능합니다.')
 								/* $("input[type='file']").val(""); */
 								return;
-							}
+							};
 							
 							image_list.push(f);
 							
 							if(image_list.length > 20){
 								alert('이미지는 20개까지 업로드 가능합니다');
 								console.log("배열1 길이:",image_list.length);
-								image_list.pop();
+								image_list.splice(20,image_list.length);
 								console.log("배열2 길이:",image_list.length);
 								return false;
-							}
+							};
 							
 	            console.log("image_list",image_list); 
 							
@@ -313,20 +328,20 @@
 							reader.onload = function(e) {
 								
 								var img_html = '<a href="javascript:void(0);" onclick=\"deleteNewImageAction('+ index + ');\" id="img_id_'+ index+ '" class="img_event" >';
-								img_html += '<img src="'+e.target.result+'" data-file="'+f.name+'" id="imgPrv'+index+'" style="width:160px; height:160px;"></a>';
+								img_html += '<img src="'+e.target.result+'" data-file="'+f.name+'" id="imgPrv'+index+'" class="imgPrv" style="width:148px; height:148px;"></a>';
 
 								index++;
 
 								$('.preview').append(img_html);
 
-							}
+							};
 							reader.readAsDataURL(f);
 													
 						});
 						
 			};
 	        
-	    } // window.onload 끝
+	    }; // window.onload 끝
 	    
     
 		</script>

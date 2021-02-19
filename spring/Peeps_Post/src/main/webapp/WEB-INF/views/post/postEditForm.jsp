@@ -37,17 +37,19 @@
 	font-weight: 800;
 }
 
+.pdate {
+	color: #999;
+	font-size: 1.1em;
+}
+
 .ptitle {
-	border: 1px solid;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 	width: 770px;
 	height: 50px;
 	margin-bottom: 15px;
 	font-size: 1.5em;
 	padding: 5px 15px;
-}
-
-.post_photoinput {
-	margin: 20px 0;
 }
 
 .pcontent {
@@ -57,6 +59,8 @@
 	font-size: 1.4em;
 	padding: 15px;
 	margin-bottom: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 
 /* 스크롤바 숨김 & 스크롤 정상 작동 */
@@ -74,6 +78,12 @@
 	height: 40px;
 	font-size: 1.1em;
 	font-family: 'Nanum Gothic', sans-serif;
+	border: 0px solid;
+	border-radius: 5px;
+}
+
+#submitbtn {
+	background-color: #F5E978;
 }
 
 #imguploadbtn {
@@ -82,11 +92,17 @@
 }
 
 #preview {
-	width: 800px;
+	width: 790px;
 	min-height: 50px;
 	margin: 15px 0px;
 	border: 1px solid #ccc;
 	font-size: 0;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+.imgPrv {
+	padding: 5px;
 }
 
 .plocwrap {
@@ -95,11 +111,12 @@
 
 .searchlocbtn {
 	border: 0px solid;
-	background-color: #ccc;
+	background-color: #F5E978;
 	border-radius: 5px;
-	width: 80px;
-	height: 35px;
-	margin: 5px 0;
+	width: 110px;
+	height: 45px;
+	margin: 5px 10px 5px 0;
+	font-size: 1.1em;
 }
 
 .searchlocBox {
@@ -107,6 +124,7 @@
 	background-color: transparent;
 	cursor: default;
 	width: 250px;
+	font-size: 1.1em;
 }
 
 .displayNone {
@@ -236,8 +254,7 @@ body {
 					
 					// 게시글 인덱스
 					console.log("ajax p_idx : ", data.p_idx);
-					var pInfo = '<input type="hidden" name="postIdx" value="'+data.p_idx+'">';
-					   pInfo += '<input type="hidden" name="postIdx" value="'+data.p_thumbnail+'">';
+					var pInfo = '<input type="hidden" class="postIdx" name="postIdx" value="'+data.p_idx+'">';
 					$('.postInfo').append(pInfo);
 					// 날짜
 					var date = data.p_date-540*60*1000;
@@ -274,10 +291,9 @@ body {
 					
 					$.each(data,function(index, item){
 						var prvImgHtml = '<a href="javascript:void(0);" onclick=\"deleteOldImageAction('+ index + ');\" id="img_id_'+ index+ '" class="img_event" >';
-						   prvImgHtml += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" style="width:160px; height:160px;" id="post-images" alt="postImages"></a>';
+						   prvImgHtml += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" style="width:148px; height:148px;" class="imgPrv" alt="postImages"></a>';
 						
 						   oldImage_list.push(item.f_name);
-						   oldImg_original.push(item.f_name);
 						   
 						   $('.oldPrv').append(prvImgHtml);
 						   /* console.log("예전 이미지 인덱스 : ", index); */
@@ -369,8 +385,6 @@ body {
 				}).open();
 			}
 			
-			
-		var oldImg_original = [];
 		var oldImage_list = [];
 		var deleteImage_list = [];
         var image_list = []; // 새롭게 추가,삭제한 파일들의 배열
@@ -378,7 +392,8 @@ body {
      // 뷰에서 선택한 이미지를 삭제 (추가한 이미지)
     	function deleteNewImageAction(index) {
     		console.log('테스트 4');
-
+    		console.log(index);
+    		
     		var delFname = $('#imgPrv'+index).data('file');
     		console.log(delFname); 
     		for(var i=0; i<image_list.length; i++){
@@ -453,9 +468,9 @@ body {
 	    	}
 	    	
 	    	// 기존 이미지 원본 리스트 저장
-	    	for(var i=0; i<oldImg_original.length; i++){
-	    		formData.append("oldOriginalImg", oldImg_original[i])
-    			console.log("기존 원본 이미지 : ", oldImg_original[i]);
+	    	for(var i=0; i<oldImage_list.length; i++){
+	    		formData.append("oldImage", oldImage_list[i])
+    			console.log("기존 원본 이미지 : ", oldImage_list[i]);
 	    	}
 	    	
 	    	// 폼 데이터 확인
@@ -465,6 +480,9 @@ body {
 	    	for (var value of formData.values()) {
 	    		console.log("밸류 : ", value);
 	    	}			
+	    	
+	    	var postIdx = $(".postIdx").val();
+	    	console.log("포스트idx 확인 : ", postIdx);
 	    			
 	    	//ajax로 폼데이터 전송
 	    	$.ajax({
@@ -475,9 +493,9 @@ body {
 	    		contentType: false,
 	    		success : function(data){
 	    					
-	    		console.log("ajax 데이터 : ",data);			/* test 계정 아이디 */
-	    		window.location.href="http://localhost:8080/post/main/jhS2";
-	    					
+	    		console.log("ajax 데이터 : ",data);			
+	    		window.location.href="http://localhost:8080/post/main/post/detail?idx="+postIdx;
+	    		console.log("포스트idx 확인 : ", postIdx);
 	    		},error: function(e){
 	    		console.log("ajax전송에러");	
 	    		console.log(e);
@@ -531,7 +549,7 @@ body {
 			    	  $("input[type='file']").val("");
 			    	  return false;
 			      }
-
+				
 				var files = e.target.files;
 				console.log("files---------- : ",files);
 
@@ -540,11 +558,40 @@ body {
 							
 				var index = 100;
 				
-				filesArr.forEach(function(f) {
+				// 이미지 20개 제한
+				var tempList = [];
+				
+				for(var list in image_list){
+					tempList.push(list);
+				}
+				
+				for(var list in filesArr){
+					tempList.push(list);
+				}
+				
+				console.log("템프리스트 : ", tempList);
+				
+				/* var oldImage_list = [];
+				var deleteImage_list = []; */
+				var oldLngth = oldImage_list.length;
+				var delLngth = deleteImage_list.length;
+				var newLngth = tempList.length;
+				var remainLng = oldLngth - delLngth + newLngth;
+				console.log(oldLngth - delLngth);
+				console.log(tempList.length);
+				console.log(remainLng);
+				
+				if(remainLng > 20){
+					alert("이미지는 20개까지 업로드 가능합니다.");
+					return false;
+				}
+				
+				/* filesArr.forEach(function(f) { */
+					filesArr.some(function(f) {
 							if (!f.type.match("image.*")) {
 								alert('이미지 파일만 가능합니다.')
 								/* $("input[type='file']").val(""); */
-								return;
+								return true;
 							}
 							
 							image_list.push(f);
@@ -552,9 +599,9 @@ body {
 							if(image_list.length > 20){
 								alert('이미지는 20개까지 업로드 가능합니다');
 								console.log("배열1 길이:",image_list.length);
-								image_list.pop();
+								image_list.splice(20,image_list.length);
 								console.log("배열2 길이:",image_list.length);
-								return false;
+								return true;
 							}
 							
 	            console.log("image_list",image_list); 
@@ -563,7 +610,7 @@ body {
 							reader.onload = function(e) {
 								
 								var img_html = '<a href="javascript:void(0);" onclick=\"deleteNewImageAction('+ index + ');\" id="img_id_'+ index+ '" class="img_event" >';
-								img_html += '<img src="'+e.target.result+'" data-file="'+f.name+'" style="width:160px; height:160px;"></a>';
+								img_html += '<img src="'+e.target.result+'" data-file="'+f.name+'" style="width:148px; height:148px;" class="imgPrv" id="imgPrv'+index+'"></a>';
 
 								index++;
 
