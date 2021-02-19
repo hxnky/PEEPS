@@ -3,15 +3,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 
-<%
-	// 줄바꿈
-	pageContext.setAttribute("br", "<br/>");
-	pageContext.setAttribute("cn", "\n");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,214 +13,7 @@
 <title>PEEPS</title>
 </head>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" 
-rel="stylesheet" 
-integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" 
-crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
-integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" 
-crossorigin="anonymous"></script>
-
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap')
-	;
-</style>
-
-<style>
-.post_wrap {
-	width: 1000px;
-	height: auto;
-	background-color: white;
-	margin: 200px auto;
-	border: 1px solid #eef0ed;
-}
-
-.post {
-	margin: 80px auto 65px;
-}
-
-.post_top_wrap {
-	padding-bottom: 15px;
-}
-
-.postuserphoto {
-	width: 50px;
-	height: 50px;
-	border-radius: 50px;
-}
-
-.postuserphoto, .id, .followchk {
-	float: left;
-	margin-right: 15px;
-}
-
-.id, .followchk {
-	/* height: 50px;
-	line-height: 300%; */
-	font-weight: 800;
-	font-size: 20px;
-	margin-top: 10px;
-}
-
-.followchk {
-	color: #aaa;
-}
-
-.ptitle {
-	width: 800px;
-	height: 50px;
-	font-size: 2em;
-	font-weight: 800;
-	border-top: 2px solid #ccc;
-	border-bottom: 2px solid #ccc;
-	display: table-cell;
-    vertical-align: middle;
-    padding: 10px;
-}
-
-.post_datenbutton {
-	padding: 15px 5px 0 5px;
-}
-
-.pdate {
-	/* text-align: right;  */
-	float: left;
-	font-weight: 800;
-	font-size: 20px;
-	color: #aaa;
-	margin: auto;
-    /* margin: 7px 0; */
-}
-
-.deleteBtn, .editBtn {
-	background-color: #ccc;
-	float: right;
-	margin-left: 20px;
-	font-size: 15px;
-	border: 0px solid;
-	width: 80px;
-	height: 40px;
-	text-align: center;
-	padding: 10px;
-}
-
-.carousel-inner>div {
-    position: relative;
-    height:100%;
-}
-
-.carousel-inner>div>img {
-    position: absolute;   
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.carousel-inner {
-	margin: 15px auto;
-	width: 800px;
-	height: 800px;
-	background-color: #ccc;
-}
-
-.content {
-	margin: 20px 0;
-}
-
-.rightside {
-	float: right;
-}
-
-.cmtdiv {
-	margin: 25px 0;
-}
-
-.cmtinputarea {
-	float: right;
-}
-
-.cmttxt {
-	resize: none;
-	width: 555px;
-	height: 50px;
-	border: 2px solid #ccc;
-	border-radius: 5px;
-	display: table-cell;
-    vertical-align: middle;
-    padding: 10px;
-	margin-right: 10px;
-}
-
-.cmttxt::-webkit-scrollbar {
-	display: none;
-}
-
-.cmtbtn {
-	border: 0px solid;
-	width: 70px;
-	height: 50px;
-}
-
-pre {
-	font-size: 1.2em;
-	font-family: 'Nanum Gothic', sans-serif;
-}
-
-a:link {
-	text-decoration: none;
-	color: white;
-}
-a:visited {
-	text-decoration: none;
-	color: white;
-}
-a:active {
-	text-decoration: none;
-	color: white;
-}
-a:hover {
-	text-decoration: none;
-	color: white;
-}
-
-.oneImg {
-	text-align: center;
-	margin: 20px 0;
-	background-color: #ccc;
-	width: 800px;
-	min-height: 800px;
-	position: relative;
-	
-}
-
-.oneImg>img {
-	/* height: 800px; */
-	/* min-width: 800px; */
-	position: absolute;
-	max-height: 100%;
-	max-width: 100%;
-	/* width: auto; */
-	min-width: 800px;
-	height: auto;
-	margin:auto;
-    top:0; 
-    bottom:0; 
-    left:0; 
-    right:0;
-}
-
-body {
-	background-color: #fcf9f6;
-	font-family: 'Nanum Gothic', sans-serif;
-}
-</style>
-
-<!--jquery 라이브러리 로드-->
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" 
-		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
-		crossorigin="anonymous">
-</script> 
-
+<%@ include file="/WEB-INF/views/include/detailBasicset.jsp"%>  
 
 <body>
 
@@ -254,16 +41,8 @@ body {
 			<tr>
 				<td class="post_datenbutton">
 					<span class="pdate">
-						<%-- <fmt:formatDate value="${readView.post.p_date}"
-										pattern="yyyy.MM.dd."/> --%>
 					</span>
 					<span class="deBtn">
-					<%-- <a class="deleteBtn"
-					href="javascript:deletePost(${readView.post.p_idx});"
-					>삭제</a>
-					<a class="editBtn"
-					href="<c:url value="/post/editPNO=${readView.post.p_idx}" />"
-					>수정</a> --%>
 					</span>
 					
 				</td>
@@ -293,8 +72,10 @@ body {
 						
 						<span class="rightside">
 						<img style="width: 30px; height: 30px;" src="<spring:url value='/resources/img/likespic.png'/>">
+						<!-- 좋아요 -->
 						<span class="likes" style="margin: 0 5px;"></span>
 						<img style="width: 30px; height: 30px;" src="<spring:url value='/resources/img/cmtpic.png'/>">
+						<!-- 댓글 개수 -->
 						<span class="comment" style="margin-left: 5px;">3</span>
 						</span>
 					</div>
@@ -319,7 +100,6 @@ body {
 			<!-- 댓글창 -->
 			<tr>
 				<td>
-					
 				</td>
 			</tr>
 		</table>
@@ -395,6 +175,11 @@ body {
 				type : 'GET',
 				success: function(data){
 					console.log("게시물파일 ajax success", data);
+					
+					// 이미지가 없을 경우 게시글 내용 최소 사이즈 지정
+					if(data.length < 1){
+						$('.content').attr('id','divMinHeight');
+					}
 					
 					if(data.length == 1){
 						console.log("이미지 1개");
