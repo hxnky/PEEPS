@@ -11,126 +11,10 @@
 <meta charset="UTF-8">
 <title>게시글 작성</title>
 </head>
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap')
-	;
-</style>
 
-<style>
-.post_wrap {
-	width: 1000px;
-	height: auto;
-	background-color: white;
-	margin: 200px auto;
-	border: 1px solid #eef0ed;
-}
-
-.post {
-	margin: 80px auto 65px;
-}
-
-.pdate_wrap {
-	text-align: right;
-	height: 40px;
-	font-family: 'Nanum Gothic', sans-serif;
-	font-weight: 800;
-}
-
-.ptitle {
-	border: 1px solid;
-	width: 770px;
-	height: 50px;
-	margin-bottom: 15px;
-	font-size: 1.5em;
-	padding: 5px 15px;
-}
-
-.post_photoinput {
-	margin: 20px 0;
-}
-
-.pcontent {
-	resize: none;
-	width: 770px;
-	height: 600px;
-	font-size: 1.4em;
-	padding: 15px;
-	margin-bottom: 5px;
-}
-
-.pcontent::-webkit-scrollbar {
-	display: none;
-}
-/* 스크롤바 숨김 & 스크롤 정상 작동 */
-.post_cnclorsubmt {
-	text-align: right;
-}
-
-.post_cnclorsubmt>input {
-	margin: 20px 0 0 20px;
-	width: 100px;
-	height: 40px;
-	font-size: 1.1em;
-	font-family: 'Nanum Gothic', sans-serif;
-}
-
-#imguploadbtn {
-	width: 45px;
-	height: 45px;
-}
-
-#preview {
-	width: 800px;
-	min-height: 50px;
-	margin: 15px 0px;
-	border: 1px solid #ccc;
-}
-
-/* .selProductFile {
-	width: 180px;
-	height: 180px;
-	margin: 10px;
-} */
-
-.plocwrap {
-	margin: 10px 0;
-}
-
-.searchlocbtn {
-	border: 0px solid;
-	background-color: #ccc;
-	border-radius: 5px;
-	width: 80px;
-	height: 35px;
-	margin: 5px 0;
-}
-
-.searchlocBox {
-	border: 0px solid;
-	background-color: transparent;
-	cursor: default;
-	width: 250px;
-}
-
-body {
-	background-color: #fcf9f6;
-	font-family: 'Nanum Gothic', sans-serif;
-}
-</style>
-
-<!--jquery 라이브러리 로드-->
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" 
-		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
-		crossorigin="anonymous">
-</script>    
-
-
-
+<%@ include file="/WEB-INF/views/include/writeBasicset.jsp"%>  
 
 <body>
-
-
 
 	<div class="post_wrap">
 		<form method="post" enctype="multipart/form-data" id="uploadForm">
@@ -160,13 +44,12 @@ body {
 			<!-- 파일 -->
 			<tr>
 				<td>
-					<!-- <input type="hidden" class="pthumbnail" name="pthumbnail" value=""> -->
 					<div>
 						<input type="file" accept="image/*" 
 						name="postformfile" id="postformfile"
-						multiple>
-						<%-- <a href="javascript:" onclick="fileUploadAction();" class="my_button">
-						<img id="imguploadbtn" src="<c:url value="/resources/img/imguploadbtn.png"/>"/> </a>--%>
+						multiple hidden>
+						<a href="javascript:" onclick="uploadImgBtnClick();" class="my_button">
+						<img id="imguploadbtn" src="<c:url value="/resources/img/imguploadbtn.png"/>"/> </a>
 						
 					</div>
 					<!-- 파일 프리뷰 -->
@@ -265,15 +148,30 @@ body {
 		</form>
 		
 		<script>
+		
+		// 파일 업로드 이미지 버튼 클릭 시 
+        function uploadImgBtnClick(){
+        	$('#postformfile').trigger('click');
+        }
         
         var image_list = [];
         
      // 뷰에서 선택한 이미지를 삭제 (추가한 이미지)
     	function deleteNewImageAction(index) {
     		console.log('테스트 4');
-
-    		console.log("index :" + index);
-    		image_list.splice(index, 1);
+    		
+    		var delFname = $('#imgPrv'+index).data('file');
+    		console.log(delFname); 
+    		for(var i=0; i<image_list.length; i++){
+    			console.log(image_list[i].name);
+    			
+    			if(image_list[i].name == delFname){
+    				image_list.splice(i,1);
+    			}
+    		}
+			
+    		/* console.log("index :" + index);
+    		image_list.splice(index, 1); */
 
     		var target = $('#img_id_' + index);
     		console.log(target);
@@ -415,7 +313,7 @@ body {
 							reader.onload = function(e) {
 								
 								var img_html = '<a href="javascript:void(0);" onclick=\"deleteNewImageAction('+ index + ');\" id="img_id_'+ index+ '" class="img_event" >';
-								img_html += '<img src="'+e.target.result+'" data-file="'+f.name+'" style="width:160px; height:160px;"></a>';
+								img_html += '<img src="'+e.target.result+'" data-file="'+f.name+'" id="imgPrv'+index+'" style="width:160px; height:160px;"></a>';
 
 								index++;
 
@@ -430,67 +328,6 @@ body {
 	        
 	    } // window.onload 끝
 	    
-        
-        
-        
-     	
-        
-	   
-        
-        
-     
-        /* 임시 메서드 시작부분 */
-        // 파일 업로드 메서드
-        /* function handleImgFileSelect(e){
-        	// 이미지 개수 제한
-		      if(e.target.files.length>20){
-		    	  alert("이미지는 20개까지 업로드 가능합니다.")
-		    	  $("input[type='file']").val("");
-		    	  return false;
-		      }
-        	
-        	// 이미지 정보들을 초기화
-            sel_files = [];
-            $(".preview").empty();
- 
-            var files = e.target.files;
-            var filesArr = Array.prototype.slice.call(files);
- 
-            var index = 0;
-            
-            // 이미지 확장자 이외 제한
-            filesArr.forEach(function(f) {
-                if(!f.type.match("image.*")) {
-                    alert("확장자는 이미지 확장자만 가능합니다.");
-                    return;
-                }
- 
-                sel_files.push(f);
- 
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                	var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\">"
-                		html += "<img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
-                	
-                	$(".preview").append(html);
-                    index++;
- 
-                }
-                reader.readAsDataURL(f);
-                
-            });
-        }
-        
-        // 파일 개별 취소
-        function deleteImageAction(index) {            
-            console.log("index : "+index);
-            sel_files.splice(index, 1);
- 
-            var img_id = "#img_id_"+index;
-            $(img_id).remove();
- 
-            console.log(sel_files);
-        }      */ 
     
 		</script>
 	</div>

@@ -59,10 +59,11 @@
 	margin-bottom: 5px;
 }
 
+/* 스크롤바 숨김 & 스크롤 정상 작동 */
 .pcontent::-webkit-scrollbar {
 	display: none;
 }
-/* 스크롤바 숨김 & 스크롤 정상 작동 */
+
 .post_cnclorsubmt {
 	text-align: right;
 }
@@ -86,12 +87,6 @@
 	margin: 15px 0px;
 	border: 1px solid #ccc;
 	font-size: 0;
-}
-
-.selProductFile {
-	width: 180px;
-	height: 180px;
-	margin: 10px;
 }
 
 .plocwrap {
@@ -160,13 +155,12 @@ body {
 			<!-- 파일 -->
 			<tr>
 				<td>
-					<!-- <input type="hidden" class="pthumbnail" name="pthumbnail" value=""> -->
 					<div>
 						<input type="file" accept="image/*" 
 						name="postformfile" id="postformfile"
-						multiple>
-						<%-- <a href="javascript:" onclick="fileUploadAction();" class="my_button">
-						<img id="imguploadbtn" src="<c:url value="/resources/img/imguploadbtn.png"/>"/> </a>--%>
+						multiple hidden>
+						<a href="javascript:" onclick="uploadImgBtnClick();" class="my_button">
+						<img id="imguploadbtn" src="<c:url value="/resources/img/imguploadbtn.png"/>"/> </a>
 						
 					</div>
 					<!-- 파일 프리뷰 -->
@@ -215,6 +209,12 @@ body {
 		</form>
 		
 		<script>
+		
+		// 파일 업로드 이미지 버튼 클릭 시 
+        function uploadImgBtnClick(){
+        	$('#postformfile').trigger('click');
+        }
+		
 		var postLoc = "";
 		$(document).ready(function() {
 			
@@ -379,8 +379,18 @@ body {
     	function deleteNewImageAction(index) {
     		console.log('테스트 4');
 
-    		console.log("index :" + index);
-    		image_list.splice(index, 1);
+    		var delFname = $('#imgPrv'+index).data('file');
+    		console.log(delFname); 
+    		for(var i=0; i<image_list.length; i++){
+    			console.log(image_list[i].name);
+    			
+    			if(image_list[i].name == delFname){
+    				image_list.splice(i,1);
+    			}
+    		}
+			
+    		/* console.log("index :" + index);
+    		image_list.splice(index, 1); */
 
     		var target = $('#img_id_' + index);
     		console.log(target);
@@ -466,7 +476,7 @@ body {
 	    		success : function(data){
 	    					
 	    		console.log("ajax 데이터 : ",data);			/* test 계정 아이디 */
-	    		/* window.location.href="http://localhost:8080/post/main/jhS2";  */
+	    		window.location.href="http://localhost:8080/post/main/jhS2";
 	    					
 	    		},error: function(e){
 	    		console.log("ajax전송에러");	
@@ -568,67 +578,6 @@ body {
 	        
 	    } // window.onload 끝
 	    
-	 
-        
-        
-     	
-        
-	   
-        
-        
-     
-        /* 임시 메서드 시작부분 */
-        // 파일 업로드 메서드
-        /* function handleImgFileSelect(e){
-        	// 이미지 개수 제한
-		      if(e.target.files.length>20){
-		    	  alert("이미지는 20개까지 업로드 가능합니다.")
-		    	  $("input[type='file']").val("");
-		    	  return false;
-		      }
-        	
-        	// 이미지 정보들을 초기화
-            sel_files = [];
-            $(".preview").empty();
- 
-            var files = e.target.files;
-            var filesArr = Array.prototype.slice.call(files);
- 
-            var index = 0;
-            
-            // 이미지 확장자 이외 제한
-            filesArr.forEach(function(f) {
-                if(!f.type.match("image.*")) {
-                    alert("확장자는 이미지 확장자만 가능합니다.");
-                    return;
-                }
- 
-                sel_files.push(f);
- 
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                	var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\">"
-                		html += "<img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
-                	
-                	$(".preview").append(html);
-                    index++;
- 
-                }
-                reader.readAsDataURL(f);
-                
-            });
-        }
-        
-        // 파일 개별 취소
-        function deleteImageAction(index) {            
-            console.log("index : "+index);
-            sel_files.splice(index, 1);
- 
-            var img_id = "#img_id_"+index;
-            $(img_id).remove();
- 
-            console.log(sel_files);
-        }      */ 
     
 		</script>
 	</div>
