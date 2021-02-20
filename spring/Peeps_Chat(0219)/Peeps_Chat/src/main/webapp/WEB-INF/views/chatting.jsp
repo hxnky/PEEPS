@@ -281,6 +281,22 @@
 					type : "GET",
 					success : function(list) {
 						
+						var text = JSON.stringify(list);
+						
+						console.log(text);
+						if(text==0){
+							console.log('text null');
+						} else {
+							console.log('ajax로 받았는데 text null 아님');
+							switch(text.type){
+							case "like":
+								console.log('like');
+								break;
+							case 'comment':
+								console.log('comment');
+								break;
+							}
+						}
 						if(list == 0){
 							console.log('list null');
 							} else {
