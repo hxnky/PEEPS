@@ -1,44 +1,147 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="">
 
 <head>
 
-<title>수정 폼</title>
+<title>방명록</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <%@ include file="/WEB-INF/views/include/basicset.jsp"%>
 
 
 
 </head>
-<style>ㅇㅇㅇ
+<style>
 .ginsert_wrap {
+	border: 1px solid red;
 	background-color: #eef0ed;
 	height: 270px;
 	width: 850px;
-	margin: 0px auto 10px auto;
+	margin: auto;
 }
 
-.ginsert_wrap>ul>li>img {
-	background-color: black;
-	/* white: 50px;
-height: 50px; */
-	margin: 10px;
-	border-radius: 50px;
+.ginsert_wrap2 {
+	border: 1px solid red;
+	background-color: #eef0ed;
+	height: auto;
+	width: 850px;
+	margin: auto;
 }
 
 .ginsert_wrap>ul>li {
 	list-style-type: none;
 	float: left;
-	margin: 10px;
-	margin-top: 50px;
+	margin: 5px;
+	margin-top: 30px;
 }
 
 .gimg {
 	background-color: white;
 	width: 70px;
 	height: 70px;
+	margin: 10px;
+	border-radius: 50px;
+}
+
+.upgphoto, .upgid {
+	float: left;
+}
+
+.gdate {
+	float: right;
+	margin: 15px
+}
+
+.upgtable {
+	/* background-color: aqua; */
+	margin: 100px;
+}
+
+.upmsg {
+	border: 1px solid black;
+	width: 600px;
+	margin: 30px auto;
+	height: auto;
+	font-size: 1.5em;
+}
+
+table.upmsg_table {
+	/* background-color: aqua; */
+	margin: 30px;
+	font-size: 20px;
+}
+
+.nowpage {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.paging {
+	text-align: center;
+}
+
+.upgbinfo {
+	border: 1px solid red;
+	width: 830px;
+	height: 100px;
+	margin: 10px auto 10px auto;
+}
+
+.gbutton {
+	border: 1px solid red;
+	float: right;
+}
+
+.paging {
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+.paging>span {
+	padding: 5px 10px;
+	border-radius: 4px;
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	font-size: 1.2em;
+}
+
+.postidx {
+	color: black;
+}
+
+.col-sm-4 {
+	width: 383px;
+}
+
+.row {
+	/* margin: auto;
+	width: 1150px; */
+}
+
+.container {
+	/* max-width: 100%; 
+	height: auto; */
+	width: 1150px;
+}
+
+.pageBtn:link {
+	text-decoration: none;
+	color: gray;
+}
+.pageBtn:visited {
+	text-decoration: none;
+	color: gray;
+}
+.pageBtn:active {
+	text-decoration: none;
+	color: gray;
+}
+.pageBtn:hover {
+	text-decoration: none;
+	color: gray;
 }
 </style>
 
@@ -53,151 +156,230 @@ height: 50px; */
 	</div>
 	<!--=====================context======================-->
 	<div class="changing">
-		<form method="POST" enctype="multipart/form-data">
 
 
+		<form method="POST" id="insertGForm" enctype="multipart/form-data">
 			<div class="ginsert_wrap">
-
+				<!-- 방명록 입력 div -->
 				<ul>
-<!--  
 					<li><img
 						src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"
 						class="gimg"></li>
-					<li><input type="text" id ="gidx",name="gidx" value="${guestbook.gidx}"></li>	
 					<li><textarea rows="9" cols="80" id="gmessage" name="gmessage">${guestbook.gmessage}</textarea><br>
-
-						<input type="text" id="oldgphoto" name="oldgphoto" value="${guestbook.gphoto}"><input type="file" id="gphoto" name="gphoto" ></li>
-					<li><input type="submit" id="c_btn" value="수정"><br><br><button>취소</button></li>
--->
-				 <div class="g_edit"></div>
+					<input type="text" id="oldgphoto" name="oldgphoto" value="${guestbook.gphoto}"><input type="file" id="gphoto" name="gphoto"></li>
+					<li><input type="submit" value="수정" id="editbtn"><button>취소</button></li>
 				</ul>
 			</div>
+			`
 		</form>
+		
+
+		<div class="ginsert_wrap2" id="ginsert_wrap2">
+           <!-- 방명록 시작 -->
+				
+			<!-- 방명록 끝 -->	
+			
+			</div>
+			
+			
+			
 	</div>
-	
-	
-	<script>
-	
-
-		
+	<!-- 목록 끝 -->
+	<!-- 페이징 -->
+	<div class="paging">
+	</div>
 			
-	// .g_edit .cmt -> 수정 혹은 통일시키기 !!!!!!!!!!!!!!!!!!!!!!!!!!
-	
-	
-	// 수정 버튼 누르면 폼 
-	function editComment(idx){
-		
-		// 460  <input type='text' id='load_cmt' value='+cmt.cmt_content+'>
-		var origin = $('.g_edit .changing #loac_cmt').eq(idx).val(); // 수정 글 
-		
-		console.log(idx);
-		
-		var html="<div class='editForm'>";
-		html += "<li><img src='https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340' class='gimg'></li>";
-		html += "<li><input type='text' id ='gidx',name='gidx' value="+${guestbook.gidx}+"></li>";
-		html += "<li><textarea rows='9' cols='80' id='gmessage' name='gmessage'>"+origin+"</textarea><br>";
-		html += "<input type='text' id='oldgphoto' name='oldgphoto' value="+${guestbook.gphoto}+"><input type='file' id='gphoto' name='gphoto' ></li>";
-		html += "	<li><input type='submit'  id='c_btn' value='수정'><br><br><button>취소</button></li>";
-		
-		$('.g_edit .cmt').eq(idx).replaceWith(html);
-	}
-	
+			<script>
+			// 뷰컨트롤러 통해 페이지 번호 받기
+			function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+			var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
+			return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
+		  }
 
-	</script>
-	
-	<script>
-	
-	// 댓글 삭제 
-	// 댓글 작성 html에서  <input type="submit" id="cmtbtn" value="등록">
-	// 	삭제 버튼 id= g_del (guestform)  수정 버튼 id=g_ed
-	$(document).on("click", "#g_del", function(){
-		
-		var idx = $('.g_edit .cmt #g_del').index(this);
-		var g_dix = document.getElementsByClassName('cmt')[idx].id;
-		
-		console.log(idx);
-		console.log(gidx);
-		
-		if(confirm('댓글을 삭제하시겠습니까?')){
 			
-			$('.g_edit .cmt').eq(idx).remove();
+			var p = getParameterByName('p');
+			var gidx =getParameterByName('gidx');
+			console.log("방명록인덱스 : ",gidx);
+		    console.log(p);
+			
+		$(document).ready(function(){
+			
+		   /*  방명록 데이터  수정*/
+			
+			$('#editbtn').click(function() {
+
+				var photoFile =$('#gphoto');
+				
+				var file1 =photoFile[0].files[0];
+			
+				
+				//console.log(file1);
+				
+			var formData = new FormData();
+				formData.append("gmessage",$('#gmessage').val());
+				formData.append("gphoto",file1);
+				
+				//console.log(formData);
+				
+				
+				$.ajax({
+					url : 'http://localhost:8080/peeps/rest/guestbook/edit',
+					type : 'post',
+					data : formData,
+					async : false,
+					enctype : 'multipart/form-data',
+					processData : false,
+					contentType : false,
+					cache : false ,
+					success : function(data){
+						console.log("ajax data",data);
+						console.log("작성완료");
+						alert("방명록이 수정 되었습니다");
+						
+					}
+				});
+				
+				
+				
+			
+			}); //-------방명록 작성 ajax끝 
+			
+			
+			
+			
+		
+
+				/*게스트북 리스트 출력*/
+				$.ajax({
+					url : 'http://localhost:8080/peeps/rest/guestbook?p='+p,
+					type : 'GET',
+					success : function(data){
+						console.log(data);
+						//alert(data);
+						//alert(JSON.stringify(data));
+						console.log("ajax로 받아온 데이터 : ", data);
+						var list = $(data.gbList);
+						console.log(list);
+						$.each(list, function(index, item){
+						
+							var date = item.gdate-540*60*1000;
+							
+							date = new Date(date).toLocaleDateString();
+						
+							console.log("날짜: ", date);
+						 
+							
+							var html  =' <div class="upgbinfo">';
+								html +=' <span class="upgphoto"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"class="gimg" > </span>';
+								html +=' <span class="upgid"><h4>'+item.gwriter+'</h4></span>';
+								html +=' <div class="gbutton">';
+								html +=' <button type="button" onclick="location.href="<c:url value="/guestbook/edit?gidx='+item.gidx+'"/>" ">수정</button>';
+								html +=' <button type="button"onclick="location.href="javascript:deleteMsg('+item.gidx+');">삭제</button></div>';
+								html +=' <span class="gdate">'+date+'<fmt:formatDate value="${guestbook.gdate}" pattern="yyyy.MM.dd." /></span>';
+							    html +=' </div>';
+							    html +=' <div class="upmsg" border="1px">';
+							    html +=' <div>'+item.gmessage+'</div>';
+							    html +=' <span><img src="<c:url value="/fileupload/guestbook/'+item.gphoto+'"/>"></span>';
+							    html +='  </div>';
+							    html +='  <a href="javascript:deleteMsg('+item.gidx+');">삭제</a>';
+								   
+							    	html +=' <a href="<c:url value="/guestbook/edit?gidx='+item.gidx+'"/>">수정</a>';
+									
+							   $('#ginsert_wrap2').append(html); 
+						 
+						});
+					
+						// 페이징 처리
+						 if (data.totalGbCount>0){
+							 console.log('totalPageCount :' + data.totalPageCount);
+							for(var i=1; i <= data.totalPageCount; i++){	/* test 계정아이디 들어가야 함 */			
+								 var html2 =' <span><a class="pageBtn" href="<c:url value="/guestbook"/>?p='+i+'">'+i+'</a></span> ';																		
+								 $('.paging').append(html2);
+							}										 
+						 };	
+						
+						
+					},
+					error:function(e){
+					console.log("에러발생!! :",e);	
+					}
+				
+					
+				}); //----리스트 ajax end
+			
+
+					
+				
+				/* 방명록 삭제  */
+			//	$('#delbnt').click(function() {
+				/* 방명록 삭제 ajax  */
+			//	$.ajax({
+			//		url : 'http://localhost:8080/peeps/rest/guestbook/delete?gdx='+gidx,
+			//		type : 'post',
+				//	success :function (data) {
+				//		console.log("삭제",data);
+						
+			//		}
+					
+					
+			//	});//------방명록 삭제 ajax  end 
+				
+				
+				
+				
+			
+			});
+				
+		function deleteMsg(gidx){
+
+			if (confirm('방명록을 삭제하시겠습니까? from ajax')) {
+				
+				
+				$.ajax({
+					url : 'http://localhost:8080/peeps/rest/guestbook/delete?gidx=' + gidx,
+					type : 'post',
+					success : function(data){
+						console.log("ajax data",data);
+						window.location.href="http://localhost:8080/peeps/guestbook";
+						alert("방명록이 삭제 되었습니다");
+						
+					}
+				});
+			}
+		
+			/* 방명록 수정  */
+			$.ajax({
+				url : 'http://localhost:8080/peeps/rest/guestbook/edit?gidx=' + gidx,
+				type : 'post',
+				success : function(data){
+					console.log("ajax data",data);
+					alert("수정 되었습니다");
+				}
+				
+			});
+
+			/* 방명록 데이터 받아오기   */
 			
 			$.ajax({
-				url : '${pageContext.request.contextPath}/list/del', // 경로 맞추
-				type :'post',
-				async : false,
-				data : {
-					"gidx" : gidx // 파라미터값 
-				},
+				url : 'http://localhost:8080/peeps/rest/guestbook/edit/' + gidx,
+				type : 'GET',
+				async: false,
 				success : function(data){
-					if(data == 1){
-						console.log("방명록 정보가 삭제되었습니다.");
-						// 방명록 리스트 출력 함수 넣기 !!!
-					}else {
-						console.log("삭제 실패....");
-				 }
-				}, 
-				error : function(){
-					console.log("삭제 실패...에러남.....");
+					console.log("ajax 데이터 받아오기 성공");
+					
 				}
-			}
-       });
-	});
-	
-	
-		// 댓글 수정 
-		$(document).on("click", "#g_ed", function(){
-		
-			var idx = $('.g_eidt .cmt #g_ed').index(this);
-			var g_idx = document.getElementsByClassName('cmt')[idx].id;	
-			
-			editComment(idx);
-			
-			$("#c_btn").click(function(){ // 수정폼 submit
 				
-				var cmt = $('#gmessage').val(); // 수정 글 작성란   id 값 넣어서 수정 !!
+			});
+			
+		} //--- 시작 함수 끝 
+			
 				
-				if(cmt.trim() == ""){
-		            alert("내용을 입력해주세요");
-				} else{
-					$.ajax({
-						url : '${pageContext.request.contextPath}/edit', // 경로 맞추기 
-						type : 'post',
-						async : false,
-						data : {
-							"cmt_idx" : cmt_idx, // editGuestbook 파라미터
-							"cmt_content" : cmt
-						},
-						success : function(data) {
-							console.log("방명록이 수정되었습니다.");
-							$('#gmessage').val('');
-							loadComment();
-						},
-						error : function() {
-							console.log("방명록 수정에 실패하였습니,,,,");
-						}
-					});
-				}
-		
-		
-	
-	
-	
 
+			
 		
-	}
+			
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	</script>
-
+		</script>
 </body>
 
 </html>
