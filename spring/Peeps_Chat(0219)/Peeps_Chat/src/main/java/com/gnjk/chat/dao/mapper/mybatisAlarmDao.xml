@@ -6,13 +6,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.gnjk.dao.mapper.mybatisAlarmDao">
 
 <insert id ="insertAlarm" parameterType ="com.gnjk.chat.domain.Alarm">
-      insert into chat.alarm(type, sender, receiver)
-      values (#{type},#{sender},#{receiver}) 
+      insert into chat.alarm(type, sender, receiver, post)
+      values (#{type},#{sender},#{receiver}, #{post}) 
    </insert>
    
-   <select id="selectAlarm" resultType="com.gnjk.domain.Alarm">
-   		select * from chat.alarm(type, sender, receiver)
-   		where receiver = #{receiver}  
+   <select id="alarmList" parameterType="list" resultType="com.gnjk.chat.domain.Alarm">
+   		select *
+   		from chat.alarm
    </select>
    
    </mapper>

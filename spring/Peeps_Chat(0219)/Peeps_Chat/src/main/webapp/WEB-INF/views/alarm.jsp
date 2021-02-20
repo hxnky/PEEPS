@@ -42,7 +42,7 @@
 	 
 	    function onMessage(evt) {
 		 	var data = evt.data;
-		   	console.log("ReceivMessage : " + data + "\n");
+		   	console.log("ReceiveMessage : " + data + "\n");
 
 	// 모달 알림
 			var toastTop = app.toast.create({

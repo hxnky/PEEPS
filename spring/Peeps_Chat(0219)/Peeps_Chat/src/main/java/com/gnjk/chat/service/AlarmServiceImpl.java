@@ -23,9 +23,9 @@ public class AlarmServiceImpl implements AlarmService {
 	}
 	
 	@Override
-	public List<Alarm> listNav() throws Exception {
+	public List<Alarm> alarmList(Alarm alarm) throws Exception {
 		
-		return dao. listNav();
+		return dao.alarmList(alarm);
 		
 	}
 
