@@ -10,6 +10,6 @@ public interface AlarmService {
 	public void insertAlarm(Alarm alarm) throws Exception;
 	
 	// 각각 페이지(네비?)에 전달해줄 리스트
-	public List<Alarm> alarmList(Alarm alarm) throws Exception;
+	public List<Alarm> alarmList() throws Exception;
 	
 }

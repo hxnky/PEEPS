@@ -10,9 +10,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       values (#{type},#{sender},#{receiver}, #{post}) 
    </insert>
    
-   <select id="alarmList" parameterType="list" resultType="com.gnjk.chat.domain.Alarm">
-   		select *
-   		from chat.alarm
-   </select>
+   
    
    </mapper>

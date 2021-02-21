@@ -27,13 +27,16 @@ import com.gnjk.chat.service.AlarmService;
 @Controller
 public class HomeController {
 	
+	@Autowired
+	private AlarmService service;	
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET) // web page
 	public ModelAndView chat(
 			ModelAndView mav, 
 			// @RequestParam("m_idx") String m_idx,
 			// Date ch_time,
 			HttpSession session
-			) {
+			) throws Exception {
 
 		mav.setViewName("home"); // .jsp 파일 이름 !! chatting.jsp로 보낼거
 
@@ -41,6 +44,12 @@ public class HomeController {
 		mav.addObject("rm_idx", "받는 사람");
 
 		session.setAttribute("m_idx", "사용자 아이디");
+		
+		/*List<Alarm> list = service.alarmList();
+		mav.addAllObjects(list);
+		*/
+
+		System.out.println("알람 컨트롤러…");
 		
 		return mav;
 	}

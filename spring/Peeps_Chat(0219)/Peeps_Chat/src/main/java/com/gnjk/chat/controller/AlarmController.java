@@ -28,14 +28,16 @@ public class AlarmController {
 
 	}
 	
-	@GetMapping(value = "/select")
-	   @ResponseBody
-	public void alarmList(Alarm alarm, Model model) throws Exception{
+	/*@RequestMapping(value = "/select")
+	@ResponseBody
+	public String alarmList(Alarm alarm, Model model) throws Exception{
 
-		List<Alarm> list = service.alarmList(alarm);
+		List<Alarm> list = service.alarmList();
 		model.addAttribute("list", list);
 
 		System.out.println("알람 컨트롤러…");
+		
+		return "chatting";
 
-	}
+	}*/
 }

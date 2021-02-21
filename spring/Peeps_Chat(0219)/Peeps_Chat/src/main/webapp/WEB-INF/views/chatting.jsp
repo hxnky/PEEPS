@@ -75,7 +75,15 @@
 		<td>${list.type}</td>
 		<td>${list}</td>
 		<div id="my_modal_header">${list}알람목록</div>
+<select id="inputState" class="form-control">
 
+<option selected>부서,,?</option>
+<c:forEach items="${list}" var="list">
+<option><c:out value="${list.type}"/></option>
+
+</c:forEach>
+
+</select>
 			<%-- <c:choose>
 			<c:when test="${Alarm == 0}">
 				<div id="user_no">알람이 없습니다.</div>
@@ -276,18 +284,20 @@
 				
 				
 				
-				$.ajax({
+	/*			$.ajax({
 					url : "select",
 					type : "GET",
 					success : function(list) {
 						
 						var text = JSON.stringify(list);
+						var data = list.data;
+						var text = JSON.parse(data);
 						
 						console.log(text);
 						if(text==0){
 							console.log('text null');
 						} else {
-							console.log('ajax로 받았는데 text null 아님');
+							console.log('ajax로 받았는데 text 값 낫널,,,== 값 있음!!');
 							switch(text.type){
 							case "like":
 								console.log('like');
@@ -305,7 +315,7 @@
 						 
 						 
 					}
-				})
+				}) */
 	};
 
 	function sendMessage() {

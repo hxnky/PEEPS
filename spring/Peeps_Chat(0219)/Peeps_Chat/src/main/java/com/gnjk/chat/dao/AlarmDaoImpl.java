@@ -22,9 +22,9 @@ public class AlarmDaoImpl implements AlarmDao {
 
 	}
 
-	public List<Alarm> alarmList(Alarm alarm) throws Exception {
+	public List<Alarm> alarmList() throws Exception {
 		
-		return session.selectList("alarmList", alarm);
+		return session.selectList("alarmList", alarmList());
 
 	}
 }

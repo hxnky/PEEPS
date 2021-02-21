@@ -8,7 +8,7 @@ public interface AlarmDao {
 	
 	public void insertAlarm(Alarm alarmData) throws Exception;
 	
-	public List<Alarm> alarmList(Alarm alarm) throws Exception;
+	public List<Alarm> alarmList() throws Exception;
 	
 	//public List<Alarm> listNav() throws Exception;
 	
