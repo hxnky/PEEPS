@@ -67,6 +67,9 @@ public interface MemberDao {
 
 	// 회원 사진 정보 수정
 	int m_photoUpdate(@Param("email") String email, @Param("m_photo") String m_photo, @Param("name") String name);
+	
+	// 회원 이메일 인증 값 확인
+	String selectVerifyByEmail(String email);
 
 	// 팔로우 되어있는지 확인
 	int CheckFollow(@Param("m_idx") int m_idx, @Param("follow_idx") int follow_idx);

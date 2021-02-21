@@ -89,5 +89,13 @@ public class OAuthService {
 		
 		return dao.selectMemberByEmail(email);
 	}
+	
+	// 회원 이메일 인증 값 확인
+	public String selectSocialVerify(String email) {
+		
+		dao = template.getMapper(MemberDao.class);
+		
+		return dao.selectVerifyByEmail(email);
+	}
 
 }
