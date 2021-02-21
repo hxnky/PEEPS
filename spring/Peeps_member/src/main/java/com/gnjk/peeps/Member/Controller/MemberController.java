@@ -45,7 +45,7 @@ public class MemberController {
 	// 타임라인
 	@RequestMapping(value = "/TimeLine", method = RequestMethod.GET)
 	public String Timeline() {
-
+		
 		return "member/TimeLine";
 	}
 

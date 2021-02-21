@@ -28,61 +28,28 @@
 
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="<c:url value="/resources/css/demo.css"/>" rel="stylesheet" />
-<link href="<c:url value="/resources/css/reg.css"/>" rel="stylesheet" />
 <link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 </head>
+<style>
+#total_wrap{
+margin: 100px auto;
+}
+</style>
 <body>
-	<div id="nav">
-		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
-	</div>
-	<!--   Big container   -->
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2">
+	<div id="total_wrap">
+		<div id="nav">
+			<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+		</div>
 
-				<!--      Wizard container        -->
-				<div class="wizard-container">
-
-					<div class="card wizard-card" id="wizardProfile">
-						<!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
-
-						<div class="wizard-header">
-							<h3>
-								<b>PEEPS</b> <br>
-							</h3>
-						</div>
-
-						<!-- nav css 수정하기 -->
-						<div>
-							<ul>
-								<li id="top_nav">회원가입</li>
-							</ul>
-
-						</div>
-
-						<h1>타 임 라 인</h1>
-						${peeps }
-						<button id="edit_btn">프로필 편집</button>
-
-						<input type="button" value="로그아웃"
-							onclick="location.href='${pageContext.request.contextPath}/logout'">
-
-						<div class="wizard-footer height-wizard">
-							<div class="clearfix">
-								<br>
-							</div>
-						</div>
-					</div>
+		<div id="total_contents">
+			<div id="post_contents">
+			
+				<div id="post">
+					
 				</div>
-				<!-- wizard container -->
 			</div>
 		</div>
-		<!-- end row -->
-	</div>
-	<!--  big container -->
 
-	<div class="footer">
-		PEEPS<i class="fa fa-heart heart"></i>GNJKK
 	</div>
 
 </body>
@@ -97,63 +64,169 @@
 
 
 <script>
-	var email = "${peeps.email}";
+$(document).ready(function() {
+	
+	var m_idx = ${peeps.m_idx};
 
-	console.log(email);
+	$("#MyPage_img").click(function() {
 
-	$('#edit_btn')
-			.click(
-					function() {
+		location.href = "${pageContext.request.contextPath}/mypage/" + m_idx;
 
-						$
-								.ajax({
-									url : '${pageContext.request.contextPath}/profile/chk',
-									type : 'get',
-									data : {
-										"email" : email,
-									},
-									async : false,
-									success : function(data) {
-										location.href = "${pageContext.request.contextPath}/profile/Info";
-									},
-									error : function(request, status, error) {
-										console.log("통신 실패");
+	});
+	
+	// 타임라인 목록 불러오기
+	loadTimeLine();
+	
+	function loadTimeLine(){
+		
+		var m_idx = ${peeps.m_idx};
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/user/TimeLineList',
+			type: 'get',
+			data : {"m_idx" : m_idx},
+			success : function(data){
+				console.log(data);
+			
+				var post = data;
+				
+				$('#post_contents').empty();
+				
+				$.each(data, function(index, post){
+					
+					$('#post_contents').append("<div class='post' id='"+post.p_idx+"'>"+post.p_title+"</div>");
+					
+					var post_idx= post.p_idx;
+					
+					$.ajax({
+						url : '${pageContext.request.contextPath}/user/cmtList',
+						type: 'get',
+						data : {"post_idx" : post_idx},
+						success : function(data){
+							
+							var cmt = data;
+							
+							$.each(data, function(index, cmt){
+								if(post_idx == cmt.post_idx){
+			 						$('#'+post.p_idx).append("<div class='cmt' id='"+cmt.cmt_idx+"'>"+cmt.cmt_content+"</div>");
 
-									}
-								});
+								}
+							});
+							
+							
+
+						},
+						error : function() {
+							console.log("댓글 리스트 실패,,,,");
+						}
 					});
+
+				})
+				
+			},
+			error : function() {
+				console.log("게시글 리스트 실패,,,,");
+			}
+		});
+
+// 		$.ajax({
+// 			url : '${pageContext.request.contextPath}/post/cmt/select?PostNO=' + post_idx,
+// 			type: 'get',
+// 			data : {"post_idx" : post_idx},
+// 			success : function(data){
+				
+// 				var comment = data;
+				
+// 				console.log(comment);
+				
+// 				$('.comment').empty();
+
+// 				$.each(data, function(index, cmt){
+					
+// 					if(cmt.member_idx == member_idx){
+// 						$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'> <button id='cmt_re' type='submit'>답글</button> <button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button><br><input type='hidden' id='replytext'></div>");
+// 					} else{
+// 						$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button></div>");
+
+// 					}
+					
+// 					// 대댓글
+// 					$.ajax({
+// 						url : '${pageContext.request.contextPath}/post/reply/select',
+// 						type: 'get',
+// 						data : {"cmt_idx" : cmt.cmt_idx},
+// 						success : function(data){
+							
+// 							var reply = data;
+							
+// 							console.log(reply);
+
+// 							$.each(data, function(index, reply){
+// 								console.log(cmt.cmt_idx);
+// 								console.log(reply.re_idx);
+								
+// 								if(cmt.cmt_idx == reply.comment_idx){
+// 									if(reply.member_idx == member_idx){
+// 									$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_re' value='"+reply.re_content+"'><button id='re_edit' type='submit'>수정</button>  <button id='re_del' type='submit'>삭제</button></div>");
+// 									} else{
+// 										$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_re' value='"+reply.re_content+"'></div>");
+// 									}
+// 								}								
+// 							});
+							
+// 						},
+// 						error : function() {
+// 							console.log("대댓글 실패,,,,");
+// 						}
+						
+						
+// 					});
+
+// 				});
+				
+// 			},
+// 			error : function() {
+// 				console.log("댓글 실패,,,,");
+// 			}
+			
+			
+// 		});
+		
+		
+		
+	}
+	
+	
+});
+	
 </script>
 <script>
-$("#keyword")
-.click(
-		function() {
+	$("#keyword").click(function() {
 
 			var m_idx = ${peeps.m_idx};
 			var keyword = $('#search').val();
 
-			if(keyword.trim()==""){
+			if (keyword.trim() == "") {
 				alert("한 글자 이상 입력하세요");
-			} else{
-				$
-				.ajax({
+			} else {
+				$.ajax({
 					url : '${pageContext.request.contextPath}/user/finduser',
 					type : 'get',
 					async : false,
 					data : {
-						"keyword":keyword,
-						"m_idx" : m_idx
-					},
-					success : function(data) {
-						location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
-					},
-					error : function() {
-						console.log("실패,,,,");
-					}
-				});
+					"keyword" : keyword,
+					"m_idx" : m_idx
+				},
+				success : function(data) {
+					location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
+				},
+				error : function() {
+					console.log("실패,,,,");
+				}
+			});
 
-			}
+		}
 
-			
-		});
+	});
 </script>
 </html>

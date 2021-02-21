@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.gnjk.peeps.Member.domain.Comment;
 import com.gnjk.peeps.Member.domain.Peeps;
+import com.gnjk.peeps.Member.domain.Post;
 
 public interface MemberDao {
 
@@ -97,4 +99,11 @@ public interface MemberDao {
 
 	// 팔로우/팔로잉 목록 삭제
 	int deleteFollowList(@Param("m_idx") int m_idx);
+	
+	
+	// 타임라인 관련 
+	// 포스트 리스트 가져오기
+	List<Post> selectPostList(int m_idx);
+	// 댓글 리스트 가져오기
+	List<Comment> selectCmtList(int post_idx);
 }

@@ -26,8 +26,11 @@ import com.gnjk.peeps.Member.Service.LoginService;
 import com.gnjk.peeps.Member.Service.MyPageService;
 import com.gnjk.peeps.Member.Service.OAuthService;
 import com.gnjk.peeps.Member.Service.RegService;
+import com.gnjk.peeps.Member.Service.TimeLineService;
+import com.gnjk.peeps.Member.domain.Comment;
 import com.gnjk.peeps.Member.domain.EditRequest;
 import com.gnjk.peeps.Member.domain.Peeps;
+import com.gnjk.peeps.Member.domain.Post;
 import com.gnjk.peeps.Member.domain.RegRequest;
 import com.gnjk.peeps.Member.domain.SocialRequest;
 
@@ -63,6 +66,9 @@ public class MemberRestController {
 	
 	@Autowired
 	private OAuthService oauthService;
+	
+	@Autowired
+	private TimeLineService timeLineService;
 
 	// 로그인
 	@PostMapping("/user/login")
@@ -213,4 +219,16 @@ public class MemberRestController {
 		return oauthService.selectSocialVerify(email);
 	}
 
+	@GetMapping("/user/TimeLineList")
+	public List<Post> TimeLineList(int m_idx) {
+		
+		return timeLineService.TimeLineList(m_idx);
+	}
+	
+	@GetMapping("/user/cmtList")
+	public List<Comment> CmtList(int post_idx){
+		
+		return timeLineService.CmtList(post_idx);
+	}
+	
 }
