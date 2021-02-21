@@ -72,18 +72,15 @@
 <body>
 
 	<div id="my_modal">
-		<td>${list.type}</td>
-		<td>${list}</td>
-		<div id="my_modal_header">${list}알람목록</div>
-<select id="inputState" class="form-control">
+		<td>${alarms.type}</td>
+		<td>${alarms}</td>
+		<div id="my_modal_header">${alarms}알람목록</div>
 
-<option selected>부서,,?</option>
-<c:forEach items="${list}" var="list">
+<c:forEach items="${alarms}" var="list">
 <option><c:out value="${list.type}"/></option>
 
 </c:forEach>
 
-</select>
 			<%-- <c:choose>
 			<c:when test="${Alarm == 0}">
 				<div id="user_no">알람이 없습니다.</div>
@@ -91,12 +88,12 @@
 			<c:otherwise> --%>
 			<!-- 		<a href="/chat"></a> -->
 			<c:choose>
-				<c:when test="${list == 0}">
+				<c:when test="${alarmCnt == 0}">
 					<div id="user_no">알람이 없습니다.</div>
 				</c:when>
 				<c:otherwise>
 
-					<c:forEach items="${list}" var="alarm">
+					<c:forEach items="${alarms}" var="alarm">
 				forEach문 실행
 					<table id="alarmData">
 							<tr>
@@ -122,13 +119,13 @@
 					</c:forEach>
 
 
-					<c:forEach items="${list}" var="alarm">
+					<c:forEach items="${alarms}" var="alarm">
 						<tbody>
 							<tr>
-								<td>${Alarm.type}</td>
-								<td>${Alarm.sender}</td>
-								<td>${Alarm.receiver}</td>
-								<td>${Alarm.post}</td>
+								<td>${alarm.type}</td>
+								<td>${alarm.sender}</td>
+								<td>${alarm.receiver}</td>
+								<td>${alarm.post}</td>
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -209,8 +206,8 @@
 			sendMessage();
 			console.log("sendMessage() - 메서드 실행 ");
 
-			modal('my_modal');
-			console.log("알림 모달 보기라도 하자...");
+			//modal('my_modal');
+			//console.log("알림 모달 보기라도 하자...");
 		});
 
 	});

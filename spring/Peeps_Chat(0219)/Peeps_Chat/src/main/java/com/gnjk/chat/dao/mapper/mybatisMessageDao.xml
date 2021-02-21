@@ -24,11 +24,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       values (#{m_idx},#{rm_idx},#{ch_time},#{ch_ms}) 
    </insert>
    
-   <select id="alarmList" resultType="com.gnjk.chat.domain.Alarm">
-   		select *
-   		from chat.alarm
-   </select>
-   
  <!--   <select id="getMessageData" resultType = "com.gnjk.chat.domain.Message">
    	select rm_idx, ch_time, ch_ms
    	from chat.chat

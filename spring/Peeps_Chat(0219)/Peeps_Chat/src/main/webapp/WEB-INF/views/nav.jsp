@@ -29,14 +29,27 @@
 				<li class="center"><a id="Logo"><img
 						src="<c:url value='/icon/navi/Logo.png' />"></a></li>
 
-				<li class="right"><a id="Home" href="#"><img
-						src="<c:url value='/icon/navi/023-home.png' />"></a> <a
+				<li class="right">
+					<li><a id="Home" href="#"><img
+						src="<c:url value='/icon/navi/023-home.png' />"></a></li>
+						<li><a
 					id="Content" href="#"><img
-						src="<c:url value='/icon/navi/Content.png' />"></a> <a
-					id="Alarm" href="#"><img
-						src="<c:url value='/icon/navi/008-notification.png' />"></a> <a
+						src="<c:url value='/icon/navi/Content.png' />"></a></li>
+						
+						<li><img
+						src="<c:url value='/icon/navi/008-notification.png' />">
+						<c:url value="/test/test" var="alarmList" /><a
+					id="Alarm" href="${alarmList}">${alarmList}</a><li>
+					
+					
+						
+						<li>
+						<a
 					id="Chat" href="#"><img
-						src="<c:url value='/icon/navi/050-wechat.png'/>"></a> <a
+						src="<c:url value='/icon/navi/050-wechat.png'/>"></a><li>
+						
+						<li>
+						<a
 					id="MyPage" href="#"><img
 						src="<c:url value='/icon/navi/010-user.png '/>"></a></li>
 

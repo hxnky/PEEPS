@@ -1,24 +1,11 @@
 package com.gnjk.chat;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
 import javax.servlet.http.HttpSession;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.gnjk.chat.domain.Alarm;
-import com.gnjk.chat.service.AlarmService;
 
 /**
  * Handles requests for the application home page.
@@ -26,9 +13,6 @@ import com.gnjk.chat.service.AlarmService;
 
 @Controller
 public class HomeController {
-	
-	@Autowired
-	private AlarmService service;	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET) // web page
 	public ModelAndView chat(
@@ -44,13 +28,7 @@ public class HomeController {
 		mav.addObject("rm_idx", "받는 사람");
 
 		session.setAttribute("m_idx", "사용자 아이디");
-		
-		/*List<Alarm> list = service.alarmList();
-		mav.addAllObjects(list);
-		*/
 
-		System.out.println("알람 컨트롤러…");
-		
 		return mav;
 	}
 	

@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gnjk.chat.domain.Alarm;
 import com.gnjk.chat.service.AlarmService;
-
+/*
 @Controller
 public class AlarmController {
 
@@ -39,5 +39,4 @@ public class AlarmController {
 		
 		return "chatting";
 
-	}*/
-}
+	}}*/
