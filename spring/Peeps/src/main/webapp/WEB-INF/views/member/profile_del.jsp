@@ -152,89 +152,83 @@
 		$("#mem_del")
 				.click(
 						function() {
-							var result = confirm('정말 탈퇴하시겠습니까?');
-							if (result) {
+							
+							if($('#password').val().trim()==""){
+								alert("비밀번호를 입력해주세요");
+							}else{
+								var result = confirm('정말 탈퇴하시겠습니까?');
+								if (result) {
 
-								var password = $('#password').val();
-								var email = "${peeps.email}";
-								var m_idx = "${peeps.m_idx}";
-								m_idx = Number(m_idx);
+									var password = $('#password').val();
+									var email = "${peeps.email}";
+									var m_idx = "${peeps.m_idx}";
+									m_idx = Number(m_idx);
 
-								console.log(password);
-								console.log(m_idx);
+									console.log(password);
+									console.log(m_idx);
 
-								$
-										.ajax({
-											url : '${pageContext.request.contextPath}/user/del',
-											type : 'post',
-											data : {
-												"email" : email,
-												"password" : password,
-												"m_idx" : m_idx
-											},
-											async : false,
-											success : function(data) {
-												if (data == 1) {
-													alert("탈퇴되었습니다.");
-													location.href = "${pageContext.request.contextPath}/";
-												} else {
-													alert("비밀번호가 일치하지 않습니다.");
+									$.ajax({
+												url : '${pageContext.request.contextPath}/user/del',
+												type : 'post',
+												data : {
+													"email" : email,
+													"password" : password,
+													"m_idx" : m_idx
+												},
+												async : false,
+												success : function(data) {
+													if (data == 1) {
+														alert("탈퇴되었습니다.");
+														location.href = "${pageContext.request.contextPath}/";
+													} else {
+														alert("비밀번호가 일치하지 않습니다.");
+													}
+												},
+												error : function(request, status,error) {
+													console.log("통신 실패");
+
 												}
-											},
-											error : function(request, status,
-													error) {
-												console.log("통신 실패");
+											});
 
-											}
-										});
-
-								$('#del_form').submit();
+									//$('#del_form').submit();
+								}
 							}
 						})
-
 	});
 </script>
 
 <script>
-	$("#keyword")
-			.click(
-					function() {
+$("#keyword")
+.click(
+		function() {
 
-						var m_idx = ${peeps.m_idx};
-						var keyword = $('#search').val();
+			var m_idx = ${peeps.m_idx};
+			var keyword = $('#search').val();
 
-						if (keyword.trim() == "") {
-							alert("한 글자 이상 입력하세요");
-						} else {
-							$
-									.ajax({
-										url : '${pageContext.request.contextPath}/user/finduser',
-										type : 'get',
-										async : false,
-										data : {
-											"keyword" : keyword,
-											"m_idx" : m_idx
-										},
-										success : function(data) {
-											location.href = "${pageContext.request.contextPath}/member/FindView?keyword="
-													+ keyword;
-										},
-										error : function() {
-											console.log("실패,,,,");
-										}
-									});
+			if(keyword.trim()==""){
+				alert("한 글자 이상 입력하세요");
+			} else{
+				$
+				.ajax({
+					url : '${pageContext.request.contextPath}/user/finduser',
+					type : 'get',
+					async : false,
+					data : {
+						"keyword":keyword,
+						"m_idx" : m_idx
+					},
+					success : function(data) {
+						location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
+					},
+					error : function() {
+						console.log("실패,,,,");
+					}
+				});
 
-						}
+			}
 
-					});
-
-	var m_idx = ${peeps.m_idx};
-
-	$("#MyPage_img").click(function() {
-
-		location.href = "${pageContext.request.contextPath}/mypage/" + m_idx;
-
-	});
+			
+		});
 </script>
 
 </html>

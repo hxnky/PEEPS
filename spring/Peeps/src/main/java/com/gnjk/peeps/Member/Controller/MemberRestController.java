@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gnjk.peeps.Member.Service.DeleteService;
@@ -205,6 +204,13 @@ public class MemberRestController {
 		session.setAttribute("peeps", oauthService.selectSocialInfo(email));
 		
 		return oauthService.selectSocialInfo(email);
+	}
+	
+	// 소셜 로그인 타입 확인
+	@GetMapping("/user/socialVerify")
+	public String socialVerify(String email) {
+		
+		return oauthService.selectSocialVerify(email);
 	}
 
 }

@@ -42,6 +42,10 @@ public class LoginService {
 				System.out.println("미인증계정");
 				loginCheck = true;
 				result = 1;
+			} else if (peeps.getVerify() == 'R'){
+				System.out.println("탈퇴된 계정");
+				loginCheck = true;
+				result = 3;
 			}
 
 		}

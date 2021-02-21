@@ -7,8 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 회원가입 -->
 	<insert id="insertMember"
-		parameterType="com.gnjk.peeps.Member.domain.Peeps" useGeneratedKeys="true"
-		keyProperty="m_idx">
+		parameterType="com.gnjk.peeps.Member.domain.Peeps"
+		useGeneratedKeys="true" keyProperty="m_idx">
 		insert into member (email, id,
 		password, name, code) values
 		(#{email}, #{id},#{password},#{name},
@@ -36,9 +36,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 이메일 없으면 이메일, 이름, 사진, 로그인 타입 insert 하기 -->
 	<insert id="insertSocialMember"
-		parameterType="com.gnjk.peeps.Member.domain.Peeps" useGeneratedKeys="true"
-		keyProperty="m_idx">
-		insert into member (email, id, password, m_photo, name,
+		parameterType="com.gnjk.peeps.Member.domain.Peeps"
+		useGeneratedKeys="true" keyProperty="m_idx">
+		insert into member (email, id,
+		password, m_photo, name,
 		loginType, verify, code) values (#{email},
 		#{id},#{password},#{m_photo},#{name}, #{loginType}, 'Y', #{code});
 	</insert>
@@ -116,15 +117,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<!-- 회원 정보 삭제 시 아이디 중복 사용 하지 못하게 verify 업데이트 -->
-	<!-- <update id="deletePeeps"> -->
-	<!-- update member set verify='R' where email=#{email} and -->
-	<!-- password=#{password} -->
-	<!-- </update> -->
-	
-	<delete id="deletePeeps">
-		delete from member where email=#{email} and
+	<update id="deletePeeps">
+		update member set verify='R' where email=#{email} and
 		password=#{password}
-	</delete>
+	</update>
+
+	<!-- <delete id="deletePeeps"> -->
+	<!-- delete from member where email=#{email} and -->
+	<!-- password=#{password} -->
+	<!-- </delete> -->
 
 	<!-- 해당 단어가 들어가는 유저 검색 -->
 	<select id="searchMember" resultMap="memberResult">
@@ -156,7 +157,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 인덱스로 회원 정보 가져오기 -->
 	<select id="selectMemberByIdx" resultMap="memberResult">
 		select * from member
-		where m_idx = #{f_idx}
+		where m_idx = #{m_idx}
 	</select>
 
 	<!-- 소셜 회원 정보 업데이트 -->
@@ -165,6 +166,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		email=#{email}
 	</update>
+	
+	<!-- 소셜 회원이메일 인증 값 확인  -->
+	<select id="selectVerifyByEmail" resultType="String">
+		select verify from member where email=#{email}
+	</select>
 
 	<!-- 팔로우 상태인지 확인 -->
 	<select id="CheckFollow" resultType="int">

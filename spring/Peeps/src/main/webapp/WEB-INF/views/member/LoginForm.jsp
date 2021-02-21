@@ -170,32 +170,6 @@ td {
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 <script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 
-<script>
-	$(document)
-			.ready(
-					function() {
-
-						var result = $
-						{
-							l_result
-						}
-						;
-						var email = $('#email').val();
-
-						if (result == 2) {
-							alert("로그인 되었습니다.");
-							location.href = "${pageContext.request.contextPath}/TimeLine?email="
-									+ email;
-						} else if (result == 1) {
-							alert("미인증 계정입니다. 이메일을 확인해주세요.");
-						} else if (result == 0) {
-							alert("아이디 또는 비밀번호가 일치하지 않습니다.");
-						}
-					
-						
-
-					});
-</script>
 
 <script>
 	// 로그인 처리
@@ -225,8 +199,10 @@ td {
 						location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
 					} else if(data==1) {
 						alert("미인증 계정입니다. 이메일을 확인해주세요");
-					} else{
+					} else if(data == 0){
 						alert("없는 계정이거나 비밀번호가 일치하지 않습니다.");
+					} else if(data == 3){
+						alert("탈퇴된 계정입니다.");
 					}
 
 				},error : function(request,status, error) {
