@@ -3,8 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <nav>
 	<div class="navbar">
-		로그인 정보 : ${loginInfo}
-
 		<ul>
 			<a href="<c:url value="/"/>">HOME</a>
 		</ul>

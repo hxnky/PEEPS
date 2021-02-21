@@ -159,16 +159,9 @@ table.upmsg_table {
 
 
 		<form method="POST" id="insertGForm" enctype="multipart/form-data">
-			<div class="ginsert_wrap">
+			<div class="ginsert_wrap" id="ginsert_wrap">
 				<!-- 방명록 입력 div -->
-				<ul>
-					<li><img
-						src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"
-						class="gimg"></li>
-					<li><textarea rows="9" cols="80" id="gmessage" name="gmessage">${guestbook.gmessage}</textarea><br>
-					<input type="text" id="oldgphoto" name="oldgphoto" value="${guestbook.gphoto}"><input type="file" id="gphoto" name="gphoto"></li>
-					<li><input type="submit" value="수정" id="editbtn"><button>취소</button></li>
-				</ul>
+				
 			</div>
 			`
 		</form>
@@ -204,45 +197,89 @@ table.upmsg_table {
 			
 		$(document).ready(function(){
 			
-		   /*  방명록 데이터  수정*/
+			/* 수정할 데이터 값 받아오기*/
 			
-			$('#editbtn').click(function() {
-
-				var photoFile =$('#gphoto');
-				
-				var file1 =photoFile[0].files[0];
-			
-				
-				//console.log(file1);
-				
-			var formData = new FormData();
-				formData.append("gmessage",$('#gmessage').val());
-				formData.append("gphoto",file1);
-				
-				//console.log(formData);
-				
-				
-				$.ajax({
-					url : 'http://localhost:8080/peeps/rest/guestbook/edit',
-					type : 'post',
-					data : formData,
-					async : false,
-					enctype : 'multipart/form-data',
-					processData : false,
-					contentType : false,
-					cache : false ,
-					success : function(data){
-						console.log("ajax data",data);
-						console.log("작성완료");
-						alert("방명록이 수정 되었습니다");
+					$.ajax({
+						url : 'http://localhost:8080/peeps/rest/guestbook/' + gidx,
+						type : 'get',
+						success : function(data){
+							console.log("ajax2 data",data);
+							
+						     var html =' <ul> ';
+								html +=' <li><img ';
+								html +=' src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"';
+								html +=' class="gimg"></li>';
+								html +=' <li><input type="text" id ="gidx",name="gidx" value="'+data.gidx+'"></li>';
+								html +=' <li><textarea rows="9" cols="80" id="gmessage" name="gmessage">'+data.gmessage+'</textarea><br>';
+								html +=' <input type="text" id="oldgphoto" name="oldgphoto" value="'+data.gphoto+'"><input type="file" id="gphoto" name="gphoto"></li>';
+								html +=' <li><input type="submit" value="수정" id="editbtn"><button>취소</button></li>';
+								html +=' </ul>';
+								
+								$('#ginsert_wrap').append(html);
+						     
 						
-					}
-				});
-				
-				
-				
+						     
+						       },
+						       
+						       error : function(e){
+				    				console.log("에러발생!! : ", e);
+				    			}
+					
+						
+						
+					}); /* 수정할 데이터 값 받아오기 ajax end*/	
 			
-			}); //-------방명록 작성 ajax끝 
+			
+			
+				    /*  방명록 데이터  수정*/
+					
+					$('#editbtn').click(function() {
+
+						var photoFile =$('#gphoto');
+						
+						var file1 =photoFile[0].files[0];
+					
+						
+						//console.log(file1);
+						
+					var formData = new FormData();
+						formData.append("gmessage",$('#gmessage').val());
+						formData.append("gphoto",file1);
+						
+						//console.log(formData);
+						
+						
+						$.ajax({
+							url : 'http://localhost:8080/peeps/rest/guestbook/edit',
+							type : 'post',
+							data : formData,
+							async : false,
+							enctype : 'multipart/form-data',
+							processData : false,
+							contentType : false,
+							cache : false ,
+							success : function(data){
+								console.log("edit data",data);
+								console.log("수정완료");
+								window.location.href="http://localhost:8080/peeps/guestbook";
+								alert("방명록이 수정 되었습니다");
+								
+							}
+						,
+						error:function(e){
+						console.log("에러발생!! :",e);	
+						}
+						});
+						
+						
+						
+					
+					}); //-------방명록다시 작성 끝 
+			
+			
+			
+			
+			
 			
 			
 			
@@ -266,11 +303,13 @@ table.upmsg_table {
 							
 							date = new Date(date).toLocaleDateString();
 						
-							console.log("날짜: ", date);
+							//console.log("날짜: ", date);
 						 
 							
 							var html  =' <div class="upgbinfo">';
+							
 								html +=' <span class="upgphoto"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"class="gimg" > </span>';
+								
 								html +=' <span class="upgid"><h4>'+item.gwriter+'</h4></span>';
 								html +=' <div class="gbutton">';
 								html +=' <button type="button" onclick="location.href="<c:url value="/guestbook/edit?gidx='+item.gidx+'"/>" ">수정</button>';
@@ -357,9 +396,9 @@ table.upmsg_table {
 				}
 				
 			});
+			
 
 			/* 방명록 데이터 받아오기   */
-			
 			$.ajax({
 				url : 'http://localhost:8080/peeps/rest/guestbook/edit/' + gidx,
 				type : 'GET',
@@ -371,6 +410,7 @@ table.upmsg_table {
 				
 			});
 			
+		
 		} //--- 시작 함수 끝 
 			
 				

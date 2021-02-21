@@ -26,7 +26,7 @@ import com.gnjk.peeps.guestbook.service.GuestbookRestService;
 
 @RestController
 @RequestMapping("/rest/guestbook")
-public class GuestbookRestApiController {
+public class GuestbookRestController {
 	
 	@Autowired
 	private GuestbookRestService restService;
@@ -50,7 +50,7 @@ public class GuestbookRestApiController {
 	}
 	
 	// 1개의 방명록 정보
-	@GetMapping("/edit/{gidx}")
+	@GetMapping("/{gidx}")
 	public Guestbook getGuestbookInfo(@PathVariable("gidx") int gidx) {
 		return restService.getGuestbook(gidx);
 	}
@@ -64,11 +64,11 @@ public class GuestbookRestApiController {
 			return insertService.guestbook(gRequest, request);
 		}
 	
-    //방명록 수정
-	/* 수정 값 전달 */
+    //방명록 수정 업데이트
+	
 		@PostMapping("/edit")
 		@ResponseBody
-		public int editGuestbook(GuestbookEditRequest editRequest, HttpServletRequest request) {
+		public int updateGuestbook(GuestbookEditRequest editRequest, HttpServletRequest request) {
 			
 			return editService.editGuestbook(editRequest, request) ;
 		}

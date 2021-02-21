@@ -1,30 +1,33 @@
 package com.gnjk.post.mypost.service;
 
+import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gnjk.post.mypost.dao.FileDao;
 import com.gnjk.post.mypost.dao.PostDao;
 import com.gnjk.post.mypost.domain.Post;
+import com.gnjk.post.mypost.domain.PostFile;
 import com.gnjk.post.mypost.domain.PostListView;
 
 @Service
 public class PostListService {
 	
 	private PostDao dao;
+	private FileDao fDao;
 	
 	@Autowired
 	private SqlSessionTemplate template;
 	
-	public PostListView getPostListView(int pageNumber, HttpSession session) {
+	// 게시글 전체 리스트 불러오기
+	public PostListView getPostListView(int pageNumber) {
 		
 		// test용 로그인 정보
-		int member_idx = 155;
-		session.setAttribute("m_idx", member_idx);
+		int member_idx = 1;
 		
 		PostListView listView = null;
 		
@@ -40,6 +43,7 @@ public class PostListService {
 			int endRow = startRow+cntPerPage-1;
 			
 			int totalPostCount = dao.selectTotalPostCount(member_idx);
+			
 			System.out.println("postTotalCount : "+ totalPostCount);
 			
 			List<Post> postList = dao.selectPostList(member_idx, startRow, cntPerPage);
@@ -54,5 +58,18 @@ public class PostListService {
 		return listView;
 	}
 	
+	// 게시글 하나 내용 불러오기
+	public Post getDetail(int idx) {
+		
+		dao = template.getMapper(PostDao.class);
+		
+		return dao.selectPostDetail(idx);
+	}
+	
+	// 게시글 하나 이미지 불러오기
+	public List<PostFile> getDetailImgs(int idx){
+		fDao = template.getMapper(FileDao.class);
+		return fDao.selectPostImgs(idx);
+	}
 
 }
