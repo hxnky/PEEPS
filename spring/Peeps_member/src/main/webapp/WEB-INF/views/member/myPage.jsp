@@ -40,13 +40,13 @@ body {
 	font-weight: bold;
 }
 
-#pro_img{
+#pro_img {
 	width: 500px;
 }
 
 #pro_img>img {
-	height: 250px; 
-	width : 250px;
+	height: 250px;
+	width: 250px;
 	border-radius: 100%;
 	border: 1px solid #CCC;
 	margin: 20px auto;
@@ -124,176 +124,178 @@ body {
 </style>
 
 <body>
-	<div id="nav">
-		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
-	</div>
-	<!-------------네비 넣기------------------>
-	<div id="main_wrap">
-		<div class="jumbotron">
-			<div id="profile_wrap">
-				<div id="pro_img">
-					<c:set var="loginType" value="${page_peeps.loginType}" />
-					<c:choose>
-						<c:when test="${loginType eq 'email'}">
-							<img id="profile"
-								src="<c:url value="/fileupload/${page_peeps.m_photo}"/>">
-						</c:when>
-						<c:when test="${loginType ne 'email' }">
-							<img id="profile" src="<c:url value="${page_peeps.m_photo}"/>">
-						</c:when>
-					</c:choose>
-				</div>
-				<div id="pro_btn" class="${page_peeps.m_idx}">
-					<c:choose>
-						<c:when test="${peeps.m_idx eq page_peeps.m_idx }">
-							<ul>
-								<li>${page_peeps.id }</li>
-								<li><button id="edit">프로필 편집</button></li>
-							</ul>
-						</c:when>
-						<c:otherwise>
-							<c:choose>
-								<c:when test="${follow_chk == true}">
-									<ul>
-										<li>${page_peeps.id }</li>
-										<li>
-											<button class="p_f_btn" id="pro_unfollow" type="submit"
-												onclick="proUnfollow(${page_peeps.m_idx})">언팔로우</button>
-										</li>
-									</ul>
-								</c:when>
-								<c:otherwise>
-									<ul>
-										<li>${page_peeps.id }</li>
-										<li><button class="p_f_btn" id="pro_follow" type="submit"
-												onclick="proFollow(${page_peeps.m_idx})">팔로우</button></li>
-									</ul>
-								</c:otherwise>
-							</c:choose>
-						</c:otherwise>
-					</c:choose>
+	<div id="total_wrap">
+		<div id="nav">
+			<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+		</div>
+		<!-------------네비 넣기------------------>
+		<div id="main_wrap">
+			<div class="jumbotron">
+				<div id="profile_wrap">
+					<div id="pro_img">
+						<c:set var="loginType" value="${page_peeps.loginType}" />
+						<c:choose>
+							<c:when test="${loginType eq 'email'}">
+								<img id="profile"
+									src="<c:url value="/fileupload/${page_peeps.m_photo}"/>">
+							</c:when>
+							<c:when test="${loginType ne 'email' }">
+								<img id="profile" src="<c:url value="${page_peeps.m_photo}"/>">
+							</c:when>
+						</c:choose>
+					</div>
+					<div id="pro_btn" class="${page_peeps.m_idx}">
+						<c:choose>
+							<c:when test="${peeps.m_idx eq page_peeps.m_idx }">
+								<ul>
+									<li>${page_peeps.id }</li>
+									<li><button id="edit">프로필 편집</button></li>
+								</ul>
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${follow_chk == true}">
+										<ul>
+											<li>${page_peeps.id }</li>
+											<li>
+												<button class="p_f_btn" id="pro_unfollow" type="submit"
+													onclick="proUnfollow(${page_peeps.m_idx})">언팔로우</button>
+											</li>
+										</ul>
+									</c:when>
+									<c:otherwise>
+										<ul>
+											<li>${page_peeps.id }</li>
+											<li><button class="p_f_btn" id="pro_follow"
+													type="submit" onclick="proFollow(${page_peeps.m_idx})">팔로우</button></li>
+										</ul>
+									</c:otherwise>
+								</c:choose>
+							</c:otherwise>
+						</c:choose>
 
 
-					<ul>
-						<li>게시물</li>
-						<li>NN</li>
-						<li>팔로워</li>
-						<li><button id="follower_btn">${follower}</button></li>
-						<li>팔로잉</li>
-						<li>
-							<button id="following_btn">${following }</button>
-						</li>
-					</ul>
-					<div id="pro_name">${page_peeps.name}</div>
-					<div id="pro_bio">${page_peeps.bio }</div>
+						<ul>
+							<li>게시물</li>
+							<li>NN</li>
+							<li>팔로워</li>
+							<li><button id="follower_btn">${follower}</button></li>
+							<li>팔로잉</li>
+							<li>
+								<button id="following_btn">${following }</button>
+							</li>
+						</ul>
+						<div id="pro_name">${page_peeps.name}</div>
+						<div id="pro_bio">${page_peeps.bio }</div>
+					</div>
 				</div>
 			</div>
+
 		</div>
 
-	</div>
 
+		<!-- 팔로워 목록 모달창 -->
+		<div id="my_modal_wer">
+			<div id="my_modal_header">팔로워 목록</div>
+			<c:choose>
+				<c:when test="${Follower == 0}">
+					<div id="user_no">팔로워가 없습니다.</div>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${FollowerList}" var="follower" varStatus="i">
+						<table id="find_peeps">
+							<tr>
+								<td><a href="/peeps/mypage/${follower.m_idx}"> <c:set
+											var="loginType" value="${follower.loginType}" /> <c:choose>
+											<c:when test="${loginType eq 'email'}">
+												<img id="profile_modal"
+													src="<c:url value="/fileupload/${follower.m_photo}"/>">
+											</c:when>
+											<c:when test="${loginType ne 'email' }">
+												<img id="profile_modal"
+													src="<c:url value="${follower.m_photo}"/>">
+											</c:when>
+										</c:choose>
+								</a></td>
+								<td id="id"><a href="/peeps/mypage/${follower.m_idx}">${follower.id}</a></td>
+								<td><c:choose>
+										<c:when test="${peeps.m_idx eq follower.m_idx }">
+											<button id="modal_edit" onclick="modal_edit()">프로필 편집</button>
+										</c:when>
+										<c:otherwise>
+											<div id="fix" class="${follower.m_idx}">
+												<c:choose>
+													<c:when test="${follower.chk_result eq 1}">
+														<button class="f_btn" id="unfollow" type="submit"
+															onclick="unfollow(${follower.m_idx})">언팔로우</button>
+													</c:when>
+													<c:otherwise>
+														<button class="f_btn" id="follow" type="submit"
+															onclick="follow(${follower.m_idx})">팔로우</button>
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</c:otherwise>
+									</c:choose></td>
+							</tr>
+						</table>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+			<button type="button" class="modal_close_btn">x</button>
+		</div>
 
-	<!-- 팔로워 목록 모달창 -->
-	<div id="my_modal_wer">
-		<div id="my_modal_header">팔로워 목록</div>
-		<c:choose>
-			<c:when test="${Follower == 0}">
-				<div id="user_no">팔로워가 없습니다.</div>
-			</c:when>
-			<c:otherwise>
-				<c:forEach items="${FollowerList}" var="follower" varStatus="i">
-					<table id="find_peeps">
-						<tr>
-							<td><a href="/peeps/mypage/${follower.m_idx}"> <c:set
-										var="loginType" value="${follower.loginType}" /> <c:choose>
-										<c:when test="${loginType eq 'email'}">
-											<img id="profile_modal"
-												src="<c:url value="/fileupload/${follower.m_photo}"/>">
+		<!-- 팔로잉 목록 모달창 -->
+		<div id="my_modal">
+			<div id="my_modal_header">팔로잉 목록</div>
+			<c:choose>
+				<c:when test="${Following == 0}">
+					<div id="user_no">팔로잉이 없습니다.</div>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${FollowingList}" var="following" varStatus="i">
+						<table id="find_peeps" id="${following.m_idx}">
+							<tr>
+								<td><a href="/peeps/mypage/${following.m_idx}"> <c:set
+											var="loginType" value="${following.loginType}" /> <c:choose>
+											<c:when test="${loginType eq 'email'}">
+												<img id="profile_modal"
+													src="<c:url value="/fileupload/${following.m_photo}"/>">
+											</c:when>
+											<c:when test="${loginType ne 'email' }">
+												<img id="profile_modal"
+													src="<c:url value="${following.m_photo}"/>">
+											</c:when>
+										</c:choose>
+								</a></td>
+								<td rowspan="2" id="id"><a
+									href="/peeps/mypage/${following.m_idx}">${following.id}</a></td>
+								<td><c:choose>
+										<c:when test="${peeps.m_idx eq following.m_idx }">
+											<button id="modal_edit" onclick="modal_edit()">프로필 편집</button>
 										</c:when>
-										<c:when test="${loginType ne 'email' }">
-											<img id="profile_modal"
-												src="<c:url value="${follower.m_photo}"/>">
-										</c:when>
-									</c:choose>
-							</a></td>
-							<td id="id"><a href="/peeps/mypage/${follower.m_idx}">${follower.id}</a></td>
-							<td><c:choose>
-									<c:when test="${peeps.m_idx eq follower.m_idx }">
-										<button id="modal_edit">프로필 편집</button>
-									</c:when>
-									<c:otherwise>
-										<div id="fix" class="${follower.m_idx}">
-											<c:choose>
-												<c:when test="${follower.chk_result eq 1}">
-													<button class="f_btn" id="unfollow" type="submit"
-														onclick="unfollow(${follower.m_idx})">언팔로우</button>
-												</c:when>
-												<c:otherwise>
-													<button class="f_btn" id="follow" type="submit"
-														onclick="follow(${follower.m_idx})">팔로우</button>
-												</c:otherwise>
-											</c:choose>
-										</div>
-									</c:otherwise>
-								</c:choose></td>
-						</tr>
-					</table>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-		<button type="button" class="modal_close_btn">x</button>
-	</div>
-
-	<!-- 팔로잉 목록 모달창 -->
-	<div id="my_modal">
-		<div id="my_modal_header">팔로잉 목록</div>
-		<c:choose>
-			<c:when test="${Following == 0}">
-				<div id="user_no">팔로잉이 없습니다.</div>
-			</c:when>
-			<c:otherwise>
-				<c:forEach items="${FollowingList}" var="following" varStatus="i">
-					<table id="find_peeps" id="${following.m_idx}">
-						<tr>
-							<td><a href="/peeps/mypage/${following.m_idx}"> <c:set
-										var="loginType" value="${following.loginType}" /> <c:choose>
-										<c:when test="${loginType eq 'email'}">
-											<img id="profile_modal"
-												src="<c:url value="/fileupload/${following.m_photo}"/>">
-										</c:when>
-										<c:when test="${loginType ne 'email' }">
-											<img id="profile_modal"
-												src="<c:url value="${following.m_photo}"/>">
-										</c:when>
-									</c:choose>
-							</a></td>
-							<td rowspan="2" id="id"><a
-								href="/peeps/mypage/${following.m_idx}">${following.id}</a></td>
-							<td><c:choose>
-									<c:when test="${peeps.m_idx eq following.m_idx }">
-										<button id="modal_edit">프로필 편집</button>
-									</c:when>
-									<c:otherwise>
-										<div id="fix" class="${following.m_idx}">
-											<c:choose>
-												<c:when test="${following.chk_result eq 1}">
-													<button class="f_btn" id="unfollow" type="submit"
-														onclick="unfollow(${following.m_idx})">언팔로우</button>
-												</c:when>
-												<c:otherwise>
-													<button class="f_btn" id="follow" type="submit"
-														onclick="follow(${following.m_idx})">팔로우</button>
-												</c:otherwise>
-											</c:choose>
-										</div>
-									</c:otherwise>
-								</c:choose></td>
-						</tr>
-					</table>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-		<button type="button" class="modal_close_btn">x</button>
+										<c:otherwise>
+											<div id="fix" class="${following.m_idx}">
+												<c:choose>
+													<c:when test="${following.chk_result eq 1}">
+														<button class="f_btn" id="unfollow" type="submit"
+															onclick="unfollow(${following.m_idx})">언팔로우</button>
+													</c:when>
+													<c:otherwise>
+														<button class="f_btn" id="follow" type="submit"
+															onclick="follow(${following.m_idx})">팔로우</button>
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</c:otherwise>
+									</c:choose></td>
+							</tr>
+						</table>
+					</c:forEach>
+				</c:otherwise>
+			</c:choose>
+			<button type="button" class="modal_close_btn">x</button>
+		</div>
 	</div>
 </body>
 
@@ -302,7 +304,8 @@ body {
 
 <script>
 	var email = "${peeps.email}";
-
+	var m_idx = ${peeps.m_idx};
+	
 	console.log(email);
 
 	$('#edit')
@@ -327,27 +330,11 @@ body {
 								});
 					});
 	
-	$('#modal_edit')
-	.click(
-			function() {
+	
+	$("#MyPage_img").click(function() {
 
-				$
-						.ajax({
-							url : '${pageContext.request.contextPath}/profile/chk',
-							type : 'get',
-							data : {
-								"email" : email,
-							},
-							async : false,
-							success : function(data) {
-								location.href = "${pageContext.request.contextPath}/profile/Info";
-							},
-							error : function(request, status, error) {
-								console.log("통신 실패");
-
-							}
-						});
-			});
+		location.href = "${pageContext.request.contextPath}/mypage/" + m_idx;
+	});
 </script>
 
 <script>
@@ -355,7 +342,7 @@ body {
 //팔로잉 load
 function load_Following(){
 	
-	$('#main_wrap').load(location.href + '#profile_wrap');
+	$('#total_wrap').load(location.href + '#profile_wrap');
 
 }
 
@@ -565,6 +552,33 @@ function proUnfollow(y_idx){
 	});
 
 }
+
+// 모달 프로필 편집
+function modal_edit(){
+	
+	var email = "${peeps.email}";
+	
+	$
+	.ajax({
+		url : '${pageContext.request.contextPath}/profile/chk',
+		type : 'get',
+		data : {
+			"email" : email,
+		},
+		async : false,
+		success : function(data) {
+			location.href = "${pageContext.request.contextPath}/profile/Info";
+		},
+		error : function(request, status, error) {
+			console.log("통신 실패");
+
+		}
+	});
+
+}
+
+
+				
 
 
 </script>
