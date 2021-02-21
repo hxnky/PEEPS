@@ -2,6 +2,8 @@ package com.gnjk.chat.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,13 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gnjk.chat.domain.Alarm;
 import com.gnjk.chat.service.AlarmService;
-/*
+
 @Controller
 public class AlarmController {
 
 	@Autowired
 	private AlarmService service;
 
+	/*
 	@GetMapping("/alarm/insert")
 	@ResponseBody
 	public void saveAlarm(Alarm alarmdata) throws Exception {
@@ -27,16 +30,16 @@ public class AlarmController {
 		service. insertAlarm(alarmdata);
 
 	}
+*/
 	
-	/*@RequestMapping(value = "/select")
-	@ResponseBody
-	public String alarmList(Alarm alarm, Model model) throws Exception{
+	@RequestMapping(value = "/")
+	public void alarmList(Alarm alarm, HttpSession session) throws Exception{
 
 		List<Alarm> list = service.alarmList();
-		model.addAttribute("list", list);
+		session.setAttribute("list", list);
 
 		System.out.println("알람 컨트롤러…");
 		
-		return "chatting";
 
-	}}*/
+	}
+}

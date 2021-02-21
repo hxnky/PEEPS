@@ -72,43 +72,37 @@
 <body>
 
 	<div id="my_modal">
-		<td>${alarms.type}</td>
-		<td>${alarms}</td>
-		<div id="my_modal_header">${alarms}알람목록</div>
+		<td>${list.type}</td>
+		<td>${list}</td>
+		<div id="my_modal_header">${list}알람목록</div>
 
 <c:forEach items="${alarms}" var="list">
 <option><c:out value="${list.type}"/></option>
 
 </c:forEach>
 
-			<%-- <c:choose>
-			<c:when test="${Alarm == 0}">
-				<div id="user_no">알람이 없습니다.</div>
-			</c:when>
-			<c:otherwise> --%>
-			<!-- 		<a href="/chat"></a> -->
 			<c:choose>
-				<c:when test="${alarmCnt == 0}">
+				<c:when test="${list == 0}">
 					<div id="user_no">알람이 없습니다.</div>
 				</c:when>
 				<c:otherwise>
 
-					<c:forEach items="${alarms}" var="alarm">
+					<c:forEach items="${list}" var="alarm">
 				forEach문 실행
 					<table id="alarmData">
 							<tr>
 								<%-- 					<td><a href="/alarm/select ${sender.m_idx}"> --%>
-								<c:set var="type" value="${alarm.type}" />
+								<c:set var="type" value="${list.type}" />
 								<c:choose>
 									<c:when test="${type eq 'comment'}">
-										<c:out value="${alarm.sender}">님이</c:out>댓글을 남겼습니다.
+										<c:out value="${list.sender}">님이</c:out>댓글을 남겼습니다.
 										</c:when>
 									<c:when test="${type eq 'like'}">
-										<c:out value="${alarm.sender}">님이</c:out>
+										<c:out value="${list.sender}">님이</c:out>
 											좋아요를 눌렀습니다.
 										</c:when>
 									<c:when test="${type eq 'follow'}">
-										<c:out value="${alarm.sender}">님이</c:out>
+										<c:out value="${list.sender}">님이</c:out>
 											회원님을 팔로우했습니다.
 										</c:when>
 								</c:choose>
@@ -119,13 +113,13 @@
 					</c:forEach>
 
 
-					<c:forEach items="${alarms}" var="alarm">
+					<c:forEach items="${list}" var="alarm">
 						<tbody>
 							<tr>
-								<td>${alarm.type}</td>
-								<td>${alarm.sender}</td>
-								<td>${alarm.receiver}</td>
-								<td>${alarm.post}</td>
+								<td>${list.type}</td>
+								<td>${list.sender}</td>
+								<td>${list.receiver}</td>
+								<td>${list.post}</td>
 							</tr>
 						</tbody>
 					</c:forEach>
@@ -181,12 +175,12 @@
 			$('#my_modal').hide();
 		}, 10000); // 10초 뒤에 모달 사라짐
 	}
-	/* 
+/*
 	 // 네비바 알람 아이콘 눌렀을 때 -> 실시간 알람 X -> 리스트 전달하는 컨트롤러로
 	 $('#Alarm').keypress(function(event) {
 	 modal('alarm_modal');
-	 });  */
-
+	 });
+*/
 	sock = new SockJS("<c:url value="/chat"/>");
 
 	sock.onopen = onOpen;
@@ -206,8 +200,8 @@
 			sendMessage();
 			console.log("sendMessage() - 메서드 실행 ");
 
-			//modal('my_modal');
-			//console.log("알림 모달 보기라도 하자...");
+			modal('my_modal');
+			console.log("알림 모달 보기라도 하자...");
 		});
 
 	});

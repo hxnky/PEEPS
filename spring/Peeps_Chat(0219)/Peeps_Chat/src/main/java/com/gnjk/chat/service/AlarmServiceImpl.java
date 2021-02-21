@@ -8,13 +8,13 @@ import org.springframework.stereotype.Service;
 
 import com.gnjk.chat.dao.AlarmDao;
 import com.gnjk.chat.domain.Alarm;
-/*
+
 @Service
 public class AlarmServiceImpl implements AlarmService {
 	
 	@Inject
 	private AlarmDao dao;
-	/*
+/*
 	@Override
 	public void insertAlarm(Alarm alarm) throws Exception {
 		
@@ -22,7 +22,7 @@ public class AlarmServiceImpl implements AlarmService {
 		
 	}
 	
-	/*
+*/
 	@Override
 	public List<Alarm> alarmList() throws Exception {
 		
@@ -30,4 +30,4 @@ public class AlarmServiceImpl implements AlarmService {
 		
 	}
 
-}*/
+}

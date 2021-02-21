@@ -10,16 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       values (#{type},#{sender},#{receiver}, #{post}) 
    </insert>
    
-   <select id="selectAlarmList" resultType="com.gnjk.chat.domain.Alarm">
+   <select id="alarmList" resultType="com.gnjk.chat.domain.Alarm">
    		select *
    		from chat.alarm
    </select>
-   
-   <select id="selectByType"
-   			resultType="com.gnjk.chat.domain.Alarm">
-   			select *
-   			from chat.alarm
-   			where type=#{type}
-   	</select>
    
    </mapper>
