@@ -33,13 +33,15 @@ public class AlarmController {
 */
 	
 	@RequestMapping(value = "/")
-	public void alarmList(Alarm alarm, HttpSession session) throws Exception{
+	public String alarmList(Alarm alarm, HttpSession session) throws Exception{
 
-		List<Alarm> list = service.alarmList();
-		session.setAttribute("list", list);
+		session.setAttribute("list", service.alarmList(alarm));
 
 		System.out.println("알람 컨트롤러…");
 		
-
+		System.out.println(service.alarmList(alarm));
+		
+		return "nav";
+		
 	}
 }

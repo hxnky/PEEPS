@@ -34,31 +34,6 @@
 	margin: 30px;
 	word-wrap: break-word;
 }
-
-#my_modal {
-	display: none;
-	width: 600px;
-	height: 400px;
-	padding: 20px 60px;
-	background-color: #fefefe;
-	border: 1px solid #888;
-	border-radius: 10px;
-	padding: 20px 60px;
-	overflow: auto;
-}
-
-#my_modal .modal_close_btn {
-	position: fixed;
-	top: 10px;
-	right: 10px;
-}
-
-#alarmData {
-	width: 500px;
-	height: 30px;
-	text-align: center;
-	margin-top: 10px;
-}
 </style>
 
 <!-- SocketJS CDN -->
@@ -70,13 +45,23 @@
 </head>
 
 <body>
-
+<%-- 
 	<div id="my_modal">
-		<td>${list.type}</td>
-		<td>${list}</td>
 		<div id="my_modal_header">${list}알람목록</div>
 
-<c:forEach items="${alarms}" var="list">
+<c:forEach items="${list}" var="list">
+						<tbody>
+							<tr>
+								<td>${list.type}</td>
+								<td>${list.sender}</td>
+								<td>${list.receiver}</td>
+								<td>${list.post}</td>
+							</tr>
+						</tbody>
+					</c:forEach>
+
+<!--
+<c:forEach items="${list}" var="list">
 <option><c:out value="${list.type}"/></option>
 
 </c:forEach>
@@ -87,11 +72,11 @@
 				</c:when>
 				<c:otherwise>
 
-					<c:forEach items="${list}" var="alarm">
+					<c:forEach items="${list}" var="list">
 				forEach문 실행
 					<table id="alarmData">
 							<tr>
-								<%-- 					<td><a href="/alarm/select ${sender.m_idx}"> --%>
+													<td><a href="/alarm/select ${sender.m_idx}">
 								<c:set var="type" value="${list.type}" />
 								<c:choose>
 									<c:when test="${type eq 'comment'}">
@@ -107,13 +92,13 @@
 										</c:when>
 								</c:choose>
 								<!-- </a></td> -->
-
+<!-- 
 							</tr>
 						</table>
 					</c:forEach>
 
 
-					<c:forEach items="${list}" var="alarm">
+					<c:forEach items="${list}" var="list">
 						<tbody>
 							<tr>
 								<td>${list.type}</td>
@@ -126,55 +111,16 @@
 
 
 				</c:otherwise>
-			</c:choose>
+	  	</c:choose>-->	
 			<button type="button" class="modal_close_btn">x</button>
 
 
-	</div>
+	</div> --%>
 
 </body>
 
 <script>
-	function modal(id) {
-		var zIndex = 9999;
-		var modal = $('#' + id);
-		// 모달 div 뒤에 희끄무레한 레이어
-		var bg = $('<div>').css({
-			position : 'fixed',
-			zIndex : zIndex,
-			left : '0px',
-			top : '0px',
-			width : '100%',
-			height : '100%',
-			overflow : 'auto',
-			// 레이어 색갈은 여기서 바꾸면 됨
-			backgroundColor : 'rgba(0,0,0,0.500)'
-		}).appendTo('body');
-		modal
-				.css(
-						{
-							position : 'fixed',
-							boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-							// 시꺼먼 레이어 보다 한칸 위에 보이기
-							zIndex : zIndex + 1,
-							// div center 정렬
-							top : '50%',
-							left : '50%',
-							transform : 'translate(-50%, -50%)',
-							msTransform : 'translate(-50%, -50%)',
-							webkitTransform : 'translate(-50%, -50%)'
-						}).show()
-
-				// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-				.find('.modal_close_btn').on('click', function() {
-					bg.remove();
-					modal.hide();
-				});
-
-		setTimeout(function() {
-			$('#my_modal').hide();
-		}, 10000); // 10초 뒤에 모달 사라짐
-	}
+	
 /*
 	 // 네비바 알람 아이콘 눌렀을 때 -> 실시간 알람 X -> 리스트 전달하는 컨트롤러로
 	 $('#Alarm').keypress(function(event) {
@@ -200,8 +146,8 @@
 			sendMessage();
 			console.log("sendMessage() - 메서드 실행 ");
 
-			modal('my_modal');
-			console.log("알림 모달 보기라도 하자...");
+			//modal('my_modal');
+			//console.log("알림 모달 보기라도 하자...");
 		});
 
 	});

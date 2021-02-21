@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.gnjk.dao.AlarmDaoImpl">
+<mapper namespace="com.gnjk.chat.dao.AlarmDao">
 
 <insert id ="insertAlarm" parameterType ="com.gnjk.chat.domain.Alarm">
       insert into chat.alarm(type, sender, receiver, post)
