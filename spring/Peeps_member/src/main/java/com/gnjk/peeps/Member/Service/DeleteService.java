@@ -14,7 +14,7 @@ public class DeleteService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public int Delete(String email, String password, int m_idx) {
+	public int Delete(String email, String password, int m_idx, String reason) {
 
 		int result = 0;
 		
@@ -29,6 +29,8 @@ public class DeleteService {
 			System.out.println(m_idx);
 			
 			dao.deleteFollowList(m_idx);
+			
+			dao.insertReason(email, reason);
 			System.out.println("회원 삭제 완료");
 		}
 		

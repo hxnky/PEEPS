@@ -126,6 +126,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- delete from member where email=#{email} and -->
 	<!-- password=#{password} -->
 	<!-- </delete> -->
+	
+	<!-- 탈퇴 사유 저장 -->
+	<!-- 팔로우 -->
+	<insert id="insertReason"
+		parameterType="com.gnjk.peeps.Member.domain.Delete">
+		insert into withdraw (email, reason) values
+		(#{email}, #{reason})
+	</insert>
+	
 
 	<!-- 해당 단어가 들어가는 유저 검색 -->
 	<select id="searchMember" resultMap="memberResult">

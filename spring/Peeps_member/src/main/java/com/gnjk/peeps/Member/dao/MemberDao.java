@@ -52,6 +52,9 @@ public interface MemberDao {
 
 	// 회원 정보 삭제
 	int deletePeeps(@Param("email") String email, @Param("password") String password);
+	
+	// 탈퇴 사유 저장
+	int insertReason(@Param("email") String email, @Param("reason") String reason);
 
 	// 일치하는 회원 정보 출력
 	List<Peeps> searchMember(String keyword);
