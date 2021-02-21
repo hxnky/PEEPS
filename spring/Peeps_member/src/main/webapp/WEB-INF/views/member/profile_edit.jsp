@@ -8,184 +8,78 @@
 <title>프로필 편집</title>
 
 <link href="<c:url value="/resources/css/edit.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 </head>
-<style>
-# /*공통인부분*/
-body {
-	background-color: #fcf9f6;
-}
-
-#total_wrap {
-	margin: 100px auto;
-	height: 800px;
-	width: 1500px;
-}
-
-#edit_menu {
-	margin-top: 100px;
-	height: 600px;
-	width: 490px;
-	float: left;
-	text-align: center;
-	border-right: solid 0.2px #CCC;
-}
-
-/*공통 끝*/
-#edit_table {
-	margin: 50px;
-	height: 600px;
-	width: 800px;
-	float: right;
-}
-
-#table_right {
-	font-weight: bold;
-}
-
-#table_right>input, #edit_bio {
-	width: 300px;
-	margin: 10px auto;
-}
-
-#choose {
-	display: none;
-}
-
-#choose_btn {
-	background-color: #fcf9f6;
-	border: 0;
-	outline: 0;
-	font-size: 20px;
-	margin-left: 13px;
-	font-weight: bold;
-}
-
-#choose_btn:hover {
-	cursor: pointer;
-}
-
-#profile {
-	width: 200px;
-	height: 200px;
-	border-radius: 100%;
-	text-align: center;
-}
-
-#edit_text {
-	border: solid 0.2px #CCC;
-	border-radius: 5%;
-	height: 30px;
-	width: 300px;
-	font-size: 15px;
-}
-
-#edit_bio {
-	border: solid 0.2px #CCC;
-	border-radius: 5%;
-	height: 50px;
-	width: 300px;
-	font-size: 15px;
-}
-
-#change {
-	margin-left: 420px;
-	width: 80px;
-	height: 30px;
-	font-size: 15px;
-}
-
-#menu_btn {
-	margin-top: 80px;
-}
-
-h3 {
-	display: inline;
-}
-
-#menu_btn>button {
-	background-color: #fcf9f6;
-	border: none;
-	font-size: 35px;
-	font-weight: bold;
-	width: 300px;
-	margin: 50px auto;
-}
-</style>
 <body>
-<!-- 	<div id="nav"> -->
-<!-- 		<nav> -->
-<!-- 			<ul class="icon"> -->
-<!-- 				아이콘 경로 바꾸기 -->
-<!-- 				<li class="left"><span><input type="search" -->
-<!-- 						placeholder="검색"> <a href="/user/find_id"> -->
-<!-- 							<button type="submit"> -->
-<!-- 								<img -->
-<%-- 									src="<c:url value="/resources/images/icon/navi/search.png"/>"> --%>
-
-<!-- 							</button> -->
-<!-- 					</a></span></li> -->
-<!-- 				사진 크기 커서 주석처리 해놓음 -->
-<!-- 								<li class="center"><a id="Logo"><img -->
-<%-- 										src="<c:url value="/resources/images/plus.png"/>"></a></li> --%>
-
-<!-- 				<li class="right"><a id="Home" href="#"><img -->
-<%-- 						src="<c:url value="/resources/images/icon/navi/023-home.png"/>"></a> --%>
-<!-- 					<a id="Content" href="#"><img -->
-<%-- 						src="<c:url value="/resources/images/icon/navi/Content.png"/>"></a> --%>
-<!-- 					<a id="Alarm" href="#"><img -->
-<%-- 						src="<c:url value="/resources/images/icon/navi/008-notification.png"/>"></a> --%>
-<!-- 					<a id="Chat" href="#"><img -->
-<%-- 						src="<c:url value="/resources/images/icon/navi/050-wechat.png"/>"></a> --%>
-<!-- 					<a id="MyPage" href="#"><img -->
-<%-- 						src="<c:url value="/resources/images/icon/navi/010-user.png"/>"></a> --%>
-<!-- 				</li> -->
-
-<!-- 			</ul> -->
-
-<!-- 		</nav> -->
-
-<!-- 		<!-- 네비 바 들어갈 부분 --> -->
-<!-- 	</div> -->
+	<div id="nav">
+		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+	</div>
 	<div id="total_wrap">
 		<div id="edit_menu">
 			<div id="menu_btn">
-				<h3 id="email"><%=request.getParameter("email")%></h3>
+				<h3 id="email">${peeps.email}</h3>
 				<h3>님</h3>
 				<br>
 				<button id="edit">프로필 편집</button>
 				<button id="pw_ch">비밀번호 변경</button>
 				<button id="delete">탈퇴하기</button>
+				<button id="log_out">로그아웃</button>
 			</div>
 		</div>
 		<div>
-			<form id="edit_form" method="post" enctype="multipart/form-data">
+			<form id="edit_photo" enctype="multipart/form-data">
 				<table id="edit_table">
 					<tr>
-						<td id="table_left" rowspan="3"><img id="profile"
-							src="<c:url value="/fileupload/${peeps.m_photo}"/>"><br> <input
-							type="file" id="choose" name="m_photo" accept="img/*"><br>
+						<td id="table_left" rowspan="3"><c:set var="loginType"
+								value="${peeps.loginType}" /> <c:choose>
+								<c:when test="${peeps.loginType eq 'email' }">
+									<img id="profile"
+										src="<c:url value="/fileupload/${peeps.m_photo}"/>">
+									<input type="hidden" id="oldPhoto" name="oldPhoto"
+										value="${peeps.m_photo}">
+									<br>
+								</c:when>
+								<c:when test="${loginType ne 'email' }">
+									<img id="profile" src="<c:url value="${peeps.m_photo}"/>">
+									<input type="hidden" id="oldPhoto" name="oldPhoto"
+										value="${peeps.m_photo}">
+									<br>
+								</c:when>
+
+							</c:choose> <input type="file" class="choose" id="m_photo" name="m_photo"
+							accept="img/*"><br>
 							<button type="button" id="choose_btn">프로필 사진 바꾸기</button></td>
 
 						<td id="table_right">아이디 <br> <input type="text"
-							id="edit_text" name="id" value="${peeps.id}">
+							class="edit_text" id="id" name="id" value="${peeps.id}">
 						</td>
 					</tr>
 					<tr>
-						<td id="table_right">이름 <br> <input type="text"
-							id="edit_text" name="name" value="${peeps.name}">
+						<td id="table_right">이름 <br> <c:set var="loginType"
+								value="${loginType}" /> <c:choose>
+								<c:when test="${loginType eq 'email' }">
+									<input type="text" class="edit_text" id="name" name="name"
+										value="${peeps.name}">
+								</c:when>
+								<c:when test="${loginType ne 'email' }">
+									<input type="text" class="edit_text" id="name" name="name"
+										value="${peeps.name}" readonly="readonly">
+								</c:when>
+
+							</c:choose>
 						</td>
 					</tr>
 					<tr>
 						<td id="table_right">소개글 <br> <input type="text"
-							id="edit_bio" name="bio" value="${peeps.bio}">
+							class="edit_bio" id="bio" name="bio" value="${peeps.bio}">
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="submit" id="change" value="변경">
-						</td>
+						<td colspan="2"></td>
 					</tr>
 				</table>
 			</form>
+			<button id="change">변경</button>
 		</div>
 	</div>
 
@@ -202,97 +96,181 @@ h3 {
 
 <script>
 	$(function() {
-		//버튼 클릭시 업로드창 실행
-		$('#choose_btn').click(function() {
-			console.log('fileadd');
-			$("input[name='m_photo']").click();
 
+		var loginType = "${loginType}";
+
+		if (loginType == "email") {
+			//버튼 클릭시 업로드창 실행
+			$('#choose_btn').click(function() {
+				console.log('fileadd');
+				$("input[name='m_photo']").click();
+
+			})
+
+			//이미지 클릭시 업로드창 실행
+			$('#profile').click(function() {
+				console.log('fileadd');
+				$("input[name='m_photo']").click();
+
+			})
+		}
+
+		// 이미지로 파일 선택 시 미리보기
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					$('#profile').attr('src', e.target.result);
+				}
+
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+
+		$("#choose").change(function() {
+			readURL(this);
 		})
 
-		//이미지 클릭시 업로드창 실행
-		$('#profile').click(function() {
-			console.log('fileadd');
-			$("input[name='m_photo']").click();
-
-		})
 	});
 
-	// 이미지로 파일 선택 시 미리보기
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
+	// 댓글 글자 수 제한
+	$('#bio').keyup(function() {
+		// 현재 입력 문자열의 길이
+		var inputStrLen = $(this).val().length;
+		if (inputStrLen > 50) {
+			alert('50자 까지만 입력이 가능합니다.');
+			var userInput = $(this).val().substr(0, 50);
+			$(this).val(userInput);
+			inputStrLen = 50;
+		}
+	});
+</script>
 
-			reader.onload = function(e) {
-				$('#profile').attr('src', e.target.result);
+
+<script>
+	$("#edit")
+			.click(
+					function() {
+
+						var email = "${peeps.email}";
+
+						$
+								.ajax({
+									url : '${pageContext.request.contextPath}/profile/chk',
+									type : 'get',
+									data : {
+										"email" : email,
+									},
+									async : false,
+									success : function(data) {
+										location.href = "${pageContext.request.contextPath}/profile/Info";
+									},
+									error : function(request, status, error) {
+										console.log("통신 실패");
+
+									}
+								});
+					});
+
+	var email = "${peeps.email}";
+	var m_idx = ${peeps.m_idx};
+
+	$("#MyPage_img").click(function() {
+
+		location.href = "${pageContext.request.contextPath}/mypage/" + m_idx;
+
+	});
+
+	$("#pw_ch")
+			.click(
+					function() {
+
+						location.href = "${pageContext.request.contextPath}/profile/pw?email="
+								+ email;
+
+					});
+
+	$("#delete")
+			.click(
+					function() {
+
+						location.href = "${pageContext.request.contextPath}/profile/delete?email="
+								+ email;
+
+					});
+
+	$("#log_out").click(function() {
+
+		location.href = "${pageContext.request.contextPath}/logout";
+	});
+</script>
+<script>
+	$("#change").click(function() {
+
+		var data = $('#edit_photo')[0];
+		var form_data = new FormData(data);
+
+		$.ajax({
+			url : '${pageContext.request.contextPath}/profile/edit',
+			type : 'post',
+			data : form_data,
+			dataType : 'json',
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			async : true,
+			success : function(data) {
+
+				console.log("수정 완료");
+				if (data == 1) {
+					alert("수정 완료");
+					//location.href = "${pageContext.request.contextPath}profile/Info?email="+ email;
+				} else {
+					alert("계정을 찾을 수 없습니다. 이메일 또는 아이디를 확인해주세요");
+				}
+
+			},
+			error : function(request, status, error) {
+				console.log("통신 실패");
+
+			}
+		});
+	});
+</script>
+
+<script>
+$("#keyword")
+.click(
+		function() {
+
+			var m_idx = ${peeps.m_idx};
+			var keyword = $('#search').val();
+
+			if(keyword.trim()==""){
+				alert("한 글자 이상 입력하세요");
+			} else{
+				$
+				.ajax({
+					url : '${pageContext.request.contextPath}/user/finduser',
+					type : 'get',
+					async : false,
+					data : {
+						"keyword":keyword,
+						"m_idx" : m_idx
+					},
+					success : function(data) {
+						location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
+					},
+					error : function() {
+						console.log("실패,,,,");
+					}
+				});
+
 			}
 
-			reader.readAsDataURL(input.files[0]);
-		}
-	}
-
-	$("#choose").change(function() {
-		readURL(this);
-	});
+			
+		});
 </script>
-
-<script>
-	$(function() {
-
-		var email = $('#email').text();
-
-		$("#edit")
-				.click(
-						function() {
-
-							location.href = "${pageContext.request.contextPath}/profile/Info?email="
-									+ email;
-
-						});
-
-		$("#pw_ch")
-				.click(
-						function() {
-
-							location.href = "${pageContext.request.contextPath}/profile/pw?email="
-									+ email;
-
-						});
-
-		$("#delete")
-				.click(
-						function() {
-
-							location.href = "${pageContext.request.contextPath}/profile/delete?email="
-									+ email;
-
-						});
-		
-		
-	})
-</script>
-
-<script>
-$(function() {
-	var email = $('#email').text();
-	
-	console.log(email);
-
-	// 페이지 이동할때 email에 값이 안들어감 --> result는 제대로 나옴
-	if(${result} == 1){
-		alert("정보가 수정되었습니다.");
-		location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
-	} else if(${result} == 0){
-		alert("아이디가 중복됩니다.");
-		location.href = "${pageContext.request.contextPath}/profile/Info?email="+ email;
-	} else{
-		console.log("정보 수정 진입");
-	}
-	
-});
-
-	
-
-</script>
-
 
 </html>

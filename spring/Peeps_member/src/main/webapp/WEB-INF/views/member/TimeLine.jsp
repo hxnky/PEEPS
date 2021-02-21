@@ -29,77 +29,63 @@
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="<c:url value="/resources/css/demo.css"/>" rel="stylesheet" />
 <link href="<c:url value="/resources/css/reg.css"/>" rel="stylesheet" />
+<link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 </head>
 <body>
-	<div class="image-container set-full-height"
-		style="background-color: #fcf9f6">
-		<div class="logo-container">
-			<!-- 로고 넣기 -->
-			<img id="logo"
-				src="${pageContext.request.contextPath}/resources/images/plus.png">
-		</div>
+	<div id="nav">
+		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+	</div>
+	<!--   Big container   -->
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
 
-		<!--   Big container   -->
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2">
+				<!--      Wizard container        -->
+				<div class="wizard-container">
 
-					<!--      Wizard container        -->
-					<div class="wizard-container">
+					<div class="card wizard-card" id="wizardProfile">
+						<!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
 
-						<div class="card wizard-card" id="wizardProfile">
-							<!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
-
-							<div class="wizard-header">
-								<h3>
-									<b>PEEPS</b> <br>
-								</h3>
-							</div>
-
-							<!-- nav css 수정하기 -->
-							<div>
-								<ul>
-									<li id="top_nav">회원가입</li>
-								</ul>
-
-							</div>
-
-							<h1>타 임 라 인</h1>
-							<h3 id="email"><%=request.getParameter("email")%>
+						<div class="wizard-header">
+							<h3>
+								<b>PEEPS</b> <br>
 							</h3>
-							<%=session.getAttribute("loginInfo") %>
-							${loginInfo }
-							<button id="edit_btn">프로필 편집</button>
+						</div>
 
-							<input type="button" value="로그아웃"
-								onclick="location.href='${pageContext.request.contextPath}/logout'">
+						<!-- nav css 수정하기 -->
+						<div>
+							<ul>
+								<li id="top_nav">회원가입</li>
+							</ul>
 
-							<div class="wizard-footer height-wizard">
-								<div class="clearfix">
-									<br>
-								</div>
+						</div>
+
+						<h1>타 임 라 인</h1>
+						${peeps }
+						<button id="edit_btn">프로필 편집</button>
+
+						<input type="button" value="로그아웃"
+							onclick="location.href='${pageContext.request.contextPath}/logout'">
+
+						<div class="wizard-footer height-wizard">
+							<div class="clearfix">
+								<br>
 							</div>
 						</div>
 					</div>
-					<!-- wizard container -->
 				</div>
+				<!-- wizard container -->
 			</div>
-			<!-- end row -->
 		</div>
-		<!--  big container -->
+		<!-- end row -->
+	</div>
+	<!--  big container -->
 
-		<div class="footer">
-			PEEPS<i class="fa fa-heart heart"></i>GNJKK
-		</div>
-
+	<div class="footer">
+		PEEPS<i class="fa fa-heart heart"></i>GNJKK
 	</div>
 
 </body>
-
-
-<!-- <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
-
-
 
 <!--   Core JS Files   -->
 <script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
@@ -109,23 +95,65 @@
 <script src="<c:url value="/resources/js/jquery.bootstrap.wizard.js"/>"
 	type="text/javascript"></script>
 
-<!--  Plugin for the Wizard -->
-<script src="<c:url value="/resources/js/gsdk-bootstrap-wizard.js"/>"></script>
-
-<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
-<script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 
 <script>
+	var email = "${peeps.email}";
 
-var email = $('#email').text();
-
-console.log(email);
+	console.log(email);
 
 	$('#edit_btn')
 			.click(
 					function() {
-						location.href = "${pageContext.request.contextPath}/profile/Info?email="+email;
+
+						$
+								.ajax({
+									url : '${pageContext.request.contextPath}/profile/chk',
+									type : 'get',
+									data : {
+										"email" : email,
+									},
+									async : false,
+									success : function(data) {
+										location.href = "${pageContext.request.contextPath}/profile/Info";
+									},
+									error : function(request, status, error) {
+										console.log("통신 실패");
+
+									}
+								});
 					});
 </script>
+<script>
+$("#keyword")
+.click(
+		function() {
 
+			var m_idx = ${peeps.m_idx};
+			var keyword = $('#search').val();
+
+			if(keyword.trim()==""){
+				alert("한 글자 이상 입력하세요");
+			} else{
+				$
+				.ajax({
+					url : '${pageContext.request.contextPath}/user/finduser',
+					type : 'get',
+					async : false,
+					data : {
+						"keyword":keyword,
+						"m_idx" : m_idx
+					},
+					success : function(data) {
+						location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
+					},
+					error : function() {
+						console.log("실패,,,,");
+					}
+				});
+
+			}
+
+			
+		});
+</script>
 </html>

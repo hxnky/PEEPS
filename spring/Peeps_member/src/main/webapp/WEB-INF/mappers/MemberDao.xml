@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gnjk.peeps.Member.dao.MemberDao">
+
+	<!-- 회원가입 -->
+	<insert id="insertMember"
+		parameterType="com.gnjk.peeps.Member.domain.Peeps"
+		useGeneratedKeys="true" keyProperty="m_idx">
+		insert into member (email, id,
+		password, name, code) values
+		(#{email}, #{id},#{password},#{name},
+		#{code});
+	</insert>
+
+	<!-- 소셜 로그인 시 회원 이메일 있는지 확인 -->
+	<select id="selectMemberByEmailCount" resultType="int">
+		select count(*)
+		from member where email=#{email}
+	</select>
+
+	<!-- 소셜 로그인 시 회원 이메일이 있다면 로그인 타입이 일치하는지 확인 -->
+	<select id="selectLoginTypeByEmailCount" resultType="String">
+		select
+		loginType from member where email=#{email}
+	</select>
+
+	<!-- 소셜 로그인 시 사진 정보가 일치하는지 확인 -->
+	<select id="selectM_photoByEmailCount" resultType="String">
+		select
+		m_photo
+		from member where email=#{email}
+	</select>
+
+	<!-- 이메일 없으면 이메일, 이름, 사진, 로그인 타입 insert 하기 -->
+	<insert id="insertSocialMember"
+		parameterType="com.gnjk.peeps.Member.domain.Peeps"
+		useGeneratedKeys="true" keyProperty="m_idx">
+		insert into member (email, id,
+		password, m_photo, name,
+		loginType, verify, code) values (#{email},
+		#{id},#{password},#{m_photo},#{name}, #{loginType}, 'Y', #{code});
+	</insert>
+
+
+	<!-- 아이디 중복 확인 -->
+	<select id="selectMemberByIdCount" resultType="int">
+		select count(*)
+		from member where id=#{id}
+	</select>
+
+	<!-- 이메일 인증 -->
+	<select id="selectMemberByIdxVerify" resultType="int">
+		select count(*)
+		from member where m_idx=#{m_idx} and verify='Y'
+	</select>
+
+	<!-- 이메일 인증 상태 업데이트 -->
+	<update id="updateMemberVerify">
+		update member set verify='Y' where m_idx=#{param1}
+		and code=#{param2}
+	</update>
+
+	<!-- 로그인 -->
+	<resultMap id="memberResult"
+		type="com.gnjk.peeps.Member.domain.Peeps">
+		<id column="m_idx" property="m_idx" />
+		<result column="email" property="email" />
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="password" property="password" />
+		<result column="m_photo" property="m_photo" />
+	</resultMap>
+
+	<select id="selectLogin" resultMap="memberResult">
+		select * from member where
+		email=#{param1} and password=#{param2}
+	</select>
+
+	<!-- 아이디 검색 -->
+	<select id="search_user" resultType="int">
+		select count(*) from member
+		where email = #{email} and id = #{id}
+	</select>
+
+	<!-- 비밀번호 찾기 실행 시 비밀번호 변경 -->
+	<select id="updatePw" parameterType="map">
+		update member set
+		password=#{password} where email = #{email} and id = #{id}
+	</select>
+
+	<!-- 유저 정보 불러오기 -->
+	<select id="selectMemberByEmail" resultMap="memberResult">
+		select * from member
+		where email = #{email}
+	</select>
+
+	<!-- 유저 정보 업데이트 -->
+	<update id="updateMemberInfo"
+		parameterType="com.gnjk.peeps.Member.domain.Peeps">
+		update member set m_photo = #{m_photo}, name = #{name},
+		id=#{id}, bio = #{bio} where email = #{email}
+	</update>
+
+	<!-- 비밀번호 확인 -->
+	<select id="chk_password" resultType="int">
+		select count(*) from member
+		where email=#{email} and password=#{password}
+	</select>
+
+	<!-- 비밀번호 업데이트 -->
+	<update id="updatePassword">
+		update member set password= #{password} where
+		email=#{email}
+	</update>
+
+	<!-- 회원 정보 삭제 시 아이디 중복 사용 하지 못하게 verify 업데이트 -->
+	<update id="deletePeeps">
+		update member set verify='R' where email=#{email} and
+		password=#{password}
+	</update>
+
+	<!-- <delete id="deletePeeps"> -->
+	<!-- delete from member where email=#{email} and -->
+	<!-- password=#{password} -->
+	<!-- </delete> -->
+	
+	<!-- 탈퇴 사유 저장 -->
+	<!-- 팔로우 -->
+	<insert id="insertReason"
+		parameterType="com.gnjk.peeps.Member.domain.Delete">
+		insert into withdraw (email, reason) values
+		(#{email}, #{reason})
+	</insert>
+	
+
+	<!-- 해당 단어가 들어가는 유저 검색 -->
+	<select id="searchMember" resultMap="memberResult">
+		select * from member
+		<where>
+			<include refid="searchId" />
+			<include refid="searchName" />
+		</where>
+	</select>
+
+	<!-- 해당 단어가 들어가는 유저 수 검색 -->
+	<select id="searchMemberCnt" resultType="int">
+		select count(*) from member
+		<where>
+			<include refid="searchId" />
+			<include refid="searchName" />
+		</where>
+	</select>
+
+	<!-- 아이디와 이름 해당하면 다 검색 -->
+	<sql id="searchId">
+		or id like concat('%',#{keyword},'%')
+	</sql>
+
+	<sql id="searchName">
+		or name like concat('%',#{keyword},'%')
+	</sql>
+
+	<!-- 인덱스로 회원 정보 가져오기 -->
+	<select id="selectMemberByIdx" resultMap="memberResult">
+		select * from member
+		where m_idx = #{m_idx}
+	</select>
+
+	<!-- 소셜 회원 정보 업데이트 -->
+	<update id="m_photoUpdate">
+		update member set m_photo= #{m_photo}, name=#{name}
+		where
+		email=#{email}
+	</update>
+	
+	<!-- 소셜 회원이메일 인증 값 확인  -->
+	<select id="selectVerifyByEmail" resultType="String">
+		select verify from member where email=#{email}
+	</select>
+
+	<!-- 팔로우 상태인지 확인 -->
+	<select id="CheckFollow" resultType="int">
+		select count(*) from follow
+		where following_id=#{follow_idx} and follower_id = #{m_idx}
+	</select>
+
+	<!-- 팔로우 -->
+	<insert id="insertFollow"
+		parameterType="com.gnjk.peeps.Member.domain.Follow">
+		insert into follow (following_id, follower_id) values
+		(#{y_idx}, #{m_idx})
+	</insert>
+
+	<!-- 언팔로우 -->
+	<delete id="deleteFollow">
+		delete from follow where following_id=#{y_idx} and
+		follower_id= #{m_idx}
+	</delete>
+
+	<!-- 팔로워 수 체크 -->
+	<select id="FollowerCnt" resultType="int">
+		select count(*) from follow
+		where following_id =#{m_idx}
+	</select>
+
+	<!-- 팔로잉 수 체크 -->
+	<select id="FollowingCnt" resultType="int">
+		select count(following_id)
+		from follow where follower_id =#{m_idx}
+	</select>
+
+	<!-- 팔로워 인덱스 가져오기 -->
+	<select id="followerList" resultType="int">
+		select follower_id from
+		follow
+		where following_id =#{m_idx}
+	</select>
+
+	<!-- 팔로잉 인덱스 가져오기 -->
+	<select id="followingList" resultType="int">
+		select following_id
+		from
+		follow where follower_id =#{m_idx}
+	</select>
+
+	<!-- 회원 탈퇴 시 팔로우 목록 삭제 -->
+	<delete id="deleteFollowList">
+		delete from follow where follower_id =#{m_idx} or
+		following_id = #{m_idx}
+	</delete>
+
+
+</mapper>

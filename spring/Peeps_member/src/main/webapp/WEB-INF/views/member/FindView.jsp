@@ -2,129 +2,241 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+
 <head>
-<meta charset="UTF-8">
-<link rel="apple-touch-icon" sizes="76x76"
-	href="resources/img/apple-icon.png">
-<link rel="icon" type="image/png" href="resources/img/favicon.png">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>PEEPS 비밀번호 찾기 결과</title>
-<meta
-	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
-	name='viewport' />
-<meta name="viewport" content="width=device-width" />
-
-<!--     Fonts and icons     -->
-<link
-	href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css"
-	rel="stylesheet">
-
-<!-- CSS Files -->
-<link href="<c:url value="/resources/css/bootstrap.min.css" />"
-	rel="stylesheet">
-<link href="<c:url value="/resources/css/gsdk-bootstrap-wizard.css"/>"
-	rel="stylesheet" />
-
-<!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="<c:url value="/resources/css/demo.css"/>" rel="stylesheet" />
-<link href="<c:url value="/resources/css/reg.css"/>" rel="stylesheet" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아이디 검색</title>
+<link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/FindView.css" />" rel="stylesheet">
 </head>
-<style>
-/*21.02.01 회원가입 확인 css 추가*/
-.contents {
-	margin: 30px auto;
-}
 
-.content {
-	width: 500px;
-	text-align: center;
-	margin: 30px auto;
-}
-</style>
 <body>
-	<div class="image-container set-full-height"
-		style="background-color: #fcf9f6">
-		<div class="logo-container">
-			<!-- 로고 넣기 -->
-			<a href="<c:url value = "/" />"><img id="logo"
-				src="${pageContext.request.contextPath}/resources/images/plus.png">
-			</a>
-		</div>
-
-		<!--   Big container   -->
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2">
-
-					<!--      Wizard container        -->
-					<div class="wizard-container">
-
-						<div class="card wizard-card" id="wizardProfile">
-							<div class="wizard-header">
-								<h3>
-									<b>PEEPS</b> <br>
-								</h3>
-							</div>
-
-							<!-- nav css 수정하기 -->
-							<div>
-								<ul>
-									<li id="top_nav">회원가입 확인</li>
-								</ul>
-
-							</div>
-							<div class="contents">
-								<div class="content">
-
-									<h2>{$peeps.id}님!</h2>
-
-<%-- 									<c:if test="${result != null}"> --%>
-										<h3>
-											<br> 임시 비밀번호가 전송되었습니다. <br> 이메일을 확인해주세요 💛
-										</h3>
-
-										<button id="login_btn" type="button"
-											onclick="location.href='${pageContext.request.contextPath}' ">로그인 하기</button>
-<%-- 									</c:if> --%>
-
-<%-- 									<c:if test="${result == null}"> --%>
-<!-- 										<br> -->
-<!--                                         	회원가입이 정상 처리되지 않았습니다. <br> -->
-<!--                                         	다시 시도해주세요. -->
-<%--                                     </c:if> --%>
-
-								</div>
-							</div>
-
-						</div>
-					</div>
-					<!-- wizard container -->
-				</div>
-			</div>
-			<!-- end row -->
-		</div>
-		<!--  big container -->
-
-
-		<div class="footer">
-			PEEPS<i class="fa fa-heart heart"></i>GNJKK
-		</div>
-
+	<div id="nav">
+		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
 	</div>
+	<!-- 네비 바 -->
+	<div id="total_wrap">
+		<c:choose>
+			<c:when test="${peepsCnt == 0}">
+				<div id="user_no">일치하는 유저가 없습니다</div>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${peepslist}" var="peep" varStatus="i">
+					<table class="find_peeps" id="${peep.m_idx }">
+
+						<tr>
+							<td rowspan="2"><a onclick="loadMyPage(${peep.m_idx})">
+									<c:set var="loginType" value="${peep.loginType}" /> <c:choose>
+										<c:when test="${loginType eq 'email'}">
+											<img id="profile"
+												src="<c:url value="/fileupload/${peep.m_photo}"/>">
+										</c:when>
+										<c:when test="${loginType ne 'email' }">
+											<img id="profile" src="<c:url value="${peep.m_photo}"/>">
+										</c:when>
+									</c:choose>
+							</a></td>
+							<td id="id"><a onclick="loadMyPage(${peep.m_idx})">${peep.id}</a></td>
+							<td rowspan="2"><c:choose>
+									<c:when test="${peep.id eq peeps.id}">
+										<div id="fix">
+											<button id="edit_btn">프로필편집</button>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div id="fix">
+											<c:choose>
+												<c:when test="${peep.chk_result eq 1}">
+													<button class="f_btn" id="unfollow" type="submit"
+														onclick="unfollow(${peep.m_idx})">언팔로우</button>
+												</c:when>
+												<c:otherwise>
+													<button class="f_btn" id="follow" type="submit"
+														onclick="follow(${peep.m_idx})">팔로우</button>
+												</c:otherwise>
+											</c:choose>
+										</div>
+									</c:otherwise>
+								</c:choose></td>
+						</tr>
+						<tr>
+							<td id="name"><a onclick="loadMyPage(${peep.m_idx})">${peep.name}</a></td>
+						</tr>
+
+					</table>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+	</div>
+
+
 
 </body>
 <!--   Core JS Files   -->
 <script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
 	type="text/javascript"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"
-	type="text/javascript"></script>
-<script src="<c:url value="/resources/js/jquery.bootstrap.wizard.js"/>"
-	type="text/javascript"></script>
 
-<!--  Plugin for the Wizard -->
-<script src="<c:url value="/resources/js/gsdk-bootstrap-wizard.js"/>"></script>
+<script>
+// 검색 결과 load
+function load_Find(){
+	
+	var m_idx = ${peeps.m_idx};
+	var keyword = "${keyword}";
+	
+	$
+	.ajax({
+		url : '${pageContext.request.contextPath}/user/loaduser?keyword=' + keyword,
+		type : 'get',
+		async : false,
+		data : {
+			"m_idx" : m_idx
+		},
+		success : function(data) {
+			console.log(data);		
+			
+			$('#total_wrap').load(location.href + '#fix');
+			//location.reload();
+			console.log("새로고침");
+		},
+		error : function() {
+			console.log("실패,,,,");
+		}
+	});
+}
 
-<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
-<script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
+// 팔로우 function
+function follow(y_idx){
+	
+	var m_idx = ${peeps.m_idx};
+	
+	console.log(y_idx);
+	
+	$
+	.ajax({
+		url : '${pageContext.request.contextPath}/follow',
+		type : 'post',
+		async : false,
+		data : {
+			"y_idx": y_idx,
+			"m_idx" : m_idx
+		},
+		success : function(data) {
+			console.log("팔로우");	
+			load_Find();
+		},
+		error : function() {
+			console.log("실패,,,,");
+		}
+	});
+
+	
+}
+
+// 언팔로우 function
+function unfollow(y_idx){
+	
+	var m_idx = ${peeps.m_idx};
+	
+	console.log(y_idx);
+	
+	$
+	.ajax({
+		url : '${pageContext.request.contextPath}/unfollow',
+		type : 'post',
+		async : false,
+		data : {
+			"y_idx": y_idx,
+			"m_idx" : m_idx
+		},
+		success : function(data) {
+			console.log("언팔로우");
+			load_Find();
+			
+		},
+		error : function() {
+			console.log("실패,,,,");
+		}
+	});
+
+}
+</script>
+
+<script>
+$("#keyword")
+.click(
+		function() {
+
+			var m_idx = ${peeps.m_idx};
+			var keyword = $('#search').val();
+
+			if(keyword.trim()==""){
+				alert("한 글자 이상 입력하세요");
+			} else{
+				$
+				.ajax({
+					url : '${pageContext.request.contextPath}/user/finduser',
+					type : 'get',
+					async : false,
+					data : {
+						"keyword":keyword,
+						"m_idx" : m_idx
+					},
+					success : function(data) {
+						location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
+					},
+					error : function() {
+						console.log("실패,,,,");
+					}
+				});
+
+			}
+
+			
+		});
+</script>
+
+<script>
+
+var email = "${peeps.email}";
+	var m_idx= ${peeps.m_idx};
+
+	$('#edit_btn')
+	.click(
+			function() {
+				
+				$.ajax({
+					url : '${pageContext.request.contextPath}/profile/chk',
+					type : 'get',
+					data : {
+						"email" : email,
+					},
+					async : false,
+					success : function(data) {
+						location.href = "${pageContext.request.contextPath}/profile/Info";
+					},error : function(request,status, error) {
+						console.log("통신 실패");
+
+					}
+				});
+			});
+
+	$("#MyPage_img")
+	.click(
+			function() {
+
+				location.href = "${pageContext.request.contextPath}/mypage/"+ m_idx;
+
+			});
+</script>
+
+<script>
+	// 검색 목록 누르면 그 사람 마이페이지로 이동
+	function loadMyPage(m_idx) {
+		location.href = "${pageContext.request.contextPath}/mypage/"+ m_idx;
+	}
+		
+		
+</script>
 </html>

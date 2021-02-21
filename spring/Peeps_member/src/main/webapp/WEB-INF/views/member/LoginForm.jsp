@@ -62,7 +62,6 @@ td {
 					<div class="wizard-container">
 
 						<div class="card wizard-card" id="wizardProfile">
-							<form method="post">
 								<!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
 
 								<div class="wizard-header">
@@ -86,8 +85,8 @@ td {
 												src="${pageContext.request.contextPath}/resources/images/plus.png"></td>
 											<td>
 												<div class="form-group-left">
-													<input type="email" id="login_text" name="email"
-														placeholder="이메일">
+													<input type="email" class="login_text" id="email"
+														name="email" placeholder="이메일">
 												</div>
 											</td>
 
@@ -95,15 +94,15 @@ td {
 										<tr>
 											<td>
 												<div class="form-group-right">
-													<input type="password" id="login_text" name="password"
-														placeholder=" 비밀번호 ">
+													<input type="password" class="login_text" id="password"
+														name="password" placeholder=" 비밀번호 ">
 												</div>
 											</td>
 										</tr>
 									</table>
 								</div>
 
-								<input type="submit" id="sign_btn" value="로그인" />
+								<button id="sign_btn" >로그인</button>
 								<div id="or_wrap">
 									<ul>
 										<li>
@@ -137,10 +136,10 @@ td {
 										아이디가 없으신가요? <a href="<c:url value="/member/reg"/>">회원가입 하기</a>
 									</div>
 									<div>
-										비밀번호를 잊으셨나요? <a href="<c:url value="/member/find"/>">비밀번호 찾기</a>
+										비밀번호를 잊으셨나요? <a href="<c:url value="/member/find"/>">비밀번호
+											찾기</a>
 									</div>
 								</div>
-							</form>
 						</div>
 					</div>
 					<!-- wizard container -->
@@ -170,4 +169,50 @@ td {
 
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 <script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
+
+
+<script>
+	// 로그인 처리
+	$("#sign_btn").click(function() {
+		
+		var email = $('#email').val();
+		var password = $('#password').val();
+		
+		console.log(email);
+		console.log(password);
+		
+		if(email.trim()==""){
+			alert("이메일을 입력해주세요");
+		} else if(password.trim()==""){
+			alert("비밀번호를 입력해주세요!");
+		}else{
+			$.ajax({
+				url : '${pageContext.request.contextPath}/user/login',
+				type : 'post',
+				data : {
+					"email" : email,
+					"password" : password,
+				},
+				async : false,
+				success : function(data) {
+					if (data == 2) {
+						location.href = "${pageContext.request.contextPath}/TimeLine?email="+ email;
+					} else if(data==1) {
+						alert("미인증 계정입니다. 이메일을 확인해주세요");
+					} else if(data == 0){
+						alert("없는 계정이거나 비밀번호가 일치하지 않습니다.");
+					} else if(data == 3){
+						alert("탈퇴된 계정입니다.");
+					}
+
+				},error : function(request,status, error) {
+					console.log("통신 실패");
+
+				}
+		});
+		}
+
+				
+	});
+</script>
 </html>
