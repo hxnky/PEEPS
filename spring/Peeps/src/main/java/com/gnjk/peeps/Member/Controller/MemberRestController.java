@@ -110,11 +110,11 @@ public class MemberRestController {
 	
 	// 탈퇴하기
 	@PostMapping("/user/del")
-	public int EditPwPost(HttpServletResponse response, String email, String password, int m_idx, HttpSession session){
+	public int EditPwPost(HttpServletResponse response, String email, String password, int m_idx, String reason, HttpSession session){
 		
 		session.invalidate();
 		
-		return deleteService.Delete(email, password, m_idx);
+		return deleteService.Delete(email, password, m_idx, reason);
 	}
 	
 	// 검색

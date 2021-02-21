@@ -31,7 +31,7 @@
 			<table id="edit_table">
 				<tr>
 
-					<td><%=request.getParameter("email")%>님!<br> 탈퇴하시면 계정을 다시
+					<td>${peeps.email}<br> 탈퇴하시면 계정을 다시
 						복구할 수 없습니다. <br> 그래도 탈퇴하시겠어요?</td>
 				</tr>
 				<tr>
@@ -43,8 +43,7 @@
 								<option>삭제하고 싶은 내용이 있음</option>
 								<option>이 SNS가 별로임</option>
 
-							</select>
-
+							</select> <input type="hidden" id="reason">
 						</div></td>
 				</tr>
 				<tr>
@@ -75,7 +74,7 @@
 <script>
 	$(function() {
 
-		var email = $('#email').text();
+		var email = "${peeps.email}";
 
 		$("#edit")
 				.click(
@@ -133,15 +132,17 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-
+		
 		$('.dropbtn').change(function() {
+			// 드롭다운리스트에서 선택된 값을 텍스트박스에 출력
 
-			var selectedText = $(".dropbtn option:selected").text();
+			var selectedText = $(":selected").text();
 
-			$('.dropbtn').val(selectedText);
+			$('#reason').val(selectedText);
+			
+			console.log(selectedText);
 
 		});
-
 	});
 </script>
 
@@ -152,13 +153,16 @@
 		$("#mem_del")
 				.click(
 						function() {
-							
-							if($('#password').val().trim()==""){
+
+							if ($('#password').val().trim() == "") {
 								alert("비밀번호를 입력해주세요");
-							}else{
+							} else if($('#reason').val().trim()=="" || $('#reason').val()=="탈퇴 사유를 선택해주세요"){
+								alert("탈퇴 사유를 선택해주세요");
+							} else {
 								var result = confirm('정말 탈퇴하시겠습니까?');
 								if (result) {
 
+									var reason = $('#reason').val();
 									var password = $('#password').val();
 									var email = "${peeps.email}";
 									var m_idx = "${peeps.m_idx}";
@@ -166,14 +170,17 @@
 
 									console.log(password);
 									console.log(m_idx);
+									console.log(reason);
 
-									$.ajax({
+									$
+											.ajax({
 												url : '${pageContext.request.contextPath}/user/del',
 												type : 'post',
 												data : {
 													"email" : email,
 													"password" : password,
-													"m_idx" : m_idx
+													"m_idx" : m_idx,
+													"reason" : reason
 												},
 												async : false,
 												success : function(data) {
@@ -184,13 +191,12 @@
 														alert("비밀번호가 일치하지 않습니다.");
 													}
 												},
-												error : function(request, status,error) {
+												error : function(request,
+														status, error) {
 													console.log("통신 실패");
 
 												}
 											});
-
-									//$('#del_form').submit();
 								}
 							}
 						})
@@ -198,37 +204,41 @@
 </script>
 
 <script>
-$("#keyword")
-.click(
-		function() {
+	$("#keyword")
+			.click(
+					function() {
 
-			var m_idx = ${peeps.m_idx};
-			var keyword = $('#search').val();
+						var m_idx = $
+						{
+							peeps.m_idx
+						}
+						;
+						var keyword = $('#search').val();
 
-			if(keyword.trim()==""){
-				alert("한 글자 이상 입력하세요");
-			} else{
-				$
-				.ajax({
-					url : '${pageContext.request.contextPath}/user/finduser',
-					type : 'get',
-					async : false,
-					data : {
-						"keyword":keyword,
-						"m_idx" : m_idx
-					},
-					success : function(data) {
-						location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
-					},
-					error : function() {
-						console.log("실패,,,,");
-					}
-				});
+						if (keyword.trim() == "") {
+							alert("한 글자 이상 입력하세요");
+						} else {
+							$
+									.ajax({
+										url : '${pageContext.request.contextPath}/user/finduser',
+										type : 'get',
+										async : false,
+										data : {
+											"keyword" : keyword,
+											"m_idx" : m_idx
+										},
+										success : function(data) {
+											location.href = "${pageContext.request.contextPath}/member/FindView?keyword="
+													+ keyword;
+										},
+										error : function() {
+											console.log("실패,,,,");
+										}
+									});
 
-			}
+						}
 
-			
-		});
+					});
 </script>
 
 </html>
