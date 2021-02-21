@@ -23,8 +23,8 @@
 			<div id="profile_wrap">
 				<img src="<spring:url value='/resources/img/chick.jpg'/>">
 				<div id="pro_btn">
-					<ul>
-						<li>아이디</li>
+					<ul>	<!-- test id추가했음 -->
+						<li id="memberId">jhS2</li>
 						<li><button id="pro_edit">
 								<a href="#">프로필 편집</a>
 							</button></li>
@@ -125,7 +125,8 @@
 				    	// 마커를 생성합니다
 						    var marker = new kakao.maps.Marker({
 						        map: map, // 마커를 표시할 지도
-						        position: new kakao.maps.LatLng(result[0].y, result[0].x) // 마커의 위치
+						        position: new kakao.maps.LatLng(result[0].y, result[0].x), // 마커의 위치
+						        clickable: true // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
 						    });
 							
 						    // 마커에 표시할 인포윈도우를 생성합니다 
@@ -138,32 +139,23 @@
 						    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
 						    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
 						    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-				    	 
+				    	 	
+						 	// 마커에 클릭이벤트를 등록합니다
+						    kakao.maps.event.addListener(marker, 'click', function() {
+						          alert("마커를 클릭했습니다."); 
+						          /* alert(result[0].address_name); */
+						          var postAddr = result[0].address_name;
+						          var mId = $('#memberId').text();
+						          
+						          // 주소에 해당하는 게시글 모두 불러와야함
+						          markerClick(mId, postAddr);
+						    });
 				     }
 				    
 				});    
 				
 			}
 			
-			/* for (var i = 0; i < positions.length; i ++) {
-			    // 마커를 생성합니다
-			    var marker = new kakao.maps.Marker({
-			        map: map, // 마커를 표시할 지도
-			        position: positions[i].latlng // 마커의 위치
-			    });
-
-			    // 마커에 표시할 인포윈도우를 생성합니다 
-			    var infowindow = new kakao.maps.InfoWindow({
-			        content: positions[i].content // 인포윈도우에 표시할 내용
-			    });
-
-			    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
-			    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
-			    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
-			    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-			    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-			} */
-
 			// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
 			function makeOverListener(map, marker, infowindow) {
 			    return function() {
@@ -186,6 +178,34 @@
 		});
 	});
 	
+	function markerClick(mId, postAddr){
+		
+		alert(mId);
+		alert(postAddr);
+		
+		var mapPostInfo = {
+			memberid : mId,
+			postAdd : postAddr
+		};
+		
+		$.ajax({
+			url: "http://localhost:8080/post/rest/member/post/postmaplist",
+			type: 'post',
+			dataType: 'json',
+			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			data : mapPostInfo,
+			success: function(data){
+				console.log(성공);
+			},
+			error: function(e){
+				console.log("지도로 게시글 검색하기 ajax에러");
+				console.log(e);
+			}
+			
+		});
+		
+		
+	}
 	</script>
 </body>
 </html>

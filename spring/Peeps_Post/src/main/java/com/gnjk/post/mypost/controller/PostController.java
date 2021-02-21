@@ -54,16 +54,6 @@ public class PostController {
 		return listService.getPostListView(page);
 	}
 	
-	// 지도 리스트 출력
-	@GetMapping("/map")
-	public List<Post> mapList(HttpServletRequest request, Model model) {
-		
-		// test용 회원idx
-		int midx = 1;
-		
-		return listService.getMapListView(midx);
-	}
-
 	// 게시글 하나 출력
 	@GetMapping("/detail")
 	public Post getPostDetail(
@@ -100,6 +90,23 @@ public class PostController {
 			) {
 		
 		return editService.editPost(editRequest, request, model);
+	}
+	
+	// 지도 리스트 출력
+	@GetMapping("/map")
+	public List<Post> mapList(HttpServletRequest request, Model model) {
+		
+		// test용 회원idx
+		int midx = 1;
+		
+		return listService.getMapListView(midx);
+	}
+	
+	// 지도로 주소별 게시글 리스트 출력
+	@PostMapping("/postmaplist")
+	public int getPostListByMap() {
+		System.out.println("컨트롤러 진입 성공");
+		return 0;
 	}
 	
 	// 게시글 내용 등록 처리
