@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.gnjk.post.mypost.domain.LoginInfo;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostFile;
 
@@ -23,6 +24,8 @@ public interface PostDao {
 	
 	// 게시글 리스트(페이지 번호에 맞는)
 	List<Post> selectPostList(int memberidx, int startRow, int cntPerPage);
+	// 게시글 리스트(위치 조회)
+	List<Post> selectPostMapList(int memberidx);
 	
 	// 게시글 하나 조회
 	Post selectPostDetail(int pidx);

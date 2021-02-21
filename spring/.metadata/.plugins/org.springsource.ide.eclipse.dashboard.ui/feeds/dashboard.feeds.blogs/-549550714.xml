@@ -5,7 +5,37 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2021-02-19T02:29:00Z</updated>
+  <updated>2021-02-19T08:12:00Z</updated>
+  <entry>
+    <title>Spring HATEOAS 1.3 M2 released</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/02/19/spring-hateoas-1-3-m2-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Oliver Drotbohm</name>
+    </author>
+    <id>tag:spring.io,2021-02-19:4371</id>
+    <updated>2021-02-19T08:12:00Z</updated>
+    <content type="html">&lt;div class="paragraph"&gt;
+&lt;p&gt;For all users building hypermedia based API, I&amp;#8217;d like to announce that we shipped Spring HATEOAS 1.3 M2. We ship two major themes with the release:&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="ulist"&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Revised support for &lt;a href="https://rwcbook.github.io/hal-forms/"&gt;HAL-FORMS&lt;/a&gt; and most of the &lt;a href="https://rwcbook.github.io/hal-forms/#additional-property-attributes"&gt;additional property attributes&lt;/a&gt; derived from types or JSR-303 annotations. For details checkout the &lt;a href="https://docs.spring.io/spring-hateoas/docs/1.3.0-M2/reference/html/#mediatypes.hal-forms.metadata"&gt;revamped section of the references docs&lt;/a&gt; or a more complete &lt;a href="https://docs.spring.io/spring-hateoas/docs/1.3.0-M2/reference/html/#mediatypes.hal-forms.example"&gt;example&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;We significantly revamped the way we register the media type conversion within the WebMVC infrastructure. This is a response to challenges in selecting the best media type to render in certain &lt;code&gt;Accept&lt;/code&gt; header &lt;a href="https://github.com/spring-projects/spring-framework/issues/26212"&gt;edge conditions&lt;/a&gt;. This change should be a non-issue but it would be great if you could test the new setup for a spin and &lt;a href="https://github.com/spring-projects/spring-hateoas/issues"&gt;report any glitches&lt;/a&gt; you potentially encounter.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;The milestone is already included in the just announced Spring Boot 2.5 M2. Upgrading to that will allow you to transparently consume the release. We&amp;#8217;ve also shipped bugfix releases for the &lt;a href="https://github.com/spring-projects/spring-hateoas/releases/tag/1.2.4"&gt;1.2&lt;/a&gt; and &lt;a href="https://github.com/spring-projects/spring-hateoas/releases/tag/1.1.4"&gt;1.1&lt;/a&gt; branches that have been also already included in the corresponding Spring Boot maintenance branches.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="paragraph"&gt;
+&lt;p&gt;&lt;a href="https://spring.io/projects/spring-hateoas/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-hateoas"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-hateoas/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-hateoas/docs/1.3.0-M2/reference/html/"&gt;Documentation&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-hateoas"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-hateoas"&gt;Gitter&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Boot 2.5.0-M2 available now</title>
     <link rel="alternate" href="https://spring.io/blog/2021/02/18/spring-boot-2-5-0-m2-available-now" />
@@ -1155,65 +1185,6 @@ public Supplier&amp;lt;Message&amp;lt;?&amp;gt;&amp;gt; generate() {
   &lt;li&gt;&lt;a href="https://twitter.com/JavaAtMicrosoft/status/1356334244008611840"&gt;Apple announced M1, an impl of AArch64. #OpenJDK was ready for it; had been for 5 years. However there&amp;rsquo;s a layer that¡¯s specific to each OS-CPU combination. However there&amp;rsquo;s a layer that¡¯s specific to each OS-CPU combination. We had volunteers: Microsoft and Azul, who worked together. Microsoft also ported to Win/AArch64 &lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href="https://twitter.com/VMware/status/1356739950620905472"&gt; Today, we¡¯re excited to announce dates for VMware conferences slated for this year &amp;ndash; VMworld, CloudLIVE, Connect, and SpringOne! &lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Integration AWS 2.3.5.RELEASE &amp; 2.4.0,  and Spring Cloud Stream Kinesis Binder 2.0.4.RELEASE &amp; 2.1.0 Available</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/02/01/spring-integration-aws-2-3-5-release-2-4-0-and-spring-cloud-stream-kinesis-binder-2-0-4-release-2-1-0-available" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Artem Bilan</name>
-    </author>
-    <id>tag:spring.io,2021-02-01:4350</id>
-    <updated>2021-02-01T16:05:00Z</updated>
-    <content type="html">&lt;div class="paragraph"&gt;
-&lt;p&gt;Dear Spring Community,&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Today it&amp;#8217;s my pleasure to announce releases of Spring Integration for Amazon Web Services extension versions &lt;code&gt;2.3.5.RELEASE&lt;/code&gt; &amp;amp; &lt;code&gt;2.4.0&lt;/code&gt;, and Spring Cloud Stream Binder for AWS Kinesis versions &lt;code&gt;2.0.4.RELEASE&lt;/code&gt; &amp;amp; &lt;code&gt;2.1.0&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;These releases can be downloaded from Maven Central, JCenter:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="listingblock"&gt;
-&lt;div class="content"&gt;
-&lt;pre class="prettyprint highlight"&gt;&lt;code data-lang="groovy"&gt;compile "org.springframework.integration:spring-integration-aws:2.3.5.RELEASE"&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;If you don&amp;#8217;t use Kinesis Binder.
-Or via Binder dependency:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="listingblock"&gt;
-&lt;div class="content"&gt;
-&lt;pre class="prettyprint highlight"&gt;&lt;code data-lang="groovy"&gt;compile "org.springframework.cloud:spring-cloud-stream-binder-kinesis:2.0.4.RELEASE"&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Mostly these versions have bug fixes and some community feedback refinements.
-So, it is highly recommended to bump your projects to this latest versions.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;The new minor versions (&lt;code&gt;spring-integration-aws:2.4.0&lt;/code&gt; &amp;amp; &lt;code&gt;spring-cloud-stream-binder-kinesis:2.1.0&lt;/code&gt;) have the same fixes content, but with an upgrade to the latest Spring Integration and Spring Cloud Stream versions for compatibility with the latest Spring Boot and Spring Cloud, respectively.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Many thanks to everyone from the Community for all the feedback and contribution to these projects.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Any feedback is welcome via all the available communication channels!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Spring Integration for AWS resources:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;&lt;a href="https://github.com/spring-projects/spring-integration-aws"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-integration/blob/master/CONTRIBUTING.adoc"&gt;Contributing&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-integration"&gt;Help&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-integration"&gt;Chat&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;Spring Cloud Stream Binder for AWS Kinesis resources:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;&lt;a href="https://github.com/spring-cloud/spring-cloud-stream-binder-aws-kinesis"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-cloud/spring-cloud-stream-binder-aws-kinesis/blob/master/spring-cloud-stream-binder-kinesis-docs/src/main/asciidoc/contributing.adoc"&gt;Contributing&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-cloud-stream"&gt;Help&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-cloud-stream"&gt;Chat&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>

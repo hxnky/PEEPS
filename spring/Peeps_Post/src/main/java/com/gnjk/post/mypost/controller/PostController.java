@@ -3,6 +3,7 @@ package com.gnjk.post.mypost.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -51,6 +52,16 @@ public class PostController {
 //		model.addAttribute("listView", listService.getPostListView(page));
 
 		return listService.getPostListView(page);
+	}
+	
+	// 지도 리스트 출력
+	@GetMapping("/map")
+	public List<Post> mapList(HttpServletRequest request, Model model) {
+		
+		// test용 회원idx
+		int midx = 1;
+		
+		return listService.getMapListView(midx);
 	}
 
 	// 게시글 하나 출력

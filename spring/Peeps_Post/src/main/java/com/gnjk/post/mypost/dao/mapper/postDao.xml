@@ -38,6 +38,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from post 
 		where member_idx=#{param1} limit #{param2},#{param3}
 	</select>
+	
+	<!-- 게시글 리스트(위치) -->
+	<select id="selectPostMapList"
+			parameterType="list"
+			resultType="com.gnjk.post.mypost.domain.Post"
+			>
+		select * from post 
+		where member_idx=#{param1} and p_loc != "";
+	</select>
 
 	<!-- 게시글 조회 -->
 	<select id="selectPostDetail"

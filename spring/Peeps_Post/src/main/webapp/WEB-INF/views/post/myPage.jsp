@@ -9,184 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 리스트</title>
-<!--jquery 라이브러리 로드-->
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 </head>
 
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 
-자바스크립트 -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-<style>
-.container-fluid {
-	height: 50px;
-	text-align: center;
-	width: 1100px;
-	color: black;
-	max-width: 100%;
-}
-
-#top_wrap {
-	margin: 0px auto;
-	position: fixed;
-	z-index: 999;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-}
-
-#nav_wrap {
-	width: 1150px;
-	margin: 30px auto;
-	text-align: center;
-}
-
-#my_nav {
-	margin: auto;
-}
-
-.menuselect>button {
-	width: 370px;
-	height: 95px;
-	font-size: 30px;
-	border: none;
-	outline: none;
-}
-
-.jumbotron {
-	height: 400px;
-	width: 1150px;
-	margin: 100px auto 0px auto;
-	text-align: center;
-	background-color: #F5E978;
-}
-
-#profile_wrap>img {
-	width: 200px;
-	border-radius: 100%;
-	margin-left: -750px;
-	margin-top: 50px;
-	border: 1px solid #CCC;
-}
-
-#pro_btn>ul>li {
-	list-style: none;
-	font-size: 30px;
-	display: inline-block;
-	text-align: center;
-	margin-right: 40px;
-}
-
-#pro_btn {
-	margin: -180px -300px 0px 0px;
-}
-
-#foll_btn {
-	border: 0;
-	background-color: #F5E978;
-}
-
-#pro_edit {
-	border: solid 0.2px #CCC;
-	background-color: #DDD;
-	border-radius: 5px;
-	width: 300px;
-	height: 35px;
-	font-size: 20px;
-}
-
-#pro_name {
-	font-size: 20px;
-	margin: 10px auto;
-}
-
-#pro_bio {
-	font-size: 20px;
-	margin: 10px auto;
-}
-
-/* .pagediv {
-	background-color: aqua;
-	text-align: center;
-	margin: auto;
-} */
-
-.paging {
-	text-align: center;
-	margin-bottom: 100px;
-}
-
-.paging>span {
-	padding: 5px 10px;
-	border-radius: 4px;
-	border-right: 1px solid #ccc;
-	border-left: 1px solid #ccc;
-	font-size: 1.2em;
-}
-
-.postidx {
-	color: black;
-}
-
-.col-sm-4 {
-	width: 383px;
-}
-
-.row {
-	/* margin: auto;
-	width: 1150px; */
-}
-
-.container {
-	/* max-width: 100%; 
-	height: auto; */
-	width: 1150px;
-}
-
-.pageBtn:link {
-	text-decoration: none;
-	color: gray;
-}
-.pageBtn:visited {
-	text-decoration: none;
-	color: gray;
-}
-.pageBtn:active {
-	text-decoration: none;
-	color: gray;
-}
-.pageBtn:hover {
-	text-decoration: none;
-	color: gray;
-}
-
-#ptitle:link {
-	text-decoration: none;
-	color: white;
-}
-#ptitle:visited {
-	text-decoration: none;
-	color: white;
-}
-#ptitle:active {
-	text-decoration: none;
-	color: white;
-}
-#ptitle:hover {
-	text-decoration: none;
-	color: white;
-}
-
-</style>
+<%@ include file="/WEB-INF/views/include/mypageBasicset.jsp"%> 
 
 
 <body>
@@ -220,9 +46,9 @@
 			</div>
 		</div>
 		<div id="nav_wrap">
-			<div class="menuselect">
-				<button onclick="location.href='jhS2'">게시물</button> <!-- test 회원 아이디 들어가야 함 -->
-				<button onclick="javascript:menulist(1);">지도</button>
+			<div class="menuselect"> <!-- test 회원 아이디 들어가야 함 -->
+				<button onclick="location.href='jhS2'">게시물</button> 
+				<button onclick="location.href='jhS2/map'">지도</button>
 				<button onclick="javascript:menulist(2);">방명록</button>
 
 			</div>
@@ -242,24 +68,6 @@
 	<!-- 페이징 -->
 	<div class="paging">
 	</div>
-	
-	<!-- <div class="pagediv">
-		<nav aria-label="Page navigation example">
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
-				페이지 번호 영역
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
-			</ul>
-		</nav>
-	</div> -->
 	
 	<script>
 	// 뷰컨트롤러 통해 페이지 번호 받기

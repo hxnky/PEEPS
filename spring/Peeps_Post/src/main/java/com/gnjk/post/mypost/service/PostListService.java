@@ -72,4 +72,23 @@ public class PostListService {
 		return fDao.selectPostImgs(idx);
 	}
 
+	public List<Post> getMapListView(int midx) {
+		
+		List<Post> postList = null;
+		
+		try {
+			dao = template.getMapper(PostDao.class);
+			
+			postList = dao.selectPostMapList(midx);
+			
+			System.out.println("지도 포스트 리스트 조회 : "+postList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		return postList;
+	}
+	
+
 }

@@ -37,17 +37,19 @@
 	font-weight: 800;
 }
 
+.pdate {
+	color: #999;
+	font-size: 1.1em;
+}
+
 .ptitle {
-	border: 1px solid;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 	width: 770px;
 	height: 50px;
 	margin-bottom: 15px;
 	font-size: 1.5em;
 	padding: 5px 15px;
-}
-
-.post_photoinput {
-	margin: 20px 0;
 }
 
 .pcontent {
@@ -57,12 +59,15 @@
 	font-size: 1.4em;
 	padding: 15px;
 	margin-bottom: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 
+/* 스크롤바 숨김 & 스크롤 정상 작동 */
 .pcontent::-webkit-scrollbar {
 	display: none;
 }
-/* 스크롤바 숨김 & 스크롤 정상 작동 */
+
 .post_cnclorsubmt {
 	text-align: right;
 }
@@ -73,6 +78,12 @@
 	height: 40px;
 	font-size: 1.1em;
 	font-family: 'Nanum Gothic', sans-serif;
+	border: 0px solid;
+	border-radius: 5px;
+}
+
+#submitbtn {
+	background-color: #F5E978;
 }
 
 #imguploadbtn {
@@ -81,17 +92,17 @@
 }
 
 #preview {
-	width: 800px;
+	width: 790px;
 	min-height: 50px;
 	margin: 15px 0px;
 	border: 1px solid #ccc;
 	font-size: 0;
+	padding: 5px;
+	border-radius: 5px;
 }
 
-.selProductFile {
-	width: 180px;
-	height: 180px;
-	margin: 10px;
+#post-images {
+	padding: 5px;
 }
 
 .plocwrap {
@@ -100,11 +111,12 @@
 
 .searchlocbtn {
 	border: 0px solid;
-	background-color: #ccc;
+	background-color: #F5E978;
 	border-radius: 5px;
-	width: 80px;
-	height: 35px;
-	margin: 5px 0;
+	width: 110px;
+	height: 45px;
+	margin: 5px 10px 5px 0;
+	font-size: 1.1em;
 }
 
 .searchlocBox {
@@ -112,6 +124,11 @@
 	background-color: transparent;
 	cursor: default;
 	width: 250px;
+	font-size: 1.1em;
+}
+
+.displayNone {
+	display: none;
 }
 
 body {
@@ -156,13 +173,12 @@ body {
 			<!-- 파일 -->
 			<tr>
 				<td>
-					<!-- <input type="hidden" class="pthumbnail" name="pthumbnail" value=""> -->
 					<div>
 						<input type="file" accept="image/*" 
 						name="postformfile" id="postformfile"
-						multiple>
-						<%-- <a href="javascript:" onclick="fileUploadAction();" class="my_button">
-						<img id="imguploadbtn" src="<c:url value="/resources/img/imguploadbtn.png"/>"/> </a>--%>
+						multiple hidden>
+						<a href="javascript:" onclick="uploadImgBtnClick();" class="my_button">
+						<img id="imguploadbtn" src="<c:url value="/resources/img/imguploadbtn.png"/>"/> </a>
 						
 					</div>
 					<!-- 파일 프리뷰 -->
@@ -191,9 +207,8 @@ body {
 					<!-- 위치 주소 표시 -->
 					<span class="addr"></span>
 					<br>
-					<div id="map"
+					<div id="map" 
 						style="width: 800px; height: 300px; margin-top: 10px;"></div>
-				
 					<script
 						src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 					<script
@@ -212,6 +227,12 @@ body {
 		</form>
 		
 		<script>
+		
+		// 파일 업로드 이미지 버튼 클릭 시 
+        function uploadImgBtnClick(){
+        	$('#postformfile').trigger('click');
+        }
+		
 		var postLoc = "";
 		$(document).ready(function() {
 			
@@ -233,8 +254,9 @@ body {
 					
 					// 게시글 인덱스
 					console.log("ajax p_idx : ", data.p_idx);
-					var pIndex = '<input type="hidden" name="postIdx" value="'+data.p_idx+'">';
-					$('.postInfo').append(pIndex);
+					var pInfo = '<input type="hidden" name="postIdx" value="'+data.p_idx+'">';
+					   pInfo += '<input type="hidden" name="postIdx" value="'+data.p_thumbnail+'">';
+					$('.postInfo').append(pInfo);
 					// 날짜
 					var date = data.p_date-540*60*1000;
 					date = new Date(date).toLocaleDateString();
@@ -245,7 +267,11 @@ body {
 					// 내용
 					$('.pcontent').append(data.p_content);
 					
-					
+					// 기존 위치 없을 경우 지도 display:none
+					if(data.p_loc == ""){
+						var element = document.getElementById('map');
+						element.classList.add('displayNone');
+					}
 					// 위치
 					var locHtml = '<input type="text" id="sample5_address" name="ploc" class="searchlocBox" onfocus="this.blur()" value="'+data.p_loc+'" readonly>';
 					$('.addr').append(locHtml);
@@ -266,7 +292,7 @@ body {
 					
 					$.each(data,function(index, item){
 						var prvImgHtml = '<a href="javascript:void(0);" onclick=\"deleteOldImageAction('+ index + ');\" id="img_id_'+ index+ '" class="img_event" >';
-						   prvImgHtml += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" style="width:160px; height:160px;" id="post-images" alt="postImages"></a>';
+						   prvImgHtml += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" style="width:148px; height:148px;" id="post-images" alt="postImages"></a>';
 						
 						   oldImage_list.push(item.f_name);
 						   
@@ -360,8 +386,6 @@ body {
 				}).open();
 			}
 			
-			
-		
 		var oldImage_list = [];
 		var deleteImage_list = [];
         var image_list = []; // 새롭게 추가,삭제한 파일들의 배열
@@ -370,8 +394,18 @@ body {
     	function deleteNewImageAction(index) {
     		console.log('테스트 4');
 
-    		console.log("index :" + index);
-    		image_list.splice(index, 1);
+    		var delFname = $('#imgPrv'+index).data('file');
+    		console.log(delFname); 
+    		for(var i=0; i<image_list.length; i++){
+    			console.log(image_list[i].name);
+    			
+    			if(image_list[i].name == delFname){
+    				image_list.splice(i,1);
+    			}
+    		}
+			
+    		/* console.log("index :" + index);
+    		image_list.splice(index, 1); */
 
     		var target = $('#img_id_' + index);
     		console.log(target);
@@ -433,6 +467,12 @@ body {
 	    		}
 	    	}
 	    	
+	    	// 기존 이미지 원본 리스트 저장
+	    	for(var i=0; i<oldImage_list.length; i++){
+	    		formData.append("oldImage", oldImage_list[i])
+    			console.log("기존 원본 이미지 : ", oldImage_list[i]);
+	    	}
+	    	
 	    	// 폼 데이터 확인
 	    	for (var key of formData.keys()) {
 	    		console.log("키 : ",key);
@@ -450,8 +490,8 @@ body {
 	    		contentType: false,
 	    		success : function(data){
 	    					
-	    		console.log("ajax 데이터 : ",data);								/* test 계정 아이디 */
-	    		window.location.href="http://localhost:8080/post/main/jhS2"; 
+	    		console.log("ajax 데이터 : ",data);			/* test 계정 아이디 */
+	    		window.location.href="http://localhost:8080/post/main/jhS2";
 	    					
 	    		},error: function(e){
 	    		console.log("ajax전송에러");	
@@ -506,7 +546,7 @@ body {
 			    	  $("input[type='file']").val("");
 			    	  return false;
 			      }
-
+				
 				var files = e.target.files;
 				console.log("files---------- : ",files);
 
@@ -538,7 +578,7 @@ body {
 							reader.onload = function(e) {
 								
 								var img_html = '<a href="javascript:void(0);" onclick=\"deleteNewImageAction('+ index + ');\" id="img_id_'+ index+ '" class="img_event" >';
-								img_html += '<img src="'+e.target.result+'" data-file="'+f.name+'" style="width:160px; height:160px;"></a>';
+								img_html += '<img src="'+e.target.result+'" data-file="'+f.name+'" style="width:148px; height:148px;" id="post-images"></a>';
 
 								index++;
 
@@ -553,67 +593,6 @@ body {
 	        
 	    } // window.onload 끝
 	    
-	 
-        
-        
-     	
-        
-	   
-        
-        
-     
-        /* 임시 메서드 시작부분 */
-        // 파일 업로드 메서드
-        /* function handleImgFileSelect(e){
-        	// 이미지 개수 제한
-		      if(e.target.files.length>20){
-		    	  alert("이미지는 20개까지 업로드 가능합니다.")
-		    	  $("input[type='file']").val("");
-		    	  return false;
-		      }
-        	
-        	// 이미지 정보들을 초기화
-            sel_files = [];
-            $(".preview").empty();
- 
-            var files = e.target.files;
-            var filesArr = Array.prototype.slice.call(files);
- 
-            var index = 0;
-            
-            // 이미지 확장자 이외 제한
-            filesArr.forEach(function(f) {
-                if(!f.type.match("image.*")) {
-                    alert("확장자는 이미지 확장자만 가능합니다.");
-                    return;
-                }
- 
-                sel_files.push(f);
- 
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                	var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\">"
-                		html += "<img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
-                	
-                	$(".preview").append(html);
-                    index++;
- 
-                }
-                reader.readAsDataURL(f);
-                
-            });
-        }
-        
-        // 파일 개별 취소
-        function deleteImageAction(index) {            
-            console.log("index : "+index);
-            sel_files.splice(index, 1);
- 
-            var img_id = "#img_id_"+index;
-            $(img_id).remove();
- 
-            console.log(sel_files);
-        }      */ 
     
 		</script>
 	</div>

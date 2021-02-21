@@ -21,6 +21,12 @@ public class MainViewController {
 		return "post/myPage";
 	}
 	
+	// 마이페이지의 지도 리스트
+	@RequestMapping("/main/jhS2/map") // test 회원 아이디를 세션에서 받아야 함
+	public String goMapMypage() {
+		return "post/mapView";
+	}
+	
 	// 게시글 상세보기
 	@RequestMapping("/main/post/detail")
 	public String goDetailView(
