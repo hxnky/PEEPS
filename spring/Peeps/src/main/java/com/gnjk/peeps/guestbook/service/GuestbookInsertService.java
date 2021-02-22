@@ -43,6 +43,7 @@ public class GuestbookInsertService {
 		File newFile = null;
 		String newFileName = null;
 		
+		System.out.println(grequest.getGmessage());
 		
 		
 		if(!grequest.getGphoto().isEmpty()) {

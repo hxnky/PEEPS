@@ -9,220 +9,55 @@
     <title>home</title>
 
     <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="../hxnky/css/bootstrap.css">
+    <link rel="stylesheet" href="../hxnky/css/bootstrap.css">
 
-<!-- 부가적인 테마 -->
-<!--<link rel="stylesheet" href="htts://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">-->
+    <!-- 부가적인 테마 -->
+    <!--<link rel="stylesheet" href="htts://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">-->
 
-<!-- 합쳐지고 최소화된 최신 
+    <!-- 합쳐지고 최소화된 최신 
 자바스크립트 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>-->
 
 </head>
-        <style>
-            
-        nav ul {
-            top: 0px;
-            left: 0px;
-            right: 0px;
-            height: 60px;
-            width: 100%;
-            background-color: #F5E978;
-            padding: 0px;
-            position: fixed;
-            z-index: 2;
-            list-style-type: none;
-        }
-
-        .icon {
-            margin: 0px;
-            display: inline-flex;
-            justify-content: space-between;
-        }
-
-        nav ul li {
-            margin: auto 15px;
-        }
-
-        .center {
-            margin-top: -18px;
-        }
-
-        .right a {
-            padding: 5px;
-            margin-top: 20px;
-        }
-
-        input[type="search"] {
-            padding-left: 10px;
-            float: left;
-            height: 20px;
-            border-radius: 30px;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-            border: none;
-        }
-
-        nav ul li button {
-            background-color: #EEF0ED;
-            height: 20px;
-            border: none;
-            border-radius: 30px;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-        .container-fluid {
-        height: 50px;
-        text-align: center;
-        width: 1100px;
-        color: black;
-        max-width: 100%;
-    }
-
-    #top_wrap {
-        margin: 0px auto;
-        position: fixed;
-        z-index: 999;
-        top: 0px;
-        left: 0px;
-        right: 0px;
-        background-color: aquamarine;
-    }
-
-  
-    nav_wrap{
-        background-color: aqua;
-    }
-
-    #my_nav {
-        margin: auto;
-    }
-
-    .menuselect>button {
-        width: 370px;
-        height: 95px;
-        font-size: 30px;
-        border: none;
-        outline: none;
-    }
-
-    .jumbotron {
-        height: 400px;
-        width: 1150px;
-        margin: 100px auto 0px auto;
-        text-align: center;
-        background-color: #F5E978;
-    }
-
-    #profile_wrap>img {
-        width: 200px;
-        border-radius: 100%;
-        margin-left: -750px;
-        margin-top: 50px;
-        border: 1px solid #CCC;
-    }
-
-    #pro_btn>ul>li {
-        list-style: none;
-        font-size: 30px;
-        display: inline-block;
-        text-align: center;
-        margin-right: 40px;
-        background-color: aqua;
-
-    }
-
-    #pro_btn {
-        margin: -180px -300px 0px 0px;
-    }
-
-    #foll_btn {
-        border: 0;
-        background-color: #F5E978;
-    }
-
-    #pro_edit {
-        border: solid 0.2px #CCC;
-        background-color: #DDD;
-        border-radius: 5px;
-        width: 300px;
-        height: 35px;
-        font-size: 20px;
-        background-color: fuchsia;
-    }
-
-    #pro_name {
-        font-size: 20px;
-        margin: 10px auto;
-
-    }
-
-    #pro_bio {
-        font-size: 20px;
-        margin: 10px auto;
-    }
-
-    .menuselect a img {
-        background-color: aqua;
-        width: 50px;
-        height: 50px;
-        margin: 10px;
-
-    }
-
-    #nav_wrap hr {
-
-        height: 1px;
-        background-color: gray;
-    }
-
- 
-    #nav_wrap {
-        width: 1150px;
-        margin: 0 690px 0;
-    }
-
-    .menuselect {
-        margin: 0 465px;
-    }
+<link rel="stylesheet" href="default.css">
+<link rel="stylesheet" href="guestbook.css">
 
 
-    </style>
 
 
 <body>
     <nav_wrap>
-         <div id="nav">
+        <div id="nav">
 
-        <nav>
-            <ul class="icon">
+            <nav>
+                <ul class="icon">
 
-                <li class="left">
-                    <span><input type="search" placeholder="이젠 제발 올라가라ㅎㅎ">
-                        <button>
-                            <a href="#"><img src="/hyo0/icon/navi/search.png"></a>
-                        </button></span>
-                </li>
+                    <li class="left">
+                        <span><input type="search" placeholder="이젠 제발 올라가라ㅎㅎ">
+                            <button>
+                                <a href="#"><img src="/hyo0/icon/navi/search.png"></a>
+                            </button></span>
+                    </li>
 
-                <li class="center">
-                    <a id="Logo"><img src="/hyo0/icon/Logo.png"></a>
-                </li>
+                    <li class="center">
+                        <a id="Logo"><img src="/hyo0/icon/Logo.png"></a>
+                    </li>
 
-                <li class="right">
-                    <a id="Home" href="#"><img src="/hyo0/icon/navi/023-home.png"></a>
-                    <a id="Content" href="#"><img src="/hyo0/icon/navi/Content.png"></a>
-                    <a id="Alarm" href="#"><img src="/hyo0/icon/navi/008-notification.png"></a>
-                    <a id="Chat" href="#"><img src="/hyo0/icon/navi/050-wechat.png"></a>
-                    <a id="MyPage" href="#"><img src="/hyo0/icon/navi/010-user.png"></a>
-                </li>
+                    <li class="right">
+                        <a id="Home" href="#"><img src="/hyo0/icon/navi/023-home.png"></a>
+                        <a id="Content" href="#"><img src="/hyo0/icon/navi/Content.png"></a>
+                        <a id="Alarm" href="#"><img src="/hyo0/icon/navi/008-notification.png"></a>
+                        <a id="Chat" href="#"><img src="/hyo0/icon/navi/050-wechat.png"></a>
+                        <a id="MyPage" href="#"><img src="/hyo0/icon/navi/010-user.png"></a>
+                    </li>
 
-            </ul>
+                </ul>
 
-        </nav>
-    </div>
+            </nav>
+        </div>
 
     </nav_wrap>
-   
+
     <!----------------------------------------------------------------------------------------->
     <div id="main_wrap">
         <div class="jumbotron">
@@ -269,146 +104,97 @@
     <!--=====================context======================-->
     <div class="changing">
 
+        <div class="msg_wrap">
+
+            <!--<form method="POST" id="insertGForm" enctype="multipart/form-data">-->
+            <form>
+                <ul>
+                    <li><img src="../imgs/photo.png" class="gimg"></li>
+                    <li><textarea rows="9" cols="87" id="gmessage" name="gmessage" placeholder="회원님과 함께한 사진과 글을 입력해주세요." required></textarea><br>
+                        <div id="test"><button onclick="addpho_btn();">사진추가</button></div>
+                    
+                        
+                    </li>
+                    <li><input type="submit" value="등록" id="upload_btn"></li>
+                </ul>
+            </form>
 
 
 
+        </div>
+        <!--msg_wrap end-->
 
+        <div class="msg_wrap2">
 
-        <div class="container">
+            <div class="writerboutton">
+                <button id="edit_but" onclick="edit_btn();">수정</button>
+                <button id="del_but" onclick="del_btn();">삭제</button>
 
-
-
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">titleL</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
             </div>
-        </div><br>
+            <span class="writerPhoto"><img src="../imgs/photo.png" class="writerPhoto"></span>
+            <span class="writerid">2hundred2ne2</span>
+            <span class="gUpDate">202102022</span>
+            <div class="upMsg">
+                 <img src="../imgs/photo.png" class="gUpPhoto">
+                <h3 class="gUptext">간단한메시지 입력</h3>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
-
-                <div class="col-sm-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">title</div>
-                        <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-                    </div>
-                </div>
             </div>
-        </div><br><br>
+            <div class="cmt">
+
+                <span>
+                    <hr id="hr2">
+                    <h4 class="id">2hundred2ne2 :</h4>
+                </span>
+                <textarea rows="3" cols="97" name="cmt_content" class="cmttxt" id="cmttxt" placeholder="댓글을 입력해주세요." required></textarea>
+                <input type="submit" id="gCmtbtn" value="등록">
+            </div>
+            
+            
+            
+            <hr>
+
+
+        </div>
+        <!--msg_wrap end-->
 
 
 
+        <div class="paging">
+        </div>
+
+
+        <!--paging end-->
+
+
+
+
+        <script>
+            function edit_btn() {
+                alert(" 버튼을 눌러서 수정.");
+
+                
+                
+                
+            }
+
+            function del_btn() {
+                alert("버튼을 눌러서 삭제.");
+
+            }
+            
+            
+        function addpho_btn(){
+            var str = document.getElementById("test");
+		str.innerHTML = '<div><input type="file" id="gphoto" name="gphoto"></div>';
+        };    
+            
+            
+            
+            
+            
+            
+
+        </script>
 
 
 

@@ -36,6 +36,7 @@ public class GuestbookRestController {
 	private GuestbookInsertService insertService;
 	@Autowired
 	private GuestbookDeleteService deleteService;
+	@Autowired
 	private GuestbookEditService editService;
 	
 	/*
@@ -68,8 +69,7 @@ public class GuestbookRestController {
 	
 		@PostMapping("/edit")
 		@ResponseBody
-		public int updateGuestbook(GuestbookEditRequest editRequest, HttpServletRequest request) {
-			
+		public int updateGuestbook(GuestbookEditRequest editRequest, HttpServletRequest request) {			
 			return editService.editGuestbook(editRequest, request) ;
 		}
 		

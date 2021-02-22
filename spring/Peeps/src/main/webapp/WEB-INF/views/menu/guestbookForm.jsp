@@ -16,21 +16,21 @@
 
 </head>
 <style>
-.ginsert_wrap {
-	border: 1px solid red;
+
+.msg_wrap{
 	background-color: #eef0ed;
 	height: 270px;
 	width: 850px;
-	margin: auto;
+	margin:20px auto;
 }
 
-.ginsert_wrap2 {
-	border: 1px solid red;
+.msg_wrap2{
 	background-color: #eef0ed;
 	height: auto;
 	width: 850px;
-	margin: auto;
+	margin:20px auto;
 }
+
 
 .ginsert_wrap>ul>li {
 	list-style-type: none;
@@ -40,60 +40,74 @@
 }
 
 .gimg {
+    
 	background-color: white;
 	width: 70px;
 	height: 70px;
 	margin: 10px;
 	border-radius: 50px;
 }
-
 .upgphoto, .upgid {
 	float: left;
 }
 
-.gdate {
-	float: right;
-	margin: 15px
+.msg_wrap2{
+ padding: 20px;    
 }
 
-.upgtable {
-	/* background-color: aqua; */
-	margin: 100px;
+.writerboutton{
+    float: right;
+    margin-left: 10px;
+}
+.writerPhoto{
+ 
+    width: 35px;
+    height: 35px;
+    margin: 0px;
+    border-radius: 50px;
+    
 }
 
-.upmsg {
-	border: 1px solid black;
+
+.gUpDate{
+float: right;
+
+//font-size: 20px; 
+    
+}
+.upMsg{
+
+    height: auto;
 	width: 600px;
-	margin: 30px auto;
-	height: auto;
-	font-size: 1.5em;
+    margin: 0 auto;
+    
 }
 
-table.upmsg_table {
-	/* background-color: aqua; */
-	margin: 30px;
-	font-size: 20px;
+.gUpPhoto{
+    height: 400px;
+	width: 400px;
+   
 }
 
-.nowpage {
-	font-size: 1.5em;
-	font-weight: bold;
+.cmt{
+   
+	
+	margin:10px auto;
+    
+}
+.cmt_area{
+    
+}
+#gCmtbtn{
+    margin-bottom: 30px;
+    
+}
+#hr2{
+    color: black;
 }
 
-.paging {
-	text-align: center;
-}
-
-.upgbinfo {
-	border: 1px solid red;
-	width: 830px;
-	height: 100px;
-	margin: 10px auto 10px auto;
-}
-
-.gbutton {
-	border: 1px solid red;
-	float: right;
+#sbmtbtn{
+margin-top:30px;
 }
 
 .paging {
@@ -164,219 +178,263 @@ table.upmsg_table {
 		<%@ include file="/WEB-INF/views/include/menu.jsp"%>
 	</div>
 	<!--=====================context======================-->
-	<div class="changing">
+	<div class="changing" id="changing">
 
-<div id="test">
-		<form method="POST" id="insertGForm" enctype="multipart/form-data">
-			<div class="ginsert_wrap">
-				<!-- 방명록 입력 div -->
-				<ul>
-					<li><img
-						src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"
-						class="gimg"></li>
-					<li><textarea rows="9" cols="80" id="gmessage" name="gmessage"></textarea><br>
-					<input type="file" id="gphoto" name="gphoto"></li>
-					<li><input type="submit" value="등록" id="sbmtbtn"></li>
-				</ul>
-			</div>
-			`
-		</form>
-</div>		
+<div class="msg_wrap">
+	<form id="insertGForm" enctype="multipart/form-data">
+         <div class="ginsert_wrap">
+            <!-- 방명록 입력 div -->
+            <ul>
+               <li><img
+                  src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"
+                  class="gimg"></li>
+               <li><textarea rows="9" cols="80" id="gmessage" name="gmessage"></textarea><br>
+               <input type="file" id="gphoto" name="gphoto"></li>
+               
+            </ul>
+         </div>
+        
+      </form>
+              <button id="sbmtbtn">등록</button> 
 
-		<div class="ginsert_wrap2" id="ginsert_wrap2">
-           <!-- 방명록 시작 -->
-				
-			<!-- 방명록 끝 -->	
-			
-			</div>
-			
-			
-			
+
+
+
+        </div> <!-- msg_wrap -->
+        
+        
+        
+        
+  
+
+        <div id="ginsert_wrap2">
+        <!-- 방명록 리스트 반복  -->
+        </div>
+
+
+
+
+     
+</div><!-- changing end -->
+
+
+   <div class="paging">
 	</div>
-	<!-- 목록 끝 -->
-	<!-- 페이징 -->
-	<div class="paging">
-	</div>
-			
-			<script>
-			// 뷰컨트롤러 통해 페이지 번호 받기
-			function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-			var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
-			return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
-		  }
+	
+        <script>
+        
+		
+    	// 뷰컨트롤러 통해 페이지 번호 받기
+		function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
+		return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
+	  }
 
-			
-			var p = getParameterByName('p');
-			var gidx =getParameterByName('gidx');
-			console.log("방명록인덱스 : ",gidx);
-		    console.log(p);
-			
+		
+		var p = getParameterByName('p');
+		var gidx =getParameterByName('gidx');
+		console.log("방명록인덱스 : ",gidx);
+	    console.log(p);
+	    
 		$(document).ready(function(){
 			
-		   /*  방명록 데이터 등록 */
-			
-			$('#sbmtbtn').click(function() {
+			   /*  방명록 데이터 등록 */
+				
+				$('#sbmtbtn').click(function() {
+					   var data =$('#insertGForm')[0];
+			            var form_data = new FormData(data);
 
-				var photoFile =$('#gphoto');
+				       $.ajax({
+			               url : 'http://localhost:8080/peeps/rest/guestbook/upload',
+			               type : 'post',
+			               data : form_data,
+			               dataType : 'json',
+			               async : true,
+			               enctype : 'multipart/form-data',
+			               processData : false,
+			               contentType : false,
+			               cache : false ,
+			               success : function(data){
+			                  console.log("ajax data",data);
+			                  console.log("작성완료");
+			                  alert("방명록이 작성 되었습니다");
+			                  
+			               }
+			            });
+			            
+			            
+			            
+			         
+			         }); //-------방명록 작성 ajax끝 
 				
-				var file1 =photoFile[0].files[0];
-			
-				
-				//console.log(file1);
-				
-			var formData = new FormData();
-				formData.append("gmessage",$('#gmessage').val());
-				formData.append("gphoto",file1);
-				
-				//console.log(formData);
-				
-				
-				$.ajax({
-					url : 'http://localhost:8080/peeps/rest/guestbook/upload',
-					type : 'post',
-					data : formData,
-					async : false,
-					enctype : 'multipart/form-data',
-					processData : false,
-					contentType : false,
-					cache : false ,
-					success : function(data){
-						console.log("ajax data",data);
-						console.log("작성완료");
-						alert("방명록이 작성 되었습니다");
-						
-					}
-				});
 				
 				
 				
 			
-			}); //-------방명록 작성 ajax끝 
-			
-			
-			
-			
-		
 
-				/*게스트북 리스트 출력*/
-				$.ajax({
-					url : 'http://localhost:8080/peeps/rest/guestbook?p='+p,
-					type : 'GET',
-					success : function(data){
-						console.log(data);
-						//alert(data);
-						//alert(JSON.stringify(data));
-						console.log("ajax로 받아온 데이터 : ", data);
-						var list = $(data.gbList);
-						console.log(list);
-						$.each(list, function(index, item){
-						
-							var date = item.gdate-540*60*1000;
-							
-							date = new Date(date).toLocaleDateString();
-						
-							console.log("날짜: ", date);
-						 
-							
-							var html  =' <div class="upgbinfo">';
-								html +=' <span class="upgphoto"><img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"class="gimg" > </span>';
-								html +=' <span class="upgid"><h4>'+item.gwriter+'</h4></span>';
-								html +=' <div class="gbutton">';
+						/*게스트북 리스트 출력*/
+						$.ajax({
+							url : 'http://localhost:8080/peeps/rest/guestbook?p='+p,
+							type : 'GET',
+							success : function(data){
+								console.log(data);
+								//alert(data);
+								//alert(JSON.stringify(data));
+								console.log("ajax로 받아온 데이터 : ", data);
+								var list = $(data.gbList);
+								console.log(list);
+								$.each(list, function(index, item){
 								
-								
-								html +=' <span class="bnt3"><a href="<c:url value="/guestbook/edit?gidx='+item.gidx+'"/>">수정</a></span>';
-								html +=' <span class="bnt3"><a href="javascript:deleteMsg('+item.gidx+');">삭제</a></span></div>';
-								html +=' <span class="gdate">'+date+'<fmt:formatDate value="${guestbook.gdate}" pattern="yyyy.MM.dd." /></span>';
-							    html +=' </div>';
-							    html +=' <div class="upmsg" border="1px">';
-							    html +=' <div>'+item.gmessage+'</div>';
-							    html +=' <span><img src="<c:url value="/fileupload/guestbook/'+item.gphoto+'"/>"></span>';
-							    html +='  </div>';
-							    html +='  <a href="javascript:deleteMsg('+item.gidx+');">삭제</a>';
-								   
-							    	html +=' <a href="<c:url value="/guestbook/edit?gidx='+item.gidx+'"/>">수정</a>';
-							    	html +='<input type="button" value="수정 등록" id="submitbtn" onclick="javascript:actionForm();">';
+									var date = item.gdate-540*60*1000;
 									
-							   $('#ginsert_wrap2').append(html); 
-						 
-						});
-					
-						// 페이징 처리
-						 if (data.totalGbCount>0){
-							 console.log('totalPageCount :' + data.totalPageCount);
-							for(var i=1; i <= data.totalPageCount; i++){	/* test 계정아이디 들어가야 함 */			
-								 var html2 =' <span><a class="pageBtn" href="<c:url value="/guestbook"/>?p='+i+'">'+i+'</a></span> ';																		
-								 $('.paging').append(html2);
-							}										 
-						 };	
+									date = new Date(date).toLocaleDateString();
+								
+									console.log("날짜: ", date);
+								 
+									
+									var html  = ' <div class="msg_wrap2">';
+									/* 작성자와 세션 아이디가 같으면  버튼이 보이게하기 */
+									if(item.gwriter =="test"){
+										
+										html +='  <div class="writerboutton">';
+										html +='  <button id="edit_but" onclick="edit_btn('+item.gidx+');">수정</button>';
+										html +='  <button id="del_but" onclick="del_btn('+item.gidx+');">삭제</button>';
+										html +='  </div>';
+									}
+									
+									html +='  <span class="writerPhoto"><img src="../imgs/photo.png" class="writerPhoto"></span>';
+									html +='  <span class="writerid">'+ item.gwriter+'</span>';
+									html +='  <span class="gUpDate">'+date+'</span>';
+									html +='  <div class="upMsg">';
+									if(! item.gphoto ==" "){
+										html +='  <span><img src="<c:url value="/fileupload/guestbook/'+item.gphoto+'"/>" class="gUpPhoto" > </span> ';	
+										
+									}
+									 
+						            html +='  <h3 class="gUptext">'+item.gmessage+'</h3>';
+						            html +='  </div>';
+						            html +='  <div class="cmt">';
+						            html +='  <span>';
+						            html +='  <hr id="hr2">';
+						            html +='  <h4 class="id">'+ item.gwriter+' :</h4>';
+						            html +='  </span>';
+						            html +=' <textarea rows="3" cols="97" name="cmt_content" class="cmttxt" id="cmttxt" placeholder="댓글을 입력해주세요." required></textarea>';
+						            html +=' <input type="submit" id="gCmtbtn" value="등록">';
+						            html +=' </div>';
+						            html +=' <hr>';
+						            html +=' </div>';
+													
+									   $('#ginsert_wrap2').append(html); 
+								 
+								});
+							
+								// 페이징 처리
+								 if (data.totalGbCount>0){
+									 console.log('totalPageCount :' + data.totalPageCount);
+									for(var i=1; i <= data.totalPageCount; i++){	/* test 계정아이디 들어가야 함 */			
+										 var html2 =' <span><a class="pageBtn" href="<c:url value="/guestbook"/>?p='+i+'">'+i+'</a></span> ';																		
+										 $('.paging').append(html2);
+									}										 
+								 };	
+								
+								
+							},
+							error:function(e){
+							console.log("에러발생!! :",e);	
+							}
 						
+							
+						}); //----리스트 ajax end
 						
-					},
-					error:function(e){
-					console.log("에러발생!! :",e);	
-					}
-				
-					
-				}); //----리스트 ajax end
-					
-			});
-				
-		function deleteMsg(gidx){
-
-			if (confirm('방명록을 삭제하시겠습니까? from ajax')) {
-				
-				
-				$.ajax({
-					url : 'http://localhost:8080/peeps/rest/guestbook/delete?gidx=' + gidx,
-					type : 'post',
-					success : function(data){
-						console.log("ajax data",data);
-						window.location.href="http://localhost:8080/peeps/guestbook";
-						alert("방명록이 삭제 되었습니다");
-						
-					}
 				});
-			}
-		
-
-
-		}
-		
-		
-		
-		
-		
-		function actionForm(){
-			
-			var str = document.getElementById("test");
-			str.innerHTML = '	<form method="POST" id="insertGForm" enctype="multipart/form-data">';
-			str.innerHTML = '	<div class="ginsert_wrap">';
-			str.innerHTML = '	<!-- 방명록 입력 div -->';
-			str.innerHTML = '	<ul>';
-			str.innerHTML = '	<li><img ';
-			str.innerHTML = '	src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"class="gimg" ></li> ';
-			
-			str.innerHTML = '		<li><textarea rows="9" cols="80" id="gmessage" name="gmessage"></textarea><br>';
-			str.innerHTML = '	<input type="file" id="gphoto" name="gphoto"></li>';
-			str.innerHTML = '	<li><input type="submit" value="수정" id="sbmtbtn"></li>';
-			str.innerHTML = '	</ul>';
-			str.innerHTML = '	</div>';
-	        str.innerHTML = '   </form>';
-			
-			
-			
-			
-		}
-		
-		
-			
+	    
+    
+        
+        /* 방명록 수정   */
+            function edit_btn(gidx) {
+            	
+            	if (confirm('방명록을 수정하시겠습니까? ')) {
+            	
+            	$.ajax({
+            		url : 'http://localhost:8080/peeps/rest/guestbook/' + gidx,
+            		type : 'get',
+            		success : function(data){
+						console.log("수정값 받아오기  data",data);
+						
+						
+						var html = '<span>'+data.gmessage+'<span>';
+						$('textarea.gmessage').append(html);
+						
+						
+						
+						
+						
 				
+					     
+					       },
+					       
+					       error : function(e){
+			    				console.log("에러발생!! : ", e);
+			    			}
+            	});
 
+            	}
+            	
+            	} /* 방명록 수정    ---end*/
+            
+            
+            
+            
+            
+           /* 방명록 삭제  */
+            function del_btn(gidx) {
+            	
+            	if (confirm('방명록을 삭제하시겠습니까?')) {
+    				
+    				
+    				$.ajax({
+    					url : 'http://localhost:8080/peeps/rest/guestbook/delete?gidx=' + gidx,
+    					type : 'post',
+    					success : function(data){
+    						console.log("ajax data",data);
+    						
+    						//window.location.href="http://localhost:8080/peeps/guestbook";
+    						alert("방명록이 삭제 되었습니다");
+    						
+    						newdiv();
+    						
+    					}
+    				});
+    			}	
+                
+
+            }/*function del_btn(gidx) --end  */
+            
+            
+        function addpho_btn(){
+            var str = document.getElementById("test");
+		str.innerHTML = '<div><input type="file" id="gphoto" name="gphoto"></div>';
+        };    
+            
+            
+            
+        function newdiv(){
+        	$("#main_wrap").load(location.href + "#main_wrap");
+        	
+        }      
+            
+            
+
+        </script>
+			
 			
 		
 			
 	
-		</script>
+
+
+
+
 </body>
 
 </html>

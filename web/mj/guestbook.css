@@ -1,0 +1,88 @@
+.msg_wrap{
+	background-color: #eef0ed;
+	height: 270px;
+	width: 850px;
+	margin:20px auto;
+}
+
+.msg_wrap2{
+	background-color: #eef0ed;
+	height: auto;
+	width: 850px;
+	margin:20px auto;
+}
+
+
+.msg_wrap>form>ul>li {
+	list-style-type: none;
+	float: left;
+	margin: 5px;
+	margin-top: 30px;
+}
+
+.gimg {
+    
+	background-color: white;
+	width: 70px;
+	height: 70px;
+	margin: 10px;
+	border-radius: 50px;
+}
+.upgphoto, .upgid {
+	float: left;
+}
+
+.msg_wrap2{
+ padding: 20px;    
+}
+
+.writerboutton{
+    float: right;
+    margin-left: 10px;
+}
+.writerPhoto{
+ 
+    width: 35px;
+    height: 35px;
+    margin: 0px;
+    border-radius: 50px;
+    
+}
+
+
+.gUpDate{
+float: right;
+
+//font-size: 20px; 
+    
+}
+.upMsg{
+
+    height: auto;
+	width: 600px;
+    margin: 0 auto;
+    
+}
+
+.gUpPhoto{
+    height: 400px;
+	width: 400px;
+   
+}
+
+.cmt{
+   
+	
+	margin:10px auto;
+    
+}
+.cmt_area{
+    
+}
+#gCmtbtn{
+    margin-bottom: 30px;
+    
+}
+#hr2{
+    color: black;
+}
