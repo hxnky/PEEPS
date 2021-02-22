@@ -11,8 +11,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- css -->
-<link rel="styleSheet" href="<c:url value="/css/default.css"/>">
+
 
 <style>
 #right {
@@ -44,89 +43,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
 
-<body>
-<%-- 
-	<div id="my_modal">
-		<div id="my_modal_header">${list}알람목록</div>
-
-<c:forEach items="${list}" var="list">
-						<tbody>
-							<tr>
-								<td>${list.type}</td>
-								<td>${list.sender}</td>
-								<td>${list.receiver}</td>
-								<td>${list.post}</td>
-							</tr>
-						</tbody>
-					</c:forEach>
-
-<!--
-<c:forEach items="${list}" var="list">
-<option><c:out value="${list.type}"/></option>
-
-</c:forEach>
-
-			<c:choose>
-				<c:when test="${list == 0}">
-					<div id="user_no">알람이 없습니다.</div>
-				</c:when>
-				<c:otherwise>
-
-					<c:forEach items="${list}" var="list">
-				forEach문 실행
-					<table id="alarmData">
-							<tr>
-													<td><a href="/alarm/select ${sender.m_idx}">
-								<c:set var="type" value="${list.type}" />
-								<c:choose>
-									<c:when test="${type eq 'comment'}">
-										<c:out value="${list.sender}">님이</c:out>댓글을 남겼습니다.
-										</c:when>
-									<c:when test="${type eq 'like'}">
-										<c:out value="${list.sender}">님이</c:out>
-											좋아요를 눌렀습니다.
-										</c:when>
-									<c:when test="${type eq 'follow'}">
-										<c:out value="${list.sender}">님이</c:out>
-											회원님을 팔로우했습니다.
-										</c:when>
-								</c:choose>
-								<!-- </a></td> -->
-<!-- 
-							</tr>
-						</table>
-					</c:forEach>
-
-
-					<c:forEach items="${list}" var="list">
-						<tbody>
-							<tr>
-								<td>${list.type}</td>
-								<td>${list.sender}</td>
-								<td>${list.receiver}</td>
-								<td>${list.post}</td>
-							</tr>
-						</tbody>
-					</c:forEach>
-
-
-				</c:otherwise>
-	  	</c:choose>-->	
-			<button type="button" class="modal_close_btn">x</button>
-
-
-	</div> --%>
-
-</body>
+<body></body>
 
 <script>
-	
-/*
-	 // 네비바 알람 아이콘 눌렀을 때 -> 실시간 알람 X -> 리스트 전달하는 컨트롤러로
-	 $('#Alarm').keypress(function(event) {
-	 modal('alarm_modal');
-	 });
-*/
+
 	sock = new SockJS("<c:url value="/chat"/>");
 
 	sock.onopen = onOpen;
@@ -145,11 +65,7 @@
 		$('#sendBtn').click(function() {
 			sendMessage();
 			console.log("sendMessage() - 메서드 실행 ");
-
-			//modal('my_modal');
-			//console.log("알림 모달 보기라도 하자...");
 		});
-
 	});
 
 	function onOpen() {
@@ -218,45 +134,9 @@
 					} //success func 종료
 				}) // ajax 종료
 				
-				
-				
-				
-	/*			$.ajax({
-					url : "select",
-					type : "GET",
-					success : function(list) {
-						
-						var text = JSON.stringify(list);
-						var data = list.data;
-						var text = JSON.parse(data);
-						
-						console.log(text);
-						if(text==0){
-							console.log('text null');
-						} else {
-							console.log('ajax로 받았는데 text 값 낫널,,,== 값 있음!!');
-							switch(text.type){
-							case "like":
-								console.log('like');
-								break;
-							case 'comment':
-								console.log('comment');
-								break;
-							}
-						}
-						if(list == 0){
-							console.log('list null');
-							} else {
-								console.log('ajax 써야함');
-							}
-						 
-						 
-					}
-				}) */
 	};
 
 	function sendMessage() {
-		//   var t = getTimeStamp();
 		var date = new Date(); // 자바스크립트 Date 객체
 		var str = JSON.stringify(date.toJSON()); // Date 객체를 JSON 형식의 문자열로 변환
 

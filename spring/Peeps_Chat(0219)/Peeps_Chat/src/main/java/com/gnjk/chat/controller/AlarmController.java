@@ -17,6 +17,7 @@ import com.gnjk.chat.domain.Alarm;
 import com.gnjk.chat.service.AlarmService;
 
 @Controller
+@RequestMapping(value = "/alarm/select")
 public class AlarmController {
 
 	@Autowired
@@ -30,18 +31,19 @@ public class AlarmController {
 		service. insertAlarm(alarmdata);
 
 	}
-*/
+	 */
 	
-	@RequestMapping(value = "/")
-	public String alarmList(Alarm alarm, HttpSession session) throws Exception{
+	@GetMapping
+	@ResponseBody
+	public List<Alarm> alarmList(Alarm alarm, HttpSession session) throws Exception{
 
 		session.setAttribute("list", service.alarmList(alarm));
 
 		System.out.println("알람 컨트롤러…");
-		
+
 		System.out.println(service.alarmList(alarm));
-		
-		return "nav";
-		
+
+		return  service.alarmList(alarm);
+
 	}
 }

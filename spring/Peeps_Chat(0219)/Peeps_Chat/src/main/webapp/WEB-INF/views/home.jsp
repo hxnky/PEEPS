@@ -6,6 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Chatting Main Page</title>
 </head>
+
+<!-- css -->
+<link rel="styleSheet" href="<c:url value="/css/default.css"/>">
+
 <body>
 
 	<!-- navi-->

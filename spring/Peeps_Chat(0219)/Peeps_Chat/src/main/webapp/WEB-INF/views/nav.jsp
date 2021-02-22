@@ -11,8 +11,6 @@
 </head>
 
 <style>
-
-
 #my_modal {
 	display: none;
 	width: 600px;
@@ -37,7 +35,6 @@
 	text-align: center;
 	margin-top: 10px;
 }
-
 </style>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -63,26 +60,27 @@
 				<li class="center"><a id="Logo"><img
 						src="<c:url value='/icon/navi/Logo.png' />"></a></li>
 
-				<li class="right">
-				<li><a id="Home" href="#"><img
-						src="<c:url value='/icon/navi/023-home.png' />"></a></li>
-				<li><a id="Content" href="#"><img
-						src="<c:url value='/icon/navi/Content.png' />"></a></li>
+				<li class="right"><a id="Home" href="#"><img
+						src="<c:url value='/icon/navi/023-home.png' />"></a> <a
+					id="Content" href="#"><img
+						src="<c:url value='/icon/navi/Content.png' />"></a> 
+						
+						<a
+					id="Alarm" href="#none">
+						<img onclick="modal('my_modal')"
+						src="<c:url value='/icon/navi/008-notification.png' />" ></a>
 
-				<li ><button type="button"  id="Alarm"><a href="${list}"><img
-						src="<c:url value='/icon/navi/008-notification.png' />"> </a></button></li>
-
-				<li><a id="Chat" href="#"><img
-						src="<c:url value='/icon/navi/050-wechat.png'/>"></a>
-				<li>
-				<li><a id="MyPage" href="#"><img
+						<a
+					id="Chat" href="#"><img
+						src="<c:url value='/icon/navi/050-wechat.png'/>"></a> <a
+					id="MyPage" href="#"><img
 						src="<c:url value='/icon/navi/010-user.png '/>"></a></li>
 
 			</ul>
 		</nav>
 	</div>
-	<!-- nav -->
-
+	
+	<!--modal -->
 	<div id="my_modal">
 		<div id="my_modal_header">${list}알람목록</div>
 
@@ -110,7 +108,6 @@
 
 		<button type="button" class="modal_close_btn">x</button>
 
-
 	</div>
 
 </body>
@@ -118,13 +115,20 @@
 <script>
 
 $(document).ready(function() {
-$('#Alarm').keypress(function(event) {
-	//sendMessage();
-	//console.log("sendMessage() - 메서드 실행 ");
-
-	modal('my_modal');
-	console.log("알림 모달 보기라도 하자...");
-})
+	
+	$.ajax({		
+		url : "alarm/select",
+		type : "GET",
+		success : function(data) {
+			console.log("데이터 받음...");
+			console.log(data);
+		},
+		error : function() {
+			console.log("눈물 또르르륵..");
+		}
+		
+	});
+	
 });
 
 function modal(id) {
@@ -162,13 +166,12 @@ function modal(id) {
 				bg.remove();
 				modal.hide();
 			});
-
-	setTimeout(function() {
-		$('#my_modal').hide();
-	}, 10000); // 10초 뒤에 모달 사라짐
 }
+/* 	setTimeout(function() {
+		$('#my_modal').hide();
+	}, 10000); // 10초 뒤에 모달 사라짐 */
+
 
 </script>
-
 
 </html>
