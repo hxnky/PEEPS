@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="">
 
@@ -31,31 +29,11 @@
 	right: 10px;
 }
 
-#my_modal_header {
+#alarmData {
 	width: 500px;
 	height: 30px;
 	text-align: center;
 	margin-top: 10px;
-}
-
-#alarm_mask {
-	text-align: right;
-	width: auto;
-	max-width: 70%;
-	background-color: #F2D665;
-	border-radius: 5px;
-	margin: 30px;
-	word-wrap: break-word;
-}
-
-#alarm {
-	text-align: left;
-	width: auto;
-	max-width: 70%;
-	background-color: #F4F4F4;
-	border-radius: 5px;
-	margin: 30px;
-	word-wrap: break-word;
 }
 </style>
 
@@ -85,9 +63,14 @@
 				<li class="right"><a id="Home" href="#"><img
 						src="<c:url value='/icon/navi/023-home.png' />"></a> <a
 					id="Content" href="#"><img
-						src="<c:url value='/icon/navi/Content.png' />"></a> <a
-					id="Alarm" href="javascript:void(0);"> <img
-						src="<c:url value='/icon/navi/008-notification.png' />"></a> <a
+						src="<c:url value='/icon/navi/Content.png' />"></a> 
+						
+						<a
+					id="Alarm" href="#none">
+						<img onclick="modal('my_modal')"
+						src="<c:url value='/icon/navi/008-notification.png' />" ></a>
+
+						<a
 					id="Chat" href="#"><img
 						src="<c:url value='/icon/navi/050-wechat.png'/>"></a> <a
 					id="MyPage" href="#"><img
@@ -96,11 +79,33 @@
 			</ul>
 		</nav>
 	</div>
-
+	
 	<!--modal -->
 	<div id="my_modal">
 		<div id="my_modal_header">${list}알람목록</div>
-		<div id="modal_container"></div>
+
+		<c:forEach items="${list}" var="list">
+				forEach문 실행
+					<table id="alarmData">
+				<tr>
+					<c:set var="type" value="${list.type}" />
+					<c:choose>
+						<c:when test="${type eq 'comment'}">
+							<c:out value="${list.sender}"></c:out>님이 댓글을 남겼습니다.
+										</c:when>
+						<c:when test="${type eq 'like'}">
+							<c:out value="${list.sender}"></c:out>
+											님이 좋아요를 눌렀습니다.
+										</c:when>
+						<c:when test="${type eq 'follow'}">
+							<c:out value="${list.sender}"></c:out>
+											님이 회원님을 팔로우했습니다.
+										</c:when>
+					</c:choose>
+				</tr>
+			</table>
+		</c:forEach>
+
 		<button type="button" class="modal_close_btn">x</button>
 
 	</div>
@@ -111,110 +116,62 @@
 
 $(document).ready(function() {
 	
-		$.ajax({
-			url : "alarm/select",
-			type : "GET",
-			dataType : 'json',
-			success : function(data) {
-				
-				print(data);
-				$('#Alarm').click(function() {
-				modal('my_modal');
-				}); 
-				
-			}, // success
-			error : function() {
-				console.log("눈물 또르르륵..");
-			}
-		}); // ajax
-	}); // ready
+	$.ajax({		
+		url : "alarm/select",
+		type : "GET",
+		success : function(data) {
+			console.log("데이터 받음...");
+			console.log(data);
+		},
+		error : function() {
+			console.log("눈물 또르르륵..");
+		}
+		
+	});
+	
+});
 
-	function print(alarmlist) {
+function modal(id) {
+	var zIndex = 9999;
+	var modal = $('#' + id);
+	// 모달 div 뒤에 희끄무레한 레이어
+	var bg = $('<div>').css({
+		position : 'fixed',
+		zIndex : zIndex,
+		left : '0px',
+		top : '0px',
+		width : '100%',
+		height : '100%',
+		overflow : 'auto',
+		// 레이어 색갈은 여기서 바꾸면 됨
+		backgroundColor : 'rgba(0,0,0,0.500)'
+	}).appendTo('body');
+	modal
+			.css(
+					{
+						position : 'fixed',
+						boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+						// 시꺼먼 레이어 보다 한칸 위에 보이기
+						zIndex : zIndex + 1,
+						// div center 정렬
+						top : '50%',
+						left : '50%',
+						transform : 'translate(-50%, -50%)',
+						msTransform : 'translate(-50%, -50%)',
+						webkitTransform : 'translate(-50%, -50%)'
+					}).show()
 
-		if (alarmlist == "") {
-			document.getElementById('my_modal_header').value = "알람이 없습니다.";
-			console.log("alarmlist 없음");
-		} else {
-			$.each(alarmlist, function(key, val) {
-				switch (val.type) {
-				// 댓글 알람
-				case "comment":
-					console.log("1111comment");
-					var printHTML = "<div id='alarm_mask'>";
-					printHTML += "<div id='alarm'>";
-					printHTML += "<strong>" + val.sender + " 님이 회원님의 게시물";
-					printHTML += val.post + " 에 댓글을 남겼습니다!</strong> <br>";
-					printHTML += "</div>";
-					printHTML += "</div>";
-					$('#my_modal_header').append(printHTML);
-					console.log("comment");
-					break;
-				// 좋아요 알람
-				case "like":
-					console.log("22222222comment");
-					var printHTML = "<div id='alarm_mask'>";
-					printHTML += "<div id='alarm'>";
-					printHTML += "<strong>" + val.sender + " 님이 회원님의 게시물";
-					printHTML += val.post + " 에 좋아요를 눌렀습니다!</strong> <br>";
-					printHTML += "</div>";
-					printHTML += "</div>";
-					$('#my_modal_header').append(printHTML);
-					console.log("like");
-					break;
-				// 팔로우 알람
-				case "follow":
-					console.log("33333333333333333comment");
-					var printHTML = "<div id='alarm_mask'>";
-					printHTML += "<div id='alarm'>";
-					printHTML += "<strong>" + val.sender;
-					printHTML += " 님이 회원님을 팔로우 했습니다!</strong> <br>";
-					printHTML += "</div>";
-					printHTML += "</div>";
-					$('#my_modal_header').append(printHTML);
-					console.log("follow");
-					break;
-				} // switch 문
-				/* $('#modal_container').scrollTop(
-						$('#modal_container')[0].scrollHeight); // 맨 밑으로 자동 스크롤 */
-			}) // $each 문
-		} // else 문
-	}; // print 함수
+			// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+			.find('.modal_close_btn').on('click', function() {
+				bg.remove();
+				modal.hide();
+			});
+}
+/* 	setTimeout(function() {
+		$('#my_modal').hide();
+	}, 10000); // 10초 뒤에 모달 사라짐 */
 
-	function modal(id) {
-		var zIndex = 9999;
-		var modal = $('#' + id);
-		// 모달 div 뒤에 희끄무레한 레이어
-		var bg = $('<div>').css({
-			position : 'fixed',
-			zIndex : zIndex,
-			left : '0px',
-			top : '0px',
-			width : '100%',
-			height : '100%',
-			overflow : 'auto',
-			// 레이어 색갈은 여기서 바꾸면 됨
-			backgroundColor : 'rgba(0,0,0,0.500)'
-		}).appendTo('body');
-		modal
-				.css(
-						{
-							position : 'fixed',
-							boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-							// 시꺼먼 레이어 보다 한칸 위에 보이기
-							zIndex : zIndex + 1,
-							// div center 정렬
-							top : '50%',
-							left : '50%',
-							transform : 'translate(-50%, -50%)',
-							msTransform : 'translate(-50%, -50%)',
-							webkitTransform : 'translate(-50%, -50%)'
-						}).show()
 
-				// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-				.find('.modal_close_btn').on('click', function() {
-					bg.remove();
-					modal.hide();
-				});
-	}
 </script>
+
 </html>
