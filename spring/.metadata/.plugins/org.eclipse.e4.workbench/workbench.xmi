@@ -11,6 +11,7 @@
     <persistedState key="workingSets" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workingSets/>"/>
     <persistedState key="aggregateWorkingSetId" value="Aggregate for window 1612144260257"/>
     <tags>topLevel</tags>
+    <tags>shellMaximized</tags>
     <children xsi:type="basic:PartSashContainer" xmi:id="_gaWocmUYEeu0a8FnkPMDag" selectedElement="_gaWoc2UYEeu0a8FnkPMDag" horizontal="true">
       <children xsi:type="advanced:PerspectiveStack" xmi:id="_gaWoc2UYEeu0a8FnkPMDag" elementId="org.eclipse.ui.ide.perspectivestack" containerData="7500" selectedElement="_gaWodGUYEeu0a8FnkPMDag">
         <children xsi:type="advanced:Perspective" xmi:id="_gaWodGUYEeu0a8FnkPMDag" elementId="com.springsource.sts.ide.perspective" selectedElement="_gaWodWUYEeu0a8FnkPMDag" label="Spring" iconURI="platform:/plugin/org.springframework.ide.eclipse.ui/icons/full/obj16/spring_perspective.gif">
@@ -468,7 +469,7 @@
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
         <children xsi:type="basic:Part" xmi:id="_Qi1WcGiXEeuUk8YvyDyu9w" elementId="org.eclipse.e4.ui.compatibility.editor" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="chatting.jsp" iconURI="platform:/plugin/org.eclipse.jst.jsp.ui/icons/full/obj16/sourceEditor.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jst.jsp.core.jspsource.source&quot; name=&quot;chatting.jsp&quot; partName=&quot;chatting.jsp&quot; title=&quot;chatting.jsp&quot; tooltip=&quot;Peeps_Chat/src/main/webapp/WEB-INF/views/chatting.jsp&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Peeps_Chat/src/main/webapp/WEB-INF/views/chatting.jsp&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;0&quot; selectionTopPixel=&quot;1518&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.jst.jsp.core.jspsource.source&quot; name=&quot;chatting.jsp&quot; partName=&quot;chatting.jsp&quot; title=&quot;chatting.jsp&quot; tooltip=&quot;Peeps_Chat/src/main/webapp/WEB-INF/views/chatting.jsp&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/Peeps_Chat/src/main/webapp/WEB-INF/views/chatting.jsp&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>removeOnHide</tags>
           <tags>org.eclipse.jst.jsp.core.jspsource.source</tags>
@@ -720,7 +721,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_gaXQS2UYEeu0a8FnkPMDag" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_HuRfQGhEEeuUk8YvyDyu9w" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_gaZH52UYEeu0a8FnkPMDag"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_gwnpsHU6EeuLdrCmVqOIbA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_gaZH52UYEeu0a8FnkPMDag"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_gaXQWWUYEeu0a8FnkPMDag" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -760,7 +761,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_gaXQrWUYEeu0a8FnkPMDag" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_HuVwsGhEEeuUk8YvyDyu9w" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_gaZHlGUYEeu0a8FnkPMDag"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_gwwzoHU6EeuLdrCmVqOIbA" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_gaZHlGUYEeu0a8FnkPMDag"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_gaXQuGUYEeu0a8FnkPMDag" elementId="org.eclipse.jst.jsp.core.jspsource.source" visible="false">
         <tags>Draggable</tags>
@@ -3425,7 +3426,7 @@
   <addons xmi:id="_gaZJaGUYEeu0a8FnkPMDag" elementId="MinMax Addon" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
   <addons xmi:id="_gaZJaWUYEeu0a8FnkPMDag" elementId="org.eclipse.ui.workbench.addon.0" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_gaZJamUYEeu0a8FnkPMDag" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
-  <addons xmi:id="_G1PlgGhEEeuUk8YvyDyu9w" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
+  <addons xmi:id="_IYS0IKimEeS11vbz3f9ezw" elementId="org.eclipse.ui.ide.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
   <addons xmi:id="_gaZJbGUYEeu0a8FnkPMDag" elementId="org.eclipse.ui.ide.application.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.ide.application/org.eclipse.ui.internal.ide.application.addons.ModelCleanupAddon"/>
   <addons xmi:id="_gaZJbWUYEeu0a8FnkPMDag" elementId="org.eclipse.e4.ui.workbench.renderers.swt.cocoa.CocoaUIHandler" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.cocoa.CocoaUIHandler"/>
   <categories xmi:id="_gaZJbmUYEeu0a8FnkPMDag" elementId="org.eclipse.ui.category.edit" name="Edit"/>
