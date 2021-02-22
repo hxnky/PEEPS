@@ -179,7 +179,7 @@ margin-top:30px;
 	</div>
 	<!--=====================context======================-->
 	<div class="changing" id="changing">
-<div id="test">
+
 <div class="msg_wrap">
 	<form id="insertGForm" enctype="multipart/form-data">
          <div class="ginsert_wrap">
@@ -201,7 +201,7 @@ margin-top:30px;
 
 
         </div> <!-- msg_wrap -->
-       </div> 
+        
         
         
         
@@ -238,9 +238,40 @@ margin-top:30px;
 	    
 		$(document).ready(function(){
 			
-			 
-			         function loadGB(){
-			        	 
+			   /*  방명록 데이터 등록 */
+				
+				$('#sbmtbtn').click(function() {
+					   var data =$('#insertGForm')[0];
+			            var form_data = new FormData(data);
+
+				       $.ajax({
+			               url : 'http://localhost:8080/peeps/rest/guestbook/upload',
+			               type : 'post',
+			               data : form_data,
+			               dataType : 'json',
+			               async : true,
+			               enctype : 'multipart/form-data',
+			               processData : false,
+			               contentType : false,
+			               cache : false ,
+			               success : function(data){
+			                  console.log("ajax data",data);
+			                  console.log("작성완료");
+			                  alert("방명록이 작성 되었습니다");
+			                  
+			               }
+			            });
+			            
+			            
+			            
+			         
+			         }); //-------방명록 작성 ajax끝 
+				
+				
+				
+				
+			
+
 						/*게스트북 리스트 출력*/
 						$.ajax({
 							url : 'http://localhost:8080/peeps/rest/guestbook?p='+p,
@@ -277,12 +308,10 @@ margin-top:30px;
 									html +='  <div class="upMsg">';
 									if(! item.gphoto ==" "){
 										html +='  <span><img src="<c:url value="/fileupload/guestbook/'+item.gphoto+'"/>" class="gUpPhoto" > </span> ';	
-									 /*  추가 */ 	html +='<input type="hidden" id="'+item.gidx+'_photo" value="'+item.gphoto+'">';
+										
 									}
 									 
 						            html +='  <h3 class="gUptext">'+item.gmessage+'</h3>';
-						       /*  추가 */    html +=' <div><input type=text class="message"  id="'+item.gidx+'_msg" value="'+item.gmessage+'"</div>';
-						       
 						            html +='  </div>';
 						            html +='  <div class="cmt">';
 						            html +='  <span>';
@@ -316,124 +345,40 @@ margin-top:30px;
 						
 							
 						}); //----리스트 ajax end
-			         }	//-------function loadGB()
-			         
-			      // 페이지 시작되자마자 방명록 목록 출력
-						loadGB();
-			         
-			         
-			         /*  방명록 데이터 등록 */
 						
-						$('#sbmtbtn').click(function() {
-							   var data =$('#insertGForm')[0];
-							   console.log('등록',data);
-					            var form_data = new FormData(data);
-
-						       $.ajax({
-					               url : 'http://localhost:8080/peeps/rest/guestbook/upload',
-					               type : 'post',
-					               data : form_data,
-					               dataType : 'json',
-					               async : true,
-					               enctype : 'multipart/form-data',
-					               processData : false,
-					               contentType : false,
-					               cache : false ,
-					               success : function(data){
-					                  console.log("ajax data",data);
-					                  console.log("작성완료");
-					                  loadGB(); 
-					                  alert("방명록이 작성 되었습니다");
-					                  
-					               }
-					            });
-					            
-					            
-					            
-					         
-					         }); //-------방명록 작성 ajax끝 
-						
-				
-		});/* $(document).ready(function(){ */
+				});
 	    
     
         
         /* 방명록 수정   */
             function edit_btn(gidx) {
-            	console.log('수정할',gidx);
+            	
             	if (confirm('방명록을 수정하시겠습니까? ')) {
-            		var gmessage = $('#'+gidx+'_msg').val();
-        			var gphoto = $('#'+gidx+'_photo').val();
-        			
-        			console.log(gmessage);
-        			console.log(gphoto);	
-        			
-        			$('#gmessage').val(gmessage);
-        			$('#edit_photo').val(gphoto);
-        			$('#edit_gidx').val(gidx);
-        			
-        			// 수정 버튼 클릭 시 해당 위치로 스크롤!
-        			var scrollPosition = $("#nav_wrap").offset().top;
-        			$('html,body').animate({scrollTop: scrollPosition}, 500);
-        			
-        			// 수정 버튼 클릭 시 수정 취소, 수정 버튼 생성
-        			var html = "<div id='editbtn'><button id='edit'>수정</button><button id='edit_cancle'>수정 취소</button></div>";
-        			    html +=' <div><input type=text class="message" id="gidx" value="'+gidx+'"</div>';    
-        			$('#test #sbmtbtn').replaceWith(html);
-        			
-        			// 수정 취소 클릭 시 해당 텍스트 박스로 다시 이동
-        			
-        			$('#edit_cancle').click(function() {
-        				
-        				
-        				console.log("취소");
-        				var cle_html = "<button id='sbmtbtn'>등록</button>";
-        				$('#test #editbtn').replaceWith(cle_html);
-        				$('#gmessage').val("");
-        				$('#edit_photo').val("");
-        				$('#edit_gidx').val("");
-        				loadGB();
-        				
-        			});
-        			
-        			$('#edit').click(function(gidx) {
-        				var data =$('#insertGForm')[0];
-        				var form_data = new FormData(data);
-        				
-        				console.log("form_data",form_data);
-        				
-        				$.ajax({
-        					url : 'http://localhost:8080/peeps/rest/guestbook/edit',
-        					type : 'post',
-        					data : form_data,
-        					dataType : 'json',
-        					async : true,
-        					enctype : 'multipart/form-data',
-        					processData : false,
-        					contentType : false,
-        					cache : false ,
-        					success : function(data){
-        						console.log("ajax data",data);
-        						alert("방명록이 수정되었습니다");
-        						
-        						var cle_html = "<button id='sbmtbtn'>등록</button>";
-        							$('#test #editbtn').replaceWith(cle_html);
-        							$('#gmessage').val("");
-        							$('#edit_photo').val("");
-        							$('#edit_gidx').val("");
-        							
-        						loadGB();
-        					},
-        					error:function(e){
-        						console.log("수정 에러발생!! :",e);	
-        						}
-        				});
-        			});
-        			
-        			
-        			
+            	
+            	$.ajax({
+            		url : 'http://localhost:8080/peeps/rest/guestbook/' + gidx,
+            		type : 'get',
+            		success : function(data){
+						console.log("수정값 받아오기  data",data);
+						
+						
+						var html = '<span>'+data.gmessage+'<span>';
+						$('textarea.gmessage').append(html);
+						
+						
+						
+						
+						
+				
+					     
+					       },
+					       
+					       error : function(e){
+			    				console.log("에러발생!! : ", e);
+			    			}
+            	});
 
-            	} /* if (confirm('방명록을 수정하시겠습니까? ')) */
+            	}
             	
             	} /* 방명록 수정    ---end*/
             

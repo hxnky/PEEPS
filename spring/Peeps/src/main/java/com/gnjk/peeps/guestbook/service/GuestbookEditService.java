@@ -73,6 +73,8 @@ public class GuestbookEditService {
 			System.out.println(guestbook);
 			gbresult = dao.updateGuestbook(guestbook);
 			
+			System.out.println("수정될값"+gbresult);
+			
 			} catch (Exception e) {
 				e.printStackTrace();
 				

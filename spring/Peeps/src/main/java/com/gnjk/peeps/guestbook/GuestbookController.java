@@ -71,7 +71,7 @@ public class GuestbookController {
 	 */
 
 	/* 수정 */
-	@RequestMapping(value = "/guestbook/edit")
+	//@RequestMapping(value = "/guestbook/edit")
 	public String editForm(@RequestParam("gidx") int gidx ) {
 		
 		return "menu/editForm";
