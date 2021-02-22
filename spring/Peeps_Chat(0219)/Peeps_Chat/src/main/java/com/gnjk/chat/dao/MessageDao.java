@@ -8,6 +8,12 @@ public interface MessageDao {
 	
 	public void insertMessage(Message mes) throws Exception;
 	
-	//public List<Message> getMessageData(String str) throws Exception;
+	//public List<Message> mesList(Message mes) throws Exception;
+	
+	// List<Message> selectList(Message message, int rm_idx) throws Exception;
 
+	
+	//public List<Message> getMessageData(String str) throws Exception;
+	
 }
+

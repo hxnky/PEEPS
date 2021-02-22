@@ -4,6 +4,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.gnjk.dao.mapper.mybatisMessageDao">
+ <!--
+ <resultMap type="project" id="projectResultMap">
+        <id column="PNO" property="no" />
+        <result column="PNAME" property="title" />
+        <result column="CONTENT" property="content" />
+        <result column="STA_DATE" property="startDate" javaType="java.sql.Date" />
+        <result column="END_DATE" property="endDate" javaType="java.sql.Date" />
+        <result column="STATE" property="state" />
+        <result column="CRE_DATE" property="createdDate" javaType="java.sql.Date" />
+        <result column="TAGS" property="tags" />
+    </resultMap>
+    -->
+ 
 
    <!-- <resultMap id="mesResult"
    type="com.gnjk.chat.domain">
@@ -19,11 +32,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     -->
     
+    <!--  메세지 저장  -->
    <insert id ="insertMessage" parameterType ="com.gnjk.chat.domain.Message">
       insert into chat.chat(m_idx, rm_idx, ch_time, ch_ms)
       values (#{m_idx},#{rm_idx},#{ch_time},#{ch_ms}) 
-   </insert>
+   </insert>   
    
+  
  <!--   <select id="getMessageData" resultType = "com.gnjk.chat.domain.Message">
    	select rm_idx, ch_time, ch_ms
    	from chat.chat

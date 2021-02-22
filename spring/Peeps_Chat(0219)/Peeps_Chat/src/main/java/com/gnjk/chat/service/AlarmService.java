@@ -21,8 +21,9 @@ public class AlarmService {
 	
 	// 각각 네비에 전달해줄 리스트
 	public List<Alarm> alarmList(Alarm alarm) throws Exception {
+		
 		 dao = template.getMapper(AlarmDao.class);
 				 return dao.alarmList(alarm);
-	}
-	
+				 
+	}	
 }

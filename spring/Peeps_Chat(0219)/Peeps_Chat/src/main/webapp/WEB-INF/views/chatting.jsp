@@ -11,8 +11,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
-
 <style>
 #right {
 	text-align: right;
@@ -46,27 +44,87 @@
 <body></body>
 
 <script>
-
 	sock = new SockJS("<c:url value="/chat"/>");
 
 	sock.onopen = onOpen;
 	sock.onmessage = onMessage;
 	sock.onclose = onClose;
 
-	$(document).ready(function() {
-		$('#message').keypress(function(event) {
-			var keycode = (event.keyCode ? event.keyCode : event.which);
-			if (keycode == '13') {
-				sendMessage();
-			}
-			event.stopPropagation();
-		});
+	$(document)
+			.ready(
+					function() {
 
-		$('#sendBtn').click(function() {
-			sendMessage();
-			console.log("sendMessage() - 메서드 실행 ");
-		});
-	});
+						$
+								.ajax({
+									url : "mes/select",
+									type : "GET",
+									dataType : "json",
+									success : function(data) {
+
+										printMes(data);
+
+										$('#message')
+												.keypress(
+														function(event) {
+															var keycode = (event.keyCode ? event.keyCode
+																	: event.which);
+															if (keycode == '13') {
+																sendMessage();
+															}
+															event
+																	.stopPropagation();
+														}); // 엔터
+										$('#sendBtn')
+												.click(
+														function() {
+															sendMessage();
+															console
+																	.log("sendMessage() - 메서드 실행 ");
+														}); // 버튼
+									} // success
+								}); // ajax
+					}); // ready
+
+	function printMes(list) {
+
+		if (list == "") {
+
+			var printHTML = "<div id='list'>";
+			printHTML += "<strong>Peeps 채팅을 시작해보세요 :)";
+			printHTML += "</strong> <br>";
+			printHTML += "</div>";
+			$('#chatdata').append(printHTML);
+			console.log("메세지 없음!");
+
+		} else {
+
+			$.each(list, function(key, val) {
+
+				var currentuser_session = $('#sessionuserid').val();
+
+				if (val.m_idx == currentuser_session) { //m_idx = m_idx
+					var printHTML = "<div id='right'>";
+					printHTML += "<strong>" + val.m_idx + "</strong> <br>";
+					printHTML += "<strong>" + val.ch_ms + "</strong> <br>";
+					printHTML += "<strong>" + val.ch_time + "</strong> <br>";
+					printHTML += "</div>";
+
+					$('#chatdata').append(printHTML);
+				} else {
+					var printHTML = "<div id='left'>";
+					printHTML += "<strong>" + val.m_idx + "</strong> <br>";
+					printHTML += "<strong>" + val.ch_ms + "</strong> <br>";
+					printHTML += "<strong>" + val.ch_time + "</strong> <br>";
+					printHTML += "</div>";
+
+					$('#chatdata').append(printHTML);
+				} // 2중 if/else
+
+				$('#chatdata').scrollTop($('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
+
+			}); // $.each
+		} // 2중 if/else
+	} // printMes
 
 	function onOpen() {
 		console.log('open');
@@ -133,7 +191,7 @@
 						document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)";
 					} //success func 종료
 				}) // ajax 종료
-				
+
 	};
 
 	function sendMessage() {
@@ -183,8 +241,7 @@
 		}
 
 		$('#chatdata').scrollTop($('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
-
-	};
+	} // onMessage
 
 	function onClose() {
 		console.log('console close');
