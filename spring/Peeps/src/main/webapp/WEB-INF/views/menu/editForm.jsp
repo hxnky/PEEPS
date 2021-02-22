@@ -209,15 +209,15 @@ table.upmsg_table {
 								html +=' <li><img ';
 								html +=' src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"';
 								html +=' class="gimg"></li>';
-								html +=' <li><input type="text" id ="gidx",name="gidx" value="'+data.gidx+'"></li>';
 								html +=' <li><textarea rows="9" cols="80" id="gmessage" name="gmessage">'+data.gmessage+'</textarea><br>';
 								html +=' <input type="text" id="oldgphoto" name="oldgphoto" value="'+data.gphoto+'"><input type="file" id="gphoto" name="gphoto"></li>';
-								html +=' <li><input type="submit" value="수정" id="editbtn"><button>취소</button></li>';
+								html +=' <li><input type="button" value="수정 등록" id="submitbtn" onclick="javascript:actionForm();"><button>취소</button></li>';
 								html +=' </ul>';
 								
-								$('#ginsert_wrap').append(html);
-						     
-						
+								$('#ginsert_wrap').append(html)
+								
+								
+								
 						     
 						       },
 						       
@@ -228,63 +228,10 @@ table.upmsg_table {
 						
 						
 					}); /* 수정할 데이터 값 받아오기 ajax end*/	
-			
-			
-			
-				    /*  방명록 데이터  수정*/
 					
-					$('#editbtn').click(function() {
-
-						var photoFile =$('#gphoto');
-						
-						var file1 =photoFile[0].files[0];
+				
 					
-						
-						//console.log(file1);
-						
-					var formData = new FormData();
-						formData.append("gmessage",$('#gmessage').val());
-						formData.append("gphoto",file1);
-						
-						//console.log(formData);
-						
-						
-						$.ajax({
-							url : 'http://localhost:8080/peeps/rest/guestbook/edit',
-							type : 'post',
-							data : formData,
-							async : false,
-							enctype : 'multipart/form-data',
-							processData : false,
-							contentType : false,
-							cache : false ,
-							success : function(data){
-								console.log("edit data",data);
-								console.log("수정완료");
-								window.location.href="http://localhost:8080/peeps/guestbook";
-								alert("방명록이 수정 되었습니다");
-								
-							}
-						,
-						error:function(e){
-						console.log("에러발생!! :",e);	
-						}
-						});
-						
-						
-						
 					
-					}); //-------방명록다시 작성 끝 
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		
 
 				/*게스트북 리스트 출력*/
 				$.ajax({
@@ -411,10 +358,62 @@ table.upmsg_table {
 			});
 			
 		
-		} //--- 시작 함수 끝 
 			
-				
+			
+		} //--- 시작 함수 끝 
+		
+		
+		
+		 /*  방명록 데이터  수정*/
+		
+		 function actionForm(){
 
+			var photoFile =$('#gphoto');
+			
+			var file1 =photoFile[0].files[0];
+		
+			
+			//console.log(file1);
+			
+		var formData = new FormData();
+			formData.append("gmessage",$('#gmessage').val());
+			formData.append("oldgphoto",$('#oldgphoto').val());
+			formData.append("gphoto",file1);
+			
+			//console.log(formData);
+			
+			
+			$.ajax({
+				url : 'http://localhost:8080/peeps/rest/guestbook/edit',
+				type : 'post',
+				data : formData,
+				async : false,
+				enctype : 'multipart/form-data',
+				processData : false,
+				contentType : false,
+				cache : false ,
+				success : function(data){
+					console.log("edit data",data);
+					console.log("수정완료");
+					window.location.href="http://localhost:8080/peeps/guestbook";
+					alert("방명록이 수정 되었습니다");
+					window.location.href="http://localhost:8080/peeps/guestbook";
+				}
+			,
+			error:function(e){
+			console.log("에러발생!! :",e);	
+			}
+			});
+			
+			
+			
+		
+		} //-------방명록다시 작성 끝 	
+
+		
+	
+
+		
 			
 		
 			

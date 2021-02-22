@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -165,7 +166,7 @@ table.upmsg_table {
 	<!--=====================context======================-->
 	<div class="changing">
 
-
+<div id="test">
 		<form method="POST" id="insertGForm" enctype="multipart/form-data">
 			<div class="ginsert_wrap">
 				<!-- 방명록 입력 div -->
@@ -180,7 +181,7 @@ table.upmsg_table {
 			</div>
 			`
 		</form>
-		
+</div>		
 
 		<div class="ginsert_wrap2" id="ginsert_wrap2">
            <!-- 방명록 시작 -->
@@ -201,7 +202,8 @@ table.upmsg_table {
 			// 뷰컨트롤러 통해 페이지 번호 받기
 			function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 			var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
-			return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));}
+			return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
+		  }
 
 			
 			var p = getParameterByName('p');
@@ -209,15 +211,15 @@ table.upmsg_table {
 			console.log("방명록인덱스 : ",gidx);
 		    console.log(p);
 			
-  $(document).ready(function(){
+		$(document).ready(function(){
 			
 		   /*  방명록 데이터 등록 */
 			
-		$('#sbmtbtn').click(function() {
+			$('#sbmtbtn').click(function() {
 
-			var photoFile =$('#gphoto');
+				var photoFile =$('#gphoto');
 				
-			var file1 =photoFile[0].files[0];
+				var file1 =photoFile[0].files[0];
 			
 				
 				//console.log(file1);
@@ -249,15 +251,15 @@ table.upmsg_table {
 				
 				
 			
-		 }); //-------방명록 작성 끝 
+			}); //-------방명록 작성 ajax끝 
 			
 			
 			
-  
+			
 		
 
 				/*게스트북 리스트 출력*/
-		        $.ajax({
+				$.ajax({
 					url : 'http://localhost:8080/peeps/rest/guestbook?p='+p,
 					type : 'GET',
 					success : function(data){
@@ -293,7 +295,8 @@ table.upmsg_table {
 							    html +='  <a href="javascript:deleteMsg('+item.gidx+');">삭제</a>';
 								   
 							    	html +=' <a href="<c:url value="/guestbook/edit?gidx='+item.gidx+'"/>">수정</a>';
-							    	html +='<button id="editb" onclick="editb_click();">수정2</button>';
+							    	html +='<input type="button" value="수정 등록" id="submitbtn" onclick="javascript:actionForm();">';
+									
 							   $('#ginsert_wrap2').append(html); 
 						 
 						});
@@ -316,9 +319,8 @@ table.upmsg_table {
 					
 				}); //----리스트 ajax end
 					
-			
-  
-		/*  방명록사제 */		
+			});
+				
 		function deleteMsg(gidx){
 
 			if (confirm('방명록을 삭제하시겠습니까? from ajax')) {
@@ -335,55 +337,39 @@ table.upmsg_table {
 					}
 				});
 			}
-
-		} /* 방명록 삭제  ---end*/
 		
-	
-			/* 방명록 수정 버튼 클릭  */
+
+
+		}
+		
+		
+		
+		
+		
+		function actionForm(){
 			
-			function editb_click(){
-				
-				
-				$.ajax({
-					url : 'http://localhost:8080/peeps/rest/guestbook/' + gidx,
-					type : 'get',
-					success : function(data){
-						console.log("ajax2 data",data);
-						
-					     var html =' <ul> ';
-							html +=' <li><img ';
-							html +=' src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"';
-							html +=' class="gimg"></li>';
-							html +=' <li><textarea rows="9" cols="80" id="gmessage" name="gmessage">'+data.gmessage+'</textarea><br>';
-							html +=' <input type="text" id="oldgphoto" name="oldgphoto" value="'+data.gphoto+'"><input type="file" id="gphoto" name="gphoto"></li>';
-							html +=' <li><input type="submit" value="수정" id="editbtn"><button>취소</button></li>';
-							html +=' </ul>';
-							
-							$('#ginsert_wrap').append(html);
-					     
-					
-					     
-					       },
-					       
-					       error : function(e){
-			    				console.log("에러발생!! : ", e);
-			    			}
-				
-					
-					
-				});
-				
-				
-				
-			};/* 수정버튼 끝  */
-				
-				
-				
-				
-				
-				
-				
-  });
+			var str = document.getElementById("test");
+			str.innerHTML = '	<form method="POST" id="insertGForm" enctype="multipart/form-data">';
+			str.innerHTML = '	<div class="ginsert_wrap">';
+			str.innerHTML = '	<!-- 방명록 입력 div -->';
+			str.innerHTML = '	<ul>';
+			str.innerHTML = '	<li><img ';
+			str.innerHTML = '	src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"class="gimg" ></li> ';
+			
+			str.innerHTML = '		<li><textarea rows="9" cols="80" id="gmessage" name="gmessage"></textarea><br>';
+			str.innerHTML = '	<input type="file" id="gphoto" name="gphoto"></li>';
+			str.innerHTML = '	<li><input type="submit" value="수정" id="sbmtbtn"></li>';
+			str.innerHTML = '	</ul>';
+			str.innerHTML = '	</div>';
+	        str.innerHTML = '   </form>';
+			
+			
+			
+			
+		}
+		
+		
+			
 				
 
 			
