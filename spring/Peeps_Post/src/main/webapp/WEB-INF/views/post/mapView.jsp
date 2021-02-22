@@ -81,6 +81,8 @@
 
     var p = getParameterByName('p');
     console.log(p);
+    
+    var postloc = "";
 	
 	$(document).ready(function(){
 		
@@ -158,8 +160,8 @@
 						          var mId = $('#memberId').text();
 						          
 						          // 주소에 해당하는 게시글 모두 불러와야함
-						          var pageNum = 1;
-						          markerClick(postAddr, pageNum);
+						          markerClick(postAddr);
+						          postloc = postAddr;
 						    });
 				     }
 				    
@@ -189,12 +191,21 @@
 			
 		}); // 지도 ajax 끝
 		
-		
 	}); // document.ready 끝
 	
-	function markerClick(postAddr, pageNum){
+	function markerClick(postAddr){
+		
+		var chk = $('.locationInfo').val();
+		console.log("똑같은 주소인지 체크 : ",chk);
+		if(chk == postAddr){
+			console.log("똑같은 주소입니다~");
+			return false;
+		} else {
+			$('.postList').empty();
+			$('.paging').empty();
+		}
+		
 		alert(postAddr);
-		alert(pageNum);
 		console.log("함수로 들어오는 주소 : ",postAddr);
 		var memberidx = 1;
 		var pageNum = 1;
@@ -213,11 +224,13 @@
 			data : mapPostInfo,
 			/* dataType: 'json', */
 			success: function(data){
+				
 				console.log(data);
 				var list = $(data.postList);
 				console.log(list);
 				console.log("포스트리스트 : ", list[0].member_idx);
 				console.log("페이지 번호 : ", p);
+				var ploc = list[0].p_loc;
 				
 					$.each(list, function(index, item){
 					
@@ -245,11 +258,11 @@
 					   html += '<a class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">';
 					   html += '<img src="<c:url value="/resources/fileupload/postfile/'+item.p_thumbnail+'"/>" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
 					   html += '</div><div class="panel-footer">'+date+'</div></div></div>';
-					   
+					   html += '<input type="hidden" value="'+ploc+'" class="locationInfo">';
 					   $('.postList').append(html);
 				});
 				
-				var ploc = list[0].p_loc;
+				
 				// 페이징 처리
 				if (data.totalPostCount>0){
 					console.log('totalPageCount :' + data.totalPageCount);
@@ -269,7 +282,6 @@
 			
 		});
 	} // makerClick 함수 끝
-	
 	
 	
 

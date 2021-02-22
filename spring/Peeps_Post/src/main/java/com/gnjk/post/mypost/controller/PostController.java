@@ -117,15 +117,14 @@ public class PostController {
 		
 		String mIdx = request.getParameter("memberidx");
 		String pAddr = request.getParameter("postAdd");
-		String pNum = request.getParameter("pageNum");
+		int pNum = page;
 		
 		int memberIdx = Integer.parseInt(mIdx);
-		int pageNum = Integer.parseInt(pNum);
 		System.out.println(memberIdx);
 		System.out.println(pAddr);
 		System.out.println(pNum);
 		
-		return listService.getPostListByMapView(memberIdx, pAddr, pageNum);
+		return listService.getPostListByMapView(memberIdx, pAddr, pNum);
 	}
 	
 
