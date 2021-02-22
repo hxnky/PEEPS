@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gnjk.chat.dao.AlarmDao">
+
+<insert id ="insertAlarm" parameterType ="com.gnjk.chat.domain.Alarm">
+      insert into chat.alarm(type, sender, receiver, post)
+      values (#{type},#{sender},#{receiver}, #{post}) 
+   </insert>
+   
+   <select id="alarmList" resultType="com.gnjk.chat.domain.Alarm">
+   		select *
+   		from chat.alarm
+   </select>
+   
+   </mapper>
