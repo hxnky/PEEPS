@@ -17,11 +17,20 @@ public class MesListService {
 	@Autowired
 	private SqlSessionTemplate template;
 
+	// 상대방과 이전 채팅
 	public List<Message> mesList(Message mes) throws Exception {
-		
+
 		dao = template.getMapper(MesListDao.class);
 		return dao.mesList(mes);
-		
+
 	}
-	
+
+	// 왼쪽 채팅방
+	public List<Message> roomList(Message mes) throws Exception {
+
+		dao = template.getMapper(MesListDao.class);
+		return dao.roomList(mes);
+
+	}
+
 }

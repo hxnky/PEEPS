@@ -27,16 +27,13 @@
 				</div>
 
 			</header>
+			<div class="rooms" id="roomdata">
 			<ul>
 				<li><a id="aside_photo"><img
 						src="<c:url value='/icon/navi/Logo.png' />"></a>
-					<div>
-						<h2>${rm_idx}</h2>
-						<h3>
-							<span class="status orange"></span> offline
-						</h3>
-					</div></li>
+
 			</ul>
+			</div>
 		</aside>
 
 		<main>

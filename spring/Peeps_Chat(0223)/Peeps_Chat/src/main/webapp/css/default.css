@@ -106,15 +106,6 @@ aside header span {
 	background: none;
 }
 
-aside {
-	width: 330px;
-	height: 900px;
-	background-color: #F6EECC;
-	display: inline-block;
-	font-size: 15px;
-	vertical-align: top;
-}
-
 main {
 	width: 570px;
 	height: 900px;
@@ -123,20 +114,12 @@ main {
 	vertical-align: top;
 }
 
-aside ul {
+#roomdata {
 	padding-left: 0;
 	margin: 0;
 	list-style-type: none;
 	overflow-y: scroll;
 	height: 900px;
-}
-
-aside li {
-	padding: 20px 0;
-}
-
-aside li:hover {
-	background-color: #F2D665;
 }
 
 /* footer*/
@@ -205,25 +188,6 @@ aside li img {
 	border-radius: 50%;
 	margin-left: 20px;
 	margin-right: 8px;
-}
-
-aside li div {
-	display: inline-block;
-	vertical-align: top;
-	margin-top: 12px;
-}
-
-aside li h2 {
-	font-size: 14px;
-	color: #5E5E5E;
-	font-weight: normal;
-	margin-bottom: 5px;
-}
-
-aside li h3 {
-	font-size: 12px;
-	color: #5E5E5E;
-	font-weight: normal;
 }
 
 main header {

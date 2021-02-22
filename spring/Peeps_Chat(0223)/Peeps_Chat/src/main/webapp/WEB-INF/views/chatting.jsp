@@ -31,6 +31,24 @@
 	margin: 30px;
 	word-wrap: break-word;
 }
+
+#chatroom {
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 10px;
+	padding: 20px 0;
+}
+
+#chatroom:hover {
+	background-color: #F2D665;
+}
+
+strong {
+	font-size: 14px;
+	color: #5E5E5E;
+	font-weight: normal;
+	margin-bottom: 5px;
+}
 </style>
 
 <!-- SocketJS CDN -->
@@ -53,14 +71,21 @@
 	$(document).ready(function() {
 
 		$.ajax({
+			url : "room/select",
+			type : "GET",
+			dataType : "json",
+			success : function(data) {
+				printRoom(data);
+			}
+		});
+
+		$.ajax({
 			url : "mes/select",
 			type : "GET",
 			dataType : "json",
 			success : function(data) {
-
 				enter();
 				printMes(data);
-
 			}
 		});
 	});
@@ -143,7 +168,41 @@
 	}
 
 	// =============================================================
-	// select 해서 지난 기록 불러오기
+	// 채팅방 출력
+	function printRoom(room) {
+
+		console.log(room);
+		if (room == "") {
+
+			var printHTML = "<div id='chatroom''>";
+			printHTML += "<strong>Peeps 채팅을 시작해보세요 :)";
+			printHTML += "</strong> <br>";
+			printHTML += "</div>";
+
+			$('#roomdata').prepend(printHTML);
+			console.log("메세지 없음!");
+
+		} else {
+
+			$.each(room, function(key, val) {
+
+				var currentuser_session = $('#sessionuserid').val();
+				var date = new Date(val.ch_time);
+
+				var printHTML = "<div id='chatroom'>";
+				printHTML += "<strong>" + val.rm_idx + "</strong> <br>";
+				printHTML += "<strong>" + val.ch_ms + "</strong> <br>";
+				printHTML += "<strong>" + date + "</strong> <br>";
+				printHTML += "</div>";
+
+				$('#roomdata').prepend(printHTML);
+
+			}); // $.each
+		} // if/else
+	} // printRoom
+
+	// =============================================================
+	// 상대방과의 채팅 출력
 	function printMes(list) {
 
 		console.log(list);
@@ -153,8 +212,8 @@
 			printHTML += "<strong>Peeps 채팅을 시작해보세요 :)";
 			printHTML += "</strong> <br>";
 			printHTML += "</div>";
-			
-			$('#chatdata').append(printHTML);
+
+			$('#chatdata').prepend(printHTML);
 			console.log("메세지 없음!");
 
 		} else {
@@ -162,20 +221,21 @@
 			$.each(list, function(key, val) {
 
 				var currentuser_session = $('#sessionuserid').val();
+				var date = new Date(val.ch_time);
 
 				if (val.m_idx == currentuser_session) { //m_idx = m_idx
 					var printHTML = "<div id='right'>";
 					printHTML += "<strong>" + val.m_idx + "</strong> <br>";
 					printHTML += "<strong>" + val.ch_ms + "</strong> <br>";
-					printHTML += "<strong>" + val.ch_time + "</strong> <br>";
+					printHTML += "<strong>" + date + "</strong> <br>";
 					printHTML += "</div>";
 
-					$('#chatdata').append(printHTML);
+					$('#chatdata').prepend(printHTML);
 				} else {
 					var printHTML = "<div id='left'>";
 					printHTML += "<strong>" + val.m_idx + "</strong> <br>";
 					printHTML += "<strong>" + val.ch_ms + "</strong> <br>";
-					printHTML += "<strong>" + val.ch_time + "</strong> <br>";
+					printHTML += "<strong>" + date + "</strong> <br>";
 					printHTML += "</div>";
 
 					$('#chatdata').append(printHTML);
@@ -217,11 +277,11 @@
 						if (text.baseTime == realTime) {
 							switch (text.pty) {
 							case 1: // 비
-								document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)"
+								document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
 								console.log('비');
 								break;
 							case 2: // 비/눈
-								document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+								document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)"
 								console.log('비/눈');
 								break;
 							case 3: // 눈
@@ -229,7 +289,7 @@
 								console.log('눈');
 								break;
 							case 4: // 소나기
-								document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+								document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)"
 								console.log('소나기');
 								break;
 							}
@@ -250,7 +310,7 @@
 							}
 						} // if 종료
 						console.log('날씨 해당 없음');
-						document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)";
+						document.getElementById('chatdata').style.background =  "url(/chat/icon/navi/Logo.png)"
 					} //success func 종료
 				}) // ajax 종료
 
