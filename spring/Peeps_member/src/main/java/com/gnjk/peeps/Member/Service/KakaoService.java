@@ -119,7 +119,13 @@ public class KakaoService {
 
 			String name = properties.getAsJsonObject().get("nickname").getAsString();
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
-			String m_photo = properties.getAsJsonObject().get("profile_image").getAsString();
+			String m_photo = "";
+			if(properties.getAsJsonObject().get("profile_image").getAsString()!=null) {
+				m_photo = properties.getAsJsonObject().get("profile_image").getAsString();
+			} else {
+				m_photo = "profile.png";
+			}
+			
 
 			Peeps peeps = new Peeps();
 			

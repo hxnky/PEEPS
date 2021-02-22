@@ -83,4 +83,28 @@ public class TimeLineService {
 		return cmtList;
 	}
 
+	// 게시물 검색
+	public List<Post> PostList(String keyword) {
+		
+		dao = template.getMapper(MemberDao.class);
+		
+		List<Post> PostList = dao.FindPostList(keyword);
+		List<Post> UserList = new ArrayList<>();
+		
+		for(int i = 0; i<PostList.size(); i++) {
+			int u_idx = PostList.get(i).getMember_idx();
+			
+			System.out.println(u_idx);
+			UserList.addAll(dao.selectPostUserList(u_idx));
+
+			PostList.get(i).setM_photo(UserList.get(i).getM_photo());
+			PostList.get(i).setLoginType(UserList.get(i).getLoginType());
+			PostList.get(i).setId(UserList.get(i).getId());
+		}
+		
+		System.out.println(PostList);
+		
+		return PostList;
+	}
+
 }

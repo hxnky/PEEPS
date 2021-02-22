@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,19 +29,20 @@
 		</div>
 		<div>
 			<form id="edit_photo" enctype="multipart/form-data">
+				<input type="hidden" id="email" name="email" value="${peeps.email }">
 				<table id="edit_table">
 					<tr>
 						<td id="table_left" rowspan="3"><c:set var="loginType"
 								value="${peeps.loginType}" /> <c:choose>
-								<c:when test="${loginType eq 'email' }">
+								<c:when test="${peeps.loginType eq 'email' }">
 									<img id="profile"
-										src="<c:url value="/fileupload/${peeps.m_photo}"/>">
+										src="<spring:url value="/fileupload/${peeps.m_photo}"/>">
 									<input type="hidden" id="oldPhoto" name="oldPhoto"
 										value="${peeps.m_photo}">
 									<br>
 								</c:when>
 								<c:when test="${loginType ne 'email' }">
-									<img id="profile" src="<c:url value="${peeps.m_photo}"/>">
+									<img id="profile" src="<spring:url value="${peeps.m_photo}"/>">
 									<input type="hidden" id="oldPhoto" name="oldPhoto"
 										value="${peeps.m_photo}">
 									<br>
@@ -128,7 +130,7 @@
 			}
 		}
 
-		$("#choose").change(function() {
+		$(".choose").change(function() {
 			readURL(this);
 		})
 
@@ -175,7 +177,7 @@
 
 	var email = "${peeps.email}";
 	var m_idx = ${peeps.m_idx};
-
+	
 	$("#MyPage_img").click(function() {
 
 		location.href = "${pageContext.request.contextPath}/mypage/" + m_idx;
@@ -221,11 +223,10 @@
 			contentType : false,
 			async : true,
 			success : function(data) {
-
 				console.log("수정 완료");
 				if (data == 1) {
 					alert("수정 완료");
-					//location.href = "${pageContext.request.contextPath}profile/Info?email="+ email;
+					// 수정 완료 시 뭐 하면 좋을까?
 				} else {
 					alert("계정을 찾을 수 없습니다. 이메일 또는 아이디를 확인해주세요");
 				}
@@ -240,37 +241,37 @@
 </script>
 
 <script>
-$("#keyword")
-.click(
-		function() {
+	$("#keyword")
+			.click(
+					function() {
 
-			var m_idx = ${peeps.m_idx};
-			var keyword = $('#search').val();
+						var m_idx = ${peeps.m_idx};
+						var keyword = $('#search').val();
 
-			if(keyword.trim()==""){
-				alert("한 글자 이상 입력하세요");
-			} else{
-				$
-				.ajax({
-					url : '${pageContext.request.contextPath}/user/finduser',
-					type : 'get',
-					async : false,
-					data : {
-						"keyword":keyword,
-						"m_idx" : m_idx
-					},
-					success : function(data) {
-						location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
-					},
-					error : function() {
-						console.log("실패,,,,");
-					}
-				});
+						if (keyword.trim() == "") {
+							alert("한 글자 이상 입력하세요");
+						} else {
+							$
+									.ajax({
+										url : '${pageContext.request.contextPath}/user/finduser',
+										type : 'get',
+										async : false,
+										data : {
+											"keyword" : keyword,
+											"m_idx" : m_idx
+										},
+										success : function(data) {
+											location.href = "${pageContext.request.contextPath}/member/FindView?keyword="
+													+ keyword;
+										},
+										error : function() {
+											console.log("실패,,,,");
+										}
+									});
 
-			}
+						}
 
-			
-		});
+					});
 </script>
 
 </html>

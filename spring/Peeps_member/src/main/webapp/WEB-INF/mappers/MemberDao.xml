@@ -266,6 +266,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectCmtUserList" resultType="com.gnjk.peeps.Member.domain.Comment">
 		select m_photo, loginType, id from member where m_idx=#{m_idx}
 	</select>
+	
+	<!-- 게시글 검색 -->
+	<!-- 해당 단어가 들어가는 유저 수 검색 -->
+	<select id="FindPostList" resultType="com.gnjk.peeps.Member.domain.Post">
+		select * from post
+		<where>
+			<include refid="searchTitle" />
+			<include refid="searchContent" />
+		</where>
+	</select>
+
+	<!-- 아이디와 이름 해당하면 다 검색 -->
+	<sql id="searchTitle">
+		or p_title like concat('%',#{keyword},'%')
+	</sql>
+
+	<sql id="searchContent">
+		or p_content like concat('%',#{keyword},'%')
+	</sql>
 
 
 </mapper>

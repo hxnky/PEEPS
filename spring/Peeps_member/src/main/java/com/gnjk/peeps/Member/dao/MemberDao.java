@@ -109,4 +109,6 @@ public interface MemberDao {
 	List<Post> selectPostUserList(int m_idx);
 	// 회원 사진, 로그인 타입 가져오기 - 댓글
 	List<Comment> selectCmtUserList(int m_idx);
+	// 게시물 검색
+	List<Post> FindPostList(String keyword);
 }

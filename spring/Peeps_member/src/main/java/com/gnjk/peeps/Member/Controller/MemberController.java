@@ -1,5 +1,7 @@
 package com.gnjk.peeps.Member.Controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gnjk.peeps.Member.Service.FindUserService;
 import com.gnjk.peeps.Member.Service.MyPageService;
+import com.gnjk.peeps.Member.Service.TimeLineService;
 import com.gnjk.peeps.Member.Service.VerifyService;
 import com.gnjk.peeps.Member.domain.Peeps;
+import com.gnjk.peeps.Member.domain.Post;
+import com.google.gson.Gson;
 
 @Controller
 public class MemberController {
@@ -27,6 +32,9 @@ public class MemberController {
 
 	@Autowired
 	private MyPageService myPageService;
+	
+	@Autowired
+	private TimeLineService timeLineService;
 
 	// 로그인
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -130,4 +138,16 @@ public class MemberController {
 		return "redirect:/";
 	}
 
+	// 게시물 검색
+	@GetMapping("/post/FindView")
+	public String PostList(String keyword, Model model){
+		
+		List<Post> Post = timeLineService.PostList(keyword);
+		
+		 String json = new Gson().toJson(Post);
+		 model.addAttribute("Post", json);
+		
+		return "/member/FindPostView";
+	}
+	
 }

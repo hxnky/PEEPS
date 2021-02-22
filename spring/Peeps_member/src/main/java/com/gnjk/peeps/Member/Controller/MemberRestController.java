@@ -234,5 +234,5 @@ public class MemberRestController {
 		
 		return timeLineService.CmtList(post_idx);
 	}
-
+	
 }
