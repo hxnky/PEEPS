@@ -29,6 +29,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*) from post 
 		where member_idx=#{param}
 	</select>
+	
+	<!-- 게시글의 총 수(주소) -->
+	<select id="selectTotalPostByAddrCount" resultType="int">
+		select count(*) from post 
+		where member_idx=#{param1}
+		and p_loc=#{param2}
+	</select>
 
 	<!-- 게시글 리스트 -->
 	<select id="selectPostList"
@@ -46,6 +53,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			>
 		select * from post 
 		where member_idx=#{param1} and p_loc != "";
+	</select>
+	
+	<!-- 게시글 리스트(주소) -->
+	<select id="selectPostByAddrList"
+			parameterType="list"
+			resultType="com.gnjk.post.mypost.domain.Post"
+			>
+		select * from post 
+		where member_idx=#{param2} and p_loc=#{param1}
+		limit #{param3},#{param4}
 	</select>
 
 	<!-- 게시글 조회 -->

@@ -1,9 +1,9 @@
 package com.gnjk.post.mypost.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostEditRequest;
 import com.gnjk.post.mypost.domain.PostFile;
@@ -103,52 +104,30 @@ public class PostController {
 	}
 	
 	// 지도로 주소별 게시글 리스트 출력
-	@PostMapping("/postmaplist")
-	public int getPostListByMap() {
+	@GetMapping("/postmaplist")
+	public PostListView getMapPostList(
+			@RequestParam(value = "p", defaultValue = "1") int page,
+			@RequestParam Map<String, Object> param,
+			HttpServletRequest request,
+			Model model) {
 		System.out.println("컨트롤러 진입 성공");
-		return 0;
+		System.out.println("파람 : "+param);
+		
+		System.out.println("리퀘멤idx : "+request.getParameter("memberidx"));
+		
+		String mIdx = request.getParameter("memberidx");
+		String pAddr = request.getParameter("postAdd");
+		String pNum = request.getParameter("pageNum");
+		
+		int memberIdx = Integer.parseInt(mIdx);
+		int pageNum = Integer.parseInt(pNum);
+		System.out.println(memberIdx);
+		System.out.println(pAddr);
+		System.out.println(pNum);
+		
+		return listService.getPostListByMapView(memberIdx, pAddr, pageNum);
 	}
 	
-	// 게시글 내용 등록 처리
-//	@RequestMapping(value = "/write", method = RequestMethod.POST)
-//	public String postWritePOST(
-//			@ModelAttribute("writeData") PostWriteRequest writeRequest,
-//			HttpServletRequest request,
-//			Model model
-//			) {
-//		
-//		System.out.println(writeRequest);
-//		
-//		int result = uploadService.postWrite(writeRequest, request);
-//		
-//		model.addAttribute("result", result);
-//		
-//		/* return "/mypost/postWriteView"; */
-//		return "redirect:/post/list";
-//	}
-
-	// 게시글 조회
-//	@RequestMapping(value = "/postNO={p_idx}", method = RequestMethod.GET)
-//	public String postReadGET(
-//			@PathVariable("p_idx") int postidx,
-//			Model model
-//			) {
-////		System.out.println("글 번호 : "+postidx);
-//		
-//		model.addAttribute("readView", readService.getPostReadView(postidx));
-//		
-//		return "/mypost/postRead";
-//	}
-
-	// 게시글 수정페이지
-//	@RequestMapping(value = "/editPNO={p_idx}", method = RequestMethod.GET)
-//	public String postEditForm(@PathVariable("p_idx") int pidx, Model model) {
-//
-//		model.addAttribute("editView", editService.getPost(pidx));
-//
-//		return "/mypost/postEditForm";
-//	}
-
 
 
 }

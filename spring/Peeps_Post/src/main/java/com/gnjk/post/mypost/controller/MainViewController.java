@@ -23,7 +23,9 @@ public class MainViewController {
 	
 	// 마이페이지의 지도 리스트
 	@RequestMapping("/main/jhS2/map") // test 회원 아이디를 세션에서 받아야 함
-	public String goMapMypage() {
+	public String goMapMypage(
+			@RequestParam(value = "p", defaultValue = "1") int p
+			) {
 		return "post/mapView";
 	}
 	

@@ -71,7 +71,8 @@ public class PostListService {
 		fDao = template.getMapper(FileDao.class);
 		return fDao.selectPostImgs(idx);
 	}
-
+	
+	// 위치 가져오기
 	public List<Post> getMapListView(int midx) {
 		
 		List<Post> postList = null;
@@ -88,6 +89,38 @@ public class PostListService {
 		
 		
 		return postList;
+	}
+	
+	// 주소로 게시글 가져오기
+	public PostListView getPostListByMapView(int mIdx, String pAddr, int pageNumber) {
+		
+		PostListView listView = null;
+		
+		try {
+			// PostDao 구현체 생성
+			dao = template.getMapper(PostDao.class);
+			
+			System.out.println("pageNumber : " + pageNumber);
+			
+			int cntPerPage = 9;
+			
+			int startRow = (pageNumber-1)*cntPerPage;
+			int endRow = startRow+cntPerPage-1;
+			
+			int totalPostCount = dao.selectTotalPostByAddrCount(mIdx, pAddr);
+			
+			System.out.println("postTotalCount : "+ totalPostCount);
+			
+			List<Post> postList = dao.selectPostByAddrList(pAddr, mIdx, startRow, cntPerPage);
+			System.out.println(postList);
+			
+			listView = new PostListView(pageNumber, totalPostCount, cntPerPage, postList, startRow, endRow);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return listView;
 	}
 	
 

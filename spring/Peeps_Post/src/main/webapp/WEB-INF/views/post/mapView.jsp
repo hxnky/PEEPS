@@ -57,7 +57,8 @@
 		<div class="container">
 			<div class="row">
 			<!-- 지도 목록 시작 -->
-			<div id="map" style="width:100%;height:800px;"></div>	
+			<div id="map" style="width:100%;height:800px;margin-bottom: 50px;"></div>
+			<div class="postList"></div>	
 			<!-- 지도 목록 끝 -->	
 			</div>
 		</div>
@@ -72,6 +73,15 @@
 	<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed6849fd6d5d015aebf82a3eb747333"></script> -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed6849fd6d5d015aebf82a3eb747333&libraries=services"></script>
 	<script>
+	// 뷰컨트롤러 통해 페이지 번호 받기
+	function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
+	return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+
+    var p = getParameterByName('p');
+    console.log(p);
+	
 	$(document).ready(function(){
 		
 		$.ajax({
@@ -148,7 +158,8 @@
 						          var mId = $('#memberId').text();
 						          
 						          // 주소에 해당하는 게시글 모두 불러와야함
-						          markerClick(mId, postAddr);
+						          var pageNum = 1;
+						          markerClick(postAddr, pageNum);
 						    });
 				     }
 				    
@@ -169,33 +180,87 @@
 			        infowindow.close();
 			    };
 			}
+			
 					
 			},
 			error : function(request, status, error) {
 				console.log("에러 발생 : code = " +request.status + "message =" + request.responseText + "error : " + error);
 			}
 			
-		});
-	});
-	
-	function markerClick(mId, postAddr){
+		}); // 지도 ajax 끝
 		
-		alert(mId);
+		
+	}); // document.ready 끝
+	
+	function markerClick(postAddr, pageNum){
 		alert(postAddr);
+		alert(pageNum);
+		console.log("함수로 들어오는 주소 : ",postAddr);
+		var memberidx = 1;
+		var pageNum = 1;
+		locInfo = postAddr;
+		console.log("주소 정보!! : ", locInfo);
 		
 		var mapPostInfo = {
-			memberid : mId,
-			postAdd : postAddr
+			"memberidx" : memberidx,
+			"postAdd" : postAddr,
+			"pageNum" : pageNum
 		};
 		
 		$.ajax({
-			url: "http://localhost:8080/post/rest/member/post/postmaplist",
-			type: 'post',
-			dataType: 'json',
-			contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+			url: "http://localhost:8080/post/rest/member/post/postmaplist?p="+p,
+			type: 'get',
 			data : mapPostInfo,
+			/* dataType: 'json', */
 			success: function(data){
-				console.log(성공);
+				console.log(data);
+				var list = $(data.postList);
+				console.log(list);
+				console.log("포스트리스트 : ", list[0].member_idx);
+				console.log("페이지 번호 : ", p);
+				
+					$.each(list, function(index, item){
+					
+					var date = item.p_date-540*60*1000;
+						
+					date = new Date(date).toLocaleDateString();
+					
+					console.log("날짜: ", date);
+					
+					var pt = item.p_title;
+					
+					/* 글자수 20자 이상이면 자르기 */
+					if(pt.length > 20){
+						pt = pt.substring(0, 15);
+						pt = pt+"...";
+						console.log(pt);
+					} 
+					
+					var html = '<div class="col-sm-4">';
+					   html += '<div class="panel panel-primary">';
+					   html += '<div class="panel-heading">';  /* href="postNO=${post.p_idx}" */
+					   /* html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+item.p_title; */
+					   html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+pt;
+					   html += '</a></div><div class="panel-body">';
+					   html += '<a class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">';
+					   html += '<img src="<c:url value="/resources/fileupload/postfile/'+item.p_thumbnail+'"/>" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
+					   html += '</div><div class="panel-footer">'+date+'</div></div></div>';
+					   
+					   $('.postList').append(html);
+				});
+				
+				var ploc = list[0].p_loc;
+				// 페이징 처리
+				if (data.totalPostCount>0){
+					console.log('totalPageCount :' + data.totalPageCount);
+					for(var i=1; i <= data.totalPageCount; i++){	/* test 계정아이디 들어가야 함 */		
+						var html2 = '<span><a class="pageBtn" href="<c:url value="/main/jhS2/map"/>?p='+i+'">'+i+'</a></span>';
+						$('.paging').append(html2);
+						
+					}										 
+				};	
+					
+				
 			},
 			error: function(e){
 				console.log("지도로 게시글 검색하기 ajax에러");
@@ -203,9 +268,14 @@
 			}
 			
 		});
-		
-		
-	}
+	} // makerClick 함수 끝
+	
+	
+	
+
+	
+	
+	
 	</script>
 </body>
 </html>
