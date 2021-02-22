@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -104,28 +105,51 @@ public class PostController {
 	}
 	
 	// 지도로 주소별 게시글 리스트 출력
-	@GetMapping("/postmaplist")
-	public PostListView getMapPostList(
-			@RequestParam(value = "p", defaultValue = "1") int page,
-			@RequestParam Map<String, Object> param,
-			HttpServletRequest request,
-			Model model) {
-		System.out.println("컨트롤러 진입 성공");
-		System.out.println("파람 : "+param);
-		
-		System.out.println("리퀘멤idx : "+request.getParameter("memberidx"));
-		
-		String mIdx = request.getParameter("memberidx");
-		String pAddr = request.getParameter("postAdd");
-		int pNum = page;
-		
-		int memberIdx = Integer.parseInt(mIdx);
-		System.out.println(memberIdx);
-		System.out.println(pAddr);
-		System.out.println(pNum);
-		
-		return listService.getPostListByMapView(memberIdx, pAddr, pNum);
-	}
+		@GetMapping("/postmaplist")
+		public PostListView getMapPostList(
+				@RequestParam Map<String, Object> param,
+				HttpServletRequest request,
+				Model model) {
+			System.out.println("컨트롤러 진입 성공");
+			System.out.println("파람 : "+param);
+			
+			System.out.println("리퀘멤idx : "+request.getParameter("memberidx"));
+			
+			String mIdx = request.getParameter("memberidx");
+			String pAddr = request.getParameter("postAdd");
+			System.out.println("파라미터로 받은 pAddr : "+pAddr);
+			
+			int memberIdx = Integer.parseInt(mIdx);
+			System.out.println(memberIdx);
+			System.out.println(pAddr);
+			
+			return listService.getPostListByMapView(memberIdx, pAddr);
+		}
+	
+//	// 지도로 주소별 게시글 리스트 출력
+//	@GetMapping("/postmaplist")
+//	public PostListView getMapPostList(
+//			@RequestParam(value = "p", defaultValue = "1") int page,
+//			@RequestParam Map<String, Object> param,
+//			HttpServletRequest request,
+//			Model model) {
+//		System.out.println("컨트롤러 진입 성공");
+//		System.out.println("파람 : "+param);
+//		
+//		System.out.println("리퀘멤idx : "+request.getParameter("memberidx"));
+//		
+//		String mIdx = request.getParameter("memberidx");
+//		String pAddr = request.getParameter("postAdd");
+//		System.out.println("파라미터로 받은 pAddr : "+pAddr);
+//		int pNum = page;
+//		
+//		int memberIdx = Integer.parseInt(mIdx);
+//		System.out.println(memberIdx);
+//		System.out.println(pAddr);
+//		System.out.println(pNum);
+//		
+//		return listService.getPostListByMapView(memberIdx, pAddr, pNum);
+//	}
 	
 
 

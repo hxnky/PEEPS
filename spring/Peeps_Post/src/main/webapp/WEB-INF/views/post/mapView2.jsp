@@ -62,28 +62,28 @@
 			<!-- 지도 목록 끝 -->	
 			</div>
 		</div>
-		<div class="locationInfoDiv"></div>
 		<br>
 
 	</div>
 	<!-- 목록 끝 -->
 	<!-- 페이징 -->
 	<div class="paging">
-	<!-- <span><input type="button" onclick="javascript:markerClick();" value="1"></span> -->
 	</div>
 	
 	<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed6849fd6d5d015aebf82a3eb747333"></script> -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed6849fd6d5d015aebf82a3eb747333&libraries=services"></script>
 	<script>
 	// 뷰컨트롤러 통해 페이지 번호 받기
-/* 	function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 	var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
 	return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
   }
 
     var p = getParameterByName('p');
-    console.log(p); */
+    console.log(p);
     
+    var postloc = "";
+	
 	$(document).ready(function(){
 		
 		$.ajax({
@@ -154,13 +154,13 @@
 				    	 	
 						 	// 마커에 클릭이벤트를 등록합니다
 						    kakao.maps.event.addListener(marker, 'click', function() {
-						          /* alert("마커를 클릭했습니다."); */ 
+						          alert("마커를 클릭했습니다."); 
 						          /* alert(result[0].address_name); */
 						          var postAddr = result[0].address_name;
 						          var mId = $('#memberId').text();
 						          
 						          // 주소에 해당하는 게시글 모두 불러와야함
-						          markerClick(postAddr,0,5);
+						          markerClick(postAddr);
 						          postloc = postAddr;
 						    });
 				     }
@@ -191,24 +191,21 @@
 			
 		}); // 지도 ajax 끝
 		
-		
 	}); // document.ready 끝
 	
-	function markerClick(postAddr, sIdx, eIdx){
+	function markerClick(postAddr){
 		
 		var chk = $('.locationInfo').val();
 		console.log("똑같은 주소인지 체크 : ",chk);
 		if(chk == postAddr){
-			/* console.log("똑같은 주소입니다~"); */
-			$('.postList').empty();
-			/* return false; */
+			console.log("똑같은 주소입니다~");
+			return false;
 		} else {
 			$('.postList').empty();
 			$('.paging').empty();
-			$('.locationInfoDiv').empty();
 		}
 		
-		/* alert(postAddr); */
+		alert(postAddr);
 		console.log("함수로 들어오는 주소 : ",postAddr);
 		var memberidx = 1;
 		var pageNum = 1;
@@ -222,7 +219,7 @@
 		};
 		
 		$.ajax({
-			url: "http://localhost:8080/post/rest/member/post/postmaplist",		
+			url: "http://localhost:8080/post/rest/member/post/postmaplist?p="+p,
 			type: 'get',
 			data : mapPostInfo,
 			/* dataType: 'json', */
@@ -232,17 +229,18 @@
 				var list = $(data.postList);
 				console.log(list);
 				console.log("포스트리스트 : ", list[0].member_idx);
+				console.log("페이지 번호 : ", p);
 				var ploc = list[0].p_loc;
 				
-				for(var i=sIdx; i<=eIdx; i++){
+					$.each(list, function(index, item){
 					
-					var date = list[i].p_date-540*60*1000;
-					
+					var date = item.p_date-540*60*1000;
+						
 					date = new Date(date).toLocaleDateString();
 					
 					console.log("날짜: ", date);
 					
-					var pt = list[i].p_title;
+					var pt = item.p_title;
 					
 					/* 글자수 20자 이상이면 자르기 */
 					if(pt.length > 20){
@@ -255,56 +253,26 @@
 					   html += '<div class="panel panel-primary">';
 					   html += '<div class="panel-heading">';  /* href="postNO=${post.p_idx}" */
 					   /* html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+item.p_title; */
-					   html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+list[i].p_idx+'"/>">'+pt;
+					   html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+pt;
 					   html += '</a></div><div class="panel-body">';
-					   html += '<a class="postidx" href="<c:url value="/main/post/detail?idx='+list[i].p_idx+'"/>">';
-					   html += '<img src="<c:url value="/resources/fileupload/postfile/'+list[i].p_thumbnail+'"/>" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
+					   html += '<a class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">';
+					   html += '<img src="<c:url value="/resources/fileupload/postfile/'+item.p_thumbnail+'"/>" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
 					   html += '</div><div class="panel-footer">'+date+'</div></div></div>';
+					   html += '<input type="hidden" value="'+ploc+'" class="locationInfo">';
 					   $('.postList').append(html);
-					
-				}
-					
-				// 페이징 
-				console.log("전체 게시글 수  :",list.length);
-				var lngth = list.length;
-				var totalPageCnt = parseInt(lngth / 6);
-				console.log(totalPageCnt);
-				console.log(lngth%6);
-				if(lngth%6 > 0){
-					totalPageCnt += 1;
-				}
+				});
 				
-				var startidx = 0;
-				var endidx = 5;
-				var remainPost = lngth%6;
 				
-				// 페이지가 없을 경우 추가
-				if(totalPageCnt > 1 && chk != postAddr){
-					
-					var infoHtml = '<input type="hidden" class="locationInfo" value="'+list[0].p_loc+'">';
-					$('.locationInfoDiv').append(infoHtml);
-					
-					
-					console.log("페이징 처리 if 진입");
-					var pHtml = '<div>';
-					for(var i=0; i<totalPageCnt; i++){ 					
+				// 페이징 처리
+				if (data.totalPostCount>0){
+					console.log('totalPageCount :' + data.totalPageCount);
+					for(var i=1; i <= data.totalPageCount; i++){	/* test 계정아이디 들어가야 함 */		
+						var html2 = '<span><a class="pageBtn" href="<c:url value="/main/jhS2/map"/>?p='+i+'">'+i+'</a></span>';
+						$('.paging').append(html2);
 						
-						var chkNum = totalPageCnt-1;
-						if(i==chkNum){
-							var lastIdx = startidx + remainPost -1;
-							pHtml += '<span><input type="button" class="pageBtn" onclick="javascript:markerClick(\''+ploc+'\','+startidx+','+lastIdx+');" value="'+(i+1)+'"></span>';
-						} else{
-							pHtml += '<span><input type="button" class="pageBtn" onclick="javascript:markerClick(\''+ploc+'\','+startidx+','+endidx+');" value="'+(i+1)+'"></span>';
-							startidx += 6;
-							endidx += 6;
-						}
-					};
-					pHtml += '</div>';
-					$('.paging').append(pHtml);
+					}										 
+				};	
 					
-				}; 
-				
-				
 				
 			},
 			error: function(e){

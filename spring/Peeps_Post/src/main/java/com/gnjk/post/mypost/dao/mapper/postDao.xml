@@ -62,7 +62,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			>
 		select * from post 
 		where member_idx=#{param2} and p_loc=#{param1}
-		limit #{param3},#{param4}
+		<!-- limit #{param3},#{param4} -->
 	</select>
 
 	<!-- 게시글 조회 -->

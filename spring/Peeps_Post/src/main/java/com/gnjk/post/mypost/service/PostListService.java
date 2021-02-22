@@ -92,7 +92,7 @@ public class PostListService {
 	}
 	
 	// 주소로 게시글 가져오기
-	public PostListView getPostListByMapView(int mIdx, String pAddr, int pageNumber) {
+	public PostListView getPostListByMapView(int mIdx, String pAddr) {
 		
 		PostListView listView = null;
 		
@@ -100,21 +100,11 @@ public class PostListService {
 			// PostDao 구현체 생성
 			dao = template.getMapper(PostDao.class);
 			
-			System.out.println("pageNumber : " + pageNumber);
-			
-			int cntPerPage = 9;
-			
-			int startRow = (pageNumber-1)*cntPerPage;
-			int endRow = startRow+cntPerPage-1;
-			
-			int totalPostCount = dao.selectTotalPostByAddrCount(mIdx, pAddr);
-			
-			System.out.println("postTotalCount : "+ totalPostCount);
-			
-			List<Post> postList = dao.selectPostByAddrList(pAddr, mIdx, startRow, cntPerPage);
+			List<Post> postList = dao.selectPostByAddrList(pAddr, mIdx);
 			System.out.println(postList);
 			
-			listView = new PostListView(pageNumber, totalPostCount, cntPerPage, postList, startRow, endRow);
+//			listView = new PostListView(pageNumber, totalPostCount, cntPerPage, postList, startRow, endRow);
+			listView = new PostListView(1, 1, 1, postList, 1, 1);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -122,6 +112,38 @@ public class PostListService {
 		
 		return listView;
 	}
+	
+//	// 주소로 게시글 가져오기
+//	public PostListView getPostListByMapView(int mIdx, String pAddr, int pageNumber) {
+//		
+//		PostListView listView = null;
+//		
+//		try {
+//			// PostDao 구현체 생성
+//			dao = template.getMapper(PostDao.class);
+//			
+//			System.out.println("pageNumber : " + pageNumber);
+//			
+//			int cntPerPage = 9;
+//			
+//			int startRow = (pageNumber-1)*cntPerPage;
+//			int endRow = startRow+cntPerPage-1;
+//			
+//			int totalPostCount = dao.selectTotalPostByAddrCount(mIdx, pAddr);
+//			
+//			System.out.println("postTotalCount : "+ totalPostCount);
+//			
+//			List<Post> postList = dao.selectPostByAddrList(pAddr, mIdx, startRow, cntPerPage);
+//			System.out.println(postList);
+//			
+//			listView = new PostListView(pageNumber, totalPostCount, cntPerPage, postList, startRow, endRow);
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return listView;
+//	}
 	
 
 }
