@@ -32,7 +32,7 @@
 					<tr>
 						<td id="table_left" rowspan="3"><c:set var="loginType"
 								value="${peeps.loginType}" /> <c:choose>
-								<c:when test="${peeps.loginType eq 'email' }">
+								<c:when test="${loginType eq 'email' }">
 									<img id="profile"
 										src="<c:url value="/fileupload/${peeps.m_photo}"/>">
 									<input type="hidden" id="oldPhoto" name="oldPhoto"

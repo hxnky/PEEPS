@@ -54,7 +54,7 @@ public interface MemberDao {
 
 	// 회원 정보 삭제
 	int deletePeeps(@Param("email") String email, @Param("password") String password);
-	
+
 	// 탈퇴 사유 저장
 	int insertReason(@Param("email") String email, @Param("reason") String reason);
 
@@ -72,7 +72,7 @@ public interface MemberDao {
 
 	// 회원 사진 정보 수정
 	int m_photoUpdate(@Param("email") String email, @Param("m_photo") String m_photo, @Param("name") String name);
-	
+
 	// 회원 이메일 인증 값 확인
 	String selectVerifyByEmail(String email);
 
@@ -99,11 +99,14 @@ public interface MemberDao {
 
 	// 팔로우/팔로잉 목록 삭제
 	int deleteFollowList(@Param("m_idx") int m_idx);
-	
-	
-	// 타임라인 관련 
+
+	// 타임라인 관련
 	// 포스트 리스트 가져오기
 	List<Post> selectPostList(int m_idx);
 	// 댓글 리스트 가져오기
 	List<Comment> selectCmtList(int post_idx);
+	// 회원 사진, 로그인 타입 가져오기 - 게시글
+	List<Post> selectPostUserList(int m_idx);
+	// 회원 사진, 로그인 타입 가져오기 - 댓글
+	List<Comment> selectCmtUserList(int m_idx);
 }

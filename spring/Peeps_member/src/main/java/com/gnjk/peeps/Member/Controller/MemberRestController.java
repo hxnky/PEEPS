@@ -144,6 +144,7 @@ public class MemberRestController {
 		return followService.unfollow(m_idx, y_idx, session);
 	}
 	
+	// 마이페이지 팔로우
 	@PostMapping("/mypage/follow")
 	public int MyFollow(int m_idx, int y_idx, HttpSession session) {
 
@@ -154,6 +155,7 @@ public class MemberRestController {
 		return myPageService.getFollowing(m_idx, session);
 	}
 
+	// 마이페이지 언팔로우
 	@PostMapping("/mypage/unfollow")
 	public int MyUnFollow(int m_idx, int y_idx, HttpSession session) {
 
@@ -219,16 +221,18 @@ public class MemberRestController {
 		return oauthService.selectSocialVerify(email);
 	}
 
+	// 타임라인 게시물 리스트
 	@GetMapping("/user/TimeLineList")
 	public List<Post> TimeLineList(int m_idx) {
 		
 		return timeLineService.TimeLineList(m_idx);
 	}
 	
+	// 타임라인 댓글 리스트
 	@GetMapping("/user/cmtList")
 	public List<Comment> CmtList(int post_idx){
 		
 		return timeLineService.CmtList(post_idx);
 	}
-	
+
 }

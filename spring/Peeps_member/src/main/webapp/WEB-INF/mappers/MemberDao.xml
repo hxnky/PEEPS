@@ -257,10 +257,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from comment where post_idx = #{post_idx} limit 3;
 	</select>
 
+	<!-- 타임라인 유저 사진, 로그인 타입 - 게시글 -->
+	<select id="selectPostUserList" resultType="com.gnjk.peeps.Member.domain.Post">
+		select m_photo, loginType, id from member where m_idx=#{m_idx}
+	</select>
 
-
-
-
+	<!-- 타임라인 유저 사진, 로그인 타입 - 댓글 -->
+	<select id="selectCmtUserList" resultType="com.gnjk.peeps.Member.domain.Comment">
+		select m_photo, loginType, id from member where m_idx=#{m_idx}
+	</select>
 
 
 </mapper>

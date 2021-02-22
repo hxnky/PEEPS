@@ -83,7 +83,7 @@
 							<li><button id="follower_btn">${follower}</button></li>
 							<li>팔로잉</li>
 							<li>
-								<button id="following_btn">${following }</button>
+								<button id="following_btn">${following}</button>
 							</li>
 						</ul>
 						<div id="pro_name">${page_peeps.name}</div>
@@ -99,7 +99,7 @@
 		<div id="my_modal_wer">
 			<div id="my_modal_header">팔로워 목록</div>
 			<c:choose>
-				<c:when test="${Follower == 0}">
+				<c:when test="${follower == 0}">
 					<div id="user_no">팔로워가 없습니다.</div>
 				</c:when>
 				<c:otherwise>
@@ -150,7 +150,7 @@
 		<div id="my_modal">
 			<div id="my_modal_header">팔로잉 목록</div>
 			<c:choose>
-				<c:when test="${Following == 0}">
+				<c:when test="${following eq 0}">
 					<div id="user_no">팔로잉이 없습니다.</div>
 				</c:when>
 				<c:otherwise>

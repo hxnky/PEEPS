@@ -23,16 +23,26 @@
 <!-- CSS Files -->
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
 	rel="stylesheet">
-<link href="<c:url value="/resources/css/gsdk-bootstrap-wizard.css"/>"
-	rel="stylesheet" />
 
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="<c:url value="/resources/css/demo.css"/>" rel="stylesheet" />
 <link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 </head>
 <style>
-#total_wrap{
-margin: 100px auto;
+#total_contents{
+	margin: 100px auto;
+	width: 50%;
+}
+.user_img>img{
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+}
+
+.cmt_img>img{
+	width: 30px;
+	height: 30px;
+	border-radius: 100%;
 }
 </style>
 <body>
@@ -42,12 +52,11 @@ margin: 100px auto;
 		</div>
 
 		<div id="total_contents">
+		<div id="userImg"></div>
 			<div id="post_contents">
-			
-				<div id="post">
-					
-				</div>
+	
 			</div>
+
 		</div>
 
 	</div>
@@ -58,8 +67,6 @@ margin: 100px auto;
 <script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
 	type="text/javascript"></script>
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"
-	type="text/javascript"></script>
-<script src="<c:url value="/resources/js/jquery.bootstrap.wizard.js"/>"
 	type="text/javascript"></script>
 
 
@@ -81,6 +88,7 @@ $(document).ready(function() {
 		
 		var m_idx = ${peeps.m_idx};
 		
+		// postList
 		$.ajax({
 			url : '${pageContext.request.contextPath}/user/TimeLineList',
 			type: 'get',
@@ -94,33 +102,47 @@ $(document).ready(function() {
 				
 				$.each(data, function(index, post){
 					
-					$('#post_contents').append("<div class='post' id='"+post.p_idx+"'>"+post.p_title+"</div>");
-					
-					var post_idx= post.p_idx;
-					
-					$.ajax({
-						url : '${pageContext.request.contextPath}/user/cmtList',
-						type: 'get',
-						data : {"post_idx" : post_idx},
-						success : function(data){
+					var m_idx = post.member_idx;
+							// 글쓴 사람 사진 가져오기
+							if(post.loginType=="email"){
+								$('#post_contents').append("<div class='user_img' ><img id='profile' src='<c:url value='fileupload/"+post.m_photo+"'/>'</div>");
+							} else{
+								$('#post_contents').append("<div class='user_img'><img id='profile' src='<c:url value='"+post.m_photo+"'/>'</div>");
+							}
+							// 글 쓴 사람 아이디 가져오기
+							$('#post_contents').append("<div class='user_id' id='"+post.member_idx+"'>"+post.id+"</div>")
+							// 게시물 정보 불러오기
+							$('#post_contents').append("<div class='post' id='"+post.p_idx+"'>"+post.p_title+"</div>");
 							
-							var cmt = data;
+							var post_idx= post.p_idx;
 							
-							$.each(data, function(index, cmt){
-								if(post_idx == cmt.post_idx){
-			 						$('#'+post.p_idx).append("<div class='cmt' id='"+cmt.cmt_idx+"'>"+cmt.cmt_content+"</div>");
+							$.ajax({
+								url : '${pageContext.request.contextPath}/user/cmtList',
+								type: 'get',
+								data : {"post_idx" : post_idx},
+								success : function(data){
+									
+									var cmt = data;
+									
+									$.each(data, function(index, cmt){
+										if(post_idx == cmt.post_idx){
+											if(post.loginType=="email"){
+												$('#'+post.p_idx).append("<div class='cmt_img' ><img id='profile' src='<c:url value='fileupload/"+cmt.m_photo+"'/>'</div>");
+											} else{
+												$('#'+post.p_idx).append("<div class='cmt_img'><img id='profile' src='<c:url value='"+cmt.m_photo+"'/>'</div>");
+											}
+											$('#'+post.p_idx).append("<div class='cmt_id' id='"+cmt.member_idx+"'>"+cmt.id+"</div>");
+					 						$('#'+post.p_idx).append("<div class='cmt' id='"+cmt.cmt_idx+"'>"+cmt.cmt_content+"</div>");
+										}
+									});
+									
+									
 
+								},
+								error : function() {
+									console.log("댓글 리스트 실패,,,,");
 								}
 							});
-							
-							
-
-						},
-						error : function() {
-							console.log("댓글 리스트 실패,,,,");
-						}
-					});
-
 				})
 				
 			},
@@ -129,68 +151,7 @@ $(document).ready(function() {
 			}
 		});
 
-// 		$.ajax({
-// 			url : '${pageContext.request.contextPath}/post/cmt/select?PostNO=' + post_idx,
-// 			type: 'get',
-// 			data : {"post_idx" : post_idx},
-// 			success : function(data){
-				
-// 				var comment = data;
-				
-// 				console.log(comment);
-				
-// 				$('.comment').empty();
 
-// 				$.each(data, function(index, cmt){
-					
-// 					if(cmt.member_idx == member_idx){
-// 						$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'> <button id='cmt_re' type='submit'>답글</button> <button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button><br><input type='hidden' id='replytext'></div>");
-// 					} else{
-// 						$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button></div>");
-
-// 					}
-					
-// 					// 대댓글
-// 					$.ajax({
-// 						url : '${pageContext.request.contextPath}/post/reply/select',
-// 						type: 'get',
-// 						data : {"cmt_idx" : cmt.cmt_idx},
-// 						success : function(data){
-							
-// 							var reply = data;
-							
-// 							console.log(reply);
-
-// 							$.each(data, function(index, reply){
-// 								console.log(cmt.cmt_idx);
-// 								console.log(reply.re_idx);
-								
-// 								if(cmt.cmt_idx == reply.comment_idx){
-// 									if(reply.member_idx == member_idx){
-// 									$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_re' value='"+reply.re_content+"'><button id='re_edit' type='submit'>수정</button>  <button id='re_del' type='submit'>삭제</button></div>");
-// 									} else{
-// 										$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_re' value='"+reply.re_content+"'></div>");
-// 									}
-// 								}								
-// 							});
-							
-// 						},
-// 						error : function() {
-// 							console.log("대댓글 실패,,,,");
-// 						}
-						
-						
-// 					});
-
-// 				});
-				
-// 			},
-// 			error : function() {
-// 				console.log("댓글 실패,,,,");
-// 			}
-			
-			
-// 		});
 		
 		
 		
