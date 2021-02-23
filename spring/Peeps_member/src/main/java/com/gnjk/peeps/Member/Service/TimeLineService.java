@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gnjk.peeps.Member.dao.MemberDao;
-import com.gnjk.peeps.Member.domain.Comment;
-import com.gnjk.peeps.Member.domain.Post;
+import com.gnjk.peeps.Member.domain.CommentRequest;
+import com.gnjk.peeps.Member.domain.PostRequest;
 
 @Service
 public class TimeLineService {
@@ -21,15 +21,15 @@ public class TimeLineService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public List<Post> TimeLineList(int m_idx) {
+	public List<PostRequest> TimeLineList(int m_idx) {
 
 		dao = template.getMapper(MemberDao.class);
 
 		// 1. 팔로잉 리스트 받기
 		List<Integer> followList = dao.followingList(m_idx);
 
-		List<Post> PostList = new ArrayList<>();
-		List<Post> UserList = new ArrayList<>();
+		List<PostRequest> PostList = new ArrayList<>();
+		List<PostRequest> UserList = new ArrayList<>();
 		
 		// 포스트 리스트 받기
 		for (int i = 0; i < followList.size(); i++) {
@@ -57,12 +57,12 @@ public class TimeLineService {
 	}
 
 	// 댓글 상위 3개만 뽑아오기
-	public List<Comment> CmtList(int post_idx) {
+	public List<CommentRequest> CmtList(int post_idx) {
 
 		dao = template.getMapper(MemberDao.class);
 		
-		List<Comment> cmtList = dao.selectCmtList(post_idx);
-		List<Comment> UserList = new ArrayList<>();
+		List<CommentRequest> cmtList = dao.selectCmtList(post_idx);
+		List<CommentRequest> UserList = new ArrayList<>();
 
 		// 댓글
 		for(int i = 0; i<cmtList.size(); i++) {
@@ -84,12 +84,12 @@ public class TimeLineService {
 	}
 
 	// 게시물 검색
-	public List<Post> PostList(String keyword) {
+	public List<PostRequest> PostList(String keyword) {
 		
 		dao = template.getMapper(MemberDao.class);
 		
-		List<Post> PostList = dao.FindPostList(keyword);
-		List<Post> UserList = new ArrayList<>();
+		List<PostRequest> PostList = dao.FindPostList(keyword);
+		List<PostRequest> UserList = new ArrayList<>();
 		
 		for(int i = 0; i<PostList.size(); i++) {
 			int u_idx = PostList.get(i).getMember_idx();

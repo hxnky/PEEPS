@@ -18,7 +18,7 @@ import com.gnjk.peeps.Member.Service.MyPageService;
 import com.gnjk.peeps.Member.Service.TimeLineService;
 import com.gnjk.peeps.Member.Service.VerifyService;
 import com.gnjk.peeps.Member.domain.Peeps;
-import com.gnjk.peeps.Member.domain.Post;
+import com.gnjk.peeps.Member.domain.PostRequest;
 import com.google.gson.Gson;
 
 @Controller
@@ -142,7 +142,7 @@ public class MemberController {
 	@GetMapping("/post/FindView")
 	public String PostList(String keyword, Model model){
 		
-		List<Post> Post = timeLineService.PostList(keyword);
+		List<PostRequest> Post = timeLineService.PostList(keyword);
 		
 		 String json = new Gson().toJson(Post);
 		 model.addAttribute("Post", json);

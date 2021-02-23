@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.gnjk.peeps.Member.domain.Comment;
+import com.gnjk.peeps.Member.domain.CommentRequest;
 import com.gnjk.peeps.Member.domain.Peeps;
-import com.gnjk.peeps.Member.domain.Post;
+import com.gnjk.peeps.Member.domain.PostRequest;
 
 public interface MemberDao {
 
@@ -102,13 +102,13 @@ public interface MemberDao {
 
 	// 타임라인 관련
 	// 포스트 리스트 가져오기
-	List<Post> selectPostList(int m_idx);
+	List<PostRequest> selectPostList(int m_idx);
 	// 댓글 리스트 가져오기
-	List<Comment> selectCmtList(int post_idx);
+	List<CommentRequest> selectCmtList(int post_idx);
 	// 회원 사진, 로그인 타입 가져오기 - 게시글
-	List<Post> selectPostUserList(int m_idx);
+	List<PostRequest> selectPostUserList(int m_idx);
 	// 회원 사진, 로그인 타입 가져오기 - 댓글
-	List<Comment> selectCmtUserList(int m_idx);
+	List<CommentRequest> selectCmtUserList(int m_idx);
 	// 게시물 검색
-	List<Post> FindPostList(String keyword);
+	List<PostRequest> FindPostList(String keyword);
 }

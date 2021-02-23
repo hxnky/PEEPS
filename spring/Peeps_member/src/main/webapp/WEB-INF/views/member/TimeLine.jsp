@@ -56,8 +56,12 @@
 
 <script>
 
-function GoMyPage(idx){
-	location.href = "${pageContext.request.contextPath}/mypage/" + idx;
+function GoMyPage(m_idx){
+	location.href = "${pageContext.request.contextPath}/mypage/" + m_idx;
+}
+
+function GoPost(p_idx){
+	location.href = "${pageContext.request.contextPath}/main/post/detail?idx=" + p_idx;
 }
 
 </script>
@@ -103,8 +107,8 @@ $(document).ready(function() {
 							// 글 쓴 사람 아이디 가져오기
 							$('#'+post.p_idx).append("<div class='user_id' id='"+post.member_idx+"' onclick='GoMyPage("+post.member_idx+")'>"+post.id+"</div>");
 							// 게시물 정보 불러오기
-							// 게시물 썸네일 경로 변경하기
-							$('#'+post.p_idx).append("<div class='post'><div id='post_title'>"+post.p_title+"</div><div id='post_img'><img src='<c:url value='"+post.m_photo+"'/>'></div><button id='heart'><img src='<c:url value='/resources/images/icon/navi/002-like.png'/>'></button><hr></div>");
+							// 클라이언트 합친 후 게시물 썸네일 경로 변경하기
+							$('#'+post.p_idx).append("<div class='post'><div id='post_title' onclick='GoPost("+post.p_idx+")'>"+post.p_title+"</div><div id='post_img'><img src='<c:url value='fileupload/postfile/"+post.p_thumbnail+"'/>' onclick='GoPost("+post.p_idx+")'></div><button id='heart'><img src='<c:url value='/resources/images/icon/navi/002-like.png'/>'></button><hr></div>");
 
 							var post_idx= post.p_idx;
 							
