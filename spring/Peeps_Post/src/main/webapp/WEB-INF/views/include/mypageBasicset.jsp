@@ -127,6 +127,22 @@
 	font-size: 1.2em;
 }
 
+.mapPageBtn {
+	border: 0px solid;
+	padding: 5px 10px;
+	border-radius: 4px;
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	font-size: 1.2em;
+	background-color: white;
+	margin: 0px 5px;
+}
+
+.mapPageBtn:focus {
+	outline: none;
+	color: #F5E978;
+}
+
 .postidx {
 	color: black;
 }
@@ -161,6 +177,10 @@
 .pageBtn:hover {
 	text-decoration: none;
 	color: gray;
+}
+
+#nowPgBtn {
+	color: #F5E978;
 }
 
 #ptitle:link {
