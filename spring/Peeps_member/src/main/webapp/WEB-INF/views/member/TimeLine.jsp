@@ -42,9 +42,13 @@
 			</div>
 
 		</div>
-
+		
 	</div>
 
+
+	<!-- 맨 위로 올라가는 버튼 -->
+	<button class="scrollToTop"><img src="<c:url value="/resources/images/up.png"/>"></button>
+	
 </body>
 
 <!--   Core JS Files   -->
@@ -67,6 +71,12 @@ function GoPost(p_idx){
 </script>
 <script>
 $(document).ready(function() {
+	
+		//버튼 클릭 시 맨 위로 스크롤
+		$('.scrollToTop').click(function(){
+			$('html, body').animate({scrollTop : 0},800);
+			return false;
+		});
 	
 	var m_idx = ${peeps.m_idx};
 

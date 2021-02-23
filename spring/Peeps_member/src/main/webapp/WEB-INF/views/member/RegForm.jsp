@@ -141,7 +141,7 @@
 		</div>
 
 	</div>
-
+<div id="loadingImg"></div>
 </body>
 <!--   Core JS Files   -->
 <script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
@@ -158,44 +158,94 @@
 <script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 
 <script>
+
+function LoadingWithMask() {
+    //화면의 높이와 너비를 구합니다.
+    var maskHeight = $(document).height();
+    var maskWidth  = window.document.body.clientWidth;
+     
+    //화면에 출력할 마스크를 설정해줍니다.
+    var mask       ="<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
+    var loadingImg ='';
+    
+    loadingImg +=" <img src='<c:url value='/resources/images/loading-unscreen.gif'/>' style='z-index:9999; width:200px; height:200px; position: absolute; display: block; left:43%; top:30%;'>"; 
+ 
+    //화면에 레이어 추가
+    $('body').append(mask);
+ 
+    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
+    $('#mask').css({
+            'width' : maskWidth,
+            'height': maskHeight,
+            'opacity' :'0.3'
+    });
+  
+    //마스크 표시
+    $('#mask').show();
+  
+    //로딩중 이미지 표시
+    $('#loadingImg').append(loadingImg);
+    $('#loadingImg').show();
+}
+
+function closeLoadingWithMask() {
+    $('#mask, #loadingImg').hide();
+    $('#mask, #loadingImg').empty(); 
+}
+
 	$(document).on("click", "#sign_btn", function() {
+		
+		if($('#email').val().trim() == ""){
+			alert("이메일을 입력해주세요");
+		} else if($('#password').val().trim() == ""){
+			alert("비밀번호를 입력해주세요");
+		} else if($('#name').val().trim() == ""){
+			alert("이름을 입력해주세요");
+		} else if($('#id').val().trim() == ""){
+			alert("아이디를 입력해주세요");
+		} else{
+			LoadingWithMask();
+			
+			var email = $('#email').val();
+			var password = $('#password').val();
+			var id = $('#id').val();
+			var name = $('#name').val();
 
-		var email = $('#email').val();
-		var password = $('#password').val();
-		var id = $('#id').val();
-		var name = $('#name').val();
+			console.log(email);
+			console.log(password);
+			console.log(id);
+			console.log(name);
 
-		console.log(email);
-		console.log(password);
-		console.log(id);
-		console.log(name);
+			$.ajax({
+				url : '${pageContext.request.contextPath}/member/regPost',
+				type : 'post',
+				data : {
+					"email" : email,
+					"password" : password,
+					"id" : id,
+					"name" : name
+				},
+				success : function(data) {
+					closeLoadingWithMask();
+					
+					if(data==1){
+						alert("이미 가입된 이메일입니다. 로그인 화면으로 이동합니다.");
+						location.href = "${pageContext.request.contextPath}/";
+					} else if(data==2){
+						alert("아이디가 중복됩니다.");
+					} else{
+						alert("회원가입이 완료되었습니다. 이메일 인증을 완료해주세요!");
+						location.href = "${pageContext.request.contextPath}/";
+					}
+				},
+				error : function(request, status, error) {
+					console.log("통신 실패");
 
-		$.ajax({
-			url : '${pageContext.request.contextPath}/member/regPost',
-			type : 'post',
-			data : {
-				"email" : email,
-				"password" : password,
-				"id" : id,
-				"name" : name
-			},
-			success : function(data) {
-				
-				if(data==1){
-					alert("이미 가입된 이메일입니다. 로그인 화면으로 이동합니다.");
-					location.href = "${pageContext.request.contextPath}/";
-				} else if(data==2){
-					alert("아이디가 중복됩니다.");
-				} else{
-					alert("회원가입이 완료되었습니다. 이메일 인증을 완료해주세요!");
-					location.href = "${pageContext.request.contextPath}/";
 				}
-			},
-			error : function(request, status, error) {
-				console.log("통신 실패");
+			});
+		}
 
-			}
-		});
+		
 
 	})
 </script>
