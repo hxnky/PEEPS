@@ -292,9 +292,9 @@
 						var chkNum = totalPageCnt-1;
 						if(i==chkNum){
 							var lastIdx = startidx + remainPost -1;
-							pHtml += '<span><input type="button" class="pageBtn" onclick="javascript:markerClick(\''+ploc+'\','+startidx+','+lastIdx+');" value="'+(i+1)+'"></span>';
+							pHtml += '<span><input type="button" class="mapPageBtn" onclick="javascript:markerClick(\''+ploc+'\','+startidx+','+lastIdx+');" value="'+(i+1)+'"></span>';
 						} else{
-							pHtml += '<span><input type="button" class="pageBtn" onclick="javascript:markerClick(\''+ploc+'\','+startidx+','+endidx+');" value="'+(i+1)+'"></span>';
+							pHtml += '<span><input type="button" class="mapPageBtn" onclick="javascript:markerClick(\''+ploc+'\','+startidx+','+endidx+');" value="'+(i+1)+'"></span>';
 							startidx += 6;
 							endidx += 6;
 						}
