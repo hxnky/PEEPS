@@ -171,6 +171,14 @@ margin-top:30px;
 .cmttxt{
 /* 댓글창  */
 }
+
+#edit{
+
+
+margin: 25px 0 5px auto;
+
+
+}
 </style>
 
 
@@ -248,6 +256,8 @@ margin-top:30px;
 			 
 			         function loadGB(){
 			        	 
+			        	 $('#ginsert_wrap2').empty();
+			        	 
 						/*게스트북 리스트 출력*/
 						$.ajax({
 							url : 'http://localhost:8080/peeps/rest/guestbook?p='+p,
@@ -278,29 +288,36 @@ margin-top:30px;
 										html +='  </div>';
 									}
 									
+									
 									html +='  <span class="writerPhoto"><img src="../imgs/photo.png" class="writerPhoto"></span>';
 									html +='  <span class="writerid">'+ item.gwriter+'</span>';
 									html +='  <span class="gUpDate">'+date+'</span>';
+									
+									
 									html +='  <div class="upMsg">';
+									//사진이 있을때만 보이기
 									if(! item.gphoto ==" "){
 										html +='  <span><img src="<c:url value="/fileupload/guestbook/'+item.gphoto+'"/>" class="gUpPhoto" > </span> ';	
 									 /*  추가 */ 	html +='<input type="hidden" id="'+item.gidx+'_photo" value="'+item.gphoto+'">';
 									}
-									 
 						            html +='  <h3 class="gUptext">'+item.gmessage+'</h3>';
-						       /*  추가 */    html +=' <div><input  type="hidden" class="message"  id="'+item.gidx+'_msg" value="'+item.gmessage+'"</div>';
+						           /*  추가 */ html +=' <div><input  type="hidden" class="message"  id="'+item.gidx+'_msg" value="'+item.gmessage+'"</div>';
 						       
 						            html +='  </div>';
-						            html +='  <div class="cmt">';
-						            html +='  <span>';
-						           // html +='  <hr id="hr2">';
+						            html +='  <div class="gCmtdiv">';					           					        
 						            html +='  <h4 class="id">'+ item.gwriter+' :</h4>';
-						            html +='  </span>';
-						            html +=' <textarea rows="3" cols="80" name="cmt_content" class="cmttxt" id="cmttxt" placeholder="댓글을 입력해주세요." required></textarea>';
-						            html +=' <input type="submit" id="gCmtbtn" value="등록">';
-						            html +=' </div>';
-						          //  html +=' <hr id="hr2">';
-						            html +=' </div>';
+						            html +=' <span class="cmtinputarea"> ';
+						            html +=' <textarea rows="3" cols="80" name="gCmt_content" class="cmttxt" id="cmttxt" placeholder="답글을 입력해주세요." required></textarea>';
+						            html +=' <button id="gCmtbtn" onclick="gCmtbtn('+item.gidx+');">등록</button>';
+						            
+						            
+						            html +=' </span>';
+						            html +=' </div>'; 
+						          //  html +=' <hr>';
+						            html +=' <div class="comment">';
+						            html +='</div> ';
+						         
+						         //   html +=' </div>';
 													
 									   $('#ginsert_wrap2').append(html); 
 								 
@@ -360,7 +377,7 @@ margin-top:30px;
 					         
 					         }); //-------방명록 작성 ajax끝 
 						
-				
+						
 		});/* $(document).ready(function(){ */
 	    
     
@@ -384,7 +401,7 @@ margin-top:30px;
         			$('html,body').animate({scrollTop: scrollPosition}, 500);
         			
         			// 수정 버튼 클릭 시 수정 취소, 수정 버튼 생성
-        			var html = "<div id='editbtn'><button id='edit'>수정</button><button id='edit_cancle'>수정 취소</button></div>";
+        			var html = "<div id='editbtn'><button id='edit'>수정</button><br><button id='edit_cancle'>취소</button></div>";
         			  //  html +=' <div><input type=text class="message" id="gidx" value="'+gidx+'"</div>';    
         			$('#test #sbmtbtn').replaceWith(html);
         			
@@ -429,8 +446,8 @@ margin-top:30px;
         							$('#edit_photo').val("");
         							$('#edit_gidx').val("");
         							
-        							
-        						loadGB();
+        							window.location.href="http://localhost:8080/peeps/guestbook";	
+        						
         					},
         					error:function(e){
         						console.log("수정 에러발생!! :",e);	
@@ -461,10 +478,10 @@ margin-top:30px;
     					success : function(data){
     						console.log("ajax data",data);
     						
-    						//window.location.href="http://localhost:8080/peeps/guestbook";
+    						window.location.href="http://localhost:8080/peeps/guestbook";
     						alert("방명록이 삭제 되었습니다");
     						
-    						loadGB()
+    						loadGB();
     						
     					}
     				});
@@ -480,7 +497,52 @@ margin-top:30px;
             
 
         </script>
+		<!-- 댓글 작성 -->
+		<script >
+		$(function(){
 			
+		
+			// 댓글 작성
+			function gCmtbtn(gidx) {
+				
+				alert(gidx);
+				var cmt = $('#cmttxt').val();
+				
+				if(cmt.trim() == ""){
+		            alert("내용을 입력해주세요");
+		           
+		        } else{
+		        	/* $.ajax({
+		    			url : '${pageContext.request.contextPath}/rest/guestbook/cmt/insert',
+		    			type : 'post',
+		    			async : false,
+		    			data : {
+		    				"gb_idx" : "${readView.post.p_idx}",
+		    				"gmember_idx" : "${m_idx}",
+		    				"gcmt_content" : cmt
+		    			},
+		    			success : function(data) {
+		    				console.log("작성 완료");
+		    				$('#cmttxt').val('');
+		    				loadComment();
+		    			},
+		    			error : function() {
+		    				console.log("작성 실패,,,,");
+		    			}
+		    		}); */
+		        }
+
+				
+			}
+
+		
+		
+		
+			
+		});
+		
+		
+		</script>	
 			
 		
 			

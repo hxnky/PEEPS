@@ -1,4 +1,4 @@
-package com.gnjk.peeps.guestbook;
+package com.gnjk.peeps.guestbook.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,15 +9,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gnjk.peeps.guestbook.domain.Guestbook;
+import com.gnjk.peeps.guestbook.domain.GuestbookCommentRequest;
 import com.gnjk.peeps.guestbook.domain.GuestbookEditRequest;
 import com.gnjk.peeps.guestbook.domain.GuestbookListView;
 import com.gnjk.peeps.guestbook.domain.GuestbookRequest;
+import com.gnjk.peeps.guestbook.service.GuestbookCommentService;
 import com.gnjk.peeps.guestbook.service.GuestbookDeleteService;
 import com.gnjk.peeps.guestbook.service.GuestbookEditService;
 import com.gnjk.peeps.guestbook.service.GuestbookInsertService;
@@ -38,21 +39,12 @@ public class GuestbookRestController {
 	private GuestbookDeleteService deleteService;
 	@Autowired
 	private GuestbookEditService editService;
+	@Autowired
+	private GuestbookCommentService commentService;
 	
 	
 	
-	
-	
-	
-	@RequestMapping("/guestbook")
-	public String getguestbookForm() {
 
-		return "/menu/guestbookForm";
-
-	}
-	
-	
-	
 	
 	
 	// LIST
@@ -94,6 +86,22 @@ public class GuestbookRestController {
 					
 			return deleteService.deleteMsg(gidx);
 		}
+	
+	
+	 //댓글 달기
+	
+	 @PostMapping(value = "/cmt/insert")
+	  @ResponseBody public int cmtInsert(@ModelAttribute("cmtData")
+	  GuestbookCommentRequest request) {
+	  
+	  System.out.println("댓글 작성 진입");
+	  
+	  return commentService.cmtInsert(request); }
+	 
+	
+	
+	
+	
 	
 
 	}

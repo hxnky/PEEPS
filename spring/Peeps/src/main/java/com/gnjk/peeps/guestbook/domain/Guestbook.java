@@ -6,6 +6,10 @@ import java.util.Date;
 
 
 
+
+
+
+
 public class Guestbook {
 	
 	private int gidx;
@@ -59,6 +63,8 @@ public class Guestbook {
 		return "guestbook [gidx=" + gidx + ", gwriter=" + gwriter + ", gdate=" + gdate + ", gmessage=" + gmessage
 				+ ", gphoto=" + gphoto + "]";
 	}
+	
+
 	
 	
 

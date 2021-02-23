@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.gnjk.peeps.guestbook.domain.Guestbook;
+import com.gnjk.peeps.guestbook.domain.GuestbookComment;
 import com.gnjk.peeps.guestbook.domain.LoginInfo;
 
 
@@ -34,6 +35,8 @@ public interface GuestbookDao {
 	Guestbook selectGuestbookIdx(int gidx);
     //방명록 정보 업데이트
 	int updateGuestbook(Guestbook guestbook);
+    //댓글등록
+	int insertCmt(GuestbookComment comment);
 	
 
 }

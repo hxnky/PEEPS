@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.sql.Timestamp"/>
-<fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="com.gnjk.post.domain.Post"/>
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.dao.PostDao"/>
 <fullyQualifiedTypeName name="java.lang.reflect.Method"/>
@@ -12,9 +10,7 @@
 <fullyQualifiedTypeName name="com.mysql.cj.log.Log"/>
 <fullyQualifiedTypeName name="java.net.URI"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
-<fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Mapper"/>
 <fullyQualifiedTypeName name="lombok.extern.slf4j.Slf4j"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
@@ -27,13 +23,10 @@
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
 <fullyQualifiedTypeName name="org.springframework.ui.Model"/>
 <fullyQualifiedTypeName name="org.mybatis.spring.SqlSessionTemplate"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
 <fullyQualifiedTypeName name="com.sun.java.util.jar.pack.Package.Class.Member"/>
 <fullyQualifiedTypeName name="com.gnjk.peeps.guestbook.domain.GuestbookRequest"/>
-<fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="java.io.IOException"/>
 <fullyQualifiedTypeName name="com.gnjk.peeps.guestbook.domain.Guestbook"/>
-<fullyQualifiedTypeName name="com.gnjk.peeps.guestbook.dao.GuestbookDao"/>
 <fullyQualifiedTypeName name="com.gnjk.peeps.guestbook.service.GuestbookEditService"/>
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
@@ -41,4 +34,14 @@
 <fullyQualifiedTypeName name="com.gnjk.peeps.guestbook.domain.GuestbookEditRequest"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
 <fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+<fullyQualifiedTypeName name="lombok.Getter"/>
+<fullyQualifiedTypeName name="lombok.Setter"/>
+<fullyQualifiedTypeName name="java.sql.Timestamp"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="com.gnjk.peeps.guestbook.domain.GuestbookComment"/>
+<fullyQualifiedTypeName name="com.gnjk.peeps.guestbook.dao.GuestbookDao"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="org.springframework.transaction.annotation.Transactional"/>
 </qualifiedTypeNameHistroy>
