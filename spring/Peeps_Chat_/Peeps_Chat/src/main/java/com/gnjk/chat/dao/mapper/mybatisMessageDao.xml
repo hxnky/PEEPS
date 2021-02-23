@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gnjk.dao.mapper.mybatisMessageDao">
+ <!--
+ <resultMap type="project" id="projectResultMap">
+        <id column="PNO" property="no" />
+        <result column="PNAME" property="title" />
+        <result column="CONTENT" property="content" />
+        <result column="STA_DATE" property="startDate" javaType="java.sql.Date" />
+        <result column="END_DATE" property="endDate" javaType="java.sql.Date" />
+        <result column="STATE" property="state" />
+        <result column="CRE_DATE" property="createdDate" javaType="java.sql.Date" />
+        <result column="TAGS" property="tags" />
+    </resultMap>
+    -->
+ 
+
+   <!-- <resultMap id="mesResult"
+   type="com.gnjk.chat.domain">
+      <id column="room_idx" property="room_idx" />
+      <result column="m_idx" property="m_idx" />
+      <result column="rm_idx" property="rm_idx" />
+   </resultMap>
+ -->
+ <!--
+    <insert id = "createRoom" parameterType = "com.gnjk.chat.domain.ChatRoom">
+       insert into CHATROOM (room_idx, m_idx, rm_idx)
+       values (#{room_idx}, #{m_idx}, #{rm_idx})
+    </insert>
+    -->
+    
+    <!--  메세지 저장  -->
+   <insert id ="insertMessage" parameterType ="com.gnjk.chat.domain.Message">
+      insert into chat.chat(m_idx, rm_idx, ch_time, ch_ms)
+      values (#{m_idx},#{rm_idx},#{ch_time},#{ch_ms}) 
+   </insert>   
+   
+  
+ <!--   <select id="getMessageData" resultType = "com.gnjk.chat.domain.Message">
+   	select rm_idx, ch_time, ch_ms
+   	from chat.chat
+   	where m_idx = #{m_idx}
+   </select> -->
+   <!-- where 조건에 room_idx 같을때 and 해야하는지 헷갈림...
+   <select id = "isRoom" resultMap = "com.gnjk.chat.domain.ChatRoom">
+      select * from CHATROOM WHERE m_idx = #{m_idx}
+   </select>
+    -->
+   
+   <!-- <select id = "getRecentMessage" resultType="String">
+      select chat.*, rm_idx from CHAT chat
+      where room_idx = #{room_idx} order by ch_idx DESC limit 1
+   </select> -->
+   
+</mapper>
