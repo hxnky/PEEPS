@@ -105,51 +105,38 @@ public class PostController {
 	}
 	
 	// 지도로 주소별 게시글 리스트 출력
-		@GetMapping("/postmaplist")
-		public PostListView getMapPostList(
-				@RequestParam Map<String, Object> param,
-				HttpServletRequest request,
-				Model model) {
-			System.out.println("컨트롤러 진입 성공");
-			System.out.println("파람 : "+param);
-			
-			System.out.println("리퀘멤idx : "+request.getParameter("memberidx"));
-			
-			String mIdx = request.getParameter("memberidx");
-			String pAddr = request.getParameter("postAdd");
-			System.out.println("파라미터로 받은 pAddr : "+pAddr);
-			
-			int memberIdx = Integer.parseInt(mIdx);
-			System.out.println(memberIdx);
-			System.out.println(pAddr);
-			
-			return listService.getPostListByMapView(memberIdx, pAddr);
-		}
-	
-//	// 지도로 주소별 게시글 리스트 출력
-//	@GetMapping("/postmaplist")
-//	public PostListView getMapPostList(
-//			@RequestParam(value = "p", defaultValue = "1") int page,
-//			@RequestParam Map<String, Object> param,
-//			HttpServletRequest request,
-//			Model model) {
+	@GetMapping("/postmaplist")
+	public PostListView getMapPostList(
+			@RequestParam Map<String, Object> param,
+			HttpServletRequest request,
+			Model model) {
 //		System.out.println("컨트롤러 진입 성공");
 //		System.out.println("파람 : "+param);
-//		
+//			
 //		System.out.println("리퀘멤idx : "+request.getParameter("memberidx"));
-//		
-//		String mIdx = request.getParameter("memberidx");
-//		String pAddr = request.getParameter("postAdd");
+			
+		String mIdx = request.getParameter("memberidx");
+		String pAddr = request.getParameter("postAdd");
 //		System.out.println("파라미터로 받은 pAddr : "+pAddr);
-//		int pNum = page;
-//		
-//		int memberIdx = Integer.parseInt(mIdx);
+			
+		int memberIdx = Integer.parseInt(mIdx);
 //		System.out.println(memberIdx);
 //		System.out.println(pAddr);
-//		System.out.println(pNum);
-//		
-//		return listService.getPostListByMapView(memberIdx, pAddr, pNum);
-//	}
+			
+		return listService.getPostListByMapView(memberIdx, pAddr);
+	}
+		
+	// 좋아요 
+	@GetMapping("/likes")
+	public Post updateLikes(
+			HttpServletRequest request
+			) {
+		
+		int postIdx = Integer.parseInt(request.getParameter("pIdx"));
+		System.out.println("포스트인덱스 : "+postIdx);
+		
+		return listService.getLikes(postIdx, request);
+	}
 	
 
 

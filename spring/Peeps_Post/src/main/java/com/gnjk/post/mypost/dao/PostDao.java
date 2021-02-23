@@ -44,6 +44,11 @@ public interface PostDao {
 	// 게시글 update
 	int updatePost(Post post);
 	
+	// 게시글 좋아요 개수 update
+	int updatePostLikes(int pIdx, int pm);
+	
+	
+	
 	
 	
 	

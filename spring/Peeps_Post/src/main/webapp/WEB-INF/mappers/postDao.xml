@@ -93,6 +93,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set p_title=#{p_title}, p_content=#{p_content}, p_loc=#{p_loc}
 		where p_idx=#{p_idx}
 	</update>
+	
+	<!-- 게시글 좋아요 개수 update updatePostLikes -->
+	<update id="updatePostLikes">
+		update post 
+		set p_likes=p_likes+#{param2}
+		where p_idx=#{param1} 
+	</update>
 
 
 </mapper>

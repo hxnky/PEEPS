@@ -25,7 +25,7 @@
 				<td class="post_top_wrap">
 					<div class="post_top">
 						<img class="postuserphoto" src="<spring:url value='/resources/img/puppy3.jpg'/>">
-						<span class="id">hxnky__</span>
+						<span class="memberid">hxnky__</span>
 						<span class="followchk" >· 팔로잉</span>
 					</div>
 				</td>
@@ -71,9 +71,13 @@
 						</span>
 						
 						<span class="rightside">
+						
+						<button type="button" class="likeBtn" onclick="javascript:clickLikeBtn();">
 						<img style="width: 30px; height: 30px;" src="<spring:url value='/resources/img/likespic.png'/>">
+						</button>
 						<!-- 좋아요 -->
 						<span class="likes" style="margin: 0 5px;"></span>
+						
 						<img style="width: 30px; height: 30px;" src="<spring:url value='/resources/img/cmtpic.png'/>">
 						<!-- 댓글 개수 -->
 						<span class="comment" style="margin-left: 5px;">3</span>
@@ -86,7 +90,7 @@
 				<td>
 				<div class="cmtdiv">
 					<img class="postuserphoto" src="<spring:url value='/resources/img/puppy3.jpg'/>">
-					<span class="id" >hxnky__</span>
+					<span class="memberid" >hxnky__</span>
 					<span class="cmtinputarea">
 					<textarea rows="10"
 							  class="cmttxt" name="pcmt" id="cmttxt"
@@ -106,7 +110,16 @@
 		</form>
 	</div>
 	
-	<script>
+	
+<!-- 	<script>
+//게시물 idx 받기
+function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
+	return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+	
+var postIdx = getParameterByName('idx');
+console.log("포스트인덱스 : ",postIdx);
 	
 	    $(document).ready(function(){
 	        
@@ -122,20 +135,16 @@
 	            }
 	        });
 	        
-	     	// 게시물 idx 받기
-			function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-				var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
-				return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
-			}
 	     	
-			var postIdx = getParameterByName('idx');
-			console.log("포스트인덱스 : ",postIdx);
 			
 			// 컨트롤러로 값 넘기기 (회원 게시글 데이터 받기)
 			$.ajax({
 				url : "http://localhost:8080/post/rest/member/post/detail?idx="+ postIdx,
 				type : 'GET',
 				success : function(data) {
+					
+					var infoHtml = '<input type="hidden" class="memberidx" value="'+data.member_idx+'">';
+					$('.memberid').append(infoHtml);
 					
 					var Btn = '<a class="deleteBtn" href="javascript:deletePost('+data.p_idx+');">삭제</a>';
 					   Btn += '<a class="editBtn" href="<c:url value="/main/post/edit?idx='+data.p_idx+'" />">수정</a>';
@@ -256,7 +265,33 @@
 				
 			} 
 		};
-	</script>
-
+		
+		// 좋아요 버튼 클릭
+		function clickLikeBtn(){
+			alert("좋아요버튼 클릭");
+			console.log("좋아요버튼 함수 안 게시글 idx :",postIdx);
+			
+			var likeInfo = {
+				"pIdx" : postIdx	
+			};
+			
+			$.ajax({
+				
+				url: "http://localhost:8080/post/rest/member/post/likes",
+				type: 'get',
+				data: likeInfo,
+				success: function(data){
+					console.log("좋아요 ajax 성공");
+				},
+				error: function(e){
+					console.log(e);
+					console.log("좋아요 ajax 에러!!!!!!");
+				}
+				
+			});	// ajax 끝		
+			
+		} // clickLikeBtn 함수 끝
+		
+</script> -->
 </body>
 </html>
