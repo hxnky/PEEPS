@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gnjk.chat.domain.Message;
 import com.gnjk.chat.service.MesListService;
 
+// Database에서 채팅 데이터 select 후 채팅방 입장 시 채팅내용 불러오기 위한 컨트롤러
 @RestController
 public class ListController {
 	
