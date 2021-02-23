@@ -6,12 +6,15 @@ public class LoginInfo {
 	private String name;
 	private String id;
 	private String m_photo;
+	// 21.02.23 팔로우 체크
+	private int chk_result;
 	
-	public LoginInfo(int m_idx, String name, String id, String m_photo) {
+	public LoginInfo(int m_idx, String name, String id, String m_photo, int chk_result) {
 		this.m_idx = m_idx;
 		this.name = name;
 		this.id = id;
 		this.m_photo = m_photo;
+		this.chk_result = chk_result;
 	}
 	
 	// 원래는 setter 없어야 함
@@ -39,11 +42,20 @@ public class LoginInfo {
 	public void setM_photo(String m_photo) {
 		this.m_photo = m_photo;
 	}
-	
+	public int getChk_result() {
+		return chk_result;
+	}
+	public void setChk_result(int chk_result) {
+		this.chk_result = chk_result;
+	}
+
 	@Override
 	public String toString() {
-		return "LoginInfo [m_idx=" + m_idx + ", name=" + name + ", id=" + id + ", m_photo=" + m_photo + "]";
+		return "LoginInfo [m_idx=" + m_idx + ", name=" + name + ", id=" + id + ", m_photo=" + m_photo + ", chk_result="
+				+ chk_result + "]";
 	}
+	
+	
 
 
 }
