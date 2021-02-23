@@ -25,5 +25,6 @@ public class AlarmService {
 		 dao = template.getMapper(AlarmDao.class);
 				 return dao.alarmList(alarm);
 				 
-	}	
+	}
+	
 }

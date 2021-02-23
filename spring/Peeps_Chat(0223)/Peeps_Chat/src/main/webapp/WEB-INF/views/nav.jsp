@@ -11,7 +11,6 @@
 </head>
 
 <style>
-
 #alarm_mask {
 	text-align: right;
 	width: auto;
@@ -57,6 +56,11 @@ strong {
 	margin-top: 10px;
 }
 
+#btn {
+	position: fixed;
+	text-align: right;
+	font-size: 10px;
+}
 </style>
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -64,6 +68,7 @@ strong {
 	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <body>
 
@@ -99,7 +104,7 @@ strong {
 
 	<!--modal -->
 	<div id="my_modal">
-		<div id="my_modal_header">${list}알람목록</div>
+		<div id="my_modal_header">알람목록</div>
 
 		<button type="button" class="modal_close_btn">x</button>
 
@@ -117,7 +122,7 @@ strong {
 			success : function(data) {
 
 				print(data);
-				
+
 				$('#Alarm').click(function() {
 					modal('my_modal');
 				});
@@ -134,14 +139,14 @@ strong {
 	function print(alarmList) {
 
 		if (alarmList == "") {
-			
+
 			var printHTML = "<div id='alarm'>";
 			printHTML += "<strong>알람이 없습니다!";
-			printHTML +=  "</strong> <br>";
+			printHTML += "</strong> <br>";
 			printHTML += "</div>";
 			$('#my_modal_header').append(printHTML);
 			console.log("알람 없음!");
-			
+
 		} else {
 
 			$.each(alarmList, function(key, val) {
@@ -150,6 +155,8 @@ strong {
 				case "comment":
 					console.log("1111comment");
 					var printHTML = "<div id='alarm_mask'>";
+					printHTML += "<button id='btn' value="+ val.al_idx +" onclick='del_al("
+							+ val.al_idx + ");' />";
 					printHTML += "<div id='alarm'>";
 					printHTML += "<strong>" + val.sender + " 님이 회원님의 게시물";
 					printHTML += val.post + " 에 댓글을 남겼습니다!</strong> <br>";
@@ -157,11 +164,14 @@ strong {
 					printHTML += "</div>";
 					$('#my_modal_header').append(printHTML);
 					console.log("comment");
+					//console.log(val.al_idx);
 					break;
 				// 좋아요 알람
 				case "like":
 					console.log("22222222comment");
 					var printHTML = "<div id='alarm_mask'>";
+					printHTML += "<button id='btn' value="+ val.al_idx +" onclick='del_al("
+							+ val.al_idx + ");' />";
 					printHTML += "<div id='alarm'>";
 					printHTML += "<strong>" + val.sender + " 님이 회원님의 게시물";
 					printHTML += val.post + " 에 좋아요를 눌렀습니다!</strong> <br>";
@@ -169,11 +179,14 @@ strong {
 					printHTML += "</div>";
 					$('#my_modal_header').append(printHTML);
 					console.log("like");
+					//console.log(val.al_idx);
 					break;
 				// 팔로우 알람
 				case "follow":
 					console.log("33333333333333333comment");
 					var printHTML = "<div id='alarm_mask'>";
+					printHTML += "<button id='btn' value="+ val.al_idx +" onclick='del_al("
+							+ val.al_idx + ");' />";
 					printHTML += "<div id='alarm'>";
 					printHTML += "<strong>" + val.sender;
 					printHTML += " 님이 회원님을 팔로우 했습니다!</strong> <br>";
@@ -181,6 +194,7 @@ strong {
 					printHTML += "</div>";
 					$('#my_modal_header').append(printHTML);
 					console.log("follow");
+					//console.log(val.al_idx);
 					break;
 				} // switch 문
 
@@ -227,6 +241,30 @@ strong {
 	/* 	setTimeout(function() {
 	 $('#my_modal').hide();
 	 }, 10000); // 10초 뒤에 모달 사라짐 */
+</script>
+
+<script>
+	function del_al(al_idx) {
+
+		var al_idx = {"al_idx" : $("#btn").val()};
+
+		$.ajax({
+			url : 'alarm/delete',
+			type : 'post',
+			data : al_idx,
+			success : function(data) {
+				$('#alarm_mask').remove(); //이전 페이지 컨텐츠 제거
+				$('#my_modal_header').scrollTop($('#my_modal_header')[0].scrollHeight);
+				//$('#alarm_mask').load(url + ' #alarm_mask').hide().fadeIn(slow);
+				//$('#alarm_mask').load(location.href + "#alarm_mask"); */
+				console.log("삭제 성공ㅎㅎㅎ");
+			},
+			error : function() {
+				console.log("삭제 왜 안돼,,,,,?");
+			}
+		}); // ajax
+
+	} // del_al
 </script>
 
 </html>

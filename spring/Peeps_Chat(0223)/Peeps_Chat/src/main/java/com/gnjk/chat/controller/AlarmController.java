@@ -5,23 +5,23 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.gnjk.chat.domain.Alarm;
 import com.gnjk.chat.service.AlarmService;
+import com.gnjk.chat.service.DeleteService;
 
-@Controller
-@RequestMapping(value = "/alarm/select")
+@RestController
 public class AlarmController {
 
 	@Autowired
 	private AlarmService service;
+	
+	@Autowired
+	private DeleteService dservice;
 
 	/*
 	@GetMapping("/alarm/insert")
@@ -33,8 +33,7 @@ public class AlarmController {
 	}
 	 */
 	
-	@GetMapping
-	@ResponseBody
+	@RequestMapping(value = "/alarm/select")
 	public List<Alarm> alarmList(Alarm alarm, HttpSession session) throws Exception{
 
 		session.setAttribute("list", service.alarmList(alarm));
@@ -45,5 +44,16 @@ public class AlarmController {
 
 		return  service.alarmList(alarm);
 
+	}
+	
+	@RequestMapping(value = "/alarm/delete")
+	public int deleteAl(Alarm alarm, HttpSession session) throws Exception {
+		
+		session.setAttribute("delAl", dservice.deleteAlarm(alarm.getAl_idx()));
+		
+		System.out.println("알람 삭제 컨트롤러.....");
+		
+		return dservice.deleteAlarm(alarm.getAl_idx());
+		
 	}
 }
