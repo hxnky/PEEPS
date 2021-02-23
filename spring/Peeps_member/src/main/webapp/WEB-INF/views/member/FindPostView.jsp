@@ -10,6 +10,11 @@
 <link href="<c:url value="/resources/css/TimeLine.css" />"
 	rel="stylesheet">
 </head>
+<style>
+#no_post{
+	
+}
+</style>
 <body>
 	<div id="total_wrap">
 		<div id="nav">
@@ -58,7 +63,7 @@ $("#MyPage_img").click(function() {
 	$('#post_contents').empty();
 
 	if (post.length === 0) {
-		$('#post_contents').append("<div>해당하는 게시물이 없습니다.</div>");
+		$('#post_contents').append("<div id='no_post'>해당하는 게시물이 없습니다.</div>");
 	} else {
 		$.each(post,function(index, post) {
 			var m_idx = post.member_idx;

@@ -119,3 +119,9 @@ hr {
 	height: 20px;
 	width: 30px;
 }
+
+#no_post {
+	font-size: 40px;
+	margin: 20px 0 0 80px;
+	font-weight: bold;
+}

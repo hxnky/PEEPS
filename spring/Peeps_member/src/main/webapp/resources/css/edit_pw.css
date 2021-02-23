@@ -1,6 +1,9 @@
 /*공통인부분*/
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
 body {
 	background-color: #fcf9f6;
+	font-family: 'Nanum Gothic', sans-serif;
 }
 
 #total_wrap {
