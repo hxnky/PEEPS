@@ -108,12 +108,6 @@
 	margin: 10px auto;
 }
 
-/* .pagediv {
-	background-color: aqua;
-	text-align: center;
-	margin: auto;
-} */
-
 .paging {
 	text-align: center;
 	margin-bottom: 100px;
