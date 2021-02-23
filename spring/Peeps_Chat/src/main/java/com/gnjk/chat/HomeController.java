@@ -27,18 +27,14 @@ import org.springframework.web.servlet.ModelAndView;
 				// @RequestParam("m_idx") String m_idx,
 				// Date ch_time,
 				HttpSession session
-				) {
+				) throws Exception{
 		
-			
-			
 			mav.setViewName("home"); // .jsp 파일 이름 !! chatting.jsp로 보낼거
 
 			mav.addObject("m_idx", "사용자 아이디");
 			mav.addObject("rm_idx", "받는 사람");
-
 			
 			session.setAttribute("m_idx", "사용자 아이디");
-			
 			
 			return mav;
 		}

@@ -26,8 +26,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.gnjk.chat.dao.MessageDao;
 import com.gnjk.chat.domain.Message;
-import com.gnjk.chat.service.MessageSendService;
 import com.google.gson.Gson;
 
 public class ChattingHandler extends TextWebSocketHandler {
@@ -46,14 +46,15 @@ public class ChattingHandler extends TextWebSocketHandler {
 	private Map<String, WebSocketSession> users = new HashMap<String, WebSocketSession>();
 	private List<HashMap<String, Object>> hash = new ArrayList<>(); // 웹소켓 세션을 담아둘 리스트 
 	
-	
+	/*
 	// 파일 업로드 
 	private static final String FILE_UPLOAD_PATH = "/Users/seoa/Documents/websocket/"; // 파일 저장 경로 
 	static int fileUploadIdx = 0;
 	static String fileUploadSession = "";
+	*/
 	
 	@Autowired
-	private MessageSendService sendService;
+	private MessageDao dao;
 	
 	
 	// =============================================================
@@ -98,7 +99,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 			sockSession.sendMessage(sendmes);
 		 }
 		 
-		 sendService.insertMessage(message);
+		 dao.insertMessage(mes);
 		 
 		
 	}
@@ -109,7 +110,8 @@ public class ChattingHandler extends TextWebSocketHandler {
 	//  BhandleBinaryMessage 메소드가 추가
 	// 매개변수 BinaryMessage의 데이터를 ByteBuffer로 받아서 파일을 저장하고
 	// 현재 방에 존재하는 세션에게만 ByteBuffer데이터를 전송
-	
+
+	 /*
 	 @Override
 	 public void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {
 		 
@@ -166,7 +168,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 				}
 		}
 	}
-	
+	*/
 	
 	// =============================================================
 	@Override

@@ -113,6 +113,9 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="/Users/seoa/Documents/GitHub/PEEPS/spring/Peeps_Chat"/>
+			<item value="/Users/seoa/Documents/GitHub/PEEPS/spring/Peeps"/>
+			<item value="/Users/seoa/Downloads/Peeps_Chat(0217)/Peeps_Chat"/>
 			<item value="/Users/seoa/Documents/GitHub/classproject/spring_project/FirstSpring"/>
 			<item value="/Users/seoa/Documents/GitHub/Spring_openproject/project/Spring-Socket-Chat"/>
 			<item value="/Users/seoa/Documents/GitHub/Spring_openproject/project/Spring_openProject"/>

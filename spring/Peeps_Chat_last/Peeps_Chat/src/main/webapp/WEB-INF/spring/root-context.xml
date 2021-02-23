@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:p="http://www.springframework.org/schema/p"
+   xmlns:aop="http://www.springframework.org/schema/aop"
+   xmlns:context="http://www.springframework.org/schema/context"
+   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+   xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+   xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+      http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+      http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+   <!-- Root Context: defines shared resources visible to all other web components -->
+   <context:component-scan
+      base-package="com.gnjk.chat.dao"></context:component-scan>
+
+
+   <!-- jdbc모듈을 이용하여 dataSource추가 -->
+   <!-- mysql과 연결을 담당 -->
+   <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+      p:driverClassName="com.mysql.cj.jdbc.Driver"
+      p:jdbcUrl="jdbc:mysql://localhost:3306/chat?serverTimezone=UTC"
+      p:username="root" p:password="adminadmin" />
+
+   <!-- SqlSessionFactoryBean 등록 -
+    	   DB와의 연결과 sql 실행에 대한 모든것을 가진 객체 -->
+   <bean id="sqlSessionFactory"
+      class="org.mybatis.spring.SqlSessionFactoryBean"
+		p:dataSource-ref="dataSource"
+		p:mapperLocations="classpath:com/gnjk/chat/dao/mapper/*.xml" />  <!-- /WEB-INF/mappers/*.xml -->
+
+	<!-- JdbcTemplate 클래스 등록 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+			<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- SqlSessionTemplate 등록 -->
+	<bean id="sqlSessionTemplate"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- 
+   <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" >
+        <constructor-arg index="0" name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>   
+    </bean>
+     -->
+
+   <bean id="transactionManager"
+      class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+      <property name="dataSource" ref="dataSource"></property>
+   </bean>
+   
+   <!--  
+   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
+		<property name="basePackage" value="com.gnjk.chat.dao.mapper" />
+		<property name="sqlSessionFactory" value="sqlSessionFactory" />
+	</bean>
+	-->
+   
+</beans>
