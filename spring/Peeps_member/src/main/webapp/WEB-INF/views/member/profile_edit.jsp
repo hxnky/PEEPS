@@ -12,6 +12,7 @@
 <link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 </head>
 <body>
+<div id="wrap">
 	<div id="nav">
 		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
 	</div>
@@ -27,7 +28,7 @@
 				<button id="log_out">로그아웃</button>
 			</div>
 		</div>
-		<div>
+		<div id="edit_wrap">
 			<form id="edit_photo" enctype="multipart/form-data">
 				<input type="hidden" id="email" name="email" value="${peeps.email }">
 				<table id="edit_table">
@@ -84,7 +85,7 @@
 			<button id="change">변경</button>
 		</div>
 	</div>
-
+</div>
 </body>
 
 <!--   Core JS Files   -->
@@ -151,30 +152,6 @@
 
 
 <script>
-	$("#edit")
-			.click(
-					function() {
-
-						var email = "${peeps.email}";
-
-						$
-								.ajax({
-									url : '${pageContext.request.contextPath}/profile/chk',
-									type : 'get',
-									data : {
-										"email" : email,
-									},
-									async : false,
-									success : function(data) {
-										location.href = "${pageContext.request.contextPath}/profile/Info";
-									},
-									error : function(request, status, error) {
-										console.log("통신 실패");
-
-									}
-								});
-					});
-
 	var email = "${peeps.email}";
 	var m_idx = ${peeps.m_idx};
 	
@@ -226,9 +203,9 @@
 				console.log("수정 완료");
 				if (data == 1) {
 					alert("수정 완료");
-					// 수정 완료 시 뭐 하면 좋을까?
+					//$('#wrap').load(location.href + '#edit_wrap');
 				} else {
-					alert("계정을 찾을 수 없습니다. 이메일 또는 아이디를 확인해주세요");
+					console.log("수정 실패");
 				}
 
 			},

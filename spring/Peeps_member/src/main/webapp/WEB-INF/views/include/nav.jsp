@@ -11,9 +11,8 @@
 					<img src="<c:url value="/resources/images/icon/navi/search.png"/>">
 
 				</button></span></li>
-		<!-- 				사진 크기 커서 주석처리 해놓음 -->
-		<!-- 								<li class="center"><a id="Logo"><img -->
-		<%-- 										src="<c:url value="/resources/images/plus.png"/>"></a></li> --%>
+		<li class="center"><a id="Logo"><img
+				src="<c:url value="/resources/images/icon/Logo.png"/>"></a></li>
 
 		<li class="right"><a id="Home" href="#"><img
 				src="<c:url value="/resources/images/icon/navi/023-home.png"/>"></a>

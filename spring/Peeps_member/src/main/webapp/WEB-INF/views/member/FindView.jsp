@@ -13,6 +13,7 @@
 </head>
 
 <body>
+<div id="wrap">
 	<div id="nav">
 		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
 	</div>
@@ -70,7 +71,7 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-
+</div>
 
 
 </body>
@@ -96,7 +97,7 @@ function load_Find(){
 		success : function(data) {
 			console.log(data);		
 			
-			$('#total_wrap').load(location.href + '#fix');
+			$('#wrap').load(location.href + '#fix');
 			//location.reload();
 			console.log("새로고침");
 		},

@@ -8,7 +8,7 @@
 <link rel="apple-touch-icon" sizes="76x76"
 	href="resources/img/apple-icon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>임시 타임라인</title>
+<title>타임라인</title>
 <meta
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
@@ -27,35 +27,8 @@
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="<c:url value="/resources/css/demo.css"/>" rel="stylesheet" />
 <link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/TimeLine.css" />" rel="stylesheet">
 </head>
-<style>
-#total_contents{
-	margin: 100px auto;
-	width: 50%;
-	background-color: #fcf9f6;
-}
-
-#post_contents{
-	background-color: white;
-	border: 1px solid black;
-}
-.user_img>img{
-	width: 50px;
-	height: 50px;
-	border-radius: 100%;
-}
-
-.cmt_img>img{
-	width: 30px;
-	height: 30px;
-	border-radius: 100%;
-}
-
-#heart{
-	background-color: white;
-	border : none;
-}
-</style>
 <body>
 	<div id="total_wrap">
 		<div id="nav">
@@ -82,6 +55,13 @@
 
 
 <script>
+
+function GoMyPage(idx){
+	location.href = "${pageContext.request.contextPath}/mypage/" + idx;
+}
+
+</script>
+<script>
 $(document).ready(function() {
 	
 	var m_idx = ${peeps.m_idx};
@@ -91,7 +71,7 @@ $(document).ready(function() {
 		location.href = "${pageContext.request.contextPath}/mypage/" + m_idx;
 
 	});
-	
+
 	// 타임라인 목록 불러오기
 	loadTimeLine();
 	
@@ -116,16 +96,16 @@ $(document).ready(function() {
 					var m_idx = post.member_idx;
 							// 글쓴 사람 사진 가져오기
 							if(post.loginType=="email"){
-								$('#post_contents').append("<div class='user_img' ><img id='profile' src='<c:url value='fileupload/"+post.m_photo+"'/>'</div>");
+								$('#post_contents').append("<div class='post_wrap' id='"+post.p_idx+"'><div class='user_img' ><img id='profile' src='<c:url value='fileupload/"+post.m_photo+"'/>' onclick='GoMyPage("+post.member_idx+")'></div></div>");
 							} else{
-								$('#post_contents').append("<div class='user_img'><img id='profile' src='<c:url value='"+post.m_photo+"'/>'</div>");
+								$('#post_contents').append("<div class='post_wrap' id='"+post.p_idx+"'><div class='user_img'><img id='profile' src='<c:url value='"+post.m_photo+"'/>' onclick='GoMyPage("+post.member_idx+")'></div></div>");
 							}
 							// 글 쓴 사람 아이디 가져오기
-							$('#post_contents').append("<div class='user_id' id='"+post.member_idx+"'>"+post.id+"</div>")
+							$('#'+post.p_idx).append("<div class='user_id' id='"+post.member_idx+"' onclick='GoMyPage("+post.member_idx+")'>"+post.id+"</div>");
 							// 게시물 정보 불러오기
-							// 게시물 어케 출력할지 논의하기
-							$('#post_contents').append("<div class='post' id='"+post.p_idx+"'>"+post.p_title+"<div id='post_img'>******사진넣기******</div><div id='post_con'>"+post.p_content+"</div><hr><button id='heart'><img src='<c:url value='/resources/images/icon/navi/002-like.png'/>'></button><hr></div>");
-							
+							// 게시물 썸네일 경로 변경하기
+							$('#'+post.p_idx).append("<div class='post'><div id='post_title'>"+post.p_title+"</div><div id='post_img'><img src='<c:url value='"+post.m_photo+"'/>'></div><button id='heart'><img src='<c:url value='/resources/images/icon/navi/002-like.png'/>'></button><hr></div>");
+
 							var post_idx= post.p_idx;
 							
 							$.ajax({
@@ -139,12 +119,12 @@ $(document).ready(function() {
 									$.each(data, function(index, cmt){
 										if(post_idx == cmt.post_idx){
 											if(cmt.loginType=="email"){
-												$('#'+post.p_idx).append("<div class='cmt_img' ><img id='profile' src='<c:url value='fileupload/"+cmt.m_photo+"'/>'</div>");
+												$('#'+post.p_idx).append("<div id='cmt_wrap' class='"+cmt.cmt_idx+"'><div class='cmt_img' ><img id='profile' src='<c:url value='fileupload/"+cmt.m_photo+"'/>' onclick='GoMyPage("+cmt.member_idx+")'></div></div>");
 											} else{
-												$('#'+post.p_idx).append("<div class='cmt_img'><img id='profile' src='<c:url value='"+cmt.m_photo+"'/>'</div>");
+												$('#'+post.p_idx).append("<div id='cmt_wrap' class='"+cmt.cmt_idx+"'><div class='cmt_img'><img id='profile' src='<c:url value='"+cmt.m_photo+"'/>' onclick='GoMyPage("+cmt.member_idx+")'></div></div>");
 											}
-											$('#'+post.p_idx).append("<div class='cmt_id' id='"+cmt.member_idx+"'>"+cmt.id+"</div>");
-					 						$('#'+post.p_idx).append("<div class='cmt' id='"+cmt.cmt_idx+"'>"+cmt.cmt_content+"</div>");
+											$('.'+cmt.cmt_idx).append("<div class='cmt_id' id='"+cmt.member_idx+"' onclick='GoMyPage("+cmt.member_idx+")'>"+cmt.id+"</div>");
+					 						$('.'+cmt.cmt_idx).append("<div class='cmt'>"+cmt.cmt_content+"</div>");
 										}
 									});
 									
