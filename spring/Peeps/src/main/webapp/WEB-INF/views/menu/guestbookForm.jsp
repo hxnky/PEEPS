@@ -103,7 +103,8 @@ float: right;
     
 }
 #hr2{
-    color: black;
+    background-color: black;
+    
 }
 
 #sbmtbtn{
@@ -166,6 +167,10 @@ margin-top:30px;
    padding: 5px;
    
 }
+
+.cmttxt{
+/* 댓글창  */
+}
 </style>
 
 
@@ -186,11 +191,13 @@ margin-top:30px;
             <!-- 방명록 입력 div -->
             <ul>
                <li><img
-                  src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"
-                  class="gimg"></li>
-               <li><textarea rows="9" cols="80" id="gmessage" name="gmessage"></textarea><br>
-               <input type="file" id="gphoto" name="gphoto"></li>
-               
+							src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTAxMDVfNiAg%2FMDAxNjA5ODUyMjAyODkx.SGiMYE0GV5JhjH_FVZUCfOREl7yH6ipmytqZ6ynDP9gg.81AO4sM4kRPOR8_50gibNZ3YmoIsHIaAgbpTNkGCKGYg.JPEG.nbsupporter%2F%25B0%25AD%25BE%25C6%25C1%25F6_2.jpg&type=a340"
+							class="gimg"></li>
+						<li><textarea rows="9" cols="80" id="gmessage"
+								name="gmessage" placeholder="회원님과 함께한 사진과 글을 입력해주세요." required></textarea><br>
+						    <input type="file" id="gphoto" name="gphoto">
+							<input type="hidden" id="edit_photo" name="oldgphoto">
+							<input type="hidden" id="edit_gidx" name="gidx"></li>
             </ul>
          </div>
         
@@ -281,18 +288,18 @@ margin-top:30px;
 									}
 									 
 						            html +='  <h3 class="gUptext">'+item.gmessage+'</h3>';
-						       /*  추가 */    html +=' <div><input type=text class="message"  id="'+item.gidx+'_msg" value="'+item.gmessage+'"</div>';
+						       /*  추가 */    html +=' <div><input  type="hidden" class="message"  id="'+item.gidx+'_msg" value="'+item.gmessage+'"</div>';
 						       
 						            html +='  </div>';
 						            html +='  <div class="cmt">';
 						            html +='  <span>';
-						            html +='  <hr id="hr2">';
+						           // html +='  <hr id="hr2">';
 						            html +='  <h4 class="id">'+ item.gwriter+' :</h4>';
 						            html +='  </span>';
-						            html +=' <textarea rows="3" cols="97" name="cmt_content" class="cmttxt" id="cmttxt" placeholder="댓글을 입력해주세요." required></textarea>';
+						            html +=' <textarea rows="3" cols="80" name="cmt_content" class="cmttxt" id="cmttxt" placeholder="댓글을 입력해주세요." required></textarea>';
 						            html +=' <input type="submit" id="gCmtbtn" value="등록">';
 						            html +=' </div>';
-						            html +=' <hr>';
+						          //  html +=' <hr id="hr2">';
 						            html +=' </div>';
 													
 									   $('#ginsert_wrap2').append(html); 
@@ -378,7 +385,7 @@ margin-top:30px;
         			
         			// 수정 버튼 클릭 시 수정 취소, 수정 버튼 생성
         			var html = "<div id='editbtn'><button id='edit'>수정</button><button id='edit_cancle'>수정 취소</button></div>";
-        			    html +=' <div><input type=text class="message" id="gidx" value="'+gidx+'"</div>';    
+        			  //  html +=' <div><input type=text class="message" id="gidx" value="'+gidx+'"</div>';    
         			$('#test #sbmtbtn').replaceWith(html);
         			
         			// 수정 취소 클릭 시 해당 텍스트 박스로 다시 이동
@@ -396,7 +403,7 @@ margin-top:30px;
         				
         			});
         			
-        			$('#edit').click(function(gidx) {
+        			$('#edit').click(function() {
         				var data =$('#insertGForm')[0];
         				var form_data = new FormData(data);
         				
@@ -421,6 +428,7 @@ margin-top:30px;
         							$('#gmessage').val("");
         							$('#edit_photo').val("");
         							$('#edit_gidx').val("");
+        							
         							
         						loadGB();
         					},
@@ -456,7 +464,7 @@ margin-top:30px;
     						//window.location.href="http://localhost:8080/peeps/guestbook";
     						alert("방명록이 삭제 되었습니다");
     						
-    						newdiv();
+    						loadGB()
     						
     					}
     				});
@@ -465,18 +473,9 @@ margin-top:30px;
 
             }/*function del_btn(gidx) --end  */
             
-    /*         
-        function addpho_btn(){
-            var str = document.getElementById("test");
-		str.innerHTML = '<div><input type="file" id="gphoto" name="gphoto"></div>';
-        };    
-             */
+  
             
-            
-        function newdiv(){
-        	$("#main_wrap").load(location.href + "#main_wrap");
-        	
-        }      
+       
             
             
 

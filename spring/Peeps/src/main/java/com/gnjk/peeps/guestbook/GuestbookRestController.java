@@ -39,11 +39,22 @@ public class GuestbookRestController {
 	@Autowired
 	private GuestbookEditService editService;
 	
-	/*
-	 * @GetMapping public List<Guestbook> getGuestbookList(){
-	 * 
-	 * return listService.getGbookList(); }
-	 */
+	
+	
+	
+	
+	
+	@RequestMapping("/guestbook")
+	public String getguestbookForm() {
+
+		return "/menu/guestbookForm";
+
+	}
+	
+	
+	
+	
+	
 	// LIST
 	@GetMapping
 	public GuestbookListView getlistview(@RequestParam(value = "p",defaultValue ="1")int page,Model model){
@@ -69,7 +80,8 @@ public class GuestbookRestController {
 	
 		@PostMapping("/edit")
 		@ResponseBody
-		public int updateGuestbook(GuestbookEditRequest editRequest, HttpServletRequest request) {			
+		public int updateGuestbook(GuestbookEditRequest editRequest, HttpServletRequest request) {	
+		
 			return editService.editGuestbook(editRequest, request) ;
 		}
 		
@@ -83,5 +95,5 @@ public class GuestbookRestController {
 			return deleteService.deleteMsg(gidx);
 		}
 	
-	//방명록 존재 유무
+
 	}
