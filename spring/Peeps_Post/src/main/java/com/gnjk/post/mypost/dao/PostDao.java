@@ -1,11 +1,7 @@
 package com.gnjk.post.mypost.dao;
 
 import java.util.List;
-import java.util.Map;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import com.gnjk.post.mypost.domain.LoginInfo;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostFile;
 
@@ -46,10 +42,6 @@ public interface PostDao {
 	
 	// 게시글 좋아요 개수 update
 	int updatePostLikes(int pIdx, int pm);
-	
-	
-	
-	
 	
 	
 	
