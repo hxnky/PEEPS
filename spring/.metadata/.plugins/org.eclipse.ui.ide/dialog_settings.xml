@@ -113,15 +113,15 @@
 		<item key="WizardProjectsImportPage.STORE_CLOSE_CREATED_PROJECTS_ID" value="false"/>
 		<item key="WizardProjectsImportPage.STORE_HIDE_CONFLICTING_PROJECTS_ID" value="false"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\kimjh\Downloads\PEEPS-hxnky\spring"/>
 			<item value="C:\Users\kimjh\Downloads\withearth-sunkyung"/>
 			<item value="C:\Users\kimjh\Downloads\spring_project"/>
-			<item value="C:\Users\kimjh\Downloads\PEEPS-hxnky\spring"/>
 			<item value="C:\Users\kimjh\Documents\GitHub\PEEPS\spring"/>
 			<item value="C:\Users\kho3\OneDrive\Documents\GitHub\PEEPS\spring\Peeps_Chat"/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
-			<item value="C:\Users\kimjh\Documents\GitHub\PEEPS\spring\Peeps_Post\src\main\java\com\gnjk\post\mypost\dao\mapper\postDao.xml"/>
 			<item value=""/>
+			<item value="C:\Users\kimjh\Documents\GitHub\PEEPS\spring\Peeps_Post\src\main\java\com\gnjk\post\mypost\dao\mapper\postDao.xml"/>
 		</list>
 	</section>
 	<section name="SmartImportWizard">

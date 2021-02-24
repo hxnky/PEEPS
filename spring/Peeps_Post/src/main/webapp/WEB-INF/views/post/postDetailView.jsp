@@ -73,7 +73,7 @@
 						<span class="rightside">
 						
 						<button type="button" class="likeBtn" onclick="javascript:clickLikeBtn();">
-						<img style="width: 30px; height: 30px;" src="<spring:url value='/resources/img/likespic.png'/>">
+						<%-- <img style="width: 30px; height: 30px;" src="<spring:url value='/resources/img/likespic.png'/>"> --%>
 						</button>
 						<!-- 좋아요 -->
 						<span class="likes" style="margin: 0 5px;"></span>

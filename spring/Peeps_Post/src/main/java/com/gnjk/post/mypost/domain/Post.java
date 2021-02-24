@@ -14,6 +14,9 @@ public class Post {
 	private String p_loc;
 	private int p_likes;
 	
+	// 21.02.24 추가
+	private int likeChk;	// 좋아요 여부
+	
 	public int getP_idx() {
 		return p_idx;
 	}
@@ -62,19 +65,26 @@ public class Post {
 	public void setP_likes(int p_likes) {
 		this.p_likes = p_likes;
 	}
+	public int getLikeChk() {
+		return likeChk;
+	}
+	public void setLikeChk(int likeChk) {
+		this.likeChk = likeChk;
+	}
 	
 	public Date getToDate() {
 		return new Date(this.p_date.getTime());
 	}
 	
-	// LoginInfo
-	
 	@Override
 	public String toString() {
 		return "Post [p_idx=" + p_idx + ", member_idx=" + member_idx + ", p_date=" + p_date + ", p_title=" + p_title
 				+ ", p_content=" + p_content + ", p_thumbnail=" + p_thumbnail + ", p_loc=" + p_loc + ", p_likes="
-				+ p_likes + "]";
+				+ p_likes + ", likeChk=" + likeChk + "]";
 	}
+	
+	
+	
 	
 	
 	

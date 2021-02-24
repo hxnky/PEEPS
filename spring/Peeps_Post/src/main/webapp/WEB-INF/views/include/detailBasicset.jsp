@@ -360,7 +360,34 @@ console.log("포스트인덱스 : ",postIdx);
 					console.log("게시글파일ajax에러");
 					console.log(e);
 				}
-			})
+			}) // 파일 ajax 끝
+			
+			var likeInfo = {
+					"pIdx" : postIdx	
+				};
+			// 컨트롤러로 값 넘기기 (좋아요 여부 데이터 받기)
+			$.ajax({
+				url : "http://localhost:8080/post/rest/member/post/likeChk",
+				type : 'GET',
+				data: likeInfo,
+				success: function(data){
+					console.log("좋아요 여부 : ",data.likeChk);
+					
+					if(data.likeChk == 1){
+						var likeHtml = '<img style="width: 30px; height: 30px;" src="<spring:url value="/resources/icon/like1.png"/>">';
+						$('.likeBtn').append(likeHtml);
+					} else {
+						var likeHtml = '<img style="width: 30px; height: 30px;" src="<spring:url value="/resources/icon/like0.png"/>">';
+						$('.likeBtn').append(likeHtml);
+					}
+					
+					
+				},
+				error: function(e){
+					console.log("좋아요 여부 ajax에러");
+					console.log(e);
+				}
+			}); // 좋아요 여부 ajax 끝
 	        
 	    });
 	    
@@ -404,6 +431,15 @@ console.log("포스트인덱스 : ",postIdx);
 					
 					var html = '<span>'+data.p_likes+'</span>';
 					$('.likes').append(html);
+					
+					$('.likeBtn').empty();
+					if(data.likeChk == 1){
+						var likeHtml = '<img style="width: 30px; height: 30px;" src="<spring:url value="/resources/icon/like1.png"/>">';
+						$('.likeBtn').append(likeHtml);
+					} else {
+						var likeHtml = '<img style="width: 30px; height: 30px;" src="<spring:url value="/resources/icon/like0.png"/>">';
+						$('.likeBtn').append(likeHtml);
+					}
 					
 				},
 				error: function(e){

@@ -120,7 +120,7 @@ public class PostListService {
 	}
 	
 	// 좋아요 
-	public Post getLikes(int pIdx, HttpServletRequest request) {
+	public Post updateLikes(int pIdx, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
 		LoginInfo loginInfo = (LoginInfo) session.getAttribute("peeps");
@@ -144,6 +144,7 @@ public class PostListService {
 			loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); 
 			session.setAttribute("peeps", loginInfo);
 			System.out.println("로그인 인포 세션2 : "+loginInfo);
+			post.setLikeChk(0);
 			System.out.println("로그인 안된 경우 post : "+post);
 			return post;
 			
@@ -190,11 +191,13 @@ public class PostListService {
 					// 좋아요 1로 바꼈으면 -> 게시글 좋아요 개수 +1 
 					dao.updatePostLikes(pIdx, 1);
 					post = dao.selectPostDetail(pIdx);
+					post.setLikeChk(likeCheck);
 					System.out.println("게시글 좋아요 개수 +1 : "+post);
 				} else {
 					// 좋아요 0으로 바꼈으면 -> 게시글 좋아요 개수 -1
 					dao.updatePostLikes(pIdx, -1);
 					post = dao.selectPostDetail(pIdx);
+					post.setLikeChk(likeCheck);
 					System.out.println("게시글 좋아요 개수 -1 : "+post);
 				}
 				
@@ -203,9 +206,58 @@ public class PostListService {
 			}
 			
 		}
-		
-		
 		return post;
 	}
+	
+	// 좋아요 여부
+	public Post getLikes(int pIdx, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		LoginInfo loginInfo = (LoginInfo) session.getAttribute("peeps");
+		System.out.println("로그인 인포 세션1 : "+loginInfo);
+		
+		int result = 0;
+		
+		Post post = null;
+		
+		try{
+			// 해당 게시글 정보 post에 바인딩
+			dao = template.getMapper(PostDao.class);
+			post = dao.selectPostDetail(pIdx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(loginInfo == null) { // 로그인이 안된 경우
+			
+			// test 로그인 정보 세션 생성
+			loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); 
+			session.setAttribute("peeps", loginInfo);
+			System.out.println("로그인 인포 세션2 : "+loginInfo);
+			post.setLikeChk(0);
+			System.out.println("로그인 안된 경우 post : "+post);
+			return post;
+			
+		} else {	// 로그인 된 경우
+			System.out.println("로그인 인포 세션3 : "+loginInfo);
+			int mIdx = loginInfo.getM_idx();
+			
+			try {
+				System.out.println("try구문 진입");
+				lDao = template.getMapper(LikeDao.class);
+				
+				int likeCheck = lDao.selectLikeChk(pIdx, mIdx);
+				
+				post.setLikeChk(likeCheck);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+		}
+		return post;
+	}
+	
+	
 
 }

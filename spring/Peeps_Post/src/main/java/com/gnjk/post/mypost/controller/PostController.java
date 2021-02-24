@@ -135,6 +135,18 @@ public class PostController {
 		int postIdx = Integer.parseInt(request.getParameter("pIdx"));
 		System.out.println("포스트인덱스 : "+postIdx);
 		
+		return listService.updateLikes(postIdx, request);
+	}
+	
+	// 좋아요 여부
+	@GetMapping("/likeChk")
+	public Post getLikes(
+			HttpServletRequest request
+			) {
+		
+		int postIdx = Integer.parseInt(request.getParameter("pIdx"));
+		System.out.println("포스트인덱스 : "+postIdx);
+		
 		return listService.getLikes(postIdx, request);
 	}
 	
