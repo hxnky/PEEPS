@@ -9,6 +9,9 @@ public interface PostDao {
 	
 	// public abstract 
 	
+	// 멤버 id에 해당하는 멤버 idx 찾기
+	int selectMemberidx(String memberId);
+	
 	// 게시글 등록
 	int insertPost(Post post);
 	
