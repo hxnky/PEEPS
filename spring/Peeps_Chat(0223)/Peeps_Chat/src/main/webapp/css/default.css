@@ -64,7 +64,7 @@ body {
 
 aside {
 	width: 330px;
-	height: 900px;
+	height: 500px;
 	background-color: #F6EECC;
 	display: inline-block;
 	font-size: 15px;
@@ -72,8 +72,9 @@ aside {
 }
 
 #container {
+
 	width: 900px;
-	height: 900px;
+	height: 500px;
 	background: #eff3f7;
 	margin: 120PX auto;
 	padding: inherit;
@@ -233,26 +234,3 @@ main header h3 {
 	border-top: 2px solid #5e616a;
 	border-bottom: 2px solid #5e616a;
 }
-
-/* .text_right {
-	text-align: right;
-	width: auto;
-	max-width: 90%;
-	display: inline-block;
-	background-color: #F4F4F4;
-	border-radius: 5px;
-	padding: 20px;
-	margin-right: 10px;
-	word-wrap: break-word;
-}
-.text_left {
-	text-align: left;
-	width: auto;
-	max-width: 90%;
-	display: inline-block;
-	background-color: #F2D665;
-	border-radius: 5px;
-	padding: 20px;
-	margin-left: 10px;
-	word-wrap: break-word;
-} */

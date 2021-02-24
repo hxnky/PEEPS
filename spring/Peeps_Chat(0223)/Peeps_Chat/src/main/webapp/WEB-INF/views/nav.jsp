@@ -253,10 +253,8 @@ strong {
 			type : 'post',
 			data : al_idx,
 			success : function(data) {
-				$('#alarm_mask').remove(); //이전 페이지 컨텐츠 제거
-				$('#my_modal_header').scrollTop($('#my_modal_header')[0].scrollHeight);
-				//$('#alarm_mask').load(url + ' #alarm_mask').hide().fadeIn(slow);
-				//$('#alarm_mask').load(location.href + "#alarm_mask"); */
+				$('#alarm_mask').remove();	// 알람 css도 제거!
+				$('#my_modal_header').scrollTop($('#my_modal_header')[0].scrollHeight);	// 제거 후 알람들 위로 올리기
 				console.log("삭제 성공ㅎㅎㅎ");
 			},
 			error : function() {

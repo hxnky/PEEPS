@@ -13,22 +13,27 @@
 
 <style>
 #right {
+	margin-right: 15px;
+	padding: 15px;
+	display: inline;
 	text-align: right;
 	width: auto;
 	max-width: 70%;
-	background-color: #F2D665;
-	border-radius: 5px;
-	margin: 30px;
+	background-color: #F4F4F4;
+	border-radius: 20px;
 	word-wrap: break-word;
 }
+/* position: relative; */
 
 #left {
+	margin-left: 15px;
+	padding: 15px;
+	display: inline;
 	text-align: left;
 	width: auto;
 	max-width: 70%;
 	background-color: #F4F4F4;
-	border-radius: 5px;
-	margin: 30px;
+	border-radius: 20px;
 	word-wrap: break-word;
 }
 
@@ -44,10 +49,11 @@
 }
 
 strong {
+	padding: 30px;
+	display: inline;
 	font-size: 14px;
 	color: #5E5E5E;
 	font-weight: normal;
-	margin-bottom: 5px;
 }
 </style>
 
@@ -57,6 +63,10 @@ strong {
 	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.16/dayjs.min.js"
+	crossorigin="anonymous"></script>
+
 </head>
 
 <body></body>
@@ -124,19 +134,17 @@ strong {
 		var currentuser_session = $('#sessionuserid').val();
 
 		if (obj.m_idx == currentuser_session) { //m_idx = m_idx
-			var printHTML = "<div id='right'>";
-			printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
-			printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
-			printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
-			printHTML += "</div>";
+			var printHTML = "<br><br><div id='right'>";
+			printHTML += "<strong>" + obj.ch_ms + "</strong>";
+			printHTML += "<strong>" + obj.ch_time + "</strong>";
+			printHTML += "</div> <br><br>";
 
 			$('#chatdata').append(printHTML);
 		} else {
-			var printHTML = "<div id='left'>";
-			printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
-			printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
-			printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
-			printHTML += "</div>";
+			var printHTML = "<br><br><div id='left'>";
+			printHTML += "<strong>" + obj.ch_ms + "</strong>";
+			printHTML += "<strong>" + obj.ch_time + "</strong>";
+			printHTML += "</div> <br><br>";
 
 			$('#chatdata').append(printHTML);
 		}
@@ -188,11 +196,12 @@ strong {
 
 				var currentuser_session = $('#sessionuserid').val();
 				var date = new Date(val.ch_time);
+				const setDate = dayjs(date).format("MM/DD HH:mm");
 
 				var printHTML = "<div id='chatroom'>";
 				printHTML += "<strong>" + val.rm_idx + "</strong> <br>";
 				printHTML += "<strong>" + val.ch_ms + "</strong> <br>";
-				printHTML += "<strong>" + date + "</strong> <br>";
+				printHTML += "<strong>" + setDate + "</strong> <br>";
 				printHTML += "</div>";
 
 				$('#roomdata').prepend(printHTML);
@@ -221,23 +230,22 @@ strong {
 			$.each(list, function(key, val) {
 
 				var currentuser_session = $('#sessionuserid').val();
-				var date = new Date(val.ch_time);
+				var date = new Date(val.ch_time); // Thu Feb 18 2021 00:43:22 GMT+0900 (대한민국 표준시)
+				const setDate = dayjs(date).format("MM/DD HH:mm"); //02/18 00:43
 
-				if (val.m_idx == currentuser_session) { //m_idx = m_idx
-					var printHTML = "<div id='right'>";
-					printHTML += "<strong>" + val.m_idx + "</strong> <br>";
-					printHTML += "<strong>" + val.ch_ms + "</strong> <br>";
-					printHTML += "<strong>" + date + "</strong> <br>";
-					printHTML += "</div>";
+				if (val.m_idx == currentuser_session) { // m_idx = m_idx
+					var printHTML = "<br><br><div id='right'>";
+					printHTML += "<strong>" + val.ch_ms + "</strong>";
+					printHTML += "<strong>" + setDate + "</strong>";
+					printHTML += "</div> <br><br>";
 
 					$('#chatdata').prepend(printHTML);
 				} else {
-					var printHTML = "<div id='left'>";
-					printHTML += "<strong>" + val.m_idx + "</strong> <br>";
-					printHTML += "<strong>" + val.ch_ms + "</strong> <br>";
-					printHTML += "<strong>" + date + "</strong> <br>";
-					printHTML += "</div>";
-
+					var printHTML = "<br><br><div id='left'>";
+					printHTML += "<strong>" + val.ch_ms + "</strong>";
+					printHTML += "<strong>" + setDate + "</strong>";
+					printHTML += "</div> <br><br>";
+					
 					$('#chatdata').append(printHTML);
 				} // 2중 if/else
 
@@ -310,7 +318,7 @@ strong {
 							}
 						} // if 종료
 						console.log('날씨 해당 없음');
-						document.getElementById('chatdata').style.background =  "url(/chat/icon/navi/Logo.png)"
+						//document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
 					} //success func 종료
 				}) // ajax 종료
 
