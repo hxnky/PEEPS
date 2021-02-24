@@ -16,7 +16,7 @@
 <%@ include file="/WEB-INF/views/include/detailBasicset.jsp"%>  
 
 <body>
-
+<%@ include file="/WEB-INF/views/include/nav.jsp"%>
 	<div class="post_wrap">
 		<form method="post" enctype="multipart/form-data">
 		<table class="post">
