@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이 페이지</title>
+<title>메인 화면</title>
 </head>
 <body>
 
-<%@ include file="/WEB-INF/views/include/indexnav.jsp"%>
+<h1>메인 화면</h1>
 
-<h1>마이 페이지</h1>
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
 
 
 

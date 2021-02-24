@@ -27,6 +27,12 @@
 		<ul>
 			<a href="<c:url value="/post/test"/>">(test)</a>
 		</ul>
+		
+		
+		<ul>
+			<a href="<c:url value="/post/writetest"/>">TEST게시글 등록</a>
+		</ul>
+		
 	</div>
 </nav>
 

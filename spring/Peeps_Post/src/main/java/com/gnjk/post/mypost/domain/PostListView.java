@@ -4,18 +4,10 @@ import java.util.List;
 
 public class PostListView {
 	
-//	private int pageNumber; // 현재 페이지 번호
-//	private int totalMemberCount; // 전체 게시물의 개수
-//	private int cntPerPage; // 한 페이지에 노출할 게시물의 개수
-//	private List<Member> memberList; // 페이지에 노출할 회원의 정보를 담는 리스트
-//	private int startRow;
-//	private int endRow;
-//	private int totalPageCount; // 전체 페이지의 개수
-	
+	private List<Post> postList; // 한 페이지에 노출할 게시글 정보 리스트
 	private int pageNumber; // 현재 페이지 번호
 	private int totalPostCount; // 전체 게시물의 개수
 	private int cntPerPage; // 한 페이지에 노출할 게시물의 개수
-	private List<Post> postList; // 페이지에 노출할 게시글의 정보를 담는 리스트
 	private int startRow;
 	private int endRow;
 	private int totalPageCount; // 전체 페이지의 개수

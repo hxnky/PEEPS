@@ -16,7 +16,10 @@ public class Comment {
 	private int member_idx;
 	private Timestamp cmt_date;
 	private String cmt_content;
-
+	
+	// 21.02.24 게시글멤버idx 변수 추가
+	private int postmemberidx;
+	
 	// 데이터 형식 바꿔야할듯
 	public Date getToDate() {
 		
