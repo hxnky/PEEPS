@@ -364,10 +364,16 @@ margin: 25px 0 5px auto;
 					               contentType : false,
 					               cache : false ,
 					               success : function(data){
-					                  console.log("ajax data",data);
+					                  console.log("ajax data1",data);
 					                  console.log("작성완료");
+					               
+					                  $('#gmessage').val("");
+					                  $('#gphoto').val("");
 					                  loadGB(); 
+					                  
 					                  alert("방명록이 작성 되었습니다");
+					                  
+					                  
 					                  
 					               }
 					            });
