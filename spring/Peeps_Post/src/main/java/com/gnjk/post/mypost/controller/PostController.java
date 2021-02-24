@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonParser;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostEditRequest;
 import com.gnjk.post.mypost.domain.PostFile;
@@ -38,7 +36,7 @@ public class PostController {
 	private PostDeleteService deleteService;
 	@Autowired
 	private PostEditService editService;
-
+	
 	// 게시글 업로드
 	@PostMapping("/upload")
 	@ResponseBody
@@ -110,18 +108,11 @@ public class PostController {
 			@RequestParam Map<String, Object> param,
 			HttpServletRequest request,
 			Model model) {
-//		System.out.println("컨트롤러 진입 성공");
-//		System.out.println("파람 : "+param);
-//			
-//		System.out.println("리퀘멤idx : "+request.getParameter("memberidx"));
 			
 		String mIdx = request.getParameter("memberidx");
 		String pAddr = request.getParameter("postAdd");
-//		System.out.println("파라미터로 받은 pAddr : "+pAddr);
 			
 		int memberIdx = Integer.parseInt(mIdx);
-//		System.out.println(memberIdx);
-//		System.out.println(pAddr);
 			
 		return listService.getPostListByMapView(memberIdx, pAddr);
 	}
@@ -150,6 +141,7 @@ public class PostController {
 		return listService.getLikes(postIdx, request);
 	}
 	
+
 
 
 }
