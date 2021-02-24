@@ -1,8 +1,6 @@
 package com.gnjk.post.mypost.service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.gnjk.post.mypost.dao.FileDao;
 import com.gnjk.post.mypost.dao.LikeDao;
 import com.gnjk.post.mypost.dao.PostDao;
-import com.gnjk.post.mypost.domain.LoginInfo;
+import com.gnjk.post.mypost.domain.Peeps;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostFile;
 import com.gnjk.post.mypost.domain.PostListView;
@@ -30,16 +28,29 @@ public class PostListService {
 	private SqlSessionTemplate template;
 	
 	// 게시글 전체 리스트 불러오기
-	public PostListView getPostListView(int pageNumber) {
+	public PostListView getPostListView(int pageNumber, HttpServletRequest request, String memberid) {
+		// 로그인 세션 가져오기
+		HttpSession session = request.getSession();
+		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
+		System.out.println("로그인 인포 세션 : "+loginInfo);
 		
-		// test용 로그인 정보
-		int member_idx = 1;
+		// test 로그인 안된 경우, 로그인 정보 세션 생성
+		if(loginInfo == null) {
+			
+			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
+			session.setAttribute("peeps", loginInfo);
+		}
+		// 세션 멤버 idx 
+		int member_idx = loginInfo.getM_idx();
 		
 		PostListView listView = null;
 		
 		try {
 			// PostDao 구현체 생성
 			dao = template.getMapper(PostDao.class);
+			
+			// 멤버 id 로 멤버 idx 찾기
+			int pathMemberidx = dao.selectMemberidx(memberid);
 			
 			System.out.println("pageNumber : " + pageNumber);
 			
@@ -48,11 +59,11 @@ public class PostListService {
 			int startRow = (pageNumber-1)*cntPerPage;
 			int endRow = startRow+cntPerPage-1;
 			
-			int totalPostCount = dao.selectTotalPostCount(member_idx);
+			int totalPostCount = dao.selectTotalPostCount(pathMemberidx);
 			
 			System.out.println("postTotalCount : "+ totalPostCount);
 			
-			List<Post> postList = dao.selectPostList(member_idx, startRow, cntPerPage);
+			List<Post> postList = dao.selectPostList(pathMemberidx, startRow, cntPerPage);
 			System.out.println(postList);
 			
 			listView = new PostListView(pageNumber, totalPostCount, cntPerPage, postList, startRow, endRow);
@@ -79,14 +90,17 @@ public class PostListService {
 	}
 	
 	// 위치 가져오기
-	public List<Post> getMapListView(int midx) {
+	public List<Post> getMapListView(String memberid) {
 		
 		List<Post> postList = null;
 		
 		try {
 			dao = template.getMapper(PostDao.class);
 			
-			postList = dao.selectPostMapList(midx);
+			// 멤버 id 로 멤버 idx 찾기
+			int pathMemberidx = dao.selectMemberidx(memberid);
+			
+			postList = dao.selectPostMapList(pathMemberidx);
 			
 			System.out.println("지도 포스트 리스트 조회 : "+postList);
 		} catch (Exception e) {
@@ -98,13 +112,16 @@ public class PostListService {
 	}
 	
 	// 주소로 게시글 가져오기
-	public PostListView getPostListByMapView(int mIdx, String pAddr) {
+	public PostListView getPostListByMapView(String pathmId, String pAddr) {
 		
 		PostListView listView = null;
 		
 		try {
 			// PostDao 구현체 생성
 			dao = template.getMapper(PostDao.class);
+			
+			// 멤버 id로 멤버 idx 가져오기
+			int mIdx = dao.selectMemberidx(pathmId);
 			
 			List<Post> postList = dao.selectPostByAddrList(pAddr, mIdx);
 			System.out.println(postList);
@@ -123,8 +140,9 @@ public class PostListService {
 	public Post updateLikes(int pIdx, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-		LoginInfo loginInfo = (LoginInfo) session.getAttribute("peeps");
-		System.out.println("로그인 인포 세션1 : "+loginInfo);
+		/* LoginInfo loginInfo = (LoginInfo) session.getAttribute("peeps"); */
+		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
+		System.out.println("로그인 인포 세션 : "+loginInfo);
 		
 		int result = 0;
 		
@@ -138,10 +156,12 @@ public class PostListService {
 			e.printStackTrace();
 		}
 		
+		// test loginInfo null인 경우 interceptor 처리
 		if(loginInfo == null) { // 로그인이 안된 경우
 			
 			// test 로그인 정보 세션 생성
-			loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); 
+			/* loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); */
+			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
 			session.setAttribute("peeps", loginInfo);
 			System.out.println("로그인 인포 세션2 : "+loginInfo);
 			post.setLikeChk(0);
@@ -213,7 +233,7 @@ public class PostListService {
 	public Post getLikes(int pIdx, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-		LoginInfo loginInfo = (LoginInfo) session.getAttribute("peeps");
+		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
 		System.out.println("로그인 인포 세션1 : "+loginInfo);
 		
 		int result = 0;
@@ -228,10 +248,12 @@ public class PostListService {
 			e.printStackTrace();
 		}
 		
+		// test loginInfo null인 경우 interceptor 처리
 		if(loginInfo == null) { // 로그인이 안된 경우
 			
 			// test 로그인 정보 세션 생성
-			loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); 
+			/* loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); */
+			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
 			session.setAttribute("peeps", loginInfo);
 			System.out.println("로그인 인포 세션2 : "+loginInfo);
 			post.setLikeChk(0);
