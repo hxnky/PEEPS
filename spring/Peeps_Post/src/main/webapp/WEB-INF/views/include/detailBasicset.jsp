@@ -280,8 +280,12 @@ function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[
 	
 var postIdx = getParameterByName('idx');
 /* console.log("포스트인덱스 : ",postIdx); */
-var memberIdx = "";
-	
+/* var memberIdx = ""; */
+
+/* test */
+var sessionMidx = "${peeps.m_idx}";
+console.log("세션정보!!!~~ : ", sessionMidx);
+
 	    $(document).ready(function(){
 	        
 	        // 글자 수 제한
@@ -317,9 +321,12 @@ var memberIdx = "";
 					var infoHtml = '<input type="hidden" class="memberidx" value="'+data.member_idx+'">';
 					$('.memberid').append(infoHtml);
 					
-					var Btn = '<a class="deleteBtn" href="javascript:deletePost('+data.p_idx+');">삭제</a>';
-					   Btn += '<a class="editBtn" href="<c:url value="/main/post/edit?idx='+data.p_idx+'" />">수정</a>';
-					$('.deBtn').append(Btn);
+					if(sessionMidx == data.member_idx){
+						console.log("세션midx랑 게시글midx가 같습니다.");
+						var Btn = '<a class="deleteBtn" href="javascript:deletePost('+data.p_idx+');">삭제</a>';
+						   Btn += '<a class="editBtn" href="<c:url value="/main/post/edit?idx='+data.p_idx+'" />">수정</a>';
+						$('.deBtn').append(Btn);
+					}
 					   
 					/* console.log(data.p_title); */
 					$('.ptitle').append(data.p_title);
