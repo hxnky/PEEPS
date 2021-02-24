@@ -53,6 +53,7 @@ nav ul li button {
 
 /* chat */
 body {
+	position: sticky;
 	background-color: #FCF9F6;
 	font-family: Arial;
 }
@@ -64,7 +65,7 @@ body {
 
 aside {
 	width: 330px;
-	height: 500px;
+	height: 640px;
 	background-color: #F6EECC;
 	display: inline-block;
 	font-size: 15px;
@@ -72,11 +73,10 @@ aside {
 }
 
 #container {
-
 	width: 900px;
-	height: 500px;
+	height: 640px;
 	background: #eff3f7;
-	margin: 120PX auto;
+	margin: 90PX auto;
 	padding: inherit;
 	font-size: 0;
 	border-radius: 5px;
@@ -109,7 +109,7 @@ aside header span {
 
 main {
 	width: 570px;
-	height: 900px;
+	height: 590px;
 	display: inline-block;
 	font-size: 15px;
 	vertical-align: top;
@@ -125,7 +125,7 @@ main {
 
 /* footer*/
 main footer {
-	height: 155px;
+	height: 130px;
 	padding: 10px 15px 10px 15px;
 	margin-bottom: -110px;
 }
@@ -135,7 +135,7 @@ main footer #message {
 	border: none;
 	display: block;
 	width: 100%;
-	height: 100px;
+	height: 90px;
 	border-radius: 3px;
 	padding: 10px;
 	font-size: 13px;
@@ -152,6 +152,7 @@ main footer img {
 }
 
 .send {
+	margin-top: -5px;
 	height: 100%;
 	display: flex;
 	align-items: center;
@@ -160,7 +161,7 @@ main footer img {
 
 #sendBtn {
 	width: 100px;
-	height: 100px;
+	height: 90px;
 	font-size: 20px;
 	letter-spacing: 2px;
 	background-color: #F5E978;
@@ -192,8 +193,8 @@ aside li img {
 }
 
 main header {
-	height: 50px;
-	padding: 30px 20px 30px 40px;
+	height: 30px;
+	padding: 10px 20px 20px 40px;
 }
 
 main header>* {
@@ -230,7 +231,7 @@ main header h3 {
 #chatdata {
 	list-style-type: none;
 	overflow-y: scroll;
-	height: 600px;
+	height: 430px;
 	border-top: 2px solid #5e616a;
 	border-bottom: 2px solid #5e616a;
 }
