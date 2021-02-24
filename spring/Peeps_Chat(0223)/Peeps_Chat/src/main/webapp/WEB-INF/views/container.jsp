@@ -28,11 +28,10 @@
 
 			</header>
 			<div class="rooms" id="roomdata">
-			<ul>
-				<li><a id="aside_photo"><img
-						src="<c:url value='/icon/navi/Logo.png' />"></a>
-
-			</ul>
+				<ul>
+					<li><a id="aside_photo"><img
+							src="<c:url value='/icon/navi/Logo.png' />"></a>
+				</ul>
 			</div>
 		</aside>
 
@@ -61,7 +60,10 @@
 					alt=""> <img
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png"
 					alt="">
-
+				<button type="button" id="emt">
+					<img onclick="modal('emtset')"
+						src="<c:url value='/icon/navi/Logo.png' />" id="emtLogo">
+				</button>
 				<div class="send">
 					<input type="text" id="message" name="ch_ms"
 						placeholder="Type your message" />
@@ -73,6 +75,5 @@
 		</main>
 
 	</div>
-
 </body>
 </html>

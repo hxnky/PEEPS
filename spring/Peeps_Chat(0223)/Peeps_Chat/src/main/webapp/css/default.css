@@ -53,9 +53,9 @@ nav ul li button {
 
 /* chat */
 body {
-	position: sticky;
-	background-color: #FCF9F6;
+	position: sticky; background-color : #FCF9F6;
 	font-family: Arial;
+	background-color: #FCF9F6;
 }
 
 /* 스크롤 바 없애기 */
@@ -148,7 +148,25 @@ main footer #message::placeholder {
 main footer img {
 	height: 30px;
 	cursor: pointer;
-	margin-bottom: -15px;
+	margin-bottom: -20px;
+	overflow: hidden;
+}
+
+#emt {
+	margin-top: -15px;
+	margin-bottom: -10px;
+	width: 40px;
+	height: 40px;
+	font-size: 20px;
+	border: none;
+	cursor: pointer;
+	outline: none;
+}
+
+#emtLogo {
+	width: 40px;
+	height: 40px;
+
 }
 
 .send {

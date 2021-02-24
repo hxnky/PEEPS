@@ -45,9 +45,10 @@ public class ChattingHandler extends TextWebSocketHandler {
 	 * // 파일 업로드 private static final String FILE_UPLOAD_PATH =
 	 * "/Users/seoa/Documents/websocket/"; // 파일 저장 경로 static int fileUploadIdx = 0;
 	 * static String fileUploadSession = "";
-	 * 
-	 * @Autowired private MessageDao dao;
-	 */
+	 */ 
+	 @Autowired
+	 private MessageDao dao;
+	 
 	
 	
 	// =============================================================
@@ -102,7 +103,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 			sockSession.sendMessage(sendmes);
 		 }
 		 
-		 //dao.insertMessage(mes);
+		 dao.insertMessage(mes);
 		 
 	}
 

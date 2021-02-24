@@ -34,8 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <!--  메세지 저장  -->
    <insert id ="insertMessage" parameterType ="com.gnjk.chat.domain.Message">
-      insert into chat.chat(m_idx, rm_idx, ch_time, ch_ms)
-      values (#{m_idx},#{rm_idx},#{ch_time},#{ch_ms}) 
+      insert into chat.chat(m_idx, rm_idx, ch_time, ch_ms, e_idx)
+      values (#{m_idx},#{rm_idx},#{ch_time},#{ch_ms}, #{e_idx}) 
    </insert>   
    
   

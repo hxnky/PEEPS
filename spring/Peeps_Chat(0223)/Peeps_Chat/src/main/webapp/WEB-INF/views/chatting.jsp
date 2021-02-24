@@ -23,7 +23,6 @@
 	border-radius: 20px;
 	word-wrap: break-word;
 }
-/* position: relative; */
 
 #left {
 	margin-left: 15px;
@@ -55,6 +54,25 @@ strong {
 	color: #5E5E5E;
 	font-weight: normal;
 }
+
+/* 이모티콘 */
+#emtset {
+	display: none;
+	width: 200px;
+	height: 80px;
+	padding: 20px 60px;
+	background-color: #F5E978;
+	border: 1px solid #888;
+	border-radius: 10px;
+	padding: 20px 60px;
+	overflow: auto;
+}
+
+#emtset #btn {
+	position: fixed;
+	top: 15px;
+	right: 15px;
+}
 </style>
 
 <!-- SocketJS CDN -->
@@ -69,7 +87,28 @@ strong {
 
 </head>
 
-<body></body>
+<body>
+
+	<!--Emoticon modal -->
+	<div id="emtset">
+		<div id="emtset_header">이모티콘 :)</div>
+
+		<table>
+			<tr>
+				<td><a href="#none"><img onclick="sendemt('emt1')"
+						src="<c:url value='/icon/navi/Logo.png' />" id="emt1"></a></td>
+				<td><a href="#none"><img onclick="sendemt('emt2')"
+						src="<c:url value='/icon/navi/Logo.png' />" id="emt2"></a></td>
+				<td><a href="#none"><img onclick="sendemt('emt3')"
+						src="<c:url value='/icon/navi/Logo.png' />" id="emt3"></a></td>
+			<tr>
+		</table>
+
+		<button type="button" id="btn">x</button>
+
+	</div>
+
+</body>
 
 <script>
 	sock = new SockJS("<c:url value="/chat"/>");
@@ -98,6 +137,11 @@ strong {
 				printMes(data);
 			}
 		});
+		
+		$('#emt').click(function() {
+			modal('emtset');
+		});
+		
 	});
 
 	function onOpen() {
@@ -105,6 +149,26 @@ strong {
 		weatherAPI();
 	};
 
+	function sendemt(emt) {
+		
+		var date = new Date(); // 자바스크립트 Date 객체
+		var str = JSON.stringify(date.toJSON()); // Date 객체를 JSON 형식의 문자열로 변환
+		var mes = {
+			m_idx : '${m_idx}',
+			rm_idx : '${rm_idx}',
+			ch_ms : 'emt',
+			e_idx : emt,
+			ch_time : date
+		}
+		if (mes.e_idx == "") {
+			return false; // 메세지 없이 전송 X
+		} else {
+			sock.send(JSON.stringify(mes)); // JSON문자열로 반환
+			console.log(JSON.stringify(mes));
+			console.log('위 메세지 소켓에 전송');			
+		}
+	}
+	
 	function sendMessage() {
 		var date = new Date(); // 자바스크립트 Date 객체
 		var str = JSON.stringify(date.toJSON()); // Date 객체를 JSON 형식의 문자열로 변환
@@ -122,7 +186,6 @@ strong {
 			sock.send(JSON.stringify(mes)); // JSON문자열로 반환
 			console.log(JSON.stringify(mes));
 			console.log('위 메세지 소켓에 전송');
-
 		}
 		$("#message").val("");
 	}
@@ -130,20 +193,33 @@ strong {
 	function onMessage(evt) {
 		var data = evt.data;
 		var obj = JSON.parse(data);
+		const setDate = dayjs(obj.ch_time).format("MM/DD HH:mm");
 
 		var currentuser_session = $('#sessionuserid').val();
 
 		if (obj.m_idx == currentuser_session) { //m_idx = m_idx
 			var printHTML = "<br><br><div id='right'>";
-			printHTML += "<strong>" + obj.ch_ms + "</strong>";
-			printHTML += "<strong>" + obj.ch_time + "</strong>";
+				if(obj.e_idx == null) {
+					printHTML += "<strong>" + obj.ch_ms + "</strong>";
+				} else {
+					printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
+					//printHTML += "<img src = "+"<c:url value= '/icon/navi/Logo.png' />";
+					//printHTML += "id="+ obj.e_idx + ">";
+				}
+			printHTML += "<strong>" + setDate + "</strong>";
 			printHTML += "</div> <br><br>";
 
 			$('#chatdata').append(printHTML);
 		} else {
 			var printHTML = "<br><br><div id='left'>";
-			printHTML += "<strong>" + obj.ch_ms + "</strong>";
-			printHTML += "<strong>" + obj.ch_time + "</strong>";
+			if(obj.e_idx == null) {
+				printHTML += "<strong>" + obj.ch_ms + "</strong>";
+			} else {
+				printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
+				//printHTML += "<img src = <c:url value= '/icon/navi/Logo.png' />";
+				//printHTML += "id="+ obj.e_idx + ">";
+			}
+			printHTML += "<strong>" + setDate + "</strong>";
 			printHTML += "</div> <br><br>";
 
 			$('#chatdata').append(printHTML);
@@ -232,24 +308,32 @@ strong {
 				var currentuser_session = $('#sessionuserid').val();
 				var date = new Date(val.ch_time); // Thu Feb 18 2021 00:43:22 GMT+0900 (대한민국 표준시)
 				const setDate = dayjs(date).format("MM/DD HH:mm"); //02/18 00:43
+				
+					if (val.m_idx == currentuser_session) { //m_idx = m_idx
+						var printHTML = "<br><br><div id='right'>";
+							if(val.e_idx == null) {
+								printHTML += "<strong>" + val.ch_ms + "</strong>";
+							} else {
+								printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
+							}
+						printHTML += "<strong>" + setDate + "</strong>";
+						printHTML += "</div> <br><br>";
 
-				if (val.m_idx == currentuser_session) { // m_idx = m_idx
-					var printHTML = "<br><br><div id='right'>";
-					printHTML += "<strong>" + val.ch_ms + "</strong>";
-					printHTML += "<strong>" + setDate + "</strong>";
-					printHTML += "</div> <br><br>";
+						$('#chatdata').append(printHTML);
+					} else {
+						var printHTML = "<br><br><div id='left'>";
+						if(val.e_idx == null) {
+							printHTML += "<strong>" + val.ch_ms + "</strong>";
+						} else {
+							printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png  />";
+						}
+						printHTML += "<strong>" + setDate + "</strong>";
+						printHTML += "</div> <br><br>";
 
-					$('#chatdata').prepend(printHTML);
-				} else {
-					var printHTML = "<br><br><div id='left'>";
-					printHTML += "<strong>" + val.ch_ms + "</strong>";
-					printHTML += "<strong>" + setDate + "</strong>";
-					printHTML += "</div> <br><br>";
-					
-					$('#chatdata').append(printHTML);
-				} // 2중 if/else
+						$('#chatdata').append(printHTML);
+					}
 
-				$('#chatdata').scrollTop($('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
+					$('#chatdata').scrollTop($('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
 
 			}); // $.each
 		} // 2중 if/else
@@ -323,5 +407,46 @@ strong {
 				}) // ajax 종료
 
 	}
+</script>
+
+<script>
+	function modal(id) {
+		var zIndex = 9999;
+		var modal = $('#' + id);
+		// 모달 div 뒤에 희끄무레한 레이어
+		
+		var bg = $('<div>').css({
+/*			position : 'fixed',
+			zIndex : zIndex,
+			left : '500px',
+			top : '500px',
+			width : '450px',
+			height : '700px',
+			overflow : 'auto',
+			// 레이어 색갈은 여기서 바꾸면 됨
+			backgroundColor : 'rgba(0,0,0,0.500)'*/
+		}).appendTo('main');
+		modal
+				.css(
+						{
+							position : 'fixed',
+							boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+							// 시꺼먼 레이어 보다 한칸 위에 보이기
+							zIndex : zIndex + 1,
+							// div center 정렬
+							top : '65%',
+							left : '60%',
+							transform : 'translate(-50%, -50%)',
+							msTransform : 'translate(-50%, -50%)',
+							webkitTransform : 'translate(-50%, -50%)'
+						}).show()
+
+				// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+				.find('#btn').on('click', function() {
+					bg.remove();
+					modal.hide();
+				});
+	}
+
 </script>
 </html>
