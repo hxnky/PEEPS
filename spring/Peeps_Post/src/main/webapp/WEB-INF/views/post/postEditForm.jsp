@@ -16,6 +16,7 @@
 	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap')
 	;
 </style>
+<link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 
 <style>
 .post_wrap {
@@ -144,7 +145,7 @@ body {
 </script>    
 
 <body>
-
+<%@ include file="/WEB-INF/views/include/nav.jsp"%>
 	<div class="post_wrap">
 		<form method="post" enctype="multipart/form-data" id="uploadForm">
 		<table class="post">
