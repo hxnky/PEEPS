@@ -55,6 +55,14 @@ crossorigin="anonymous"></script>
 	margin-top: 10px;
 }
 
+.sessionmid {
+	float: left;
+	margin-right: 15px;	
+		font-weight: 800;
+	font-size: 20px;
+	margin-top: 10px;
+}
+
 .followchk {
 	color: #aaa;
 }
@@ -350,6 +358,41 @@ console.log("세션정보!!!~~ : ", sessionMidx);
 					}
 					
 					$('.likes').append(data.p_likes);
+					
+					var postMidx = {
+						"mIdx" : data.member_idx
+				 	};
+					
+					$.ajax({
+						url: 'http://localhost:8081/peeps/user/idList',
+						type: 'GET',
+						data: postMidx,
+						success: function(data){
+							console.log("ajax 성공시 data : ", data);
+							
+							$.each(data, function(index, item){
+								console.log("each문 안! : ", item.id);
+								
+								if(item.loginType == "email"){
+									
+									var html = '<img class="postuserphoto" src="<c:url value="/fileupload/'+item.m_photo+'"/>">';
+									$('.post_top').append(html);
+								} else {
+									
+									var html = '<img class="postuserphoto" src="<c:url value="'+item.m_photo+'"/>">';
+									$('.post_top').append(html);
+								}
+								
+								var html2 = '<span class="memberid">'+item.id+'</span>';
+								$('.post_top').append(html2);
+							});
+							
+						},
+						error: function(e){
+							
+						}
+					});
+					
 				},
 				error : function(e) {
 					console.log("게시글내용ajax에러");

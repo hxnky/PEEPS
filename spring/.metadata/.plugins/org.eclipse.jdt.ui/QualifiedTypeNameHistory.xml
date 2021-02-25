@@ -31,7 +31,6 @@
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.domain.PostListView"/>
 <fullyQualifiedTypeName name="com.fasterxml.jackson.core.JsonParser"/>
-<fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.dao.LikeDao"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.domain.Peeps"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
 </qualifiedTypeNameHistroy>

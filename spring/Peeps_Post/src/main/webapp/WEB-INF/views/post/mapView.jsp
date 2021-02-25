@@ -23,7 +23,7 @@
 			<div id="profile_wrap">
 				<img src="<spring:url value='/resources/img/chick.jpg'/>">
 				<div id="pro_btn">
-				<input type="hidden" class="idx" value="1">
+				<input type="hidden" id="idx" value="1">
 					<ul>	
 						<li id="memberId">아이디</li>
 						<li><button id="pro_edit">
@@ -86,13 +86,13 @@
 	   menuHtml += '<button>방명록</button>'; 
 	   $('.menuselect').append(menuHtml);
 	   
-	var memberidx = $('.idx').val();
+	var memberidx = $('#idx').val();
 	console.log("hidden 멤버인덱스 : ",memberidx);
     
 	$(document).ready(function(){
 		
 		console.log("document.ready 안 : ", pathMemberId);
-		var memberidx = $('.idx').val();
+		var memberidx = $('#idx').val();
 		console.log(memberidx);
 		
 		var pathmId = {

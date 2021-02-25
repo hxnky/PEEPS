@@ -23,7 +23,7 @@
 			<div id="profile_wrap">
 				<img src="<spring:url value='/resources/img/chick.jpg'/>">
 				<div id="pro_btn">
-				<input type="hidden" class="idx" value="1">
+				<input type="hidden" id="idx" value="1">
 					<ul>
 						<li>아이디</li>
 						<li><button id="pro_edit">
@@ -68,6 +68,7 @@
 	<div class="paging">
 	</div>
 	
+	
 	<script>
 	// 뷰컨트롤러 통해 페이지 번호 받기
 	function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -93,7 +94,7 @@
 	$(document).ready(function(){
 		
 		console.log("document.ready 안 : ", pathMemberId);
-		var memberidx = $('.idx').val();
+		var memberidx = $('#idx').val();
 		console.log(memberidx);
 		
 		var pathmId = {
@@ -157,7 +158,25 @@
 			}
 			
 		});
-	});
+		
+		$.ajax({
+			url: 'http://localhost:8081/peeps/user/idxList',
+			type: 'GET',
+			data: pathmId,
+			success: function(data){
+				console.log("ajax 성공시 data : ", data);
+				
+				$.each(data, function(index, item){
+					console.log("each문 안! : ", item.id);
+				});
+				
+			},
+			error: function(e){
+				
+			}
+		});
+		
+	}); // document.ready 끝
 	
 	</script>
 </body>

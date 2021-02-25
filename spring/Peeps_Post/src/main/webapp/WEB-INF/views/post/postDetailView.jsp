@@ -23,9 +23,9 @@
 			<tr>
 				<td class="post_top_wrap">
 					<div class="post_top">
-						<img class="postuserphoto" src="<spring:url value='/resources/img/puppy3.jpg'/>">
-						<span class="memberid">hxnky__</span>
-						<span class="followchk" >· 팔로잉</span>
+						<%-- <img class="postuserphoto" src="<spring:url value='/resources/img/puppy3.jpg'/>">
+						<span class="memberid"></span> --%>
+						<!-- <span class="followchk" >· 팔로잉</span> -->
 					</div>
 				</td>
 			</tr>
@@ -88,8 +88,18 @@
 			<tr>
 				<td>
 				<div class="cmtdiv">
-					<img class="postuserphoto" src="<spring:url value='/resources/img/puppy3.jpg'/>">
-					<span class="memberid" >hxnky__</span>
+					<%-- <img class="postuserphoto" src="<spring:url value='/resources/img/puppy3.jpg'/>"> --%>
+						<c:set var="loginType" value="${peeps.loginType}" />
+						<c:choose>
+							<c:when test="${loginType eq 'email'}">
+								<img class="postuserphoto"
+									src="<c:url value="/fileupload/${peeps.m_photo}"/>">
+							</c:when>
+							<c:when test="${loginType ne 'email' }">
+								<img class="postuserphoto" src="<c:url value="${peeps.m_photo}"/>">
+							</c:when>
+						</c:choose>					
+					<span class="sessionmid">${peeps.id}</span>
 					<span class="cmtinputarea">
 					<textarea rows="10"
 							  class="cmttxt" name="pcmt" id="cmttxt"

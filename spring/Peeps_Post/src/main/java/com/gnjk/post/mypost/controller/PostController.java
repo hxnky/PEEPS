@@ -71,18 +71,6 @@ public class PostController {
 			, HttpServletRequest request //test세션
 			) {
 		
-		// test 로그인 세션 가져오기
-		HttpSession session = request.getSession();
-		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
-		System.out.println("로그인 인포 세션 : "+loginInfo);
-		
-		// test 로그인 안된 경우, 로그인 정보 세션 생성
-		if(loginInfo == null) {
-			
-			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
-			session.setAttribute("peeps", loginInfo);
-		}
-		
 		return listService.getDetail(postIdx);
 	}
 	

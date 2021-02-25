@@ -40,11 +40,11 @@ public class PostUploadService {
 		System.out.println("로그인 인포 세션 : "+loginInfo);
 		
 		// test 로그인 안된 경우, 로그인 정보 세션 생성
-		if(loginInfo == null) {
-			
-			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
-			session.setAttribute("peeps", loginInfo);
-		}
+//		if(loginInfo == null) {
+//			
+//			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
+//			session.setAttribute("peeps", loginInfo);
+//		}
 		
 		// 세션 멤버 idx 
 		int memberIdx = loginInfo.getM_idx();

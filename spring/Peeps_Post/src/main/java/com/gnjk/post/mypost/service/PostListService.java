@@ -34,12 +34,6 @@ public class PostListService {
 		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
 		System.out.println("로그인 인포 세션 : "+loginInfo);
 		
-		// test 로그인 안된 경우, 로그인 정보 세션 생성
-		if(loginInfo == null) {
-			
-			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
-			session.setAttribute("peeps", loginInfo);
-		}
 		// 세션 멤버 idx 
 		int member_idx = loginInfo.getM_idx();
 		
@@ -161,8 +155,8 @@ public class PostListService {
 			
 			// test 로그인 정보 세션 생성
 			/* loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); */
-			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
-			session.setAttribute("peeps", loginInfo);
+//			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
+//			session.setAttribute("peeps", loginInfo);
 			System.out.println("로그인 인포 세션2 : "+loginInfo);
 			post.setLikeChk(0);
 			System.out.println("로그인 안된 경우 post : "+post);
@@ -253,8 +247,8 @@ public class PostListService {
 			
 			// test 로그인 정보 세션 생성
 			/* loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); */
-			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
-			session.setAttribute("peeps", loginInfo);
+//			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
+//			session.setAttribute("peeps", loginInfo);
 			System.out.println("로그인 인포 세션2 : "+loginInfo);
 			post.setLikeChk(0);
 			System.out.println("로그인 안된 경우 post : "+post);

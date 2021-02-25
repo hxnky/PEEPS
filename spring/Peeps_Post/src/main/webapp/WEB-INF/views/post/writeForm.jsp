@@ -21,7 +21,7 @@
 		<table class="post">
 			<tr>
 				<td>							<!-- test 회원idx  -->
-					<input type="hidden" name="userIdx" value="1">
+					<!-- <input type="hidden" name="userIdx" value="1"> -->
 				</td>
 			</tr>
 			<!-- 날짜 -->
@@ -225,7 +225,13 @@
 	    	for (var value of formData.values()) {
 	    		console.log("밸류 : ", value);
 	    	};			
-	    			
+	    	
+	    	/* 세션에서 회원 idx 받아오기 */
+	    	var m_idx = ${peeps.m_idx};	
+	    	console.log("세션으로 받아온 midx : ", m_idx);
+	    	formData.append("userIdx", m_idx);
+	    	console.log("최종 formdata : ", formData);
+	    	
 	    	//ajax로 폼데이터 전송
 	    	$.ajax({
 	    		url : 'http://localhost:8080/post/rest/member/post/upload',
@@ -234,9 +240,11 @@
 	    		processData: false,
 	    		contentType: false,
 	    		success : function(data){
-	    					
-	    		console.log("ajax 데이터 : ",data);				/* test 계정 아이디 */
-	    		window.location.href="http://localhost:8080/post/main/jhS2"; 
+	    		
+	    		/* 세션으로 받아온 회원id */
+	    		var memberid = "${peeps.id}";
+	    		console.log("ajax 데이터 : ",data);				
+	    		window.location.href="http://localhost:8080/post/main/"+memberid; 
 	    					
 	    		},error: function(e){
 	    		console.log("ajax전송에러");	
