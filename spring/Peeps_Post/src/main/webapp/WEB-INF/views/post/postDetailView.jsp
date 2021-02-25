@@ -18,7 +18,6 @@
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp"%>
 	<div class="post_wrap">
-		<form method="post" enctype="multipart/form-data">
 		<table class="post">
 			<!-- 작성자 정보 -->
 			<tr>
@@ -96,7 +95,7 @@
 							  class="cmttxt" name="pcmt" id="cmttxt"
 							  placeholder="댓글을 입력해주세요." required
 					></textarea>
-					<input type="submit" class="cmtbtn" value="등록">
+					<button class="cmtbtn">등록</button>
 					</span>
 				</div>
 				</td>
@@ -110,7 +109,6 @@
 				</td>
 			</tr>
 		</table>
-		</form>
 	</div>
 
 	

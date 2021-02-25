@@ -657,8 +657,8 @@ $(function() {
 	console.log("포스트IDX확인 : ",postIdx);
 	
 	// 댓글 작성
-	$("#cmtbtn").click(function() {
-		
+	$(document).on("click", ".cmtbtn", function(){
+
 		var cmt = $('#cmttxt').val();
 		
 		var mIdx = $('.memberidx').val();
@@ -674,7 +674,7 @@ $(function() {
     			async : false,
     			data : {
     				"post_idx" : postIdx,
-    				"member_idx" : "${m_idx}",
+    				"member_idx" : mIdx,
     				"cmt_content" : cmt
     			},
     			success : function(data) {
@@ -796,13 +796,13 @@ $(function() {
 				if(reply.trim() == ""){
 		            alert("내용을 입력해주세요");
 				} else{
-					
+					// 세션 m_idx 값 넣기
 					$.ajax({
 								url : '${pageContext.request.contextPath}/rest/cmt/reply/insert',
 								type : 'post',
 								data : {
 									"comment_idx" : cmt_idx,
-									"member_idx" : "${m_idx}",
+									"member_idx" : 2,
 									"re_content" : reply
 								},
 								success : function(data) {
