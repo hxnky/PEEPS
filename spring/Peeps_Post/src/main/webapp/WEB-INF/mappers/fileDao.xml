@@ -11,10 +11,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		useGeneratedKeys="true" keyProperty="f_idx">
 
 		INSERT INTO file
-		(f_idx, f_name, f_path, f_type, f_size, post_idx)
+		(f_idx, f_name, post_idx)
 		VALUES
 		<!-- <foreach collection="list" item="item" separator=","> -->
-		(#{f_idx},#{f_name},#{f_path},#{f_type},#{f_size},#{post_idx})
+		(#{f_idx},#{f_name},#{post_idx})
 		<!-- </foreach> -->
 
 	</insert>

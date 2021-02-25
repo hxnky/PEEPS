@@ -23,6 +23,7 @@
 			<div id="profile_wrap">
 				<img src="<spring:url value='/resources/img/chick.jpg'/>">
 				<div id="pro_btn">
+				<input type="hidden" class="idx" value="1">
 					<ul>
 						<li>아이디</li>
 						<li><button id="pro_edit">
@@ -92,10 +93,13 @@
 	$(document).ready(function(){
 		
 		console.log("document.ready 안 : ", pathMemberId);
+		var memberidx = $('.idx').val();
+		console.log(memberidx);
 		
 		var pathmId = {
-			"mId" : pathMemberId
-		};
+			"mId" : pathMemberId,
+			"mIdx" : memberidx
+ 		};
 		
 		$.ajax({
 			url: 'http://localhost:8080/post/rest/member/post/list?p='+p,

@@ -28,7 +28,7 @@ public class PostListService {
 	private SqlSessionTemplate template;
 	
 	// 게시글 전체 리스트 불러오기
-	public PostListView getPostListView(int pageNumber, HttpServletRequest request, String memberid) {
+	public PostListView getPostListView(int pageNumber, HttpServletRequest request, int mIdx) {
 		// 로그인 세션 가져오기
 		HttpSession session = request.getSession();
 		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
@@ -50,7 +50,7 @@ public class PostListService {
 			dao = template.getMapper(PostDao.class);
 			
 			// 멤버 id 로 멤버 idx 찾기
-			int pathMemberidx = dao.selectMemberidx(memberid);
+//			int pathMemberidx = dao.selectMemberidx(memberid);
 			
 			System.out.println("pageNumber : " + pageNumber);
 			
@@ -59,11 +59,11 @@ public class PostListService {
 			int startRow = (pageNumber-1)*cntPerPage;
 			int endRow = startRow+cntPerPage-1;
 			
-			int totalPostCount = dao.selectTotalPostCount(pathMemberidx);
+			int totalPostCount = dao.selectTotalPostCount(mIdx);
 			
 			System.out.println("postTotalCount : "+ totalPostCount);
 			
-			List<Post> postList = dao.selectPostList(pathMemberidx, startRow, cntPerPage);
+			List<Post> postList = dao.selectPostList(mIdx, startRow, cntPerPage);
 			System.out.println(postList);
 			
 			listView = new PostListView(pageNumber, totalPostCount, cntPerPage, postList, startRow, endRow);
@@ -90,7 +90,7 @@ public class PostListService {
 	}
 	
 	// 위치 가져오기
-	public List<Post> getMapListView(String memberid) {
+	public List<Post> getMapListView(int mIdx) {
 		
 		List<Post> postList = null;
 		
@@ -98,9 +98,9 @@ public class PostListService {
 			dao = template.getMapper(PostDao.class);
 			
 			// 멤버 id 로 멤버 idx 찾기
-			int pathMemberidx = dao.selectMemberidx(memberid);
+//			int pathMemberidx = dao.selectMemberidx(memberid);
 			
-			postList = dao.selectPostMapList(pathMemberidx);
+			postList = dao.selectPostMapList(mIdx);
 			
 			System.out.println("지도 포스트 리스트 조회 : "+postList);
 		} catch (Exception e) {
@@ -112,7 +112,7 @@ public class PostListService {
 	}
 	
 	// 주소로 게시글 가져오기
-	public PostListView getPostListByMapView(String pathmId, String pAddr) {
+	public PostListView getPostListByMapView(int mIdx, String pAddr) {
 		
 		PostListView listView = null;
 		
@@ -121,7 +121,7 @@ public class PostListService {
 			dao = template.getMapper(PostDao.class);
 			
 			// 멤버 id로 멤버 idx 가져오기
-			int mIdx = dao.selectMemberidx(pathmId);
+//			int mIdx = dao.selectMemberidx(pathmId);
 			
 			List<Post> postList = dao.selectPostByAddrList(pAddr, mIdx);
 			System.out.println(postList);

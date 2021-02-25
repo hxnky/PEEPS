@@ -23,7 +23,8 @@
 			<div id="profile_wrap">
 				<img src="<spring:url value='/resources/img/chick.jpg'/>">
 				<div id="pro_btn">
-					<ul>	<!-- test id추가했음 -->
+				<input type="hidden" class="idx" value="1">
+					<ul>	
 						<li id="memberId">아이디</li>
 						<li><button id="pro_edit">
 								<a href="#">프로필 편집</a>
@@ -84,13 +85,19 @@
 	   menuHtml += '<button onclick="location.href=\'<c:url value="/main/'+pathMemberId+'/map"/>\'">지도</button>';
 	   menuHtml += '<button>방명록</button>'; 
 	   $('.menuselect').append(menuHtml);
+	   
+	var memberidx = $('.idx').val();
+	console.log("hidden 멤버인덱스 : ",memberidx);
     
 	$(document).ready(function(){
 		
 		console.log("document.ready 안 : ", pathMemberId);
+		var memberidx = $('.idx').val();
+		console.log(memberidx);
 		
 		var pathmId = {
-			"mId" : pathMemberId
+			"mId" : pathMemberId,
+			"mIdx" : memberidx
 		};
 		
 		$.ajax({
@@ -222,10 +229,13 @@
 		locInfo = postAddr;
 		console.log("주소 정보!! : ", locInfo);
 		
+		
+		
 		var mapPostInfo = {
 			"pathmemberid" : pathMemberId,
 			"postAdd" : postAddr,
-			"pageNum" : pageNum
+			"pageNum" : pageNum,
+			"mIdx" : memberidx
 		};
 		
 		$.ajax({

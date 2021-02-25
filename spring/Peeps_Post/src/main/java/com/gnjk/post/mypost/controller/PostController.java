@@ -55,10 +55,13 @@ public class PostController {
 			HttpServletRequest request,
 			@RequestParam Map<String, Object> param) {
 		String memberid = request.getParameter("mId");
-			
+		String memberidx = request.getParameter("mIdx");
+		
+		int mIdx = Integer.parseInt(memberidx);
+		
 		System.out.println("path 멤버아이디 :"+memberid);
 
-		return listService.getPostListView(page, request, memberid);
+		return listService.getPostListView(page, request, mIdx);
 	}
 	
 	// 게시글 하나 출력
@@ -121,10 +124,13 @@ public class PostController {
 			Model model) {
 		
 		String memberid = request.getParameter("mId");
+		String memberidx = request.getParameter("mIdx");
+		
+		int mIdx = Integer.parseInt(memberidx);
 		
 		System.out.println("path 멤버아이디 :"+memberid); 
 		
-		return listService.getMapListView(memberid);
+		return listService.getMapListView(mIdx);
 	}
 	
 	// 지도로 주소별 게시글 리스트 출력
@@ -136,8 +142,11 @@ public class PostController {
 			
 		String pathmId = request.getParameter("pathmemberid");
 		String pAddr = request.getParameter("postAdd");
+		String memberidx = request.getParameter("mIdx");
+		
+		int mIdx = Integer.parseInt(memberidx);
 			
-		return listService.getPostListByMapView(pathmId, pAddr);
+		return listService.getPostListByMapView(mIdx, pAddr);
 	}
 		
 	// 좋아요 
