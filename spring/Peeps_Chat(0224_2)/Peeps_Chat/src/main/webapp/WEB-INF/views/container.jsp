@@ -61,7 +61,7 @@
 					src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png"
 					alt="">
 				<button type="button" id="emt">
-					<img onclick="modal('emtset')"
+					<img onclick="emg('emtset')"
 						src="<c:url value='/icon/navi/Logo.png' />" id="emtLogo">
 				</button>
 				<div class="send">

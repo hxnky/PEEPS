@@ -11,29 +11,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gnjk.chat.domain.Alarm;
-import com.gnjk.chat.service.AlarmService;
+import com.gnjk.chat.service.AlarmListService;
 import com.gnjk.chat.service.DeleteService;
 
 @RestController
 public class AlarmController {
 
 	@Autowired
-	private AlarmService service;
+	private AlarmListService service;
 	
 	@Autowired
 	private DeleteService dservice;
-	
-	/*
-	 * @RequestMapping(value = "/alarm/insert") public int saveAlarm(Alarm
-	 * alarmdata) throws Exception {
-	 * 
-	 * System.out.println("알람 저장 컨트롤러…");
-	 * 
-	 * return service. insertAlarm(alarmdata);
-	 * 
-	 * }
-	 */
-	
+
 	@RequestMapping(value = "/alarm/select")
 	public List<Alarm> alarmList(Alarm alarm, HttpSession session) throws Exception{
 

@@ -9,11 +9,16 @@
 
 	<bean id="chattinghandler"
 		class="com.gnjk.chat.handler.ChattingHandler" />
+		<bean id="alarmhandler"
+		class="com.gnjk.chat.handler.AlarmHandler" />
 
 	<websocket:handlers>
 		<websocket:mapping handler="chattinghandler"
 			path="/chat" />
+			<websocket:mapping handler="alarmhandler"
+			path="/alarm" />
 		<websocket:handshake-interceptors>
+		
 			<bean
 				class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
 		</websocket:handshake-interceptors>

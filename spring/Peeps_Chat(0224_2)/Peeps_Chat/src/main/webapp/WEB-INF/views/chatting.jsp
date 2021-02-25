@@ -68,10 +68,16 @@ strong {
 	overflow: auto;
 }
 
-#emtset #btn {
+#emtset {
 	position: fixed;
 	top: 15px;
 	right: 15px;
+}
+
+.emt_btn {
+	position: fixed;
+	top: 10px;
+	right: 10px;
 }
 </style>
 
@@ -86,7 +92,8 @@ strong {
 	crossorigin="anonymous"></script>
 
 </head>
-
+<%-- 	<!--alarm-->
+	<%@ include file="/WEB-INF/views/alarm.jsp"%> --%>
 <body>
 
 	<!--Emoticon modal -->
@@ -104,7 +111,7 @@ strong {
 			<tr>
 		</table>
 
-		<button type="button" id="btn">x</button>
+		<button type="button" class="emt_btn">x</button>
 
 	</div>
 
@@ -137,11 +144,11 @@ strong {
 				printMes(data);
 			}
 		});
-		
+
 		$('#emt').click(function() {
 			modal('emtset');
 		});
-		
+
 	});
 
 	function onOpen() {
@@ -150,13 +157,17 @@ strong {
 	};
 
 	function sendemt(emt) {
-		
 		var date = new Date(); // 자바스크립트 Date 객체
 		var str = JSON.stringify(date.toJSON()); // Date 객체를 JSON 형식의 문자열로 변환
+
+		var e_idx = {
+			"emt" : "emt"
+		};
+
 		var mes = {
 			m_idx : '${m_idx}',
 			rm_idx : '${rm_idx}',
-			ch_ms : 'emt',
+			ch_ms : '${0}',
 			e_idx : emt,
 			ch_time : date
 		}
@@ -165,10 +176,10 @@ strong {
 		} else {
 			sock.send(JSON.stringify(mes)); // JSON문자열로 반환
 			console.log(JSON.stringify(mes));
-			console.log('위 메세지 소켓에 전송');			
+			console.log('위 메세지 소켓에 전송');
 		}
 	}
-	
+
 	function sendMessage() {
 		var date = new Date(); // 자바스크립트 Date 객체
 		var str = JSON.stringify(date.toJSON()); // Date 객체를 JSON 형식의 문자열로 변환
@@ -177,7 +188,8 @@ strong {
 			m_idx : '${m_idx}',
 			rm_idx : '${rm_idx}',
 			ch_ms : $("#message").val(),
-			ch_time : date
+			ch_time : date,
+			e_idx : '${0}'
 		}
 
 		if (mes.ch_ms == "") {
@@ -199,20 +211,20 @@ strong {
 
 		if (obj.m_idx == currentuser_session) { //m_idx = m_idx
 			var printHTML = "<br><br><div id='right'>";
-				if(obj.e_idx == null) {
-					printHTML += "<strong>" + obj.ch_ms + "</strong>";
-				} else {
-					printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
-					//printHTML += "<img src = "+"<c:url value= '/icon/navi/Logo.png' />";
-					//printHTML += "id="+ obj.e_idx + ">";
-				}
+			if (obj.e_idx == '${0}') {
+				printHTML += "<strong>" + obj.ch_ms + "</strong>";
+			} else {
+				printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
+				//printHTML += "<img src = "+"<c:url value= '/icon/navi/Logo.png' />";
+				//printHTML += "id="+ obj.e_idx + ">";
+			}
 			printHTML += "<strong>" + setDate + "</strong>";
 			printHTML += "</div> <br><br>";
 
 			$('#chatdata').append(printHTML);
 		} else {
 			var printHTML = "<br><br><div id='left'>";
-			if(obj.e_idx == null) {
+			if (obj.e_idx == '${0}') {
 				printHTML += "<strong>" + obj.ch_ms + "</strong>";
 			} else {
 				printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
@@ -303,40 +315,48 @@ strong {
 
 		} else {
 
-			$.each(list, function(key, val) {
+			$
+					.each(
+							list,
+							function(key, val) {
 
-				var currentuser_session = $('#sessionuserid').val();
-				var date = new Date(val.ch_time); // Thu Feb 18 2021 00:43:22 GMT+0900 (대한민국 표준시)
-				const setDate = dayjs(date).format("MM/DD HH:mm"); //02/18 00:43
-				
-					if (val.m_idx == currentuser_session) { //m_idx = m_idx
-						var printHTML = "<br><br><div id='right'>";
-							if(val.e_idx == null) {
-								printHTML += "<strong>" + val.ch_ms + "</strong>";
-							} else {
-								printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
-							}
-						printHTML += "<strong>" + setDate + "</strong>";
-						printHTML += "</div> <br><br>";
+								var currentuser_session = $('#sessionuserid')
+										.val();
+								var date = new Date(val.ch_time); // Thu Feb 18 2021 00:43:22 GMT+0900 (대한민국 표준시)
+								const setDate = dayjs(date).format(
+										"MM/DD HH:mm"); //02/18 00:43
 
-						$('#chatdata').append(printHTML);
-					} else {
-						var printHTML = "<br><br><div id='left'>";
-						if(val.e_idx == null) {
-							printHTML += "<strong>" + val.ch_ms + "</strong>";
-						} else {
-							printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png  />";
-						}
-						printHTML += "<strong>" + setDate + "</strong>";
-						printHTML += "</div> <br><br>";
+								if (val.m_idx == currentuser_session) { //m_idx = m_idx
+									var printHTML = "<br><br><div id='right'>";
+									if (val.e_idx == '${0}') {
+										printHTML += "<strong>" + val.ch_ms
+												+ "</strong>";
+									} else {
+										printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
+									}
+									printHTML += "<strong>" + setDate
+											+ "</strong>";
+									printHTML += "</div> <br><br>";
 
-						$('#chatdata').append(printHTML);
-					}
+									$('#chatdata').append(printHTML);
+								} else {
+									var printHTML = "<br><br><div id='left'>";
+									if (val.e_idx == '${0}') {
+										printHTML += "<strong>" + val.ch_ms
+												+ "</strong>";
+									} else {
+										printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png  />";
+									}
+									printHTML += "<strong>" + setDate
+											+ "</strong>";
+									printHTML += "</div> <br><br>";
 
-					$('#chatdata').scrollTop($('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
-
-			}); // $.each
+									$('#chatdata').append(printHTML);
+								}
+							}); // $.each
+			$('#chatdata').scrollTop($('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
 		} // 2중 if/else
+
 	} // printMes
 
 	// =============================================================
@@ -410,13 +430,13 @@ strong {
 </script>
 
 <script>
-	function modal(id) {
+	function emg(id) {
 		var zIndex = 9999;
-		var modal = $('#' + id);
+		var emg = $('#' + id);
 		// 모달 div 뒤에 희끄무레한 레이어
-		
-		var bg = $('<div>').css({
-/*			position : 'fixed',
+
+		var nobg = $('<div>').css({
+			position : 'fixed',
 			zIndex : zIndex,
 			left : '500px',
 			top : '500px',
@@ -424,9 +444,10 @@ strong {
 			height : '700px',
 			overflow : 'auto',
 			// 레이어 색갈은 여기서 바꾸면 됨
-			backgroundColor : 'rgba(0,0,0,0.500)'*/
+			backgroundColor : 'rgba(0,0,0,0)',
+			display : 'none'
 		}).appendTo('main');
-		modal
+		emg
 				.css(
 						{
 							position : 'fixed',
@@ -436,17 +457,16 @@ strong {
 							// div center 정렬
 							top : '65%',
 							left : '60%',
-							transform : 'translate(-50%, -50%)',
+/* 							transform : 'translate(-50%, -50%)',
 							msTransform : 'translate(-50%, -50%)',
-							webkitTransform : 'translate(-50%, -50%)'
+							webkitTransform : 'translate(-50%, -50%)' */
 						}).show()
 
 				// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-				.find('#btn').on('click', function() {
-					bg.remove();
-					modal.hide();
+				.find('.emt_btn').on('click', function() {
+					nobg.remove();
+					emg.nobg('hide');
 				});
 	}
-
 </script>
 </html>

@@ -70,29 +70,69 @@ strong {
 	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.16/dayjs.min.js"
-	crossorigin="anonymous"></script>
 
 </head>
 
+<!-- css -->
+<link rel="styleSheet" href="<c:url value="/css/default.css"/>">
+
 <body>
+
+	<!-- nav -->
+	<div id="nav">
+		<nav>
+			<ul class="icon">
+
+				<li class="left"><span><input type="search"
+						placeholder="@kyung_s2">
+						<button>
+							<a href="#"><img
+								src="<c:url value='/icon/navi/search.png' />"></a>
+						</button></span></li>
+
+				<li class="center"><a id="Logo"><img
+						src="<c:url value='/icon/navi/Logo.png' />"></a></li>
+
+				<li class="right"><ahref="#none">
+					<img onclick="sendAlarm('comment')"
+						src="<c:url value='/icon/navi/Content.png' />">
+					</a> <a href="#none"> <img onclick="sendAlarm('like')"
+						src="<c:url value='/icon/navi/008-notification.png' />"></a> <a
+						href="#"><img onclick="sendAlarm('follow')"
+						src="<c:url value='/icon/navi/050-wechat.png'/>"></a>
+			</ul>
+		</nav>
+	</div>
 
 	<!--modal -->
 	<div id="my_modal">
 		<div id="my_modal_header">실시간 알람</div>
+		<button type="button" class="modal_close_btn">x</button>
 	</div>
 
 </body>
 
 <script>
-	sock = new SockJS("<c:url value="/chat"/>");
+	sock = new SockJS("<c:url value="/alarm"/>");
 
 	sock.onopen = onOpen;
 	sock.onmessage = onMessage;
 	sock.onclose = onClose;
 
 	$(document).ready(function() {
+		
+		function sendAlarm(type) {
+
+			var alm = {
+				type : type,
+				sender : 'sender',
+				receiver : 'receiver',
+				post : 'post'
+			}
+			sock.send(JSON.stringify(alm)); // JSON문자열로 반환
+			console.log(JSON.stringify(alm));
+			console.log('위 메세지 소켓에 전송');
+		}
 
 	});
 
@@ -100,71 +140,58 @@ strong {
 		console.log('open');
 	};
 
-	function sendMessage() {
-		var str = JSON.stringify(date.toJSON()); // Date 객체를 JSON 형식의 문자열로 변환
-
-		var alm = {
-			type : '${type}',
-			sender : '${sender}',
-			receiver : '${receiver}',
-			post : '${post}'
-		}
-			sock.send(JSON.stringify(alm)); // JSON문자열로 반환
-			console.log(JSON.stringify(alm));
-			console.log('위 메세지 소켓에 전송');
-	}
-
 	function onMessage(evt) {
 		var data = evt.data;
 		var obj = JSON.parse(data);
 
 		var currentuser_session = $('#sessionuserid').val();
 
-		if (obj.receiver == currentuser_session) { //m_idx = m_idx
-			if ( obj != "") {
-					switch (obj.type) {
-					// 댓글 알람
-					case "comment":
-						console.log("1111comment");
-						var printHTML = "<div id='alarm_mask'>";
-						printHTML += "<div id='alarm'>";
-						printHTML += "<strong>" + obj.sender + " 님이 회원님의 게시물";
-						printHTML += obj.post + " 에 댓글을 남겼습니다!</strong> <br>";
-						printHTML += "</div>";
-						printHTML += "</div>";
-						$('#my_modal_header').append(printHTML);
-						console.log("comment");
-						//console.log(val.al_idx);
-						break;
-					// 좋아요 알람
-					case "like":
-						console.log("22222222comment");
-						var printHTML = "<div id='alarm_mask'>";
-						printHTML += "<div id='alarm'>";
-						printHTML += "<strong>" + obj.sender + " 님이 회원님의 게시물";
-						printHTML += obj.post + " 에 좋아요를 눌렀습니다!</strong> <br>";
-						printHTML += "</div>";
-						printHTML += "</div>";
-						$('#my_modal_header').append(printHTML);
-						console.log("like");
-						//console.log(val.al_idx);
-						break;
-					// 팔로우 알람
-					case "follow":
-						console.log("33333333333333333comment");
-						var printHTML = "<div id='alarm_mask'>";
-						printHTML += "<div id='alarm'>";
-						printHTML += "<strong>" + obj.sender;
-						printHTML += " 님이 회원님을 팔로우 했습니다!</strong> <br>";
-						printHTML += "</div>";
-						printHTML += "</div>";
-						$('#my_modal_header').append(printHTML);
-						console.log("follow");
-						//console.log(val.al_idx);
-						break;
-					} // switch 문
-			} // if
-		} // onMessage 함수
+		//if (obj.receiver == currentuser_session) { //m_idx = m_idx
+		if (obj != "") {
+			switch (obj.type) {
+			// 댓글 알람
+			case "comment":
+				console.log("1111comment");
+				var printHTML = "<div id='alarm_mask'>";
+				printHTML += "<div id='alarm'>";
+				printHTML += "<strong>" + obj.sender + " 님이 회원님의 게시물";
+				printHTML += obj.post + " 에 댓글을 남겼습니다!</strong> <br>";
+				printHTML += "</div>";
+				printHTML += "</div>";
+				$('#my_modal_header').append(printHTML);
+				console.log("comment");
+				//console.log(val.al_idx);
+				break;
+			// 좋아요 알람
+			case "like":
+				console.log("22222222comment");
+				var printHTML = "<div id='alarm_mask'>";
+				printHTML += "<div id='alarm'>";
+				printHTML += "<strong>" + obj.sender + " 님이 회원님의 게시물";
+				printHTML += obj.post + " 에 좋아요를 눌렀습니다!</strong> <br>";
+				printHTML += "</div>";
+				printHTML += "</div>";
+				$('#my_modal_header').append(printHTML);
+				console.log("like");
+				//console.log(val.al_idx);
+				break;
+			// 팔로우 알람
+			case "follow":
+				console.log("33333333333333333comment");
+				var printHTML = "<div id='alarm_mask'>";
+				printHTML += "<div id='alarm'>";
+				printHTML += "<strong>" + obj.sender;
+				printHTML += " 님이 회원님을 팔로우 했습니다!</strong> <br>";
+				printHTML += "</div>";
+				printHTML += "</div>";
+				$('#my_modal_header').append(printHTML);
+				console.log("follow");
+				//console.log(val.al_idx);
+				break;
+			} // switch 문
+		} // if
+		//}
+	} // onMessage 함수
 
 	function onClose() {
 		console.log('console close');
@@ -201,17 +228,12 @@ strong {
 							msTransform : 'translate(-50%, -50%)',
 							webkitTransform : 'translate(-50%, -50%)'
 						}).show()
+				// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+				.find('.modal_close_btn').on('click', function() {
+					bg.remove();
+					modal.hide();
+				});
 
 	}
-
-	// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-	setTimeout(function() {
-		bg.remove();
-		modal.hide();
-	}, 10000); // 10초 뒤에 모달 사라짐 */
-
-	/* 	setTimeout(function() {
-	 $('#my_modal').hide();
-	 }, 10000); // 10초 뒤에 모달 사라짐 */
 </script>
 </html>

@@ -24,6 +24,8 @@
 	
 	<!--chatting-->
 	<%@ include file="/WEB-INF/views/chatting.jsp"%>
+	
+
 
 </body>
 </html>

@@ -89,7 +89,7 @@ strong {
 
 				<li class="right"><a id="Home" href="#"><img
 						src="<c:url value='/icon/navi/023-home.png' />"></a> <a
-					id="Content" href="#"><img
+					id="Content" href="#none"><img
 						src="<c:url value='/icon/navi/Content.png' />"></a> <a
 					id="Alarm" href="#none"> <img onclick="modal('my_modal')"
 						src="<c:url value='/icon/navi/008-notification.png' />"></a> <a
@@ -235,7 +235,7 @@ strong {
 				// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
 				.find('.modal_close_btn').on('click', function() {
 					bg.remove();
-					modal.hide();
+					modal.remove();
 				});
 	}
 	/* 	setTimeout(function() {

@@ -3,23 +3,12 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.gnjk.chat.dao.AlarmDao">
+<mapper namespace="com.gnjk.chat.dao.mapper.mybatisAlarmDao">
 
-<insert id ="insertAlarm" parameterType ="com.gnjk.chat.domain.Alarm">
-      insert
-      into chat.alarm(type, sender, receiver, post)
-      values (#{type},#{sender},#{receiver}, #{post}) 
-   </insert>
-   
-   <select id="alarmList" resultType="com.gnjk.chat.domain.Alarm">
-   		select *
-   		from chat.alarm
-   </select>
-   
-   <delete id="deleteAlarm">
-   		delete
-   		from chat.alarm
-   		where al_idx=#{al_idx}
-   </delete>
-   
-   </mapper>
+	<insert id="insertAlarm"
+		parameterType="com.gnjk.chat.domain.Alarm">
+		insert into chat.alarm(type,sender,receiver,post)
+		values (#{type},#{sender},#{receiver},#{post})
+	</insert>
+
+</mapper>

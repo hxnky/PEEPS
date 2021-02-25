@@ -62,20 +62,11 @@ public class ChattingHandler extends TextWebSocketHandler {
 		connectedSessionList.add(session);
 		
 		// 메세지 전송을 위한 세션 
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put(session.getId(), session);
-		hash.add(map);
+		//HashMap<String, Object> map = new HashMap<String, Object>();
+		//map.put(session.getId(), session);
+		//hash.add(map);
 
 		logger.info("{} 연결되었습니다.", session.getId()+":"+ sessionId);
-		
-		//map.put(session.getRemoteAddress().getHostName(), session);
-		//hash.add(map);
-		
-		//logger.info("연결 IP : {}", session.getRemoteAddress().getHostName() + ":" + session);
-		
-		// sIP = session.getRemoteAddress().getHostName();
-		
-		//dao.getMessageData(sessionId);
 		
 		log(session.getId() + " getId() 연결 성공 ");
 
