@@ -16,14 +16,20 @@ public class AlarmService {
 	
 	@Autowired
 	private SqlSessionTemplate template;
-	// DB 저장
-	//public void insertAlarm(Alarm alarm) throws Exception;
+	
+	//DB 저장
+	public int insertAlarm(Alarm alarm) throws Exception{
+		
+		dao = template.getMapper(AlarmDao.class);
+		return dao.insertAlarm(alarm);
+		
+	}
 	
 	// 각각 네비에 전달해줄 리스트
 	public List<Alarm> alarmList(Alarm alarm) throws Exception {
 		
 		 dao = template.getMapper(AlarmDao.class);
-				 return dao.alarmList(alarm);
+		 return dao.alarmList(alarm);
 				 
 	}
 	

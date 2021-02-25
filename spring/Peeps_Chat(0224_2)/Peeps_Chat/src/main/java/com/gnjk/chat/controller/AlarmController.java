@@ -22,15 +22,16 @@ public class AlarmController {
 	
 	@Autowired
 	private DeleteService dservice;
-
+	
 	/*
-	@GetMapping("/alarm/insert")
-	@ResponseBody
-	public void saveAlarm(Alarm alarmdata) throws Exception {
-
-		service. insertAlarm(alarmdata);
-
-	}
+	 * @RequestMapping(value = "/alarm/insert") public int saveAlarm(Alarm
+	 * alarmdata) throws Exception {
+	 * 
+	 * System.out.println("알람 저장 컨트롤러…");
+	 * 
+	 * return service. insertAlarm(alarmdata);
+	 * 
+	 * }
 	 */
 	
 	@RequestMapping(value = "/alarm/select")
