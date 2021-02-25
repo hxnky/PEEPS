@@ -23,7 +23,7 @@
 			<div id="profile_wrap">
 				<img src="<spring:url value='/resources/img/chick.jpg'/>">
 				<div id="pro_btn">
-				<input type="hidden" id="idx" value="1">
+				<input type="hidden" id="idx" value="3">
 					<ul>	
 						<li id="memberId">아이디</li>
 						<li><button id="pro_edit">

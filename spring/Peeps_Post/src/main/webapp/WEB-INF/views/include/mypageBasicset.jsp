@@ -196,4 +196,8 @@
 	color: white;
 }
 
+.panel-heading {
+	color: #ccc;
+}
+
 </style>
