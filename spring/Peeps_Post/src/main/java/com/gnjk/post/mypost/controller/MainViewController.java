@@ -63,6 +63,14 @@ public class MainViewController {
 		return "post/postEditForm";
 	}
 	
+	//방명록 폼
+	@RequestMapping("/main/jhS2/guestbook")
+	public String getguestbookForm() {
+
+		return "post/guestbookForm";
+
+	}
+	
 
 
 }
