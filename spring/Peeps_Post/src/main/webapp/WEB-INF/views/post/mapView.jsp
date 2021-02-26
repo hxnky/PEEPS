@@ -101,7 +101,7 @@
 		};
 		
 		$.ajax({
-			url: 'http://localhost:8080/post/rest/member/post/map',
+			url: 'http://localhost:8081/post/rest/member/post/map',
 			type: 'GET',
 			data: pathmId,
 			success: function(data){
@@ -229,8 +229,6 @@
 		locInfo = postAddr;
 		console.log("주소 정보!! : ", locInfo);
 		
-		
-		
 		var mapPostInfo = {
 			"pathmemberid" : pathMemberId,
 			"postAdd" : postAddr,
@@ -239,7 +237,7 @@
 		};
 		
 		$.ajax({
-			url: "http://localhost:8080/post/rest/member/post/postmaplist",		
+			url: "http://localhost:8081/post/rest/member/post/postmaplist",		
 			type: 'get',
 			data : mapPostInfo,
 			/* dataType: 'json', */
@@ -252,6 +250,8 @@
 				var ploc = list[0].p_loc;
 				
 				for(var i=sIdx; i<=eIdx; i++){
+					
+					console.log("게시글 날짜 : ", list[i].p_date);
 					
 					var date = list[i].p_date-540*60*1000;
 					

@@ -262,9 +262,20 @@ public class PostListService {
 				System.out.println("try구문 진입");
 				lDao = template.getMapper(LikeDao.class);
 				
-				int likeCheck = lDao.selectLikeChk(pIdx, mIdx);
+				int likeChk = lDao.selectLike(pIdx, mIdx);
 				
-				post.setLikeChk(likeCheck);
+				if(likeChk == 0) {
+					// 좋아요 한번도 누른적 없는 경우
+					post.setLikeChk(0);
+				} else {
+					// 좋아요 누른적 있는 경우
+					likeChk = lDao.selectLikeChk(pIdx, mIdx);
+					post.setLikeChk(likeChk);
+				}
+				
+//				int likeCheck = lDao.selectLikeChk(pIdx, mIdx);
+				
+//				post.setLikeChk(likeCheck);
 				
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -323,7 +323,7 @@ console.log("세션정보!!!~~ : ", sessionMidx);
 			
 			// 컨트롤러로 값 넘기기 (회원 게시글 데이터 받기)
 			$.ajax({
-				url : "http://localhost:8080/post/rest/member/post/detail?idx="+ postIdx,
+				url : "http://localhost:8081/post/rest/member/post/detail?idx="+ postIdx,
 				type : 'GET',
 				success : function(data) {
 					
@@ -364,7 +364,7 @@ console.log("세션정보!!!~~ : ", sessionMidx);
 				 	};
 					
 					$.ajax({
-						url: 'http://localhost:8081/peeps/user/idList',
+						url: 'http://localhost:8080/peeps/user/idList',
 						type: 'GET',
 						data: postMidx,
 						success: function(data){
@@ -402,7 +402,7 @@ console.log("세션정보!!!~~ : ", sessionMidx);
 			
 			// 컨트롤러로 값 넘기기 (회원 게시글 이미지 데이터 받기)
 			$.ajax({
-				url : "http://localhost:8080/post/rest/member/post/detail/image?idx="+ postIdx,
+				url : "http://localhost:8081/post/rest/member/post/detail/image?idx="+ postIdx,
 				type : 'GET',
 				success: function(data){
 					/* console.log("게시물파일 ajax success", data); */
@@ -474,7 +474,7 @@ console.log("세션정보!!!~~ : ", sessionMidx);
 				};
 			// 컨트롤러로 값 넘기기 (좋아요 여부 데이터 받기)
 			$.ajax({
-				url : "http://localhost:8080/post/rest/member/post/likeChk",
+				url : "http://localhost:8081/post/rest/member/post/likeChk",
 				type : 'GET',
 				data: likeInfo,
 				success: function(data){
@@ -503,10 +503,12 @@ console.log("세션정보!!!~~ : ", sessionMidx);
 			if(confirm('삭제하시겠습니까?')){
 				
 				$.ajax({
-					url: "http://localhost:8080/post/rest/member/post/delete?idx="+pidx,
+					url: "http://localhost:8081/post/rest/member/post/delete?idx="+pidx,
 					type: 'GET',
 					success : function(data){						/* test 회원계정 */
-						window.location.href="http://localhost:8080/post/main/jhS2";
+						var memberid = $('.memberid').val();
+						/* window.location.href="http://localhost:8081/post/main/jhS2"; */
+						window.location.href="http://localhost:8081/post/main/"+memberid;
 						console.log(pidx+'번 게시물 삭제 완료');
 					}
 					
@@ -526,7 +528,7 @@ console.log("세션정보!!!~~ : ", sessionMidx);
 			
 			$.ajax({
 				
-				url: "http://localhost:8080/post/rest/member/post/likes",
+				url: "http://localhost:8081/post/rest/member/post/likes",
 				type: 'get',
 				data: likeInfo,
 				success: function(data){
@@ -555,10 +557,6 @@ console.log("세션정보!!!~~ : ", sessionMidx);
 				}
 				
 			});	// 좋아요 ajax 끝
-			
-
-			
-			
 			
 		} // clickLikeBtn 함수 끝
 		
@@ -647,6 +645,66 @@ function loadComment(){
 			
 			$('.comment').empty();
 			$.each(data.cmtList, function(index, cmt){
+				console.log("댓글 ajax each문 진입");
+			// 멤버 정보 받아오는 ajax 시작
+				$.ajax({ 
+					url: 'http://localhost:8080/peeps/user/memberList',
+					type: 'GET',
+					success: function(data){
+						console.log("멤버 ajax success");
+						console.log("멤버 데이터 : ", data)
+						
+						$.each(data, function(index, mbr){
+							console.log("멤버 ajax each문 진입");
+							console.log("each1 :", mbr.m_idx);
+							console.log("each2 :", cmt.member_idx);
+							
+							if(mbr.m_idx == cmt.member_idx){
+								
+								// 세션 회원이랑 댓글 회원 idx 비교해서 수정 삭제 버튼 추가 여부 결정
+								if(cmt.member_idx == member_idx){
+									$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+mbr.m_photo+"'/>'> <span class='id'>"+mbr.id+"</span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button> <button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button><br><input type='hidden' id='replytext'></div>");
+								} else {
+									$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+mbr.m_photo+"'/>'> <span class='id'>"+mbr.id+"</span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button></div>");
+								}
+								
+								/* console.log("댓글의 멤버 ajax if구문 진입 !!!!! ");
+								console.log("파일이름...:",mbr.m_photo); */	
+								
+								// 대댓글
+								$.ajax({
+									url : '${pageContext.request.contextPath}/rest/cmt/reply/select',
+									type: 'get',
+									data : {"cmt_idx" : cmt.cmt_idx},
+									success : function(data){
+										
+										var reply = data;
+										
+										console.log("대댓글 ajax 성공~~~!!! ",reply);
+										
+										
+										
+									},
+									error : function() {
+										console.log("대댓글 실패,,,,");
+									}
+									
+									
+								}); // 대댓글 끝
+								
+							} // if mbr.m_idx == cmt.member_idx 끝
+						}); // 멤버 each 끝
+						
+					},
+					error: function(e){
+						console.log("댓글 ajax속 멤버 ajax 실패");
+					}
+					
+				}); // 멤버 정보 받아오는 ajax 끝
+			});
+			
+			$('.comment').empty();
+			$.each(data.cmtList, function(index, cmt){
 				
 				if(cmt.member_idx == member_idx){
 					$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'> <button id='cmt_re' type='submit'>답글</button> <button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button><br><input type='hidden' id='replytext'></div>");
@@ -683,7 +741,7 @@ function loadComment(){
 					}
 					
 					
-				});
+				}); // 대댓글 끝
 			});
 		},
 		error : function(e){
@@ -704,7 +762,8 @@ $(function() {
 
 		var cmt = $('#cmttxt').val();
 		
-		var mIdx = $('.memberidx').val();
+		// test용 멤버 idx
+		var mIdx = "${peeps.m_idx}";
 		console.log("댓글 작성의 mIdx : ", mIdx);
 		
 		if(cmt.trim() == ""){
@@ -840,12 +899,14 @@ $(function() {
 		            alert("내용을 입력해주세요");
 				} else{
 					// 세션 m_idx 값 넣기
+					
+					var sessionMidx = "${peeps.m_idx}";
 					$.ajax({
 								url : '${pageContext.request.contextPath}/rest/cmt/reply/insert',
 								type : 'post',
 								data : {
 									"comment_idx" : cmt_idx,
-									"member_idx" : 2,
+									"member_idx" : sessionMidx,
 									"re_content" : reply
 								},
 								success : function(data) {

@@ -103,7 +103,7 @@
  		};
 		
 		$.ajax({
-			url: 'http://localhost:8080/post/rest/member/post/list?p='+p,
+			url: 'http://localhost:8081/post/rest/member/post/list?p='+p,
 			type: 'GET',
 			data: pathmId,
 			success: function(data){
@@ -159,8 +159,9 @@
 			
 		});
 		
+		/* test ajax */
 		$.ajax({
-			url: 'http://localhost:8081/peeps/user/idxList',
+			url: 'http://localhost:8080/peeps/user/idxList',
 			type: 'GET',
 			data: pathmId,
 			success: function(data){
