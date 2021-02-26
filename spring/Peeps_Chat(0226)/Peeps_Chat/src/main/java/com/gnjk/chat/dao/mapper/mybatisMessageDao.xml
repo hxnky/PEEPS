@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gnjk.chat.dao.mapper.mybatisMessageDao">
+    
+    <!--  메세지 저장  -->
+   <insert id ="insertMessage" parameterType ="com.gnjk.chat.domain.Message">
+      insert into chat.chat(m_idx, rm_idx, ch_time, ch_ms, e_idx)
+      values (#{m_idx},#{rm_idx},#{ch_time},#{ch_ms}, #{e_idx}) 
+   </insert>
+
+</mapper>

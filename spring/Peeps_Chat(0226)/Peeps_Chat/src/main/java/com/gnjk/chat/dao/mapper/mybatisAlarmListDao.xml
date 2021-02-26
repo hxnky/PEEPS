@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gnjk.chat.dao.AlarmListDao">
+   
+   <select id="alarmList" resultType="com.gnjk.chat.domain.Alarm">
+   		select *
+   		from chat.alarm
+   </select>
+   
+   <delete id="deleteAlarm">
+   		delete
+   		from chat.alarm
+   		where al_idx=#{al_idx}
+   </delete>
+   
+   </mapper>

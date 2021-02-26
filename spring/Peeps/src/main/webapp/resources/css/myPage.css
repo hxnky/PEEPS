@@ -1,0 +1,98 @@
+@import
+	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap')
+	;
+
+body {
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+.jumbotron {
+	height: 400px;
+	width: 1150px;
+	margin: 100px auto 0px auto;
+	text-align: center;
+	background-color: #F5E978;
+	font-weight: bold;
+}
+
+#pro_img {
+	width: 500px;
+}
+
+#pro_img>img {
+	height: 250px;
+	width: 250px;
+	border-radius: 100%;
+	border: 1px solid #CCC;
+	margin: 20px auto;
+}
+
+#pro_btn>ul>li {
+	list-style: none;
+	font-size: 30px;
+	display: inline-block;
+	text-align: center;
+	margin-right: 40px;
+}
+
+#pro_btn {
+	margin: -250px -300px 0px 0px;
+}
+
+#foll_btn {
+	border: 0;
+	background-color: #F5E978;
+}
+
+#pro_edit {
+	border: solid 0.2px #CCC;
+	background-color: #DDD;
+	border-radius: 5px;
+	width: 300px;
+	height: 35px;
+	font-size: 20px;
+}
+
+#pro_name, #pro_bio {
+	font-size: 25px;
+	margin: 10px auto;
+	width: 500px;
+	text-align: left;
+	word-break: break-all;
+}
+
+#user_no {
+	font-size: 30px;
+	text-align: center;
+	line-height: 300px;
+}
+
+#edit {
+	width: 200px;
+	border: 0.2px solid #CCC;
+	border-radius: 5%;
+	font-size: 25px;
+	font-weight: bold;
+	background-color: #fcf9f6;
+}
+
+#follower_btn, #following_btn {
+	background-color: #F5E978;
+	border: none;
+}
+
+#pro_unfollow, #pro_follow {
+	width: 200px;
+	border: 0.2px solid #CCC;
+	font-size: 25px;
+	font-weight: bold;
+	border-radius: 5%;
+}
+
+#pro_follow {
+	background-color: #fcf9f6;
+}
+
+#pro_unfollow {
+	background-color: #CCC;
+}
