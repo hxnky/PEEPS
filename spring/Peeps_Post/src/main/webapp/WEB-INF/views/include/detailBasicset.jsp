@@ -283,18 +283,18 @@ body {
 
 <script>
 //게시물 idx 받기
-function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-	var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
-	return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-	
-var postIdx = getParameterByName('idx');
-/* console.log("포스트인덱스 : ",postIdx); */
-/* var memberIdx = ""; */
+	function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
+		return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+		
+	var postIdx = getParameterByName('idx');
+	/* console.log("포스트인덱스 : ",postIdx); */
+	/* var memberIdx = ""; */
 
-/* test */
-var sessionMidx = "${peeps.m_idx}";
-console.log("세션정보!!!~~ : ", sessionMidx);
+	/* test */
+	var sessionMidx = "${peeps.m_idx}";
+	console.log("세션정보!!!~~ : ", sessionMidx);
 
 	    $(document).ready(function(){
 	        

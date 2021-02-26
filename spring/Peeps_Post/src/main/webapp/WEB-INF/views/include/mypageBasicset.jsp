@@ -8,18 +8,21 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 <!-- 합쳐지고 최소화된 최신 CSS -->
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	href="<c:url value="/resources/css/bootstrap.css" />">
 
 <!-- 부가적인 테마 -->
-<link rel="stylesheet"
+<!-- <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
+ -->
 <!-- 합쳐지고 최소화된 최신 
 자바스크립트 -->
-<script
+<!-- <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+ -->
 <link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 
 <style>
@@ -196,15 +199,13 @@
 	color: white;
 }
 
-.panel-heading {
+/* .panel-heading {
 	color: #ccc;
-	background-color: #DDD;
-}
+} */
 
 .panel-primary {
   border-color: #DDD;
 }
-
 
 
 
