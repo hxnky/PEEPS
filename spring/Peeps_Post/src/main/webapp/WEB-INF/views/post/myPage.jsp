@@ -47,7 +47,7 @@
 			</div>
 		</div>
 		<div id="nav_wrap">
-			<div class="menuselect"> <!-- test 해당 회원 아이디 들어가야 함 -->
+			<div class="menuselect"> 
 				
 
 			</div>
@@ -143,12 +143,14 @@
 				// 페이징 처리
 				 if (data.totalPostCount>0){
 					 console.log('totalPageCount :' + data.totalPageCount);
-					for(var i=1; i <= data.totalPageCount; i++){	/* test 계정아이디 들어가야 함 */			
+					for(var i=1; i <= data.totalPageCount; i++){			
 						if(data.pageNumber == i){
-							var html2 =' <span><a class="pageBtn" id="nowPgBtn" href="<c:url value="/main/jhS2"/>?p='+i+'">'+i+'</a></span> ';
+							/* var html2 =' <span><a class="pageBtn" id="nowPgBtn" href="<c:url value="/main/jhS2"/>?p='+i+'">'+i+'</a></span> '; */
+							var html2 =' <span><a class="pageBtn" id="nowPgBtn" href="<c:url value="/main/'+pathMemberId+'"/>?p='+i+'">'+i+'</a></span> ';
 							$('.paging').append(html2);
 						} else {
-							var html2 =' <span><a class="pageBtn" href="<c:url value="/main/jhS2"/>?p='+i+'">'+i+'</a></span> ';
+							/* var html2 =' <span><a class="pageBtn" href="<c:url value="/main/jhS2"/>?p='+i+'">'+i+'</a></span> '; */
+							var html2 =' <span><a class="pageBtn" href="<c:url value="/main/'+pathMemberId+'"/>?p='+i+'">'+i+'</a></span> ';
 							$('.paging').append(html2);
 						}
 					}										 

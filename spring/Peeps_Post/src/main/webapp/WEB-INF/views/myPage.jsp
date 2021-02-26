@@ -116,8 +116,7 @@
 					
 					var html = '<div class="col-sm-4">';
 					   html += '<div class="panel panel-primary">';
-					   html += '<div class="panel-heading">';  /* href="postNO=${post.p_idx}" */
-					   /* html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+item.p_title; */
+					   html += '<div class="panel-heading">';  
 					   html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+pt;
 					   html += '</a></div><div class="panel-body">';
 					   html += '<a class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">';
@@ -131,6 +130,7 @@
 					 console.log('totalPageCount :' + data.totalPageCount);
 					for(var i=1; i <= data.totalPageCount; i++){	/* test 계정아이디 들어가야 함 */			
 						if(data.pageNumber == i){
+							/* var html2 =' <span><a class="pageBtn" id="nowPgBtn" href="<c:url value="/main/jhS2"/>?p='+i+'">'+i+'</a></span> '; */
 							var html2 =' <span><a class="pageBtn" id="nowPgBtn" href="<c:url value="/main/jhS2"/>?p='+i+'">'+i+'</a></span> ';
 							$('.paging').append(html2);
 						} else {
