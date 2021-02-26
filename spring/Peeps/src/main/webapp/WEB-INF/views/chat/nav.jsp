@@ -85,7 +85,7 @@ strong {
 				<a id="Home" href="#"><img src="<c:url value='/chat/icon/navi/023-home.png' />"></a> 
 				<a id="Content" href="#"><img src="<c:url value='/chat/icon/navi/Content.png' />"></a> 
 				<a id="Alarm" href="#"> <img onclick="modal('my_modal')" src="<c:url value='/chat/icon/navi/008-notification.png' />"></a> 
-				<a id="Chat" href="/chatting">
+				<a id="Chat" href="user/chatting">
 				<img src="<c:url value='/chat/icon/navi/050-wechat.png'/>"></a> 
 				<c:set var="loginType" value="${loginType }" /> 
 				<c:choose>
