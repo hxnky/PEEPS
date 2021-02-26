@@ -264,6 +264,92 @@ body {
 #cmttxt_edit{
 	width : 400px;
 }
+/*좋아요 모달*/
+/*중간 위치 모달창*/
+#my_modal {
+	display: none;
+	width: 600px;
+	height: 400px;
+	padding: 20px 60px;
+	background-color: #fefefe;
+	border: 1px solid #888;
+	border-radius: 10px;
+	padding: 20px 60px;
+	overflow: auto;
+}
+
+#my_modal .modal_close_btn {
+	position: fixed;
+	top: 10px;
+	right: 10px;
+}
+
+#my_modal_header {
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+}
+/* 모달창 테이블*/
+#profile_modal {
+	width: 60px;
+	height: 60px;
+	border-radius: 100%;
+	border: 0.1px solid #CCC;
+}
+
+#follow, #modal_edit {
+	width: 120px;
+	height: 40px;
+	background: #F5E978;
+	border: 0.2px solid #CCC;
+	border-radius: 5px;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 1px 6px;
+}
+
+#follow:hover {
+	cursor: pointer;
+}
+
+#modal_edit:hover{
+	cursor: pointer;
+}
+
+#unfollow {
+	width: 120px;
+	height: 40px; background : #CCC;
+	border: 0.2px solid #CCC;
+	border-radius: 5px;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 1px 6px;
+	background: #CCC;
+}
+
+#unfollow:hover {
+	cursor: pointer;
+}
+
+#user_id {
+	font-size: 20px;
+	font-weight: bold;
+	width: 200px;
+}
+
+.likes:hover{
+	cursor: pointer;
+}
+
+#userList {
+	width: 500px;
+	text-align: center;
+	margin: 10px auto;
+}
+
+.modal_wrap{
+	height: 65px;
+}
 </style>
 
 <!--jquery 라이브러리 로드-->
@@ -913,5 +999,190 @@ $(function() {
 })
 	
 </script>
+<!-- 21.02.24 좋아요 모달창 관련 한경 추가 -->
+ <script>
+	 var postIdx = getParameterByName('idx');
+	 
+		// 모달창 띄우기
+		$(document).on("click", ".likes", function(){
+			console.log("좋아요 리스트");
+			LikeUserList();
+			modal('my_modal');
+		});
+	 
+	 	// 모달창 레이아웃
+		function modal(id) {
+			var zIndex = 9999;
+			var modal = $('#' + id);
 
+			// 모달 div 뒤에 희끄무레한 레이어
+			var bg = $('<div>').css({
+				position : 'fixed',
+				zIndex : zIndex,
+				left : '0px',
+				top : '0px',
+				width : '100%',
+				height : '100%',
+				overflow : 'auto',
+				// 레이어 색갈은 여기서 바꾸면 됨
+				backgroundColor : 'rgba(0,0,0,0.500)'
+			}).appendTo('body');
+
+			modal.css(
+							{
+								position : 'fixed',
+								boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+
+								// 시꺼먼 레이어 보다 한칸 위에 보이기
+								zIndex : zIndex + 1,
+
+								// div center 정렬
+								top : '50%',
+								left : '50%',
+								transform : 'translate(-50%, -50%)',
+								msTransform : 'translate(-50%, -50%)',
+								webkitTransform : 'translate(-50%, -50%)'
+							}).show()
+
+					// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+					.find('.modal_close_btn').on('click', function() {
+						bg.remove();
+						modal.hide();			
+					});
+		}
+		
+		//좋아요 누른 유저 리스트
+		function LikeUserList(){
+			// 좋아요 테이블에서 p_idx에 좋아요를 누른 m_idx 가져오기
+			// 그 멤버들 정보 조회
+			$.ajax({
+				url: "http://localhost:8080/post/rest/member/post/likesList",
+				type: 'get',
+				data: {
+					// m_idx 세션 값으로 바꾸기
+					"lpost_idx":postIdx,
+					"m_idx":2
+				},
+				success: function(data){
+					var like = data;
+
+					if(data == null){
+						$('#user_no').empty();
+						
+						$('#user_no').append("첫번째 좋아요를 눌러보세요!");
+					} else{
+						
+						$('#userList').empty();
+						
+						$.each(data, function(index, like){
+							
+							// 세션 저장된 걸로 바꾸기
+							var m_idx = 2;
+							
+							if(like.loginType == 'email'){
+								$('#userList').append("<tr class='modal_wrap' id='"+like.m_idx+"'><td><div id='user_img'><img id='profile_modal' src='<c:url value='/fileupload/"+like.m_photo+"'/>' onclick='loadMyPage("+like.m_idx+")'></div></td></tr>");
+							} else{
+								$('#userList').append("<tr class='modal_wrap' id='"+like.m_idx+"'><td><div id='user_img'><img id='profile_modal' src='<c:url value='"+like.m_photo+"'/>' onclick='loadMyPage("+like.m_idx+")'></div></td></tr>");
+							}
+							$('#'+like.m_idx).append("<td><div id='user_id' onclick='loadMyPage("+like.m_idx+")'>"+like.id+"</div></td>");
+							if(like.m_idx == m_idx){
+								$('#'+like.m_idx).append("<td><div id='pro_edit'><button id='modal_edit' onclick='loadMyPage("+like.m_idx+")'>프로필 편집</button></div></td>");
+							}else{
+								if(like.followChk == 0){
+									$('#'+like.m_idx).append("<td><div id='followChk' class='f_"+like.m_idx+"'><button class='f_btn' id='follow' type='submit' onclick='follow("+like.m_idx+")'>팔로우</button></div></td>");
+								}else{
+									$('#'+like.m_idx).append("<td><div id='followChk' class='f_"+like.m_idx+"'><button class='f_btn' id='unfollow' type='submit' onclick='unfollow("+like.m_idx+")'>언팔로우</button></div></td>");
+								}
+							}
+						});
+						
+					}
+				},
+				error: function(e){
+					console.log(e);
+					console.log("리스트 불러오기 실패");
+				}
+				
+			});	// 좋아요 누른 유저 리스트 ajax 끝
+		}
+
+		// 목록 누르면 그 사람 마이페이지로 이동
+		function loadMyPage(m_idx) {
+			location.href = "${pageContext.request.contextPath}/mypage/"+ m_idx;
+		}	
+		
+		// 모달 팔로우 -> 언팔로우
+		function FtoU(y_idx){
+					
+			var html="<div id='followChk' class='f_"+y_idx+"'><button class='f_btn' id='unfollow' type='submit' onclick='unfollow("+y_idx+")'>언팔로우</button></div>";
+					
+			$('#my_modal #LikeList .modal_wrap .f_'+y_idx).replaceWith(html);
+
+		}
+
+		// 모달 팔로우 -> 언팔로우
+		function UtoF(y_idx){
+			
+			var html="<div id='followChk' class='f_"+y_idx+"'><button class='f_btn' id='follow' type='submit' onclick='follow("+y_idx+")'>팔로우</button></div>";
+					
+			$('#my_modal #LikeList .modal_wrap .f_'+y_idx).replaceWith(html);
+
+		}
+		
+		// 모달창 팔로우 function
+		function follow(y_idx){
+			
+			var m_idx = ${peeps.m_idx};
+			
+			console.log(y_idx);
+			
+			$
+			.ajax({
+				url : '${pageContext.request.contextPath}/mypage/follow',
+				type : 'post',
+				async : false,
+				data : {
+					"y_idx": y_idx,
+					"m_idx" : m_idx
+				},
+				success : function(data) {
+					console.log("팔로우");	
+					FtoU(y_idx);
+				},
+				error : function() {
+					console.log("실패,,,,");
+				}
+			});
+
+			
+		}
+
+		// 모달창 언팔로우 function
+		function unfollow(y_idx){
+			
+			var m_idx = ${peeps.m_idx};
+			
+			console.log(y_idx);
+			
+			$
+			.ajax({
+				url : '${pageContext.request.contextPath}/mypage/unfollow',
+				type : 'post',
+				async : false,
+				data : {
+					"y_idx": y_idx,
+					"m_idx" : m_idx
+				},
+				success : function(data) {
+					console.log("언팔로우");
+					UtoF(y_idx);
+					
+				},
+				error : function() {
+					console.log("실패,,,,");
+				}
+			});
+
+		}
+</script>
    

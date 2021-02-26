@@ -35,4 +35,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and lmember_idx=#{param2}
 	</update>
 	
+	<!-- 21.02.24 한경 추가 -->
+	<!-- 좋아요 유저 idx 값 리스트 -->
+	<select id="m_idxList" resultType="int">
+		select lmember_idx from postlike where lpost_idx = #{lpost_idx}
+	</select>
+	
+	<!-- 좋아요 유저 정보 리스트   -->
+	<select id="LikeList" resultType="com.gnjk.post.mypost.domain.LikeRequest">
+		select id, m_photo, m_idx, loginType from member where m_idx = #{m_idx}
+	</select>
+	
+	<!-- 좋아요 팔로우 확인 -->
+	<select id="LikeFollowChk" resultType="int">
+		select count(*) from follow where following_id=#{lm_idx} and follower_id = #{m_idx}
+	</select>
+	
+	
 </mapper>
