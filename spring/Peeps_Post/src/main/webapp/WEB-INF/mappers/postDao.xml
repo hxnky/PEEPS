@@ -111,5 +111,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectPostByM_idx" resultType="com.gnjk.post.mypost.domain.Post">
 		select * from post where member_idx = #{member_idx}
 	</select>
+	
+	<!-- 게시글 검색 -->
+	<!-- 해당 단어가 들어가는 유저 검색 -->
+	<select id="selectPostByKeyword" resultType="com.gnjk.post.mypost.domain.Post">
+		select * from post
+		<where>
+			<include refid="searchTitle" />
+			<include refid="searchContent" />
+		</where>
+	</select>
+
+	<!-- 아이디와 이름 해당하면 다 검색 -->
+	<sql id="searchTitle">
+		or p_title like concat('%',#{keyword},'%')
+	</sql>
+
+	<sql id="searchContent">
+		or p_content like concat('%',#{keyword},'%')
+	</sql>
 
 </mapper>

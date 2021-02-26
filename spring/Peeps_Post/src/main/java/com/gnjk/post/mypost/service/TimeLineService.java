@@ -47,4 +47,15 @@ public class TimeLineService {
 		return CmtList;
 	}
 
+	
+	public List<Post> PostListByK(String keyword) {
+		dao = template.getMapper(PostDao.class);
+		
+		System.out.println(keyword);
+		
+		List<Post> PostList = dao.selectPostByKeyword(keyword);
+		
+		return PostList;
+	}
+
 }

@@ -49,6 +49,8 @@ public interface PostDao {
 	// 21.02.26 한경 추가
 	// 회원 인덱스로 게시물 조회
 	List<Post> selectPostByM_idx(int idx);
+	// 게시물 검색
+	List<Post> selectPostByKeyword(String keyword);
 	
 	
 	

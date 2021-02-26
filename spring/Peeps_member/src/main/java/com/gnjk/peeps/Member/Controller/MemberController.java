@@ -144,16 +144,13 @@ public class MemberController {
 
 		return "redirect:/";
 	}
-
+	
 	// 게시물 검색
 	@GetMapping("/post/FindView")
-	public String PostList(String keyword, Model model){
-		
-		List<PostRequest> Post = timeLineService.PostList(keyword);
-		
-		 String json = new Gson().toJson(Post);
-		 model.addAttribute("Post", json);
-		
+	public String PostList(String keyword, Model model) {
+
+		model.addAttribute("PostKeyword", keyword);
+
 		return "/member/FindPostView";
 	}
 	
