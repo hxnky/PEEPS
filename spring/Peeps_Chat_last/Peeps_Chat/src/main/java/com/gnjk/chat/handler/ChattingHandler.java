@@ -112,7 +112,7 @@ public class ChattingHandler extends TextWebSocketHandler {
 	
 	// =============================================================
 	// 파일 저장을 위한 함수 
-	//  BhandleBinaryMessage 메소드가 추가
+	// handleBinaryMessage 메소드가 추가
 	// 매개변수 BinaryMessage의 데이터를 ByteBuffer로 받아서 파일을 저장하고
 	// 현재 방에 존재하는 세션에게만 ByteBuffer데이터를 전송
 	

@@ -76,7 +76,7 @@ strong {
 	$(document).ready(function() {
 
 		$.ajax({
-			url : "http://localhost:8081/room/select",
+			url : "http://localhost:8081/chat/room/select",
 			type : "GET",
 			dataType : "json",
 			success : function(data) {
@@ -85,7 +85,7 @@ strong {
 		});
 
 		$.ajax({
-			url : "http://localhost:8081/mes/select",
+			url : "http://localhost:8081/chat/mes/select",
 			type : "GET",
 			dataType : "json",
 			success : function(data) {
