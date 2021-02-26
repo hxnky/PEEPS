@@ -46,10 +46,8 @@
 			</div>
 		</div>
 		<div id="nav_wrap">
-			<div class="menuselect"> <!-- test 회원 아이디 들어가야 함 -->
-				<button onclick="location.href='jhS2'">게시물</button> 
-				<button onclick="location.href='jhS2/map'">지도</button>
-				<button onclick="javascript:menulist(2);">방명록</button>
+			<div class="menuselect"> <!-- test 해당 회원 아이디 들어가야 함 -->
+				
 
 			</div>
 		</div>
@@ -75,15 +73,34 @@
 	var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
 	return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
   }
-
+	
     var p = getParameterByName('p');
     console.log(p);
 	
+	var urlPath = location.pathname;
+	console.log("URL 패스네임 : ", urlPath);
+	var splitUrl = urlPath.split("/");
+	var pathMemberId = splitUrl[3];
+	console.log(splitUrl);
+	console.log("패스멤버아이디",pathMemberId);
+	
+	var menuHtml = '<button onclick="location.href=\'<c:url value="/main/'+pathMemberId+'"/>\'">게시물</button>';
+	   menuHtml += '<button onclick="location.href=\'<c:url value="/main/'+pathMemberId+'/map"/>\'">지도</button>';
+	   menuHtml += '<button>방명록</button>'; 
+	   $('.menuselect').append(menuHtml);
+	
 	$(document).ready(function(){
+		
+		console.log("document.ready 안 : ", pathMemberId);
+		
+		var pathmId = {
+			"mId" : pathMemberId
+		};
 		
 		$.ajax({
 			url: 'http://localhost:8080/post/rest/member/post/list?p='+p,
 			type: 'GET',
+			data: pathmId,
 			success: function(data){
 				console.log("ajax로 받아온 데이터 : ", data);
 				var list = $(data.postList);

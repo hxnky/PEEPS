@@ -24,11 +24,9 @@ public class Peeps {
 
 	// 21.02.04 소셜 로그인 타입 추가
 	private String loginType;
-	
+
 	// 21.02.15 팔로우 체크
 	private int chk_result;
-
-	
 
 	public Peeps(int m_idx, String email, String password, String name, String id, String m_photo, String bio,
 			String code, char verify, String loginType) {
@@ -107,7 +105,7 @@ public class Peeps {
 	}
 
 	public LoginInfo toLoginInfo() {
-		return new LoginInfo(id, name, m_photo, bio);
+		return new LoginInfo(m_idx, email, id, name, m_photo, loginType);
 	}
 
 	@Override

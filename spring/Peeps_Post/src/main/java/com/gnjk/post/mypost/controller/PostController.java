@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gnjk.post.mypost.domain.LikeRequest;
+import com.gnjk.post.mypost.domain.Peeps;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostEditRequest;
 import com.gnjk.post.mypost.domain.PostFile;
@@ -48,18 +49,37 @@ public class PostController {
 
 	// 게시글 리스트 출력
 	@GetMapping("/list")
-	public PostListView postList(@RequestParam(value = "p", defaultValue = "1") int page, Model model) {
+	public PostListView postList(
+			@RequestParam(value = "p", defaultValue = "1") int page, 
+			Model model,
+			HttpServletRequest request,
+			@RequestParam Map<String, Object> param) {
+		String memberid = request.getParameter("mId");
+			
+		System.out.println("path 멤버아이디 :"+memberid);
 
-//		model.addAttribute("listView", listService.getPostListView(page));
-
-		return listService.getPostListView(page);
+		return listService.getPostListView(page, request, memberid);
 	}
 	
 	// 게시글 하나 출력
 	@GetMapping("/detail")
 	public Post getPostDetail(
 			@RequestParam("idx") int postIdx
+			, HttpServletRequest request //test세션
 			) {
+		
+		// test 로그인 세션 가져오기
+		HttpSession session = request.getSession();
+		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
+		System.out.println("로그인 인포 세션 : "+loginInfo);
+		
+		// test 로그인 안된 경우, 로그인 정보 세션 생성
+		if(loginInfo == null) {
+			
+			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
+			session.setAttribute("peeps", loginInfo);
+		}
+		
 		return listService.getDetail(postIdx);
 	}
 	
@@ -95,12 +115,16 @@ public class PostController {
 	
 	// 지도 리스트 출력
 	@GetMapping("/map")
-	public List<Post> mapList(HttpServletRequest request, Model model) {
+	public List<Post> mapList(
+			@RequestParam Map<String, Object> param,
+			HttpServletRequest request, 
+			Model model) {
 		
-		// test용 회원idx
-		int midx = 1;
+		String memberid = request.getParameter("mId");
 		
-		return listService.getMapListView(midx);
+		System.out.println("path 멤버아이디 :"+memberid); 
+		
+		return listService.getMapListView(memberid);
 	}
 	
 	// 지도로 주소별 게시글 리스트 출력
@@ -110,12 +134,10 @@ public class PostController {
 			HttpServletRequest request,
 			Model model) {
 			
-		String mIdx = request.getParameter("memberidx");
+		String pathmId = request.getParameter("pathmemberid");
 		String pAddr = request.getParameter("postAdd");
 			
-		int memberIdx = Integer.parseInt(mIdx);
-			
-		return listService.getPostListByMapView(memberIdx, pAddr);
+		return listService.getPostListByMapView(pathmId, pAddr);
 	}
 		
 	// 좋아요 
@@ -142,15 +164,7 @@ public class PostController {
 		return listService.getLikes(postIdx, request);
 	}
 	
-	@GetMapping("/likesList")
-	public List<LikeRequest> getLikeList(int lpost_idx, int m_idx) {
-		
-		System.out.println("좋아요 유저 가져오기");
-		System.out.println(lpost_idx);
-		System.out.println(m_idx);
-		
-		return listService.getLikeList(lpost_idx, m_idx);
-	}
+
 
 
 }

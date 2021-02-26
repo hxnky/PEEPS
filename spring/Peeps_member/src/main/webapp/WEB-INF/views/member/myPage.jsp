@@ -485,10 +485,14 @@ function modal_edit(){
 </script>
 
 <script>
-	// 목록 누르면 그 사람 마이페이지로 이동
-	function loadMyPage(m_idx) {
-		location.href = "${pageContext.request.contextPath}/mypage/"+ m_idx;
-	}	
+var id = ${peeps.id};
+
+$("#MyPage_img").click(function() {
+
+	location.href = "${pageContext.request.contextPath}/mypage/" + id;
+
+});
+
 </script>
 <script>
 $("#keyword")

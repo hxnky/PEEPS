@@ -11,6 +11,7 @@ crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
 integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" 
 crossorigin="anonymous"></script>
+<link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 
 <style>
 @import
@@ -263,93 +264,6 @@ body {
 #cmttxt_edit{
 	width : 400px;
 }
-
-/*좋아요 모달*/
-/*중간 위치 모달창*/
-#my_modal {
-	display: none;
-	width: 600px;
-	height: 400px;
-	padding: 20px 60px;
-	background-color: #fefefe;
-	border: 1px solid #888;
-	border-radius: 10px;
-	padding: 20px 60px;
-	overflow: auto;
-}
-
-#my_modal .modal_close_btn {
-	position: fixed;
-	top: 10px;
-	right: 10px;
-}
-
-#my_modal_header {
-	text-align: center;
-	font-size: 20px;
-	font-weight: bold;
-}
-/* 모달창 테이블*/
-#profile_modal {
-	width: 60px;
-	height: 60px;
-	border-radius: 100%;
-	border: 0.1px solid #CCC;
-}
-
-#follow, #modal_edit {
-	width: 120px;
-	height: 40px;
-	background: #F5E978;
-	border: 0.2px solid #CCC;
-	border-radius: 5px;
-	font-size: 20px;
-	font-weight: bold;
-	padding: 1px 6px;
-}
-
-#follow:hover {
-	cursor: pointer;
-}
-
-#modal_edit:hover{
-	cursor: pointer;
-}
-
-#unfollow {
-	width: 120px;
-	height: 40px; background : #CCC;
-	border: 0.2px solid #CCC;
-	border-radius: 5px;
-	font-size: 20px;
-	font-weight: bold;
-	padding: 1px 6px;
-	background: #CCC;
-}
-
-#unfollow:hover {
-	cursor: pointer;
-}
-
-#user_id {
-	font-size: 20px;
-	font-weight: bold;
-	width: 200px;
-}
-
-.likes:hover{
-	cursor: pointer;
-}
-
-#userList {
-	width: 500px;
-	text-align: center;
-	margin: 10px auto;
-}
-
-.modal_wrap{
-	height: 65px;
-}
 </style>
 
 <!--jquery 라이브러리 로드-->
@@ -367,8 +281,12 @@ function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[
 	
 var postIdx = getParameterByName('idx');
 /* console.log("포스트인덱스 : ",postIdx); */
-var memberIdx = "";
-	
+/* var memberIdx = ""; */
+
+/* test */
+var sessionMidx = "${peeps.m_idx}";
+console.log("세션정보!!!~~ : ", sessionMidx);
+
 	    $(document).ready(function(){
 	        
 	        // 글자 수 제한
@@ -404,9 +322,12 @@ var memberIdx = "";
 					var infoHtml = '<input type="hidden" class="memberidx" value="'+data.member_idx+'">';
 					$('.memberid').append(infoHtml);
 					
-					var Btn = '<a class="deleteBtn" href="javascript:deletePost('+data.p_idx+');">삭제</a>';
-					   Btn += '<a class="editBtn" href="<c:url value="/main/post/edit?idx='+data.p_idx+'" />">수정</a>';
-					$('.deBtn').append(Btn);
+					if(sessionMidx == data.member_idx){
+						console.log("세션midx랑 게시글midx가 같습니다.");
+						var Btn = '<a class="deleteBtn" href="javascript:deletePost('+data.p_idx+');">삭제</a>';
+						   Btn += '<a class="editBtn" href="<c:url value="/main/post/edit?idx='+data.p_idx+'" />">수정</a>';
+						$('.deBtn').append(Btn);
+					}
 					   
 					/* console.log(data.p_title); */
 					$('.ptitle').append(data.p_title);
@@ -551,9 +472,6 @@ var memberIdx = "";
 			} 
 		};
 		
-		
-		
-		
 		// 좋아요 버튼 클릭
 		function clickLikeBtn(){
 			/* alert("좋아요버튼 클릭"); */
@@ -569,9 +487,9 @@ var memberIdx = "";
 				type: 'get',
 				data: likeInfo,
 				success: function(data){
-					console.log("좋아요 ajax 성공");
+					/* console.log("좋아요 ajax 성공");
 					console.log("받은 데이터 : ",data);
-					console.log(data.p_likes); 
+					console.log(data.p_likes); */
 					
 					$('.likes').empty();
 					
@@ -739,8 +657,8 @@ $(function() {
 	console.log("포스트IDX확인 : ",postIdx);
 	
 	// 댓글 작성
-	$("#cmtbtn").click(function() {
-		
+	$(document).on("click", ".cmtbtn", function(){
+
 		var cmt = $('#cmttxt').val();
 		
 		var mIdx = $('.memberidx').val();
@@ -756,7 +674,7 @@ $(function() {
     			async : false,
     			data : {
     				"post_idx" : postIdx,
-    				"member_idx" : "${m_idx}",
+    				"member_idx" : mIdx,
     				"cmt_content" : cmt
     			},
     			success : function(data) {
@@ -878,13 +796,13 @@ $(function() {
 				if(reply.trim() == ""){
 		            alert("내용을 입력해주세요");
 				} else{
-					
+					// 세션 m_idx 값 넣기
 					$.ajax({
 								url : '${pageContext.request.contextPath}/rest/cmt/reply/insert',
 								type : 'post',
 								data : {
 									"comment_idx" : cmt_idx,
-									"member_idx" : "${m_idx}",
+									"member_idx" : 2,
 									"re_content" : reply
 								},
 								success : function(data) {
@@ -996,189 +914,4 @@ $(function() {
 	
 </script>
 
-<!-- 21.02.24 좋아요 모달창 관련 한경 추가 -->
- <script>
-	 var postIdx = getParameterByName('idx');
-	 
-		// 모달창 띄우기
-		$(document).on("click", ".likes", function(){
-			console.log("좋아요 리스트");
-			LikeUserList();
-			modal('my_modal');
-		});
-	 
-	 	// 모달창 레이아웃
-		function modal(id) {
-			var zIndex = 9999;
-			var modal = $('#' + id);
-
-			// 모달 div 뒤에 희끄무레한 레이어
-			var bg = $('<div>').css({
-				position : 'fixed',
-				zIndex : zIndex,
-				left : '0px',
-				top : '0px',
-				width : '100%',
-				height : '100%',
-				overflow : 'auto',
-				// 레이어 색갈은 여기서 바꾸면 됨
-				backgroundColor : 'rgba(0,0,0,0.500)'
-			}).appendTo('body');
-
-			modal.css(
-							{
-								position : 'fixed',
-								boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-
-								// 시꺼먼 레이어 보다 한칸 위에 보이기
-								zIndex : zIndex + 1,
-
-								// div center 정렬
-								top : '50%',
-								left : '50%',
-								transform : 'translate(-50%, -50%)',
-								msTransform : 'translate(-50%, -50%)',
-								webkitTransform : 'translate(-50%, -50%)'
-							}).show()
-
-					// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-					.find('.modal_close_btn').on('click', function() {
-						bg.remove();
-						modal.hide();			
-					});
-		}
-		
-		//좋아요 누른 유저 리스트
-		function LikeUserList(){
-			// 좋아요 테이블에서 p_idx에 좋아요를 누른 m_idx 가져오기
-			// 그 멤버들 정보 조회
-			$.ajax({
-				url: "http://localhost:8080/post/rest/member/post/likesList",
-				type: 'get',
-				data: {
-					// m_idx 세션 값으로 바꾸기
-					"lpost_idx":postIdx,
-					"m_idx":2
-				},
-				success: function(data){
-					var like = data;
-
-					if(data == null){
-						$('#user_no').empty();
-						
-						$('#user_no').append("첫번째 좋아요를 눌러보세요!");
-					} else{
-						
-						$('#userList').empty();
-						
-						$.each(data, function(index, like){
-							
-							// 세션 저장된 걸로 바꾸기
-							var m_idx = 2;
-							
-							if(like.loginType == 'email'){
-								$('#userList').append("<tr class='modal_wrap' id='"+like.m_idx+"'><td><div id='user_img'><img id='profile_modal' src='<c:url value='/fileupload/"+like.m_photo+"'/>' onclick='loadMyPage("+like.m_idx+")'></div></td></tr>");
-							} else{
-								$('#userList').append("<tr class='modal_wrap' id='"+like.m_idx+"'><td><div id='user_img'><img id='profile_modal' src='<c:url value='"+like.m_photo+"'/>' onclick='loadMyPage("+like.m_idx+")'></div></td></tr>");
-							}
-							$('#'+like.m_idx).append("<td><div id='user_id' onclick='loadMyPage("+like.m_idx+")'>"+like.id+"</div></td>");
-							if(like.m_idx == m_idx){
-								$('#'+like.m_idx).append("<td><div id='pro_edit'><button id='modal_edit' onclick='loadMyPage("+like.m_idx+")'>프로필 편집</button></div></td>");
-							}else{
-								if(like.followChk == 0){
-									$('#'+like.m_idx).append("<td><div id='followChk' class='f_"+like.m_idx+"'><button class='f_btn' id='follow' type='submit' onclick='follow("+like.m_idx+")'>팔로우</button></div></td>");
-								}else{
-									$('#'+like.m_idx).append("<td><div id='followChk' class='f_"+like.m_idx+"'><button class='f_btn' id='unfollow' type='submit' onclick='unfollow("+like.m_idx+")'>언팔로우</button></div></td>");
-								}
-							}
-						});
-						
-					}
-				},
-				error: function(e){
-					console.log(e);
-					console.log("리스트 불러오기 실패");
-				}
-				
-			});	// 좋아요 누른 유저 리스트 ajax 끝
-		}
-
-		// 목록 누르면 그 사람 마이페이지로 이동
-		function loadMyPage(m_idx) {
-			location.href = "${pageContext.request.contextPath}/mypage/"+ m_idx;
-		}	
-		
-		// 모달 팔로우 -> 언팔로우
-		function FtoU(y_idx){
-					
-			var html="<div id='followChk' class='f_"+y_idx+"'><button class='f_btn' id='unfollow' type='submit' onclick='unfollow("+y_idx+")'>언팔로우</button></div>";
-					
-			$('#my_modal #LikeList .modal_wrap .f_'+y_idx).replaceWith(html);
-
-		}
-
-		// 모달 팔로우 -> 언팔로우
-		function UtoF(y_idx){
-			
-			var html="<div id='followChk' class='f_"+y_idx+"'><button class='f_btn' id='follow' type='submit' onclick='follow("+y_idx+")'>팔로우</button></div>";
-					
-			$('#my_modal #LikeList .modal_wrap .f_'+y_idx).replaceWith(html);
-
-		}
-		
-		// 모달창 팔로우 function
-		function follow(y_idx){
-			
-			var m_idx = ${peeps.m_idx};
-			
-			console.log(y_idx);
-			
-			$
-			.ajax({
-				url : '${pageContext.request.contextPath}/mypage/follow',
-				type : 'post',
-				async : false,
-				data : {
-					"y_idx": y_idx,
-					"m_idx" : m_idx
-				},
-				success : function(data) {
-					console.log("팔로우");	
-					FtoU(y_idx);
-				},
-				error : function() {
-					console.log("실패,,,,");
-				}
-			});
-
-			
-		}
-
-		// 모달창 언팔로우 function
-		function unfollow(y_idx){
-			
-			var m_idx = ${peeps.m_idx};
-			
-			console.log(y_idx);
-			
-			$
-			.ajax({
-				url : '${pageContext.request.contextPath}/mypage/unfollow',
-				type : 'post',
-				async : false,
-				data : {
-					"y_idx": y_idx,
-					"m_idx" : m_idx
-				},
-				success : function(data) {
-					console.log("언팔로우");
-					UtoF(y_idx);
-					
-				},
-				error : function() {
-					console.log("실패,,,,");
-				}
-			});
-
-		}
-</script>
+   

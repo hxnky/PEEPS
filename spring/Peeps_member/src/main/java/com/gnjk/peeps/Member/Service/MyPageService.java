@@ -20,12 +20,12 @@ public class MyPageService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	// idx 로 바꾸기
-	public Peeps getPeeps(int m_idx, HttpSession session) {
+	// 아이디로 바꾸기
+	public List<Peeps> getPeeps(int m_idx, HttpSession session) {
 
 		dao = template.getMapper(MemberDao.class);
 
-		Peeps peeps = dao.selectMemberByIdx(m_idx);
+		List<Peeps> peeps = dao.selectMemberByIdx(m_idx);
 		
 		session.setAttribute("page_peeps", peeps);
 
@@ -112,7 +112,7 @@ public class MyPageService {
 
 			System.out.println(f_idx);
 
-			followingList.add(dao.selectMemberByIdx(f_idx));
+			//followingList.add(dao.selectMemberByIdx(f_idx));
 
 			int chk_result = dao.CheckFollow(m_idx, f_idx);
 
@@ -137,7 +137,7 @@ public class MyPageService {
 
 			int f_idx = follower_peeps.get(i);
 
-			followerList.add(dao.selectMemberByIdx(f_idx));
+			//followerList.add(dao.selectMemberByIdx(f_idx));
 			
 			int chk_result = dao.CheckFollow(m_idx, f_idx);
 

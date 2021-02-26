@@ -208,11 +208,7 @@
 			.click(
 					function() {
 
-						var m_idx = $
-						{
-							peeps.m_idx
-						}
-						;
+						var m_idx = ${peeps.m_idx};
 						var keyword = $('#search').val();
 
 						if (keyword.trim() == "") {
@@ -239,6 +235,15 @@
 						}
 
 					});
+	
+	var id = ${peeps.id};
+
+	$("#MyPage_img").click(function() {
+
+		location.href = "${pageContext.request.contextPath}/mypage/" + id;
+
+	});
+
 </script>
 
 </html>

@@ -36,5 +36,9 @@ public interface CommentDao {
 	
 	// 대댓글 삭제
 	int deleteReply(int re_idx);
+	
+	// 대댓글 상위 3개만 가져오기
+	List<Comment> selectCmtListLimit(int post_idx);
+
 
 }

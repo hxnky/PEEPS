@@ -5,6 +5,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.gnjk.post.mypost.dao.PostDao">
 
+	<!-- 멤버 idx 찾기 -->
+	<select id="selectMemberidx" resultType="int">
+		select m_idx from member 
+		where id=#{param}
+	</select>	
+
 	<!-- 게시글 등록 -->
 	<insert id="insertPost"
 		parameterType="com.gnjk.post.mypost.domain.Post"
@@ -100,6 +106,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set p_likes=p_likes+#{param2}
 		where p_idx=#{param1} 
 	</update>
-
+	
+	<!-- 21.02.26 한경 추가 -->
+	<select id="selectPostByM_idx" resultType="com.gnjk.post.mypost.domain.Post">
+		select * from post where member_idx = #{member_idx}
+	</select>
 
 </mapper>

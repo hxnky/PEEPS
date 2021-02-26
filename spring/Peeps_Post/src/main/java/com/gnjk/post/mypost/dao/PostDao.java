@@ -9,6 +9,9 @@ public interface PostDao {
 	
 	// public abstract 
 	
+	// 멤버 id에 해당하는 멤버 idx 찾기
+	int selectMemberidx(String memberId);
+	
 	// 게시글 등록
 	int insertPost(Post post);
 	
@@ -42,6 +45,10 @@ public interface PostDao {
 	
 	// 게시글 좋아요 개수 update
 	int updatePostLikes(int pIdx, int pm);
+
+	// 21.02.26 한경 추가
+	// 회원 인덱스로 게시물 조회
+	List<Post> selectPostByM_idx(int idx);
 	
 	
 	

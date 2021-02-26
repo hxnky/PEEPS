@@ -1,11 +1,27 @@
 package com.gnjk.post.mypost.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainViewController {
+	
+//	@RequestMapping("/error")
+//	public String goErrorPage() {
+//		return "error/errorPage";
+//	}
+	
+	// 마이페이지의 게시글 리스트 (회원 계정 아이디로 접속)
+	@RequestMapping("/main/{mid}")
+	public String goMyPage(
+			@RequestParam(value = "p", defaultValue = "1") int p,
+			@PathVariable("mid") String mid
+			) {
+		System.out.println("PathVariable 이용한 컨트롤러로 진입");
+		return "post/myPage";
+	}
 	
 	// 게시글 작성 폼
 	@RequestMapping("/main/post/upload")
@@ -14,18 +30,20 @@ public class MainViewController {
 	}
 	
 	// 마이페이지의 게시글 리스트
-	@RequestMapping("/main/jhS2")	// test 회원 아이디를 세션에서 받아야 함
-	public String goMemberMypage(
-			@RequestParam(value = "p", defaultValue = "1") int p
-			) {
-		return "post/myPage";
-	}
+//	@RequestMapping("/main/jhS2")	// test 클릭한 회원 계정의 아이디를 받아야 함
+//	public String goMemberMypage(
+//			@RequestParam(value = "p", defaultValue = "1") int p
+//			) {
+//		
+//		return "post/myPage";
+//	}
 	
 	// 마이페이지의 지도 리스트
-	@RequestMapping("/main/jhS2/map") // test 회원 아이디를 세션에서 받아야 함
+	@RequestMapping("/main/{mid}/map") // test 회원 아이디를 세션에서 받아야 함
 	public String goMapMypage(
-//			@RequestParam(value = "p", defaultValue = "1") int p
+			@PathVariable("mid") String mid
 			) {
+		System.out.println("PathVariable 이용한 컨트롤러로 진입");
 		return "post/mapView";
 	}
 	
@@ -43,6 +61,14 @@ public class MainViewController {
 			@RequestParam("idx") int postIdx
 			) {
 		return "post/postEditForm";
+	}
+	
+	//방명록 폼
+	@RequestMapping("/main/jhS2/guestbook")
+	public String getguestbookForm() {
+
+		return "post/guestbookForm";
+
 	}
 	
 

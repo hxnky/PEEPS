@@ -119,6 +119,17 @@
 	font-size: 1.1em;
 }
 
+#prvPlaceHolder {
+	font-family: 'Nanum Gothic', sans-serif;
+	font-weight: 100px;
+	color: #bbb;
+	margin: 15px 10px;
+}
+
+/* #cannotSee {
+	display: none;
+} */
+
 body {
 	background-color: #fcf9f6;
 	font-family: 'Nanum Gothic', sans-serif;
@@ -131,4 +142,3 @@ body {
 		crossorigin="anonymous">
 </script>
 
-   

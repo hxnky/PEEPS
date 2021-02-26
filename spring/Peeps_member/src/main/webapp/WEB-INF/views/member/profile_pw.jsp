@@ -110,6 +110,14 @@
 			location.href = "${pageContext.request.contextPath}/logout";
 
 		});
+		var id = ${peeps.id};
+
+		$("#MyPage_img").click(function() {
+
+			location.href = "${pageContext.request.contextPath}/mypage/" + id;
+
+		});
+
 	});
 </script>
 

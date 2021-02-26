@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gnjk.post.mypost.dao.FileDao;
 import com.gnjk.post.mypost.dao.PostDao;
+import com.gnjk.post.mypost.domain.LoginInfo;
+import com.gnjk.post.mypost.domain.Peeps;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostFile;
 import com.gnjk.post.mypost.domain.PostWriteRequest;
@@ -31,6 +34,21 @@ public class PostUploadService {
 
 	// 게시글 저장
 	public int uploadPost(PostWriteRequest writeRequest, HttpServletRequest request, Model model) {
+		// 로그인 세션 가져오기
+		HttpSession session = request.getSession();
+		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
+		System.out.println("로그인 인포 세션 : "+loginInfo);
+		
+		// test 로그인 안된 경우, 로그인 정보 세션 생성
+		if(loginInfo == null) {
+			
+			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
+			session.setAttribute("peeps", loginInfo);
+		}
+		
+		// 세션 멤버 idx 
+		int memberIdx = loginInfo.getM_idx();
+		
 		int postResult = 0;
 
 		MultipartFile[] files = writeRequest.getPostformfile();
@@ -50,6 +68,7 @@ public class PostUploadService {
 
 		// 게시글 데이터 바인딩
 		Post post = writeRequest.toPost();
+		post.setMember_idx(memberIdx);
 		System.out.println("게시글 제목 :" + post.getP_title());
 		System.out.println("위치 주소 : " + post.getP_loc());
 

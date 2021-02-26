@@ -30,7 +30,6 @@ import com.gnjk.peeps.Member.Service.TimeLineService;
 import com.gnjk.peeps.Member.domain.CommentRequest;
 import com.gnjk.peeps.Member.domain.EditRequest;
 import com.gnjk.peeps.Member.domain.Peeps;
-import com.gnjk.peeps.Member.domain.PostRequest;
 import com.gnjk.peeps.Member.domain.RegRequest;
 import com.gnjk.peeps.Member.domain.SocialRequest;
 
@@ -221,18 +220,26 @@ public class MemberRestController {
 		return oauthService.selectSocialVerify(email);
 	}
 
-	// 타임라인 게시물 리스트
-	@GetMapping("/user/TimeLineList")
-	public List<PostRequest> TimeLineList(int m_idx) {
-		
-		return timeLineService.TimeLineList(m_idx);
-	}
 	
 	// 타임라인 댓글 리스트
 	@GetMapping("/user/cmtList")
 	public List<CommentRequest> CmtList(int post_idx){
 		
 		return timeLineService.CmtList(post_idx);
+	}
+	
+	@GetMapping("/user/followingList")
+	// 유저 팔로잉 리스트
+	public List<Integer> followingList(int m_idx){
+		
+		return timeLineService.FollowingList(m_idx);
+	}
+	
+	// 팔로잉 유저 정보 받아오기
+	@GetMapping("/user/followingInfo")
+	public List<Peeps> followingInfo(int m_idx) {
+		
+		return timeLineService.FollowingInfo(m_idx);
 	}
 	
 }

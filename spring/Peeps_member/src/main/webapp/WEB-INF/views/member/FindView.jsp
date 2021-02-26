@@ -223,13 +223,14 @@ var email = "${peeps.email}";
 				});
 			});
 
-	$("#MyPage_img")
-	.click(
-			function() {
+	var id = ${peeps.id};
 
-				location.href = "${pageContext.request.contextPath}/mypage/"+ m_idx;
+	$("#MyPage_img").click(function() {
 
-			});
+		location.href = "${pageContext.request.contextPath}/mypage/" + id;
+
+	});
+
 </script>
 
 <script>

@@ -154,12 +154,14 @@
 <script>
 	var email = "${peeps.email}";
 	var m_idx = ${peeps.m_idx};
-	
+	var id = ${peeps.id};
+
 	$("#MyPage_img").click(function() {
 
-		location.href = "${pageContext.request.contextPath}/mypage/" + m_idx;
+		location.href = "${pageContext.request.contextPath}/mypage/" + id;
 
 	});
+
 
 	$("#pw_ch")
 			.click(

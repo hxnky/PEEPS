@@ -109,9 +109,9 @@ public class MemberController {
 		return "member/FindView";
 	}
 
-	// 마이페이지
-	@RequestMapping(value = "/mypage/{m_idx}", method = RequestMethod.GET)
-	public String MyPage(@PathVariable("m_idx") int m_idx, HttpSession session) {
+	// 마이페이지 임시
+	@RequestMapping(value = "/mypage/chk", method = RequestMethod.GET)
+	public String MyPage2(int m_idx, HttpSession session) {
 
 		Peeps peeps = (Peeps) session.getAttribute("peeps");
 		int idx = peeps.getM_idx();
@@ -125,6 +125,13 @@ public class MemberController {
 		session.setAttribute("follow_chk", myPageService.chk_follow(m_idx, idx));
 		session.setAttribute("FollowingList", myPageService.getFollowingList(m_idx, session));
 		session.setAttribute("FollowerList", myPageService.getFollowerList(m_idx, session));
+
+		return "member/myPage";
+	}
+	
+	// 마이페이지
+	@RequestMapping(value = "/mypage/{id}", method = RequestMethod.GET)
+	public String MyPage(@PathVariable("id") String id, HttpSession session) {
 
 		return "member/myPage";
 	}

@@ -24,7 +24,7 @@
 				<img src="<spring:url value='/resources/img/chick.jpg'/>">
 				<div id="pro_btn">
 					<ul>	<!-- test id추가했음 -->
-						<li id="memberId">jhS2</li>
+						<li id="memberId">아이디</li>
 						<li><button id="pro_edit">
 								<a href="#">프로필 편집</a>
 							</button></li>
@@ -46,10 +46,7 @@
 			</div>
 		</div>
 		<div id="nav_wrap">
-			<div class="menuselect"> <!-- test 회원 아이디 들어가야 함 -->
-				<button onclick="location.href='http://localhost:8080/post/main/jhS2'">게시물</button> 
-				<button onclick="location.href='map'">지도</button>
-				<button onclick="javascript:menulist(2);">방명록</button>
+			<div class="menuselect"> 
 
 			</div>
 		</div>
@@ -75,20 +72,31 @@
 	<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed6849fd6d5d015aebf82a3eb747333"></script> -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed6849fd6d5d015aebf82a3eb747333&libraries=services"></script>
 	<script>
-	// 뷰컨트롤러 통해 페이지 번호 받기
-/* 	function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-	var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
-	return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
-  }
-
-    var p = getParameterByName('p');
-    console.log(p); */
+    
+	var urlPath = location.pathname;
+	console.log("URL 패스네임 : ", urlPath);
+	var splitUrl = urlPath.split("/");
+	var pathMemberId = splitUrl[3];
+	console.log(splitUrl);
+	console.log("패스멤버아이디",pathMemberId);
+	
+	var menuHtml = '<button onclick="location.href=\'<c:url value="/main/'+pathMemberId+'"/>\'">게시물</button>';
+	   menuHtml += '<button onclick="location.href=\'<c:url value="/main/'+pathMemberId+'/map"/>\'">지도</button>';
+	   menuHtml += '<button>방명록</button>'; 
+	   $('.menuselect').append(menuHtml);
     
 	$(document).ready(function(){
+		
+		console.log("document.ready 안 : ", pathMemberId);
+		
+		var pathmId = {
+			"mId" : pathMemberId
+		};
 		
 		$.ajax({
 			url: 'http://localhost:8080/post/rest/member/post/map',
 			type: 'GET',
+			data: pathmId,
 			success: function(data){
 				
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
@@ -210,13 +218,12 @@
 		
 		/* alert(postAddr); */
 		console.log("함수로 들어오는 주소 : ",postAddr);
-		var memberidx = 1;
 		var pageNum = 1;
 		locInfo = postAddr;
 		console.log("주소 정보!! : ", locInfo);
 		
 		var mapPostInfo = {
-			"memberidx" : memberidx,
+			"pathmemberid" : pathMemberId,
 			"postAdd" : postAddr,
 			"pageNum" : pageNum
 		};

@@ -13,9 +13,9 @@
 </head>
 
 <%@ include file="/WEB-INF/views/include/writeBasicset.jsp"%>  
-
+<link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 <body>
-
+<%@ include file="/WEB-INF/views/include/nav.jsp"%>
 	<div class="post_wrap">
 		<form method="post" enctype="multipart/form-data" id="uploadForm">
 		<table class="post">
@@ -54,6 +54,7 @@
 					</div>
 					<!-- 파일 프리뷰 -->
 					<div id="preview" class="preview">
+					<h4 id="prvPlaceHolder">첨부한 이미지가 이곳에 표시됩니다. (이미지 클릭 시 첨부 취소)</h4>
         			</div>
 				</td>
 			</tr>
@@ -73,67 +74,15 @@
 					<div class="plocwrap">
 					<input type="button" class="searchlocbtn" 
 					onclick="sample5_execDaumPostcode()" value="위치 추가">
+					<span class="xBtnSpan"></span>
 					<input type="text" id="sample5_address" name="ploc" class="searchlocBox" 
 						onfocus="this.blur()"
 					readonly>
+					
 					<br>
 					<div id="map"
 						style="width: 800px; height: 300px; margin-top: 10px; display: none"></div>
 				
-					<!-- <script
-						src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-					<script
-						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed6849fd6d5d015aebf82a3eb747333&libraries=services"></script>
-					<script>
-						var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-						mapOption = {
-							center : new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-							draggable: false, // 확대축소 & 드래그 막기
-							level : 3
-						// 지도의 확대 레벨
-						};
-						
-						//지도를 미리 생성
-						var map = new daum.maps.Map(mapContainer, mapOption);
-						//주소-좌표 변환 객체를 생성
-						var geocoder = new daum.maps.services.Geocoder();
-						//마커를 미리 생성
-						var marker = new daum.maps.Marker({
-							position : new daum.maps.LatLng(37.537187, 127.005476),
-							map : map
-						});
-				
-						function sample5_execDaumPostcode() {
-							new daum.Postcode({
-								oncomplete : function(data) {
-									var addr = data.address; // 최종 주소 변수
-				
-									// 주소 정보를 해당 필드에 넣는다.
-									document.getElementById("sample5_address").value = addr;
-									// 주소로 상세 정보를 검색
-									geocoder.addressSearch(data.address, function(results,
-											status) {
-										// 정상적으로 검색이 완료됐으면
-										if (status === daum.maps.services.Status.OK) {
-				
-											var result = results[0]; //첫번째 결과의 값을 활용
-				
-											// 해당 주소에 대한 좌표를 받아서
-											var coords = new daum.maps.LatLng(result.y,
-													result.x);
-											// 지도를 보여준다.
-											mapContainer.style.display = "block";
-											map.relayout();
-											// 지도 중심을 변경한다.
-											map.setCenter(coords);
-											// 마커를 결과값으로 받은 위치로 옮긴다.
-											marker.setPosition(coords)
-										}
-									});
-								}
-							}).open();
-						}
-					</script> -->
 					</div>
 				</td>
 			</tr>
@@ -146,6 +95,7 @@
 			</tr>
 		</table>
 		</form>
+		
 		
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed6849fd6d5d015aebf82a3eb747333&libraries=services"></script>
@@ -168,22 +118,22 @@
 			position : new daum.maps.LatLng(37.537187, 127.005476),
 			map : map
 		});
-
 		function sample5_execDaumPostcode() {
 			new daum.Postcode({
 				oncomplete : function(data) {
 					var addr = data.address; // 최종 주소 변수
-
 					// 주소 정보를 해당 필드에 넣는다.
 					document.getElementById("sample5_address").value = addr;
+					
+					var html = '<input type="button" class="cLocBtn" onClick="javascript:xBtnClick();" value="X">';
+					$('.xBtnSpan').append(html);
+					
 					// 주소로 상세 정보를 검색
 					geocoder.addressSearch(data.address, function(results,
 							status) {
 						// 정상적으로 검색이 완료됐으면
 						if (status === daum.maps.services.Status.OK) {
-
 							var result = results[0]; //첫번째 결과의 값을 활용
-
 							// 해당 주소에 대한 좌표를 받아서
 							var coords = new daum.maps.LatLng(result.y,
 									result.x);
@@ -198,11 +148,23 @@
 					});
 				}
 			}).open();
+			
 		}
 		
 		// 파일 업로드 이미지 버튼 클릭 시 
         function uploadImgBtnClick(){
         	$('#postformfile').trigger('click');
+        	
+        };
+        
+        // 위치 취소 버튼 클릭 시
+        function xBtnClick(){
+        	alert('엑스버튼 클릭');
+        	
+        	$('.cLocBtn').remove();
+        	$('.searchlocBox').val("");
+        	mapContainer.style.display = "none";
+        	
         };
         
         var image_list = [];
@@ -223,13 +185,10 @@
 			
     		/* console.log("index :" + index);
     		image_list.splice(index, 1); */
-
     		var target = $('#img_id_' + index);
     		console.log(target);
-
     		$(target).remove();
     		console.log(image_list);
-
     	}; 
     	
     	 //폼 데이터 전송 메서드
@@ -335,7 +294,6 @@
 				
 				var files = e.target.files;
 				console.log("files---------- : ",files);
-
 				var filesArr = Array.prototype.slice.call(files);
 				console.log("filesArr : ", filesArr);
 							
@@ -380,11 +338,8 @@
 								
 								var img_html = '<a href="javascript:void(0);" onclick=\"deleteNewImageAction('+ index + ');\" id="img_id_'+ index+ '" class="img_event" >';
 								img_html += '<img src="'+e.target.result+'" data-file="'+f.name+'" id="imgPrv'+index+'" class="imgPrv" style="width:148px; height:148px;"></a>';
-
 								index++;
-
 								$('.preview').append(img_html);
-
 							};
 							reader.readAsDataURL(f);
 													
@@ -395,7 +350,8 @@
 	    }; // window.onload 끝
 	    
     
-		</script>
+		</script>		
+
 	</div>
 
 </body>

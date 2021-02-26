@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.gnjk.peeps.Member.dao.MemberDao;
 import com.gnjk.peeps.Member.domain.CommentRequest;
+import com.gnjk.peeps.Member.domain.Peeps;
 import com.gnjk.peeps.Member.domain.PostRequest;
 
 @Service
@@ -105,6 +106,22 @@ public class TimeLineService {
 		System.out.println(PostList);
 		
 		return PostList;
+	}
+
+	public List<Integer> FollowingList(int m_idx) {
+		
+		dao = template.getMapper(MemberDao.class);
+		
+		List<Integer> FollowingList = dao.followingList(m_idx);
+		
+		return FollowingList;
+	}
+
+	public List<Peeps> FollowingInfo(int m_idx) {
+		
+		dao = template.getMapper(MemberDao.class);
+		
+		return dao.selectMemberByIdx(m_idx);
 	}
 
 }
