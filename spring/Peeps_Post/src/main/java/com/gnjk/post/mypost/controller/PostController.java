@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gnjk.post.mypost.domain.LikeRequest;
 import com.gnjk.post.mypost.domain.Peeps;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostEditRequest;

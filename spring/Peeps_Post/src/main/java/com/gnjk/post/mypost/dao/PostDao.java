@@ -28,7 +28,6 @@ public interface PostDao {
 	// 게시글 리스트(위치 조회)
 	List<Post> selectPostMapList(int memberidx);
 	// 게시글 리스트(주소)
-//	List<Post> selectPostByAddrList(String addr, int memberidx, int startRow, int cntPerPage);
 	List<Post> selectPostByAddrList(String addr, int memberidx);
 	
 	// 게시글 하나 조회
@@ -46,7 +45,12 @@ public interface PostDao {
 	// 게시글 좋아요 개수 update
 	int updatePostLikes(int pIdx, int pm);
 	
+	// 21.02.26 한경 추가
+	// 회원 인덱스로 게시물 조회
+	List<Post> selectPostByM_idx(int idx);
 	
+	// 게시물 검색
+	List<Post> selectPostByKeyword(String keyword);
 	
 	
 }

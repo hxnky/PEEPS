@@ -79,7 +79,7 @@
 						
 						<img style="width: 30px; height: 30px;" src="<spring:url value='/resources/img/cmtpic.png'/>">
 						<!-- 댓글 개수 -->
-						<span class="commentTotal" style="margin-left: 5px;">3</span>
+						<span class="commentTotal" style="margin-left: 5px;"></span>
 						</span>
 					</div>
 				</td>
@@ -120,7 +120,7 @@
 			</tr>
 		</table>
 	</div>
-
+	
 	
 </body>
 </html>

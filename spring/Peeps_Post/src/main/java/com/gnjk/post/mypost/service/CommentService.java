@@ -51,8 +51,12 @@ public class CommentService {
 		pDao = template.getMapper(PostDao.class);
 		
 		Post post = pDao.selectPostDetail(post_idx);
+		
+		int allReplyCnt = dao.countAllReply(post_idx);
+		int allCmtCnt = dao.countAllCmt(post_idx);
+		int allCandR = allReplyCnt + allCmtCnt;
 				
- 		CommentListView clistView = new CommentListView(cmtList, post);
+ 		CommentListView clistView = new CommentListView(cmtList, post, allCandR);
  		System.out.println("리스트뷰 : "+clistView);
 		
 		/*return dao.selectCmtList(post_idx);*/
@@ -69,7 +73,9 @@ public class CommentService {
 		Comment comment = request.GetCmt();
 
 		result = dao.insertCmt(comment);
-
+		
+		
+		
 		return result;
 	}
 

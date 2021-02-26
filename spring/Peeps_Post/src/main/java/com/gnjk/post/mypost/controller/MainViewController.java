@@ -30,7 +30,7 @@ public class MainViewController {
 		// test 로그인 안된 경우, 로그인 정보 세션 생성
 		if(loginInfo == null) {
 			
-			loginInfo = new Peeps(3, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
+			loginInfo = new Peeps(3, "jh@gmail.com", "11111", "jh", "jhS2", "프으사 (3).jpg", "안녕하세요", "1", 'Y', "email");
 			session.setAttribute("peeps", loginInfo);
 		}
 		return "myPage";
@@ -52,17 +52,8 @@ public class MainViewController {
 		return "post/writeForm";
 	}
 	
-	// 마이페이지의 게시글 리스트
-//	@RequestMapping("/main/jhS2")	// test 클릭한 회원 계정의 아이디를 받아야 함
-//	public String goMemberMypage(
-//			@RequestParam(value = "p", defaultValue = "1") int p
-//			) {
-//		
-//		return "post/myPage";
-//	}
-	
 	// 마이페이지의 지도 리스트
-	@RequestMapping("/main/{mid}/map") // test 회원 아이디를 세션에서 받아야 함
+	@RequestMapping("/main/{mid}/map") 
 	public String goMapMypage(
 			@PathVariable("mid") String mid
 			) {

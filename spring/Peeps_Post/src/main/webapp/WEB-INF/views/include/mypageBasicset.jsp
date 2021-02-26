@@ -198,6 +198,14 @@
 
 .panel-heading {
 	color: #ccc;
+	background-color: #DDD;
 }
+
+.panel-primary {
+  border-color: #DDD;
+}
+
+
+
 
 </style>

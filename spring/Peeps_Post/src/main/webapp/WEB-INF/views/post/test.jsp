@@ -43,6 +43,29 @@ $.ajax({
 	}
 });
 
+
+
+
+// 멤버 정보 받아오는 ajax 시작 (대댓글)
+$.ajax({ 
+	url: 'http://localhost:8080/peeps/user/memberList',
+	type: 'GET',
+	success: function(data){
+		$.each(data, function(index, mbr){
+			
+			if(mbr.m_idx == reply.member_idx){
+				$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+mbr.m_photo+"'/>'> <span class='id'> "+mbr.id+"</span> <input type='text' id='load_re' value='"+reply.re_content+"'></div>");
+			}
+			
+		});
+		
+	},
+	error: function(e){
+		console.log("댓글 ajax속 멤버 ajax 실패");
+	}
+	
+}); // 멤버 정보 받아오는 ajax 끝 (대댓글)
+
 </script>
 
 </body>

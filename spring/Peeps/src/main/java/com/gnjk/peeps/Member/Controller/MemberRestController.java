@@ -151,6 +151,7 @@ public class MemberRestController {
 	}
 
 	@PostMapping("/mypage/unfollow")
+	@CrossOrigin
 	public int MyUnFollow(int m_idx, int y_idx, HttpSession session) {
 
 		myPageService.unFollow(m_idx, y_idx);
@@ -246,11 +247,9 @@ public class MemberRestController {
 	@GetMapping("/user/memberList")
 	@CrossOrigin
 	public List<Peeps> MemberList(
-//			@RequestParam Map<String, Object> param,
 			HttpServletRequest request
 			){
 		
-//		int pIdx = request.getParameter("postIdx");
 		System.out.println("memberList 컨트롤러 진입~~~!");
 		
 		return findUserService.getMemberInfo();

@@ -36,5 +36,16 @@ public interface CommentDao {
 	
 	// 대댓글 삭제
 	int deleteReply(int re_idx);
-
+	
+	// 21.02.26 한경 추가
+    // 대댓글 상위 3개만 가져오기
+	List<Comment> selectCmtListLimit(int post_idx);
+	
+	// 21.02.26 정현 추가
+	// 게시글 idx 에 해당하는 총 대댓글 수
+	int countAllReply(int post_idx);
+	
+	// 게시글 idx 에 해당하는 총 댓글 수 
+	int countAllCmt(int post_idx);
+	
 }

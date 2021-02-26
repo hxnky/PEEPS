@@ -1,5 +1,6 @@
 package com.gnjk.post.mypost.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.gnjk.post.mypost.dao.FileDao;
 import com.gnjk.post.mypost.dao.LikeDao;
 import com.gnjk.post.mypost.dao.PostDao;
+import com.gnjk.post.mypost.domain.LikeRequest;
 import com.gnjk.post.mypost.domain.Peeps;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostFile;
@@ -284,6 +286,8 @@ public class PostListService {
 		}
 		return post;
 	}
+	
+	
 	
 	
 

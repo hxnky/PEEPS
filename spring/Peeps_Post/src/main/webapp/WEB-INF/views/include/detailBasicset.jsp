@@ -272,6 +272,7 @@ body {
 #cmttxt_edit{
 	width : 400px;
 }
+
 </style>
 
 <!--jquery 라이브러리 로드-->
@@ -590,14 +591,19 @@ console.log("세션정보!!!~~ : ", sessionMidx);
 		
 		console.log(idx);
 		
+		// 세션받아오기
+		var memberId = "${peeps.id}";
+		var memberphoto = "${peeps.m_photo}";
+		
 		var html="<div class='editForm'>";
-		html += "<img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'>";
-		html += "아이디";
-		html += "</span>";
+		html += "<img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+memberphoto+"'/>'> ";
+		html += "<span class='id'>"+memberId+"</span>";
 		html += "<span id='cmtinputarea'> <textarea rows='10' name='cmt_content' class='cmttxt' id='reply_insert' placeholder='답글을 입력해주세요' required></textarea>";
 		html += "<input type='submit' id='reply_insert_btn' value='등록'><input type='submit' id='reply_cancle_btn' value='취소'></span></div>";
-		
+			
 		$('.comment .cmt').eq(idx).append(html);
+
+		
 	}
 	
 	// 대댓글 수정 누르면 폼 생기게
@@ -606,10 +612,13 @@ console.log("세션정보!!!~~ : ", sessionMidx);
 		var origin = $('.comment .cmt .reply #load_re').eq(idx).val();
 		console.log(idx);
 		
+		// 세션받아오기
+		var memberId = "${peeps.id}";
+		var memberphoto = "${peeps.m_photo}";
+		
 		var html="<div class='editForm'>";
-		html += "<img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'>";
-		html += "아이디";
-		html += "</span>";
+		html += "<img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+memberphoto+"'/>'> ";
+		html += "<span class='id'>"+memberId+"</span>";
 		html += "<span id='cmtinputarea'> <textarea rows='10' name='cmt_content' class='cmttxt' id='reply_insert'  required>"+origin+"</textarea>";
 		html += "<input type='submit' id='reply_insert_btn' value='등록'><input type='submit' id='reply_cancle_btn' value='취소'></span></div>";
 		
@@ -643,21 +652,25 @@ function loadComment(){
 			var member_idx = data.post.member_idx;
 			console.log("멤버idx:",member_idx);
 			
+			$('.commentTotal').empty();
+			console.log("@@@총 댓글 수! : ",data.allCmtRplCnt);
+			$('.commentTotal').append(data.allCmtRplCnt);
+			
 			$('.comment').empty();
 			$.each(data.cmtList, function(index, cmt){
 				console.log("댓글 ajax each문 진입");
-			// 멤버 정보 받아오는 ajax 시작
+			// 멤버 정보 받아오는 ajax 시작 (댓글)
 				$.ajax({ 
 					url: 'http://localhost:8080/peeps/user/memberList',
 					type: 'GET',
 					success: function(data){
 						console.log("멤버 ajax success");
-						console.log("멤버 데이터 : ", data)
+						//console.log("멤버 데이터 : ", data)
 						
 						$.each(data, function(index, mbr){
 							console.log("멤버 ajax each문 진입");
-							console.log("each1 :", mbr.m_idx);
-							console.log("each2 :", cmt.member_idx);
+							//console.log("each1 :", mbr.m_idx);
+							//console.log("each2 :", cmt.member_idx);
 							
 							if(mbr.m_idx == cmt.member_idx){
 								
@@ -668,49 +681,15 @@ function loadComment(){
 									$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+mbr.m_photo+"'/>'> <span class='id'>"+mbr.id+"</span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button></div>");
 								}
 								
-								/* console.log("댓글의 멤버 ajax if구문 진입 !!!!! ");
-								console.log("파일이름...:",mbr.m_photo); */	
-								
-								// 대댓글
-								$.ajax({
-									url : '${pageContext.request.contextPath}/rest/cmt/reply/select',
-									type: 'get',
-									data : {"cmt_idx" : cmt.cmt_idx},
-									success : function(data){
-										
-										var reply = data;
-										
-										console.log("대댓글 ajax 성공~~~!!! ",reply);
-										
-										
-										
-									},
-									error : function() {
-										console.log("대댓글 실패,,,,");
-									}
-									
-									
-								}); // 대댓글 끝
-								
 							} // if mbr.m_idx == cmt.member_idx 끝
-						}); // 멤버 each 끝
+						}); // 멤버 each 1 끝 
 						
 					},
 					error: function(e){
 						console.log("댓글 ajax속 멤버 ajax 실패");
 					}
 					
-				}); // 멤버 정보 받아오는 ajax 끝
-			});
-			
-			$('.comment').empty();
-			$.each(data.cmtList, function(index, cmt){
-				
-				if(cmt.member_idx == member_idx){
-					$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'> <button id='cmt_re' type='submit'>답글</button> <button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button><br><input type='hidden' id='replytext'></div>");
-				} else{
-					$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button></div>");
-				}
+				}); // 멤버 정보 받아오는 ajax 끝 (댓글)
 				
 				// 대댓글
 				$.ajax({
@@ -718,23 +697,61 @@ function loadComment(){
 					type: 'get',
 					data : {"cmt_idx" : cmt.cmt_idx},
 					success : function(data){
-						
-						var reply = data;
-						
-						console.log(reply);
 						$.each(data, function(index, reply){
-							console.log(cmt.cmt_idx);
-							console.log(reply.re_idx);
-							
 							if(cmt.cmt_idx == reply.comment_idx){
+								console.log("댓idx=대댓idx 인 reply! : ", reply);
+								console.log("댓idx=대댓idx 인 reply 의 index! : ", index);
+								
 								if(reply.member_idx == member_idx){
-								$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_re' value='"+reply.re_content+"'><button id='re_edit' type='submit'>수정</button>  <button id='re_del' type='submit'>삭제</button></div>");
-								} else{
-									$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'> 아이디 넣기 </span> <input type='text' id='load_re' value='"+reply.re_content+"'></div>");
+									console.log("&1 대댓 확인 : ",reply);
+									// 멤버 정보 받아오는 ajax 시작 (대댓글)
+									$.ajax({ 
+										url: 'http://localhost:8080/peeps/user/memberList',
+										type: 'GET',
+										success: function(data){
+											$.each(data, function(index, mbr){
+												
+												if(mbr.m_idx == reply.member_idx){
+													$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+mbr.m_photo+"'/>'> <span class='id'> "+mbr.id+" </span> <input type='text' id='load_re' value='"+reply.re_content+"'><button id='re_edit' type='submit'>수정</button>  <button id='re_del' type='submit'>삭제</button></div>");
+												}
+												
+											});
+											
+										},
+										error: function(e){
+											console.log("댓글 ajax속 멤버 ajax 실패");
+										}
+										
+									}); // 멤버 정보 받아오는 ajax 끝 (대댓글)
+									
+								} else {
+									console.log("&2 대댓 확인 : ",reply);
+									
+									// 멤버 정보 받아오는 ajax 시작 (대댓글)
+									$.ajax({ 
+										url: 'http://localhost:8080/peeps/user/memberList',
+										type: 'GET',
+										success: function(data){
+											$.each(data, function(index, mbr){
+												
+												if(mbr.m_idx == reply.member_idx){
+													$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+mbr.m_photo+"'/>'> <span class='id'> "+mbr.id+"</span> <input type='text' id='load_re' value='"+reply.re_content+"'></div>");
+												}
+												
+											});
+											
+										},
+										error: function(e){
+											console.log("댓글 ajax속 멤버 ajax 실패");
+										}
+										
+									}); // 멤버 정보 받아오는 ajax 끝 (대댓글)
 								}
-							}								
+								
+
+								
+							};
 						});
-						
 					},
 					error : function() {
 						console.log("대댓글 실패,,,,");
@@ -742,7 +759,10 @@ function loadComment(){
 					
 					
 				}); // 대댓글 끝
-			});
+				
+			}); // cmtList each1 끝
+			
+			
 		},
 		error : function(e){
 			console.log("댓글 실패,,,,");
