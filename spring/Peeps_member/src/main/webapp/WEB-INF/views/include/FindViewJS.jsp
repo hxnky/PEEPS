@@ -1,28 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html lang="ko">
 
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>아이디 검색</title>
-<link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/FindView.css" />" rel="stylesheet">
-</head>
-<body>
-<div id="wrap">
-	<div id="nav">
-		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
-	</div>
-	<!-- 네비 바 -->
-	<div id="total_wrap">
-	</div>
-</div>
-
-
-</body>
 <script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
 	type="text/javascript"></script>
 
@@ -201,27 +180,5 @@ function GoMyPage(idx){
 	});
 	
 }
-
-
-var id = "${id}";
-
-$("#MyPage_img").click(function() {
-
-	location.href = "${pageContext.request.contextPath}/mypage/" + id;
-
-});
-
-
-$("#keyword").click(function() {
-	
-	var keyword = $('#search').val();
-
-	if (keyword.trim() == "") {
-		alert("한 글자 이상 입력하세요");
-	} else {
-		location.href = "${pageContext.request.contextPath}/user/finduser?keyword="+ keyword;
-}
-
-});
+		
 </script>
-</html>

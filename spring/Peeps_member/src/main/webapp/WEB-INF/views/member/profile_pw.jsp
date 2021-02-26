@@ -76,49 +76,29 @@
 <script>
 	$(function() {
 
-		var email = $('#email').text();
+		var email = "${email}";
 
-		$("#edit")
-				.click(
-						function() {
-
-							location.href = "${pageContext.request.contextPath}/profile/Info?email="
-									+ email;
+		$(document).on("click", "#edit", function(){
+							location.href = "${pageContext.request.contextPath}/profile/Info";
 
 						});
-
-		$("#pw_ch")
-				.click(
-						function() {
-
+		$(document).on("click", "#pw_ch", function(){
 							location.href = "${pageContext.request.contextPath}/profile/pw?email="
 									+ email;
 
 						});
-
-		$("#delete")
-				.click(
-						function() {
-
+		$(document).on("click", "#delete", function(){
 							location.href = "${pageContext.request.contextPath}/profile/delete?email="
 									+ email;
 
 						});
 
-		$("#log_out").click(function() {
-
+		$(document).on("click", "#log_out", function(){
+			
 			location.href = "${pageContext.request.contextPath}/logout";
 
 		});
-		var id = "${id}";
-
-		$("#MyPage_img").click(function() {
-
-			location.href = "${pageContext.request.contextPath}/mypage/" + id;
-
-		});
-
-	});
+	})
 </script>
 
 <script>
@@ -167,37 +147,27 @@
 </script>
 
 <script>
-$("#keyword")
-.click(
-		function() {
 
-			var m_idx = ${m_idx};
-			var keyword = $('#search').val();
+var id = "${id}";
 
-			if(keyword.trim()==""){
-				alert("한 글자 이상 입력하세요");
-			} else{
-				$
-				.ajax({
-					url : '${pageContext.request.contextPath}/user/finduser',
-					type : 'get',
-					async : false,
-					data : {
-						"keyword":keyword,
-						"m_idx" : m_idx
-					},
-					success : function(data) {
-						location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
-					},
-					error : function() {
-						console.log("실패,,,,");
-					}
-				});
+$("#MyPage_img").click(function() {
 
-			}
+	location.href = "${pageContext.request.contextPath}/mypage/" + id;
 
-			
-		});
+});
+
+
+$("#keyword").click(function() {
+	
+	var keyword = $('#search').val();
+
+	if (keyword.trim() == "") {
+		alert("한 글자 이상 입력하세요");
+	} else {
+		location.href = "${pageContext.request.contextPath}/user/finduser?keyword="+ keyword;
+}
+
+});
 </script>
 
 
