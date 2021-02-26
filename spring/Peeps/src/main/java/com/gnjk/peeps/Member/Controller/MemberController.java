@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.gnjk.peeps.Member.Service.FindUserService;
 import com.gnjk.peeps.Member.Service.MyPageService;
+import com.gnjk.peeps.Member.Service.TimeLineService;
 import com.gnjk.peeps.Member.Service.VerifyService;
 import com.gnjk.peeps.Member.domain.Peeps;
 
@@ -27,6 +28,9 @@ public class MemberController {
 
 	@Autowired
 	private MyPageService myPageService;
+	
+	@Autowired
+	private TimeLineService timeLineService;
 
 	// 로그인
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -45,7 +49,7 @@ public class MemberController {
 	// 타임라인
 	@RequestMapping(value = "/TimeLine", method = RequestMethod.GET)
 	public String Timeline() {
-
+		
 		return "member/TimeLine";
 	}
 
@@ -87,37 +91,20 @@ public class MemberController {
 
 	// 검색
 	@RequestMapping(value = "/user/finduser", method = RequestMethod.GET)
-	public String findUser(String keyword, int m_idx, HttpSession session) {
+	public String findUser(String keyword, Model model) {
 
-		session.setAttribute("peepslist", findUserService.SearchPeeps(keyword, m_idx, session));
-
-		return "member/FindView";
-	}
-
-	// 검색 결과
-	@RequestMapping("/member/FindView")
-	public String findUserPage() {
+		System.out.println(keyword);
+		model.addAttribute("UserKeyword", keyword);
 
 		return "member/FindView";
 	}
-
+	
 	// 마이페이지
-	@RequestMapping(value = "/mypage/{m_idx}", method = RequestMethod.GET)
-	public String MyPage(@PathVariable("m_idx") int m_idx, HttpSession session) {
+	@RequestMapping(value = "/mypage/{id}", method = RequestMethod.GET)
+	public String MyPage(@PathVariable("id") String id, Model model) {
 
-		Peeps peeps = (Peeps) session.getAttribute("peeps");
-		int idx = peeps.getM_idx();
-
-		System.out.println("세션에 저장된 인덱스 : " + idx);
-		System.out.println("마이페이지 인덱스 :" + m_idx);
-
-		// idx로 정보 가져와서 저장
-		myPageService.getPeeps(m_idx, session);
-
-		session.setAttribute("follow_chk", myPageService.chk_follow(m_idx, idx));
-		session.setAttribute("FollowingList", myPageService.getFollowingList(m_idx, session));
-		session.setAttribute("FollowerList", myPageService.getFollowerList(m_idx, session));
-
+		model.addAttribute("page_id", id);
+		
 		return "member/myPage";
 	}
 
@@ -129,5 +116,15 @@ public class MemberController {
 
 		return "redirect:/";
 	}
+	
+	// 게시물 검색
+	@GetMapping("/post/FindView")
+	public String PostList(String keyword, Model model) {
 
+		model.addAttribute("PostKeyword", keyword);
+
+		return "/member/FindPostView";
+	}
+	
+	
 }

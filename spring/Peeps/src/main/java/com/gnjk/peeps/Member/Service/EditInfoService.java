@@ -65,7 +65,6 @@ public class EditInfoService {
 		}
 
 		Peeps peeps = editRequest.getToPeeps();
-		String email = peeps.getEmail();
 
 		System.out.println(editRequest);
 		System.out.println(peeps);
@@ -81,7 +80,6 @@ public class EditInfoService {
 			dao = template.getMapper(MemberDao.class);
 
 			result = dao.updateMemberInfo(peeps);
-			peeps = dao.selectMemberByEmail(email);
 
 		} catch (Exception e) {
 			e.printStackTrace();

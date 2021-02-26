@@ -119,24 +119,17 @@ public class KakaoService {
 
 			String name = properties.getAsJsonObject().get("nickname").getAsString();
 			String email = kakao_account.getAsJsonObject().get("email").getAsString();
-			String m_photo = properties.getAsJsonObject().get("profile_image").getAsString();
-
-			Peeps peeps = new Peeps();
+			String m_photo = "";
+			if(properties.getAsJsonObject().get("profile_image").getAsString()!=null) {
+				m_photo = properties.getAsJsonObject().get("profile_image").getAsString();
+			} else {
+				m_photo = "profile.png";
+			}
 			
-			peeps.setEmail(email);
-			peeps.setName(name);
-			peeps.setM_photo(m_photo);
-			peeps.setLoginType("kakao");
-			
-			System.out.println(peeps);
-			
-			session.setAttribute("peeps", peeps);
-			
-
-			userInfo.put("name", name);
-			userInfo.put("email", email);
-			userInfo.put("m_photo", m_photo);
-			session.setAttribute("loginInfo", userInfo);
+			session.setAttribute("email", email);
+			session.setAttribute("name", name);
+			session.setAttribute("m_photo", m_photo);
+			session.setAttribute("loginType", "kakao");	
 
 		} catch (IOException e) {
 			e.printStackTrace();
