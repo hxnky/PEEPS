@@ -31,7 +31,7 @@
 			<table id="edit_table">
 				<tr>
 
-					<td>${peeps.email}<br> 탈퇴하시면 계정을 다시
+					<td>${email}<br> 탈퇴하시면 계정을 다시
 						복구할 수 없습니다. <br> 그래도 탈퇴하시겠어요?</td>
 				</tr>
 				<tr>
@@ -74,7 +74,7 @@
 <script>
 	$(function() {
 
-		var email = "${peeps.email}";
+		var email = "${email}";
 
 		$("#edit")
 				.click(
@@ -164,8 +164,8 @@
 
 									var reason = $('#reason').val();
 									var password = $('#password').val();
-									var email = "${peeps.email}";
-									var m_idx = "${peeps.m_idx}";
+									var email = "${email}";
+									var m_idx = ${m_idx};
 									m_idx = Number(m_idx);
 
 									console.log(password);
@@ -208,7 +208,7 @@
 			.click(
 					function() {
 
-						var m_idx = ${peeps.m_idx};
+						var m_idx = ${m_idx};
 						var keyword = $('#search').val();
 
 						if (keyword.trim() == "") {
@@ -236,7 +236,7 @@
 
 					});
 	
-	var id = ${peeps.id};
+	var id = "${id}";
 
 	$("#MyPage_img").click(function() {
 

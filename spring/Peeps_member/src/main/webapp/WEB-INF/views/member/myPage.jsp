@@ -47,7 +47,7 @@
 					</div>
 					<div id="pro_btn" class="${page_peeps.m_idx}">
 						<c:choose>
-							<c:when test="${peeps.m_idx eq page_peeps.m_idx }">
+							<c:when test="${m_idx eq page_peeps.m_idx }">
 								<ul>
 									<li>${page_peeps.id }</li>
 									<li><button id="edit">프로필 편집</button></li>
@@ -204,8 +204,7 @@
 	type="text/javascript"></script>
 
 <script>
-	var email = "${peeps.email}";
-	var m_idx = ${peeps.m_idx};
+	var email = "${email}";
 	
 	console.log(email);
 
@@ -230,12 +229,6 @@
 									}
 								});
 					});
-	
-	
-	$("#MyPage_img").click(function() {
-
-		location.href = "${pageContext.request.contextPath}/mypage/" + m_idx;
-	});
 </script>
 
 <script>
@@ -343,7 +336,7 @@ function pro_UtoF(y_idx){
 // 모달창 팔로우 function
 function follow(y_idx){
 	
-	var m_idx = ${peeps.m_idx};
+	var m_idx = ${m_idx};
 	
 	console.log(y_idx);
 	
@@ -371,7 +364,7 @@ function follow(y_idx){
 // 모달창 언팔로우 function
 function unfollow(y_idx){
 	
-	var m_idx = ${peeps.m_idx};
+	var m_idx = ${m_idx};
 	
 	console.log(y_idx);
 	
@@ -399,7 +392,7 @@ function unfollow(y_idx){
 // 프로필 팔로우
 function proFollow(y_idx){
 	
-	var m_idx = ${peeps.m_idx};
+	var m_idx = ${m_idx};
 	
 	console.log(y_idx);
 	
@@ -428,7 +421,7 @@ function proFollow(y_idx){
 // 프로필 언팔로우
 function proUnfollow(y_idx){
 	
-	var m_idx = ${peeps.m_idx};
+	var m_idx = ${m_idx};
 	
 	console.log(y_idx);
 	
@@ -457,7 +450,7 @@ function proUnfollow(y_idx){
 // 모달 프로필 편집
 function modal_edit(){
 	
-	var email = "${peeps.email}";
+	var email = "${email}";
 	
 	$
 	.ajax({
@@ -485,13 +478,40 @@ function modal_edit(){
 </script>
 
 <script>
-var id = ${peeps.id};
+var id = ${id};
 
+// 자신의 마이페이지
 $("#MyPage_img").click(function() {
 
 	location.href = "${pageContext.request.contextPath}/mypage/" + id;
 
 });
+
+// 다른 유저 마이페이지
+function GoMyPage(idx){
+	
+	console.log(idx);
+	
+	$.ajax({
+		url : '${pageContext.request.contextPath}/mypage/chk',
+		type: 'get',
+		data : {
+		"m_idx" : idx
+		},
+		success : function(data){
+			
+			var id = data;
+			
+			console.log(id);
+			
+			location.href = "${pageContext.request.contextPath}/mypage/" + id;
+		},
+		error : function() {
+			console.log("유저 정보 실패,,,,");
+		}
+	});
+	
+}
 
 </script>
 <script>
@@ -499,7 +519,7 @@ $("#keyword")
 .click(
 		function() {
 
-			var m_idx = ${peeps.m_idx};
+			var m_idx = ${m_idx};
 			var keyword = $('#search').val();
 
 			if(keyword.trim()==""){

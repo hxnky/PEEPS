@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.gnjk.peeps.Member.domain.CommentRequest;
 import com.gnjk.peeps.Member.domain.Peeps;
-import com.gnjk.peeps.Member.domain.PostRequest;
 
 public interface MemberDao {
 
@@ -100,15 +98,16 @@ public interface MemberDao {
 	// 팔로우/팔로잉 목록 삭제
 	int deleteFollowList(@Param("m_idx") int m_idx);
 
-	// 타임라인 관련
-	// 포스트 리스트 가져오기
-	List<PostRequest> selectPostList(int m_idx);
-	// 댓글 리스트 가져오기
-	List<CommentRequest> selectCmtList(int post_idx);
-	// 회원 사진, 로그인 타입 가져오기 - 게시글
-	List<PostRequest> selectPostUserList(int m_idx);
-	// 회원 사진, 로그인 타입 가져오기 - 댓글
-	List<CommentRequest> selectCmtUserList(int m_idx);
-	// 게시물 검색
-	List<PostRequest> FindPostList(String keyword);
+	// 21.02.25 멤버id로 idx 가져오기 추가 (정현)
+	List<Peeps> selectMemberlistById(String id);
+
+	// 21.02.25 멤버idx로 id 가져오기 추가 (정현)
+	List<Peeps> selectMemberlistByIdx(int m_idx);
+
+	// 21.02.26 회원정보 조회 (정현)
+	List<Peeps> selectMemberlist();
+
+	// 인덱스로 아이디 조회 - 마이페이지
+	String selectId(int m_idx);
+
 }

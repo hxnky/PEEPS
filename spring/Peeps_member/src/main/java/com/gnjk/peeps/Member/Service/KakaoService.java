@@ -126,23 +126,10 @@ public class KakaoService {
 				m_photo = "profile.png";
 			}
 			
-
-			Peeps peeps = new Peeps();
-			
-			peeps.setEmail(email);
-			peeps.setName(name);
-			peeps.setM_photo(m_photo);
-			peeps.setLoginType("kakao");
-			
-			System.out.println(peeps);
-			
-			session.setAttribute("peeps", peeps);
-			
-
-			userInfo.put("name", name);
-			userInfo.put("email", email);
-			userInfo.put("m_photo", m_photo);
-			session.setAttribute("loginInfo", userInfo);
+			session.setAttribute("email", email);
+			session.setAttribute("name", name);
+			session.setAttribute("m_photo", m_photo);
+			session.setAttribute("loginType", "kakao");	
 
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -110,7 +110,7 @@
 			location.href = "${pageContext.request.contextPath}/logout";
 
 		});
-		var id = ${peeps.id};
+		var id = "${id}";
 
 		$("#MyPage_img").click(function() {
 
@@ -125,7 +125,7 @@
 	$(document).on("click", "#change", function() {
 
 		var password = $('#now_password').val();
-		var email = "${peeps.email}";
+		var email = "${email}";
 		var c_password = $('#chk_password').val();
 		var e_password = $('#edit_password').val();
 
@@ -171,7 +171,7 @@ $("#keyword")
 .click(
 		function() {
 
-			var m_idx = ${peeps.m_idx};
+			var m_idx = ${m_idx};
 			var keyword = $('#search').val();
 
 			if(keyword.trim()==""){

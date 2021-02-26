@@ -29,17 +29,54 @@ public class FindUserService {
 		int peepsCnt = dao.searchMemberCnt(keyword);
 
 		session.setAttribute("peepsCnt", peepsCnt);
-		
+
 		for (int i = 0; i < peepslist.size(); i++) {
-			
+
 			int follow_idx = peepslist.get(i).getM_idx();
 
 			int chk_result = dao.CheckFollow(m_idx, follow_idx);
-				
+
 			peepslist.get(i).setChk_result(chk_result);
 		}
-		
+
 		return peepslist;
+	}
+
+	// 21.02.25 멤버 id로 idx 찾기 추가 (정현)
+	public List<Peeps> getMemberidx(String memberid) {
+
+		List<Peeps> midxList = null;
+
+		dao = template.getMapper(MemberDao.class);
+
+		midxList = dao.selectMemberlistById(memberid);
+
+		return midxList;
+	}
+
+	// 21.02.25 멤버 idx로 id 찾기 추가 (정현)
+	public List<Peeps> getMemberid(int memberidx) {
+
+		List<Peeps> midList = null;
+
+		dao = template.getMapper(MemberDao.class);
+
+		midList = dao.selectMemberlistByIdx(memberidx);
+
+		return midList;
+	}
+
+	// 21.02.26 회원정보 조회 (정현)
+	public List<Peeps> getMemberInfo() {
+		List<Peeps> midList = null;
+
+		dao = template.getMapper(MemberDao.class);
+
+		midList = dao.selectMemberlist();
+
+		System.out.println("getMemberInfo 속 midList !" + midList);
+
+		return midList;
 	}
 
 }

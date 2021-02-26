@@ -33,6 +33,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		m_photo
 		from member where email=#{email}
 	</select>
+	
+	<!-- 인덱스로 아이디 조회 -->
+	<select id="selectId" resultType="String">
+		select id from member where m_idx=#{m_idx}
+	</select>
 
 	<!-- 이메일 없으면 이메일, 이름, 사진, 로그인 타입 insert 하기 -->
 	<insert id="insertSocialMember"
@@ -122,13 +127,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		password=#{password}
 	</update>
 
-	<!-- <delete id="deletePeeps"> -->
-	<!-- delete from member where email=#{email} and -->
-	<!-- password=#{password} -->
-	<!-- </delete> -->
-
 	<!-- 탈퇴 사유 저장 -->
-	<!-- 팔로우 -->
 	<insert id="insertReason"
 		parameterType="com.gnjk.peeps.Member.domain.Delete">
 		insert into withdraw (email, reason) values
@@ -234,40 +233,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		following_id = #{m_idx}
 	</delete>
 
-	<!-- 게시물 -->
-	<resultMap id="PostResult"
-		type="com.gnjk.peeps.Member.domain.PostRequest">
-		<id column="p_idx" property="p_idx" />
-		<result column="p_data" property="p_date" />
-		<result column="p_title" property="p_title" />
-		<result column="p_content" property="p_content" />
-		<result column="p_thumbnail" property="p_thumbnail" />
-		<result column="p_loc" property="p_loc" />
-	</resultMap>
 
 
-	<!-- 게시글 리스트 -->
-	<select id="selectPostList"
-		resultType="com.gnjk.peeps.Member.domain.PostRequest">
-		select * from post where member_idx=#{m_idx}
-	</select>
-	
-	<!-- 댓글 상위 3개 -->
-	<select id="selectCmtList" resultType="com.gnjk.peeps.Member.domain.CommentRequest">
-		select * from comment where post_idx = #{post_idx} limit 3;
+	<!-- 21.02.25 추가 (정현) -->
+	<!-- 아이디로 회원 정보 가져오기 -->
+	<select id="selectMemberlistById" parameterType="list"
+		resultType="com.gnjk.peeps.Member.domain.Peeps">
+		select * from member
+		where id = #{id}
 	</select>
 
-	<!-- 타임라인 유저 사진, 로그인 타입 - 게시글 -->
-	<select id="selectPostUserList" resultType="com.gnjk.peeps.Member.domain.PostRequest">
-		select m_photo, loginType, id from member where m_idx=#{m_idx}
+	<!-- 21.02.25 추가 (정현) -->
+	<!-- 인덱스로 회원 정보 가져오기 -->
+	<select id="selectMemberlistByIdx" parameterType="list"
+		resultType="com.gnjk.peeps.Member.domain.Peeps">
+		select * from member
+		where m_idx = #{m_idx}
 	</select>
 
-	<!-- 타임라인 유저 사진, 로그인 타입 - 댓글 -->
-	<select id="selectCmtUserList" resultType="com.gnjk.peeps.Member.domain.CommentRequest">
-		select m_photo, loginType, id from member where m_idx=#{m_idx}
+	<!-- 21.02.26 추가 (정현) -->
+	<!-- 회원 정보 가져오기 -->
+	<select id="selectMemberlist" parameterType="list"
+		resultType="com.gnjk.peeps.Member.domain.Peeps">
+		select * from member
 	</select>
-	
-
-
 
 </mapper>

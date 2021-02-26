@@ -35,7 +35,28 @@
 <script>
 
 function GoMyPage(idx){
-	location.href = "${pageContext.request.contextPath}/mypage/" + idx;
+	
+	console.log(idx);
+	
+	$.ajax({
+		url : '${pageContext.request.contextPath}/mypage/chk',
+		type: 'get',
+		data : {
+		"m_idx" : idx
+		},
+		success : function(data){
+			
+			var id = data;
+			
+			console.log(id);
+			
+			location.href = "${pageContext.request.contextPath}/mypage/" + id;
+		},
+		error : function() {
+			console.log("유저 정보 실패,,,,");
+		}
+	});
+	
 }
 
 function GoPost(p_idx){
@@ -47,7 +68,7 @@ function GoPost(p_idx){
 $(document).ready(function() {
 	
 
-	var id = "${peeps.id}";
+	var id = "${id}";
 
 	$("#MyPage_img").click(function() {
 
@@ -196,74 +217,18 @@ $(document).ready(function() {
 	
 })
 
-	
-
-// 	$('#post_contents').empty();
-
-// 	if (post.length === 0) {
-// 		$('#post_contents').append("<div id='no_post'>해당하는 게시물이 없습니다.</div>");
-// 	} else {
-// 		$.each(post,function(index, post) {
-// 			var m_idx = post.member_idx;
-// 			// 글쓴 사람 사진 가져오기
-// 			if(post.loginType=="email"){
-// 				$('#post_contents').append("<div class='post_wrap' id='"+post.p_idx+"'><div class='user_img' ><img id='profile' src='<c:url value='fileupload/"+post.m_photo+"'/>' onclick='GoMyPage("+post.member_idx+")'></div></div>");
-// 			} else{
-// 				$('#post_contents').append("<div class='post_wrap' id='"+post.p_idx+"'><div class='user_img'><img id='profile' src='<c:url value='"+post.m_photo+"'/>' onclick='GoMyPage("+post.member_idx+")'></div></div>");
-// 			}
-// 			// 글 쓴 사람 아이디 가져오기
-// 			$('#'+post.p_idx).append("<div class='user_id' id='"+post.member_idx+"' onclick='GoMyPage("+post.member_idx+")'>"+post.id+"</div>");
-// 			// 게시물 정보 불러오기
-// 			// 게시물 썸네일 경로 변경하기
-// 			$('#' + post.p_idx).append("<div class='post'><div id='post_title' onclick='GoPost("+post.p_idx+")'>"+ post.p_title+ "</div><div id='post_img'><img src='<c:url value='"+post.m_photo+"'/>' onclick='GoPost("+post.p_idx+")'></div><button id='heart'><img src='<c:url value='/resources/images/icon/navi/002-like.png'/>'></button><hr></div>");
-
-// 			var post_idx = post.p_idx;
-
-// 			$.ajax({
-// 				url : '${pageContext.request.contextPath}/user/cmtList',
-// 				type : 'get',
-// 				data : {
-// 				"post_idx" : post_idx
-// 				},
-// 				success : function(data) {
-
-// 					var cmt = data;
-	
-// 					$.each(data,function(index, cmt) {
-// 						if(post_idx == cmt.post_idx){
-// 							if(cmt.loginType=="email"){
-// 								$('#'+post.p_idx).append("<div id='cmt_wrap' class='"+cmt.cmt_idx+"'><div class='cmt_img' ><img id='profile' src='<c:url value='fileupload/"+cmt.m_photo+"'/>' onclick='GoMyPage("+cmt.member_idx+")'></div></div>");
-// 							} else{
-// 								$('#'+post.p_idx).append("<div id='cmt_wrap' class='"+cmt.cmt_idx+"'><div class='cmt_img'><img id='profile' src='<c:url value='"+cmt.m_photo+"'/>' onclick='GoMyPage("+cmt.member_idx+")'></div></div>");
-// 							}
-// 							$('.'+cmt.cmt_idx).append("<div class='cmt_id' id='"+cmt.member_idx+"' onclick='GoMyPage("+cmt.member_idx+")'>"+cmt.id+"</div>");
-// 	 						$('.'+cmt.cmt_idx).append("<div class='cmt'>"+cmt.cmt_content+"</div>");
-// 						}
-// 					});
-
-// 				},
-// 				error : function() {
-// 					console.log("댓글 리스트 실패,,,,");
-// 				}
-// 			});
-// 		})
-// 	}
 </script>
 <script>
-	$("#PostKeyword")
-			.click(
-					function() {
+$("#PostKeyword").click(function() {
 
-						var keyword = $('#FindPost').val();
+	var keyword = $('#FindPost').val();
 
-						if (keyword.trim() == "") {
-							alert("한 글자 이상 입력하세요");
-						} else {
-							location.href = "${pageContext.request.contextPath}/post/FindView?keyword="
-									+ keyword;
-						}
-						;
+	if (keyword.trim() == "") {
+		alert("한 글자 이상 입력하세요");
+	} else {
+		location.href = "${pageContext.request.contextPath}/post/FindView?keyword="+ keyword;
+	};
 
-					});
+});
 </script>
 </html>

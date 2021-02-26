@@ -36,7 +36,8 @@
 		</div>
 			
 		<div id="total_contents">
-			<div id="post_find"><input type="text" id="FindPost"><button id="PostKeyword"><img src="<c:url value="/resources/images/icon/navi/search.png"/>"></button></div>
+			<div id="post_find">
+			<input type="text" id="FindPost"><button id="PostKeyword"><img src="<c:url value="/resources/images/icon/navi/search.png"/>"></button></div>
 			<div id="post_contents">
 	
 			</div>
@@ -62,26 +63,40 @@
 
 <script>
 
-var id = "${peeps.id}";
-var m_idx = ${peeps.m_idx};
+var id = "${id}";
+var m_idx = ${m_idx};
 
 $("#MyPage_img").click(function() {
+
+	location.href = "${pageContext.request.contextPath}/mypage/" + id;
+
+});
+
+
+function GoMyPage(idx){
+	
+	console.log(idx);
 	
 	$.ajax({
 		url : '${pageContext.request.contextPath}/mypage/chk',
 		type: 'get',
-		data : {"m_idx" : m_idx},
+		data : {
+		"m_idx" : idx
+		},
 		success : function(data){
+			
+			var id = data;
+			
+			console.log(id);
+			
 			location.href = "${pageContext.request.contextPath}/mypage/" + id;
 		},
 		error : function() {
-			console.log("마이페이지 실패,,,,");
+			console.log("유저 정보 실패,,,,");
 		}
 	});
-
 	
-
-});
+}
 
 
 function GoPost(p_idx){
@@ -105,7 +120,7 @@ $(document).ready(function() {
 	
 	function loadTimeLine(){
 		
-		var m_idx = ${peeps.m_idx};
+		var m_idx = ${m_idx};
 		
 		//팔로잉 목록 가져오기
 		$.ajax({
@@ -268,7 +283,7 @@ $(document).ready(function() {
 <script>
 	$("#keyword").click(function() {
 
-			var m_idx = ${peeps.m_idx};
+			var m_idx = ${m_idx};
 			var keyword = $('#search').val();
 
 			if (keyword.trim() == "") {

@@ -28,7 +28,7 @@
 					<table class="find_peeps" id="${peep.m_idx }">
 
 						<tr>
-							<td rowspan="2"><a onclick="loadMyPage(${peep.m_idx})">
+							<td rowspan="2"><a onclick="loadMyPage(${peep.id})">
 									<c:set var="loginType" value="${peep.loginType}" /> <c:choose>
 										<c:when test="${loginType eq 'email'}">
 											<img id="profile"
@@ -39,7 +39,7 @@
 										</c:when>
 									</c:choose>
 							</a></td>
-							<td id="id"><a onclick="loadMyPage(${peep.m_idx})">${peep.id}</a></td>
+							<td id="id"><a onclick="loadMyPage(${peep.id})">${peep.id}</a></td>
 							<td rowspan="2"><c:choose>
 									<c:when test="${peep.id eq peeps.id}">
 										<div id="fix">
@@ -83,7 +83,7 @@
 // 검색 결과 load
 function load_Find(){
 	
-	var m_idx = ${peeps.m_idx};
+	var m_idx = ${m_idx};
 	var keyword = "${keyword}";
 	
 	$
@@ -110,7 +110,7 @@ function load_Find(){
 // 팔로우 function
 function follow(y_idx){
 	
-	var m_idx = ${peeps.m_idx};
+	var m_idx = ${m_idx};
 	
 	console.log(y_idx);
 	
@@ -138,7 +138,7 @@ function follow(y_idx){
 // 언팔로우 function
 function unfollow(y_idx){
 	
-	var m_idx = ${peeps.m_idx};
+	var m_idx = ${m_idx};
 	
 	console.log(y_idx);
 	
@@ -169,7 +169,7 @@ $("#keyword")
 .click(
 		function() {
 
-			var m_idx = ${peeps.m_idx};
+			var m_idx = ${m_idx};
 			var keyword = $('#search').val();
 
 			if(keyword.trim()==""){
@@ -200,8 +200,8 @@ $("#keyword")
 
 <script>
 
-var email = "${peeps.email}";
-	var m_idx= ${peeps.m_idx};
+var email = "${email}";
+	var m_idx= ${m_idx};
 
 	$('#edit_btn')
 	.click(
@@ -223,7 +223,7 @@ var email = "${peeps.email}";
 				});
 			});
 
-	var id = ${peeps.id};
+	var id = "${id}";
 
 	$("#MyPage_img").click(function() {
 
@@ -234,11 +234,31 @@ var email = "${peeps.email}";
 </script>
 
 <script>
-	// 검색 목록 누르면 그 사람 마이페이지로 이동
-	function loadMyPage(m_idx) {
-		location.href = "${pageContext.request.contextPath}/mypage/"+ m_idx;
-	}
-		
+// 누르면 마이페이지로 이동
+function GoMyPage(idx){
+	
+	console.log(idx);
+	
+	$.ajax({
+		url : '${pageContext.request.contextPath}/mypage/chk',
+		type: 'get',
+		data : {
+		"m_idx" : idx
+		},
+		success : function(data){
+			
+			var id = data;
+			
+			console.log(id);
+			
+			location.href = "${pageContext.request.contextPath}/mypage/" + id;
+		},
+		error : function() {
+			console.log("유저 정보 실패,,,,");
+		}
+	});
+	
+}
 		
 </script>
 </html>

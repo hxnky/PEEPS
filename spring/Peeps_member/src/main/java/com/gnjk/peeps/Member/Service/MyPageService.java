@@ -147,6 +147,13 @@ public class MyPageService {
 
 		return followerList;
 	}
+
+	public String selectId(int m_idx) {
+
+		dao = template.getMapper(MemberDao.class);
+		
+		return dao.selectId(m_idx);
+	}
 	
 	
 	

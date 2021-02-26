@@ -1,7 +1,5 @@
 package com.gnjk.peeps.Member.Controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +16,6 @@ import com.gnjk.peeps.Member.Service.MyPageService;
 import com.gnjk.peeps.Member.Service.TimeLineService;
 import com.gnjk.peeps.Member.Service.VerifyService;
 import com.gnjk.peeps.Member.domain.Peeps;
-import com.gnjk.peeps.Member.domain.PostRequest;
-import com.google.gson.Gson;
 
 @Controller
 public class MemberController {
@@ -108,26 +104,6 @@ public class MemberController {
 
 		return "member/FindView";
 	}
-
-	// 마이페이지 임시
-	@RequestMapping(value = "/mypage/chk", method = RequestMethod.GET)
-	public String MyPage2(int m_idx, HttpSession session) {
-
-		Peeps peeps = (Peeps) session.getAttribute("peeps");
-		int idx = peeps.getM_idx();
-
-		System.out.println("세션에 저장된 인덱스 : " + idx);
-		System.out.println("마이페이지 인덱스 :" + m_idx);
-
-		// idx로 정보 가져와서 저장
-		myPageService.getPeeps(m_idx, session);
-
-		session.setAttribute("follow_chk", myPageService.chk_follow(m_idx, idx));
-		session.setAttribute("FollowingList", myPageService.getFollowingList(m_idx, session));
-		session.setAttribute("FollowerList", myPageService.getFollowerList(m_idx, session));
-
-		return "member/myPage";
-	}
 	
 	// 마이페이지
 	@RequestMapping(value = "/mypage/{id}", method = RequestMethod.GET)
@@ -152,6 +128,13 @@ public class MemberController {
 		model.addAttribute("PostKeyword", keyword);
 
 		return "/member/FindPostView";
+	}
+	
+	// 임시 채팅
+	@GetMapping("/chat/chatting")
+	public String Chat() {
+		
+		return "/chat/chatting";
 	}
 	
 }
