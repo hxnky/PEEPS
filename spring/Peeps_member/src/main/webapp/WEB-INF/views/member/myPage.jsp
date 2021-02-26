@@ -136,28 +136,11 @@ function load_MyPage(){
 	});
 	
 }
-	var email = "${email}";
-	
-	console.log(email);
 
-	$('#edit').click(function() {
+	$(document).on("click", "#edit", function(){
+			location.href = "${pageContext.request.contextPath}/profile/Info";
 
-						$.ajax({
-									url : '${pageContext.request.contextPath}/profile/chk',
-									type : 'get',
-									data : {
-										"email" : email,
-									},
-									async : false,
-									success : function(data) {
-										location.href = "${pageContext.request.contextPath}/profile/Info";
-									},
-									error : function(request, status, error) {
-										console.log("통신 실패");
-
-									}
-								});
-					});
+		});
 
 
 
