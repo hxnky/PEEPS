@@ -164,10 +164,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 
 	<!-- 인덱스로 회원 정보 가져오기 -->
-	<select id="selectMemberByIdx" resultMap="memberResult">
+	<select id="selectMemberByIdx" resultType="com.gnjk.peeps.Member.domain.FollowRequest">
 		select * from member
 		where m_idx = #{m_idx}
 	</select>
+	
+	<!-- 아이디로 회원 정보 가져오기 -->
+	<select id="selectMemberById" resultType="com.gnjk.peeps.Member.domain.FollowRequest">
+		select * from member where id = #{id}
+	</select>
+	
 
 	<!-- 소셜 회원 정보 업데이트 -->
 	<update id="m_photoUpdate">

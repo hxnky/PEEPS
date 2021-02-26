@@ -16,10 +16,6 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-<!-- 합쳐지고 최소화된 최신 
-자바스크립트 -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/modal.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/myPage.css" />" rel="stylesheet">
@@ -33,61 +29,7 @@
 		<div id="main_wrap">
 			<div class="jumbotron">
 				<div id="profile_wrap">
-					<div id="pro_img">
-						<c:set var="loginType" value="${page_peeps.loginType}" />
-						<c:choose>
-							<c:when test="${loginType eq 'email'}">
-								<img id="profile"
-									src="<c:url value="/fileupload/${page_peeps.m_photo}"/>">
-							</c:when>
-							<c:when test="${loginType ne 'email' }">
-								<img id="profile" src="<c:url value="${page_peeps.m_photo}"/>">
-							</c:when>
-						</c:choose>
-					</div>
-					<div id="pro_btn" class="${page_peeps.m_idx}">
-						<c:choose>
-							<c:when test="${m_idx eq page_peeps.m_idx }">
-								<ul>
-									<li>${page_peeps.id }</li>
-									<li><button id="edit">프로필 편집</button></li>
-								</ul>
-							</c:when>
-							<c:otherwise>
-								<c:choose>
-									<c:when test="${follow_chk == true}">
-										<ul>
-											<li>${page_peeps.id }</li>
-											<li>
-												<button class="p_f_btn" id="pro_unfollow" type="submit"
-													onclick="proUnfollow(${page_peeps.m_idx})">언팔로우</button>
-											</li>
-										</ul>
-									</c:when>
-									<c:otherwise>
-										<ul>
-											<li>${page_peeps.id }</li>
-											<li><button class="p_f_btn" id="pro_follow"
-													type="submit" onclick="proFollow(${page_peeps.m_idx})">팔로우</button></li>
-										</ul>
-									</c:otherwise>
-								</c:choose>
-							</c:otherwise>
-						</c:choose>
-
-
-						<ul>
-							<li>게시물</li>
-							<li>NN</li>
-							<li>팔로워</li>
-							<li><button id="follower_btn">${follower}</button></li>
-							<li>팔로잉</li>
-							<li>
-								<button id="following_btn">${following}</button>
-							</li>
-						</ul>
-						<div id="pro_name">${page_peeps.name}</div>
-						<div id="pro_bio">${page_peeps.bio }</div>
+					
 					</div>
 				</div>
 			</div>
@@ -98,122 +40,109 @@
 		<!-- 팔로워 목록 모달창 -->
 		<div id="my_modal_wer">
 			<div id="my_modal_header">팔로워 목록</div>
-			<c:choose>
-				<c:when test="${follower == 0}">
-					<div id="user_no">팔로워가 없습니다.</div>
-				</c:when>
-				<c:otherwise>
-					<c:forEach items="${FollowerList}" var="follower" varStatus="i">
-						<table id="find_peeps">
-							<tr>
-								<td><a href="/peeps/mypage/${follower.m_idx}"> <c:set
-											var="loginType" value="${follower.loginType}" /> <c:choose>
-											<c:when test="${loginType eq 'email'}">
-												<img id="profile_modal"
-													src="<c:url value="/fileupload/${follower.m_photo}"/>">
-											</c:when>
-											<c:when test="${loginType ne 'email' }">
-												<img id="profile_modal"
-													src="<c:url value="${follower.m_photo}"/>">
-											</c:when>
-										</c:choose>
-								</a></td>
-								<td id="id"><a href="/peeps/mypage/${follower.m_idx}">${follower.id}</a></td>
-								<td><c:choose>
-										<c:when test="${peeps.m_idx eq follower.m_idx }">
-											<button id="modal_edit" onclick="modal_edit()">프로필 편집</button>
-										</c:when>
-										<c:otherwise>
-											<div id="fix" class="${follower.m_idx}">
-												<c:choose>
-													<c:when test="${follower.chk_result eq 1}">
-														<button class="f_btn" id="unfollow" type="submit"
-															onclick="unfollow(${follower.m_idx})">언팔로우</button>
-													</c:when>
-													<c:otherwise>
-														<button class="f_btn" id="follow" type="submit"
-															onclick="follow(${follower.m_idx})">팔로우</button>
-													</c:otherwise>
-												</c:choose>
-											</div>
-										</c:otherwise>
-									</c:choose></td>
-							</tr>
-						</table>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
+			<div id="List_wer"></div>
+		
 			<button type="button" class="modal_close_btn">x</button>
 		</div>
 
 		<!-- 팔로잉 목록 모달창 -->
 		<div id="my_modal">
 			<div id="my_modal_header">팔로잉 목록</div>
-			<c:choose>
-				<c:when test="${following eq 0}">
-					<div id="user_no">팔로잉이 없습니다.</div>
-				</c:when>
-				<c:otherwise>
-					<c:forEach items="${FollowingList}" var="following" varStatus="i">
-						<table id="find_peeps" id="${following.m_idx}">
-							<tr>
-								<td><a href="/peeps/mypage/${following.m_idx}"> <c:set
-											var="loginType" value="${following.loginType}" /> <c:choose>
-											<c:when test="${loginType eq 'email'}">
-												<img id="profile_modal"
-													src="<c:url value="/fileupload/${following.m_photo}"/>">
-											</c:when>
-											<c:when test="${loginType ne 'email' }">
-												<img id="profile_modal"
-													src="<c:url value="${following.m_photo}"/>">
-											</c:when>
-										</c:choose>
-								</a></td>
-								<td rowspan="2" id="id"><a
-									href="/peeps/mypage/${following.m_idx}">${following.id}</a></td>
-								<td><c:choose>
-										<c:when test="${peeps.m_idx eq following.m_idx }">
-											<button id="modal_edit" onclick="modal_edit()">프로필 편집</button>
-										</c:when>
-										<c:otherwise>
-											<div id="fix" class="${following.m_idx}">
-												<c:choose>
-													<c:when test="${following.chk_result eq 1}">
-														<button class="f_btn" id="unfollow" type="submit"
-															onclick="unfollow(${following.m_idx})">언팔로우</button>
-													</c:when>
-													<c:otherwise>
-														<button class="f_btn" id="follow" type="submit"
-															onclick="follow(${following.m_idx})">팔로우</button>
-													</c:otherwise>
-												</c:choose>
-											</div>
-										</c:otherwise>
-									</c:choose></td>
-							</tr>
-						</table>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
+			<div id="List_ing"></div>
 			<button type="button" class="modal_close_btn">x</button>
 		</div>
-	</div>
+
 </body>
 
 <script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
 	type="text/javascript"></script>
-
 <script>
+
+load_MyPage();
+
+function load_MyPage(){
+	
+	var id = "${page_id}";
+	var m_idx = ${m_idx};
+	
+	// 유저 정보 불러오기
+	$.ajax({
+		url : '${pageContext.request.contextPath}/mypage/Info',
+		type : 'get',
+		async : false,
+		data : {
+			"m_idx" : m_idx,
+			"id" : id
+		},
+		success : function(data) {
+			console.log(data);
+			
+			var find = data;
+			
+			$('#profile_wrap').empty();
+			
+			$.each(data, function(index, find){
+				if(find.loginType == 'email'){
+					$('#profile_wrap').append("<div id='pro_img'><input type='hidden' id='idx' value='"+find.m_idx+"'><img id='profile' src='<c:url value='fileupload/"+find.m_photo+"'/>' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("+find.m_idx+")'></div><div id='pro_btn' class='"+find.m_idx+"'></div>");
+					if(find.m_idx == m_idx){
+						$('#pro_btn').append("<ul><li>"+find.id+"</li><li><button id='edit'>프로필 편집</button></li></ul>");
+					}else{
+						if(find.chk_result == 1){
+							$('#pro_btn').append("<ul><li>"+find.id+"</li><li><button class='p_f_btn' id='pro_unfollow' typ='submit' onclick='proUnfollow("+find.m_idx+")'>언팔로우</button></li></ul>");
+						}else{
+							$('#pro_btn').append("<ul><li>"+find.id+"</li><li><button class='p_f_btn' id='pro_follow' typ='submit' onclick='proFollow("+find.m_idx+")'>팔로우</button></li></ul>");							
+						}
+					}
+				}else{
+					$('#profile_wrap').append("<div id='pro_img'><input type='hidden' id='idx' value='"+find.m_idx+"'><img id='profile' src='<c:url value='"+find.m_photo+"'/>' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("+find.m_idx+")'></div><div id='pro_btn' class='"+find.m_idx+"'></div>");
+					if(find.m_idx == m_idx){
+						$('#pro_btn').append("<ul><li>"+find.id+"</li><li><button id='edit'>프로필 편집</button></li></ul>");
+					}else{
+						if(find.chk_result == 1){
+							$('#pro_btn').append("<ul><li>"+find.id+"</li><li><button class='p_f_btn' id='pro_unfollow' typ='submit' onclick='proUnfollow("+find.m_idx+")'>언팔로우</button></li></ul>");
+						}else{
+							$('#pro_btn').append("<ul><li>"+find.id+"</li><li><button class='p_f_btn' id='pro_follow' typ='submit' onclick='proFollow("+find.m_idx+")'>팔로우</button></li></ul>");							
+						}
+					}
+				}
+				$('#pro_btn').append("<ul><li>게시물</li><li id='postCnt'></li><li>팔로워</li><li><button id='follower_btn'>"+find.followerCnt+"</button></li><li>팔로잉</li><li><button id='following_btn'>"+find.followingCnt+"</button></li></ul>");
+				$('#pro_btn').append("<div id='pro_name'>"+find.name+"</div><div id='pro_bio'>"+find.bio+"</div>")
+				
+			});
+		},
+		error : function() {
+			console.log("실패,,,,");
+		}
+	});
+	
+	// 게시물 수 검색
+	var idx = $('#idx').val();
+	
+	$.ajax({
+		url : 'http://localhost:8081/post/mypage/PostCnt',
+		type : 'get',
+		async : false,
+		data : {
+			"m_idx" : idx
+		},
+		success : function(data) {
+			console.log("게시물 수 ");
+			console.log(data);
+			$('#postCnt').append(data);
+		},
+		error : function() {
+			console.log("실패,,,,");
+		}
+	});
+	
+}
 	var email = "${email}";
 	
 	console.log(email);
 
-	$('#edit')
-			.click(
-					function() {
+	$('#edit').click(function() {
 
-						$
-								.ajax({
+						$.ajax({
 									url : '${pageContext.request.contextPath}/profile/chk',
 									type : 'get',
 									data : {
@@ -229,16 +158,8 @@
 									}
 								});
 					});
-</script>
 
-<script>
 
-//팔로잉 load
-function load_Following(){
-	
-	$('#total_wrap').load(location.href + '#profile_wrap');
-
-}
 
 // 모달창
 	function modal(id) {
@@ -278,19 +199,141 @@ function load_Following(){
 				.find('.modal_close_btn').on('click', function() {
 					bg.remove();
 					modal.hide();
-					load_Following();					
+					load_MyPage();					
 				});
 	}
 
-	$('#following_btn').on('click', function() {
-		// 모달창 띄우기
-		modal('my_modal');
-	});
+	// 팔로잉 리스트
+	function load_Following(){
+		
+		var idx = $('#idx').val();
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/mypage/ingList',
+			type : 'get',
+			async : false,
+			data : {
+				"m_idx" : idx
+			},
+			success : function(data) {
+				console.log(data);
+				
+				var follow = data;
+				var m_idx = ${m_idx};
+				
+				$('#List_wer').empty();
+				$('#List_ing').empty();
+				
+				if(follow.length == 0){
+					$('#List_ing').append("<div id='user_no'>팔로잉이 없습니다.</div>");
+				} else{
+					$.each(data, function(index, follow){
 
-	$('#follower_btn').on('click', function() {
+						if(follow.loginType == 'email'){
+							$('#List_ing').append("<table id='find_peeps'><tr><td><img id='profile_modal' src='<c:url value='/fileupload/"+follow.m_photo+"'/>' onclick='GoMyPage("+follow.m_idx+")'></td><td rowspan='2' id='id' onclick='GoMyPage("+follow.m_idx+")'>"+follow.id+"</td><td id='"+follow.m_idx+"'></td></tr></table>");
+							if(follow.m_idx == m_idx){
+								$('#'+follow.m_idx).append("<button id='modal_edit' onclick='modal_edit()'>프로필 편집</button>");
+							}else{
+								if(follow.chk_result==1){
+									$('#'+follow.m_idx).append("<div id='fix' class='"+follow.m_idx+"'><button class='f_btn' id='unfollow' type='submit' onclick='unfollow("+follow.m_idx+")'>언팔로우</button></div>");
+								}else{
+									$('#'+follow.m_idx).append("<div id='fix' class='"+follow.m_idx+"'><button class='f_btn' id='follow' type='submit' onclick='follow("+follow.m_idx+")'>팔로우</button></div>");							
+								}
+							}
+						}else{
+							$('#List_ing').append("<table id='find_peeps'><tr><td><img id='profile_modal' src='<c:url value='"+follow.m_photo+"'/>' onclick='GoMyPage("+follow.m_idx+")'></td><td rowspan='2' id='id' onclick='GoMyPage("+follow.m_idx+")'>"+follow.id+"</td><td id='"+follow.m_idx+"'></td></tr></table>");
+							if(follow.m_idx == m_idx){
+								$('#'+follow.m_idx).append("<button id='modal_edit' onclick='modal_edit()'>프로필 편집</button>");
+							}else{
+								if(follow.chk_result==1){
+									$('#'+follow.m_idx).append("<div id='fix' class='"+follow.m_idx+"'><button class='f_btn' id='unfollow' type='submit' onclick='unfollow("+follow.m_idx+")'>언팔로우</button></div>");
+								}else{
+									$('#'+follow.m_idx).append("<div id='fix' class='"+follow.m_idx+"'><button class='f_btn' id='follow' type='submit' onclick='follow("+follow.m_idx+")'>팔로우</button></div>");							
+								}
+							}
+						}
+						
+					});
+				}
+
+				modal('my_modal');
+			},
+			error : function(request, status, error) {
+				console.log("통신 실패");
+			}
+		});
+	}
+	
+	function load_Follower(){
+		var idx = $('#idx').val();
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/mypage/werList',
+			type : 'get',
+			async : false,
+			data : {
+				"m_idx" : idx
+			},
+			success : function(data) {
+				console.log(data);
+				
+				var follow = data;
+				var m_idx = ${m_idx};
+				
+				$('#List_wer').empty();
+				$('#List_ing').empty();
+
+				if(follow.length == 0){
+					$('#List_wer').append("<div id='user_no'>팔로워가 없습니다.</div>");
+				} else{
+					
+					$.each(data, function(index, follow){
+						if(follow.loginType == 'email'){
+							$('#List_wer').append("<table id='find_peeps'><tr><td><img id='profile_modal' src='<c:url value='/fileupload/"+follow.m_photo+"'/>' onclick='GoMyPage("+follow.m_idx+")'></td><td rowspan='2' id='id' onclick='GoMyPage("+follow.m_idx+")'>"+follow.id+"</td><td id='"+follow.m_idx+"'></td></tr></table>");
+							if(follow.m_idx == m_idx){
+								$('#'+follow.m_idx).append("<button id='modal_edit' onclick='modal_edit()'>프로필 편집</button>");
+							}else{
+								if(follow.chk_result==1){
+									$('#'+follow.m_idx).append("<div id='fix' class='"+follow.m_idx+"'><button class='f_btn' id='unfollow' type='submit' onclick='unfollow("+follow.m_idx+")'>언팔로우</button></div>");
+								}else{
+									$('#'+follow.m_idx).append("<div id='fix' class='"+follow.m_idx+"'><button class='f_btn' id='follow' type='submit' onclick='follow("+follow.m_idx+")'>팔로우</button></div>");							
+								}
+							}
+						}else{
+							$('#List_wer').append("<table id='find_peeps'><tr><td><img id='profile_modal' src='<c:url value='"+follow.m_photo+"'/>' onclick='GoMyPage("+follow.m_idx+")'></td><td rowspan='2' id='id' onclick='GoMyPage("+follow.m_idx+")'>"+follow.id+"</td><td id='"+follow.m_idx+"'></td></tr></table>");
+							if(follow.m_idx == m_idx){
+								$('#'+follow.m_idx).append("<button id='modal_edit' onclick='modal_edit()'>프로필 편집</button>");
+							}else{
+								if(follow.chk_result==1){
+									$('#'+follow.m_idx).append("<div id='fix' class='"+follow.m_idx+"'><button class='f_btn' id='unfollow' type='submit' onclick='unfollow("+follow.m_idx+")'>언팔로우</button></div>");
+								}else{
+									$('#'+follow.m_idx).append("<div id='fix' class='"+follow.m_idx+"'><button class='f_btn' id='follow' type='submit' onclick='follow("+follow.m_idx+")'>팔로우</button></div>");							
+								}
+							}
+						}
+						
+					});
+				}
+				modal('my_modal_wer');
+				
+			},
+			error : function(request, status, error) {
+				console.log("통신 실패");
+			}
+		});
+	}
+
+	$(document).on("click", "#following_btn", function(){
+		load_Following();
 		// 모달창 띄우기
-		modal('my_modal_wer');
+		
 	});
+	
+	$(document).on("click", "#follower_btn", function(){
+		// 모달창 띄우기
+		load_Follower();
+	});
+	
 </script>
 
 <script>
@@ -301,9 +344,9 @@ function FtoU(y_idx){
 			
 			var html="<div id='fix' class='"+y_idx+"'><button class='f_btn' id='unfollow' type='submit' onclick='unfollow("+y_idx+")'>언팔로우</button></div>";
 			
-			$('#my_modal #find_peeps .'+y_idx).replaceWith(html);
-			$('#my_modal_wer #find_peeps .'+y_idx).replaceWith(html);
-			$('#main_wrap #jumbotron #profile_wrap .'+y_idx).replaceWith(html);
+			$('#my_modal #List_ing #find_peeps .'+y_idx).replaceWith(html);
+			$('#my_modal_wer #List_wer #find_peeps .'+y_idx).replaceWith(html);
+			pro_FtoU(y_idx);
 }
 
 // 모달 팔로우 -> 언팔로우
@@ -311,9 +354,9 @@ function UtoF(y_idx){
 			
 			var html="<div id='fix' class='"+y_idx+"'><button class='f_btn' id='follow' type='submit' onclick='follow("+y_idx+")'>팔로우</button></div>";
 			
-			$('#my_modal #find_peeps .'+y_idx).replaceWith(html);
-			$('#my_modal_wer #find_peeps .'+y_idx).replaceWith(html);
-			$('#main_wrap #jumbotron #profile_wrap .'+y_idx).replaceWith(html);
+			$('#my_modal #List_ing #find_peeps .'+y_idx).replaceWith(html);
+			$('#my_modal_wer #List_wer #find_peeps .'+y_idx).replaceWith(html);
+			pro_UtoF(y_idx);
 }
 
 
@@ -408,7 +451,7 @@ function proFollow(y_idx){
 		success : function(data) {
 			console.log("팔로우");	
 			pro_FtoU(y_idx);
-			load_Following();
+			load_MyPage();
 		},
 		error : function() {
 			console.log("실패,,,,");
@@ -437,7 +480,7 @@ function proUnfollow(y_idx){
 		success : function(data) {
 			console.log("언팔로우");
 			pro_UtoF(y_idx);
-			load_Following();
+			load_MyPage();
 			
 		},
 		error : function() {
@@ -450,24 +493,8 @@ function proUnfollow(y_idx){
 // 모달 프로필 편집
 function modal_edit(){
 	
-	var email = "${email}";
-	
-	$
-	.ajax({
-		url : '${pageContext.request.contextPath}/profile/chk',
-		type : 'get',
-		data : {
-			"email" : email,
-		},
-		async : false,
-		success : function(data) {
-			location.href = "${pageContext.request.contextPath}/profile/Info";
-		},
-		error : function(request, status, error) {
-			console.log("통신 실패");
+	location.href = "${pageContext.request.contextPath}/profile/Info";
 
-		}
-	});
 
 }
 
@@ -478,7 +505,7 @@ function modal_edit(){
 </script>
 
 <script>
-var id = ${id};
+var id = "${id}";
 
 // 자신의 마이페이지
 $("#MyPage_img").click(function() {

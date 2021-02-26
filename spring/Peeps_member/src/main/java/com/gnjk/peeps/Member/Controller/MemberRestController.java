@@ -29,6 +29,7 @@ import com.gnjk.peeps.Member.Service.OAuthService;
 import com.gnjk.peeps.Member.Service.RegService;
 import com.gnjk.peeps.Member.Service.TimeLineService;
 import com.gnjk.peeps.Member.domain.EditRequest;
+import com.gnjk.peeps.Member.domain.FollowRequest;
 import com.gnjk.peeps.Member.domain.Peeps;
 import com.gnjk.peeps.Member.domain.RegRequest;
 import com.gnjk.peeps.Member.domain.SocialRequest;
@@ -138,26 +139,39 @@ public class MemberRestController {
 		return followService.unfollow(m_idx, y_idx);
 	}
 
+	// 마이페이지 유저 정보
+	@GetMapping("/mypage/Info")
+	public List<FollowRequest> PageInfo(String id, int m_idx){
+		
+		return myPageService.getPeeps(id, m_idx);
+	}
+	
+	// 마이페이지 팔로잉 리스트
+	@GetMapping("/mypage/ingList")
+	public List<FollowRequest> ingList(int m_idx){
+		
+		return myPageService.getFollowingList(m_idx);
+	}
+	
+	// 마이페이지 팔로워 리스트
+	@GetMapping("/mypage/werList")
+	public List<FollowRequest> werList(int m_idx){
+		
+		return myPageService.getFollowerList(m_idx);
+	}
+	
 	// 마이페이지 팔로우
 	@PostMapping("/mypage/follow")
-	public int MyFollow(int m_idx, int y_idx, HttpSession session) {
-
-		myPageService.Follow(m_idx, y_idx);
-
-		session.setAttribute("FollowingList", myPageService.getFollowingList(m_idx, session));
-
-		return myPageService.getFollowing(m_idx, session);
+	public int MyFollow(int m_idx, int y_idx) {
+		
+		return myPageService.Follow(m_idx, y_idx);
 	}
 
 	// 마이페이지 언팔로우
 	@PostMapping("/mypage/unfollow")
-	public int MyUnFollow(int m_idx, int y_idx, HttpSession session) {
+	public int MyUnFollow(int m_idx, int y_idx) {
 
-		myPageService.unFollow(m_idx, y_idx);
-
-		session.setAttribute("FollowingList", myPageService.getFollowingList(m_idx, session));
-
-		return myPageService.getFollowing(m_idx, session);
+		return myPageService.unFollow(m_idx, y_idx);
 	}
 
 	// 소셜 로그인 정보 확인
@@ -224,7 +238,7 @@ public class MemberRestController {
 
 	// 팔로잉 유저 정보 받아오기
 	@GetMapping("/user/followingInfo")
-	public List<Peeps> followingInfo(int m_idx) {
+	public List<FollowRequest> followingInfo(int m_idx) {
 
 		return timeLineService.FollowingInfo(m_idx);
 	}

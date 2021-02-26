@@ -101,8 +101,10 @@ public class MemberController {
 	
 	// 마이페이지
 	@RequestMapping(value = "/mypage/{id}", method = RequestMethod.GET)
-	public String MyPage(@PathVariable("id") String id, HttpSession session) {
+	public String MyPage(@PathVariable("id") String id, Model model) {
 
+		model.addAttribute("page_id", id);
+		
 		return "member/myPage";
 	}
 

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gnjk.peeps.Member.dao.MemberDao;
-import com.gnjk.peeps.Member.domain.Peeps;
+import com.gnjk.peeps.Member.domain.FollowRequest;
 
 @Service
 public class TimeLineService {
@@ -26,7 +26,7 @@ public class TimeLineService {
 		return FollowingList;
 	}
 
-	public List<Peeps> FollowingInfo(int m_idx) {
+	public List<FollowRequest> FollowingInfo(int m_idx) {
 		
 		dao = template.getMapper(MemberDao.class);
 		
