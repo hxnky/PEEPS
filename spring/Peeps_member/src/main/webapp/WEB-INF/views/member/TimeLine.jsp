@@ -282,29 +282,13 @@ $(document).ready(function() {
 </script>
 <script>
 	$("#keyword").click(function() {
-
-			var m_idx = ${m_idx};
+		
 			var keyword = $('#search').val();
 
 			if (keyword.trim() == "") {
 				alert("한 글자 이상 입력하세요");
 			} else {
-				$.ajax({
-					url : '${pageContext.request.contextPath}/user/finduser',
-					type : 'get',
-					async : false,
-					data : {
-					"keyword" : keyword,
-					"m_idx" : m_idx
-				},
-				success : function(data) {
-					location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
-				},
-				error : function() {
-					console.log("실패,,,,");
-				}
-			});
-
+				location.href = "${pageContext.request.contextPath}/user/finduser?keyword="+ keyword;
 		}
 
 	});

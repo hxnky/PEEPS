@@ -91,16 +91,10 @@ public class MemberController {
 
 	// 검색
 	@RequestMapping(value = "/user/finduser", method = RequestMethod.GET)
-	public String findUser(String keyword, int m_idx, HttpSession session) {
+	public String findUser(String keyword, Model model) {
 
-		session.setAttribute("peepslist", findUserService.SearchPeeps(keyword, m_idx, session));
-
-		return "member/FindView";
-	}
-
-	// 검색 결과
-	@RequestMapping("/member/FindView")
-	public String findUserPage() {
+		System.out.println(keyword);
+		model.addAttribute("UserKeyword", keyword);
 
 		return "member/FindView";
 	}
@@ -130,11 +124,5 @@ public class MemberController {
 		return "/member/FindPostView";
 	}
 	
-	// 임시 채팅
-	@GetMapping("/chat/chatting")
-	public String Chat() {
-		
-		return "/chat/chatting";
-	}
 	
 }

@@ -19,16 +19,11 @@ public class FindUserService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public List<Peeps> SearchPeeps(String keyword, int m_idx, HttpSession session) {
+	public List<Peeps> SearchPeeps(String keyword, int m_idx) {
 
 		dao = template.getMapper(MemberDao.class);
 
-		session.setAttribute("keyword", keyword);
-
 		List<Peeps> peepslist = dao.searchMember(keyword);
-		int peepsCnt = dao.searchMemberCnt(keyword);
-
-		session.setAttribute("peepsCnt", peepsCnt);
 
 		for (int i = 0; i < peepslist.size(); i++) {
 

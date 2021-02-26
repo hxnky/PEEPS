@@ -119,23 +119,23 @@ public class MemberRestController {
 
 	// 검색
 	@GetMapping("/user/loaduser")
-	public List<Peeps> loadUser(@RequestParam("keyword") String keyword, int m_idx, HttpSession session) {
+	public List<Peeps> loadUser(String keyword, int m_idx) {
 
-		return findUserService.SearchPeeps(keyword, m_idx, session);
+		return findUserService.SearchPeeps(keyword, m_idx);
 	}
 
 	// 팔로우
 	@PostMapping("/follow")
-	public int Follow(int m_idx, int y_idx, HttpSession session) {
+	public int Follow(int m_idx, int y_idx) {
 
-		return followService.follow(m_idx, y_idx, session);
+		return followService.follow(m_idx, y_idx);
 	}
 
 	// 언팔로우
 	@PostMapping("/unfollow")
-	public int UnFollow(int m_idx, int y_idx, HttpSession session) {
+	public int UnFollow(int m_idx, int y_idx) {
 
-		return followService.unfollow(m_idx, y_idx, session);
+		return followService.unfollow(m_idx, y_idx);
 	}
 
 	// 마이페이지 팔로우

@@ -19,57 +19,6 @@
 	</div>
 	<!-- 네비 바 -->
 	<div id="total_wrap">
-		<c:choose>
-			<c:when test="${peepsCnt == 0}">
-				<div id="user_no">일치하는 유저가 없습니다</div>
-			</c:when>
-			<c:otherwise>
-				<c:forEach items="${peepslist}" var="peep" varStatus="i">
-					<table class="find_peeps" id="${peep.m_idx }">
-
-						<tr>
-							<td rowspan="2"><a onclick="loadMyPage(${peep.id})">
-									<c:set var="loginType" value="${peep.loginType}" /> <c:choose>
-										<c:when test="${loginType eq 'email'}">
-											<img id="profile"
-												src="<c:url value="/fileupload/${peep.m_photo}"/>">
-										</c:when>
-										<c:when test="${loginType ne 'email' }">
-											<img id="profile" src="<c:url value="${peep.m_photo}"/>">
-										</c:when>
-									</c:choose>
-							</a></td>
-							<td id="id"><a onclick="loadMyPage(${peep.id})">${peep.id}</a></td>
-							<td rowspan="2"><c:choose>
-									<c:when test="${peep.id eq peeps.id}">
-										<div id="fix">
-											<button id="edit_btn">프로필편집</button>
-										</div>
-									</c:when>
-									<c:otherwise>
-										<div id="fix">
-											<c:choose>
-												<c:when test="${peep.chk_result eq 1}">
-													<button class="f_btn" id="unfollow" type="submit"
-														onclick="unfollow(${peep.m_idx})">언팔로우</button>
-												</c:when>
-												<c:otherwise>
-													<button class="f_btn" id="follow" type="submit"
-														onclick="follow(${peep.m_idx})">팔로우</button>
-												</c:otherwise>
-											</c:choose>
-										</div>
-									</c:otherwise>
-								</c:choose></td>
-						</tr>
-						<tr>
-							<td id="name"><a onclick="loadMyPage(${peep.m_idx})">${peep.name}</a></td>
-						</tr>
-
-					</table>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
 	</div>
 </div>
 
@@ -80,34 +29,74 @@
 	type="text/javascript"></script>
 
 <script>
-// 검색 결과 load
-function load_Find(){
-	
-	var m_idx = ${m_idx};
-	var keyword = "${keyword}";
-	
-	$
-	.ajax({
-		url : '${pageContext.request.contextPath}/user/loaduser?keyword=' + keyword,
-		type : 'get',
-		async : false,
-		data : {
-			"m_idx" : m_idx
-		},
-		success : function(data) {
-			console.log(data);		
-			
-			$('#wrap').load(location.href + '#fix');
-			//location.reload();
-			console.log("새로고침");
-		},
-		error : function() {
-			console.log("실패,,,,");
-		}
-	});
-}
+	// 검색 결과 load
+	load_Find();
 
-// 팔로우 function
+	function load_Find(){
+		
+		var m_idx = ${m_idx};
+		var keyword = "${UserKeyword}";
+		
+		$.ajax({
+			url : '${pageContext.request.contextPath}/user/loaduser?keyword=' + keyword,
+			type : 'get',
+			async : false,
+			data : {
+				"m_idx" : m_idx
+			},
+			success : function(data) {
+				console.log(data);		
+				
+				var find = data;
+				
+				$('#total_wrap').empty();
+				
+				if(find.length == 0){
+					$('#total_wrap').append("<div id='user_no'>해당하는 회원이 존재하지 않습니다.</div>");
+				} else{
+					$('#total_wrap').empty();
+					
+					$.each(data, function(index, find){
+						if(find.loginType == 'email'){
+							$('#total_wrap').append("<table class='find_peeps' id='"+find.m_idx+"'><tr class='"+find.m_idx+"'><td rowspan='2'><img id='profile' src='<c:url value='fileupload/"+find.m_photo+"'/>' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("+find.m_idx+")'>"+find.id+"</td></tr></table>");
+							if(find.m_idx == m_idx){
+								$('.'+find.m_idx).append("<td rowspan='2'><div id='fix'><button id='edit_btn'>프로필 편집</button></div></td>");
+							}else{
+								if(find.chk_result == 1){
+									$('.'+find.m_idx).append("<td rowspan='2' ><div id='fix'><button class='f_btn' id='unfollow' type='submit' onclick='unfollow("+find.m_idx+")'>언팔로우</button></div></td>");
+								}else{
+									$('.'+find.m_idx).append("<td rowspan='2'><div id='fix'><button class='f_btn' id='follow' type='submit' onclick='follow("+find.m_idx+")'>팔로우</button></div></td>");									
+								}
+							}
+						} else{
+							$('#total_wrap').append("<table class='find_peeps' id='"+find.m_idx+"'><tr class='"+find.m_idx+"'><td rowspan='2'><img id='profile' src='<c:url value='"+find.m_photo+"'/>' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("+find.m_idx+")'>"+find.id+"</td></tr></table>");
+							if(find.m_idx == m_idx){
+								$('.'+find.m_idx).append("<td rowspan='2'><div id='fix'><button id='edit_btn'>프로필 편집</button></div></td>");
+							}else{
+								if(find.chk_result == 1){
+									$('.'+find.m_idx).append("<td rowspan='2'><div id='fix'><button class='f_btn' id='unfollow' type='submit' onclick='unfollow("+find.m_idx+")'>언팔로우</button></div></td>");
+								}else{
+									$('.'+find.m_idx).append("<td rowspan='2'><div id='fix'><button class='f_btn' id='follow' type='submit' onclick='follow("+find.m_idx+")'>팔로우</button></div></td>");									
+								}
+							}							
+						}
+						
+						$('#'+find.m_idx).append("<tr><td id='name' onclick='GoMyPage("+find.m_idx+")'>"+find.name+"</td></tr>");
+					});
+				}
+						
+					
+				
+		
+			},
+			error : function() {
+				console.log("실패,,,,");
+			}
+		});
+	}
+
+
+//팔로우 function
 function follow(y_idx){
 	
 	var m_idx = ${m_idx};
@@ -162,50 +151,29 @@ function unfollow(y_idx){
 	});
 
 }
+
+
 </script>
 
 <script>
-$("#keyword")
-.click(
-		function() {
+$("#keyword").click(function() {
+	
+	var keyword = $('#search').val();
 
-			var m_idx = ${m_idx};
-			var keyword = $('#search').val();
+	if (keyword.trim() == "") {
+		alert("한 글자 이상 입력하세요");
+	} else {
+		location.href = "${pageContext.request.contextPath}/user/finduser?keyword="+ keyword;
+}
 
-			if(keyword.trim()==""){
-				alert("한 글자 이상 입력하세요");
-			} else{
-				$
-				.ajax({
-					url : '${pageContext.request.contextPath}/user/finduser',
-					type : 'get',
-					async : false,
-					data : {
-						"keyword":keyword,
-						"m_idx" : m_idx
-					},
-					success : function(data) {
-						location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
-					},
-					error : function() {
-						console.log("실패,,,,");
-					}
-				});
-
-			}
-
-			
-		});
+});
 </script>
 
 <script>
 
-var email = "${email}";
-	var m_idx= ${m_idx};
+	var email = "${email}";
 
-	$('#edit_btn')
-	.click(
-			function() {
+	$('#edit_btn').click(function() {
 				
 				$.ajax({
 					url : '${pageContext.request.contextPath}/profile/chk',
