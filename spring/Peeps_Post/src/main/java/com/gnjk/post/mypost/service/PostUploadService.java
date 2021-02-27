@@ -52,7 +52,7 @@ public class PostUploadService {
 		System.out.println("첫번째 파일 크기 : " + files[0].getSize());
 		
 		// 웹 경로
-		String uploadPath = "/resources/fileupload/postfile";
+		String uploadPath = "http://localhost:8080/peeps/resources/fileupload/postfile";
 		// 실제 경로
 		String saveDirPath = request.getSession().getServletContext().getRealPath(uploadPath);
 		String fileName = "";

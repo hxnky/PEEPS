@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 수정</title>
+<title>Peeps</title>
 </head>
 <style>
 @import
@@ -179,11 +179,12 @@ body {
 						name="postformfile" id="postformfile"
 						multiple hidden>
 						<a href="javascript:" onclick="uploadImgBtnClick();" class="my_button">
-						<img id="imguploadbtn" src="<c:url value="/resources/img/imguploadbtn.png"/>"/> </a>
+						<img id="imguploadbtn" src="<c:url value="/resources/images/imguploadbtn.png"/>"/> </a>
 						
 					</div>
 					<!-- 파일 프리뷰 -->
 					<div id="preview" class="preview">
+					
 					<span class="oldPrv"></span>
 					<span class="newPrv"></span>
         			</div>

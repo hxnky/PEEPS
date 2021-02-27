@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 작성</title>
+<title>Peeps</title>
 </head>
 
 <%@ include file="/WEB-INF/views/include/writeBasicset.jsp"%>  
