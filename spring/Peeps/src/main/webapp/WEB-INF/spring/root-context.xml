@@ -12,8 +12,8 @@
 	<!-- dataSource -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
 		p:driverClassName="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
-		p:jdbcUrl="jdbc:log4jdbc:mysql://localhost:3306/peeps?serverTimezone=UTC"
-		p:username="peeps" p:password="0309" />
+		p:jdbcUrl="jdbc:log4jdbc:mysql://openproject.cxefi7doaxtm.ap-northeast-2.rds.amazonaws.com:3306/open?serverTimezone=UTC"
+		p:username="hxnky" p:password="1026" />
 
 	<!-- SqlSessionFactoryBean 등록 -->
 	<bean id="sqlSessionFactory"

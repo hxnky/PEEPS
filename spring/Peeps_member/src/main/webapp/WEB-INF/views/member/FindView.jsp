@@ -169,7 +169,7 @@ $("#keyword").click(function() {
 
 <script>
 
-	$('#edit_btn').click(function() {
+$(document).on("click", "#edit_btn", function(){
 		location.href = "${pageContext.request.contextPath}/profile/Info";
 	});
 
