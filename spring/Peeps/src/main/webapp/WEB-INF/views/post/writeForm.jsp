@@ -49,7 +49,7 @@
 						name="postformfile" id="postformfile"
 						multiple hidden>
 						<a href="javascript:" onclick="uploadImgBtnClick();" class="my_button">
-						<img id="imguploadbtn" src="<c:url value="/resources/img/imguploadbtn.png"/>"/> </a>
+						<img id="imguploadbtn" src="<c:url value="/resources/images/imguploadbtn.png"/>"/> </a>
 						
 					</div>
 					<!-- 파일 프리뷰 -->
@@ -159,7 +159,7 @@
         
         // 위치 취소 버튼 클릭 시
         function xBtnClick(){
-        	alert('엑스버튼 클릭');
+        	/* alert('엑스버튼 클릭'); */
         	
         	$('.cLocBtn').remove();
         	$('.searchlocBox').val("");
@@ -227,7 +227,7 @@
 	    	};			
 	    	
 	    	/* 세션에서 회원 idx 받아오기 */
-	    	var m_idx = ${peeps.m_idx};	
+	    	var m_idx = ${m_idx};	
 	    	console.log("세션으로 받아온 midx : ", m_idx);
 	    	formData.append("userIdx", m_idx);
 	    	console.log("최종 formdata : ", formData);
@@ -242,9 +242,9 @@
 	    		success : function(data){
 	    		
 	    		/* 세션으로 받아온 회원id */
-	    		var memberid = "${peeps.id}";
+	    		var memberid = "${id}";
 	    		console.log("ajax 데이터 : ",data);				
-	    		window.location.href="http://localhost:8081/post/main/"+memberid; 
+	    		window.location.href="http://localhost:8080/peeps/main/"+memberid; 
 	    					
 	    		},error: function(e){
 	    		console.log("ajax전송에러");	

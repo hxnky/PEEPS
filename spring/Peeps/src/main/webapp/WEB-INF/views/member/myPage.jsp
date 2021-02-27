@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,13 +11,15 @@
 <title>마이페이지</title>
 </head>
 <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
+<!-- <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
+ -->
 <!-- 부가적인 테마 -->
-<link rel="stylesheet"
+<!-- <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
+ -->
+ <%@ include file="/WEB-INF/views/include/mypageBasicset.jsp"%>
+ 
 <link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/modal.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/myPage.css" />" rel="stylesheet">

@@ -26,14 +26,14 @@ public class MainViewController {
 //	}
 	
 	// 마이페이지의 게시글 리스트 (회원 계정 아이디로 접속)
-	@RequestMapping("/main/{mid}")
-	public String goMyPage(
-			@RequestParam(value = "p", defaultValue = "1") int p,
-			@PathVariable("mid") String mid
-			) {
-		System.out.println("PathVariable 이용한 컨트롤러로 진입");
-		return "post/myPage";
-	}
+//	@RequestMapping("/main/{mid}")
+//	public String goMyPage(
+//			@RequestParam(value = "p", defaultValue = "1") int p,
+//			@PathVariable("mid") String mid
+//			) {
+//		System.out.println("PathVariable 이용한 컨트롤러로 진입");
+//		return "post/myPage";
+//	}
 	
 	// 게시글 작성 폼
 	@RequestMapping("/main/post/upload")

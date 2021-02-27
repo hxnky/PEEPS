@@ -1,11 +1,8 @@
 package com.gnjk.post.mypost.service;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.gnjk.post.mypost.dao.FileDao;
 import com.gnjk.post.mypost.dao.PostDao;
-import com.gnjk.post.mypost.domain.LoginInfo;
-import com.gnjk.post.mypost.domain.Peeps;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostFile;
 import com.gnjk.post.mypost.domain.PostWriteRequest;
-
-import net.coobird.thumbnailator.Thumbnailator;
 
 @Service
 public class PostUploadService {
@@ -35,10 +28,10 @@ public class PostUploadService {
 	// 게시글 저장
 	public int uploadPost(PostWriteRequest writeRequest, HttpServletRequest request, Model model) {
 		// 로그인 세션 가져오기
-		HttpSession session = request.getSession();
-		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
-		System.out.println("로그인 인포 세션 : "+loginInfo);
-		
+//		HttpSession session = request.getSession();
+//		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
+//		System.out.println("로그인 인포 세션 : "+loginInfo);
+
 		// test 로그인 안된 경우, 로그인 정보 세션 생성
 //		if(loginInfo == null) {
 //			
@@ -47,7 +40,7 @@ public class PostUploadService {
 //		}
 		
 		// 세션 멤버 idx 
-		int memberIdx = loginInfo.getM_idx();
+		int memberIdx = writeRequest.getUserIdx();
 		
 		int postResult = 0;
 

@@ -88,8 +88,13 @@ public class MemberController {
 	}
 	
 	// 마이페이지
-	@RequestMapping(value = "/user/mypage", method = RequestMethod.GET)
-	public String MyPage(String id, Model model) {
+//	@RequestMapping(value = "/user/mypage", method = RequestMethod.GET)
+//	@RequestMapping("/main/{mid}")
+	@RequestMapping(value = "/main/{mid}", method = RequestMethod.GET)
+	public String MyPage(
+			@RequestParam(value = "p", defaultValue = "1") int p,
+			@PathVariable("mid") String mid,
+			String id, Model model) {
 
 		model.addAttribute("page_id", id);
 		
