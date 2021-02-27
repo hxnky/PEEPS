@@ -1,6 +1,6 @@
 package com.gnjk.peeps.Member.Service;
 
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,11 @@ public class LoginService {
 
 	@Autowired
 	private SqlSessionTemplate template;
+	
+	@Autowired
+	private RedisService redisService;
 
-	public int login(String email, String password, HttpSession session) {
+	public int login(String email, String password, HttpServletRequest request) {
 
 		dao = template.getMapper(MemberDao.class);
 
@@ -35,7 +38,8 @@ public class LoginService {
 
 		if (peeps != null) {
 			if (peeps.getVerify() == 'Y') {
-				session.setAttribute("loginInfo", peeps.toLoginInfo());
+				request.getSession().setAttribute("loginInfo", peeps.toLoginInfo());
+				redisService.setUserInformation(peeps.toLoginInfo(), request.getSession());
 				loginCheck = true;
 				result = 2;
 			} else if(peeps.getVerify() == 'N') {
@@ -50,7 +54,7 @@ public class LoginService {
 
 		}
 
-		session.setAttribute("peeps", peeps);
+		//session.setAttribute("peeps", peeps);
 
 		return result;
 	}

@@ -25,7 +25,7 @@
 				<div id="pro_btn">
 				<input type="hidden" id="idx" value="3">
 					<ul>
-						<li id="memberid">아이디</li>
+						<li>아이디</li>
 						<li><button id="pro_edit">
 								<a href="#">프로필 편집</a>
 							</button></li>
@@ -79,14 +79,12 @@
     var p = getParameterByName('p');
     console.log(p);
 	
-	/* var urlPath = location.pathname;
+	var urlPath = location.pathname;
 	console.log("URL 패스네임 : ", urlPath);
 	var splitUrl = urlPath.split("/");
 	var pathMemberId = splitUrl[3];
 	console.log(splitUrl);
-	console.log("패스멤버아이디",pathMemberId); */
-	
-	var pathMemberId = $('#memberid').val();
+	console.log("패스멤버아이디",pathMemberId);
 	
 	var menuHtml = '<button onclick="location.href=\'<c:url value="/main/'+pathMemberId+'"/>\'">게시물</button>';
 	   menuHtml += '<button onclick="location.href=\'<c:url value="/main/'+pathMemberId+'/map"/>\'">지도</button>';

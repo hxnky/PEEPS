@@ -27,7 +27,9 @@ import com.gnjk.peeps.Member.Service.LoginService;
 import com.gnjk.peeps.Member.Service.MyPageService;
 import com.gnjk.peeps.Member.Service.OAuthService;
 import com.gnjk.peeps.Member.Service.RegService;
+import com.gnjk.peeps.Member.Service.TimeLineService;
 import com.gnjk.peeps.Member.domain.EditRequest;
+import com.gnjk.peeps.Member.domain.FollowRequest;
 import com.gnjk.peeps.Member.domain.Peeps;
 import com.gnjk.peeps.Member.domain.RegRequest;
 import com.gnjk.peeps.Member.domain.SocialRequest;
@@ -65,11 +67,14 @@ public class MemberRestController {
 	@Autowired
 	private OAuthService oauthService;
 
+	@Autowired
+	private TimeLineService timeLineService;
+
 	// 로그인
 	@PostMapping("/user/login")
-	public int login(String email, String password, Model model, HttpSession session) {
+	public int login(String email, String password, Model model, HttpServletRequest request) {
 
-		return loginService.login(email, password, session);
+		return loginService.login(email, password, request);
 
 	}
 
@@ -78,13 +83,6 @@ public class MemberRestController {
 	public int memberReg(RegRequest regRequest, HttpServletRequest request) {
 
 		return regService.memberReg(regRequest, request);
-	}
-
-	// 프로필 편집 진입 시 소셜회원의 정보도 얻기 위해
-	@GetMapping("/profile/chk")
-	public int editUserInfoPage(String email, HttpSession session) {
-
-		return editService.getPeeps(email, session);
 	}
 
 	// 프로필 편집
@@ -122,43 +120,58 @@ public class MemberRestController {
 
 	// 검색
 	@GetMapping("/user/loaduser")
-	public List<Peeps> loadUser(@RequestParam("keyword") String keyword, int m_idx, HttpSession session) {
+	public List<Peeps> loadUser(String keyword, int m_idx) {
 
-		return findUserService.SearchPeeps(keyword, m_idx, session);
+		return findUserService.SearchPeeps(keyword, m_idx);
 	}
 
 	// 팔로우
 	@PostMapping("/follow")
-	public int Follow(int m_idx, int y_idx, HttpSession session) {
+	public int Follow(int m_idx, int y_idx) {
 
-		return followService.follow(m_idx, y_idx, session);
+		return followService.follow(m_idx, y_idx);
 	}
 
 	// 언팔로우
 	@PostMapping("/unfollow")
-	public int UnFollow(int m_idx, int y_idx, HttpSession session) {
+	public int UnFollow(int m_idx, int y_idx) {
 
-		return followService.unfollow(m_idx, y_idx, session);
+		return followService.unfollow(m_idx, y_idx);
 	}
 
+	// 마이페이지 유저 정보
+	@GetMapping("/mypage/Info")
+	public List<FollowRequest> PageInfo(String id, int m_idx){
+		
+		return myPageService.getPeeps(id, m_idx);
+	}
+	
+	// 마이페이지 팔로잉 리스트
+	@GetMapping("/mypage/ingList")
+	public List<FollowRequest> ingList(int m_idx){
+		
+		return myPageService.getFollowingList(m_idx);
+	}
+	
+	// 마이페이지 팔로워 리스트
+	@GetMapping("/mypage/werList")
+	public List<FollowRequest> werList(int m_idx){
+		
+		return myPageService.getFollowerList(m_idx);
+	}
+	
+	// 마이페이지 팔로우
 	@PostMapping("/mypage/follow")
-	public int MyFollow(int m_idx, int y_idx, HttpSession session) {
-
-		myPageService.Follow(m_idx, y_idx);
-
-		session.setAttribute("FollowingList", myPageService.getFollowingList(m_idx, session));
-
-		return myPageService.getFollowing(m_idx, session);
+	public int MyFollow(int m_idx, int y_idx) {
+		
+		return myPageService.Follow(m_idx, y_idx);
 	}
 
+	// 마이페이지 언팔로우
 	@PostMapping("/mypage/unfollow")
-	public int MyUnFollow(int m_idx, int y_idx, HttpSession session) {
+	public int MyUnFollow(int m_idx, int y_idx) {
 
-		myPageService.unFollow(m_idx, y_idx);
-
-		session.setAttribute("FollowingList", myPageService.getFollowingList(m_idx, session));
-
-		return myPageService.getFollowing(m_idx, session);
+		return myPageService.unFollow(m_idx, y_idx);
 	}
 
 	// 소셜 로그인 정보 확인
@@ -202,11 +215,11 @@ public class MemberRestController {
 
 	// 소셜 회원 정보
 	@GetMapping(value = "/user/socialInfo")
-	public Peeps SocialInfo(String email, HttpSession session) {
+	public Peeps SocialInfo(String email, HttpServletRequest request) {
 
-		session.setAttribute("peeps", oauthService.selectSocialInfo(email));
+		// session.setAttribute("peeps", oauthService.selectSocialInfo(email));
 
-		return oauthService.selectSocialInfo(email);
+		return oauthService.selectSocialInfo(email, request);
 	}
 
 	// 소셜 로그인 타입 확인
@@ -214,6 +227,27 @@ public class MemberRestController {
 	public String socialVerify(String email) {
 
 		return oauthService.selectSocialVerify(email);
+	}
+
+	@GetMapping("/user/followingList")
+	// 유저 팔로잉 리스트
+	public List<Integer> followingList(int m_idx) {
+
+		return timeLineService.FollowingList(m_idx);
+	}
+
+	// 팔로잉 유저 정보 받아오기
+	@GetMapping("/user/followingInfo")
+	public List<FollowRequest> followingInfo(int m_idx) {
+
+		return timeLineService.FollowingInfo(m_idx);
+	}
+	
+	// 마이페이지 - 아이디 조회
+	@RequestMapping(value = "/mypage/chk", method = RequestMethod.GET)
+	public String MyPageChk(int m_idx) {
+
+		return myPageService.selectId(m_idx);
 	}
 
 	// 21.02.25 멤버 id 로 idx 찾기 추가 (정현)

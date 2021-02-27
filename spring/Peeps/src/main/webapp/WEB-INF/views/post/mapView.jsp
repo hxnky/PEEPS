@@ -25,7 +25,7 @@
 				<div id="pro_btn">
 				<input type="hidden" id="idx" value="3">
 					<ul>	
-						<li id="memberid">아이디</li>
+						<li id="memberId">아이디</li>
 						<li><button id="pro_edit">
 								<a href="#">프로필 편집</a>
 							</button></li>
@@ -74,13 +74,12 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed6849fd6d5d015aebf82a3eb747333&libraries=services"></script>
 	<script>
     
-	/* var urlPath = location.pathname;
+	var urlPath = location.pathname;
 	console.log("URL 패스네임 : ", urlPath);
 	var splitUrl = urlPath.split("/");
 	var pathMemberId = splitUrl[3];
 	console.log(splitUrl);
-	console.log("패스멤버아이디",pathMemberId); */
-	var pathMemberId = $('#memberid').val();
+	console.log("패스멤버아이디",pathMemberId);
 	
 	var menuHtml = '<button onclick="location.href=\'<c:url value="/main/'+pathMemberId+'"/>\'">게시물</button>';
 	   menuHtml += '<button onclick="location.href=\'<c:url value="/main/'+pathMemberId+'/map"/>\'">지도</button>';
@@ -173,7 +172,7 @@
 						          /* alert("마커를 클릭했습니다."); */ 
 						          /* alert(result[0].address_name); */
 						          var postAddr = result[0].address_name;
-						          var mId = $('#memberid').text();
+						          var mId = $('#memberId').text();
 						          
 						          // 주소에 해당하는 게시글 모두 불러와야함
 						          markerClick(postAddr,0,5);

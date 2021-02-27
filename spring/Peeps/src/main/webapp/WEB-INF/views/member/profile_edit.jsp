@@ -12,13 +12,14 @@
 <link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 </head>
 <body>
+<div id="wrap">
 	<div id="nav">
-		<%@ include file="/WEB-INF/views/chat/nav.jsp"%>
+		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
 	</div>
 	<div id="total_wrap">
 		<div id="edit_menu">
 			<div id="menu_btn">
-				<h3 id="email">${peeps.email}</h3>
+				<h3 id="email">${email}</h3>
 				<h3>님</h3>
 				<br>
 				<button id="edit">프로필 편집</button>
@@ -27,24 +28,24 @@
 				<button id="log_out">로그아웃</button>
 			</div>
 		</div>
-		<div>
+		<div id="edit_wrap">
 			<form id="edit_photo" enctype="multipart/form-data">
-				<input type="hidden" id="email" name="email" value="${peeps.email }">
+				<input type="hidden" id="email" name="email" value="${email }">
 				<table id="edit_table">
 					<tr>
 						<td id="table_left" rowspan="3"><c:set var="loginType"
-								value="${peeps.loginType}" /> <c:choose>
-								<c:when test="${peeps.loginType eq 'email' }">
+								value="${loginType}" /> <c:choose>
+								<c:when test="${loginType eq 'email' }">
 									<img id="profile"
-										src="<spring:url value="/fileupload/${peeps.m_photo}"/>">
+										src="<spring:url value="/fileupload/${m_photo}"/>">
 									<input type="hidden" id="oldPhoto" name="oldPhoto"
-										value="${peeps.m_photo}">
+										value="${m_photo}">
 									<br>
 								</c:when>
 								<c:when test="${loginType ne 'email' }">
-									<img id="profile" src="<spring:url value="${peeps.m_photo}"/>">
+									<img id="profile" src="<spring:url value="${m_photo}"/>">
 									<input type="hidden" id="oldPhoto" name="oldPhoto"
-										value="${peeps.m_photo}">
+										value="${m_photo}">
 									<br>
 								</c:when>
 
@@ -53,7 +54,7 @@
 							<button type="button" id="choose_btn">프로필 사진 바꾸기</button></td>
 
 						<td id="table_right">아이디 <br> <input type="text"
-							class="edit_text" id="id" name="id" value="${peeps.id}">
+							class="edit_text" id="id" name="id" value="${id}">
 						</td>
 					</tr>
 					<tr>
@@ -61,11 +62,11 @@
 								value="${loginType}" /> <c:choose>
 								<c:when test="${loginType eq 'email' }">
 									<input type="text" class="edit_text" id="name" name="name"
-										value="${peeps.name}">
+										value="${name}">
 								</c:when>
 								<c:when test="${loginType ne 'email' }">
 									<input type="text" class="edit_text" id="name" name="name"
-										value="${peeps.name}" readonly="readonly">
+										value="${name}" readonly="readonly">
 								</c:when>
 
 							</c:choose>
@@ -73,7 +74,7 @@
 					</tr>
 					<tr>
 						<td id="table_right">소개글 <br> <input type="text"
-							class="edit_bio" id="bio" name="bio" value="${peeps.bio}">
+							class="edit_bio" id="bio" name="bio" value="${bio}">
 						</td>
 					</tr>
 					<tr>
@@ -84,7 +85,7 @@
 			<button id="change">변경</button>
 		</div>
 	</div>
-
+</div>
 </body>
 
 <!--   Core JS Files   -->
@@ -151,61 +152,31 @@
 
 
 <script>
-	$("#edit")
-			.click(
-					function() {
+	$(function() {
 
-						var email = "${peeps.email}";
+		var email = "${email}";
 
-						$
-								.ajax({
-									url : '${pageContext.request.contextPath}/profile/chk',
-									type : 'get',
-									data : {
-										"email" : email,
-									},
-									async : false,
-									success : function(data) {
-										location.href = "${pageContext.request.contextPath}/profile/Info";
-									},
-									error : function(request, status, error) {
-										console.log("통신 실패");
+		$(document).on("click", "#edit", function(){
+							location.href = "${pageContext.request.contextPath}/profile/Info";
 
-									}
-								});
-					});
+						});
+		$(document).on("click", "#pw_ch", function(){
+							location.href = "${pageContext.request.contextPath}/profile/pw?email="
+									+ email;
 
-	var email = "${peeps.email}";
-	var m_idx = ${peeps.m_idx};
-	
-	$("#MyPage_img").click(function() {
+						});
+		$(document).on("click", "#delete", function(){
+							location.href = "${pageContext.request.contextPath}/profile/delete?email="
+									+ email;
 
-		location.href = "${pageContext.request.contextPath}/mypage/" + m_idx;
+						});
 
-	});
+		$(document).on("click", "#log_out", function(){
+			
+			location.href = "${pageContext.request.contextPath}/logout";
 
-	$("#pw_ch")
-			.click(
-					function() {
-
-						location.href = "${pageContext.request.contextPath}/profile/pw?email="
-								+ email;
-
-					});
-
-	$("#delete")
-			.click(
-					function() {
-
-						location.href = "${pageContext.request.contextPath}/profile/delete?email="
-								+ email;
-
-					});
-
-	$("#log_out").click(function() {
-
-		location.href = "${pageContext.request.contextPath}/logout";
-	});
+		});
+	})
 </script>
 <script>
 	$("#change").click(function() {
@@ -226,9 +197,9 @@
 				console.log("수정 완료");
 				if (data == 1) {
 					alert("수정 완료");
-					// 수정 완료 시 뭐 하면 좋을까?
+					//$('#wrap').load(location.href + '#edit_wrap');
 				} else {
-					alert("계정을 찾을 수 없습니다. 이메일 또는 아이디를 확인해주세요");
+					console.log("수정 실패");
 				}
 
 			},
@@ -241,37 +212,28 @@
 </script>
 
 <script>
-	$("#keyword")
-			.click(
-					function() {
 
-						var m_idx = ${peeps.m_idx};
-						var keyword = $('#search').val();
+var id = "${id}";
 
-						if (keyword.trim() == "") {
-							alert("한 글자 이상 입력하세요");
-						} else {
-							$
-									.ajax({
-										url : '${pageContext.request.contextPath}/user/finduser',
-										type : 'get',
-										async : false,
-										data : {
-											"keyword" : keyword,
-											"m_idx" : m_idx
-										},
-										success : function(data) {
-											location.href = "${pageContext.request.contextPath}/member/FindView?keyword="
-													+ keyword;
-										},
-										error : function() {
-											console.log("실패,,,,");
-										}
-									});
+$("#MyPage_img").click(function() {
 
-						}
+	location.href = "${pageContext.request.contextPath}/user/mypage?id=" + id;
 
-					});
+});
+
+
+
+$("#keyword").click(function() {
+	
+	var keyword = $('#search').val();
+
+	if (keyword.trim() == "") {
+		alert("한 글자 이상 입력하세요");
+	} else {
+		location.href = "${pageContext.request.contextPath}/user/finduser?keyword="+ keyword;
+}
+
+});
 </script>
 
 </html>

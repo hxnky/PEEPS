@@ -7,14 +7,13 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- Root Context: defines shared resources visible to all other web components -->
 
 	<!-- 데이터베이스 관련 설정 -->
 	<!-- dataSource -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
 		p:driverClassName="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"
-		p:jdbcUrl="jdbc:log4jdbc:mysql://localhost:3306/peeps?serverTimezone=UTC"
-		p:username="peeps" p:password="0309" />
+		p:jdbcUrl="jdbc:log4jdbc:mysql://openproject.cxefi7doaxtm.ap-northeast-2.rds.amazonaws.com:3306/open?serverTimezone=UTC"
+		p:username="hxnky" p:password="1026" />
 
 	<!-- SqlSessionFactoryBean 등록 -->
 	<bean id="sqlSessionFactory"
@@ -32,4 +31,6 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
+
+	
 </beans>

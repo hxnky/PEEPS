@@ -69,31 +69,12 @@ public class GoogleController {
 		Map<String, String> userInfo = mapper.readValue(resultJson, new TypeReference<Map<String, String>>() {
 		});
 
+		session.setAttribute("access_Token", Result.getAccessToken());	
+		session.setAttribute("email", userInfo.get("email"));
+		session.setAttribute("name", userInfo.get("name"));
+		session.setAttribute("m_photo", userInfo.get("picture"));
+		session.setAttribute("loginType", "google");			
 
-
-		session.setAttribute("loginInfo", userInfo);
-		session.setAttribute("access_Token", Result.getAccessToken());
-		
-
-		model.addAttribute("token", Result.getAccessToken());
-		model.addAttribute("result", result);
-		
-		
-		Peeps peeps = new Peeps();
-		
-		peeps.setEmail(userInfo.get("email"));
-		peeps.setName(userInfo.get("name"));
-		peeps.setM_photo(userInfo.get("picture"));
-		peeps.setLoginType("google");
-		
-		System.out.println(peeps);
-		
-		session.setAttribute("peeps", peeps);
-		
-		System.out.println(userInfo);
-		System.out.println("이메일 : " + userInfo.get("email"));
-		System.out.println("이름 : " + userInfo.get("name"));
-		System.out.println("사진 URL : " + userInfo.get("picture"));
 
 		return "member/SocialRegForm";
 
