@@ -126,15 +126,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- delete from member where email=#{email} and -->
 	<!-- password=#{password} -->
 	<!-- </delete> -->
-	
+
 	<!-- 탈퇴 사유 저장 -->
 	<!-- 팔로우 -->
 	<insert id="insertReason"
 		parameterType="com.gnjk.peeps.Member.domain.Delete">
 		insert into withdraw (email, reason) values
-		(#{email}, #{reason})
+		(#{email},
+		#{reason})
 	</insert>
-	
+
 
 	<!-- 해당 단어가 들어가는 유저 검색 -->
 	<select id="searchMember" resultMap="memberResult">
@@ -175,10 +176,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		email=#{email}
 	</update>
-	
-	<!-- 소셜 회원이메일 인증 값 확인  -->
+
+	<!-- 소셜 회원이메일 인증 값 확인 -->
 	<select id="selectVerifyByEmail" resultType="String">
-		select verify from member where email=#{email}
+		select verify from
+		member where email=#{email}
 	</select>
 
 	<!-- 팔로우 상태인지 확인 -->
@@ -231,33 +233,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from follow where follower_id =#{m_idx} or
 		following_id = #{m_idx}
 	</delete>
-	
+
 	<!-- 21.02.25 추가 (정현) -->
 	<!-- 아이디로 회원 정보 가져오기 -->
-	<select id="selectMemberlistById" 
-			parameterType="list"
-			resultType="com.gnjk.peeps.Member.domain.Peeps"
-			>
+	<select id="selectMemberlistById" parameterType="list"
+		resultType="com.gnjk.peeps.Member.domain.Peeps">
 		select * from member
 		where id = #{id}
 	</select>
-	
+
 	<!-- 21.02.25 추가 (정현) -->
 	<!-- 인덱스로 회원 정보 가져오기 -->
-		<select id="selectMemberlistByIdx" 
-			parameterType="list"
-			resultType="com.gnjk.peeps.Member.domain.Peeps"
-			>
+	<select id="selectMemberlistByIdx" parameterType="list"
+		resultType="com.gnjk.peeps.Member.domain.Peeps">
 		select * from member
 		where m_idx = #{m_idx}
 	</select>
-	
+
 	<!-- 21.02.26 추가 (정현) -->
 	<!-- 회원 정보 가져오기 -->
-		<select id="selectMemberlist" 
-			parameterType="list"
-			resultType="com.gnjk.peeps.Member.domain.Peeps"
-			>
+	<select id="selectMemberlist" parameterType="list"
+		resultType="com.gnjk.peeps.Member.domain.Peeps">
 		select * from member
 	</select>
 

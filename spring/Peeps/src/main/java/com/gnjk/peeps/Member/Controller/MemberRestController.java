@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,22 +46,22 @@ public class MemberRestController {
 
 	@Autowired
 	private EditPwService editPwService;
-	
+
 	@Autowired
 	private FindPwService findPwService;
-	
+
 	@Autowired
 	private DeleteService deleteService;
-	
+
 	@Autowired
 	private FindUserService findUserService;
-	
+
 	@Autowired
 	private FollowService followService;
-	
+
 	@Autowired
 	private MyPageService myPageService;
-	
+
 	@Autowired
 	private OAuthService oauthService;
 
@@ -102,30 +101,32 @@ public class MemberRestController {
 
 		return editPwService.EditPw(email, password, e_password, c_password);
 	}
-	
+
 	// 비밀번호 찾기
 	@PostMapping("/user/findPW")
-	public int memberFindPost(String email, String id, HttpServletResponse response, @ModelAttribute Peeps peeps) throws Exception{
-		
+	public int memberFindPost(String email, String id, HttpServletResponse response, @ModelAttribute Peeps peeps)
+			throws Exception {
+
 		return findPwService.find_pw(email, id, response, peeps);
 	}
-	
+
 	// 탈퇴하기
 	@PostMapping("/user/del")
-	public int EditPwPost(HttpServletResponse response, String email, String password, int m_idx, String reason, HttpSession session){
-		
+	public int EditPwPost(HttpServletResponse response, String email, String password, int m_idx, String reason,
+			HttpSession session) {
+
 		session.invalidate();
-		
+
 		return deleteService.Delete(email, password, m_idx, reason);
 	}
-	
+
 	// 검색
 	@GetMapping("/user/loaduser")
-	public List<Peeps> loadUser(@RequestParam("keyword") String keyword, int m_idx, HttpSession session){
-		
+	public List<Peeps> loadUser(@RequestParam("keyword") String keyword, int m_idx, HttpSession session) {
+
 		return findUserService.SearchPeeps(keyword, m_idx, session);
 	}
-	
+
 	// 팔로우
 	@PostMapping("/follow")
 	public int Follow(int m_idx, int y_idx, HttpSession session) {
@@ -135,11 +136,11 @@ public class MemberRestController {
 
 	// 언팔로우
 	@PostMapping("/unfollow")
-	public int UnFollow(int m_idx,int y_idx, HttpSession session) {
-		
+	public int UnFollow(int m_idx, int y_idx, HttpSession session) {
+
 		return followService.unfollow(m_idx, y_idx, session);
 	}
-	
+
 	@PostMapping("/mypage/follow")
 	public int MyFollow(int m_idx, int y_idx, HttpSession session) {
 
@@ -151,7 +152,6 @@ public class MemberRestController {
 	}
 
 	@PostMapping("/mypage/unfollow")
-	@CrossOrigin
 	public int MyUnFollow(int m_idx, int y_idx, HttpSession session) {
 
 		myPageService.unFollow(m_idx, y_idx);
@@ -167,7 +167,7 @@ public class MemberRestController {
 
 		return oauthService.checkEmail(email);
 	}
-	
+
 	// 소셜 사진 정보 확인
 	@GetMapping("/user/photoChk")
 	public String photoCheck(String email) {
@@ -190,7 +190,7 @@ public class MemberRestController {
 
 		return result;
 	}
-	
+
 	// 소셜 사진 변경
 	@PostMapping(value = "/user/photoUpdate")
 	public int m_photoUpdate(String email, String m_photo, String name) {
@@ -199,59 +199,48 @@ public class MemberRestController {
 
 		return result;
 	}
-	
+
 	// 소셜 회원 정보
 	@GetMapping(value = "/user/socialInfo")
 	public Peeps SocialInfo(String email, HttpSession session) {
 
 		session.setAttribute("peeps", oauthService.selectSocialInfo(email));
-		
+
 		return oauthService.selectSocialInfo(email);
 	}
-	
+
 	// 소셜 로그인 타입 확인
 	@GetMapping("/user/socialVerify")
 	public String socialVerify(String email) {
-		
+
 		return oauthService.selectSocialVerify(email);
 	}
-	
+
 	// 21.02.25 멤버 id 로 idx 찾기 추가 (정현)
 	@GetMapping("/user/idxList")
-	@CrossOrigin
-	public List<Peeps> MemberidxList(
-			@RequestParam Map<String, Object> param,
-			HttpServletRequest request
-			){
-		
+	public List<Peeps> MemberidxList(@RequestParam Map<String, Object> param, HttpServletRequest request) {
+
 		String memberid = request.getParameter("mId");
-		System.out.println("path 멤버아이디 :"+memberid); 
-		
+		System.out.println("path 멤버아이디 :" + memberid);
+
 		return findUserService.getMemberidx(memberid);
 	}
-	
+
 	// 21.02.25 멤버 idx 로 id 찾기 추가 (정현)
 	@GetMapping("/user/idList")
-	@CrossOrigin
-	public List<Peeps> MemberidList(
-			@RequestParam Map<String, Object> param,
-			HttpServletRequest request
-			){
-		
+	public List<Peeps> MemberidList(@RequestParam Map<String, Object> param, HttpServletRequest request) {
+
 		int memberidx = Integer.parseInt(request.getParameter("mIdx"));
-		
+
 		return findUserService.getMemberid(memberidx);
 	}
-	
+
 	// 21.02.26 회원정보 조회 (정현)
 	@GetMapping("/user/memberList")
-	@CrossOrigin
-	public List<Peeps> MemberList(
-			HttpServletRequest request
-			){
-		
+	public List<Peeps> MemberList(HttpServletRequest request) {
+
 		System.out.println("memberList 컨트롤러 진입~~~!");
-		
+
 		return findUserService.getMemberInfo();
 	}
 

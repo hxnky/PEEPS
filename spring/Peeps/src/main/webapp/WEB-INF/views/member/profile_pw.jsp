@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div id="nav">
-		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+		<%@ include file="/WEB-INF/views/chat/nav.jsp"%>
 	</div>
 	<div id="total_wrap">
 		<div id="edit_menu">

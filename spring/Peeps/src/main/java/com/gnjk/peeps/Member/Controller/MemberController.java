@@ -27,7 +27,14 @@ public class MemberController {
 
 	@Autowired
 	private MyPageService myPageService;
+	
+	// 이메일 회원가입
+	@GetMapping("/post/test")
+	public String getTest() {
 
+		return "post/test";
+	}
+	
 	// 로그인
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String loginForm() {
@@ -129,5 +136,7 @@ public class MemberController {
 
 		return "redirect:/";
 	}
+	
+
 
 }

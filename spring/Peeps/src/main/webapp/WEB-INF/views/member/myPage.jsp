@@ -27,7 +27,7 @@
 <body>
 	<div id="total_wrap">
 		<div id="nav">
-			<%@ include file="/WEB-INF/views/include/nav.jsp"%>
+			<%@ include file="/WEB-INF/views/chat/nav.jsp"%>
 		</div>
 		<!-------------네비 넣기------------------>
 		<div id="main_wrap">

@@ -23,6 +23,7 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/fileupload/**" location="file:///C:\Users\hanky\Desktop\bit\PEEPS\peeps_spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Peeps\fileupload" />
+	<resources mapping="/chat/**" location="/chat/" />
 
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
@@ -60,8 +61,6 @@
 	</beans:bean>
 
 
-
-	<tx:annotation-driven />
 
 	
 	<context:component-scan base-package="com.gnjk.peeps" />

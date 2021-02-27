@@ -25,16 +25,15 @@
 	rel="stylesheet">
 <link href="<c:url value="/resources/css/gsdk-bootstrap-wizard.css"/>"
 	rel="stylesheet" />
+	
 
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="<c:url value="/resources/css/demo.css"/>" rel="stylesheet" />
 <link href="<c:url value="/resources/css/reg.css"/>" rel="stylesheet" />
-<link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
+<link href="<c:url value="/chat/css/default.css" />" rel="stylesheet">
 </head>
 <body>
-	<div id="nav">
-		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
-	</div>
+	<%@ include file="/WEB-INF/views/chat/nav.jsp"%>
 	<!--   Big container   -->
 	<div class="container">
 		<div class="row">

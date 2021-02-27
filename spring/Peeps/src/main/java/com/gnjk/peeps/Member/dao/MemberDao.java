@@ -52,7 +52,7 @@ public interface MemberDao {
 
 	// 회원 정보 삭제
 	int deletePeeps(@Param("email") String email, @Param("password") String password);
-	
+
 	// 탈퇴 사유 저장
 	int insertReason(@Param("email") String email, @Param("reason") String reason);
 
@@ -70,7 +70,7 @@ public interface MemberDao {
 
 	// 회원 사진 정보 수정
 	int m_photoUpdate(@Param("email") String email, @Param("m_photo") String m_photo, @Param("name") String name);
-	
+
 	// 회원 이메일 인증 값 확인
 	String selectVerifyByEmail(String email);
 
@@ -97,14 +97,13 @@ public interface MemberDao {
 
 	// 팔로우/팔로잉 목록 삭제
 	int deleteFollowList(@Param("m_idx") int m_idx);
-	
+
 	// 21.02.25 멤버id로 idx 가져오기 추가 (정현)
 	List<Peeps> selectMemberlistById(String id);
-	
+
 	// 21.02.25 멤버idx로 id 가져오기 추가 (정현)
 	List<Peeps> selectMemberlistByIdx(int m_idx);
-	
+
 	// 21.02.26 회원정보 조회 (정현)
 	List<Peeps> selectMemberlist();
-	
 }
