@@ -22,7 +22,10 @@ public class EditInfoService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public int getPeeps(String email, HttpSession session) {
+//	@Autowired
+//	private RedisService redisService;
+
+	public int getPeeps(String email) {
 
 		dao = template.getMapper(MemberDao.class);
 		int result = 0;
@@ -31,8 +34,8 @@ public class EditInfoService {
 		System.out.println("프로필 편집 페이지");
 		System.out.println(peeps);
 
-		if(peeps != null) {
-			session.setAttribute("peeps", peeps);	
+		if (peeps != null) {
+			//session.setAttribute("peeps", peeps);
 			result = 1;
 		}
 
@@ -94,7 +97,7 @@ public class EditInfoService {
 		}
 
 		// 수정 후 세션 다시 저장
-		session.setAttribute("peeps", peeps);
+		//redisService.setUserInformation(peeps.toLoginInfo(), request.getSession());
 
 		return result;
 	}

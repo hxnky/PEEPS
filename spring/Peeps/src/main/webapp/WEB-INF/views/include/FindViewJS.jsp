@@ -155,30 +155,6 @@ $("#keyword").click(function() {
 </script>
 
 <script>
-// 누르면 마이페이지로 이동
-function GoMyPage(idx){
-	
-	console.log(idx);
-	
-	$.ajax({
-		url : '${pageContext.request.contextPath}/mypage/chk',
-		type: 'get',
-		data : {
-		"m_idx" : idx
-		},
-		success : function(data){
-			
-			var id = data;
-			
-			console.log(id);
-			
-			location.href = "${pageContext.request.contextPath}/mypage/" + id;
-		},
-		error : function() {
-			console.log("유저 정보 실패,,,,");
-		}
-	});
-	
-}
+
 		
 </script>

@@ -85,7 +85,7 @@ function load_MyPage(){
 				if(find.loginType == 'email'){
 					$('#profile_wrap').append("<div id='pro_img'><input type='hidden' id='idx' value='"+find.m_idx+"'><img id='profile' src='<c:url value='fileupload/"+find.m_photo+"'/>' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("+find.m_idx+")'></div><div id='pro_btn' class='"+find.m_idx+"'></div>");
 					if(find.m_idx == m_idx){
-						$('#pro_btn').append("<ul><li>"+find.id+"</li><li><button id='edit'>프로필 편집</button></li></ul>");
+						$('#pro_btn').append("<ul><li id='memberid'>"+find.id+"</li><li><button id='edit'>프로필 편집</button></li></ul>");
 					}else{
 						if(find.chk_result == 1){
 							$('#pro_btn').append("<ul><li>"+find.id+"</li><li><button class='p_f_btn' id='pro_unfollow' typ='submit' onclick='proUnfollow("+find.m_idx+")'>언팔로우</button></li></ul>");
@@ -136,10 +136,12 @@ function load_MyPage(){
 	});
 	
 }
-$(document).on("click", "#edit", function(){
-	location.href = "${pageContext.request.contextPath}/profile/Info";
 
-});
+	$(document).on("click", "#edit", function(){
+			location.href = "${pageContext.request.contextPath}/profile/Info";
+
+		});
+
 
 
 // 모달창
@@ -499,11 +501,11 @@ function GoMyPage(idx){
 		},
 		success : function(data){
 			
-			var id = data;
+			var page_id = data;
 			
 			console.log(id);
 			
-			location.href = "${pageContext.request.contextPath}/mypage/" + id;
+			location.href = "${pageContext.request.contextPath}/user/mypage?id=" + page_id;
 		},
 		error : function() {
 			console.log("유저 정보 실패,,,,");
@@ -519,7 +521,7 @@ var id = "${id}";
 
 $("#MyPage_img").click(function() {
 
-	location.href = "${pageContext.request.contextPath}/mypage/" + id;
+	location.href = "${pageContext.request.contextPath}/user/mypage?id=" + id;
 
 });
 

@@ -68,9 +68,10 @@ var m_idx = ${m_idx};
 
 $("#MyPage_img").click(function() {
 
-	location.href = "${pageContext.request.contextPath}/mypage/" + id;
+	location.href = "${pageContext.request.contextPath}/user/mypage?id=" + id;
 
 });
+
 
 
 function GoMyPage(idx){
@@ -89,7 +90,7 @@ function GoMyPage(idx){
 			
 			console.log(id);
 			
-			location.href = "${pageContext.request.contextPath}/mypage/" + id;
+			location.href = "${pageContext.request.contextPath}/user/mypage?id=" + id;
 		},
 		error : function() {
 			console.log("유저 정보 실패,,,,");

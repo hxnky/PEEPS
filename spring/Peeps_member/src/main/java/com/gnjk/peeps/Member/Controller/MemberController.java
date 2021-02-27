@@ -11,11 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gnjk.peeps.Member.Service.FindUserService;
-import com.gnjk.peeps.Member.Service.MyPageService;
-import com.gnjk.peeps.Member.Service.TimeLineService;
 import com.gnjk.peeps.Member.Service.VerifyService;
-import com.gnjk.peeps.Member.domain.Peeps;
 
 @Controller
 public class MemberController {
@@ -23,14 +19,6 @@ public class MemberController {
 	@Autowired
 	private VerifyService verifyService;
 
-	@Autowired
-	private FindUserService findUserService;
-
-	@Autowired
-	private MyPageService myPageService;
-	
-	@Autowired
-	private TimeLineService timeLineService;
 
 	// 로그인
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -100,8 +88,8 @@ public class MemberController {
 	}
 	
 	// 마이페이지
-	@RequestMapping(value = "/mypage/{id}", method = RequestMethod.GET)
-	public String MyPage(@PathVariable("id") String id, Model model) {
+	@RequestMapping(value = "/user/mypage", method = RequestMethod.GET)
+	public String MyPage(String id, Model model) {
 
 		model.addAttribute("page_id", id);
 		

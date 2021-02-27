@@ -36,9 +36,10 @@ var id = "${id}";
 
 $("#MyPage_img").click(function() {
 
-	location.href = "${pageContext.request.contextPath}/mypage/" + id;
+	location.href = "${pageContext.request.contextPath}/user/mypage?id=" + id;
 
 });
+
 
 
 $("#keyword").click(function() {
