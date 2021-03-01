@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.gnjk.peeps.Member.domain.FollowRequest;
 import com.gnjk.peeps.Member.domain.Peeps;
 
 public interface MemberDao {
@@ -61,9 +62,12 @@ public interface MemberDao {
 
 	// 일치하는 회원 수 출력
 	int searchMemberCnt(String keyword);
-
+	
 	// 인덱스로 회원 정보 가져오기
-	Peeps selectMemberByIdx(int m_idx);
+	List<FollowRequest> selectMemberByIdx(int m_idx);
+		
+	// 아이디로 회원정보 가져오기
+	List<FollowRequest> selectMemberById(String id);
 
 	// 회원 사진 정보 확인
 	String selectM_photoByEmailCount(String m_photo);
@@ -97,4 +101,17 @@ public interface MemberDao {
 
 	// 팔로우/팔로잉 목록 삭제
 	int deleteFollowList(@Param("m_idx") int m_idx);
+	
+	// 인덱스로 아이디 조회 - 마이페이지
+	String selectId(int m_idx);
+
+	// 21.02.25 멤버id로 idx 가져오기 추가 (정현)
+	List<Peeps> selectMemberlistById(String id);
+
+	// 21.02.25 멤버idx로 id 가져오기 추가 (정현)
+	List<Peeps> selectMemberlistByIdx(int m_idx);
+
+	// 21.02.26 회원정보 조회 (정현)
+	List<Peeps> selectMemberlist();
+
 }

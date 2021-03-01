@@ -23,6 +23,8 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/fileupload/**" location="file:///C:\Users\hanky\Desktop\bit\PEEPS\peeps_spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Peeps\fileupload" />
+	<resources mapping="/postfile/**"
+		location="file:///C:\Users\hanky\Desktop\bit\PEEPS\peeps_spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Peeps_member\fileupload\postfile" />
 	<resources mapping="/chat/**" location="/chat/" />
 
 
@@ -59,7 +61,15 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-
+	
+	
+	<!-- Redis -->
+	<beans:bean id="jedisConnFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		p:usePool="true" p:hostName="localhost" p:port="6379" />
+	<beans:bean id="redisTemplate"
+		class="org.springframework.data.redis.core.RedisTemplate"
+		p:connectionFactory-ref="jedisConnFactory" />
 
 
 	<tx:annotation-driven />

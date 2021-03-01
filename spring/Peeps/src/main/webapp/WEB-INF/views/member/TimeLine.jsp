@@ -15,10 +15,10 @@
 <meta name="viewport" content="width=device-width" />
 
 
-<!--     Fonts and icons     -->
-<link
-	href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css"
+<!--     Fonts and icons   	-->
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css"
 	rel="stylesheet">
+
 
 <!-- CSS Files -->
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
@@ -29,11 +29,12 @@
 
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="<c:url value="/resources/css/demo.css"/>" rel="stylesheet" />
-<link href="<c:url value="/resources/css/reg.css"/>" rel="stylesheet" />
-<link href="<c:url value="/chat/css/default.css" />" rel="stylesheet">
+<!-- <link href="<c:url value="/resources/css/reg.css"/>" rel="stylesheet" /> -->
+<link rel="styleSheet" href="<c:url value="/chat/css/default.css"/>">
 </head>
+
 <body>
-	<%@ include file="/WEB-INF/views/chat/nav.jsp"%>
+<%@ include file="/WEB-INF/views/chat/nav.jsp"%>
 	<!--   Big container   -->
 	<div class="container">
 		<div class="row">

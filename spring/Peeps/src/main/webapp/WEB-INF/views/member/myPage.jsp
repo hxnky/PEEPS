@@ -20,15 +20,13 @@
 자바스크립트 -->
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-<link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/modal.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/myPage.css" />" rel="stylesheet">
+<link rel="styleSheet" href="<c:url value="/css/default.css"/>">
 
 <body>
 	<div id="total_wrap">
-		<div id="nav">
-			<%@ include file="/WEB-INF/views/chat/nav.jsp"%>
-		</div>
+<%@ include file="/WEB-INF/views/chat/nav.jsp"%>
 		<!-------------네비 넣기------------------>
 		<div id="main_wrap">
 			<div class="jumbotron">

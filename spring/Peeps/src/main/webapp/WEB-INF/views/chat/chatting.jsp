@@ -13,44 +13,73 @@
 <link rel="styleSheet" href="<c:url value="/chat/css/default.css"/>">
 
 <style>
-
 #right {
-	text-align: right;
-	width: auto;
-	max-width: 70%;
-	background-color: #F2D665;
-	border-radius: 5px;
-	margin: 30px;
-	word-wrap: break-word;
+   margin-right: 15px;
+   padding: 15px;
+   display: inline;
+   text-align: right;
+   width: auto;
+   max-width: 70%;
+   background-color: #F4F4F4;
+   border-radius: 20px;
+   word-wrap: break-word;
 }
-
+/* position: relative; */
 #left {
-	text-align: left;
-	width: auto;
-	max-width: 70%;
-	background-color: #F4F4F4;
-	border-radius: 5px;
-	margin: 30px;
-	word-wrap: break-word;
+   margin-left: 15px;
+   padding: 15px;
+   display: inline;
+   text-align: left;
+   width: auto;
+   max-width: 70%;
+   background-color: #F4F4F4;
+   border-radius: 20px;
+   word-wrap: break-word;
 }
 
 #chatroom {
-	display: inline-block;
-	vertical-align: top;
-	margin-top: 10px;
-	padding: 20px 0;
+   display: inline-block;
+   vertical-align: top;
+   margin-top: 10px;
+   padding: 20px 0;
 }
 
 #chatroom:hover {
-	background-color: #F2D665;
+   background-color: #F2D665;
 }
 
 strong {
-	font-size: 14px;
-	color: #5E5E5E;
-	font-weight: normal;
-	margin-bottom: 5px;
+   padding: 30px;
+   display: inline;
+   font-size: 14px;
+   color: #5E5E5E;
+   font-weight: normal;
 }
+/* 이모티콘 */
+#emtset {
+   display: none;
+   width: 200px;
+   height: 80px;
+   padding: 20px 60px;
+   background-color: #F5E978;
+   border: 1px solid #888;
+   border-radius: 10px;
+   padding: 20px 60px;
+   overflow: auto;
+}
+
+#emtset {
+   position: fixed;
+   top: 15px;
+   right: 15px;
+}
+
+.emt_btn {
+   position: fixed;
+   top: 10px;
+   right: 10px;
+}
+
 </style>
 
 <!-- SocketJS CDN -->
@@ -59,11 +88,34 @@ strong {
 	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script
+   src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.8.16/dayjs.min.js"
+   crossorigin="anonymous"></script>
 </head>
 
 <body>
 <%@ include file="/WEB-INF/views/chat/nav.jsp"%>
 <%@ include file="/WEB-INF/views/chat/container.jsp"%>
+
+<!--Emoticon modal -->
+   <div id="emtset">
+      <div id="emtset_header">이모티콘 :)</div>
+
+      <table>
+         <tr>
+            <td><a href="#none"><img onclick="sendemt('emt1')"
+                  src="<c:url value='/icon/navi/Logo.png' />" id="emt1"></a></td>
+            <td><a href="#none"><img onclick="sendemt('emt2')"
+                  src="<c:url value='/icon/navi/Logo.png' />" id="emt2"></a></td>
+            <td><a href="#none"><img onclick="sendemt('emt3')"
+                  src="<c:url value='/icon/navi/Logo.png' />" id="emt3"></a></td>
+         <tr>
+      </table>
+
+      <button type="button" class="emt_btn">x</button>
+
+   </div>
+
 </body>
 
 <script>
@@ -73,81 +125,160 @@ strong {
 	sock.onmessage = onMessage;
 	sock.onclose = onClose;
 
-	$(document).ready(function() {
+	  $(document).ready(function() {
+	      
+	      $.ajax({
+	         url : "http://localhost:8081/chat/room/select",
+	         type : "GET",
+	         dataType : "json",
+	         success : function(data) {
+	            printRoom(data);
 
-		$.ajax({
-			url : "http://localhost:8081/chat/room/select",
-			type : "GET",
-			dataType : "json",
-			success : function(data) {
-				printRoom(data);
-			}
-		});
+	/*            
+	               // 멤버 정보 받아오는 ajax 시작 (댓글)
+	                  $.ajax({
+	                     url: 'http://localhost:8080/peeps/user/memberList',
+	                     type: 'GET',
+	                     success: function(data){
+	                        console.log("회원 ajax success");
+	                        //console.log("회원 데이터 : ", data)
+	                        
+	                        $.each(data, function(index, mbr){
+	                           console.log("멤버 ajax each문 진입");
+	                           //console.log("each1 :", mbr.m_idx);
+	                           //console.log("each2 :", rm_idx);
 
-		$.ajax({
-			url : "http://localhost:8081/chat/mes/select",
-			type : "GET",
-			dataType : "json",
-			success : function(data) {
-				enter();
-				printMes(data);
-			}
-		});
-	});
+	                           if(mbr.m_idx == rm_idx){
+	                                 $('#roomdata').append("<div class='rm_idx' id='"+ rm_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/" + mbr.m_photo+"'/>'> <span class='id'>"+mbr.id+"</span></div>");
+	                           }// if mbr.m_idx == rm_idx 끝
+	                        }); // 멤버 each 1 끝 
+	                        
+	                     },   // sucess
+	                     error: function(e){
+	                        console.log(" 멤버 ajax 실패");
+	                     }
+	                     
+	                  }); // 멤버 정보 받아오는 ajax 끝 (댓글)
+	               
+	            */
+	            
+	            },   // 채팅방 정보 select sucess
+	            error : function(e){
+	               console.log("채팅방 출력 실패,,,,,");
+	            }
+	         }); //채팅방 ajax 끝
+
+	         
+	      $.ajax({
+	         url : "http://localhost:8081/chat/mes/select",
+	         type : "GET",
+	         dataType : "json",
+	         success : function(data) {
+	            enter();
+	            printMes(data);
+	         }
+	      });
+
+	      $('#emt').click(function() {
+	         modal('emtset');
+	      });
+
+	   });
+	  
+	//===========================================================================================
 
 	function onOpen() {
 		console.log('open');
 		weatherAPI();
 	};
 
-	function sendMessage() {
-		var date = new Date(); // 자바스크립트 Date 객체
-		var str = JSON.stringify(date.toJSON()); // Date 객체를 JSON 형식의 문자열로 변환
+	//===========================================================================================
+	
+	function sendemt(emt) {
+	      var date = new Date(); // 자바스크립트 Date 객체
+	      var str = JSON.stringify(date.toJSON()); // Date 객체를 JSON 형식의 문자열로 변환
+	      var e_idx = {
+	         "emt" : "emt"
+	      };
+	      var mes = {
+	         m_idx : '${m_idx}',
+	         rm_idx : '${rm_idx}',
+	         ch_ms : '${0}',
+	         e_idx : emt,
+	         ch_time : date
+	      }
+	      if (mes.e_idx == "") {
+	         return false; // 메세지 없이 전송 X
+	      } else {
+	         sock.send(JSON.stringify(mes)); // JSON문자열로 반환
+	         console.log(JSON.stringify(mes));
+	         console.log('위 메세지 소켓에 전송');
+	      }
+	   }
 
-		var mes = {
-			m_idx : '${m_idx}',
-			rm_idx : '${rm_idx}',
-			ch_ms : $("#message").val(),
-			ch_time : date
-		}
+	
+	//===========================================================================================
+	
+	   function sendMessage() {
+	      var date = new Date(); // 자바스크립트 Date 객체
+	      var str = JSON.stringify(date.toJSON()); // Date 객체를 JSON 형식의 문자열로 변환
 
-		if (mes.ch_ms == "") {
-			return false; // 메세지 없이 전송 X
-		} else {
-			sock.send(JSON.stringify(mes)); // JSON문자열로 반환
-			console.log(JSON.stringify(mes));
-			console.log('위 메세지 소켓에 전송');
+	      var mes = {
+	         m_idx : '${m_idx}',
+	         rm_idx : '${rm_idx}',
+	         ch_ms : $("#message").val(),
+	         ch_time : date,
+	         e_idx : '${0}'
+	      }
 
-		}
-		$("#message").val("");
-	}
+	      if (mes.ch_ms == "") {
+	         return false; // 메세지 없이 전송 X
+	      } else {
+	         sock.send(JSON.stringify(mes)); // JSON문자열로 반환
+	         console.log(JSON.stringify(mes));
+	         console.log('위 메세지 소켓에 전송');
+
+	      }
+	      $("#message").val("");
+	   }
+	
+	
+	 //===========================================================================================
 
 	function onMessage(evt) {
 		var data = evt.data;
 		var obj = JSON.parse(data);
+		const setDate = dayjs(obj.ch_time).format("MM/DD HH:mm");
 
 		var currentuser_session = $('#sessionuserid').val();
 
 		if (obj.m_idx == currentuser_session) { //m_idx = m_idx
-			var printHTML = "<div id='right'>";
-			printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
-			printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
-			printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
-			printHTML += "</div>";
-
-			$('#chatdata').append(printHTML);
-		} else {
-			var printHTML = "<div id='left'>";
-			printHTML += "<strong>" + obj.m_idx + "</strong> <br>";
-			printHTML += "<strong>" + obj.ch_ms + "</strong> <br>";
-			printHTML += "<strong>" + obj.ch_time + "</strong> <br>";
-			printHTML += "</div>";
-
-			$('#chatdata').append(printHTML);
-		}
-
-		$('#chatdata').scrollTop($('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
-	} // onMessage
+	         var printHTML = "<br><br><div id='right'>";
+	         if (obj.e_idx != '${0}') {
+	            printHTML += "<strong>" + obj.ch_ms + "</strong>";
+	         } else {
+	            printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
+	            //printHTML += "<img src = "+"<c:url value= '/icon/navi/Logo.png' />";
+	            //printHTML += "id="+ obj.e_idx + ">";
+	         }
+	         printHTML += "<strong>" + setDate + "</strong>";
+	         printHTML += "</div> <br><br>";
+	         $('#chatdata').append(printHTML);
+	      } else {
+	         var printHTML = "<br><br><div id='left'>";
+	         if (obj.e_idx != '${0}') {
+	            printHTML += "<strong>" + obj.ch_ms + "</strong>";
+	         } else {
+	            printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
+	            //printHTML += "<img src = <c:url value= '/icon/navi/Logo.png' />";
+	            //printHTML += "id="+ obj.e_idx + ">";
+	         }
+	         printHTML += "<strong>" + setDate + "</strong>";
+	         printHTML += "</div> <br><br>";
+	         $('#chatdata').append(printHTML);
+	      }
+	      $('#chatdata').scrollTop($('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
+	   } // onMessage
 
 	function onClose() {
 		console.log('console close');
@@ -190,17 +321,16 @@ strong {
 		} else {
 
 			$.each(room, function(key, val) {
+	            var currentuser_session = $('#sessionuserid').val();
+	            var date = new Date(val.ch_time);
+	            const setDate = dayjs(date).format("MM/DD HH:mm");
+	            var printHTML = "<div id='chatroom'>";
+	            printHTML += "<strong>" + val.rm_idx + "</strong> <br>";
+	            printHTML += "<strong>" + val.ch_ms + "</strong> <br>";
+	            printHTML += "<strong>" + setDate + "</strong> <br>";
+	            printHTML += "</div>";
+	            $('#roomdata').prepend(printHTML);
 
-				var currentuser_session = $('#sessionuserid').val();
-				var date = new Date(val.ch_time);
-
-				var printHTML = "<div id='chatroom'>";
-				printHTML += "<strong>" + val.rm_idx + "</strong> <br>";
-				printHTML += "<strong>" + val.ch_ms + "</strong> <br>";
-				printHTML += "<strong>" + date + "</strong> <br>";
-				printHTML += "</div>";
-
-				$('#roomdata').prepend(printHTML);
 
 			}); // $.each
 		} // if/else
@@ -227,30 +357,38 @@ strong {
 
 				var currentuser_session = $('#sessionuserid').val();
 				var date = new Date(val.ch_time);
+				const setDate = dayjs(date).format("MM/DD HH:mm"); //02/18 00:43
 
-				if (val.m_idx == currentuser_session) { //m_idx = m_idx
-					var printHTML = "<div id='right'>";
-					printHTML += "<strong>" + val.m_idx + "</strong> <br>";
-					printHTML += "<strong>" + val.ch_ms + "</strong> <br>";
-					printHTML += "<strong>" + date + "</strong> <br>";
-					printHTML += "</div>";
+				 if (val.m_idx == currentuser_session) { //m_idx = m_idx
+                     var printHTML = "<br><br><div id='right'>";
+                     if (val.e_idx != '${0}') {
+                        printHTML += "<strong>" + val.ch_ms
+                              + "</strong>";
+                     } else {
+                        printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
+                     }
+                     printHTML += "<strong>" + setDate
+                           + "</strong>";
+                     printHTML += "</div> <br><br>";
+                     $('#chatdata').append(printHTML);
+                  } else {
+                     var printHTML = "<br><br><div id='left'>";
+                     if (val.e_idx != '${0}') {
+                        printHTML += "<strong>" + val.ch_ms
+                              + "</strong>";
+                     } else {
+                        printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png  />";
+                     }
+                     printHTML += "<strong>" + setDate
+                           + "</strong>";
+                     printHTML += "</div> <br><br>";
+                     $('#chatdata').append(printHTML);
+                  }
+               }); // $.each
+  	 $('#chatdata').scrollTop($('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
+	} // 2중 if/else
+ } // printMes
 
-					$('#chatdata').prepend(printHTML);
-				} else {
-					var printHTML = "<div id='left'>";
-					printHTML += "<strong>" + val.m_idx + "</strong> <br>";
-					printHTML += "<strong>" + val.ch_ms + "</strong> <br>";
-					printHTML += "<strong>" + date + "</strong> <br>";
-					printHTML += "</div>";
-
-					$('#chatdata').append(printHTML);
-				} // 2중 if/else
-
-				$('#chatdata').scrollTop($('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
-
-			}); // $.each
-		} // 2중 if/else
-	} // printMes
 
 	// =============================================================
 	// 날씨 API
@@ -321,4 +459,31 @@ strong {
 
 	}
 </script>
+
+<script>
+   function emg(id) {
+      var zIndex = 9999;
+      var emg = $('#' + id);
+      // 모달 div 뒤에 희끄무레한 레이어
+      var emg = $('<div>')
+            .css(
+                  {
+                     position : 'fixed',
+                     boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+                     // 시꺼먼 레이어 보다 한칸 위에 보이기
+                     zIndex : zIndex + 1,
+                     // div center 정렬
+                     top : '65%',
+                     left : '60%',
+                  /*                      transform : 'translate(-50%, -50%)',
+                   msTransform : 'translate(-50%, -50%)',
+                   webkitTransform : 'translate(-50%, -50%)' */
+                  }).show()
+            // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+            .find('.emt_btn').on('click', function() {
+               emg.hide();
+            });
+   }
+</script>
+
 </html>
