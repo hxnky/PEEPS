@@ -234,7 +234,7 @@
 	    	
 	    	//ajax로 폼데이터 전송
 	    	$.ajax({
-	    		url : 'http://localhost:8081/post/rest/member/post/upload',
+	    		url : 'http://52.79.234.178:8080/post/rest/member/post/upload',
 	    		type : 'POST',
 	    		data : formData,
 	    		processData: false,
@@ -244,7 +244,8 @@
 	    		/* 세션으로 받아온 회원id */
 	    		var memberid = "${id}";
 	    		console.log("ajax 데이터 : ",data);				
-	    		window.location.href="http://localhost:8080/peeps/"+memberid; 
+	    		/* window.location.href="http://localhost:8080/peeps/"+memberid; */
+	    		window.location.href="${pageContext.request.contextPath}/peeps/"+memberid;
 	    					
 	    		},error: function(e){
 	    		console.log("ajax전송에러");	

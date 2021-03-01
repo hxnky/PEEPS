@@ -613,7 +613,8 @@ $("#keyword").click(function() {
  		};
 		
 		$.ajax({
-			url: 'http://localhost:8081/post/rest/member/post/list?p='+p,
+			/* url: 'http://localhost:8081/post/rest/member/post/list?p='+p, */
+			url: 'http://52.79.234.178:8080/post/rest/member/post/list?p='+p,
 			type: 'GET',
 			data: pathmId,
 			success: function(data){
@@ -692,7 +693,8 @@ $("#keyword").click(function() {
 		};
 		
 		$.ajax({
-			url: 'http://localhost:8081/post/rest/member/post/map',
+			/* url: 'http://localhost:8081/post/rest/member/post/map', */
+			url: 'http://52.79.234.178:8080/post/rest/member/post/map',
 			type: 'GET',
 			data: pathmId,
 			success: function(data){
@@ -814,7 +816,8 @@ $("#keyword").click(function() {
 		};
 		
 		$.ajax({
-			url: "http://localhost:8081/post/rest/member/post/postmaplist",		
+			/* url: "http://localhost:8081/post/rest/member/post/postmaplist",*/
+			url: "http://52.79.234.178:8080/post/rest/member/post/postmaplist",	
 			type: 'get',
 			data : mapPostInfo,
 			/* dataType: 'json', */

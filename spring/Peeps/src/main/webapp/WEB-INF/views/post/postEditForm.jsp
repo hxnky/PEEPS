@@ -249,7 +249,7 @@ body {
 			var postIdx = getParameterByName('idx');
 			// 게시글 데이터 받아오기
 			$.ajax({
-				url : "http://localhost:8081/post/rest/member/post/detail?idx="+ postIdx,
+				url : "http://52.79.234.178:8080/post/rest/member/post/detail?idx="+ postIdx,
 				type : 'GET',
 				async: false,
 				success : function(data){
@@ -288,7 +288,7 @@ body {
 			
 			// 게시글 이미지 데이터 받아오기
 			$.ajax({
-				url : "http://localhost:8081/post/rest/member/post/detail/image?idx="+ postIdx,
+				url : "http://52.79.234.178:8080/post/rest/member/post/detail/image?idx="+ postIdx,
 				type : 'GET',
 				success : function(data){
 					
@@ -499,7 +499,7 @@ body {
 	    			
 	    	//ajax로 폼데이터 전송
 	    	$.ajax({
-	    		url : 'http://localhost:8081/post/rest/member/post/edit',
+	    		url : 'http://52.79.234.178:8080/post/rest/member/post/edit',
 	    		type : 'POST',
 	    		data : formData,
 	    		processData: false,
@@ -507,7 +507,7 @@ body {
 	    		success : function(data){
 	    					
 	    		console.log("ajax 데이터 : ",data);			
-	    		window.location.href="http://localhost:8080/peeps/post/detail?idx="+postIdx;
+	    		window.location.href="http://52.79.227.12:8080/peeps/post/detail?idx="+postIdx;
 	    		console.log("포스트idx 확인 : ", postIdx);
 	    		},error: function(e){
 	    		console.log("ajax전송에러");	
