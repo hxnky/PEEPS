@@ -125,15 +125,45 @@ strong {
 	sock.onclose = onClose;
 
 	$(document).ready(function() {
-
+		
 		$.ajax({
 			url : "http://localhost:8081/chat/room/select",
 			type : "GET",
 			dataType : "json",
 			success : function(data) {
 				printRoom(data);
-			}
-		});
+
+/* 		         // 멤버 정보 받아오는 ajax 시작 (댓글)
+		            $.ajax({
+		               url: 'http://localhost:8080/peeps/user/memberList',
+		               type: 'GET',
+		               success: function(data){
+		                  console.log("회원 ajax success");
+		                  //console.log("회원 데이터 : ", data)
+		                  
+		                  $.each(data, function(index, mbr){
+		                     console.log("멤버 ajax each문 진입");
+		                     //console.log("each1 :", mbr.m_idx);
+		                     //console.log("each2 :", rm_idx);
+
+		                     if(mbr.m_idx == rm_idx){
+		                           $('#roomdata').append("<div class='rm_idx' id='"+ rm_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/" + mbr.m_photo+"'/>'> <span class='id'>"+mbr.id+"</span></div>");
+		                     }// if mbr.m_idx == rm_idx 끝
+		                  }); // 멤버 each 1 끝 
+		                  
+		               },	// sucess
+		               error: function(e){
+		                  console.log(" 멤버 ajax 실패");
+		               }
+		               
+		            }); // 멤버 정보 받아오는 ajax 끝 (댓글) */
+		         
+		         
+		      },	// 채팅방 정보 select sucess
+		      error : function(e){
+		         console.log("채팅방 출력 실패,,,,,");
+		      }
+		   }); //채팅방 ajax 끝
 
 		$.ajax({
 			url : "http://localhost:8081/chat/mes/select",
@@ -163,7 +193,7 @@ strong {
 			"emt" : "emt"
 		};
 		var mes = {
-			m_idx : '${m_idx}',
+			me_idx : '${me_idx}',
 			rm_idx : '${rm_idx}',
 			ch_ms : '${0}',
 			e_idx : emt,
@@ -183,7 +213,7 @@ strong {
 		var str = JSON.stringify(date.toJSON()); // Date 객체를 JSON 형식의 문자열로 변환
 
 		var mes = {
-			m_idx : '${m_idx}',
+			me_idx : '${me_idx}',
 			rm_idx : '${rm_idx}',
 			ch_ms : $("#message").val(),
 			ch_time : date,
@@ -308,7 +338,7 @@ strong {
 								var date = new Date(val.ch_time); // Thu Feb 18 2021 00:43:22 GMT+0900 (대한민국 표준시)
 								const setDate = dayjs(date).format(
 										"MM/DD HH:mm"); //02/18 00:43
-								if (val.m_idx == currentuser_session) { //m_idx = m_idx
+								if (val.me_idx == currentuser_session) { //m_idx = m_idx
 									var printHTML = "<br><br><div id='right'>";
 									if (val.e_idx == '${0}') {
 										printHTML += "<strong>" + val.ch_ms

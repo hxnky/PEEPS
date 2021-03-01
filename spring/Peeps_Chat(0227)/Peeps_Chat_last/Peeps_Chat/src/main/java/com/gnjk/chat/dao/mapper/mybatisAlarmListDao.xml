@@ -7,12 +7,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="alarmList" resultType="com.gnjk.chat.domain.Alarm">
 		select *
-		from chat.alarm
+		from open.alarm
 	</select>
 
 	<delete id="deleteAlarm">
 		delete
-		from chat.alarm
+		from open.alarm
 		where al_idx=#{al_idx}
 	</delete>
 

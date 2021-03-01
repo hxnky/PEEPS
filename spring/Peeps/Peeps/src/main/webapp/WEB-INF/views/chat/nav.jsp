@@ -20,6 +20,7 @@
 	margin: 30px;
 	word-wrap: break-word;
 }
+
 #alarm {
 	text-align: left;
 	width: auto;
@@ -29,6 +30,7 @@
 	margin: 30px;
 	word-wrap: break-word;
 }
+
 #my_modal {
 	display: none;
 	width: 600px;
@@ -40,17 +42,20 @@
 	padding: 20px 60px;
 	overflow: auto;
 }
+
 #my_modal .modal_close_btn {
 	position: fixed;
 	top: 10px;
 	right: 10px;
 }
+
 strong {
 	width: 500px;
 	height: 30px;
 	text-align: center;
 	margin-top: 10px;
 }
+
 #btn {
 	position: fixed;
 	text-align: right;
@@ -63,7 +68,8 @@ strong {
 	src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <body>
 
 	<!-- nav -->
@@ -72,26 +78,31 @@ strong {
 			<ul class="icon">
 
 				<li class="left"><span><input type="search"
-						placeholder="@kyung_s2">
-						<button>
-							<a href="#"><img
-								src="<c:url value='/icon/navi/search.png' />"></a>
+						placeholder="검색" required="required">
+						<button id="keyword" type="submit">
+							<img
+								src="<c:url value="/resources/images/icon/navi/search.png"/>">
 						</button></span></li>
 
 				<li class="center"><a id="Logo"><img
-						src="<c:url value='/icon/navi/Logo.png' />"></a></li>
+						src="<c:url value='/chat/icon/navi/Logo.png' />"></a></li>
 
 				<li class="right"><a id="Home" href="#"><img
-						src="<c:url value='/icon/navi/023-home.png' />"></a> <a
-					id="Content" href="#none"><img
-						src="<c:url value='/icon/navi/Content.png' />"></a> <a
+						src="<c:url value='/chat/icon/navi/023-home.png' />"></a> <a
+					id="Content" href="#"><img
+						src="<c:url value='/chat/icon/navi/Content.png' />"></a> <a
 					id="Alarm" href="#none"> <img onclick="modal('my_modal')"
-						src="<c:url value='/icon/navi/008-notification.png' />"></a> <a
-					id="Chat" href="#"><img
-						src="<c:url value='/icon/navi/050-wechat.png'/>"></a> <a
-					id="MyPage" href="#"><img
-						src="<c:url value='/icon/navi/010-user.png '/>"></a></li>
-
+						src="<c:url value='/chat/icon/navi/008-notification.png' />"></a>
+					<a id="Chat" href=${pageContext.request.contextPath}/user/chatting> <img
+						src="<c:url value='/chat/icon/navi/050-wechat.png'/>"></a> <c:set
+						var="loginType" value="${loginType }" /> <c:choose>
+						<c:when test="${peeps.loginType eq 'email' }">
+							<img id="MyPage_img"
+								src="<c:url value="/fileupload/${peeps.m_photo}"/>">
+						</c:when>
+						<c:when test="${peeps.loginType ne 'email' }">
+						</c:when>
+					</c:choose></li>
 			</ul>
 		</nav>
 	</div>
@@ -107,16 +118,132 @@ strong {
 </body>
 
 <script>
+
+sock = new SockJS("<c:url value="/alarm"/>");
+sock.onopen = onOpen;
+sock.onmessage = onMessage;
+sock.onclose = onClose;
+$(document).ready(function() {
+	
+	function sendAlarm(type) {
+		var alm = {
+			type : type,
+			sender : 'sender',
+			receiver : 'receiver',
+			post : 'post'
+		}
+		sock.send(JSON.stringify(alm)); // JSON문자열로 반환
+		console.log(JSON.stringify(alm));
+		console.log('위 메세지 소켓에 전송');
+	}
+});
+function onOpen() {
+	console.log('open');
+};
+function onMessage(evt) {
+	var data = evt.data;
+	var obj = JSON.parse(data);
+	var currentuser_session = $('#sessionuserid').val();
+	//if (obj.receiver == currentuser_session) { //m_idx = m_idx
+	if (obj != "") {
+		switch (obj.type) {
+		// 댓글 알람
+		case "comment":
+			console.log("1111comment");
+			var printHTML = "<div id='alarm_mask'>";
+			printHTML += "<div id='alarm'>";
+			printHTML += "<strong>" + obj.sender + " 님이 회원님의 게시물";
+			printHTML += obj.post + " 에 댓글을 남겼습니다!</strong> <br>";
+			printHTML += "</div>";
+			printHTML += "</div>";
+			$('#my_modal_header').append(printHTML);
+			console.log("comment");
+			//console.log(val.al_idx);
+			break;
+		// 좋아요 알람
+		case "like":
+			console.log("22222222comment");
+			var printHTML = "<div id='alarm_mask'>";
+			printHTML += "<div id='alarm'>";
+			printHTML += "<strong>" + obj.sender + " 님이 회원님의 게시물";
+			printHTML += obj.post + " 에 좋아요를 눌렀습니다!</strong> <br>";
+			printHTML += "</div>";
+			printHTML += "</div>";
+			$('#my_modal_header').append(printHTML);
+			console.log("like");
+			//console.log(val.al_idx);
+			break;
+		// 팔로우 알람
+		case "follow":
+			console.log("33333333333333333comment");
+			var printHTML = "<div id='alarm_mask'>";
+			printHTML += "<div id='alarm'>";
+			printHTML += "<strong>" + obj.sender;
+			printHTML += " 님이 회원님을 팔로우 했습니다!</strong> <br>";
+			printHTML += "</div>";
+			printHTML += "</div>";
+			$('#my_modal_header').append(printHTML);
+			console.log("follow");
+			//console.log(val.al_idx);
+			break;
+		} // switch 문
+	} // if
+	//}
+} // onMessage 함수
+function onClose() {
+	console.log('console close');
+};
+</script>
+
+<script>
+function modal(id) {
+	var zIndex = 9999;
+	var modal = $('#' + id);
+	// 모달 div 뒤에 희끄무레한 레이어
+	var bg = $('<div>').css({
+		position : 'fixed',
+		zIndex : zIndex,
+		left : '0px',
+		top : '0px',
+		width : '100%',
+		height : '100%',
+		overflow : 'auto',
+		// 레이어 색갈은 여기서 바꾸면 됨
+		backgroundColor : 'rgba(0,0,0,0.500)'
+	}).appendTo('body');
+	modal
+			.css(
+					{
+						position : 'fixed',
+						boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+						// 시꺼먼 레이어 보다 한칸 위에 보이기
+						zIndex : zIndex + 1,
+						// div center 정렬
+						top : '50%',
+						left : '50%',
+						transform : 'translate(-50%, -50%)',
+						msTransform : 'translate(-50%, -50%)',
+						webkitTransform : 'translate(-50%, -50%)'
+					}).show()
+			// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+			.find('.modal_close_btn').on('click', function() {
+				bg.remove();
+				modal.hide();
+			});
+}
+</script>
+
+<script>
 	$(document).ready(function() {
 
 		$.ajax({
-			url : "http://localhost:8081/chat/alarm/select",
+			url : "alarm/select",
 			type : "GET",
 			dataType : "json",
 			success : function(data) {
 
 				print(data);
-				
+
 				$('#Alarm').click(function() {
 					modal('my_modal');
 				});
@@ -145,8 +272,8 @@ strong {
 				case "comment":
 					console.log("1111comment");
 					var printHTML = "<div id='alarm_mask'>";
-					printHTML += "<button id='btn' value="+ val.al_idx +" onclick='del_al("
-							+ val.al_idx + ");' />";
+					printHTML += "<button id='btn' value=" + val.al_idx
+							+ " onclick='del_al(" + val.al_idx + ");' />";
 					printHTML += "<div id='alarm'>";
 					printHTML += "<strong>" + val.sender + " 님이 회원님의 게시물";
 					printHTML += val.post + " 에 댓글을 남겼습니다!</strong> <br>";
@@ -160,8 +287,8 @@ strong {
 				case "like":
 					console.log("22222222comment");
 					var printHTML = "<div id='alarm_mask'>";
-					printHTML += "<button id='btn' value="+ val.al_idx +" onclick='del_al("
-							+ val.al_idx + ");' />";
+					printHTML += "<button id='btn' value=" + val.al_idx
+							+ " onclick='del_al(" + val.al_idx + ");' />";
 					printHTML += "<div id='alarm'>";
 					printHTML += "<strong>" + val.sender + " 님이 회원님의 게시물";
 					printHTML += val.post + " 에 좋아요를 눌렀습니다!</strong> <br>";
@@ -175,8 +302,8 @@ strong {
 				case "follow":
 					console.log("33333333333333333comment");
 					var printHTML = "<div id='alarm_mask'>";
-					printHTML += "<button id='btn' value="+ val.al_idx +" onclick='del_al("
-							+ val.al_idx + ");' />";
+					printHTML += "<button id='btn' value=" + val.al_idx
+							+ " onclick='del_al(" + val.al_idx + ");' />";
 					printHTML += "<div id='alarm'>";
 					printHTML += "<strong>" + val.sender;
 					printHTML += " 님이 회원님을 팔로우 했습니다!</strong> <br>";
@@ -230,15 +357,18 @@ strong {
 <script>
 	function del_al(al_idx) {
 
-		var al_idx = {"al_idx" : $("#btn").val()};
+		var al_idx = {
+			"al_idx" : $("#btn").val()
+		};
 
 		$.ajax({
-			url : 'alarm/delete',
+			url : 'http://localhost:8081/chat/alarm/delete',
 			type : 'post',
 			data : al_idx,
 			success : function(data) {
-				$('#alarm_mask').remove();	// 알람 css도 제거!
-				$('#my_modal_header').scrollTop($('#my_modal_header')[0].scrollHeight);	// 제거 후 알람들 위로 올리기
+				$('#alarm_mask').remove(); // 알람 css도 제거!
+				$('#my_modal_header').scrollTop(
+						$('#my_modal_header')[0].scrollHeight); // 제거 후 알람들 위로 올리기
 				console.log("삭제 성공ㅎㅎㅎ");
 			},
 			error : function() {

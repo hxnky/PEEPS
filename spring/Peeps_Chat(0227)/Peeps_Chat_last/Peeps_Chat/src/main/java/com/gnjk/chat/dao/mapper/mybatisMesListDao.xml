@@ -8,15 +8,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 이전 채팅 출력 -->
 	<select id="mesList" resultType="com.gnjk.chat.domain.Message">
 		select *
-		from chat.chat
+		from open.chat
 	</select>
 
 	<!-- 채팅목록 출력 -->
 	<select id="roomList" resultType="com.gnjk.chat.domain.Message">
 		select *
-		from chat.chat
+		from open.chat
 		where
-		m_idx = #{m_idx}
+		me_idx = #{me_idx}
 		order by rm_idx desc limit 1
 	</select>
 

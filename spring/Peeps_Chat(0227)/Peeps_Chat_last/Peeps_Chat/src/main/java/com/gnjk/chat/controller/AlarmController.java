@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +21,7 @@ import com.gnjk.chat.service.AlarmService;
 import com.gnjk.chat.service.DeleteService;
 
 @RestController
-@RequestMapping(value = "http://localhost:8081/chat/alarm/select")
+@CrossOrigin
 public class AlarmController {
 
 	@Autowired
@@ -29,7 +30,7 @@ public class AlarmController {
 	@Autowired
 	private DeleteService dservice;
 
-	@RequestMapping(value = "/alarm/select")
+	@RequestMapping(value = "alarm/select")
 	public List<Alarm> alarmList(Alarm alarm, HttpSession session) throws Exception{
 
 		session.setAttribute("list", service.alarmList(alarm));
@@ -42,7 +43,7 @@ public class AlarmController {
 
 	}
 
-	@RequestMapping(value = "/alarm/delete")
+	@RequestMapping(value = "alarm/delete")
 	public int deleteAl(Alarm alarm, HttpSession session) throws Exception {
 
 		session.setAttribute("delAl", dservice.deleteAlarm(alarm.getAl_idx()));

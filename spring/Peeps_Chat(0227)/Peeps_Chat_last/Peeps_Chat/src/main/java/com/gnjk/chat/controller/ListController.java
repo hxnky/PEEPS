@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,12 +13,13 @@ import com.gnjk.chat.domain.Message;
 import com.gnjk.chat.service.MesListService;
 
 @RestController
+@CrossOrigin
 public class ListController {
 
 	@Autowired
 	private MesListService service;
 
-	@RequestMapping(value = "http://localhost:8081/chat/mes/select")
+	@RequestMapping(value = "mes/select")
 	public List<Message> mesList(Message mes, HttpSession session) throws Exception{
 
 		session.setAttribute("list",  service.mesList(mes));
@@ -29,7 +31,7 @@ public class ListController {
 
 	}
 
-	@RequestMapping(value = "http://localhost:8081/chat/room/select")
+	@RequestMapping(value = "room/select")
 	public List<Message> roomList(Message mes, HttpSession session) throws Exception{
 
 		session.setAttribute("list",  service.roomList(mes));
