@@ -121,7 +121,7 @@ public class PostListService {
 //			int mIdx = dao.selectMemberidx(pathmId);
 			
 			List<Post> postList = dao.selectPostByAddrList(pAddr, mIdx);
-			System.out.println(postList);
+			System.out.println("포스트리스트 :"+postList);
 			
 //			listView = new PostListView(pageNumber, totalPostCount, cntPerPage, postList, startRow, endRow);
 			listView = new PostListView(1, 1, 1, postList, 1, 1);

@@ -202,12 +202,12 @@
 	color: white;
 }
 
-/* .panel-heading {
-	color: #ccc;
-} */
-
 .panel-primary {
   border-color: #DDD;
+}
+
+.displayNone {
+	display: none;
 }
 
 

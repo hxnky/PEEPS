@@ -134,15 +134,23 @@ public class PostController {
 	// 지도로 주소별 게시글 리스트 출력
 	@GetMapping("/postmaplist")
 	public PostListView getMapPostList(
-			@RequestParam Map<String, Object> param,
+//			@RequestParam Map<String, Object> param,
+			@RequestParam("postAdd") String pAddr,
+			@RequestParam("mIdx") int mIdx,
 			HttpServletRequest request,
 			Model model) {
 			
-		String pathmId = request.getParameter("pathmemberid");
-		String pAddr = request.getParameter("postAdd");
-		String memberidx = request.getParameter("mIdx");
-		
-		int mIdx = Integer.parseInt(memberidx);
+//		String pathmId = request.getParameter("pathmemberid");
+//		String pAddr = request.getParameter("postAdd");
+//		String memberidx = request.getParameter("mIdx");
+//		
+//		System.out.println("주소 ! : "+pAddr);
+//		System.out.println("멤버 인덱스 : "+memberidx);
+//		
+//		int mIdx = Integer.parseInt(memberidx);
+//		System.out.println("멤버 인덱스 : "+mIdx);
+		System.out.println("게시글 클릭 주소 : "+pAddr);
+		System.out.println("게시글 멤버 인덱스 : "+mIdx);
 			
 		return listService.getPostListByMapView(mIdx, pAddr);
 	}
