@@ -206,6 +206,7 @@ body {
 					<div class="plocwrap">
 					<input type="button" class="searchlocbtn" 
 					onclick="sample5_execDaumPostcode()" value="위치 추가">
+					<span class="xBtnSpan"></span>
 					<!-- 위치 주소 표시 -->
 					<span class="addr"></span>
 					<br>
@@ -311,6 +312,10 @@ body {
 			// 기존 위치 주소 있을 경우 지도 표시
 			if(postLoc != ""){
 				console.log("위치 주소 있을 경우");
+				
+				var html = '<input type="button" class="cLocBtn" onClick="javascript:xBtnClick();" value="X">';
+				$('.xBtnSpan').append(html);
+				
 				/* 게시글에 저장된 위치를 지도로 표시 */
 				// 주소로 좌표를 검색합니다
 				/* geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) { */
@@ -357,12 +362,18 @@ body {
 			
 
 			function sample5_execDaumPostcode() {
+			
 				new daum.Postcode({
 					oncomplete : function(data) {
 						var addr = data.address; // 최종 주소 변수
 
 						// 주소 정보를 해당 필드에 넣는다.
 						document.getElementById("sample5_address").value = addr;
+						
+						$('.xBtnSpan').empty();
+						var html = '<input type="button" class="cLocBtn" onClick="javascript:xBtnClick();" value="X">';
+						$('.xBtnSpan').append(html);
+						
 						// 주소로 상세 정보를 검색
 						geocoder.addressSearch(data.address, function(results,
 								status) {
@@ -627,7 +638,15 @@ body {
 	        
 	    } // window.onload 끝
 	    
-    
+        // 위치 취소 버튼 클릭 시
+        function xBtnClick(){
+        	/* alert('엑스버튼 클릭'); */
+        	
+        	$('.cLocBtn').remove();
+        	$('.searchlocBox').val("");
+        	mapContainer.style.display = "none";
+        	
+        };
 		</script>
 	</div>
 
