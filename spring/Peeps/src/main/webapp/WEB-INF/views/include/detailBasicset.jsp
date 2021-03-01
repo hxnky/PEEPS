@@ -293,7 +293,8 @@ body {
 	/* var memberIdx = ""; */
 
 	/* test */
-	var sessionMidx = "${peeps.m_idx}";
+	/* var sessionMidx = "${peeps.m_idx}"; */
+	var sessionMidx = "${m_idx}";
 	console.log("세션정보!!!~~ : ", sessionMidx);
 
 	    $(document).ready(function(){
@@ -331,12 +332,40 @@ body {
 					var infoHtml = '<input type="hidden" class="memberidx" value="'+data.member_idx+'">';
 					$('.memberid').append(infoHtml);
 					
-					if(sessionMidx == data.member_idx){
+					var pIdx = data.p_idx;
+					
+					// 멤버 정보 받아오는 ajax 시작
+					$.ajax({ 
+						url: 'http://localhost:8080/peeps/user/memberList',
+						type: 'GET',
+						success: function(data){
+							console.log("멤버 ajax success");
+							//console.log("멤버 데이터 : ", data)
+							
+							$.each(data, function(index, mbr){
+								
+								if(sessionMidx == mbr.m_idx){
+									console.log("세션midx랑 게시글midx가 같습니다.");
+									var Btn = '<a class="deleteBtn" href="javascript:deletePost('+pIdx+');">삭제</a>';
+									   Btn += '<a class="editBtn" href="<c:url value="/post/edit?idx='+pIdx+'" />">수정</a>';
+									$('.deBtn').append(Btn);
+								}
+								
+							}); // 멤버 each 1 끝 
+							
+						},
+						error: function(e){
+							console.log("댓글 ajax속 멤버 ajax 실패");
+						}
+					
+					}); // 멤버 정보 받아오는 ajax 끝 (게시글)
+					
+					/* if(sessionMidx == data.member_idx){
 						console.log("세션midx랑 게시글midx가 같습니다.");
 						var Btn = '<a class="deleteBtn" href="javascript:deletePost('+data.p_idx+');">삭제</a>';
 						   Btn += '<a class="editBtn" href="<c:url value="/main/post/edit?idx='+data.p_idx+'" />">수정</a>';
 						$('.deBtn').append(Btn);
-					}
+					} */
 					   
 					/* console.log(data.p_title); */
 					$('.ptitle').append(data.p_title);
@@ -470,8 +499,12 @@ body {
 				}
 			}) // 파일 ajax 끝
 			
+			var mIdx = ${m_idx};
+			console.log("멤버인덱스! : ",mIdx);
+			
 			var likeInfo = {
-					"pIdx" : postIdx	
+					"pIdx" : postIdx,
+					"mIdx" : mIdx
 				};
 			// 컨트롤러로 값 넘기기 (좋아요 여부 데이터 받기)
 			$.ajax({
@@ -479,7 +512,7 @@ body {
 				type : 'GET',
 				data: likeInfo,
 				success: function(data){
-					/* console.log("좋아요 여부 : ",data.likeChk); */
+					console.log("좋아요 여부 : ",data.likeChk);
 					
 					if(data.likeChk == 1){
 						var likeHtml = '<img style="width: 30px; height: 30px;" src="<spring:url value="/resources/images/icon/like1.png"/>">';
@@ -499,6 +532,7 @@ body {
 			
 	    }); // document.ready 끝
 	    
+	    // 게시글 삭제
 		function deletePost(pidx) {
 			
 			if(confirm('삭제하시겠습니까?')){
@@ -507,9 +541,9 @@ body {
 					url: "http://localhost:8081/post/rest/member/post/delete?idx="+pidx,
 					type: 'GET',
 					success : function(data){						/* test 회원계정 */
-						var memberid = $('.memberid').val();
+						var memberid = "${id}";
 						/* window.location.href="http://localhost:8081/post/main/jhS2"; */
-						window.location.href="http://localhost:8081/post/main/"+memberid;
+						window.location.href="http://localhost:8080/peeps/"+memberid;
 						console.log(pidx+'번 게시물 삭제 완료');
 					}
 					
@@ -522,9 +556,12 @@ body {
 		function clickLikeBtn(){
 			/* alert("좋아요버튼 클릭"); */
 			/* console.log("좋아요버튼 함수 안 게시글 idx :",postIdx); */
+			var memberidx = ${m_idx};
+			console.log("멤버 인덱스 : ", memberidx);
 			
 			var likeInfo = {
-				"pIdx" : postIdx	
+				"pIdx" : postIdx,
+				"mIdx" : memberidx
 			};
 			
 			$.ajax({
@@ -533,9 +570,9 @@ body {
 				type: 'get',
 				data: likeInfo,
 				success: function(data){
-					/* console.log("좋아요 ajax 성공");
+					console.log("좋아요 ajax 성공");
 					console.log("받은 데이터 : ",data);
-					console.log(data.p_likes); */
+					console.log(data.p_likes);
 					
 					$('.likes').empty();
 					
@@ -544,10 +581,10 @@ body {
 					
 					$('.likeBtn').empty();
 					if(data.likeChk == 1){
-						var likeHtml = '<img style="width: 30px; height: 30px;" src="<spring:url value="/resources/icon/like1.png"/>">';
+						var likeHtml = '<img style="width: 30px; height: 30px;" src="<spring:url value="/resources/images/icon/like1.png"/>">';
 						$('.likeBtn').append(likeHtml);
 					} else {
-						var likeHtml = '<img style="width: 30px; height: 30px;" src="<spring:url value="/resources/icon/like0.png"/>">';
+						var likeHtml = '<img style="width: 30px; height: 30px;" src="<spring:url value="/resources/images/icon/like0.png"/>">';
 						$('.likeBtn').append(likeHtml);
 					}
 					
@@ -592,8 +629,8 @@ body {
 		console.log(idx);
 		
 		// 세션받아오기
-		var memberId = "${peeps.id}";
-		var memberphoto = "${peeps.m_photo}";
+		var memberId = "${id}";
+		var memberphoto = "${m_photo}";
 		
 		var html="<div class='editForm'>";
 		html += "<img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+memberphoto+"'/>'> ";
@@ -613,8 +650,8 @@ body {
 		console.log(idx);
 		
 		// 세션받아오기
-		var memberId = "${peeps.id}";
-		var memberphoto = "${peeps.m_photo}";
+		var memberId = "${id}";
+		var memberphoto = "${m_photo}";
 		
 		var html="<div class='editForm'>";
 		html += "<img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+memberphoto+"'/>'> ";
@@ -641,7 +678,7 @@ function loadComment(){
 	// 컨트롤러로 값 넘기기 (댓글 데이터 받기) 
 	$.ajax({
 		/* url : '${pageContext.request.contextPath}/post/cmt/select?PostNO=' + postIdx, */
-		url : "${pageContext.request.contextPath}/rest/cmt/select?PostNO=" + postIdx,
+		url : "http://localhost:8081/post/rest/cmt/select?PostNO=" + postIdx,
 		type: 'get',
 		data : {"postIdx" : postIdx},
 		success : function(data){
@@ -693,7 +730,7 @@ function loadComment(){
 				
 				// 대댓글
 				$.ajax({
-					url : '${pageContext.request.contextPath}/rest/cmt/reply/select',
+					url : 'http://localhost:8081/post/rest/cmt/reply/select',
 					type: 'get',
 					data : {"cmt_idx" : cmt.cmt_idx},
 					success : function(data){
@@ -783,7 +820,7 @@ $(function() {
 		var cmt = $('#cmttxt').val();
 		
 		// test용 멤버 idx
-		var mIdx = "${peeps.m_idx}";
+		var mIdx = "${m_idx}";
 		console.log("댓글 작성의 mIdx : ", mIdx);
 		
 		if(cmt.trim() == ""){
@@ -791,7 +828,7 @@ $(function() {
            
         } else{
         	$.ajax({
-    			url : '${pageContext.request.contextPath}/rest/cmt/insert',
+    			url : 'http://localhost:8081/post/rest/cmt/insert',
     			type : 'post',
     			async : false,
     			data : {
@@ -825,7 +862,7 @@ $(function() {
 			
 			$('.comment .cmt').eq(idx).remove();
 			$.ajax({
-				url : '${pageContext.request.contextPath}/rest/cmt/del',
+				url : 'http://localhost:8081/post/rest/cmt/del',
 				type : 'post',
 				async : false,
 				data : {
@@ -866,7 +903,7 @@ $(function() {
 	            alert("내용을 입력해주세요");
 			} else{
 				$.ajax({
-					url : '${pageContext.request.contextPath}/rest/cmt/edit',
+					url : 'http://localhost:8081/post/rest/cmt/edit',
 					type : 'post',
 					async : false,
 					data : {
@@ -920,9 +957,9 @@ $(function() {
 				} else{
 					// 세션 m_idx 값 넣기
 					
-					var sessionMidx = "${peeps.m_idx}";
+					var sessionMidx = "${m_idx}";
 					$.ajax({
-								url : '${pageContext.request.contextPath}/rest/cmt/reply/insert',
+								url : 'http://localhost:8081/post/rest/cmt/reply/insert',
 								type : 'post',
 								data : {
 									"comment_idx" : cmt_idx,
@@ -970,7 +1007,7 @@ $(function() {
 	            alert("내용을 입력해주세요");
 			} else{
 				$.ajax({
-							url : '${pageContext.request.contextPath}/rest/cmt/reply/edit',
+							url : 'http://localhost:8081/post/rest/cmt/reply/edit',
 							type : 'post',
 							async : false,
 							data : {
@@ -1009,7 +1046,7 @@ $(function() {
 			
 			$('.comment .cmt #reply').eq(idx).remove();
 			$.ajax({
-						url : '${pageContext.request.contextPath}/rest/cmt/reply/del',
+						url : 'http://localhost:8081/post/rest/cmt/reply/del',
 						type : 'post',
 						async : false,
 						data : {

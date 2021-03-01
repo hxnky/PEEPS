@@ -18,7 +18,7 @@
 
 				<li class="right"><a id="Home" href="#"><img
 						src="<c:url value="/resources/images/icon/navi/023-home.png"/>"></a>
-					<a id="Content" href="#"><img
+					<a id="Content" href="<c:url value="/post/upload"/>"><img
 						src="<c:url value="/resources/images/icon/navi/Content.png"/>"></a>
 					<a id="Alarm" href="#"><img
 						src="<c:url value="/resources/images/icon/navi/008-notification.png"/>"></a>

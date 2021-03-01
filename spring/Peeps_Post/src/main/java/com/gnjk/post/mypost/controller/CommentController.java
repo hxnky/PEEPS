@@ -116,5 +116,8 @@ public class CommentController {
 
 		return replyService.DelReply(re_idx);
 	}
+	
+	
+	
 
 }

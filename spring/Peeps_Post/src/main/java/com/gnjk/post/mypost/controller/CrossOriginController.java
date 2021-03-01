@@ -49,7 +49,7 @@ public class CrossOriginController {
    // 게시물 수 검색
    @GetMapping("/mypage/PostCnt")
    public int PostCnt(int m_idx) {
-      
+	   
       return timeLineService.PostCnt(m_idx);
    }
 

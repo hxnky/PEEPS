@@ -219,9 +219,9 @@ body {
 				</td>
 			</tr>
 			<!-- 버튼 -->
-			<tr>
-				<td class="post_cnclorsubmt">
-					<input type="button" value="취소">
+			<tr>												
+				<td class="post_cnclorsubmt">	
+					<input type="button" value="취소" onclick="location.href='<c:url value="/${id}"/>'">
 					<input type="button" value="등록" id="submitbtn" onclick="javascript:actionForm();">
 				</td>
 			</tr>
@@ -496,7 +496,7 @@ body {
 	    		success : function(data){
 	    					
 	    		console.log("ajax 데이터 : ",data);			
-	    		window.location.href="http://localhost:8081/post/main/post/detail?idx="+postIdx;
+	    		window.location.href="http://localhost:8080/peeps/post/detail?idx="+postIdx;
 	    		console.log("포스트idx 확인 : ", postIdx);
 	    		},error: function(e){
 	    		console.log("ajax전송에러");	

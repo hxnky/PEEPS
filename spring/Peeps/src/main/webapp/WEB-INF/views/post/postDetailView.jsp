@@ -77,7 +77,7 @@
 						<!-- 좋아요 -->
 						<span class="likes" style="margin: 0 5px;"></span>
 						
-						<img style="width: 30px; height: 30px;" src="<spring:url value='/resources/img/cmtpic.png'/>">
+						<img style="width: 30px; height: 30px;" src="<spring:url value='/resources/images/icon/cmtpic.png'/>">
 						<!-- 댓글 개수 -->
 						<span class="commentTotal" style="margin-left: 5px;"></span>
 						</span>
@@ -89,17 +89,17 @@
 				<td>
 				<div class="cmtdiv">
 					<%-- <img class="postuserphoto" src="<spring:url value='/resources/img/puppy3.jpg'/>"> --%>
-						<c:set var="loginType" value="${peeps.loginType}" />
+						<c:set var="loginType" value="${loginType}" />
 						<c:choose>
 							<c:when test="${loginType eq 'email'}">
 								<img class="postuserphoto"
-									src="<c:url value="/fileupload/${peeps.m_photo}"/>">
+									src="<c:url value="/fileupload/${m_photo}"/>">
 							</c:when>
 							<c:when test="${loginType ne 'email' }">
-								<img class="postuserphoto" src="<c:url value="${peeps.m_photo}"/>">
+								<img class="postuserphoto" src="<c:url value="${m_photo}"/>">
 							</c:when>
 						</c:choose>					
-					<span class="sessionmid">${peeps.id}</span>
+					<span class="sessionmid">${id}</span>
 					<span class="cmtinputarea">
 					<textarea rows="10"
 							  class="cmttxt" name="pcmt" id="cmttxt"

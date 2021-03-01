@@ -23,7 +23,7 @@
 			<div id="profile_wrap">
 				<img src="<spring:url value='/resources/img/chick.jpg'/>">
 				<div id="pro_btn">
-				<input type="hidden" id="idx" value="3">
+				<input type="hidden" id="idx" value="21">
 					<ul>	
 						<li id="memberId">아이디</li>
 						<li><button id="pro_edit">
@@ -77,14 +77,17 @@
 	var urlPath = location.pathname;
 	console.log("URL 패스네임 : ", urlPath);
 	var splitUrl = urlPath.split("/");
-	var pathMemberId = splitUrl[3];
+	var pathMemberId = splitUrl[2];
 	console.log(splitUrl);
 	console.log("패스멤버아이디",pathMemberId);
 	
-	var menuHtml = '<button onclick="location.href=\'<c:url value="/main/'+pathMemberId+'"/>\'">게시물</button>';
-	   menuHtml += '<button onclick="location.href=\'<c:url value="/main/'+pathMemberId+'/map"/>\'">지도</button>';
-	   menuHtml += '<button>방명록</button>'; 
-	   $('.menuselect').append(menuHtml);
+	var menuHtml = '<button onclick="location.href=\'<c:url value="/'+pathMemberId+'"/>\'">';
+		menuHtml += '<img src="<c:url value="/resources/images/icon/navi/006-newsfeed.png"/>"></button>'; 
+	    menuHtml += '<button onclick="location.href=\'<c:url value="/'+pathMemberId+'/map"/>\'">';
+		menuHtml += '<img src="<c:url value="/resources/images/icon/navi/018-location pin.png"/>"></button>';
+		menuHtml += '<button>'; 
+		menuHtml += '<img src="<c:url value="/resources/images/icon/navi/017-friends.png"/>"></button>';
+		$('.menuselect').append(menuHtml);	
 	   
 	var memberidx = $('#idx').val();
 	console.log("hidden 멤버인덱스 : ",memberidx);
@@ -93,7 +96,7 @@
 		
 		console.log("document.ready 안 : ", pathMemberId);
 		var memberidx = $('#idx').val();
-		console.log(memberidx);
+		console.log("멤버 인덱스 : ", memberidx);
 		
 		var pathmId = {
 			"mId" : pathMemberId,
@@ -143,13 +146,16 @@
 			];
 			
 			console.log("포지션즈 배열 : ", positions); */
-			
+			console.log("데이터의 길이 : ", data.length);
 			for (var i=0; i<data.length; i++){
-				
+				console.log("for문 진입");
 				geocoder.addressSearch(data[i].p_loc, function(result, status) {
 					// 정상적으로 검색이 완료됐으면 
+					console.log("지오코더 진입");
 				     if (status === kakao.maps.services.Status.OK){
 				    	// 마커를 생성합니다
+				    	console.log("if문 진입");
+				    	console.log("주소 : ", result[0].address_name);
 						    var marker = new kakao.maps.Marker({
 						        map: map, // 마커를 표시할 지도
 						        position: new kakao.maps.LatLng(result[0].y, result[0].x), // 마커의 위치
@@ -160,7 +166,7 @@
 						    var infowindow = new kakao.maps.InfoWindow({
 						        content: '<div>'+result[0].address_name+'</div>' // 인포윈도우에 표시할 내용
 						    });
-
+							
 						    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
 						    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
 						    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
@@ -272,9 +278,9 @@
 					   html += '<div class="panel panel-primary">';
 					   html += '<div class="panel-heading">';  /* href="postNO=${post.p_idx}" */
 					   /* html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+item.p_title; */
-					   html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+list[i].p_idx+'"/>">'+pt;
+					   html += '<a id="ptitle" class="postidx" href="<c:url value="/post/detail?idx='+list[i].p_idx+'"/>">'+pt;
 					   html += '</a></div><div class="panel-body">';
-					   html += '<a class="postidx" href="<c:url value="/main/post/detail?idx='+list[i].p_idx+'"/>">';
+					   html += '<a class="postidx" href="<c:url value="/post/detail?idx='+list[i].p_idx+'"/>">';
 					   html += '<img src="<c:url value="/resources/fileupload/postfile/'+list[i].p_thumbnail+'"/>" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
 					   html += '</div><div class="panel-footer">'+date+'</div></div></div>';
 					   $('.postList').append(html);

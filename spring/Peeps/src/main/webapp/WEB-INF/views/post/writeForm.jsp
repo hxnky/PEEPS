@@ -89,7 +89,7 @@
 			<!-- 버튼 -->
 			<tr>
 				<td class="post_cnclorsubmt">
-					<input type="button" class="resetBtn" value="취소">
+					<input type="button" class="resetBtn" value="취소" onclick="location.href='<c:url value="/${id}"/>'">
 					<input type="button" class="sbmtBtn" value="등록" id="submitbtn" onclick="javascript:actionForm();">
 				</td>
 			</tr>
@@ -244,7 +244,7 @@
 	    		/* 세션으로 받아온 회원id */
 	    		var memberid = "${id}";
 	    		console.log("ajax 데이터 : ",data);				
-	    		window.location.href="http://localhost:8080/peeps/main/"+memberid; 
+	    		window.location.href="http://localhost:8080/peeps/"+memberid; 
 	    					
 	    		},error: function(e){
 	    		console.log("ajax전송에러");	

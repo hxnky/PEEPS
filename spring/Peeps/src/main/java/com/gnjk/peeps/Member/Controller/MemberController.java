@@ -89,8 +89,8 @@ public class MemberController {
 	
 	// 마이페이지
 //	@RequestMapping(value = "/user/mypage", method = RequestMethod.GET)
-//	@RequestMapping("/main/{mid}")
-	@RequestMapping(value = "/main/{mid}", method = RequestMethod.GET)
+//	@RequestMapping(value = "/main/{mid}", method = RequestMethod.GET)
+	@RequestMapping(value = "/{mid}", method = RequestMethod.GET)
 	public String MyPage(
 			@RequestParam(value = "p", defaultValue = "1") int p,
 			@PathVariable("mid") String mid,

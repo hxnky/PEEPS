@@ -10,19 +10,8 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 </head>
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<!-- <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
- -->
-<!-- 부가적인 테마 -->
-<!-- <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
- -->
+
  <%@ include file="/WEB-INF/views/include/mypageBasicset.jsp"%>
- 
-<link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/modal.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/myPage.css" />" rel="stylesheet">
 
 <body>
 	<div id="total_wrap">
@@ -34,11 +23,30 @@
 			<div class="jumbotron">
 				<div id="profile_wrap">
 					
-					</div>
 				</div>
 			</div>
+			
+			<div id="nav_wrap">
+				<div class="menuselect"> 
+	
+				</div>
+			</div>
+			
+			<div class="container">
+				<div class="row">
+				<!-- 게시글 목록 시작 -->
+					
+				<!-- 게시글 목록 끝 -->	
+				</div>
+			</div>
+		<br>
+			
+		</div> <!-- main_wrap끝 -->
+	<!-- 페이징 -->
+	<div class="paging">
+	</div>
 
-		</div>
+	</div>
 
 
 		<!-- 팔로워 목록 모달창 -->
@@ -124,7 +132,7 @@ function load_MyPage(){
 	// 게시물 수 검색
 	var idx = $('#idx').val();
 	
-	$.ajax({
+/* 	$.ajax({
 		url : 'http://localhost:8081/post/mypage/PostCnt',
 		type : 'get',
 		async : false,
@@ -139,7 +147,7 @@ function load_MyPage(){
 		error : function() {
 			console.log("실패,,,,");
 		}
-	});
+	}); */
 	
 }
 
@@ -544,4 +552,117 @@ $("#keyword").click(function() {
 
 });
 </script>
+
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3ed6849fd6d5d015aebf82a3eb747333&libraries=services"></script>
+	
+	<script>
+	// 뷰컨트롤러 통해 페이지 번호 받기
+	function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
+	return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+	
+    var p = getParameterByName('p');
+    console.log(p);
+	
+	var urlPath = location.pathname;
+	console.log("URL 패스네임 : ", urlPath);
+	var splitUrl = urlPath.split("/");
+	var pathMemberId = splitUrl[2];
+	console.log(splitUrl);
+	console.log("패스멤버아이디",pathMemberId);
+	
+	/* var menuHtml = '<button onclick="location.href=\'<c:url value="/'+pathMemberId+'"/>\'">게시물</button>'; */
+	/* var menuHtml = '<button onclick="location.href=\'<c:url value="/'+pathMemberId+'"/>\'">'; */
+	var menuHtml = '<button onclick="javascript:load_postList();">';   
+	   menuHtml += '<img src="<c:url value="/resources/images/icon/navi/006-newsfeed.png"/>"></button>'; 
+	   menuHtml += '<button onclick="location.href=\'<c:url value="/'+pathMemberId+'/map"/>\'">';
+	   menuHtml += '<img src="<c:url value="/resources/images/icon/navi/018-location pin.png"/>"></button>';
+	   menuHtml += '<button>'; 
+	   menuHtml += '<img src="<c:url value="/resources/images/icon/navi/017-friends.png"/>"></button>';
+	   $('.menuselect').append(menuHtml);
+	   
+		var memberidx = $('#idx').val();
+		console.log("hidden 멤버인덱스 : ",memberidx);
+	
+	load_postList();
+	
+	function load_postList(){
+		
+		$('.row').empty();
+		$('.paging').empty();
+		
+		console.log("document.ready 안 : ", pathMemberId);
+		var memberidx = $('#idx').val();
+		/* test */
+		memberidx = 21;
+		console.log(memberidx);
+		
+		var pathmId = {
+			"mId" : pathMemberId,
+			"mIdx" : memberidx
+ 		};
+		
+		$.ajax({
+			url: 'http://localhost:8081/post/rest/member/post/list?p='+p,
+			type: 'GET',
+			data: pathmId,
+			success: function(data){
+				console.log("ajax로 받아온 데이터 : ", data);
+				var list = $(data.postList);
+				console.log(list);
+				
+				$.each(list, function(index, item){
+					
+					var date = item.p_date-540*60*1000;
+						
+					date = new Date(date).toLocaleDateString();
+					
+					console.log("날짜: ", date);
+					
+					var pt = item.p_title;
+					
+					/* 글자수 20자 이상이면 자르기 */
+					if(pt.length > 20){
+						pt = pt.substring(0, 15);
+						pt = pt+"...";
+						console.log(pt);
+					} 
+					
+					var html = '<div class="col-sm-4">';
+					   html += '<div class="panel panel-primary">';
+					   html += '<div class="panel-heading">';  /* href="postNO=${post.p_idx}" */
+					   /* html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+item.p_title; */
+					   html += '<a id="ptitle" class="postidx" href="<c:url value="/post/detail?idx='+item.p_idx+'"/>">'+pt;
+					   html += '</a></div><div class="panel-body">';
+					   html += '<a class="postidx" href="<c:url value="/post/detail?idx='+item.p_idx+'"/>">';
+					   html += '<img src="<c:url value="/resources/fileupload/postfile/'+item.p_thumbnail+'"/>" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
+					   html += '</div><div class="panel-footer">'+date+'</div></div></div>';
+					   
+					   $('.row').append(html);
+				});
+				// 페이징 처리
+				 if (data.totalPostCount>0){
+					 console.log('totalPageCount :' + data.totalPageCount);
+					for(var i=1; i <= data.totalPageCount; i++){			
+						if(data.pageNumber == i){
+							/* var html2 =' <span><a class="pageBtn" id="nowPgBtn" href="<c:url value="/main/jhS2"/>?p='+i+'">'+i+'</a></span> '; */
+							var html2 =' <span><a class="pageBtn" id="nowPgBtn" href="<c:url value="/'+pathMemberId+'"/>?p='+i+'">'+i+'</a></span> ';
+							$('.paging').append(html2);
+						} else {
+							/* var html2 =' <span><a class="pageBtn" href="<c:url value="/main/jhS2"/>?p='+i+'">'+i+'</a></span> '; */
+							var html2 =' <span><a class="pageBtn" href="<c:url value="/'+pathMemberId+'"/>?p='+i+'">'+i+'</a></span> ';
+							$('.paging').append(html2);
+						}
+					}										 
+				 };	
+			},error : function(request, status, error) {
+				console.log("에러 발생 : code = " +request.status + "message =" + request.responseText + "error : " + error);
+			}
+			
+		});
+		
+	}; // 게시글 리스트 출력 함수 끝
+	
+	</script>
 </html>

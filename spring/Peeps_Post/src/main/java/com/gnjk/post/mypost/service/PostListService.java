@@ -32,12 +32,13 @@ public class PostListService {
 	// 게시글 전체 리스트 불러오기
 	public PostListView getPostListView(int pageNumber, HttpServletRequest request, int mIdx) {
 		// 로그인 세션 가져오기
-		HttpSession session = request.getSession();
-		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
-		System.out.println("로그인 인포 세션 : "+loginInfo);
+//		HttpSession session = request.getSession();
+//		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
+//		System.out.println("로그인 인포 세션 : "+loginInfo);
 		
 		// 세션 멤버 idx 
-		int member_idx = loginInfo.getM_idx();
+//		int member_idx = loginInfo.getM_idx();
+		int member_idx = mIdx;
 		
 		PostListView listView = null;
 		
@@ -133,12 +134,12 @@ public class PostListService {
 	}
 	
 	// 좋아요 
-	public Post updateLikes(int pIdx, HttpServletRequest request) {
+	public Post updateLikes(int pIdx, int mIdx) {
 		
-		HttpSession session = request.getSession();
-		/* LoginInfo loginInfo = (LoginInfo) session.getAttribute("peeps"); */
-		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
-		System.out.println("로그인 인포 세션 : "+loginInfo);
+//		HttpSession session = request.getSession();
+//		/* LoginInfo loginInfo = (LoginInfo) session.getAttribute("peeps"); */
+//		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
+//		System.out.println("로그인 인포 세션 : "+loginInfo);
 		
 		int result = 0;
 		
@@ -153,20 +154,20 @@ public class PostListService {
 		}
 		
 		// test loginInfo null인 경우 interceptor 처리
-		if(loginInfo == null) { // 로그인이 안된 경우
-			
-			// test 로그인 정보 세션 생성
-			/* loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); */
-//			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
-//			session.setAttribute("peeps", loginInfo);
-			System.out.println("로그인 인포 세션2 : "+loginInfo);
-			post.setLikeChk(0);
-			System.out.println("로그인 안된 경우 post : "+post);
-			return post;
-			
-		} else {	// 로그인 된 경우
-			System.out.println("로그인 인포 세션3 : "+loginInfo);
-			int mIdx = loginInfo.getM_idx();
+//		if(loginInfo == null) { // 로그인이 안된 경우
+//			
+//			// test 로그인 정보 세션 생성
+//			/* loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); */
+////			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
+////			session.setAttribute("peeps", loginInfo);
+//			System.out.println("로그인 인포 세션2 : "+loginInfo);
+//			post.setLikeChk(0);
+//			System.out.println("로그인 안된 경우 post : "+post);
+//			return post;
+//			
+//		} else {	// 로그인 된 경우
+//			System.out.println("로그인 인포 세션3 : "+loginInfo);
+//			int mIdx = loginInfo.getM_idx();
 			
 			try {
 				System.out.println("try구문 진입");
@@ -197,8 +198,6 @@ public class PostListService {
 				}
 				
 				// 게시글의 좋아요 수 업데이트 과정 시작
-				
-				
 				int likeCheck = 0;
 				likeCheck = lDao.selectLikeChk(pIdx, mIdx);
 				System.out.println("좋아요 여부(0or1) 확인: "+likeCheck);
@@ -221,16 +220,18 @@ public class PostListService {
 				e.printStackTrace();
 			}
 			
-		}
+//		} 
 		return post;
 	}
 	
 	// 좋아요 여부
 	public Post getLikes(int pIdx, HttpServletRequest request) {
 		
-		HttpSession session = request.getSession();
-		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
-		System.out.println("로그인 인포 세션1 : "+loginInfo);
+//		HttpSession session = request.getSession();
+//		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
+//		System.out.println("로그인 인포 세션1 : "+loginInfo);
+		int mIdx = Integer.parseInt(request.getParameter("mIdx"));
+		System.out.println("좋아요누른 멤버 인덱스! : "+mIdx);
 		
 		int result = 0;
 		
@@ -245,20 +246,20 @@ public class PostListService {
 		}
 		
 		// test loginInfo null인 경우 interceptor 처리
-		if(loginInfo == null) { // 로그인이 안된 경우
-			
-			// test 로그인 정보 세션 생성
-			/* loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); */
-//			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
-//			session.setAttribute("peeps", loginInfo);
-			System.out.println("로그인 인포 세션2 : "+loginInfo);
-			post.setLikeChk(0);
-			System.out.println("로그인 안된 경우 post : "+post);
-			return post;
-			
-		} else {	// 로그인 된 경우
-			System.out.println("로그인 인포 세션3 : "+loginInfo);
-			int mIdx = loginInfo.getM_idx();
+//		if(loginInfo == null) { // 로그인이 안된 경우
+//			
+//			// test 로그인 정보 세션 생성
+//			/* loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); */
+////			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
+////			session.setAttribute("peeps", loginInfo);
+//			System.out.println("로그인 인포 세션2 : "+loginInfo);
+//			post.setLikeChk(0);
+//			System.out.println("로그인 안된 경우 post : "+post);
+//			return post;
+//			
+//		} else {	// 로그인 된 경우
+//			System.out.println("로그인 인포 세션3 : "+loginInfo);
+//			int mIdx = loginInfo.getM_idx();
 			
 			try {
 				System.out.println("try구문 진입");
@@ -283,7 +284,7 @@ public class PostListService {
 				e.printStackTrace();
 			}
 			
-		}
+//		}
 		return post;
 	}
 	

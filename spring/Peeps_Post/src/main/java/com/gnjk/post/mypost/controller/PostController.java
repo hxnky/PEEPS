@@ -56,13 +56,17 @@ public class PostController {
 			@RequestParam(value = "p", defaultValue = "1") int page, 
 			Model model,
 			HttpServletRequest request,
-			@RequestParam Map<String, Object> param) {
-		String memberid = request.getParameter("mId");
-		String memberidx = request.getParameter("mIdx");
-		
-		int mIdx = Integer.parseInt(memberidx);
-		
-		System.out.println("path 멤버아이디 :"+memberid);
+			@RequestParam("mId") String mId,
+			@RequestParam("mIdx") int mIdx) {
+//		String memberid = request.getParameter("mId");
+//		String memberidx = request.getParameter("mIdx");
+//		System.out.println("멤버인덱스!! : "+memberidx);
+//		
+//		int mIdx = Integer.parseInt(memberidx);
+//		
+//		System.out.println("path 멤버아이디 :"+memberid); 
+		System.out.println("mIdx : "+mIdx);
+		System.out.println("멤버아이디 : "+mId);
 
 		return listService.getPostListView(page, request, mIdx);
 	}
@@ -110,16 +114,19 @@ public class PostController {
 	// 지도 리스트 출력
 	@GetMapping("/map")
 	public List<Post> mapList(
-			@RequestParam Map<String, Object> param,
+//			@RequestParam Map<String, Object> param,
+			@RequestParam("mId") String mId,
+			@RequestParam("mIdx") int mIdx,
 			HttpServletRequest request, 
 			Model model) {
 		
-		String memberid = request.getParameter("mId");
-		String memberidx = request.getParameter("mIdx");
-		
-		int mIdx = Integer.parseInt(memberidx);
-		
-		System.out.println("path 멤버아이디 :"+memberid); 
+//		String memberid = request.getParameter("mId");
+//		String memberidx = request.getParameter("mIdx");
+//		
+//		int mIdx = Integer.parseInt(memberidx);
+//		System.out.println("path 멤버아이디 :"+memberid); 
+		System.out.println("mIdx : "+mIdx);
+		System.out.println("멤버아이디 : "+mId);
 		
 		return listService.getMapListView(mIdx);
 	}
@@ -147,9 +154,10 @@ public class PostController {
 			) {
 		
 		int postIdx = Integer.parseInt(request.getParameter("pIdx"));
+		int mIdx = Integer.parseInt(request.getParameter("mIdx"));
 		System.out.println("포스트인덱스 : "+postIdx);
 		
-		return listService.updateLikes(postIdx, request);
+		return listService.updateLikes(postIdx, mIdx);
 	}
 	
 	// 좋아요 여부

@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 리스트</title>
+<title>Peeps</title>
 
 </head>
 
@@ -22,13 +22,13 @@
 		<div class="jumbotron">
 			<div id="profile_wrap">
 				<!-- 1회원append : <div id='pro_img'><input type='hidden' id='idx' value='"+find.m_idx+"'><img id='profile' src='<c:url value='fileupload/"+find.m_photo+"'/>' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("+find.m_idx+")'></div><div id='pro_btn' class='"+find.m_idx+"'></div>-->
-				<img src="<spring:url value='/resources/img/chick.jpg'/>">
+				<%-- <img src="<spring:url value='/resources/img/chick.jpg'/>"> --%>
 				<div id="pro_btn">
 				<!-- 2회원append : <ul><li id='memberid'>"+find.id+"</li><li><button id='edit'>프로필 편집</button></li></ul> -->
 				<!-- 2회원append : 팔로잉 정보 div -->
 				<!-- 2회원append : <ul><li>게시물</li><li id='postCnt'></li><li>팔로워</li><li><button id='follower_btn'>"+find.followerCnt+"</button></li><li>팔로잉</li><li><button id='following_btn'>"+find.followingCnt+"</button></li></ul> -->
 				<!-- 2회원append :  <div id='pro_name'>"+find.name+"</div><div id='pro_bio'>"+find.bio+"</div> -->
-				<input type="hidden" id="idx" value="3">
+				<input type="hidden" id="idx" value="21">
 					<ul>
 						<li>아이디</li>
 						<li><button id="pro_edit">
@@ -51,9 +51,9 @@
 				</div>
 			</div>
 		</div>
+		
 		<div id="nav_wrap">
 			<div class="menuselect"> 
-				
 
 			</div>
 		</div>
@@ -67,7 +67,7 @@
 		</div>
 		<br>
 
-	</div>
+	</div> <!-- main_wrap끝 -->
 	<!-- 목록 끝 -->
 	<!-- 페이징 -->
 	<div class="paging">

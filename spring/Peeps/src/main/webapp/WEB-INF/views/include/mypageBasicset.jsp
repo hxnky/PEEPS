@@ -9,8 +9,8 @@
 
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <!-- <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
-
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> 
+ -->
 <link rel="stylesheet"
 	href="<c:url value="/resources/css/bootstrap.css" />">
 
@@ -24,6 +24,9 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
  -->
 <link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/modal.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/myPage.css" />" rel="stylesheet">
+
 
 <style>
 .container-fluid {
