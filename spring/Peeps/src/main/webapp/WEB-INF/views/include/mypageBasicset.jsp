@@ -202,6 +202,10 @@
 	color: white;
 }
 
+/* .postList {
+	width: 1300px;
+} */
+
 .panel-primary {
   border-color: #DDD;
 }

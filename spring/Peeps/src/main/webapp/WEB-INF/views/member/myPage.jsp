@@ -33,15 +33,16 @@
 			</div>
 			
 			<div class="container">
+			<div id="map" style="width:100%;height:800px;margin-bottom: 50px;"></div>
 				<div class="row">
 				<!-- 게시글 목록 시작 -->
 				<!-- 게시글 목록 끝 -->	
-					
-				</div>
 				<!-- 지도 목록 시작 -->
-					<div id="map" style="width:100%;height:800px;margin-bottom: 50px;"></div>
-					<div class="postList"></div>	
-				<!-- 지도 목록 끝 -->
+					
+					
+				<!-- 지도 목록 끝 -->	
+				</div>
+				<!-- <div class="postList"></div> -->
 			</div>
 			<div class="locationInfoDiv"></div>
 			<br>
@@ -783,10 +784,12 @@ $("#keyword").click(function() {
 		console.log("똑같은 주소인지 체크 : ",chk);
 		if(chk == postAddr){
 			/* console.log("똑같은 주소입니다~"); */
-			$('.postList').empty();
+			/* $('.postList').empty(); */
+			$('.row').empty();
 			/* return false; */
 		} else {
-			$('.postList').empty();
+			/* $('.postList').empty(); */
+			$('.row').empty();
 			$('.paging').empty();
 			$('.locationInfoDiv').empty();
 		}
@@ -849,7 +852,8 @@ $("#keyword").click(function() {
 					   html += '<a class="postidx" href="<c:url value="/post/detail?idx='+list[i].p_idx+'"/>">';
 					   html += '<img src="<c:url value="/resources/fileupload/postfile/'+list[i].p_thumbnail+'"/>" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
 					   html += '</div><div class="panel-footer">'+date+'</div></div></div>';
-					   $('.postList').append(html);
+					  /*  $('.postList').append(html); */
+					   $('.row').append(html);
 					
 				}
 					
