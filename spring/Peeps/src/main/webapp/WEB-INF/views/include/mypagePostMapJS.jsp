@@ -56,7 +56,7 @@
 		console.log("document.ready 안 : ", pathMemberId);
 		var memberidx = $('#idx').val();
 		/* test */
-		memberidx = 21;
+		/* memberidx = 21; */
 		console.log(memberidx);
 		
 		var pathmId = {
@@ -136,7 +136,7 @@
 		
 		var memberidx = $('#idx').val();
 		/* test */
-		memberidx = 21;
+		/* memberidx = 21; */
 		console.log("멤버 인덱스 : ", memberidx);
 		
 		var pathmId = {
@@ -252,7 +252,7 @@
 		
 		var memberidx = $('#idx').val();
 		/* test */
-		memberidx = 21;
+		/* memberidx = 21; */
 		
 		/* alert(postAddr); */
 		console.log("함수로 들어오는 주소 : ",postAddr);

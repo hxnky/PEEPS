@@ -96,7 +96,7 @@ public class MemberController {
 			@PathVariable("mid") String mid,
 			String id, Model model) {
 
-		model.addAttribute("page_id", id);
+		model.addAttribute("page_id", mid);
 		
 		return "member/myPage";
 	}

@@ -830,7 +830,6 @@ $(function() {
 
 		var cmt = $('#cmttxt').val();
 		
-		// test용 멤버 idx
 		var mIdx = "${m_idx}";
 		console.log("댓글 작성의 mIdx : ", mIdx);
 		
