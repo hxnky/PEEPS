@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +28,7 @@ import com.gnjk.post.mypost.service.PostDeleteService;
 import com.gnjk.post.mypost.service.PostEditService;
 import com.gnjk.post.mypost.service.PostListService;
 import com.gnjk.post.mypost.service.PostUploadService;
+import com.gnjk.post.mypost.service.RedisService;
 
 @RestController
 @RequestMapping("rest/member/post")
@@ -42,9 +44,22 @@ public class PostController {
 	@Autowired
 	private PostEditService editService;
 	
+	@Autowired
+	private RedisService redisService;
+	
+	// test: redis
+//	@RequestMapping("/test") 
+	public String doTest(@CookieValue("JSESSIONID") String sessionId) {
+		
+//		sessionId = "B1C8D4D2EDD95B731F973432F5F66A1C";
+		
+		System.out.println("redis data : "+redisService.getUserInformation(sessionId));
+		
+		return "test 성공";
+	}
+	
 	// 게시글 업로드
 	@PostMapping("/upload")
-	@ResponseBody
 	public int uploadPost(PostWriteRequest writeRequest, HttpServletRequest request, Model model) {
 
 		return uploadService.uploadPost(writeRequest, request, model);
@@ -58,13 +73,6 @@ public class PostController {
 			HttpServletRequest request,
 			@RequestParam("mId") String mId,
 			@RequestParam("mIdx") int mIdx) {
-//		String memberid = request.getParameter("mId");
-//		String memberidx = request.getParameter("mIdx");
-//		System.out.println("멤버인덱스!! : "+memberidx);
-//		
-//		int mIdx = Integer.parseInt(memberidx);
-//		
-//		System.out.println("path 멤버아이디 :"+memberid); 
 		System.out.println("mIdx : "+mIdx);
 		System.out.println("멤버아이디 : "+mId);
 		
@@ -75,7 +83,7 @@ public class PostController {
 	@GetMapping("/detail")
 	public Post getPostDetail(
 			@RequestParam("idx") int postIdx
-			, HttpServletRequest request //test세션
+			, HttpServletRequest request 
 			) {
 		
 		return listService.getDetail(postIdx);
@@ -101,7 +109,6 @@ public class PostController {
 	
 	// 수정한 게시글 업데이트 
 	@PostMapping("/edit")
-//	@ResponseBody
 	public int updatePost(
 			PostEditRequest editRequest,
 			HttpServletRequest request,
@@ -114,17 +121,11 @@ public class PostController {
 	// 지도 리스트 출력
 	@GetMapping("/map")
 	public List<Post> mapList(
-//			@RequestParam Map<String, Object> param,
 			@RequestParam("mId") String mId,
 			@RequestParam("mIdx") int mIdx,
 			HttpServletRequest request, 
 			Model model) {
 		
-//		String memberid = request.getParameter("mId");
-//		String memberidx = request.getParameter("mIdx");
-//		
-//		int mIdx = Integer.parseInt(memberidx);
-//		System.out.println("path 멤버아이디 :"+memberid); 
 		System.out.println("mIdx : "+mIdx);
 		System.out.println("멤버아이디 : "+mId);
 		
@@ -132,23 +133,14 @@ public class PostController {
 	}
 	
 	// 지도로 주소별 게시글 리스트 출력
-	@GetMapping("/postmaplist")
+//	@GetMapping("/postmaplist")
+	@PostMapping("/postmaplist")
 	public PostListView getMapPostList(
-//			@RequestParam Map<String, Object> param,
 			@RequestParam("postAdd") String pAddr,
 			@RequestParam("mIdx") int mIdx,
 			HttpServletRequest request,
 			Model model) {
 			
-//		String pathmId = request.getParameter("pathmemberid");
-//		String pAddr = request.getParameter("postAdd");
-//		String memberidx = request.getParameter("mIdx");
-//		
-//		System.out.println("주소 ! : "+pAddr);
-//		System.out.println("멤버 인덱스 : "+memberidx);
-//		
-//		int mIdx = Integer.parseInt(memberidx);
-//		System.out.println("멤버 인덱스 : "+mIdx);
 		System.out.println("게시글 클릭 주소 : "+pAddr);
 		System.out.println("게시글 멤버 인덱스 : "+mIdx);
 			

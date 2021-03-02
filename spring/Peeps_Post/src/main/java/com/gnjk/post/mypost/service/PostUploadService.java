@@ -45,6 +45,8 @@ public class PostUploadService {
 		int postResult = 0;
 
 		MultipartFile[] files = writeRequest.getPostformfile();
+		
+		System.out.println("포스트폼파일 : "+files);
 
 		for (int i = 0; i < files.length; i++) {
 			System.out.println(files[i]);
@@ -52,9 +54,10 @@ public class PostUploadService {
 		System.out.println("첫번째 파일 크기 : " + files[0].getSize());
 		
 		// 웹 경로
-		String uploadPath = "http://localhost:8080/peeps/resources/fileupload/postfile";
+		String uploadPath = "/fileupload/postfile";
 		// 실제 경로
 		String saveDirPath = request.getSession().getServletContext().getRealPath(uploadPath);
+		System.out.println("실제 경로 : "+saveDirPath);
 		String fileName = "";
 		String newFileName = "";
 		File newFile = null;
@@ -108,6 +111,8 @@ public class PostUploadService {
 					PostFile postFile = new PostFile();
 					postFile.setF_name(newFileName);
 					postFile.setPost_idx(post.getP_idx());
+					// 21.03.02 파일 (실제)경로 설정
+					postFile.setF_path(saveDirPath);
 
 					System.out.println("!!!postFile : " + postFile);
 
