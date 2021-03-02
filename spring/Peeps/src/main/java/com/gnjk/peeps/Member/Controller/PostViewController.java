@@ -8,33 +8,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class PostViewController {
 	
-	// test용 세션 생성
-//	@RequestMapping("/")
-//	public String test(HttpServletRequest request) {
-//		// test 로그인 세션 가져오기
-//		HttpSession session = request.getSession();
-//		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
-//		System.out.println("로그인 인포 세션 : "+loginInfo);
-//		
-//		// test 로그인 안된 경우, 로그인 정보 세션 생성
-//		if(loginInfo == null) {
-//			
-//			loginInfo = new Peeps(3, "jh@gmail.com", "11111", "jh", "jhS2", "프으사 (3).jpg", "안녕하세요", "1", 'Y', "email");
-//			session.setAttribute("peeps", loginInfo);
-//		}
-//		return "myPage";
-//	}
-	
-	// 마이페이지의 게시글 리스트 (회원 계정 아이디로 접속)
-//	@RequestMapping("/main/{mid}")
-//	public String goMyPage(
-//			@RequestParam(value = "p", defaultValue = "1") int p,
-//			@PathVariable("mid") String mid
-//			) {
-//		System.out.println("PathVariable 이용한 컨트롤러로 진입");
-//		return "post/myPage";
-//	}
-	
 	// 게시글 작성 폼
 	@RequestMapping("/post/upload")
 	public String goWriteForm() {

@@ -101,16 +101,6 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
-	// 마이페이지의 게시글 리스트 (회원 계정 아이디로 접속)
-//	@RequestMapping("/main/{mid}")
-//	public String goMyPage(
-//			@RequestParam(value = "p", defaultValue = "1") int p,
-//			@PathVariable("mid") String mid
-//			) {
-//		System.out.println("PathVariable 이용한 컨트롤러로 진입");
-//		return "post/myPage";
-//	}
-
 	// 로그아웃
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {

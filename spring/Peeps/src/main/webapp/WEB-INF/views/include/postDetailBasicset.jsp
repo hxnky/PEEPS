@@ -325,8 +325,8 @@ body {
 			
 			// 컨트롤러로 값 넘기기 (회원 게시글 데이터 받기)
 			$.ajax({
-				url : "http://localhost:8081/post/rest/member/post/detail?idx="+ postIdx, 
-				/* url : "http://52.79.234.178:8080/post/rest/member/post/detail?idx="+ postIdx, */
+				/* url : "http://localhost:8081/post/rest/member/post/detail?idx="+ postIdx, */ 
+				url : "http://52.79.234.178:8080/post/rest/member/post/detail?idx="+ postIdx,
 				type : 'GET',
 				success : function(data) {
 					
@@ -338,7 +338,6 @@ body {
 					// 멤버 정보 받아오는 ajax 시작
 					$.ajax({ 
 						url: '${pageContext.request.contextPath}/user/memberList',
-						/* url: 'http://52.79.227.12:8080/peeps/user/memberList', */
 						type: 'GET',
 						success: function(data){
 							console.log("멤버 ajax success");
@@ -397,7 +396,6 @@ body {
 					
 					$.ajax({
 						url: '${pageContext.request.contextPath}/user/idList',
-						/* url: 'http://52.79.227.12:8080/peeps/user/idList', */
 						type: 'GET',
 						data: postMidx,
 						success: function(data){
@@ -435,8 +433,8 @@ body {
 			
 			// 컨트롤러로 값 넘기기 (회원 게시글 이미지 데이터 받기)
 			$.ajax({
-				url : "http://localhost:8081/post/rest/member/post/detail/image?idx="+ postIdx, 
-				/* url : "http://52.79.234.178:8080/post/rest/member/post/detail/image?idx="+ postIdx, */
+				/* url : "http://localhost:8081/post/rest/member/post/detail/image?idx="+ postIdx, */ 
+				url : "http://52.79.234.178:8080/post/rest/member/post/detail/image?idx="+ postIdx,
 				type : 'GET',
 				success: function(data){
 					/* console.log("게시물파일 ajax success", data); */
@@ -512,8 +510,8 @@ body {
 				};
 			// 컨트롤러로 값 넘기기 (좋아요 여부 데이터 받기)
 			$.ajax({
-				url : "http://localhost:8081/post/rest/member/post/likeChk",
-				/* url : "http://52.79.234.178:8080/post/rest/member/post/likeChk", */
+				/* url : "http://localhost:8081/post/rest/member/post/likeChk", */
+				url : "http://52.79.234.178:8080/post/rest/member/post/likeChk",
 				type : 'GET',
 				data: likeInfo,
 				success: function(data){
@@ -543,8 +541,8 @@ body {
 			if(confirm('삭제하시겠습니까?')){
 				
 				$.ajax({
-					url: "http://localhost:8081/post/rest/member/post/delete?idx="+pidx, 
-					/* url: "http://52.79.234.178:8080/post/rest/member/post/delete?idx="+pidx, */
+					/* url: "http://localhost:8081/post/rest/member/post/delete?idx="+pidx, */ 
+					url: "http://52.79.234.178:8080/post/rest/member/post/delete?idx="+pidx,
 					type: 'GET',
 					success : function(data){						
 						var memberid = "${id}";
@@ -571,8 +569,8 @@ body {
 			};
 			
 			$.ajax({
-				url: "http://localhost:8081/post/rest/member/post/likes",
-				/* url: "http://52.79.234.178:8080/post/rest/member/post/likes", */
+				/* url: "http://localhost:8081/post/rest/member/post/likes", */
+				url: "http://52.79.234.178:8080/post/rest/member/post/likes",
 				type: 'get',
 				data: likeInfo,
 				success: function(data){
@@ -683,9 +681,9 @@ function loadComment(){
 	
 	// 컨트롤러로 값 넘기기 (댓글 데이터 받기) 
 	$.ajax({
-		url : 'http://localhost:8081/post/rest/cmt/select?PostNO=' + postIdx,
+		/* url : 'http://localhost:8081/post/rest/cmt/select?PostNO=' + postIdx, */
 		/* url : '${pageContext.request.contextPath}/post/cmt/select?PostNO=' + postIdx, */
-		/* url : "http://52.79.234.178:8080/post/rest/cmt/select?PostNO=" + postIdx, */
+		url : "http://52.79.234.178:8080/post/rest/cmt/select?PostNO=" + postIdx,
 		type: 'get',
 		data : {"postIdx" : postIdx},
 		success : function(data){
@@ -738,8 +736,8 @@ function loadComment(){
 				
 				// 대댓글
 				$.ajax({
-					url : 'http://localhost:8081/post/rest/cmt/reply/select',
-					/* url : 'http://52.79.234.178:8080/post/rest/cmt/reply/select', */
+					/* url : 'http://localhost:8081/post/rest/cmt/reply/select', */
+					url : 'http://52.79.234.178:8080/post/rest/cmt/reply/select',
 					type: 'get',
 					data : {"cmt_idx" : cmt.cmt_idx},
 					success : function(data){
@@ -838,8 +836,8 @@ $(function() {
            
         } else{
         	$.ajax({
-        		url : 'http://localhost:8081/post/rest/cmt/insert',
-    			/* url : 'http://52.79.234.178:8080/post/rest/cmt/insert', */
+        		/* url : 'http://localhost:8081/post/rest/cmt/insert', */
+    			url : 'http://52.79.234.178:8080/post/rest/cmt/insert',
     			type : 'post',
     			async : false,
     			data : {
@@ -873,8 +871,8 @@ $(function() {
 			
 			$('.comment .cmt').eq(idx).remove();
 			$.ajax({
-				url : 'http://localhost:8081/post/rest/cmt/del',
-				/* url : 'http://52.79.234.178:8080/post/rest/cmt/del', */
+				/* url : 'http://localhost:8081/post/rest/cmt/del', */
+				url : 'http://52.79.234.178:8080/post/rest/cmt/del',
 				type : 'post',
 				async : false,
 				data : {
@@ -915,8 +913,8 @@ $(function() {
 	            alert("내용을 입력해주세요");
 			} else{
 				$.ajax({
-					url : 'http://localhost:8081/post/rest/cmt/edit',
-					/* url : 'http://52.79.234.178:8080/post/rest/cmt/edit', */
+					/* url : 'http://localhost:8081/post/rest/cmt/edit', */
+					url : 'http://52.79.234.178:8080/post/rest/cmt/edit',
 					type : 'post',
 					async : false,
 					data : {
@@ -972,8 +970,8 @@ $(function() {
 					
 					var sessionMidx = "${m_idx}";
 					$.ajax({
-								url : 'http://localhost:8081/post/rest/cmt/reply/insert',
-								/* url : 'http://52.79.234.178:8080/post/rest/cmt/reply/insert', */
+								/* url : 'http://localhost:8081/post/rest/cmt/reply/insert', */
+								url : 'http://52.79.234.178:8080/post/rest/cmt/reply/insert',
 								type : 'post',
 								data : {
 									"comment_idx" : cmt_idx,
@@ -1021,8 +1019,8 @@ $(function() {
 	            alert("내용을 입력해주세요");
 			} else{
 				$.ajax({
-							url : 'http://localhost:8081/post/rest/cmt/reply/edit',
-							/* url : 'http://52.79.234.178:8080/post/rest/cmt/reply/edit', */
+							/* url : 'http://localhost:8081/post/rest/cmt/reply/edit', */
+							url : 'http://52.79.234.178:8080/post/rest/cmt/reply/edit',
 							type : 'post',
 							async : false,
 							data : {
@@ -1061,8 +1059,8 @@ $(function() {
 			
 			$('.comment .cmt #reply').eq(idx).remove();
 			$.ajax({
-						url : 'http://localhost:8081/post/rest/cmt/reply/del',
-						/* url : 'http://52.79.234.178:8080/post/rest/cmt/reply/del', */
+						/* url : 'http://localhost:8081/post/rest/cmt/reply/del', */
+						url : 'http://52.79.234.178:8080/post/rest/cmt/reply/del',
 						type : 'post',
 						async : false,
 						data : {

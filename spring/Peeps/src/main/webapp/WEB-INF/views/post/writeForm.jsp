@@ -245,7 +245,6 @@
 	    		/* 세션으로 받아온 회원id */
 	    		var memberid = "${id}";
 	    		console.log("ajax 데이터 : ",data);				
-	    		/* window.location.href="http://localhost:8080/peeps/"+memberid; */
 	    		window.location.href="${pageContext.request.contextPath}/"+memberid;
 	    					
 	    		},error: function(e){

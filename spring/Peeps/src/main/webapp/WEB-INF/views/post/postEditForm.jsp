@@ -120,8 +120,8 @@
 			var postIdx = getParameterByName('idx');
 			// 게시글 데이터 받아오기
 			$.ajax({
-				/* url : "http://52.79.234.178:8080/post/rest/member/post/detail?idx="+ postIdx, */
-				url : "http://localhost:8081/post/rest/member/post/detail?idx="+ postIdx,
+				url : "http://52.79.234.178:8080/post/rest/member/post/detail?idx="+ postIdx,
+				/* url : "http://localhost:8081/post/rest/member/post/detail?idx="+ postIdx, */
 				type : 'GET',
 				async: false,
 				success : function(data){
@@ -160,8 +160,8 @@
 			
 			// 게시글 이미지 데이터 받아오기
 			$.ajax({
-				/* url : "http://52.79.234.178:8080/post/rest/member/post/detail/image?idx="+ postIdx, */
-				url : "http://localhost:8081/post/rest/member/post/detail/image?idx="+ postIdx,
+				url : "http://52.79.234.178:8080/post/rest/member/post/detail/image?idx="+ postIdx,
+				/* url : "http://localhost:8081/post/rest/member/post/detail/image?idx="+ postIdx, */
 				type : 'GET',
 				success : function(data){
 					
@@ -209,7 +209,6 @@
 				    } 
 				});  
 			} 
-			
 			
 			
 		}); // document.ready 끝
@@ -372,8 +371,8 @@
 	    			
 	    	//ajax로 폼데이터 전송
 	    	$.ajax({
-	    		/* url : 'http://52.79.234.178:8080/post/rest/member/post/edit', */
-	    		url : 'http://localhost:8081/post/rest/member/post/edit',
+	    		url : 'http://52.79.234.178:8080/post/rest/member/post/edit',
+	    		/* url : 'http://localhost:8081/post/rest/member/post/edit', */
 	    		type : 'POST',
 	    		data : formData,
 	    		processData: false,

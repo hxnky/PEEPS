@@ -65,8 +65,8 @@
  		};
 		
 		$.ajax({
-			url: 'http://localhost:8081/post/rest/member/post/list?p='+p,
-			/* url: 'http://52.79.234.178:8080/post/rest/member/post/list?p='+p, */
+			/* url: 'http://localhost:8081/post/rest/member/post/list?p='+p, */
+			url: 'http://52.79.234.178:8080/post/rest/member/post/list?p='+p,
 			type: 'GET',
 			data: pathmId,
 			success: function(data){
@@ -145,8 +145,8 @@
 		};
 		
 		$.ajax({
-			url: 'http://localhost:8081/post/rest/member/post/map',
-			/* url: 'http://52.79.234.178:8080/post/rest/member/post/map', */
+			/* url: 'http://localhost:8081/post/rest/member/post/map', */
+			url: 'http://52.79.234.178:8080/post/rest/member/post/map',
 			type: 'GET',
 			data: pathmId,
 			success: function(data){
@@ -256,6 +256,7 @@
 		
 		/* alert(postAddr); */
 		console.log("함수로 들어오는 주소 : ",postAddr);
+		console.log("멤버인덱스 : ", memberidx);
 		var pageNum = 1;
 		locInfo = postAddr;
 		console.log("주소 정보!! : ", locInfo);
@@ -268,16 +269,17 @@
 		};
 		
 		$.ajax({
-			url: "http://localhost:8081/post/rest/member/post/postmaplist",
-			/* url: "http://52.79.234.178:8080/post/rest/member/post/postmaplist", */	
-			type: 'get',
+			/* url: "http://localhost:8081/post/rest/member/post/postmaplist", */
+			url: "http://52.79.234.178:8080/post/rest/member/post/postmaplist",	
+			type: 'post',
 			data : mapPostInfo,
 			/* dataType: 'json', */
 			success: function(data){
 				
 				console.log(data);
 				var list = $(data.postList);
-				console.log(list);
+				console.log("지도마커클릭 데이터 포스트리스트 : ",list);
+				console.log("리스트 0인덱스 : ",list[0]);
 				console.log("포스트리스트 : ", list[0].member_idx);
 				var ploc = list[0].p_loc;
 				
