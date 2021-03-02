@@ -107,7 +107,7 @@ public class PostUploadService {
 				try {
 					// 디렉토리에 저장
 					mf.transferTo(newFile = new File(saveDirPath, newFileName));
-
+					System.out.println("저장된 새로운 파일 : "+newFile);
 					PostFile postFile = new PostFile();
 					postFile.setF_name(newFileName);
 					postFile.setPost_idx(post.getP_idx());
