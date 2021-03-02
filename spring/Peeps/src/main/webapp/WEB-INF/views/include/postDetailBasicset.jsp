@@ -435,7 +435,7 @@ body {
 			$.ajax({
 				/* url : "http://localhost:8081/post/rest/member/post/detail/image?idx="+ postIdx, */ 
 				url : "http://52.79.234.178:8080/post/rest/member/post/detail/image?idx="+ postIdx,
-				type : 'GET',
+				type : 'post',
 				success: function(data){
 					/* console.log("게시물파일 ajax success", data); */
 					
@@ -446,7 +446,7 @@ body {
 					
 					if(data.length == 1){
 						/* console.log("이미지 1개"); */
-						var html = '<div class="oneImg"><img src="<c:url value="/resources/fileupload/postfile/'+data[0].f_name+'"/>"></div>';
+						var html = '<div class="oneImg"><img src="http://52.79.234.178:8080/post/resources/fileupload/postfile/'+data[0].f_name+'"/>"></div>';
 						$('.postpics').append(html); 
 					} 
 					
@@ -469,6 +469,7 @@ body {
 						var index = 0;
 						
 						$.each(firstImg, function(index, item){
+							console.log("이미지 이름 : ", item.f_name);
 							/* console.log("첫번째 이미지 : ",firstImg); */
 							
 							/* var idcHtml1 = '<li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="'+index+''" class="active"></li>';
@@ -476,7 +477,7 @@ body {
 							$('.carousel-indicators').append(idcHtml1); */
 							
 							var html1 = '<div class="carousel-item active">';
-							   html1 += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" class="d-block w-100" alt="..."></div>';
+							   html1 += '<img src="http://52.79.234.178:8080/post/resources/fileupload/postfile/'+item.f_name+'" class="d-block w-100" alt="..."></div>';
 								$('.carousel-inner').append(html1);
 						})
 						
@@ -489,7 +490,7 @@ body {
 							$('.carousel-indicators').append(idcHtml2); */
 							
 							var html2 = '<div class="carousel-item">';
-								html2 += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" class="d-block w-100" alt="..."></div>';
+								html2 += '<img src="http://52.79.234.178:8080/post/resources/fileupload/postfile/'+item.f_name+'" class="d-block w-100" alt="..."></div>';
 								$('.carousel-inner').append(html2);
 						})
 					}

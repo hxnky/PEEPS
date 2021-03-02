@@ -99,8 +99,8 @@
 					   html += '</a></div><div class="panel-body">';
 					   html += '<a class="postidx" href="<c:url value="/post/detail?idx='+item.p_idx+'"/>">';
 					   /* test 파일 경로 */     
-					   /* html += '<img src="http://52.79.234.178:8080/post/fileupload/postfile/'+item.p_thumbnail+'"/>'; */
-					   html += '<img src="<c:url value="/resources/fileupload/postfile/'+item.p_thumbnail+'"/>" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
+					   /* html += '<img src="http://52.79.234.178:8080/post/resources/fileupload/postfile/'+item.p_thumbnail+'"/>'; */
+					   html += '<img src="http://52.79.234.178:8080/post/resources/fileupload/postfile/'+item.p_thumbnail+'" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
 					   html += '</div><div class="panel-footer">'+date+'</div></div></div>';
 					   
 					   $('.row').append(html);
@@ -311,7 +311,7 @@
 					   html += '<a id="ptitle" class="postidx" href="<c:url value="/post/detail?idx='+list[i].p_idx+'"/>">'+pt;
 					   html += '</a></div><div class="panel-body">';
 					   html += '<a class="postidx" href="<c:url value="/post/detail?idx='+list[i].p_idx+'"/>">';
-					   html += '<img src="<c:url value="/resources/fileupload/postfile/'+list[i].p_thumbnail+'"/>" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
+					   html += '<img src="http://52.79.234.178:8080/post/resources/fileupload/postfile/'+list[i].p_thumbnail+'" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
 					   html += '</div><div class="panel-footer">'+date+'</div></div></div>';
 					  /*  $('.postList').append(html); */
 					   $('.row').append(html);

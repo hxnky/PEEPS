@@ -54,10 +54,8 @@
 					</div>
 					<!-- 파일 프리뷰 -->
 					<div id="preview" class="preview">
-					
 					<span class="oldPrv"></span>
 					<span class="newPrv"></span>
-						
         			</div>
 				</td>
 			</tr>
@@ -162,12 +160,14 @@
 			$.ajax({
 				url : "http://52.79.234.178:8080/post/rest/member/post/detail/image?idx="+ postIdx,
 				/* url : "http://localhost:8081/post/rest/member/post/detail/image?idx="+ postIdx, */
-				type : 'GET',
+				type : 'post',
 				success : function(data){
+					console.log("이미지 데이터 : ",data);
 					
 					$.each(data,function(index, item){
 						var prvImgHtml = '<a href="javascript:void(0);" onclick=\"deleteOldImageAction('+ index + ');\" id="img_id_'+ index+ '" class="img_event" >';
-						   prvImgHtml += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" style="width:148px; height:148px;" class="imgPrv" alt="postImages"></a>';
+						   /* prvImgHtml += '<img src="<c:url value="/resources/fileupload/postfile/'+item.f_name+'"/>" style="width:148px; height:148px;" class="imgPrv" alt="postImages"></a>'; */
+						   prvImgHtml += '<img src="http://52.79.234.178:8080/post/resources/fileupload/postfile/'+item.f_name+'" style="width:148px; height:148px;" class="imgPrv" alt="postImages"></a>';
 						
 						   oldImage_list.push(item.f_name);
 						   

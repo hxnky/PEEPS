@@ -90,7 +90,7 @@ public class PostController {
 	}
 	
 	// 게시글의 이미지 출력
-	@GetMapping("/detail/image")
+	@PostMapping("/detail/image")
 	public List<PostFile> getPostDetailImgs(
 			@RequestParam("idx") int postIdx
 			){
