@@ -13,7 +13,7 @@
 <title>PEEPS</title>
 </head>
 
-<%@ include file="/WEB-INF/views/include/detailBasicset.jsp"%>  
+<%@ include file="/WEB-INF/views/include/postDetailBasicset.jsp"%>  
 
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp"%>

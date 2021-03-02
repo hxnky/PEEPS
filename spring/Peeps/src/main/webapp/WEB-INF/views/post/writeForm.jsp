@@ -12,7 +12,7 @@
 <title>Peeps</title>
 </head>
 
-<%@ include file="/WEB-INF/views/include/writeBasicset.jsp"%>  
+<%@ include file="/WEB-INF/views/include/postWriteBasicset.jsp"%>  
 <link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp"%>
@@ -234,7 +234,8 @@
 	    	
 	    	//ajax로 폼데이터 전송
 	    	$.ajax({
-	    		url : 'http://52.79.234.178:8080/post/rest/member/post/upload',
+	    		/* url : 'http://52.79.234.178:8080/post/rest/member/post/upload', */
+	    		url : 'http://localhost:8081/post/rest/member/post/upload',
 	    		type : 'POST',
 	    		data : formData,
 	    		processData: false,
@@ -245,7 +246,7 @@
 	    		var memberid = "${id}";
 	    		console.log("ajax 데이터 : ",data);				
 	    		/* window.location.href="http://localhost:8080/peeps/"+memberid; */
-	    		window.location.href="${pageContext.request.contextPath}/peeps/"+memberid;
+	    		window.location.href="${pageContext.request.contextPath}/"+memberid;
 	    					
 	    		},error: function(e){
 	    		console.log("ajax전송에러");	

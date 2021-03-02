@@ -67,7 +67,7 @@ public class PostController {
 //		System.out.println("path 멤버아이디 :"+memberid); 
 		System.out.println("mIdx : "+mIdx);
 		System.out.println("멤버아이디 : "+mId);
-
+		
 		return listService.getPostListView(page, request, mIdx);
 	}
 	

@@ -23,7 +23,6 @@
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.domain.PostListView"/>
 <fullyQualifiedTypeName name="com.fasterxml.jackson.core.JsonParser"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.dao.LikeDao"/>
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.service.CommentService"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Param"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
 <fullyQualifiedTypeName name="com.gnjk.peeps.Member.domain.Peeps"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
 </qualifiedTypeNameHistroy>

@@ -11,139 +11,9 @@
 <meta charset="UTF-8">
 <title>Peeps</title>
 </head>
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap')
-	;
-</style>
+
+<%@ include file="/WEB-INF/views/include/postEditBasicset.jsp"%>  
 <link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
-
-<style>
-.post_wrap {
-	width: 1000px;
-	height: auto;
-	background-color: white;
-	margin: 200px auto;
-	border: 1px solid #eef0ed;
-}
-
-.post {
-	margin: 80px auto 65px;
-}
-
-.pdate_wrap {
-	text-align: right;
-	height: 40px;
-	font-family: 'Nanum Gothic', sans-serif;
-	font-weight: 800;
-}
-
-.pdate {
-	color: #999;
-	font-size: 1.1em;
-}
-
-.ptitle {
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	width: 770px;
-	height: 50px;
-	margin-bottom: 15px;
-	font-size: 1.5em;
-	padding: 5px 15px;
-}
-
-.pcontent {
-	resize: none;
-	width: 770px;
-	height: 600px;
-	font-size: 1.4em;
-	padding: 15px;
-	margin-bottom: 5px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-}
-
-/* 스크롤바 숨김 & 스크롤 정상 작동 */
-.pcontent::-webkit-scrollbar {
-	display: none;
-}
-
-.post_cnclorsubmt {
-	text-align: right;
-}
-
-.post_cnclorsubmt>input {
-	margin: 20px 0 0 20px;
-	width: 100px;
-	height: 40px;
-	font-size: 1.1em;
-	font-family: 'Nanum Gothic', sans-serif;
-	border: 0px solid;
-	border-radius: 5px;
-}
-
-#submitbtn {
-	background-color: #F5E978;
-}
-
-#imguploadbtn {
-	width: 45px;
-	height: 45px;
-}
-
-#preview {
-	width: 790px;
-	min-height: 50px;
-	margin: 15px 0px;
-	border: 1px solid #ccc;
-	font-size: 0;
-	padding: 5px;
-	border-radius: 5px;
-}
-
-.imgPrv {
-	padding: 5px;
-}
-
-.plocwrap {
-	margin: 10px 0;
-}
-
-.searchlocbtn {
-	border: 0px solid;
-	background-color: #F5E978;
-	border-radius: 5px;
-	width: 110px;
-	height: 45px;
-	margin: 5px 10px 5px 0;
-	font-size: 1.1em;
-}
-
-.searchlocBox {
-	border: 0px solid;
-	background-color: transparent;
-	cursor: default;
-	width: 250px;
-	font-size: 1.1em;
-}
-
-.displayNone {
-	display: none;
-}
-
-body {
-	background-color: #fcf9f6;
-	font-family: 'Nanum Gothic', sans-serif;
-}
-</style>
-
-<!--jquery 라이브러리 로드-->
-<script src="https://code.jquery.com/jquery-1.12.4.min.js" 
-		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
-		crossorigin="anonymous">
-</script>    
-
 <body>
 <%@ include file="/WEB-INF/views/include/nav.jsp"%>
 	<div class="post_wrap">
@@ -187,6 +57,7 @@ body {
 					
 					<span class="oldPrv"></span>
 					<span class="newPrv"></span>
+						
         			</div>
 				</td>
 			</tr>
@@ -249,7 +120,8 @@ body {
 			var postIdx = getParameterByName('idx');
 			// 게시글 데이터 받아오기
 			$.ajax({
-				url : "http://52.79.234.178:8080/post/rest/member/post/detail?idx="+ postIdx,
+				/* url : "http://52.79.234.178:8080/post/rest/member/post/detail?idx="+ postIdx, */
+				url : "http://localhost:8081/post/rest/member/post/detail?idx="+ postIdx,
 				type : 'GET',
 				async: false,
 				success : function(data){
@@ -288,7 +160,8 @@ body {
 			
 			// 게시글 이미지 데이터 받아오기
 			$.ajax({
-				url : "http://52.79.234.178:8080/post/rest/member/post/detail/image?idx="+ postIdx,
+				/* url : "http://52.79.234.178:8080/post/rest/member/post/detail/image?idx="+ postIdx, */
+				url : "http://localhost:8081/post/rest/member/post/detail/image?idx="+ postIdx,
 				type : 'GET',
 				success : function(data){
 					
@@ -499,7 +372,8 @@ body {
 	    			
 	    	//ajax로 폼데이터 전송
 	    	$.ajax({
-	    		url : 'http://52.79.234.178:8080/post/rest/member/post/edit',
+	    		/* url : 'http://52.79.234.178:8080/post/rest/member/post/edit', */
+	    		url : 'http://localhost:8081/post/rest/member/post/edit',
 	    		type : 'POST',
 	    		data : formData,
 	    		processData: false,
@@ -507,7 +381,8 @@ body {
 	    		success : function(data){
 	    					
 	    		console.log("ajax 데이터 : ",data);			
-	    		window.location.href="http://52.79.227.12:8080/peeps/post/detail?idx="+postIdx;
+	    		/* window.location.href="http://52.79.227.12:8080/peeps/post/detail?idx="+postIdx; */
+	    		window.location.href="${pageContext.request.contextPath}/post/detail?idx="+postIdx;
 	    		console.log("포스트idx 확인 : ", postIdx);
 	    		},error: function(e){
 	    		console.log("ajax전송에러");	
