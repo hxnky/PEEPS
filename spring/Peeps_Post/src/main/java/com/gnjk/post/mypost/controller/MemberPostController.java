@@ -13,7 +13,7 @@ import com.gnjk.post.mypost.service.TimeLineService;
 
 @RestController
 @CrossOrigin(origins = "*")
-public class CrossOriginController {
+public class MemberPostController {
 
    @Autowired
    private TimeLineService timeLineService;

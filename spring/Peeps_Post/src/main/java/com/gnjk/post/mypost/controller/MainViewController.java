@@ -14,25 +14,26 @@ import com.gnjk.post.mypost.domain.Peeps;
 @Controller
 public class MainViewController {
 	
-//	@RequestMapping("/error")
-//	public String goErrorPage() {
-//		return "error/errorPage";
+	// test용 세션 생성
+//	@RequestMapping("/")
+//	public String test(HttpServletRequest request) {
+//		// test 로그인 세션 가져오기
+//		HttpSession session = request.getSession();
+//		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
+//		System.out.println("로그인 인포 세션 : "+loginInfo);
+//		
+//		// test 로그인 안된 경우, 로그인 정보 세션 생성
+//		if(loginInfo == null) {
+//			
+//			loginInfo = new Peeps(3, "jh@gmail.com", "11111", "jh", "jhS2", "프으사 (3).jpg", "안녕하세요", "1", 'Y', "email");
+//			session.setAttribute("peeps", loginInfo);
+//		}
+//		return "myPage";
 //	}
 	
-	// test용 세션 생성
+	// test용 페이지 
 	@RequestMapping("/")
-	public String test(HttpServletRequest request) {
-		// test 로그인 세션 가져오기
-		HttpSession session = request.getSession();
-		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
-		System.out.println("로그인 인포 세션 : "+loginInfo);
-		
-		// test 로그인 안된 경우, 로그인 정보 세션 생성
-		if(loginInfo == null) {
-			
-			loginInfo = new Peeps(3, "jh@gmail.com", "11111", "jh", "jhS2", "프으사 (3).jpg", "안녕하세요", "1", 'Y', "email");
-			session.setAttribute("peeps", loginInfo);
-		}
+	public String doTest() {
 		return "myPage";
 	}
 	
