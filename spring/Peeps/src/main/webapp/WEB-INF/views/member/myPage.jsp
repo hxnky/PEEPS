@@ -560,5 +560,5 @@ $("#keyword").click(function() {
 </script>
 
 <%-- <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/mypagepostmap.js"></script> --%>
-<%@ include file="/WEB-INF/views/include/mypagePostMap.jsp"%>
+<%@ include file="/WEB-INF/views/include/mypagePostMapJS.jsp"%>
 </html>
