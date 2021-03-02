@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
       select *
       from chat.chat
       where
-      m_idx = #{m_idx}
+      me_idx = #{me_idx}
       order by rm_idx desc limit 1
    </select>
 

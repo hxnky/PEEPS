@@ -13,12 +13,12 @@ import com.gnjk.chat.domain.Message;
 import com.gnjk.chat.service.MesListService;
 
 @RestController
-@CrossOrigin
 public class ListController {
 	
 	@Autowired
 	private MesListService service;
 	
+	@CrossOrigin
 	@RequestMapping(value = "mes/select")
 	public List<Message> mesList(Message mes, HttpSession session) throws Exception{
 		
@@ -31,6 +31,7 @@ public class ListController {
 		
 	}
 	
+	@CrossOrigin
 	@RequestMapping(value = "room/select")
 	public List<Message> roomList(Message mes, HttpSession session) throws Exception{
 		

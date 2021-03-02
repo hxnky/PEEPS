@@ -1,8 +1,7 @@
 package com.gnjk.chat.service;
 
-import java.util.List; import java.util.Map;
 
-import javax.inject.Inject; import javax.servlet.http.HttpSession;
+import javax.inject.Inject; 
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired; 

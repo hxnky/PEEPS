@@ -14,7 +14,6 @@ import com.gnjk.chat.service.AlarmListService;
 import com.gnjk.chat.service.DeleteService;
 
 @RestController
-@CrossOrigin
 public class AlarmController {
 
 	@Autowired
@@ -23,6 +22,7 @@ public class AlarmController {
 	@Autowired
 	private DeleteService dservice;
 
+	@CrossOrigin
 	@RequestMapping(value = "alarm/select")
 	public List<Alarm> alarmList(Alarm alarm, HttpSession session) throws Exception{
 		session.setAttribute("list", service.alarmList(alarm));
@@ -35,6 +35,7 @@ public class AlarmController {
 		
 	}
 
+	@CrossOrigin
 	@RequestMapping(value = "alarm/delete")
 	public int deleteAl(Alarm alarm, HttpSession session) throws Exception {
 
