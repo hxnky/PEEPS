@@ -28,7 +28,6 @@ import com.gnjk.peeps.Member.Service.MyPageService;
 import com.gnjk.peeps.Member.Service.OAuthService;
 import com.gnjk.peeps.Member.Service.RegService;
 import com.gnjk.peeps.Member.Service.TimeLineService;
-import com.gnjk.peeps.Member.domain.EditRequest;
 import com.gnjk.peeps.Member.domain.FollowRequest;
 import com.gnjk.peeps.Member.domain.Peeps;
 import com.gnjk.peeps.Member.domain.RegRequest;
@@ -72,9 +71,9 @@ public class MemberRestController {
 
 	// 로그인
 	@PostMapping("/user/login")
-	public int login(String email, String password, Model model, HttpServletRequest request) {
+	public int login(String email, String password, Model model, HttpServletRequest request, HttpSession session) {
 
-		return loginService.login(email, password, request);
+		return loginService.login(email, password, request, session);
 
 	}
 
@@ -84,14 +83,13 @@ public class MemberRestController {
 
 		return regService.memberReg(regRequest, request);
 	}
-
-	// 프로필 편집
-	@PostMapping("/profile/edit")
-	public int editUserInfo(EditRequest editRequest, HttpServletRequest request, HttpSession session) {
-
-		return editService.editPeeps(editRequest, request, session);
-
-	}
+//
+//	// 프로필 편집 정보
+//	@GetMapping("/edit/Info")
+//	public Peeps editUserInfo(String email) {
+//
+//		return editService.getPeeps(email);
+//	}
 
 	// 비밀번호 찾기
 	@PostMapping("/user/editpw")
@@ -119,7 +117,7 @@ public class MemberRestController {
 	}
 
 	// 검색
-	@GetMapping("/user/loaduser")
+	@PostMapping("/user/loaduser")
 	public List<Peeps> loadUser(String keyword, int m_idx) {
 
 		return findUserService.SearchPeeps(keyword, m_idx);
@@ -140,7 +138,7 @@ public class MemberRestController {
 	}
 
 	// 마이페이지 유저 정보
-	@GetMapping("/mypage/Info")
+	@PostMapping("/mypage/Info")
 	public List<FollowRequest> PageInfo(String id, int m_idx){
 		
 		return myPageService.getPeeps(id, m_idx);
@@ -215,11 +213,11 @@ public class MemberRestController {
 
 	// 소셜 회원 정보
 	@GetMapping(value = "/user/socialInfo")
-	public Peeps SocialInfo(String email, HttpServletRequest request) {
+	public Peeps SocialInfo(String email, HttpServletRequest request,HttpSession session) {
 
 		// session.setAttribute("peeps", oauthService.selectSocialInfo(email));
 
-		return oauthService.selectSocialInfo(email, request);
+		return oauthService.selectSocialInfo(email, request, session);
 	}
 
 	// 소셜 로그인 타입 확인

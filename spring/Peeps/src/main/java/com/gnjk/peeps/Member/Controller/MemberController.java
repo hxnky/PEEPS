@@ -1,12 +1,14 @@
 package com.gnjk.peeps.Member.Controller;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +28,7 @@ public class MemberController {
 
 		return "member/LoginForm";
 	}
-
+	
 	// 이메일 회원가입
 	@GetMapping("/member/reg")
 	public String getRegForm() {
@@ -40,6 +42,7 @@ public class MemberController {
 		
 		return "member/TimeLine";
 	}
+
 
 	// 이메일 인증
 	@RequestMapping("/member/verify")
@@ -78,19 +81,21 @@ public class MemberController {
 	}
 
 	// 검색
-	@RequestMapping(value = "/user/finduser", method = RequestMethod.GET)
-	public String findUser(String keyword, Model model) {
+	@RequestMapping(value = "/user/finduser", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+	public String findUser(String keyword, Model model, HttpServletRequest request) throws UnsupportedEncodingException {
 
 		System.out.println(keyword);
+		//request.setCharacterEncoding("utf-8");
 		model.addAttribute("UserKeyword", keyword);
 
 		return "member/FindView";
 	}
 	
 	// 마이페이지
-	@RequestMapping(value = "/user/mypage", method = RequestMethod.GET)
-	public String MyPage(String id, Model model) {
+	@RequestMapping(value = "/user/mypage", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+	public String MyPage(String id, Model model, HttpServletRequest request) throws UnsupportedEncodingException {
 
+		//request.setCharacterEncoding("utf-8");
 		model.addAttribute("page_id", id);
 		
 		return "member/myPage";

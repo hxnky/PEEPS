@@ -34,10 +34,11 @@
 		
 		var m_idx = ${m_idx};
 		var keyword = "${UserKeyword}";
+		console.log(keyword);
 		
 		$.ajax({
 			url : '${pageContext.request.contextPath}/user/loaduser?keyword=' + keyword,
-			type : 'get',
+			type : 'post',
 			async : false,
 			data : {
 				"m_idx" : m_idx
@@ -56,7 +57,7 @@
 					
 					$.each(data, function(index, find){
 						if(find.loginType == 'email'){
-							$('#total_wrap').append("<table class='find_peeps' id='"+find.m_idx+"'><tr class='"+find.m_idx+"'><td rowspan='2'><img id='profile' src='<c:url value='fileupload/"+find.m_photo+"'/>' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("+find.m_idx+")'>"+find.id+"</td></tr></table>");
+							$('#total_wrap').append("<table class='find_peeps' id='"+find.m_idx+"'><tr class='"+find.m_idx+"'><td rowspan='2'><img id='profile' src='<c:url value='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+find.m_photo+"'/>' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("+find.m_idx+")'>"+find.id+"</td></tr></table>");
 							if(find.m_idx == m_idx){
 								$('.'+find.m_idx).append("<td rowspan='2'><div id='fix'><button id='edit_btn'>프로필 편집</button></div></td>");
 							}else{

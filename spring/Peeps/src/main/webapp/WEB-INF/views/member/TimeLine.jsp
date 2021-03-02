@@ -178,7 +178,7 @@ $(document).ready(function() {
 												$.each(data, function(index, Info){
 													//글쓴 사람 사진 가져오기
  													if(Info.loginType=="email"){
- 														$('#'+post.p_idx).append("<div class='user_img' ><img id='profile' src='<c:url value='fileupload/"+Info.m_photo+"'/>' onclick='GoMyPage("+Info.m_idx+")'></div>");
+ 														$('#'+post.p_idx).append("<div class='user_img' ><img id='profile' src='<c:url value='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+Info.m_photo+"'/>' onclick='GoMyPage("+Info.m_idx+")'></div>");
  													} else{
  														$('#'+post.p_idx).append("<div class='user_img'><img id='profile' src='<c:url value='"+Info.m_photo+"'/>' onclick='GoMyPage("+Info.m_idx+")'></div>");
  													}
@@ -231,7 +231,7 @@ $(document).ready(function() {
 																		if(post_idx == cmt.post_idx){
 																			if(cmt.member_idx == cmtInfo.m_idx){
 																				if(cmt.loginType=="email"){
-																					$('#'+post.p_idx).append("<div id='cmt_wrap' class='"+cmt.cmt_idx+"'><div class='cmt_img' ><img id='profile' src='<c:url value='fileupload/"+cmtInfo.m_photo+"'/>' onclick='GoMyPage("+cmt.member_idx+")'></div></div>");
+																					$('#'+post.p_idx).append("<div id='cmt_wrap' class='"+cmt.cmt_idx+"'><div class='cmt_img' ><img id='profile' src='<c:url value='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+cmtInfo.m_photo+"'/>' onclick='GoMyPage("+cmt.member_idx+")'></div></div>");
 																				} else{
 																					$('#'+post.p_idx).append("<div id='cmt_wrap' class='"+cmt.cmt_idx+"'><div class='cmt_img'><img id='profile' src='<c:url value='"+cmtInfo.m_photo+"'/>' onclick='GoMyPage("+cmt.member_idx+")'></div></div>");
 																				}

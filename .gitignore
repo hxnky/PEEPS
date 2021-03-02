@@ -111,6 +111,7 @@ target/
 ## ignoring target file
 target/
 
-
+### my ignore ###
+src/main/resources/application.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse

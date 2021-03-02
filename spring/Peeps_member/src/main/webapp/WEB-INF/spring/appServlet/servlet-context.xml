@@ -20,17 +20,21 @@
 	<!-- 업로드 패스 설정 -->
 	<beans:bean class="java.lang.String" id="uploadPath">
 		<beans:constructor-arg
-			value="C:\Users\hanky\Desktop\bit\PEEPS\peeps_spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Peeps_member\fileupload" />
+			value="file:///C:/Users/hanky/Desktop/bit/PEEPS/peeps_spring/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/Peeps_member/resources/fileupload/" />
 	</beans:bean>
+	<!-- 업로드 패스 설정 -->
+	<!-- <beans:bean class="java.lang.String" id="uploadPath"> -->
+
+	<!-- <beans:constructor-arg value="peepsmember"> -->
+	<!-- </beans:constructor-arg> -->
+
+	<!-- </beans:bean> -->
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/fileupload/**"
-		location="file:///C:\Users\hanky\Desktop\bit\PEEPS\peeps_spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Peeps_member\fileupload" />
-	<resources mapping="/postfile/**"
-		location="file:///C:\Users\hanky\Desktop\bit\PEEPS\peeps_spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Peeps_member\fileupload\postfile" />
-
+		location="file:///C:\Users\hanky\Desktop\bit\PEEPS\peeps_spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Peeps_member\resources\fileupload\" />
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
 	<beans:bean
@@ -65,7 +69,6 @@
 		</beans:property>
 	</beans:bean>
 
-
 	<!-- Redis -->
 	<beans:bean id="jedisConnFactory"
 		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
@@ -74,9 +77,9 @@
 		class="org.springframework.data.redis.core.RedisTemplate"
 		p:connectionFactory-ref="jedisConnFactory" />
 
-
-
-	<tx:annotation-driven />
+	<!-- <tx:annotation-driven /> -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
 
 
 

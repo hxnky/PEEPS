@@ -68,7 +68,7 @@ function load_MyPage(){
 	// 유저 정보 불러오기
 	$.ajax({
 		url : '${pageContext.request.contextPath}/mypage/Info',
-		type : 'get',
+		type : 'post',
 		async : false,
 		data : {
 			"m_idx" : m_idx,
@@ -83,7 +83,7 @@ function load_MyPage(){
 			
 			$.each(data, function(index, find){
 				if(find.loginType == 'email'){
-					$('#profile_wrap').append("<div id='pro_img'><input type='hidden' id='idx' value='"+find.m_idx+"'><img id='profile' src='<c:url value='fileupload/"+find.m_photo+"'/>' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("+find.m_idx+")'></div><div id='pro_btn' class='"+find.m_idx+"'></div>");
+					$('#profile_wrap').append("<div id='pro_img'><input type='hidden' id='idx' value='"+find.m_idx+"'><img id='profile' src='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+find.m_photo+"' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("+find.m_idx+")'></div><div id='pro_btn' class='"+find.m_idx+"'></div>");
 					if(find.m_idx == m_idx){
 						$('#pro_btn').append("<ul><li id='memberid'>"+find.id+"</li><li><button id='edit'>프로필 편집</button></li></ul>");
 					}else{
@@ -107,7 +107,9 @@ function load_MyPage(){
 				}
 				$('#pro_btn').append("<ul><li>게시물</li><li id='postCnt'></li><li>팔로워</li><li><button id='follower_btn'>"+find.followerCnt+"</button></li><li>팔로잉</li><li><button id='following_btn'>"+find.followingCnt+"</button></li></ul>");
 				$('#pro_btn').append("<div id='pro_name'>"+find.name+"</div><div id='pro_bio'>"+find.bio+"</div>")
-				
+				if(find.bio == null){
+					$('#pro_bio').empty();
+				}
 			});
 		},
 		error : function() {
@@ -213,7 +215,7 @@ function load_MyPage(){
 					$.each(data, function(index, follow){
 
 						if(follow.loginType == 'email'){
-							$('#List_ing').append("<table id='find_peeps'><tr><td><img id='profile_modal' src='<c:url value='/fileupload/"+follow.m_photo+"'/>' onclick='GoMyPage("+follow.m_idx+")'></td><td rowspan='2' id='id' onclick='GoMyPage("+follow.m_idx+")'>"+follow.id+"</td><td id='"+follow.m_idx+"'></td></tr></table>");
+							$('#List_ing').append("<table id='find_peeps'><tr><td><img id='profile_modal' src='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+follow.m_photo+"' onclick='GoMyPage("+follow.m_idx+")'></td><td rowspan='2' id='id' onclick='GoMyPage("+follow.m_idx+")'>"+follow.id+"</td><td id='"+follow.m_idx+"'></td></tr></table>");
 							if(follow.m_idx == m_idx){
 								$('#'+follow.m_idx).append("<button id='modal_edit' onclick='modal_edit()'>프로필 편집</button>");
 							}else{
@@ -272,7 +274,7 @@ function load_MyPage(){
 					
 					$.each(data, function(index, follow){
 						if(follow.loginType == 'email'){
-							$('#List_wer').append("<table id='find_peeps'><tr><td><img id='profile_modal' src='<c:url value='/fileupload/"+follow.m_photo+"'/>' onclick='GoMyPage("+follow.m_idx+")'></td><td rowspan='2' id='id' onclick='GoMyPage("+follow.m_idx+")'>"+follow.id+"</td><td id='"+follow.m_idx+"'></td></tr></table>");
+							$('#List_wer').append("<table id='find_peeps'><tr><td><img id='profile_modal' src='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+follow.m_photo+"' onclick='GoMyPage("+follow.m_idx+")'></td><td rowspan='2' id='id' onclick='GoMyPage("+follow.m_idx+")'>"+follow.id+"</td><td id='"+follow.m_idx+"'></td></tr></table>");
 							if(follow.m_idx == m_idx){
 								$('#'+follow.m_idx).append("<button id='modal_edit' onclick='modal_edit()'>프로필 편집</button>");
 							}else{

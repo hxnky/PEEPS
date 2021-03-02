@@ -27,7 +27,7 @@
 					<c:set var="loginType" value="${loginType}" /> <c:choose>
 						<c:when test="${loginType eq 'email' }">
 							<img id="MyPage_img"
-								src="<c:url value="/fileupload/${m_photo}"/>">
+								src="https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile${m_photo}">
 						</c:when>
 						<c:when test="${loginType ne 'email' }">
 							<img id="MyPage_img" src="<c:url value="${m_photo}"/>">
@@ -39,9 +39,4 @@
 
 		</nav>
 
-
-<!-- 21.02.27 한경 추가 -->
-<script>
-
-</script>
 </html>

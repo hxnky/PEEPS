@@ -1,6 +1,7 @@
 package com.gnjk.peeps.Member.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class LoginService {
 	@Autowired
 	private RedisService redisService;
 
-	public int login(String email, String password, HttpServletRequest request) {
+	public int login(String email, String password, HttpServletRequest request, HttpSession session) {
 
 		dao = template.getMapper(MemberDao.class);
 
@@ -38,10 +39,20 @@ public class LoginService {
 
 		if (peeps != null) {
 			if (peeps.getVerify() == 'Y') {
+				System.out.println("세션 아이디 : " + request.getSession().getId());
 				request.getSession().setAttribute("loginInfo", peeps.toLoginInfo());
 				redisService.setUserInformation(peeps.toLoginInfo(), request.getSession());
 				loginCheck = true;
 				result = 2;
+				
+//				session.setAttribute("m_idx", peeps.getM_idx());
+//				session.setAttribute("email", peeps.getEmail());
+//				session.setAttribute("loginType", peeps.getLoginType());
+//				session.setAttribute("m_photo", peeps.getM_photo());
+//				session.setAttribute("id", peeps.getId());
+//				session.setAttribute("name", peeps.getName());
+//				session.setAttribute("bio", peeps.getBio());
+				
 			} else if(peeps.getVerify() == 'N') {
 				System.out.println("미인증계정");
 				loginCheck = true;
@@ -55,6 +66,8 @@ public class LoginService {
 		}
 
 		//session.setAttribute("peeps", peeps);
+		
+
 
 		return result;
 	}

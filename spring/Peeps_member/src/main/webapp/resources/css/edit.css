@@ -1,5 +1,7 @@
 /*공통인부분*/
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap')
+	;
 
 body {
 	background-color: #fcf9f6;
@@ -28,11 +30,11 @@ body {
 	float: right;
 }
 
-#table_right {
+#table_right, #table_right_ro {
 	font-weight: bold;
 }
 
-#table_right>input, #edit_bio {
+#table_right>input, , #table_right_ro>input, #edit_bio {
 	width: 300px;
 	margin: 10px auto;
 }

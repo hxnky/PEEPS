@@ -30,57 +30,8 @@
 		</div>
 		<div id="edit_wrap">
 			<form id="edit_photo" enctype="multipart/form-data">
-				<input type="hidden" id="email" name="email" value="${email }">
-				<table id="edit_table">
-					<tr>
-						<td id="table_left" rowspan="3"><c:set var="loginType"
-								value="${loginType}" /> <c:choose>
-								<c:when test="${loginType eq 'email' }">
-									<img id="profile"
-										src="<spring:url value="/fileupload/${m_photo}"/>">
-									<input type="hidden" id="oldPhoto" name="oldPhoto"
-										value="${m_photo}">
-									<br>
-								</c:when>
-								<c:when test="${loginType ne 'email' }">
-									<img id="profile" src="<spring:url value="${m_photo}"/>">
-									<input type="hidden" id="oldPhoto" name="oldPhoto"
-										value="${m_photo}">
-									<br>
-								</c:when>
-
-							</c:choose> <input type="file" class="choose" id="m_photo" name="m_photo"
-							accept="img/*"><br>
-							<button type="button" id="choose_btn">프로필 사진 바꾸기</button></td>
-
-						<td id="table_right">아이디 <br> <input type="text"
-							class="edit_text" id="id" name="id" value="${id}">
-						</td>
-					</tr>
-					<tr>
-						<td id="table_right">이름 <br> <c:set var="loginType"
-								value="${loginType}" /> <c:choose>
-								<c:when test="${loginType eq 'email' }">
-									<input type="text" class="edit_text" id="name" name="name"
-										value="${name}">
-								</c:when>
-								<c:when test="${loginType ne 'email' }">
-									<input type="text" class="edit_text" id="name" name="name"
-										value="${name}" readonly="readonly">
-								</c:when>
-
-							</c:choose>
-						</td>
-					</tr>
-					<tr>
-						<td id="table_right">소개글 <br> <input type="text"
-							class="edit_bio" id="bio" name="bio" value="${bio}">
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2"></td>
-					</tr>
-				</table>
+				
+				
 			</form>
 			<button id="change">변경</button>
 		</div>
@@ -96,7 +47,73 @@
 <script src="<c:url value="/resources/js/jquery.bootstrap.wizard.js"/>"
 	type="text/javascript"></script>
 
+<script>
+	load_EditPage();
 
+	function load_EditPage(){
+		
+		var m_idx = ${m_idx};
+		var email = "${email}";
+		var loginType="${loginType}";
+		var m_photo = "${m_photo}";
+		var name = "${name}";
+		var bio = "${bio}";
+		var id="${id}";
+		
+		console.log(loginType);
+		
+		$('#edit_photo').empty();
+		
+		$('#edit_photo').append("<input type='hidden' id='email' name='email' value='"+email+"'><input type='hidden' id='m_idx' name='m_idx' value='"+m_idx+"'><input type='hidden' id='loginType' name='loginType' value='"+loginType+"'><table id='edit_table'><tr><td id='table_left' rowspan='3'></td><td id='table_right' class='userId'></td></tr><tr><td id='table_right' class='userName'>이름<br></td></tr><table>");
+		if(loginType == 'email'){
+			$('#table_left').append("<img id='profile' src='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+m_photo+"'><input type='hidden' id='oldPhoto' name='oldPhoto' value='"+m_photo+"'><br>");
+			$('#table_left').append("<input type='file' class='choose' id='m_photo' name='m_photo' accept='img/*'><br><button type='button' id='choose_btn'>프로필 사진 바꾸기</button>");
+			$('.userId').append("아이디 <br> <input type='text' class='edit_text' id='id' name='id' value='"+id+"'>");
+			$('.userName').append("<input type='text' class='edit_text' id='name' name='name' value='"+name+"'>");
+		}else{
+			$('#table_left').append("<img id='profile' src='<c:url value='"+m_photo+"'/><input type='hidden' id='oldPhoto' name='oldPhoto' vaue='"+m_photo+"'><br>'>");						
+			$('#table_left').append("<input type='file' class='choose' id='m_photo' name='m_photo' accept='img/*'><br><button type='button' id='choose_btn'>프로필 사진 바꾸기</button>");
+			$('.userId').append("아이디 <br> <input type='text' class='edit_text' id='id' name='id' value='"+id+"'>");
+			$('.userName').append("<input type='text' class='edit_text' id='name' name='name' value='"+name+"' readonly = 'readonly'>");
+		}
+
+		$('#edit_table').append("<tr><td id='table_right'>소개글 <br> <input type='text' class='edit_bio' id='bio' name='bio' value='"+bio+"'></td></tr><tr><td colspan='2'></td></tr>");
+
+
+	}
+	
+	$("#change").click(function() {
+
+		var data = $('#edit_photo')[0];
+		var form_data = new FormData(data);
+
+		$.ajax({
+			url : '${pageContext.request.contextPath}/profile/edit',
+			type : 'post',
+			data : form_data,
+			dataType : 'json',
+			enctype : 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			async : true,
+			success : function(data) {
+				console.log("수정 완료");
+				if (data == 1) {
+					alert("수정 완료");
+					//load_EditPage();
+					location.reload();
+				} else {
+					console.log("수정 실패");
+				}
+
+			},
+			error : function(request, status, error) {
+				console.log("통신 실패");
+
+			}
+		});
+	});
+</script>
 <script>
 	$(function() {
 
@@ -178,39 +195,6 @@
 		});
 	})
 </script>
-<script>
-	$("#change").click(function() {
-
-		var data = $('#edit_photo')[0];
-		var form_data = new FormData(data);
-
-		$.ajax({
-			url : '${pageContext.request.contextPath}/profile/edit',
-			type : 'post',
-			data : form_data,
-			dataType : 'json',
-			enctype : 'multipart/form-data',
-			processData : false,
-			contentType : false,
-			async : true,
-			success : function(data) {
-				console.log("수정 완료");
-				if (data == 1) {
-					alert("수정 완료");
-					//$('#wrap').load(location.href + '#edit_wrap');
-				} else {
-					console.log("수정 실패");
-				}
-
-			},
-			error : function(request, status, error) {
-				console.log("통신 실패");
-
-			}
-		});
-	});
-</script>
-
 <script>
 
 var id = "${id}";

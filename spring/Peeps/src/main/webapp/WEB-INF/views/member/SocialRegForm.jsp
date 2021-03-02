@@ -107,47 +107,44 @@ h4 {
 <script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 
 <script>
-
-LoadingWithMask();
-
-function LoadingWithMask() {
-    //화면의 높이와 너비를 구합니다.
-    var maskHeight = $(document).height();
-    var maskWidth  = window.document.body.clientWidth;
-     
-    //화면에 출력할 마스크를 설정해줍니다.
-    var mask       ="<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
-    var loadingImg ='';
-    
-    loadingImg +=" <img src='<c:url value='/resources/images/loading-unscreen.gif'/>' style='z-index:9999; width:200px; height:200px; position: absolute; display: block; left:43%; top:30%;'>"; 
- 
-    //화면에 레이어 추가
-    $('body').append(mask);
- 
-    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
-    $('#mask').css({
-            'width' : maskWidth,
-            'height': maskHeight,
-            'opacity' :'0.3'
-    });
-  
-    //마스크 표시
-    $('#mask').show();
-  
-    //로딩중 이미지 표시
-    $('#loadingImg').append(loadingImg);
-    $('#loadingImg').show();
-}
-
-function closeLoadingWithMask() {
-    $('#mask, #loadingImg').hide();
-    $('#mask, #loadingImg').empty(); 
-}
-
-</script>
-<script>
 $(document).ready(function() {
+						
+						LoadingWithMask();
+						
+						function LoadingWithMask() {
+						    //화면의 높이와 너비를 구합니다.
+						    var maskHeight = $(document).height();
+						    var maskWidth  = window.document.body.clientWidth;
+						     
+						    //화면에 출력할 마스크를 설정해줍니다.
+						    var mask       ="<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
+						    var loadingImg ='';
+						    
+						    loadingImg +=" <img src='<c:url value='/resources/images/loading-unscreen.gif'/>' style='z-index:9999; width:200px; height:200px; position: absolute; display: block; left:43%; top:30%;'>"; 
+						 
+						    //화면에 레이어 추가
+						    $('body').append(mask);
+						 
+						    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
+						    $('#mask').css({
+						            'width' : maskWidth,
+						            'height': maskHeight,
+						            'opacity' :'0.3'
+						    });
+						  
+						    //마스크 표시
+						    $('#mask').show();
+						  
+						    //로딩중 이미지 표시
+						    $('#loadingImg').append(loadingImg);
+						    $('#loadingImg').show();
+						}
 
+						function closeLoadingWithMask() {
+						    $('#mask, #loadingImg').hide();
+						    $('#mask, #loadingImg').empty(); 
+						}
+						
 						var loginType = "${loginType}";
 						var email = "${email}";
 						var m_photo = "${m_photo}";
@@ -163,7 +160,9 @@ $(document).ready(function() {
 							type : 'get',
 							async : false,
 							success : function(data) {
-
+								
+								
+								
 								if (data == "kakao") {
 									LoginType = "kakao";
 								} else if (data == "google") {
@@ -187,6 +186,7 @@ $(document).ready(function() {
 							type : 'get',
 							async : false,
 							success : function(data) {
+								LoadingWithMask();
 								if (data == 1) {
 									if (loginType == LoginType) {
 										

@@ -11,6 +11,7 @@ public class LoginInfo {
 	private String name;
 	private String m_photo;
 	private String loginType;
+	private String bio;
 
 	@Override
 	public String toString() {
@@ -18,7 +19,7 @@ public class LoginInfo {
 				+ m_photo + ", loginType=" + loginType + "]";
 	}
 
-	public LoginInfo(int m_idx, String email, String id, String name, String m_photo, String loginType) {
+	public LoginInfo(int m_idx, String email, String id, String name, String m_photo, String loginType, String bio) {
 		super();
 		this.m_idx = m_idx;
 		this.email = email;
@@ -26,6 +27,7 @@ public class LoginInfo {
 		this.name = name;
 		this.m_photo = m_photo;
 		this.loginType = loginType;
+		this.bio = bio;
 	}
 
 }

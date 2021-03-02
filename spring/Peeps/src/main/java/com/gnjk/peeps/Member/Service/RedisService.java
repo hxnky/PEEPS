@@ -29,7 +29,7 @@ public class RedisService {
 	 * @param LoginInfo
 	 */
 
-	public void setUserInformation(LoginInfo loginInfo, HttpSession session) {
+	public Map setUserInformation(LoginInfo loginInfo, HttpSession session) {
 
 		// logger.debug("> setUserInformation", TAG);
 
@@ -40,19 +40,23 @@ public class RedisService {
 
 		Map<String, Object> mapMemberInfo = new HashMap<String, Object>();
 		mapMemberInfo.put("m_idx", loginInfo.getM_idx());
-		mapMemberInfo.put("email", loginInfo.getEmail());
 		mapMemberInfo.put("name", loginInfo.getName());
-		mapMemberInfo.put("loginType", loginInfo.getLoginType());
-		mapMemberInfo.put("id", loginInfo.getId());
 		mapMemberInfo.put("m_photo", loginInfo.getM_photo());
+		mapMemberInfo.put("id", loginInfo.getId());
+		mapMemberInfo.put("loginType", loginInfo.getLoginType());
+		mapMemberInfo.put("email", loginInfo.getEmail());
+		mapMemberInfo.put("bio", loginInfo.getBio());
 		redisTemplate.opsForHash().putAll(key, mapMemberInfo);
 
 		session.setAttribute("m_idx", loginInfo.getM_idx());
 		session.setAttribute("email", loginInfo.getEmail());
-		session.setAttribute("name", loginInfo.getName());
 		session.setAttribute("loginType", loginInfo.getLoginType());
 		session.setAttribute("m_photo", loginInfo.getM_photo());
 		session.setAttribute("id", loginInfo.getId());
+		session.setAttribute("name", loginInfo.getName());
+		session.setAttribute("bio", loginInfo.getBio());
+		
+		return mapMemberInfo;
 
 	}
 
@@ -70,11 +74,16 @@ public class RedisService {
 		String key = sessionId;
 
 		LoginInfo result = new LoginInfo((int) redisTemplate.opsForHash().get(key, "m_idx"),
-				(String) redisTemplate.opsForHash().get(key, "email"),
+				(String) redisTemplate.opsForHash().get(key, "id"),
 				(String) redisTemplate.opsForHash().get(key, "name"),
-				(String) redisTemplate.opsForHash().get(key, "loginType"),
 				(String) redisTemplate.opsForHash().get(key, "m_photo"),
-				(String) redisTemplate.opsForHash().get(key, "id"));
+				(String) redisTemplate.opsForHash().get(key, "email"),
+				(String) redisTemplate.opsForHash().get(key, "loginType"),
+				(String) redisTemplate.opsForHash().get(key, "bio"));
+
+		// logger.debug("> userId : {}", result.getMemberid(), TAG);
+		// logger.debug("> userPassword : {}", result.getMembername(), TAG);
+		// logger.debug("> phoneNumber : {}", result.getMemberphoto(), TAG);
 
 		return result;
 

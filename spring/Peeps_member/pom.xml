@@ -300,15 +300,16 @@
 			<version>1.7.30</version>
 		</dependency>
 
-		<!-- Redis -->
-		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk -->
+		<!-- S3 -->
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
 		<dependency>
 			<groupId>com.amazonaws</groupId>
-			<artifactId>aws-java-sdk</artifactId>
-			<version>1.9.2</version>
+			<artifactId>aws-java-sdk-s3</artifactId>
+			<version>1.11.964</version>
 		</dependency>
 
 
+		<!-- Redis -->
 		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
 		<dependency>
 			<groupId>redis.clients</groupId>
@@ -322,6 +323,8 @@
 			<artifactId>spring-data-redis</artifactId>
 			<version>1.8.6.RELEASE</version>
 		</dependency>
+
+
 
 	</dependencies>
 	<build>
