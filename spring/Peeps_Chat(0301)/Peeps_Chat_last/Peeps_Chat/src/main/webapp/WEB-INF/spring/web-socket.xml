@@ -8,8 +8,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
 
-	<bean class="com.gnjk.chat.handler.ChattingHandler"
-		id="chattinghandler" />
+	<bean class="com.gnjk.chat.handler.ChattingHandler" id="chattinghandler" />
 	<bean class="com.gnjk.chat.handler.AlarmHandler" id="alarmhandler" />
 
 	<websocket:handlers allowed-origins="*">

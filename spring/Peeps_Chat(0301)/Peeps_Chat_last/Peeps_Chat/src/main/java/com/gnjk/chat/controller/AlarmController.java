@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gnjk.chat.domain.Alarm;
@@ -23,8 +24,8 @@ public class AlarmController {
 	private DeleteService dservice;
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "alarm/select")
-	public List<Alarm> alarmList(Alarm alarm, HttpSession session) throws Exception{
+	@RequestMapping(value = "/alarm/select")
+	public List<Alarm> alarmList(@RequestParam("me_idx")int me_idx, Alarm alarm, HttpSession session) throws Exception{
 		session.setAttribute("list", service.alarmList(alarm));
 
 		System.out.println("알람 컨트롤러…");
@@ -36,8 +37,8 @@ public class AlarmController {
 	}
 
 	@CrossOrigin(origins = "*")
-	@RequestMapping(value = "alarm/delete")
-	public int deleteAl(Alarm alarm, HttpSession session) throws Exception {
+	@RequestMapping(value = "/alarm/delete")
+	public int deleteAl(@RequestParam("me_idx")int me_idx, Alarm alarm, HttpSession session) throws Exception {
 
 		session.setAttribute("delAl", dservice.deleteAlarm(alarm.getAl_idx()));
 

@@ -12,30 +12,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 #right {
+	float: right;
 	margin-right: 15px;
+	margin-bottom: 15px;
 	padding: 15px;
-	display: inline;
+	/* display: inline-block; */
 	text-align: right;
 	width: auto;
 	max-width: 70%;
-	background-color: #F4F4F4;
+	background-color: #F2D665;
 	border-radius: 20px;
 	word-wrap: break-word;
+	margin-right: 15px;
+	padding: 15px;
 }
 /* position: relative; */
 #left {
+	float: left;
 	margin-left: 15px;
+	margin-bottom: 15px;
 	padding: 15px;
-	display: inline;
+	display: inline-table;
 	text-align: left;
 	width: auto;
 	max-width: 70%;
 	background-color: #F4F4F4;
 	border-radius: 20px;
 	word-wrap: break-word;
+	margin-left: 15px;
 }
 
 #chatroom {
+	width: 330px;
 	display: inline-block;
 	vertical-align: top;
 	margin-top: 10px;
@@ -72,8 +80,16 @@ strong {
 	left: 520px;
 	z-index: 999999;
 }
-
 .emt_btn {
+	text-align: right;
+	/* position: fixed; */
+	top: 400px;
+	left: 810px;
+	z-index: 999999;
+}
+
+/*검색*/
+#search_wrap {
 	text-align: right;
 	position: fixed;
 	top: 400px;
@@ -133,7 +149,7 @@ strong {
    function onOpen() {
       console.log('open');
    };
-   
+
    $(document).ready(function() {
       $("#emtset").hide();
       enter();
@@ -168,11 +184,82 @@ strong {
             $("#emtset").hide();
          });
       });
+      
+      $('#srch_b').click(function() {
+    	  search();
+    	  $('.srch_btn').click(function() {
+              $("#srch_wrap").hide();
+           });
+    	  
+    	  
+    	  
+    	  
+      })
+      
    });
 
    //===========================================================================================
 
+   function search(){
+	  var m_idx = $("#sessionuserid").val();
+      var keyword = $("#sr_input").val();
+      console.log(keyword);
+      if(keyword == "") {
+    	  return false;
+      }
+      $.ajax({
+    	  url : '${pageContext.request.contextPath}/user/loaduser?keyword=' + keyword,
+			type : 'get',
+			async : false,
+			data : {
+				"m_idx" : m_idx
+			},
+			success : function(data) {
+				console.log(data);		
+				
+				var find = data;
+				
+				if(find.length == 0){
+					
+					var printHTML = "<div id='srch_wrap'>";
+					 printHTML += "<button type='button' class='srch_btn'>x</button>";
+			         printHTML += "<strong> 해당하는 회원이 존재하지 않습니다. :)";
+			         printHTML += "</strong> <br>";
+			         printHTML += "</div>";
 
+			         $('#roomdata').prepend(printHTML);
+			         console.log("메세지 없음!");
+				} else{
+					var printHTML = "<div id='srch_wrap'>";
+						printHTML += "<button type='button' class='srch_btn'>x</button>";
+					$.each(data, function(index, find){
+						if(find.loginType == 'email'){
+							 printHTML += "<table class='find_peeps' id='"+find.m_idx+"'><tr class='"+find.m_idx
+							 printHTML += "'><td rowspan='2'><img id='profile' src='<c:url value='fileupload/"+find.m_photo
+							 printHTML += "'/>' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("
+							 printHTML += find.m_idx+")'>"+find.id+"</td></tr></table>";
+							/* if(find.m_idx == m_idx){
+								return false;
+							} */
+						} else{
+							printHTML += "<table class='find_peeps' id='"+find.m_idx+"'><tr class='"+find.m_idx
+							printHTML += "'><td rowspan='2'><img id='profile' src='<c:url value='fileupload/"+find.m_photo
+							printHTML += "'/>' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("
+							printHTML += find.m_idx+")'>"+find.id+"</td></tr></table>";
+							/* if(find.m_idx == m_idx){
+								return false;
+								} */
+							}						
+						});	// $.each 끝
+					$('#roomdata').prepend(printHTML);
+						$('#'+find.m_idx).append("<tr><td id='name' onclick='GoMyPage("+find.m_idx+")'>"+find.name+"</td></tr>");
+				}
+			},	// success 끝
+			error : function() {
+				console.log("검색 실패,,,,");
+			}
+		});	// ajax 끝
+	}	//	search 끝
 
    //===========================================================================================
    function sendemt(emt) {
@@ -225,33 +312,40 @@ strong {
       var data = evt.data;
       var obj = JSON.parse(data);
       const setDate = dayjs(obj.ch_time).format("MM/DD HH:mm");
+      
+      var m_id = $("m_id").val();
+      var rm_id = $("rm_id").val();
 
       var currentuser_session = $("#sessionuserid").val();
       console.log('onMessage 실행 ');
-      if (obj.m_idx == currentuser_session) { //m_idx = m_idx
-         var printHTML = "<br><br><div id='right'>";
+      if (obj.me_idx == currentuser_session) { //m_idx = m_idx
+         var printHTML = "<div id='right'>";
+         printHTML += "<strong>" + setDate + "</strong>";
          if (obj.e_idx == '${0}') {
             printHTML += "<strong>" + obj.ch_ms + "</strong>";
          } else {
-            printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
+            printHTML += "<img src = " + "<c:url value='/resources/images/icon/navi/050-wechat.png'/>";
+            printHTML += ">";
             //printHTML += "<img src = "+"<c:url value= '/icon/navi/Logo.png' />";
             //printHTML += "id="+ obj.e_idx + ">";
          }
-         printHTML += "<strong>" + setDate + "</strong>";
-         printHTML += "</div> <br><br>";
+         printHTML += "<strong>" + obj.me_idx + "</strong>";
+         printHTML += "</div>";
 
          $('#chatdata').append(printHTML);
       } else {
-         var printHTML = "<br><br><div id='left'>";
+         var printHTML = "<div id='left'>";
          if (obj.e_idx == '${0}') {
             printHTML += "<strong>" + obj.ch_ms + "</strong>";
          } else {
-            printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
+            printHTML += "<img src = " + "<c:url value='/resources/images/icon/navi/050-wechat.png'/>";
+            printHTML += ">";
             //printHTML += "<img src = <c:url value= '/icon/navi/Logo.png' />";
             //printHTML += "id="+ obj.e_idx + ">";
          }
          printHTML += "<strong>" + setDate + "</strong>";
-         printHTML += "</div> <br><br>";
+         printHTML += "<strong>" + obj.me_idx + "</strong>";
+         printHTML += "</div>";
 
          $('#chatdata').append(printHTML);
       }
@@ -342,35 +436,40 @@ strong {
 
                         var currentuser_session = $('#sessionuserid')
                               .val();
+
                         var date = new Date(val.ch_time); // Thu Feb 18 2021 00:43:22 GMT+0900 (대한민국 표준시)
                         const setDate = dayjs(date).format(
                               "MM/DD HH:mm"); //02/18 00:43
 
-                        if (val.m_idx == currentuser_session) { //m_idx = m_idx
-                           var printHTML = "<br><br><div id='right'>";
+                        if (val.me_idx == currentuser_session) { //m_idx = m_idx
+                           var printHTML = "<div id='right'>";
+                           printHTML += "<strong>" + setDate
+                                 + "</strong>";
                            if (val.e_idx == '${0}') {
                               printHTML += "<strong>" + val.ch_ms
                                     + "</strong>";
                            } else {
-                              printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png />";
+                              printHTML += "<img src = " + "<c:url value='/resources/images/icon/navi/050-wechat.png'/>";
+                              printHTML += ">";
                            }
-                           printHTML += "<strong>" + setDate
-                                 + "</strong>";
-                           printHTML += "</div> <br><br>";
-
+                           printHTML += "<strong>" + val.me_idx + "</strong>";
+                           printHTML += "</div>";
+                           
                            $('#chatdata').append(printHTML);
                         } else {
-                           var printHTML = "<br><br><div id='left'>";
+                           var printHTML = "<div id='left'>";
                            if (val.e_idx == '${0}') {
                               printHTML += "<strong>" + val.ch_ms
                                     + "</strong>";
                            } else {
-                              printHTML += "<img src = http://123emoji.com/wp-content/uploads/2016/04/14.png  />";
+                              printHTML += "<img src = " + "<c:url value='/resources/images/icon/navi/050-wechat.png'/>";
+                              printHTML += ">";
                            }
                            printHTML += "<strong>" + setDate
                                  + "</strong>";
-                           printHTML += "</div> <br><br>";
-
+                                 printHTML += "<strong>" + val.me_idx + "</strong>";
+                           printHTML += "</div>";
+                           
                            $('#chatdata').append(printHTML);
                         }
                      }); // $.each
@@ -409,34 +508,34 @@ strong {
                   if (text.baseTime == realTime) {
                      switch (text.pty) {
                      case 1: // 비
-                        document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+                        document.getElementById('chatdata').style.background = "url(/resources/images/plus.png)"
                         console.log('비');
                         break;
                      case 2: // 비/눈
-                        document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)"
+                        document.getElementById('chatdata').style.background = "url(/resources/images/plus.png)"
                         console.log('비/눈');
                         break;
                      case 3: // 눈
-                        document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+                        document.getElementById('chatdata').style.background = "url(/resources/images/plus.png)"
                         console.log('눈');
                         break;
                      case 4: // 소나기
-                        document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)"
+                        document.getElementById('chatdata').style.background = "url(/resources/images/plus.png)"
                         console.log('소나기');
                         break;
                      }
                   } else {
                      switch (text.sky) {
                      case 1: // 맑음
-                        document.getElementById('chatdata').style.background = "url(/chat/icon/sun.jpg)"
+                        document.getElementById('chatdata').style.background = "url(/resources/images/plus.png)"
                         console.log('맑음');
                         break;
                      case 3: // 구름 많음
-                        document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+                        document.getElementById('chatdata').style.background = "url(/resources/images/plus.png)"
                         console.log('구름 많음');
                         break;
                      case 4: // 흐림
-                        document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+                        document.getElementById('chatdata').style.background = "url(/resources/images/plus.png)"
                         console.log('흐림');
                         break;
                      }
@@ -444,11 +543,11 @@ strong {
                   console.log('날씨 해당 없음');
                   //document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
                }, //success func 종료
-               
+
                error : function(e) {
                   console.log("날씨 API 실패,,,,,");
                }
-               
+
             }) // ajax 종료
 
    }

@@ -5,20 +5,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.gnjk.chat.dao.MesListDao">
 
-	  <!-- 이전 채팅 출력 -->
-   <select id="mesList" resultType="com.gnjk.chat.domain.Message">
-      select *
-      from open.chat
-   </select>
+	<!-- 이전 채팅 출력 -->
+	<select id="mesList" resultType="com.gnjk.chat.domain.Message">
+		select *
+		from open.chat
+		<!-- where me_idx=#{me_idx} -->
+	</select>
 
-   <!-- 채팅목록 출력 -->
-   <select id="roomList" resultType="com.gnjk.chat.domain.Message">
-      select *
-      from open.chat
-      <!-- where
-      me_idx=#{me_idx}
-      order by rm_idx desc limit 1 -->
-   </select>
+	<!-- 채팅목록 출력 -->
+	<select id="roomList" resultType="com.gnjk.chat.domain.Message">
+		select * from open.chat
+		where me_idx=23
+		order by rm_idx desc limit 1
+	</select>
 
 
 </mapper>

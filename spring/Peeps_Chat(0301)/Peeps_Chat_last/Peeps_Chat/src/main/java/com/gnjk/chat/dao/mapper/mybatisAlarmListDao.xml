@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteAlarm">
 		delete
 		from open.alarm
-		where al_idx=#{al_idx}
+		where al_idx=#{param}
 	</delete>
 
 </mapper>

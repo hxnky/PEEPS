@@ -25,11 +25,11 @@
 					<a id="Chat" href="#"><img
 						src="<c:url value="/resources/images/icon/navi/050-wechat.png"/>"></a>
 					<c:set var="loginType" value="${loginType}" /> <c:choose>
-						<c:when test="${loginType eq 'email' }">
+						<c:when test="${loginType eq 'email'}">
 							<img id="MyPage_img"
 								src="<c:url value="/fileupload/${m_photo}"/>">
 						</c:when>
-						<c:when test="${loginType ne 'email' }">
+						<c:when test="${loginType ne 'email'}">
 							<img id="MyPage_img" src="<c:url value="${m_photo}"/>">
 
 						</c:when>

@@ -119,265 +119,253 @@ strong {
 </body>
 
 <script>
+	sock = new SockJS("http://localhost:8081/chat/alarm");
+	sock.onopen = onOpen;
+	sock.onmessage = onMessage;
+	sock.onclose = onClose;
+	$(document).ready(function() {
 
-sock = new SockJS("http://localhost:8081/chat/alarm");
-sock.onopen = onOpen;
-sock.onmessage = onMessage;
-sock.onclose = onClose;
-$(document).ready(function() {
-   
-   function sendAlarm(type) {
-      var alm = {
-         type : type,
-         sender : 'sender',
-         receiver :'receiver',
-         post : 'post'
-      }
-      sock.send(JSON.stringify(alm)); // JSON문자열로 반환
-      console.log(JSON.stringify(alm));
-      console.log('위 메세지 소켓에 전송');
-   }
-});
-function onOpen() {
-   console.log('open');
-};
-function onMessage(evt) {
-   var data = evt.data;
-   var obj = JSON.parse(data);
-   var currentuser_session = $('#sessionuserid').val();
-   //if (obj.receiver == currentuser_session) { //m_idx = m_idx
-   if (obj != "") {
-      switch (obj.type) {
-      // 댓글 알람
-      case "comment":
-         console.log("1111comment");
-         var printHTML = "<div id='alarm_mask'>";
-         printHTML += "<div id='alarm'>";
-         printHTML += "<strong>" + obj.sender + " 님이 회원님의 게시물";
-         printHTML += obj.post + " 에 댓글을 남겼습니다!</strong> <br>";
-         printHTML += "</div>";
-         printHTML += "</div>";
-         $('#my_modal_header').append(printHTML);
-         console.log("comment");
-         //console.log(val.al_idx);
-         break;
-      // 좋아요 알람
-      case "like":
-         console.log("22222222comment");
-         var printHTML = "<div id='alarm_mask'>";
-         printHTML += "<div id='alarm'>";
-         printHTML += "<strong>" + obj.sender + " 님이 회원님의 게시물";
-         printHTML += obj.post + " 에 좋아요를 눌렀습니다!</strong> <br>";
-         printHTML += "</div>";
-         printHTML += "</div>";
-         $('#my_modal_header').append(printHTML);
-         console.log("like");
-         //console.log(val.al_idx);
-         break;
-      // 팔로우 알람
-      case "follow":
-         console.log("33333333333333333comment");
-         var printHTML = "<div id='alarm_mask'>";
-         printHTML += "<div id='alarm'>";
-         printHTML += "<strong>" + obj.sender;
-         printHTML += " 님이 회원님을 팔로우 했습니다!</strong> <br>";
-         printHTML += "</div>";
-         printHTML += "</div>";
-         $('#my_modal_header').append(printHTML);
-         console.log("follow");
-         //console.log(val.al_idx);
-         break;
-      } // switch 문
-   } // if
-   //}
-} // onMessage 함수
-function onClose() {
-   console.log('console close');
-};
+		function sendAlarm(type) {
+			var alm = {
+				type : type,
+				sender : 'sender',
+				receiver : 'receiver',
+				post : 'post'
+			}
+			sock.send(JSON.stringify(alm)); // JSON문자열로 반환
+			console.log(JSON.stringify(alm));
+			console.log('위 메세지 소켓에 전송');
+		}
+	});
+	function onOpen() {
+		console.log('open');
+	};
+	function onMessage(evt) {
+		var data = evt.data;
+		var obj = JSON.parse(data);
+		var currentuser_session = $('#sessionuserid').val();
+		//if (obj.receiver == currentuser_session) { //m_idx = m_idx
+		if (obj != "") {
+			switch (obj.type) {
+			// 댓글 알람
+			case "comment":
+				console.log("1111comment");
+				var printHTML = "<div id='alarm_mask'>";
+				printHTML += "<div id='alarm'>";
+				printHTML += "<strong>" + obj.sender + " 님이 회원님의 게시물";
+				printHTML += obj.post + " 에 댓글을 남겼습니다!</strong> <br>";
+				printHTML += "</div>";
+				printHTML += "</div>";
+				$('#my_modal_header').append(printHTML);
+				console.log("comment");
+				//console.log(val.al_idx);
+				break;
+			// 좋아요 알람
+			case "like":
+				console.log("22222222comment");
+				var printHTML = "<div id='alarm_mask'>";
+				printHTML += "<div id='alarm'>";
+				printHTML += "<strong>" + obj.sender + " 님이 회원님의 게시물";
+				printHTML += obj.post + " 에 좋아요를 눌렀습니다!</strong> <br>";
+				printHTML += "</div>";
+				printHTML += "</div>";
+				$('#my_modal_header').append(printHTML);
+				console.log("like");
+				//console.log(val.al_idx);
+				break;
+			// 팔로우 알람
+			case "follow":
+				console.log("33333333333333333comment");
+				var printHTML = "<div id='alarm_mask'>";
+				printHTML += "<div id='alarm'>";
+				printHTML += "<strong>" + obj.sender;
+				printHTML += " 님이 회원님을 팔로우 했습니다!</strong> <br>";
+				printHTML += "</div>";
+				printHTML += "</div>";
+				$('#my_modal_header').append(printHTML);
+				console.log("follow");
+				//console.log(val.al_idx);
+				break;
+			} // switch 문
+		} // if
+		//}
+	} // onMessage 함수
+	function onClose() {
+		console.log('console close');
+	};
 </script>
 
 <script>
-function modal(id) {
-   var zIndex = 9999;
-   var modal = $('#' + id);
-   // 모달 div 뒤에 희끄무레한 레이어
-   var bg = $('<div>').css({
-      position : 'fixed',
-      zIndex : zIndex,
-      left : '0px',
-      top : '0px',
-      width : '100%',
-      height : '100%',
-      overflow : 'auto',
-      // 레이어 색갈은 여기서 바꾸면 됨
-      backgroundColor : 'rgba(0,0,0,0.500)'
-   }).appendTo('body');
-   modal
-         .css(
-               {
-                  position : 'fixed',
-                  boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-                  // 시꺼먼 레이어 보다 한칸 위에 보이기
-                  zIndex : zIndex + 1,
-                  // div center 정렬
-                  top : '50%',
-                  left : '50%',
-                  transform : 'translate(-50%, -50%)',
-                  msTransform : 'translate(-50%, -50%)',
-                  webkitTransform : 'translate(-50%, -50%)'
-               }).show()
-         // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-         .find('.modal_close_btn').on('click', function() {
-            bg.remove();
-            modal.hide();
-         });
-}
+	function modal(id) {
+		var zIndex = 9999;
+		var modal = $('#' + id);
+		// 모달 div 뒤에 희끄무레한 레이어
+		var bg = $('<div>').css({
+			position : 'fixed',
+			zIndex : zIndex,
+			left : '0px',
+			top : '0px',
+			width : '100%',
+			height : '100%',
+			overflow : 'auto',
+			// 레이어 색갈은 여기서 바꾸면 됨
+			backgroundColor : 'rgba(0,0,0,0.500)'
+		}).appendTo('body');
+		modal
+				.css(
+						{
+							position : 'fixed',
+							boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+							// 시꺼먼 레이어 보다 한칸 위에 보이기
+							zIndex : zIndex + 1,
+							// div center 정렬
+							top : '50%',
+							left : '50%',
+							transform : 'translate(-50%, -50%)',
+							msTransform : 'translate(-50%, -50%)',
+							webkitTransform : 'translate(-50%, -50%)'
+						}).show()
+				// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+				.find('.modal_close_btn').on('click', function() {
+					bg.remove();
+					modal.hide();
+				});
+	}
 </script>
 
 <script>
-   $(document).ready(function() {
-
-      $.ajax({
-         url : "http://localhost:8081/chat/alarm/select",
-         type : "GET",
-         dataType : "json",
-         success : function(data) {
-
-            print(data);
-
-            $('#Alarm').click(function() {
-               modal('my_modal');
-            });
-
-         }, // success
-         error : function() {
-            console.log("alarm/select 실패");
-         }
-      }); // ajax
-
-   }); // ready
-
-   function print(alarmList) {
-
-      if (alarmList == "") {
-         var printHTML = "<div id='alarm'>";
-         printHTML += "<strong>알람이 없습니다!";
-         printHTML += "</strong> <br>";
-         printHTML += "</div>";
-         $('#my_modal_header').append(printHTML);
-         console.log("알람 없음!");
-      } else {
-         $.each(alarmList, function(key, val) {
-            switch (val.type) {
-            // 댓글 알람
-            case "comment":
-               console.log("1111comment");
-               var printHTML = "<div id='alarm_mask'>";
-               printHTML += "<button id='btn' value=" + val.al_idx
-                     + " onclick='del_al(" + val.al_idx + ");' />";
-               printHTML += "<div id='alarm'>";
-               printHTML += "<strong>" + val.sender + " 님이 회원님의 게시물";
-               printHTML += val.post + " 에 댓글을 남겼습니다!</strong> <br>";
-               printHTML += "</div>";
-               printHTML += "</div>";
-               $('#my_modal_header').append(printHTML);
-               console.log("comment");
-               //console.log(val.al_idx);
-               break;
-            // 좋아요 알람
-            case "like":
-               console.log("22222222comment");
-               var printHTML = "<div id='alarm_mask'>";
-               printHTML += "<button id='btn' value=" + val.al_idx
-                     + " onclick='del_al(" + val.al_idx + ");' />";
-               printHTML += "<div id='alarm'>";
-               printHTML += "<strong>" + val.sender + " 님이 회원님의 게시물";
-               printHTML += val.post + " 에 좋아요를 눌렀습니다!</strong> <br>";
-               printHTML += "</div>";
-               printHTML += "</div>";
-               $('#my_modal_header').append(printHTML);
-               console.log("like");
-               //console.log(val.al_idx);
-               break;
-            // 팔로우 알람
-            case "follow":
-               console.log("33333333333333333comment");
-               var printHTML = "<div id='alarm_mask'>";
-               printHTML += "<button id='btn' value=" + val.al_idx
-                     + " onclick='del_al(" + val.al_idx + ");' />";
-               printHTML += "<div id='alarm'>";
-               printHTML += "<strong>" + val.sender;
-               printHTML += " 님이 회원님을 팔로우 했습니다!</strong> <br>";
-               printHTML += "</div>";
-               printHTML += "</div>";
-               $('#my_modal_header').append(printHTML);
-               console.log("follow");
-               //console.log(val.al_idx);
-               break;
-            } // switch 문
-         }); // $.each
-      } // else
-   } // print 함수
-
-   function modal(id) {
-      var zIndex = 9999;
-      var modal = $('#' + id);
-      // 모달 div 뒤에 희끄무레한 레이어
-      var bg = $('<div>').css({
-         position : 'fixed',
-         zIndex : zIndex,
-         left : '0px',
-         top : '0px',
-         width : '100%',
-         height : '100%',
-         overflow : 'auto',
-         // 레이어 색갈은 여기서 바꾸면 됨
-         backgroundColor : 'rgba(0,0,0,0.500)'
-      }).appendTo('body');
-      modal
-            .css(
-                  {
-                     position : 'fixed',
-                     boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-                     // 시꺼먼 레이어 보다 한칸 위에 보이기
-                     zIndex : zIndex + 1,
-                     // div center 정렬
-                     top : '50%',
-                     left : '50%',
-                     transform : 'translate(-50%, -50%)',
-                     msTransform : 'translate(-50%, -50%)',
-                     webkitTransform : 'translate(-50%, -50%)'
-                  }).show()
-            // 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
-            .find('.modal_close_btn').on('click', function() {
-               bg.remove();
-               modal.hide();
-            });
-   }
+	$(document).ready(function() {
+		$.ajax({
+			url : "http://localhost:8081/chat/alarm/select",
+			type : "GET",
+			dataType : "json",
+			success : function(data) {
+				print(data);
+				$('#Alarm').click(function() {
+					modal('my_modal');
+				});
+			}, // success
+			error : function() {
+				console.log("alarm/select 실패");
+			}
+		}); // ajax
+	}); // ready
+	function print(alarmList) {
+		if (alarmList == "") {
+			var printHTML = "<div id='alarm'>";
+			printHTML += "<strong>알람이 없습니다!";
+			printHTML += "</strong> <br>";
+			printHTML += "</div>";
+			$('#my_modal_header').append(printHTML);
+			console.log("알람 없음!");
+		} else {
+			$.each(alarmList, function(key, val) {
+				switch (val.type) {
+				// 댓글 알람
+				case "comment":
+					console.log("1111comment");
+					var printHTML = "<div id='alarm_mask'>";
+					printHTML += "<button id='btn' value=" + val.al_idx
+							+ " onclick='del_al(" + val.al_idx + ");' />";
+					printHTML += "<div id='alarm'>";
+					printHTML += "<strong>" + val.sender + " 님이 회원님의 게시물";
+					printHTML += val.post + " 에 댓글을 남겼습니다!</strong> <br>";
+					printHTML += "</div>";
+					printHTML += "</div>";
+					$('#my_modal_header').append(printHTML);
+					console.log("comment");
+					//console.log(val.al_idx);
+					break;
+				// 좋아요 알람
+				case "like":
+					console.log("22222222comment");
+					var printHTML = "<div id='alarm_mask'>";
+					printHTML += "<button id='btn' value=" + val.al_idx
+							+ " onclick='del_al(" + val.al_idx + ");' />";
+					printHTML += "<div id='alarm'>";
+					printHTML += "<strong>" + val.sender + " 님이 회원님의 게시물";
+					printHTML += val.post + " 에 좋아요를 눌렀습니다!</strong> <br>";
+					printHTML += "</div>";
+					printHTML += "</div>";
+					$('#my_modal_header').append(printHTML);
+					console.log("like");
+					//console.log(val.al_idx);
+					break;
+				// 팔로우 알람
+				case "follow":
+					console.log("33333333333333333comment");
+					var printHTML = "<div id='alarm_mask'>";
+					printHTML += "<button id='btn' value=" + val.al_idx
+							+ " onclick='del_al(" + val.al_idx + ");' />";
+					printHTML += "<div id='alarm'>";
+					printHTML += "<strong>" + val.sender;
+					printHTML += " 님이 회원님을 팔로우 했습니다!</strong> <br>";
+					printHTML += "</div>";
+					printHTML += "</div>";
+					$('#my_modal_header').append(printHTML);
+					console.log("follow");
+					//console.log(val.al_idx);
+					break;
+				} // switch 문
+			}); // $.each
+		} // else
+	} // print 함수
+	function modal(id) {
+		var zIndex = 9999;
+		var modal = $('#' + id);
+		// 모달 div 뒤에 희끄무레한 레이어
+		var bg = $('<div>').css({
+			position : 'fixed',
+			zIndex : zIndex,
+			left : '0px',
+			top : '0px',
+			width : '100%',
+			height : '100%',
+			overflow : 'auto',
+			// 레이어 색갈은 여기서 바꾸면 됨
+			backgroundColor : 'rgba(0,0,0,0.500)'
+		}).appendTo('body');
+		modal
+				.css(
+						{
+							position : 'fixed',
+							boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+							// 시꺼먼 레이어 보다 한칸 위에 보이기
+							zIndex : zIndex + 1,
+							// div center 정렬
+							top : '50%',
+							left : '50%',
+							transform : 'translate(-50%, -50%)',
+							msTransform : 'translate(-50%, -50%)',
+							webkitTransform : 'translate(-50%, -50%)'
+						}).show()
+				// 닫기 버튼 처리, 시꺼먼 레이어와 모달 div 지우기
+				.find('.modal_close_btn').on('click', function() {
+					bg.remove();
+					modal.hide();
+				});
+	}
 </script>
 <script>
-   function del_al(al_idx) {
-
-      var al_idx = {
-         "al_idx" : $("#btn").val()
-      };
-
-      $.ajax({
-         url : 'http://localhost:8081/chat/alarm/delete',
-         type : 'post',
-         data : al_idx,
-         success : function(data) {
-            $('#alarm_mask').remove(); // 알람 css도 제거!
-            $('#my_modal_header').scrollTop(
-                  $('#my_modal_header')[0].scrollHeight); // 제거 후 알람들 위로 올리기
-            console.log("삭제 성공ㅎㅎㅎ");
-         },
-         error : function() {
-            console.log("삭제 왜 안돼,,,,,?");
-         }
-      }); // ajax
-
-   } // del_al
+	function del_al(al_idx) {
+		var al_idx = {
+			"al_idx" : $("#btn").val()
+		};
+		$.ajax({
+			url : 'http://localhost:8081/chat/alarm/delete',
+			type : 'post',
+			data : al_idx,
+			success : function(data) {
+				$('#alarm_mask').remove(); // 알람 css도 제거!
+				$('#my_modal_header').scrollTop(
+						$('#my_modal_header')[0].scrollHeight); // 제거 후 알람들 위로 올리기
+				console.log("삭제 성공ㅎㅎㅎ");
+			},
+			error : function() {
+				console.log("삭제 왜 안돼,,,,,?");
+			}
+		}); // ajax
+	} // del_al
 </script>
 
 </html>

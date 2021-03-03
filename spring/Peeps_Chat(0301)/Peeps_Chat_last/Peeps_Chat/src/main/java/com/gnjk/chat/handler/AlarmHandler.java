@@ -48,7 +48,7 @@ public class AlarmHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
-		String mes = message.getPayload();
+				String mes = message.getPayload();
 		
 				// 작성자가 로그인 했다면
 				// WebSocketSession writer = userMap.get(peeps.m_idx);
@@ -65,7 +65,7 @@ public class AlarmHandler extends TextWebSocketHandler {
 					sockSession.sendMessage(sendmes);
 				 }
 					// writer.sendMessage(msg);
-					// dao.insertAlarm(alarmData);
+				 dao.insertAlarm(alarmData);
 	
 	}
 
