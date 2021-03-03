@@ -599,6 +599,7 @@ var html = ' <div class="msg_wrap"> ';
  	html +=' <li><textarea rows="9" cols="80" id="gmessage" name="gmessage" placeholder="회원님과 함께한 사진과 글을 입력해주세요." required></textarea><br> ';
  	html +=' <input type="file" id="gphoto" name="gphoto"> ';
  	html +=' <input type="hidden" id="edit_photo" name="oldgphoto"> ';
+ 	html +=' <input type="hidden" id="gidx" name="gidx"> ';
  	html +=' <input type="hidden" id="gwriter" name="gwriter" value="'+gwriter+'"> ';
  	html +=' <input type="hidden" id="etype" name="etype" value="'+etype+'"> ';
  	html +=' <input type="hidden" id="midx" name="midx" value="'+midx+'"> ';
@@ -610,10 +611,28 @@ var html = ' <div class="msg_wrap"> ';
  	$('#test2').append(html); 
 		
 	}
-var p2 = 1;
+
+//뷰컨트롤러 통해 페이지 번호 받기
+function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
+return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));}
+
+
+var page = getParameterByName('page');
+var gidx =getParameterByName('gidx');
+console.log("방명록인덱스 : ",gidx);
+console.log(p);
+
+
+var p = getParameterByName('page');
+ 
+
 
 /*리스트보이기 및 초기화 목적 */
 function upMsg(p){
+	var p=p;
+	
+
  	/* 초기화 */
 	$('#ginsert_wrap2').empty();
 	    $('.paging').empty();
@@ -621,7 +640,7 @@ function upMsg(p){
 		/*게스트북 리스트 출력*/
 		$.ajax({
 			
-			url : 'http://localhost:8081/gb/rest/guestbook?p='+p2,
+			url : 'http://localhost:8081/gb/rest/guestbook?page='+p,
 		   type : 'GET',
 		success : function(data){
 				  console.log(data);
@@ -708,14 +727,14 @@ function upMsg(p){
 				});
 			
 				// 페이징 처리
-				 if (data.totalGbCount>0){
+				  if (data.totalGbCount>0){
 					 console.log('totalPageCount :' + data.totalPageCount);
-					for(var i=1; i <= data.totalPageCount; i++){	/* test 계정아이디 들어가야 함 */			
-						 var html2 =' <a class="pageBtn" href="http://localhost:8080/peeps/'+gwriter+'?p='p2+i+'">'p2+i+'</a>';																		
+					for(var i=1; i <= data.totalPageCount; i++){			
+					//	 var html2 =' <a class="pageBtn" href="http://localhost:8080/peeps/'+gwriter+'?page='+i+'">'+i+'</a>';	
+						 var html2 =' <button id="pageBtn" onclick="pageBtn('+i+');">'+i+'</button>';
 						 $('.paging').append(html2);
 					}										 
 				 };	
-				
 				
 			},
 			error:function(e){
@@ -730,6 +749,23 @@ function upMsg(p){
 }//리스트보여주기fn end
 	
 	
+function pageBtn(i){
+	
+	$('#ginsert_wrap2').empty();
+	$('#test2').empty();
+	$('.row').empty();
+	$('.paging').empty();
+	$('.postList').empty();
+	$('#map').addClass('displayNone');
+	$('#searchMyMsg').empty();
+	
+	insertMsg();
+	upMsg(i);
+	insertGMsg();
+	searchMyMsg();
+
+
+}	
 	
 
 	/* 방명록 함수시작 */
@@ -740,9 +776,24 @@ function upMsg(p){
 		$('.paging').empty();
 		$('.postList').empty();
 		$('#map').addClass('displayNone');
+		$('#searchMyMsg').empty();
 		
+	
 		insertMsg();
-		upMsg();    
+		
+
+	
+		
+		
+		
+		
+		
+		
+		
+		upMsg(1);
+		
+		
+		
 		insertGMsg();
 		searchMyMsg();
 		
@@ -768,16 +819,6 @@ function upMsg(p){
 
 <script>
 
-//뷰컨트롤러 통해 페이지 번호 받기
-function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
-return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));}
-
-
-var p = getParameterByName('p');
-var gidx =getParameterByName('gidx');
-console.log("방명록인덱스 : ",gidx);
-console.log(p);
 
 
 /*내가쓴 글보기*/ 
@@ -841,7 +882,7 @@ function searchMyMsg() {
  	
  	if (confirm('방명록을 수정하시겠습니까? ')) {
  		var gmessage = $('#'+gidx+'_msg').val();
-			var gphoto = $('#'+gidx+'_photo').val();
+		var gphoto = $('#'+gidx+'_photo').val();
 			
 			console.log(gmessage);
 			console.log(gphoto);	
@@ -850,16 +891,16 @@ function searchMyMsg() {
 			 
 			$('#gmessage').val(gmessage);
 			$('#edit_photo').val(gphoto);
-			$('#edit_gidx').val(gidx);
+			$('#gidx').val(gidx);
 			
 			// 수정 버튼 클릭 시 해당 위치로 스크롤!
-			 var scrollPosition = $("#changing").offset().top ;
+			 var scrollPosition = $("#nav_wrap").offset().top ;
 			$('html,body').animate({scrollTop: scrollPosition}, 500); 
 			
 			// 수정 버튼 클릭 시 수정 취소, 수정 버튼 생성
 			var html = "<div id='editbtn'><button id='gEdit'>수정</button><br><button id='edit_cancle'>취소</button></div>";
-			  //  html +=' <div><input type=text class="message" id="gidx" value="'+gidx+'"</div>';    
 			$('#test2 #sbmtbtn').replaceWith(html);
+			
 			
 			// 수정 취소 클릭 시 해당 텍스트 박스로 다시 이동
 			
@@ -882,7 +923,7 @@ function searchMyMsg() {
 				var form_data = new FormData(data);
 				
 				console.log("form_data",form_data);
-		
+			
 				$.ajax({
 					url : 'http://localhost:8081/gb/rest/guestbook/edit',
 					type : 'post',
@@ -954,7 +995,7 @@ function searchMyMsg() {
     	    $('.paging').empty();
      	 
     		$.ajax({
-				url : 'http://localhost:8081/gb/rest/guestbook?p='+p,
+				url : 'http://localhost:8081/gb/rest/guestbook?page='+p,
 				type : 'GET',
 				success : function(data){
 				

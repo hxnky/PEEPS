@@ -12,9 +12,9 @@ import org.junit.Test;
 public class MySQLConnectionTest {
 	 
     static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String URL = "jdbc:log4jdbc:mysql://localhost:3306/open?serverTimezone=UTC";
-    static final String USERNAME = "aia";
-    static final String PASSWORD = "aia";
+    static final String URL = "jdbc:log4jdbc:mysql://localhost:3306/peeps?serverTimezone=UTC";
+    static final String USERNAME = "peeps";
+    static final String PASSWORD = "0309";
  
     @Test
     public void getMySQLConnectionTest() {

@@ -21,6 +21,14 @@ public class MainViewController {
 		return "post/myPage";
 	}
 	
+	// 마이페이지의 지도 리스트
+	@RequestMapping("/main/jhS2/map") // test 회원 아이디를 세션에서 받아야 함
+	public String goMapMypage(
+//			@RequestParam(value = "p", defaultValue = "1") int p
+			) {
+		return "post/mapView";
+	}
+	
 	// 게시글 상세보기
 	@RequestMapping("/main/post/detail")
 	public String goDetailView(
@@ -37,6 +45,12 @@ public class MainViewController {
 		return "post/postEditForm";
 	}
 	
+	//방명록 폼
+	@RequestMapping("/main/jhS2/guestbook")
+	public String getguestbookForm() {
 
+		return "post/guestbookForm";
+
+	}
 
 }

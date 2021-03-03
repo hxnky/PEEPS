@@ -49,6 +49,7 @@ var html = ' <div class="msg_wrap"> ';
  
  /*리스트보이기 및 초기화 목적 */
  function upMsg(){
+	
   	/* 초기화 */
  	$('#ginsert_wrap2').empty();
 	    $('.paging').empty();
@@ -56,7 +57,7 @@ var html = ' <div class="msg_wrap"> ';
 		/*게스트북 리스트 출력*/
 		$.ajax({
 			
-			url : 'http://localhost:8081/gb/rest/guestbook?p='+p,
+			url : 'http://localhost:8081/gb/rest/guestbook?page='+p,
 		   type : 'GET',
 		success : function(data){
 				  console.log(data);
@@ -146,7 +147,7 @@ var html = ' <div class="msg_wrap"> ';
 				 if (data.totalGbCount>0){
 					 console.log('totalPageCount :' + data.totalPageCount);
 					for(var i=1; i <= data.totalPageCount; i++){	/* test 계정아이디 들어가야 함 */			
-						 var html2 =' <span><a class="pageBtn" href="<c:url value="/guestbook"/>?p='+i+'">'+i+'</a></span> ';																		
+						 var html2 =' <span><a class="pageBtn" href="<c:url value="/guestbook"/>?page='+i+'">'+i+'</a></span> ';																		
 						 $('.paging').append(html2);
 					}										 
 				 };	

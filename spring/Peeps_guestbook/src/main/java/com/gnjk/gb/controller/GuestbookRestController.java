@@ -47,8 +47,8 @@ public class GuestbookRestController {
 	// LIST
 	@CrossOrigin
 	@GetMapping
-	public GuestbookListView getlistview(@RequestParam(value = "p",defaultValue ="1")int page,Model model){
-		return listService.getListView(page);
+	public GuestbookListView getlistview(@RequestParam(value = "page", defaultValue ="1")int p,Model model){
+		return listService.getListView(p);
 	}
 	
 	// 1개의 방명록 정보

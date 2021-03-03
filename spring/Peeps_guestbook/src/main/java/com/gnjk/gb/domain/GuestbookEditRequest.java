@@ -19,7 +19,7 @@ public class GuestbookEditRequest {
 	public Guestbook toGuestbook() {
 
 		Guestbook guestbook = new Guestbook();
-		guestbook.setGidx(gidx);
+		 guestbook.setGidx(gidx); 
 		/* guestbook.setMidx(midx); */
 		/* guestbook.setGwriter(gwriter); */
 		guestbook.setGmessage(gmessage);

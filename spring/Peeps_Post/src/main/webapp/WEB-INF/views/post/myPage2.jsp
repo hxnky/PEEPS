@@ -9,123 +9,10 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 리스트</title>
+
 </head>
-<!--jquery 라이브러리 로드-->
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" 
-		integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" 
-		crossorigin="anonymous">
-</script> -->
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-<!-- 부가적인 테마 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 합쳐지고 최소화된 최신 
-자바스크립트 -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-<style>
-.container-fluid {
-	height: 50px;
-	text-align: center;
-	width: 1100px;
-	color: black;
-	max-width: 100%;
-}
-
-#top_wrap {
-	margin: 0px auto;
-	position: fixed;
-	z-index: 999;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-}
-
-#nav_wrap {
-	width: 1150px;
-	margin: 30px auto;
-	text-align: center;
-}
-
-#my_nav {
-	margin: auto;
-}
-
-.menuselect>button {
-	width: 370px;
-	height: 95px;
-	font-size: 30px;
-	border: none;
-	outline: none;
-}
-
-.jumbotron {
-	height: 400px;
-	width: 1150px;
-	margin: 100px auto 0px auto;
-	text-align: center;
-	background-color: #F5E978;
-}
-
-#profile_wrap>img {
-	width: 200px;
-	border-radius: 100%;
-	margin-left: -750px;
-	margin-top: 50px;
-	border: 1px solid #CCC;
-}
-
-#pro_btn>ul>li {
-	list-style: none;
-	font-size: 30px;
-	display: inline-block;
-	text-align: center;
-	margin-right: 40px;
-}
-
-#pro_btn {
-	margin: -180px -300px 0px 0px;
-}
-
-#foll_btn {
-	border: 0;
-	background-color: #F5E978;
-}
-
-#pro_edit {
-	border: solid 0.2px #CCC;
-	background-color: #DDD;
-	border-radius: 5px;
-	width: 300px;
-	height: 35px;
-	font-size: 20px;
-}
-
-#pro_name {
-	font-size: 20px;
-	margin: 10px auto;
-}
-
-#pro_bio {
-	font-size: 20px;
-	margin: 10px auto;
-}
-
-.pagediv {
-	background-color: aqua;
-	text-align: center;
-	margin: auto;
-}
-
-.postidx {
-	color: black;
-}
-</style>
+<%@ include file="/WEB-INF/views/include/mypageBasicset.jsp"%> 
 
 
 <body>
@@ -159,43 +46,20 @@
 			</div>
 		</div>
 		<div id="nav_wrap">
-			<div class="menuselect">
-				<button onclick="location.href='jhS2'">게시물</button> <!-- test 회원 아이디 들어가야 함 -->
-				<button onclick="javascript:menulist(1);">지도</button>
-				<button onclick="javascript:menulist(2);">방명록</button>
+			<div class="menuselect"> <!-- test 회원 아이디 들어가야 함 -->
+				<div class="menuselect"> <!-- test 회원 아이디 들어가야 함 -->
+				<button onclick="location.href='http://localhost:8080/post/main/jhS2'">게시물</button> 
+				<button onclick="location.href='http://localhost:8080/post/main/jhS2/map'">지도</button>
+				<button onclick="location.href='http://localhost:8080/post/main/jhS2/guestbook'">방명록</button>
 
+			</div>
 			</div>
 		</div>
 
 		<div class="container">
 			<div class="row">
 			<!-- 게시글 목록 시작 -->
-				<c:forEach items="${listView.postList}" var="post">
-				<div class="col-sm-4">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<a id="ptitle" class="postidx" href="postNO=${post.p_idx}">
-								<!-- 제목 20자 이상 초과시 자르기 -->
-								<c:choose>
-									<c:when test="${fn:length(post.p_title) > 20}">
-									<c:out value="${fn:substring(post.p_title,0,20)}"/>...
-									</c:when>
-									<c:otherwise>
-									<c:out value="${post.p_title}"></c:out>
-									</c:otherwise>
-								</c:choose>
-							</a>
-						</div>
-						<div class="panel-body">
-							<a class="postidx" href="postNO=${post.p_idx}"><img src="<c:url value="/resources/fileupload/postfile/${post.p_thumbnail}"/>"
-								class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>
-						</div>
-						<div class="panel-footer"><fmt:formatDate value="${post.p_date}"
-									pattern="yyyy.MM.dd." />
-						</div>
-					</div>
-				</div>
-				</c:forEach>
+				
 			<!-- 게시글 목록 끝 -->	
 			</div>
 		</div>
@@ -203,20 +67,79 @@
 
 	</div>
 	<!-- 목록 끝 -->
-	<div class="pagediv">
-		<nav aria-label="Page navigation example">
-			<ul class="pagination">
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-				</a></li>
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-				</a></li>
-			</ul>
-		</nav>
+	<!-- 페이징 -->
+	<div class="paging">
 	</div>
+	
+	<script>
+	// 뷰컨트롤러 통해 페이지 번호 받기
+	function getParameterByName(name) {name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	var regex = new RegExp("[\\?&]" + name+ "=([^&#]*)"), results = regex.exec(location.search);
+	return results === null ? "": decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+
+    var p = getParameterByName('p');
+    console.log(p);
+	
+	$(document).ready(function(){
+		
+		$.ajax({
+			url: 'http://localhost:8080/post/rest/member/post/list?p='+p,
+			type: 'GET',
+			success: function(data){
+				console.log("ajax로 받아온 데이터 : ", data);
+				var list = $(data.postList);
+				console.log(list);
+				
+				$.each(list, function(index, item){
+					
+					var date = item.p_date-540*60*1000;
+						
+					date = new Date(date).toLocaleDateString();
+					
+					console.log("날짜: ", date);
+					
+					var pt = item.p_title;
+					
+					/* 글자수 20자 이상이면 자르기 */
+					if(pt.length > 20){
+						pt = pt.substring(0, 15);
+						pt = pt+"...";
+						console.log(pt);
+					} 
+					
+					var html = '<div class="col-sm-4">';
+					   html += '<div class="panel panel-primary">';
+					   html += '<div class="panel-heading">';  /* href="postNO=${post.p_idx}" */
+					   /* html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+item.p_title; */
+					   html += '<a id="ptitle" class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">'+pt;
+					   html += '</a></div><div class="panel-body">';
+					   html += '<a class="postidx" href="<c:url value="/main/post/detail?idx='+item.p_idx+'"/>">';
+					   html += '<img src="<c:url value="/resources/fileupload/postfile/'+item.p_thumbnail+'"/>" class="img-responsive" style="width: 325px; height: 325px;" alt="Image"></a>';
+					   html += '</div><div class="panel-footer">'+date+'</div></div></div>';
+					   
+					   $('.row').append(html);
+				});
+				// 페이징 처리
+				 if (data.totalPostCount>0){
+					 console.log('totalPageCount :' + data.totalPageCount);
+					for(var i=1; i <= data.totalPageCount; i++){	/* test 계정아이디 들어가야 함 */			
+						if(data.pageNumber == i){
+							var html2 =' <span><a class="pageBtn" id="nowPgBtn" href="<c:url value="/main/jhS2"/>?p='+i+'">'+i+'</a></span> ';
+							$('.paging').append(html2);
+						} else {
+							var html2 =' <span><a class="pageBtn" href="<c:url value="/main/jhS2"/>?p='+i+'">'+i+'</a></span> ';
+							$('.paging').append(html2);
+						}
+					}										 
+				 };	
+			},error : function(request, status, error) {
+				console.log("에러 발생 : code = " +request.status + "message =" + request.responseText + "error : " + error);
+			}
+			
+		});
+	});
+	
+	</script>
 </body>
 </html>

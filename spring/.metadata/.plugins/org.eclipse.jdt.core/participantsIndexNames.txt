@@ -17,8 +17,6 @@ C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.js
 \Peeps_Post\src\main\java
 C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1924685571.index
 \Peeps_member\src\main\java
-C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3305858760.index
-\Peeps\src\main\java
 C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\471742913.index
 \Peeps_Post\src\main\java
 C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2509147163.index

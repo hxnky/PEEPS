@@ -1,8 +1,10 @@
 package com.gnjk.post.mypost.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostEditRequest;
 import com.gnjk.post.mypost.domain.PostFile;
@@ -52,7 +55,7 @@ public class PostController {
 
 		return listService.getPostListView(page);
 	}
-
+	
 	// 게시글 하나 출력
 	@GetMapping("/detail")
 	public Post getPostDetail(
@@ -91,46 +94,62 @@ public class PostController {
 		return editService.editPost(editRequest, request, model);
 	}
 	
-	// 게시글 내용 등록 처리
-//	@RequestMapping(value = "/write", method = RequestMethod.POST)
-//	public String postWritePOST(
-//			@ModelAttribute("writeData") PostWriteRequest writeRequest,
-//			HttpServletRequest request,
-//			Model model
-//			) {
-//		
-//		System.out.println(writeRequest);
-//		
-//		int result = uploadService.postWrite(writeRequest, request);
-//		
-//		model.addAttribute("result", result);
-//		
-//		/* return "/mypost/postWriteView"; */
-//		return "redirect:/post/list";
-//	}
-
-	// 게시글 조회
-//	@RequestMapping(value = "/postNO={p_idx}", method = RequestMethod.GET)
-//	public String postReadGET(
-//			@PathVariable("p_idx") int postidx,
-//			Model model
-//			) {
-////		System.out.println("글 번호 : "+postidx);
-//		
-//		model.addAttribute("readView", readService.getPostReadView(postidx));
-//		
-//		return "/mypost/postRead";
-//	}
-
-	// 게시글 수정페이지
-//	@RequestMapping(value = "/editPNO={p_idx}", method = RequestMethod.GET)
-//	public String postEditForm(@PathVariable("p_idx") int pidx, Model model) {
-//
-//		model.addAttribute("editView", editService.getPost(pidx));
-//
-//		return "/mypost/postEditForm";
-//	}
-
+	// 지도 리스트 출력
+	@GetMapping("/map")
+	public List<Post> mapList(HttpServletRequest request, Model model) {
+		
+		// test용 회원idx
+		int midx = 1;
+		
+		return listService.getMapListView(midx);
+	}
+	
+	// 지도로 주소별 게시글 리스트 출력
+	@GetMapping("/postmaplist")
+	public PostListView getMapPostList(
+			@RequestParam Map<String, Object> param,
+			HttpServletRequest request,
+			Model model) {
+//		System.out.println("컨트롤러 진입 성공");
+//		System.out.println("파람 : "+param);
+//			
+//		System.out.println("리퀘멤idx : "+request.getParameter("memberidx"));
+			
+		String mIdx = request.getParameter("memberidx");
+		String pAddr = request.getParameter("postAdd");
+//		System.out.println("파라미터로 받은 pAddr : "+pAddr);
+			
+		int memberIdx = Integer.parseInt(mIdx);
+//		System.out.println(memberIdx);
+//		System.out.println(pAddr);
+			
+		return listService.getPostListByMapView(memberIdx, pAddr);
+	}
+		
+	// 좋아요 
+	@GetMapping("/likes")
+	public Post updateLikes(
+			HttpServletRequest request
+			) {
+		
+		int postIdx = Integer.parseInt(request.getParameter("pIdx"));
+		System.out.println("포스트인덱스 : "+postIdx);
+		
+		return listService.updateLikes(postIdx, request);
+	}
+	
+	// 좋아요 여부
+	@GetMapping("/likeChk")
+	public Post getLikes(
+			HttpServletRequest request
+			) {
+		
+		int postIdx = Integer.parseInt(request.getParameter("pIdx"));
+		System.out.println("포스트인덱스 : "+postIdx);
+		
+		return listService.getLikes(postIdx, request);
+	}
+	
 
 
 }
