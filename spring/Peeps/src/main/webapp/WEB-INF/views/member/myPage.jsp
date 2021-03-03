@@ -77,9 +77,9 @@ var mphoto ='${m_photo}';
 		</div> <!-- main_wrap끝 -->
 	<!-- 페이징 -->
 	<div id="searchMyMsg"></div>
+	<div class="paging"></div>
 	
-	<div class="paging">
-	</div>
+	
 
 	</div>
 
@@ -587,7 +587,7 @@ $("#keyword").click(function() {
 
 });
 </script>
-<!--방명록-->
+<!--방명록시작-->
 <script>
 
 /*방명록 등록폼*/
@@ -699,26 +699,26 @@ function upMsg(p){
 		       
 		            html +='  </div>'
 		            
-		            html +='  <div class="replydiv">';					           					        
-		            html +='  <h4 class="id">'+ item.gwriter+' :</h4>';
-		            html +=' <form id="replyForm">';
+		        //    html +='  <div class="replydiv">';					           					        
+		        //    html +='  <h4 class="id">'+ item.gwriter+' :</h4>';
+		         //   html +=' <form id="replyForm">';
 		          //  html +=' <span class="replyinputarea"> ';
-		            html +=' <textarea rows="3" cols="70" name="rmsg" class="rmsg" id="rmsg" placeholder="답글을 입력해주세요." required></textarea>';		          
-		            html +=' <input  type="hidden" class="g_idx"  id="g_idx" vaule="'+item.gidx+'" > ';
-		            html +=' <input  type="hidden" class="midx"  id="midx" vaule="'+midx+'" > ';
-		            html +=' <input  type="hidden" class="gidx"  id="gidx" vaule="'+item.gidx+'" > ';
-		            html +=' <input  type="hidden" class="etype"  id="email_type" vaule="'+etype+'" > ';
-		            html +=' <input  type="hidden" class="gwriter"  id="gwriter" vaule="'+item.gwriter+'" > ';
+		          //  html +=' <textarea rows="3" cols="70" name="rmsg" class="rmsg" id="rmsg" placeholder="답글을 입력해주세요." required></textarea>';		          
+		        //    html +=' <input  type="hidden" class="g_idx"  id="g_idx" vaule="'+item.gidx+'" > ';
+		          //  html +=' <input  type="hidden" class="midx"  id="midx" vaule="'+midx+'" > ';
+		         //   html +=' <input  type="hidden" class="gidx"  id="gidx" vaule="'+item.gidx+'" > ';
+		         //   html +=' <input  type="hidden" class="etype"  id="email_type" vaule="'+etype+'" > ';
+		         //   html +=' <input  type="hidden" class="gwriter"  id="gwriter" vaule="'+item.gwriter+'" > ';
 		           //html +='<button id="replybtn">등록</button>';
-		           html +='<input type="submit" >';
+		        //   html +='<input type="submit" >';
 		         //  html +=' </span>'; 
-		            html +='</form>';
+		        //    html +='</form>';
 		           
 		            
-		            html +=' </div>'; 
+		          //  html +=' </div>'; 
 		          //  html +=' <hr>';
-		            html +=' <div class="comment">';
-		            html +='</div> ';
+		          //  html +=' <div class="comment">';
+		          //  html +='</div> ';
 		         
 		         //   html +=' </div>';
 									
@@ -862,7 +862,7 @@ function searchMyMsg() {
 	                
 	                  
 	                  alert("방명록이 작성 되었습니다");
-	                  upMsg(); //방명록 리스트 새로고침 
+	                  upMsg(1); //방명록 리스트 새로고침 
 	                  
 	                  
 	               }
@@ -886,8 +886,7 @@ function searchMyMsg() {
 			
 			console.log(gmessage);
 			console.log(gphoto);	
-			alert(gmessage);
-			alert(gphoto);
+	
 			 
 			$('#gmessage').val(gmessage);
 			$('#edit_photo').val(gphoto);
@@ -946,7 +945,7 @@ function searchMyMsg() {
 							$('#edit_photo').val("");
 							$('#edit_gidx').val("");
 							
-						upMsg(); //방명록 리스트 새로고침 
+						upMsg(1); //방명록 리스트 새로고침 
 						
 					},
 					error:function(e){
@@ -975,7 +974,7 @@ function searchMyMsg() {
 					success : function(data){
 						console.log("ajax data",data);
 						
-		        	     upMsg(); //방명록 리스트 새로고침 
+		        	     upMsg(1); //방명록 리스트 새로고침 
 						alert("방명록이 삭제 되었습니다");
 						
 						
@@ -1101,6 +1100,7 @@ function searchMyMsg() {
 
 
 </script>
+<!-- 방명록 끝 -->
 
 <%-- <script type="text/javascript" src="<%=request.getContextPath()%>/resources/js/mypagepostmap.js"></script> --%>
 <%@ include file="/WEB-INF/views/include/mypagePostMapJS.jsp"%>

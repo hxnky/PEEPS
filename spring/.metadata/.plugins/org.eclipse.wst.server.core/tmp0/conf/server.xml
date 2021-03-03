@@ -153,7 +153,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Peeps" path="/peeps" reloadable="true" source="org.eclipse.jst.jee.server:Peeps"/><Context docBase="C:\Users\bit\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Peeps_guestbook" path="/gb" reloadable="true" source="org.eclipse.jst.jee.server:Peeps_guestbook"/></Host>
+      <Context docBase="C:\Users\pc\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="C:\Users\pc\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Peeps" path="/peeps" reloadable="true" source="org.eclipse.jst.jee.server:Peeps"/><Context docBase="C:\Users\pc\Documents\GitHub\PEEPS\spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Peeps_guestbook" path="/gb" reloadable="true" source="org.eclipse.jst.jee.server:Peeps_guestbook"/></Host>
     </Engine>
   </Service>
 </Server>
