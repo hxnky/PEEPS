@@ -610,18 +610,23 @@ var html = ' <div class="msg_wrap"> ';
  	$('#test2').append(html); 
 		
 	}
-var p2 = 1;
-
+	
+	
 /*리스트보이기 및 초기화 목적 */
-function upMsg(p){
+function upMsg(){
+	
+
+	
+
  	/* 초기화 */
 	$('#ginsert_wrap2').empty();
 	    $('.paging').empty();
 	 
+	  
+	    
 		/*게스트북 리스트 출력*/
 		$.ajax({
-			
-			url : 'http://localhost:8081/gb/rest/guestbook?p='+p2,
+			url : 'http://localhost:8081/gb/rest/guestbook?p='+p,
 		   type : 'GET',
 		success : function(data){
 				  console.log(data);
@@ -710,8 +715,8 @@ function upMsg(p){
 				// 페이징 처리
 				 if (data.totalGbCount>0){
 					 console.log('totalPageCount :' + data.totalPageCount);
-					for(var i=1; i <= data.totalPageCount; i++){	/* test 계정아이디 들어가야 함 */			
-						 var html2 =' <a class="pageBtn" href="http://localhost:8080/peeps/'+gwriter+'?p='p2+i+'">'p2+i+'</a>';																		
+					for(var i=1; i <= data.totalPageCount; i++){
+						 var html2 =' <a class="pageBtn" href="http://localhost:8080/peeps/'+gwriter+'?page='+i+'">'+i+'</a>';																		
 						 $('.paging').append(html2);
 					}										 
 				 };	
