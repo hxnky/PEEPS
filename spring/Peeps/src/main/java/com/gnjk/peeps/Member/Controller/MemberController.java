@@ -93,7 +93,6 @@ public class MemberController {
 	@RequestMapping(value = "/{mid}", method = RequestMethod.GET)
 	public String MyPage(
 			@RequestParam(value = "p", defaultValue = "1") int p,
-			@RequestParam(value = "page", defaultValue = "1") int page,
 			@PathVariable("mid") String mid,
 			String id, Model model) {
 
