@@ -1,15 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.springframework.web.multipart.MultipartHttpServletRequest"/>
-<fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
-<fullyQualifiedTypeName name="com.gnjk.post.mypost.service.PostReadService"/>
-<fullyQualifiedTypeName name="com.gnjk.post.mypost.service.PostDeleteService"/>
-<fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
-<fullyQualifiedTypeName name="org.mybatis.spring.SqlSessionTemplate"/>
-<fullyQualifiedTypeName name="com.gnjk.post.mypost.domain.PostReadView"/>
-<fullyQualifiedTypeName name="com.gnjk.post.mypost.service.PostEditService"/>
-<fullyQualifiedTypeName name="com.gnjk.post.mypost.domain.PostWriteRequest"/>
 <fullyQualifiedTypeName name="java.io.FileOutputStream"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.domain.PostEditRequest"/>
@@ -33,7 +23,6 @@
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.service.ReplyService"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.service.PostListService"/>
-<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.domain.CommentView"/>
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.dao.PostDao"/>
@@ -43,11 +32,9 @@
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.domain.LoginInfo"/>
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.domain.Post"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ResponseBody"/>
 <fullyQualifiedTypeName name="com.gnjk.peeps.Member.dao.MemberDao"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.CrossOrigin"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
@@ -55,9 +42,22 @@
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
 <fullyQualifiedTypeName name="com.gnjk.peeps.Member.domain.Peeps"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMethod"/>
-<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.domain.Peeps"/>
 <fullyQualifiedTypeName name="lombok.Getter"/>
 <fullyQualifiedTypeName name="com.gnjk.post.mypost.service.RedisService"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
+<fullyQualifiedTypeName name="com.gnjk.post.mypost.service.testPostUploadService"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="com.amazonaws.services.s3.AmazonS3"/>
+<fullyQualifiedTypeName name="com.amazonaws.auth.AWSCredentials"/>
+<fullyQualifiedTypeName name="com.amazonaws.auth.BasicAWSCredentials"/>
+<fullyQualifiedTypeName name="com.amazonaws.ClientConfiguration"/>
+<fullyQualifiedTypeName name="com.amazonaws.Protocol"/>
+<fullyQualifiedTypeName name="com.amazonaws.services.s3.AmazonS3Client"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.amazonaws.services.cloudsearchdomain.model.Bucket"/>
+<fullyQualifiedTypeName name="java.io.ByteArrayInputStream"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+<fullyQualifiedTypeName name="com.gnjk.post.mypost.service.S3Util"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
 </qualifiedTypeNameHistroy>

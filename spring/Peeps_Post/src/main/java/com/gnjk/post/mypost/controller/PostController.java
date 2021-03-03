@@ -44,27 +44,13 @@ public class PostController {
 	@Autowired
 	private PostEditService editService;
 	
-	@Autowired
-	private RedisService redisService;
-	
-	// test: redis
-//	@RequestMapping("/test") 
-	public String doTest(@CookieValue("JSESSIONID") String sessionId) {
-		
-//		sessionId = "B1C8D4D2EDD95B731F973432F5F66A1C";
-		
-		System.out.println("redis data : "+redisService.getUserInformation(sessionId));
-		
-		return "test 성공";
-	}
-	
 	// 게시글 업로드
 	@PostMapping("/upload")
 	public int uploadPost(PostWriteRequest writeRequest, HttpServletRequest request, Model model) {
 
 		return uploadService.uploadPost(writeRequest, request, model);
 	}
-
+	
 	// 게시글 리스트 출력
 	@GetMapping("/list")
 	public PostListView postList(

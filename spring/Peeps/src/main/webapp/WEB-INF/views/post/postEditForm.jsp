@@ -54,6 +54,7 @@
 					</div>
 					<!-- 파일 프리뷰 -->
 					<div id="preview" class="preview">
+					<h4 id="prvPlaceHolder">첨부한 이미지가 이곳에 표시됩니다. (이미지 클릭 시 첨부 취소)</h4>
 					<span class="oldPrv"></span>
 					<span class="newPrv"></span>
         			</div>

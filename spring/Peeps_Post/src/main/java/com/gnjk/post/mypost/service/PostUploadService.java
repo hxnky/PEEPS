@@ -95,7 +95,8 @@ public class PostUploadService {
 
 			for (MultipartFile mf : files) {
 
-				fileName = mf.getOriginalFilename(); // 파일 이름
+//				fileName = mf.getOriginalFilename(); // 파일 이름
+				fileName = "postidx"+post.getP_idx();
 				// System.out.println("fileName : " + fileName);
 				newFileName = System.currentTimeMillis() + fileName;
 

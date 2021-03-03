@@ -75,7 +75,8 @@ public class PostEditService {
 			
 			// 파일 배열에서 꺼내서 경로에 저장
 			for (MultipartFile mf : files) {
-				fileName = mf.getOriginalFilename(); // 파일 이름
+//				fileName = mf.getOriginalFilename(); // 파일 이름
+				fileName = "postidx"+post.getP_idx();
 				// System.out.println("fileName : " + fileName);
 				newFileName = System.currentTimeMillis() + fileName;
 				
@@ -87,6 +88,8 @@ public class PostEditService {
 					PostFile postFile = new PostFile();
 					postFile.setF_name(newFileName);
 					postFile.setPost_idx(post.getP_idx());
+					// 21.03.02 파일 (실제)경로 설정
+					postFile.setF_path(saveDirPath);
 
 					System.out.println("!!!postFile : " + postFile);
 

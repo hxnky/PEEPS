@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gnjk.post.mypost.domain.Comment;
@@ -40,8 +41,7 @@ public class MemberPostController {
 
    // 게시물 검색
    @GetMapping("/user/FindPost")
-   public List<Post> PostList(String keyword) {
-
+   public List<Post> PostList(@RequestParam("postkeyword") String keyword) {
       
       return timeLineService.PostListByK(keyword);
    }

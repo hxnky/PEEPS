@@ -335,38 +335,12 @@ body {
 					
 					var pIdx = data.p_idx;
 					
-					// 멤버 정보 받아오는 ajax 시작
-					$.ajax({ 
-						url: '${pageContext.request.contextPath}/user/memberList',
-						type: 'GET',
-						success: function(data){
-							console.log("멤버 ajax success");
-							//console.log("멤버 데이터 : ", data)
-							
-							$.each(data, function(index, mbr){
-								
-								if(sessionMidx == mbr.m_idx){
-									console.log("세션midx랑 게시글midx가 같습니다.");
-									var Btn = '<a class="deleteBtn" href="javascript:deletePost('+pIdx+');">삭제</a>';
-									   Btn += '<a class="editBtn" href="<c:url value="/post/edit?idx='+pIdx+'" />">수정</a>';
-									$('.deBtn').append(Btn);
-								}
-								
-							}); // 멤버 each 1 끝 
-							
-						},
-						error: function(e){
-							console.log("댓글 ajax속 멤버 ajax 실패");
-						}
-					
-					}); // 멤버 정보 받아오는 ajax 끝 (게시글)
-					
-					/* if(sessionMidx == data.member_idx){
+					if(sessionMidx == data.member_idx){
 						console.log("세션midx랑 게시글midx가 같습니다.");
-						var Btn = '<a class="deleteBtn" href="javascript:deletePost('+data.p_idx+');">삭제</a>';
-						   Btn += '<a class="editBtn" href="<c:url value="/main/post/edit?idx='+data.p_idx+'" />">수정</a>';
+						var Btn = '<a class="deleteBtn" href="javascript:deletePost('+pIdx+');">삭제</a>';
+						   Btn += '<a class="editBtn" href="<c:url value="/post/edit?idx='+pIdx+'" />">수정</a>';
 						$('.deBtn').append(Btn);
-					} */
+					}
 					   
 					/* console.log(data.p_title); */
 					$('.ptitle').append(data.p_title);
@@ -446,7 +420,7 @@ body {
 					
 					if(data.length == 1){
 						/* console.log("이미지 1개"); */
-						var html = '<div class="oneImg"><img src="http://52.79.234.178:8080/post/resources/fileupload/postfile/'+data[0].f_name+'"/>"></div>';
+						var html = '<div class="oneImg"><img src="http://52.79.234.178:8080/post/resources/fileupload/postfile/'+data[0].f_name+'"/></div>';
 						$('.postpics').append(html); 
 					} 
 					
@@ -676,6 +650,7 @@ loadComment();
 
 function loadComment(){
 	
+	
 	console.log("댓글 로드 포스트idx : ", postIdx);
 	
 	/* 21.02.17 댓글 조회 한경  */
@@ -717,9 +692,9 @@ function loadComment(){
 							//console.log("each2 :", cmt.member_idx);
 							
 							if(mbr.m_idx == cmt.member_idx){
-								
+								console.log("세션멤버인덱스 : ", sessionMidx);
 								// 세션 회원이랑 댓글 회원 idx 비교해서 수정 삭제 버튼 추가 여부 결정
-								if(cmt.member_idx == member_idx){
+								if(cmt.member_idx == sessionMidx){
 									$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+mbr.m_photo+"'/>'> <span class='id'>"+mbr.id+"</span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button> <button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button><br><input type='hidden' id='replytext'></div>");
 								} else {
 									$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+mbr.m_photo+"'/>'> <span class='id'>"+mbr.id+"</span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button></div>");
@@ -747,7 +722,7 @@ function loadComment(){
 								console.log("댓idx=대댓idx 인 reply! : ", reply);
 								console.log("댓idx=대댓idx 인 reply 의 index! : ", index);
 								
-								if(reply.member_idx == member_idx){
+								if(reply.member_idx == sessionMidx){
 									console.log("&1 대댓 확인 : ",reply);
 									// 멤버 정보 받아오는 ajax 시작 (대댓글)
 									$.ajax({  
