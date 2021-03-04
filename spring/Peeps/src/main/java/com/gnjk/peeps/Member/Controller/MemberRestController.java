@@ -1,5 +1,6 @@
-package com.gnjk.peeps.Member.Controller;
+ package com.gnjk.peeps.Member.Controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gnjk.peeps.Member.Service.DeleteService;
-import com.gnjk.peeps.Member.Service.EditInfoService;
 import com.gnjk.peeps.Member.Service.EditPwService;
 import com.gnjk.peeps.Member.Service.FindPwService;
 import com.gnjk.peeps.Member.Service.FindUserService;
@@ -41,9 +41,6 @@ public class MemberRestController {
 
 	@Autowired
 	private RegService regService;
-
-	@Autowired
-	private EditInfoService editService;
 
 	@Autowired
 	private EditPwService editPwService;
@@ -83,13 +80,6 @@ public class MemberRestController {
 
 		return regService.memberReg(regRequest, request);
 	}
-//
-//	// 프로필 편집 정보
-//	@GetMapping("/edit/Info")
-//	public Peeps editUserInfo(String email) {
-//
-//		return editService.getPeeps(email);
-//	}
 
 	// 비밀번호 찾기
 	@PostMapping("/user/editpw")
@@ -118,7 +108,7 @@ public class MemberRestController {
 
 	// 검색
 	@PostMapping("/user/loaduser")
-	public List<Peeps> loadUser(String keyword, int m_idx) {
+	public List<Peeps> loadUser(@RequestParam("keyword") String keyword, @RequestParam("f_m_idx") int m_idx) {
 
 		return findUserService.SearchPeeps(keyword, m_idx);
 	}
@@ -139,7 +129,7 @@ public class MemberRestController {
 
 	// 마이페이지 유저 정보
 	@PostMapping("/mypage/Info")
-	public List<FollowRequest> PageInfo(String id, int m_idx){
+	public List<FollowRequest> PageInfo(@RequestParam("p_id") String id, @RequestParam("p_m_idx") int m_idx){
 		
 		return myPageService.getPeeps(id, m_idx);
 	}
@@ -275,5 +265,27 @@ public class MemberRestController {
 
 		return findUserService.getMemberInfo();
 	}
+	
+	// 로그인 체크
+	@GetMapping("/user/loginChk")
+	public boolean LoginChk(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		 
+        HttpSession session = request.getSession();
+        String email= (String) session.getAttribute("email");
+        System.out.println(email);
 
+        if(email == null){
+            return false;
+        }
+        
+        return true;
+	}
+	// 랜덤 유저 추천
+	@GetMapping("/user/random")
+	public List<Peeps> RandomUser(int m_idx){
+		
+		System.out.println("랜덤유저");
+		
+		return timeLineService.randomUser(m_idx);
+	}
 }

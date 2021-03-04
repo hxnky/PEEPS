@@ -114,4 +114,7 @@ public interface MemberDao {
 	// 21.02.26 회원정보 조회 (정현)
 	List<Peeps> selectMemberlist();
 
+	// 랜덤 유저 추천
+	List<Peeps> selectRandomUser(int m_idx);
+
 }

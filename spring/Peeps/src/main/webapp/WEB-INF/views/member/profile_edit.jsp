@@ -71,7 +71,7 @@
 			$('.userId').append("아이디 <br> <input type='text' class='edit_text' id='id' name='id' value='"+id+"'>");
 			$('.userName').append("<input type='text' class='edit_text' id='name' name='name' value='"+name+"'>");
 		}else{
-			$('#table_left').append("<img id='profile' src='<c:url value='"+m_photo+"'/><input type='hidden' id='oldPhoto' name='oldPhoto' vaue='"+m_photo+"'><br>'>");						
+			$('#table_left').append("<img id='profile' src='<c:url value='"+m_photo+"'/>'><input type='hidden' id='oldPhoto' name='oldPhoto' value='"+m_photo+"'><br>");						
 			$('#table_left').append("<input type='file' class='choose' id='m_photo' name='m_photo' accept='img/*'><br><button type='button' id='choose_btn'>프로필 사진 바꾸기</button>");
 			$('.userId').append("아이디 <br> <input type='text' class='edit_text' id='id' name='id' value='"+id+"'>");
 			$('.userName').append("<input type='text' class='edit_text' id='name' name='name' value='"+name+"' readonly = 'readonly'>");
@@ -195,29 +195,6 @@
 		});
 	})
 </script>
-<script>
 
-var id = "${id}";
-
-$("#MyPage_img").click(function() {
-
-	location.href = "${pageContext.request.contextPath}/user/mypage?id=" + id;
-
-});
-
-
-
-$("#keyword").click(function() {
-	
-	var keyword = $('#search').val();
-
-	if (keyword.trim() == "") {
-		alert("한 글자 이상 입력하세요");
-	} else {
-		location.href = "${pageContext.request.contextPath}/user/finduser?keyword="+ keyword;
-}
-
-});
-</script>
 
 </html>

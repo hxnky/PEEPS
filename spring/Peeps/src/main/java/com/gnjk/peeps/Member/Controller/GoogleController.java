@@ -40,7 +40,7 @@ public class GoogleController {
 
 		// Google OAuth Access Token 요청을 위한 파라미터 세팅
 		GoogleRequest googleOAuthRequestParam = GoogleRequest.builder().clientId(clientId).clientSecret(clientSecret)
-				.code(authCode).redirectUri("http://52.79.227.12:8080/peeps/glogin").grantType("authorization_code")
+				.code(authCode).redirectUri("http://ec2-52-79-227-12.ap-northeast-2.compute.amazonaws.com:8080/peeps/glogin").grantType("authorization_code")
 				.build();
 
 		// JSON 파싱을 위한 기본값 세팅

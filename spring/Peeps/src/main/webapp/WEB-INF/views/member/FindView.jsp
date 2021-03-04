@@ -37,13 +37,16 @@
 		console.log(keyword);
 		
 		$.ajax({
-			url : '${pageContext.request.contextPath}/user/loaduser?keyword=' + keyword,
+			url : '${pageContext.request.contextPath}/user/loaduser',
 			type : 'post',
 			async : false,
 			data : {
-				"m_idx" : m_idx
+				"f_m_idx" : m_idx,
+				"keyword" : keyword
 			},
 			success : function(data) {
+				console.log(m_idx);
+				console.log(keyword);
 				console.log(data);		
 				
 				var find = data;
@@ -114,6 +117,7 @@ function follow(y_idx){
 		success : function(data) {
 			console.log("팔로우");	
 			load_Find();
+			sendAlarm(follow);
 		},
 		error : function() {
 			console.log("실패,,,,");
@@ -194,7 +198,7 @@ function GoMyPage(idx){
 			
 			console.log(id);
 			
-			location.href = "${pageContext.request.contextPath}/user/mypage?id=" + id;
+			location.href = "${pageContext.request.contextPath}/user/mypage?id=" + encodeURI(encodeURIComponent(id));
 		},
 		error : function() {
 			console.log("유저 정보 실패,,,,");
@@ -203,26 +207,5 @@ function GoMyPage(idx){
 	
 }
 
-var id = "${id}";
-
-$("#MyPage_img").click(function() {
-
-	location.href = "${pageContext.request.contextPath}/user/mypage?id=" + id;
-
-});
-
-
-
-$("#keyword").click(function() {
-	
-	var keyword = $('#search').val();
-
-	if (keyword.trim() == "") {
-		alert("한 글자 이상 입력하세요");
-	} else {
-		location.href = "${pageContext.request.contextPath}/user/finduser?keyword="+ keyword;
-}
-
-});
 </script>
 </html>

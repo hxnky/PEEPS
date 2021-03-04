@@ -112,11 +112,11 @@
 							<!-- 카카오랑 구글 이미지 -->
 							<div>
 								<a
-									href="https://kauth.kakao.com/oauth/authorize?client_id=c2617392eaee575ec9e742581b354a62&redirect_uri=http://localhost:8080/peeps/login&response_type=code">
+									href="https://kauth.kakao.com/oauth/authorize?client_id=c2617392eaee575ec9e742581b354a62&redirect_uri=http://52.79.227.12:8080/peeps/login&response_type=code">
 									<img id="k_login"
 									src="${pageContext.request.contextPath}/resources/images/kakao_login_medium_narrow.png">
 								</a> <a
-									href="https://accounts.google.com/o/oauth2/v2/auth?scope=profile%20email%20openid&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=http://localhost:8080/peeps/glogin&client_id=932809958130-576t52vbv3m0dq8ei051noieo4lhauc1.apps.googleusercontent.com">
+									href="https://accounts.google.com/o/oauth2/v2/auth?scope=profile%20email%20openid&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=http://ec2-52-79-227-12.ap-northeast-2.compute.amazonaws.com:8080/peeps/glogin&client_id=932809958130-576t52vbv3m0dq8ei051noieo4lhauc1.apps.googleusercontent.com">
 
 									<img id="g_login"
 									src="${pageContext.request.contextPath}/resources/images/google_login.png">
