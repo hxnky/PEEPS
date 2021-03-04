@@ -165,11 +165,16 @@ strong {
       $("#emtset").hide();
       enter();
       weatherAPI();
+      var me_idx = $("#me").val();
       $.ajax({
-         url : "http://localhost:8081/chat/mes/select",
+         url : "http://localhost:8081/chat/room/select",
          type : "GET",
+         data : {
+     		"me_idx" : me_idx
+     		},
          dataType : "json",
          success : function(data) {
+        	 console.log("채팅방 select 성공!");
             printRoom(data);
          }, // 채팅방 정보 select sucess
          error : function(e) {
@@ -202,7 +207,6 @@ strong {
    });
 
    //===========================================================================================
-
    function search(){
 	  var m_idx = $("#me").val();
       var keyword = $("#sr_input").val();
@@ -212,7 +216,7 @@ strong {
       }
       $.ajax({
     	  url : '${pageContext.request.contextPath}/user/loaduser?keyword=' + keyword,
-			type : 'get',
+			type : 'post',
 			async : false,
 			data : {
 				"m_idx" : m_idx
@@ -305,18 +309,16 @@ strong {
 	
 } //function
 		
-		
-	//===========================================================================================
-		
+	//===========================================================================================	
 	function stChat(id) {
 		console.log("id 출력 시작");
 		console.log(id);
 		var rm_idx = id;
-		
+		document.getElementById('chatdata').style.background = "url(/peeps/resources/images/snow.jpg)"
 		getRm(rm_idx);
 
 		console.log("rm_idx : "+ rm_idx);
-		
+		$("#rm").val(rm_idx);
 		var me_idx = $("#me").val();
 		console.log("me_idx : " + me_idx);
 		var me_id = $("#me_id").val();
@@ -346,6 +348,7 @@ strong {
 														if (val.me_idx == me_idx) { // m_idx = m_idx
 															console.log("내가 작성한 채팅");
 															var printHTML = "<div id='right'>";
+															//printHTML += "<img src="+"<c:url value= '/resources/images/snow.jpg'/>";
 															printHTML += "<strong>"
 																	+ setDate
 																	+ "</strong>";
@@ -390,7 +393,7 @@ strong {
 												}	//  if (val.rm_idx == id) 끝
 
 											$('#chatdata').scrollTop($('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
-
+											document.getElementById('chatdata').style.background = "url(/resources/images/snow.jpg)";
 										}); // $.each
 					}, // success
 					error : function(e) {
@@ -488,7 +491,7 @@ strong {
 
 			$('#chatdata').append(printHTML);
 		}
-
+		
 		$('#chatdata').scrollTop($('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
 	} // onMessage
 
@@ -525,35 +528,11 @@ strong {
 
 
 	$.each(room, function(key, val) {
-			//_.uniqBy(room, val.rm_idx);
 
-/* 			function multiDimensionalUnique(room) {
-				var uniques = [];
-				var itemsFound = {};
-				for (var i = 0, l = room.length; i < l; i++) {
-					var stringified = JSON.stringify(room[i]);
-					if (itemsFound[stringified]) {
-						continue;
-					}
-					uniques.push(room[i]);
-					itemsFound[stringified] = true;
-				}
-				return uniques;
-			}
-
-			multiDimensionalUnique(room);
-			console.log(room); */
-
-			if (val.me_idx == me_idx || val.rm_idx == me_idx) {
+		if (room != "") {
 
 				var date = new Date(val.ch_time);
 				const setDate = dayjs(date).format("MM/DD HH:mm");
-
-				/*                  for (var i = 0; i < room.length(); i++) {
-				 for (var j = 0; j < room.length(); j++) {
-				 if (i == j) {
-				 } else if (room.get(j).equals(room.get(i))) {
-				 roomr.remove(j); */
 
 				var printHTML = "<div id='chatroom'onclick= 'stChat("
 						+ val.rm_idx + ")'>";
@@ -575,14 +554,7 @@ strong {
 
 				$('#roomdata').prepend(printHTML);
 				console.log("메세지 없음!");
-			}
-
-			if (room == "") {
-
-			} else {
-
-				var currentuser_session = $('#sessionuserid').val();
-
+				
 			} // if/else
 		}); // $.each
 
@@ -651,7 +623,7 @@ strong {
 							}
 						} // if 종료
 						console.log('날씨 해당 없음');
-						//document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
+						document.getElementById('chatdata').style.background = "url(/peeps/resources/images/snow.jpg)"
 					}, //success func 종료
 
 					error : function(e) {

@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 채팅목록 출력 -->
 	<select id="roomList" resultType="com.gnjk.chat.domain.Message">
 		select * from open.chat
-		order by rm_idx asc limit 1
+		order by me_idx = #{me_idx} desc limit 1
 	</select>
 
 

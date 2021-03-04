@@ -56,7 +56,8 @@
             <input type="hidden" value=${m_idx} id="me">
             <input type="hidden" value=${id} id="me_id">
             <!-- <div id="m_id" value=${id}> -->
-               <h2 id="start"> Peeps 채팅을 시작해 보세요 :) </h2>
+               <h2 id="start"> Peeps 채팅을 시작해 보세요 :)💛
+               <!-- <img src="<c:url value='/resources/images/start_1.png' />"></h2> -->
             <!-- </div> -->
 
             <div class="msgImg">
