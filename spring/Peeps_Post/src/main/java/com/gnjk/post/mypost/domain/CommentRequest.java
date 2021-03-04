@@ -18,7 +18,7 @@ public class CommentRequest {
 		comment.setPost_idx(post_idx);
 		comment.setMember_idx(member_idx);
 		comment.setCmt_content(cmt_content);
-
+		
 		return comment;
 	}
 

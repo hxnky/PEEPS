@@ -28,7 +28,6 @@ import com.gnjk.post.mypost.service.PostDeleteService;
 import com.gnjk.post.mypost.service.PostEditService;
 import com.gnjk.post.mypost.service.PostListService;
 import com.gnjk.post.mypost.service.PostUploadService;
-import com.gnjk.post.mypost.service.RedisService;
 
 @RestController
 @RequestMapping("rest/member/post")

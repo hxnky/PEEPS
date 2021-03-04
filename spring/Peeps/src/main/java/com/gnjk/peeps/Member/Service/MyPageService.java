@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.gnjk.peeps.Member.dao.MemberDao;
 import com.gnjk.peeps.Member.domain.FollowRequest;
-import com.gnjk.peeps.Member.domain.Peeps;
 
 @Service
 public class MyPageService {

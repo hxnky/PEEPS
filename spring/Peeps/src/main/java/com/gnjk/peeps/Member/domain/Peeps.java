@@ -1,9 +1,6 @@
 package com.gnjk.peeps.Member.domain;
 
-import java.util.List;
 import java.util.Random;
-
-import javax.annotation.Generated;
 
 import lombok.Getter;
 import lombok.Setter;
