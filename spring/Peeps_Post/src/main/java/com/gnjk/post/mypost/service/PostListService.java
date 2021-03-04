@@ -1,10 +1,8 @@
 package com.gnjk.post.mypost.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +11,6 @@ import org.springframework.stereotype.Service;
 import com.gnjk.post.mypost.dao.FileDao;
 import com.gnjk.post.mypost.dao.LikeDao;
 import com.gnjk.post.mypost.dao.PostDao;
-import com.gnjk.post.mypost.domain.LikeRequest;
-import com.gnjk.post.mypost.domain.Peeps;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostFile;
 import com.gnjk.post.mypost.domain.PostListView;
@@ -133,6 +129,70 @@ public class PostListService {
 		return listView;
 	}
 	
+	// 좋아요 여부
+	public Post getLikes(int pIdx, HttpServletRequest request) {
+		
+//		HttpSession session = request.getSession();
+//		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
+//		System.out.println("로그인 인포 세션1 : "+loginInfo);
+		int mIdx = Integer.parseInt(request.getParameter("mIdx"));
+		System.out.println("좋아요누른 멤버 인덱스! : "+mIdx);
+		
+		int result = 0;
+		
+		Post post = null;
+		
+		try{
+			// 해당 게시글 정보 post에 바인딩
+			dao = template.getMapper(PostDao.class);
+			post = dao.selectPostDetail(pIdx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// test loginInfo null인 경우 interceptor 처리
+//		if(loginInfo == null) { // 로그인이 안된 경우
+//			
+//			// test 로그인 정보 세션 생성
+//			/* loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); */
+////			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
+////			session.setAttribute("peeps", loginInfo);
+//			System.out.println("로그인 인포 세션2 : "+loginInfo);
+//			post.setLikeChk(0);
+//			System.out.println("로그인 안된 경우 post : "+post);
+//			return post;
+//			
+//		} else {	// 로그인 된 경우
+//			System.out.println("로그인 인포 세션3 : "+loginInfo);
+//			int mIdx = loginInfo.getM_idx();
+			
+			try {
+				System.out.println("try구문 진입");
+				lDao = template.getMapper(LikeDao.class);
+				
+				int likeChk = lDao.selectLike(pIdx, mIdx);
+				
+				if(likeChk == 0) {
+					// 좋아요 한번도 누른적 없는 경우
+					post.setLikeChk(0);
+				} else {
+					// 좋아요 누른적 있는 경우
+					likeChk = lDao.selectLikeChk(pIdx, mIdx);
+					post.setLikeChk(likeChk);
+				}
+				
+//				int likeCheck = lDao.selectLikeChk(pIdx, mIdx);
+				
+//				post.setLikeChk(likeCheck);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+//		}
+		return post;
+	}
+	
 	// 좋아요 
 	public Post updateLikes(int pIdx, int mIdx) {
 		
@@ -224,69 +284,7 @@ public class PostListService {
 		return post;
 	}
 	
-	// 좋아요 여부
-	public Post getLikes(int pIdx, HttpServletRequest request) {
-		
-//		HttpSession session = request.getSession();
-//		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
-//		System.out.println("로그인 인포 세션1 : "+loginInfo);
-		int mIdx = Integer.parseInt(request.getParameter("mIdx"));
-		System.out.println("좋아요누른 멤버 인덱스! : "+mIdx);
-		
-		int result = 0;
-		
-		Post post = null;
-		
-		try{
-			// 해당 게시글 정보 post에 바인딩
-			dao = template.getMapper(PostDao.class);
-			post = dao.selectPostDetail(pIdx);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		// test loginInfo null인 경우 interceptor 처리
-//		if(loginInfo == null) { // 로그인이 안된 경우
-//			
-//			// test 로그인 정보 세션 생성
-//			/* loginInfo = new LoginInfo(1, "hy", "hyS2", "profile.png", 0); */
-////			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
-////			session.setAttribute("peeps", loginInfo);
-//			System.out.println("로그인 인포 세션2 : "+loginInfo);
-//			post.setLikeChk(0);
-//			System.out.println("로그인 안된 경우 post : "+post);
-//			return post;
-//			
-//		} else {	// 로그인 된 경우
-//			System.out.println("로그인 인포 세션3 : "+loginInfo);
-//			int mIdx = loginInfo.getM_idx();
-			
-			try {
-				System.out.println("try구문 진입");
-				lDao = template.getMapper(LikeDao.class);
-				
-				int likeChk = lDao.selectLike(pIdx, mIdx);
-				
-				if(likeChk == 0) {
-					// 좋아요 한번도 누른적 없는 경우
-					post.setLikeChk(0);
-				} else {
-					// 좋아요 누른적 있는 경우
-					likeChk = lDao.selectLikeChk(pIdx, mIdx);
-					post.setLikeChk(likeChk);
-				}
-				
-//				int likeCheck = lDao.selectLikeChk(pIdx, mIdx);
-				
-//				post.setLikeChk(likeCheck);
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-//		}
-		return post;
-	}
+
 	
 	
 	

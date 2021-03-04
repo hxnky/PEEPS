@@ -1,11 +1,5 @@
 package com.gnjk.post.mypost.dao;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
-import com.gnjk.post.mypost.domain.LikeRequest;
-
 public interface LikeDao {
 	
 	// 좋아요 행 있는지 여부 확인

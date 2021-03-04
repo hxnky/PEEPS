@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gnjk.post.mypost.dao.FileDao;
@@ -16,7 +15,6 @@ import com.gnjk.post.mypost.dao.PostDao;
 import com.gnjk.post.mypost.domain.Post;
 import com.gnjk.post.mypost.domain.PostEditRequest;
 import com.gnjk.post.mypost.domain.PostFile;
-import com.gnjk.post.mypost.domain.PostReadView;
 
 @Service
 public class PostEditService {
@@ -27,7 +25,7 @@ public class PostEditService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public int editPost(PostEditRequest editRequest, HttpServletRequest request, Model model) {
+	public int editPost(PostEditRequest editRequest, HttpServletRequest request) {
 		int postEditResult = 0;
 
 		MultipartFile[] files = editRequest.getPostformfile();
@@ -47,7 +45,7 @@ public class PostEditService {
 		postEditResult = dao.updatePost(post);
 
 		// 속성에 저장 -> 나중에 확인해서 출력
-		model.addAttribute("result", postEditResult);
+//		model.addAttribute("result", postEditResult);
 
 		// test 게시글 idx 확인
 		int postidx = post.getP_idx();

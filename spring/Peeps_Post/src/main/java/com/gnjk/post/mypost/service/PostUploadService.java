@@ -26,7 +26,7 @@ public class PostUploadService {
 	private SqlSessionTemplate template;
 
 	// 게시글 저장
-	public int uploadPost(PostWriteRequest writeRequest, HttpServletRequest request, Model model) {
+	public int uploadPost(PostWriteRequest writeRequest, HttpServletRequest request) {
 		// 로그인 세션 가져오기
 //		HttpSession session = request.getSession();
 //		Peeps loginInfo = (Peeps) session.getAttribute("peeps");
@@ -76,7 +76,7 @@ public class PostUploadService {
 			postResult = dao.insertPost(post);
 
 			// 속성에 저장 -> 나중에 확인해서 출력
-			model.addAttribute("result", postResult);
+//			model.addAttribute("result", postResult);
 
 		} catch (Exception e) {
 			System.out.println("게시글 저장 실패");
