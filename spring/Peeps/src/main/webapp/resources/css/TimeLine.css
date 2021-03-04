@@ -126,10 +126,71 @@ hr {
 	font-weight: bold;
 }
 
-.scrollToTop>img{
-	width:40px;
+.scrollToTop {
+	border: none;
+	background-color: #fcf9f6;
+}
+
+.scrollToTop>img {
+	width: 40px;
 	height: 40px;
-	position:fixed;
-	right:100px;
-	bottom:50px;
+	position: fixed;
+	right: 100px;
+	bottom: 50px;
+}
+
+.ran_img>img {
+	width: 150px;
+	height: 150px;
+	border-radius: 100%;
+}
+
+.user_random {
+	width: 300px;
+	text-align: center;
+	display: inline;
+	margin: 10px;
+}
+
+.user_wrap {
+	text-align: center;
+	font-weight: bold;
+	font-size: 25px;
+	margin-bottom: 30px;
+}
+
+#user_content {
+	white-space: nowrap;
+	overflow-x: scroll;
+	width: 570px;
+	display: inline-block;
+	scroll-behavior: smooth;
+}
+
+#user_content::-webkit-scrollbar {
+	display: none;
+}
+
+#scr_btn {
+	width: 50px;
+	height: 50px;
+	margin-bottom: 250px;
+}
+
+#scrollToLeft, #scrollToRight {
+	background-color: #fcf9f6;
+	border: none;
+	outline: none;
+}
+
+.likeBtn {
+	border: 0px solid;
+	background-color: transparent;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
+.likeBtn:focus {
+	outline: none;
 }

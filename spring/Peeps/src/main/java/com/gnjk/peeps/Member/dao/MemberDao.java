@@ -65,7 +65,7 @@ public interface MemberDao {
 
 	// 인덱스로 회원 정보 가져오기
 	List<FollowRequest> selectMemberByIdx(int m_idx);
-	
+
 	// 아이디로 회원정보 가져오기
 	List<FollowRequest> selectMemberById(String id);
 
@@ -113,5 +113,11 @@ public interface MemberDao {
 
 	// 21.02.26 회원정보 조회 (정현)
 	List<Peeps> selectMemberlist();
+
+	// 랜덤 유저 추천
+	List<Peeps> selectRandomUser(int m_idx);
+
+	// 21.03.04 아이디, 프로필 사진 조회 (효영)
+	List<Peeps> selectChat(@Param("m_idx") int m_idx);
 
 }

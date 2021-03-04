@@ -9,7 +9,7 @@
 	href="resources/img/apple-icon.png">
 <link rel="icon" type="image/png" href="resources/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>PEEPS 회원가입</title>
+<title>Peeps</title>
 <meta
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
@@ -112,11 +112,11 @@
 							<!-- 카카오랑 구글 이미지 -->
 							<div>
 								<a
-									href="https://kauth.kakao.com/oauth/authorize?client_id=c2617392eaee575ec9e742581b354a62&redirect_uri=http://localhost:8080/peeps/login&response_type=code">
+									href="https://kauth.kakao.com/oauth/authorize?client_id=c2617392eaee575ec9e742581b354a62&redirect_uri=http://52.79.227.12:8080/peeps/login&response_type=code">
 									<img id="k_login"
 									src="${pageContext.request.contextPath}/resources/images/kakao_login_medium_narrow.png">
 								</a> <a
-									href="https://accounts.google.com/o/oauth2/v2/auth?scope=profile%20email%20openid&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=http://localhost:8080/peeps/glogin&client_id=932809958130-576t52vbv3m0dq8ei051noieo4lhauc1.apps.googleusercontent.com">
+									href="https://accounts.google.com/o/oauth2/v2/auth?scope=profile%20email%20openid&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=http://ec2-52-79-227-12.ap-northeast-2.compute.amazonaws.com:8080/peeps/glogin&client_id=932809958130-576t52vbv3m0dq8ei051noieo4lhauc1.apps.googleusercontent.com">
 
 									<img id="g_login"
 									src="${pageContext.request.contextPath}/resources/images/google_login.png">
@@ -195,6 +195,8 @@ function closeLoadingWithMask() {
 
 	$(document).on("click", "#sign_btn", function() {
 		
+		var regType1 = /^[A-Za-z0-9+]*$/;
+		
 		if($('#email').val().trim() == ""){
 			alert("이메일을 입력해주세요");
 		} else if($('#password').val().trim() == ""){
@@ -203,13 +205,18 @@ function closeLoadingWithMask() {
 			alert("이름을 입력해주세요");
 		} else if($('#id').val().trim() == ""){
 			alert("아이디를 입력해주세요");
-		} else{
+		} else if (!regType1.test(document.getElementById('id').value)) {
+			alert('아이디엔 영문과 숫자만 가능합니다.');
+			console.log("한글입력");
+			return false;
+		}else{
+
 			LoadingWithMask();
 			
-			var email = $('#email').val();
-			var password = $('#password').val();
-			var id = $('#id').val();
-			var name = $('#name').val();
+			var email = $('#email').val().replace(/(\s*)/g, "");
+			var password = $('#password').val().replace(/(\s*)/g, "");
+			var id = $('#id').val().replace(/(\s*)/g, "");
+			var name = $('#name').val().replace(/(\s*)/g, "");
 
 			console.log(email);
 			console.log(password);

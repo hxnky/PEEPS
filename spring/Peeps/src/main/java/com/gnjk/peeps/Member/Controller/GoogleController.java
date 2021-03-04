@@ -19,7 +19,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.gnjk.peeps.Member.domain.GoogleRequest;
 import com.gnjk.peeps.Member.domain.GoogleResponse;
-import com.gnjk.peeps.Member.domain.Peeps;
 
 @Controller
 public class GoogleController {
@@ -41,7 +40,7 @@ public class GoogleController {
 
 		// Google OAuth Access Token 요청을 위한 파라미터 세팅
 		GoogleRequest googleOAuthRequestParam = GoogleRequest.builder().clientId(clientId).clientSecret(clientSecret)
-				.code(authCode).redirectUri("http://localhost:8080/peeps/glogin").grantType("authorization_code")
+				.code(authCode).redirectUri("http://ec2-52-79-227-12.ap-northeast-2.compute.amazonaws.com:8080/peeps/glogin").grantType("authorization_code")
 				.build();
 
 		// JSON 파싱을 위한 기본값 세팅
@@ -69,12 +68,11 @@ public class GoogleController {
 		Map<String, String> userInfo = mapper.readValue(resultJson, new TypeReference<Map<String, String>>() {
 		});
 
-		session.setAttribute("access_Token", Result.getAccessToken());	
+		session.setAttribute("access_Token", Result.getAccessToken());
 		session.setAttribute("email", userInfo.get("email"));
 		session.setAttribute("name", userInfo.get("name"));
 		session.setAttribute("m_photo", userInfo.get("picture"));
-		session.setAttribute("loginType", "google");			
-
+		session.setAttribute("loginType", "google");
 
 		return "member/SocialRegForm";
 

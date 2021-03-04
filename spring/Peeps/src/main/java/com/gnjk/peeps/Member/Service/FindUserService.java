@@ -74,4 +74,15 @@ public class FindUserService {
 		return midList;
 	}
 
+	// 21.03.04 아이디, 프로필 사진 조회 (효영)
+	public List<Peeps> getChat(int m_idx) {
+		List<Peeps> list = null;
+
+		dao = template.getMapper(MemberDao.class);
+
+		list = dao.selectChat(m_idx);
+
+		return list;
+	}
+
 }

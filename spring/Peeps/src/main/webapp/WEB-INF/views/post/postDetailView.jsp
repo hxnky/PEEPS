@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>PEEPS</title>
+<title>Peeps</title>
 </head>
 
 <%@ include file="/WEB-INF/views/include/postDetailBasicset.jsp"%>  
@@ -93,7 +93,7 @@
 						<c:choose>
 							<c:when test="${loginType eq 'email'}">
 								<img class="postuserphoto"
-									src="<c:url value="/fileupload/${m_photo}"/>">
+									src="https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile${m_photo}">
 							</c:when>
 							<c:when test="${loginType ne 'email' }">
 								<img class="postuserphoto" src="<c:url value="${m_photo}"/>">

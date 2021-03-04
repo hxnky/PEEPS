@@ -23,10 +23,6 @@
 <!-- <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
  -->
-<link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/modal.css" />" rel="stylesheet">
-<link href="<c:url value="/resources/css/myPage.css" />" rel="stylesheet">
-
 
 <style>
 .container-fluid {
@@ -64,57 +60,6 @@
 	outline: none;
 }
 
-.jumbotron {
-	height: 400px;
-	width: 1150px;
-	margin: 100px auto 0px auto;
-	text-align: center;
-	background-color: #F5E978;
-}
-
-#profile_wrap>img {
-	width: 200px;
-	border-radius: 100%;
-	margin-left: -750px;
-	margin-top: 50px;
-	border: 1px solid #CCC;
-}
-
-#pro_btn>ul>li {
-	list-style: none;
-	font-size: 30px;
-	display: inline-block;
-	text-align: center;
-	margin-right: 40px;
-}
-
-#pro_btn {
-	margin: -180px -300px 0px 0px;
-}
-
-#foll_btn {
-	border: 0;
-	background-color: #F5E978;
-}
-
-#pro_edit {
-	border: solid 0.2px #CCC;
-	background-color: #DDD;
-	border-radius: 5px;
-	width: 300px;
-	height: 35px;
-	font-size: 20px;
-}
-
-#pro_name {
-	font-size: 20px;
-	margin: 10px auto;
-}
-
-#pro_bio {
-	font-size: 20px;
-	margin: 10px auto;
-}
 
 .paging {
 	text-align: center;

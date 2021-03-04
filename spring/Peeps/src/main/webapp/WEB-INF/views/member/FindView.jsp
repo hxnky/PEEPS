@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>아이디 검색</title>
+<title>Peeps</title>
 <link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
 <link href="<c:url value="/resources/css/FindView.css" />" rel="stylesheet">
 </head>
@@ -34,15 +34,19 @@
 		
 		var m_idx = ${m_idx};
 		var keyword = "${UserKeyword}";
+		console.log(keyword);
 		
 		$.ajax({
-			url : '${pageContext.request.contextPath}/user/loaduser?keyword=' + keyword,
-			type : 'get',
+			url : '${pageContext.request.contextPath}/user/loaduser',
+			type : 'post',
 			async : false,
 			data : {
-				"m_idx" : m_idx
+				"f_m_idx" : m_idx,
+				"keyword" : keyword
 			},
 			success : function(data) {
+				console.log(m_idx);
+				console.log(keyword);
 				console.log(data);		
 				
 				var find = data;
@@ -56,7 +60,7 @@
 					
 					$.each(data, function(index, find){
 						if(find.loginType == 'email'){
-							$('#total_wrap').append("<table class='find_peeps' id='"+find.m_idx+"'><tr class='"+find.m_idx+"'><td rowspan='2'><img id='profile' src='<c:url value='fileupload/"+find.m_photo+"'/>' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("+find.m_idx+")'>"+find.id+"</td></tr></table>");
+							$('#total_wrap').append("<table class='find_peeps' id='"+find.m_idx+"'><tr class='"+find.m_idx+"'><td rowspan='2'><img id='profile' src='<c:url value='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+find.m_photo+"'/>' onclick='GoMyPage("+find.m_idx+")'></td><td id='id' onclick='GoMyPage("+find.m_idx+")'>"+find.id+"</td></tr></table>");
 							if(find.m_idx == m_idx){
 								$('.'+find.m_idx).append("<td rowspan='2'><div id='fix'><button id='edit_btn'>프로필 편집</button></div></td>");
 							}else{
@@ -113,6 +117,7 @@ function follow(y_idx){
 		success : function(data) {
 			console.log("팔로우");	
 			load_Find();
+			sendAlarm(follow);
 		},
 		error : function() {
 			console.log("실패,,,,");
@@ -193,7 +198,7 @@ function GoMyPage(idx){
 			
 			console.log(id);
 			
-			location.href = "${pageContext.request.contextPath}/user/mypage?id=" + id;
+			location.href = "${pageContext.request.contextPath}/user/mypage?id=" + encodeURI(encodeURIComponent(id));
 		},
 		error : function() {
 			console.log("유저 정보 실패,,,,");
@@ -202,26 +207,5 @@ function GoMyPage(idx){
 	
 }
 
-var id = "${id}";
-
-$("#MyPage_img").click(function() {
-
-	location.href = "${pageContext.request.contextPath}/user/mypage?id=" + id;
-
-});
-
-
-
-$("#keyword").click(function() {
-	
-	var keyword = $('#search').val();
-
-	if (keyword.trim() == "") {
-		alert("한 글자 이상 입력하세요");
-	} else {
-		location.href = "${pageContext.request.contextPath}/user/finduser?keyword="+ keyword;
-}
-
-});
 </script>
 </html>

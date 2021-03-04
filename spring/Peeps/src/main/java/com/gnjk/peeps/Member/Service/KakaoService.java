@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
-import com.gnjk.peeps.Member.domain.Peeps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -41,7 +40,7 @@ public class KakaoService {
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
 			sb.append("&client_id=c2617392eaee575ec9e742581b354a62");
-			sb.append("&redirect_uri=http://localhost:8080/peeps/login");
+			sb.append("&redirect_uri=http://52.79.227.12:8080/peeps/login");
 			sb.append("&code=" + authorize_code);
 			bw.write(sb.toString());
 			bw.flush();

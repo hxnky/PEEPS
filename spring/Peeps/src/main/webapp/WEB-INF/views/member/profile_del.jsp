@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 탈퇴</title>
+<title>Peeps</title>
 
 <link href="<c:url value="/resources/css/edit_del.css" />"
 	rel="stylesheet">
@@ -191,28 +191,5 @@
 	});
 </script>
 
-<script>
-
-var id = "${id}";
-
-$("#MyPage_img").click(function() {
-
-	location.href = "${pageContext.request.contextPath}/user/mypage?id=" + id;
-
-});
-
-
-$("#keyword").click(function() {
-	
-	var keyword = $('#search').val();
-
-	if (keyword.trim() == "") {
-		alert("한 글자 이상 입력하세요");
-	} else {
-		location.href = "${pageContext.request.contextPath}/user/finduser?keyword="+ keyword;
-}
-
-});
-</script>
 
 </html>

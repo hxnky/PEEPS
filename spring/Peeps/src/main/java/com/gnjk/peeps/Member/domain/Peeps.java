@@ -102,7 +102,7 @@ public class Peeps {
 	}
 
 	public LoginInfo toLoginInfo() {
-		return new LoginInfo(m_idx, email, id, name, m_photo, loginType);
+		return new LoginInfo(m_idx, email, id, name, m_photo, loginType, bio);
 	}
 
 	@Override

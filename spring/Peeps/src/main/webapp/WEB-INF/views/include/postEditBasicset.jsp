@@ -90,9 +90,15 @@
 	min-height: 50px;
 	margin: 15px 0px;
 	border: 1px solid #ccc;
-	/* font-size: 0; */
 	padding: 5px;
 	border-radius: 5px;
+}
+
+#prvPlaceHolder {
+   font-family: 'Nanum Gothic', sans-serif;
+   font-weight: 100px;
+   color: #bbb;
+   margin: 15px 10px;
 }
 
 .imgPrv {
@@ -123,13 +129,6 @@
 
 .displayNone {
 	display: none;
-}
-
-#prvPlaceHolder {
-	font-family: 'Nanum Gothic', sans-serif;
-	font-weight: 100px;
-	color: #bbb;
-	margin: 15px 10px;
 }
 
 body {

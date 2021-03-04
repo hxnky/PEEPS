@@ -1,5 +1,6 @@
 package com.gnjk.peeps.Member.Controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gnjk.peeps.Member.Service.DeleteService;
-import com.gnjk.peeps.Member.Service.EditInfoService;
 import com.gnjk.peeps.Member.Service.EditPwService;
 import com.gnjk.peeps.Member.Service.FindPwService;
 import com.gnjk.peeps.Member.Service.FindUserService;
@@ -28,7 +28,6 @@ import com.gnjk.peeps.Member.Service.MyPageService;
 import com.gnjk.peeps.Member.Service.OAuthService;
 import com.gnjk.peeps.Member.Service.RegService;
 import com.gnjk.peeps.Member.Service.TimeLineService;
-import com.gnjk.peeps.Member.domain.EditRequest;
 import com.gnjk.peeps.Member.domain.FollowRequest;
 import com.gnjk.peeps.Member.domain.Peeps;
 import com.gnjk.peeps.Member.domain.RegRequest;
@@ -42,9 +41,6 @@ public class MemberRestController {
 
 	@Autowired
 	private RegService regService;
-
-	@Autowired
-	private EditInfoService editService;
 
 	@Autowired
 	private EditPwService editPwService;
@@ -72,9 +68,9 @@ public class MemberRestController {
 
 	// 로그인
 	@PostMapping("/user/login")
-	public int login(String email, String password, Model model, HttpServletRequest request) {
+	public int login(String email, String password, Model model, HttpServletRequest request, HttpSession session) {
 
-		return loginService.login(email, password, request);
+		return loginService.login(email, password, request, session);
 
 	}
 
@@ -83,14 +79,6 @@ public class MemberRestController {
 	public int memberReg(RegRequest regRequest, HttpServletRequest request) {
 
 		return regService.memberReg(regRequest, request);
-	}
-
-	// 프로필 편집
-	@PostMapping("/profile/edit")
-	public int editUserInfo(EditRequest editRequest, HttpServletRequest request, HttpSession session) {
-
-		return editService.editPeeps(editRequest, request, session);
-
 	}
 
 	// 비밀번호 찾기
@@ -119,8 +107,8 @@ public class MemberRestController {
 	}
 
 	// 검색
-	@GetMapping("/user/loaduser")
-	public List<Peeps> loadUser(String keyword, int m_idx) {
+	@PostMapping("/user/loaduser")
+	public List<Peeps> loadUser(@RequestParam("keyword") String keyword, @RequestParam("f_m_idx") int m_idx) {
 
 		return findUserService.SearchPeeps(keyword, m_idx);
 	}
@@ -140,30 +128,32 @@ public class MemberRestController {
 	}
 
 	// 마이페이지 유저 정보
-	@GetMapping("/mypage/Info")
-	public List<FollowRequest> PageInfo(String id, int m_idx){
-		
+	@PostMapping("/mypage/Info")
+	public List<FollowRequest> PageInfo(@RequestParam("p_id") String id, @RequestParam("p_m_idx") int m_idx) {
+
+		System.out.println(id);
+
 		return myPageService.getPeeps(id, m_idx);
 	}
-	
+
 	// 마이페이지 팔로잉 리스트
 	@GetMapping("/mypage/ingList")
-	public List<FollowRequest> ingList(int m_idx){
-		
+	public List<FollowRequest> ingList(int m_idx) {
+
 		return myPageService.getFollowingList(m_idx);
 	}
-	
+
 	// 마이페이지 팔로워 리스트
 	@GetMapping("/mypage/werList")
-	public List<FollowRequest> werList(int m_idx){
-		
+	public List<FollowRequest> werList(int m_idx) {
+
 		return myPageService.getFollowerList(m_idx);
 	}
-	
+
 	// 마이페이지 팔로우
 	@PostMapping("/mypage/follow")
 	public int MyFollow(int m_idx, int y_idx) {
-		
+
 		return myPageService.Follow(m_idx, y_idx);
 	}
 
@@ -215,11 +205,11 @@ public class MemberRestController {
 
 	// 소셜 회원 정보
 	@GetMapping(value = "/user/socialInfo")
-	public Peeps SocialInfo(String email, HttpServletRequest request) {
+	public Peeps SocialInfo(String email, HttpServletRequest request, HttpSession session) {
 
 		// session.setAttribute("peeps", oauthService.selectSocialInfo(email));
 
-		return oauthService.selectSocialInfo(email, request);
+		return oauthService.selectSocialInfo(email, request, session);
 	}
 
 	// 소셜 로그인 타입 확인
@@ -242,11 +232,11 @@ public class MemberRestController {
 
 		return timeLineService.FollowingInfo(m_idx);
 	}
-	
+
 	// 마이페이지 - 아이디 조회
 	@RequestMapping(value = "/mypage/chk", method = RequestMethod.GET)
 	public String MyPageChk(int m_idx) {
-
+		System.out.println("테이블 조회 아이디 : " + myPageService.selectId(m_idx));
 		return myPageService.selectId(m_idx);
 	}
 
@@ -278,4 +268,36 @@ public class MemberRestController {
 		return findUserService.getMemberInfo();
 	}
 
+	// 로그인 체크
+	@GetMapping("/user/loginChk")
+	public boolean LoginChk(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		HttpSession session = request.getSession();
+		String email = (String) session.getAttribute("email");
+		System.out.println(email);
+
+		if (email == null) {
+			return false;
+		}
+
+		return true;
+	}
+
+	// 랜덤 유저 추천
+	@GetMapping("/user/random")
+	public List<Peeps> RandomUser(int m_idx) {
+
+		System.out.println("랜덤유저");
+
+		return timeLineService.randomUser(m_idx);
+	}
+
+	// 21.03.04 아이디, 프로필 사진 조회 (효영)
+	@GetMapping("/user/chat")
+	public List<Peeps> selectChat(int m_idx) throws Exception {
+
+		System.out.println("chat 멤버조회 컨트롤러");
+
+		return findUserService.getChat(m_idx);
+	}
 }

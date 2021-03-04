@@ -33,10 +33,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		m_photo
 		from member where email=#{email}
 	</select>
-	
+
 	<!-- 인덱스로 아이디 조회 -->
 	<select id="selectId" resultType="String">
-		select id from member where m_idx=#{m_idx}
+		select id from member where
+		m_idx=#{m_idx}
 	</select>
 
 	<!-- 이메일 없으면 이메일, 이름, 사진, 로그인 타입 insert 하기 -->
@@ -164,16 +165,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 
 	<!-- 인덱스로 회원 정보 가져오기 -->
-	<select id="selectMemberByIdx" resultType="com.gnjk.peeps.Member.domain.FollowRequest">
+	<select id="selectMemberByIdx"
+		resultType="com.gnjk.peeps.Member.domain.FollowRequest">
 		select * from member
 		where m_idx = #{m_idx}
 	</select>
-	
+
 	<!-- 아이디로 회원 정보 가져오기 -->
-	<select id="selectMemberById" resultType="com.gnjk.peeps.Member.domain.FollowRequest">
+	<select id="selectMemberById"
+		resultType="com.gnjk.peeps.Member.domain.FollowRequest">
 		select * from member where id = #{id}
 	</select>
-	
+
 
 	<!-- 소셜 회원 정보 업데이트 -->
 	<update id="m_photoUpdate">
@@ -262,6 +265,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectMemberlist" parameterType="list"
 		resultType="com.gnjk.peeps.Member.domain.Peeps">
 		select * from member
+	</select>
+
+
+	<!-- 랜덤 유저 -->
+	<select id="selectRandomUser" parameterType="list"
+		resultType="com.gnjk.peeps.Member.domain.Peeps">
+		select * from member where NOT m_idx IN(#{m_idx}) order by
+		rand() limit 6
+	</select>
+
+	<!-- 21.03.04 추가 (효영) -->
+	<!-- 채팅 상대방-아이디, 프로필 사진 가져오기 -->
+	<select id="selectChat" parameterType="list"
+		resultType="com.gnjk.peeps.Member.domain.Peeps">
+		select id, m_photo
+		from member
+		where m_idx = #{m_idx}
 	</select>
 
 </mapper>

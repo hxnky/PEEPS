@@ -26,7 +26,7 @@
 	var urlPath = location.pathname;
 	console.log("URL 패스네임 : ", urlPath);
 	var splitUrl = urlPath.split("/");
-	var pathMemberId = splitUrl[2];
+	var pathMemberId = "${m_id}";
 	console.log(splitUrl);
 	console.log("패스멤버아이디",pathMemberId);
 	
@@ -37,7 +37,7 @@
 	   /* menuHtml += '<button onclick="location.href=\'<c:url value="/'+pathMemberId+'/map"/>\'">'; */
 	   menuHtml += '<button onclick="javascript:load_map();">';
 	   menuHtml += '<img src="<c:url value="/resources/images/icon/navi/018-location pin.png"/>"></button>';
-	   menuHtml += '<button>'; 
+	   menuHtml += '<button onclick="javascript:load_guestbook();">'; 
 	   menuHtml += '<img src="<c:url value="/resources/images/icon/navi/017-friends.png"/>"></button>';
 	   $('.menuselect').append(menuHtml);
 	   
@@ -47,7 +47,9 @@
 	load_postList();
 	
 	function load_postList(){
-		
+		$('#searchMyMsg').empty();
+		$('#ginsert_wrap2').empty();
+		$('#test2').empty();
 		$('.row').empty();
 		$('.paging').empty();
 		$('.postList').empty();
@@ -130,6 +132,9 @@
 	
 	// 지도 출력 함수
 	function load_map(){
+		$('#searchMyMsg').empty();
+		$('#ginsert_wrap2').empty();
+		$('#test2').empty();
 		
 		$('#map').removeClass('displayNone');
 		

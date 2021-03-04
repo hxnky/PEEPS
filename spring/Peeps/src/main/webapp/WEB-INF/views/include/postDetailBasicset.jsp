@@ -12,7 +12,6 @@ crossorigin="anonymous">
 integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" 
 crossorigin="anonymous"></script>
 <link href="<c:url value="/resources/css/nav.css" />" rel="stylesheet">
-
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap')
@@ -124,6 +123,7 @@ crossorigin="anonymous"></script>
 
 .content {
 	margin: 20px 0;
+	width: 800px;
 }
 
 .rightside {
@@ -164,6 +164,10 @@ crossorigin="anonymous"></script>
 pre {
 	font-size: 1.2em;
 	font-family: 'Nanum Gothic', sans-serif;
+	width: 800px;
+	overflow: auto;
+    word-wrap: break-word;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-break:break-all;
+
 }
 
 a:link {
@@ -335,10 +339,10 @@ body {
 					
 					var pIdx = data.p_idx;
 					
-					if(sessionMidx == data.member_idx){
+					 if(sessionMidx == data.member_idx){
 						console.log("세션midx랑 게시글midx가 같습니다.");
-						var Btn = '<a class="deleteBtn" href="javascript:deletePost('+pIdx+');">삭제</a>';
-						   Btn += '<a class="editBtn" href="<c:url value="/post/edit?idx='+pIdx+'" />">수정</a>';
+						var Btn = '<a class="deleteBtn" href="javascript:deletePost('+data.p_idx+');">삭제</a>';
+						   Btn += '<a class="editBtn" href="<c:url value="/post/edit?idx='+data.p_idx+'" />">수정</a>';
 						$('.deBtn').append(Btn);
 					}
 					   
@@ -351,13 +355,14 @@ body {
 					/* console.log("date : ",date); */
 					$('.pdate').append(date);
 					
+					/* var pcontent = '<pre>'+data.p_content+'</pre>'; */
 					var pcontent = '<pre>'+data.p_content+'</pre>';
 					$('.content').append(pcontent);
 					
 					/* console.log("위치 : ", data.p_loc); */
 					
 					if (data.p_loc != ""){
-						var plocHtml = '<img style="width: 30px; height: 30px;" src="<c:url value="/resources/img/locpic.png"/>">';
+						var plocHtml = '<img style="width: 30px; height: 30px;" src="<c:url value="/resources/images/icon/locpic.png"/>">';
 						   plocHtml += '<span class="location" style="margin-left: 5px;">'+data.p_loc+'</span>';
 						$('.locSpan').append(plocHtml);
 					}
@@ -377,18 +382,17 @@ body {
 							
 							$.each(data, function(index, item){
 								console.log("each문 안! : ", item.id);
-								
+								console.log("멤버 인덱스!!!!",item.m_idx);
 								if(item.loginType == "email"){
-									
-									var html = '<img class="postuserphoto" src="<c:url value="/fileupload/'+item.m_photo+'"/>">';
+									var html = '<img class="postuserphoto" onclick="GoMyPage('+item.m_idx+')" src="https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile'+item.m_photo+'">';
 									$('.post_top').append(html);
 								} else {
 									
-									var html = '<img class="postuserphoto" src="<c:url value="'+item.m_photo+'"/>">';
+									var html = '<img class="postuserphoto" onclick="GoMyPage('+item.m_idx+')" src="<c:url value="'+item.m_photo+'"/>">';
 									$('.post_top').append(html);
 								}
 								
-								var html2 = '<span class="memberid">'+item.id+'</span>';
+								var html2 = '<span class="memberid" onclick="GoMyPage('+item.m_idx+')">'+item.id+'</span>';
 								$('.post_top').append(html2);
 							});
 							
@@ -510,6 +514,32 @@ body {
 			
 	    }); // document.ready 끝
 	    
+	    // 프사와 아이디 클릭 시 해당 계정의 마이페이지로 이동
+	    function GoMyPage(idx){
+	    	
+	    	console.log(idx);
+	    	
+	    	$.ajax({
+	    		url : '${pageContext.request.contextPath}/mypage/chk',
+	    		type: 'get',
+	    		data : {
+	    		"m_idx" : idx
+	    		},
+	    		success : function(data){
+	    			
+	    			var mid = data;
+	    			
+	    			console.log(mid);
+	    			
+	    			location.href = "${pageContext.request.contextPath}/user/mypage?id=" + encodeURI(encodeURIComponent(mid));
+	    		},
+	    		error : function() {
+	    			console.log("유저 정보 실패,,,,");
+	    		}
+	    	});
+	    	
+	    }
+	    
 	    // 게시글 삭제
 		function deletePost(pidx) {
 			
@@ -522,7 +552,7 @@ body {
 					success : function(data){						
 						var memberid = "${id}";
 						/* window.location.href="http://localhost:8081/post/main/jhS2"; */
-						window.location.href="${pageContext.request.contextPath}/"+memberid;
+						window.location.href="${pageContext.request.contextPath}/user/mypage?id="+memberid;
 						console.log(pidx+'번 게시물 삭제 완료');
 					}
 					
@@ -588,17 +618,31 @@ body {
 	function editComment(idx){
 		
 		var origin = $('.comment .cmt #load_cmt').eq(idx).val();
+		var memberId = "${id}";
+		var memberphoto = "${m_photo}";
+		// 21.03.03 한경 사진 출력을 위한 로그인 타입 추가
+		var loginType = "${loginType}";
 		
 		console.log(idx);
 		
 		var html="<div class='editForm'>";
-		html += "<img class='postuserphoto' src= '<c:url value='/resources/img/puppy3.jpg'/>'> <span class='id'>";
-		html += "아이디";
-		html += "</span>";
+		html += "<img class='postuserphoto' src= 'https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+memberphoto+"'>";
+		html += " <span class='id'>"+memberId+"</span>";
 		html += "<span id='cmtinputarea'> <textarea rows='10' name='cmt_content' class='cmttxt' id='cmttxt_edit' required>"+origin+"</textarea>";
 		html += "<input type='submit' id='cmt_edit_btn' value='수정'><input type='submit' id='cmt_cancle_btn' value='취소'></span></div>";
 		
-		$('.comment .cmt').eq(idx).replaceWith(html);
+		var s_html="<div class='editForm'>";
+		s_html += "<img class='postuserphoto' src= '<c:url value='"+memberphoto+"'/>'>";
+		s_html += " <span class='id'>"+memberId+"</span>";
+		s_html += "<span id='cmtinputarea'> <textarea rows='10' name='cmt_content' class='cmttxt' id='cmttxt_edit' required>"+origin+"</textarea>";
+		s_html += "<input type='submit' id='cmt_edit_btn' value='수정'><input type='submit' id='cmt_cancle_btn' value='취소'></span></div>";
+		
+		if(loginType="email"){
+			$('.comment .cmt').eq(idx).replaceWith(html);
+		} else{
+			$('.comment .cmt').eq(idx).replaceWith(s_html);
+		}
+		
 		
 	}
 	
@@ -610,14 +654,27 @@ body {
 		// 세션받아오기
 		var memberId = "${id}";
 		var memberphoto = "${m_photo}";
+		// 21.03.03 한경 사진 출력을 위한 로그인 타입 추가
+		var loginType = "${loginType}";
 		
 		var html="<div class='editForm'>";
-		html += "<img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+memberphoto+"'/>'> ";
+		html += "<img class='postuserphoto' src= 'https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+memberphoto+"'> ";
 		html += "<span class='id'>"+memberId+"</span>";
 		html += "<span id='cmtinputarea'> <textarea rows='10' name='cmt_content' class='cmttxt' id='reply_insert' placeholder='답글을 입력해주세요' required></textarea>";
 		html += "<input type='submit' id='reply_insert_btn' value='등록'><input type='submit' id='reply_cancle_btn' value='취소'></span></div>";
 			
-		$('.comment .cmt').eq(idx).append(html);
+		var s_html="<div class='editForm'>";
+		s_html += "<img class='postuserphoto' src= '<c:url value='"+memberphoto+"'/>'> ";
+		s_html += "<span class='id'>"+memberId+"</span>";
+		s_html += "<span id='cmtinputarea'> <textarea rows='10' name='cmt_content' class='cmttxt' id='reply_insert' placeholder='답글을 입력해주세요' required></textarea>";
+		s_html += "<input type='submit' id='reply_insert_btn' value='등록'><input type='submit' id='reply_cancle_btn' value='취소'></span></div>";
+		
+		if(loginType == 'email'){
+			$('.comment .cmt').eq(idx).append(html);
+		}else{
+			$('.comment .cmt').eq(idx).append(s_html);
+		}
+		
 
 		
 	}
@@ -631,14 +688,27 @@ body {
 		// 세션받아오기
 		var memberId = "${id}";
 		var memberphoto = "${m_photo}";
+		// 21.03.03 한경 사진 출력을 위한 로그인 타입 추가
+		var loginType = "${loginType}";
 		
 		var html="<div class='editForm'>";
-		html += "<img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+memberphoto+"'/>'> ";
+		html += "<img class='postuserphoto' src= 'https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+memberphoto+"'> ";
 		html += "<span class='id'>"+memberId+"</span>";
 		html += "<span id='cmtinputarea'> <textarea rows='10' name='cmt_content' class='cmttxt' id='reply_insert'  required>"+origin+"</textarea>";
 		html += "<input type='submit' id='reply_insert_btn' value='등록'><input type='submit' id='reply_cancle_btn' value='취소'></span></div>";
 		
-		$('.comment .cmt .reply').eq(idx).replaceWith(html);
+		var s_html="<div class='editForm'>";
+		s_html += "<img class='postuserphoto' src= '<c:url value='"+memberphoto+"'/>'> ";
+		s_html += "<span class='id'>"+memberId+"</span>";
+		s_html += "<span id='cmtinputarea'> <textarea rows='10' name='cmt_content' class='cmttxt' id='reply_insert'  required>"+origin+"</textarea>";
+		s_html += "<input type='submit' id='reply_insert_btn' value='등록'><input type='submit' id='reply_cancle_btn' value='취소'></span></div>";
+		
+		if(loginType == 'email'){
+			$('.comment .cmt .reply').eq(idx).replaceWith(html);
+		} else{
+			$('.comment .cmt .reply').eq(idx).replaceWith(s_html);
+		}
+		
 		
 	}
 
@@ -649,7 +719,6 @@ body {
 loadComment();
 
 function loadComment(){
-	
 	
 	console.log("댓글 로드 포스트idx : ", postIdx);
 	
@@ -692,12 +761,20 @@ function loadComment(){
 							//console.log("each2 :", cmt.member_idx);
 							
 							if(mbr.m_idx == cmt.member_idx){
-								console.log("세션멤버인덱스 : ", sessionMidx);
+								
 								// 세션 회원이랑 댓글 회원 idx 비교해서 수정 삭제 버튼 추가 여부 결정
 								if(cmt.member_idx == sessionMidx){
-									$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+mbr.m_photo+"'/>'> <span class='id'>"+mbr.id+"</span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button> <button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button><br><input type='hidden' id='replytext'></div>");
+									if(mbr.loginType == 'email'){
+										$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' onclick='GoMyPage("+cmt.member_idx+");' src= 'https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+mbr.m_photo+"'> <span class='id' onclick='GoMyPage("+cmt.member_idx+");' >"+mbr.id+"</span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button> <button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button><br><input type='hidden' id='replytext'></div>");
+									}else{
+										$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' onclick='GoMyPage("+cmt.member_idx+");' src= '<c:url value='"+mbr.m_photo+"'/>'> <span class='id' onclick='GoMyPage("+cmt.member_idx+");' >"+mbr.id+"</span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button> <button id='cmt_edit' type='submit'>수정</button>  <button id='cmt_del' type='submit'>삭제</button><br><input type='hidden' id='replytext'></div>");
+									}
 								} else {
-									$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+mbr.m_photo+"'/>'> <span class='id'>"+mbr.id+"</span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button></div>");
+									if(mbr.loginType == 'email'){
+										$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' onclick='GoMyPage("+cmt.member_idx+");' src= 'https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+mbr.m_photo+"'> <span class='id' onclick='GoMyPage("+cmt.member_idx+");'>"+mbr.id+"</span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button> <input id='cmt_edit' type='hidden'><input id='cmt_del' type='hidden'></div>");
+									}else{
+										$('.comment').append("<div class='cmt' id='"+cmt.cmt_idx+"'><img class='postuserphoto' onclick='GoMyPage("+cmt.member_idx+");' src= '<c:url value='"+mbr.m_photo+"'/>'> <span class='id' onclick='GoMyPage("+cmt.member_idx+");'>"+mbr.id+"</span> <input type='text' id='load_cmt' value='"+cmt.cmt_content+"'><button id='cmt_re' type='submit'>답글</button> <input id='cmt_edit' type='hidden'> <input id='cmt_del' type='hidden'></div>");
+									}
 								}
 								
 							} // if mbr.m_idx == cmt.member_idx 끝
@@ -733,7 +810,11 @@ function loadComment(){
 											$.each(data, function(index, mbr){
 												
 												if(mbr.m_idx == reply.member_idx){
-													$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+mbr.m_photo+"'/>'> <span class='id'> "+mbr.id+" </span> <input type='text' id='load_re' value='"+reply.re_content+"'><button id='re_edit' type='submit'>수정</button>  <button id='re_del' type='submit'>삭제</button></div>");
+													if(mbr.loginType== 'email'){
+														$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' onclick='GoMyPage("+mbr.m_idx+");' src= 'https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+mbr.m_photo+"'> <span class='id' onclick='GoMyPage("+mbr.m_idx+");'> "+mbr.id+" </span> <input type='text' id='load_re' value='"+reply.re_content+"'><button id='re_edit' type='submit'>수정</button>  <button id='re_del' type='submit'>삭제</button></div>");
+													}else{
+														$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' onclick='GoMyPage("+mbr.m_idx+");' src= '<c:url value='"+mbr.m_photo+"'/>'> <span class='id' onclick='GoMyPage("+mbr.m_idx+");'> "+mbr.id+" </span> <input type='text' id='load_re' value='"+reply.re_content+"'><button id='re_edit' type='submit'>수정</button>  <button id='re_del' type='submit'>삭제</button></div>");
+													}
 												}
 												
 											});
@@ -757,7 +838,11 @@ function loadComment(){
 											$.each(data, function(index, mbr){
 												
 												if(mbr.m_idx == reply.member_idx){
-													$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' src= '<c:url value='/resources/fileupload/postfile/"+mbr.m_photo+"'/>'> <span class='id'> "+mbr.id+"</span> <input type='text' id='load_re' value='"+reply.re_content+"'></div>");
+													if(mbr.loginType== 'email'){
+														$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' onclick='GoMyPage("+mbr.m_idx+");' src= 'https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+mbr.m_photo+"'> <span class='id' onclick='GoMyPage("+mbr.m_idx+");'> "+mbr.id+"</span> <input type='text' id='load_re' value='"+reply.re_content+"'></div>");
+													}else{
+														$('#'+reply.comment_idx).append("<div class='reply' name='"+reply.re_idx+"'><img class='postuserphoto' onclick='GoMyPage("+mbr.m_idx+");' src= '<c:url value='"+mbr.m_photo+"'/>'> <span class='id' onclick='GoMyPage("+mbr.m_idx+");'> "+mbr.id+"</span> <input type='text' id='load_re' value='"+reply.re_content+"'></div>");
+													}
 												}
 												
 											});

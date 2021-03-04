@@ -43,19 +43,6 @@ public class MyPageService {
 		return peeps;
 	}
 
-//	public boolean chk_follow(int idx, int m_idx) {
-//		
-//		dao = template.getMapper(MemberDao.class);
-//		
-//		boolean follow_chk = false;
-//		
-//		if(dao.CheckFollow(m_idx, idx)==1) {
-//			follow_chk = true;
-//		}
-//			
-//		return follow_chk;
-//	}
-
 	// 팔로워 수
 	public int getFollower(int m_idx, HttpSession session) {
 
@@ -145,6 +132,9 @@ public class MyPageService {
 			int f_idx = follower_peeps.get(i);
 
 			followerList.addAll(dao.selectMemberByIdx(f_idx));
+			System.out.println("팔로워리스트 오류");
+			System.out.println(followerList);
+			System.out.println(followerList.size());
 			if(followerList.size()>0) {
 				followerList.get(i).setChk_result(dao.CheckFollow(m_idx, f_idx));
 			}

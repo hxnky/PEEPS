@@ -1,12 +1,15 @@
 package com.gnjk.peeps.Member.Controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +21,6 @@ public class MemberController {
 
 	@Autowired
 	private VerifyService verifyService;
-
 
 	// 로그인
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -37,7 +39,7 @@ public class MemberController {
 	// 타임라인
 	@RequestMapping(value = "/TimeLine", method = RequestMethod.GET)
 	public String Timeline() {
-		
+
 		return "member/TimeLine";
 	}
 
@@ -79,45 +81,45 @@ public class MemberController {
 
 	// 검색
 	@RequestMapping(value = "/user/finduser", method = RequestMethod.GET)
-	public String findUser(String keyword, Model model) {
+	public String findUser(Model model, HttpServletRequest request) throws UnsupportedEncodingException {
 
-		System.out.println(keyword);
-		model.addAttribute("UserKeyword", keyword);
+		String keyword = request.getParameter("keyword");
+		String UserKeyword = URLDecoder.decode(keyword, "UTF-8");
+		model.addAttribute("UserKeyword", UserKeyword);
 
 		return "member/FindView";
 	}
-	
-	// 마이페이지
-//	@RequestMapping(value = "/user/mypage", method = RequestMethod.GET)
-//	@RequestMapping(value = "/main/{mid}", method = RequestMethod.GET)
-	@RequestMapping(value = "/{mid}", method = RequestMethod.GET)
-	public String MyPage(
-			@RequestParam(value = "p", defaultValue = "1") int p,
-			@PathVariable("mid") String mid,
-			String id, Model model) {
 
-		model.addAttribute("page_id", mid);
-		
+	// 마이페이지
+	@RequestMapping(value = "/user/mypage", method = RequestMethod.GET)
+	public String MyPage(Model model, HttpServletRequest request) throws UnsupportedEncodingException{
+
+		// request.setCharacterEncoding("utf-8");
+		String id = request.getParameter("id");
+		String page_id = java.net.URLDecoder.decode(id, "UTF-8");
+		System.out.println("리퀘스트파라미터"+id);
+		System.out.println("디코딩 파라미터"+page_id);
+
+		model.addAttribute("mid", page_id);
+
 		return "member/myPage";
 	}
-	
+
 	// 로그아웃
 	@RequestMapping(value = "/logout")
 	public String logout(HttpSession session) {
-		
+
 		session.invalidate();
 
 		return "redirect:/";
 	}
-	
-	// 게시물 검색
-	@GetMapping("/post/FindView")
-	public String PostList(String keyword, Model model) {
 
-		model.addAttribute("PostKeyword", keyword);
+	// 채팅
+	@GetMapping("/user/chatting")
+	public String Chat() {
 
-		return "/member/FindPostView";
+		return "chat/chatting";
 	}
 	
-	
+
 }

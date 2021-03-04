@@ -92,7 +92,7 @@
 			<!-- 버튼 -->
 			<tr>												
 				<td class="post_cnclorsubmt">	
-					<input type="button" value="취소" onclick="location.href='<c:url value="/${id}"/>'">
+					<input type="button" value="취소" onclick="location.href='<c:url value="/user/mypage?id=${id}"/>'">
 					<input type="button" value="등록" id="submitbtn" onclick="javascript:actionForm();">
 				</td>
 			</tr>
