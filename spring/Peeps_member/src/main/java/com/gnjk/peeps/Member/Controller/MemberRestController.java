@@ -277,5 +277,14 @@ public class MemberRestController {
 
 		return findUserService.getMemberInfo();
 	}
+	
+	// 21.03.04 아이디, 프로필 사진 조회 (효영)
+	@GetMapping("/user/chat")
+	public List<Peeps> selectChat(int m_idx) throws Exception{
+		
+		System.out.println("chat 멤버조회 컨트롤러");
+		
+		return findUserService.getChat(m_idx);
+	}
 
 }

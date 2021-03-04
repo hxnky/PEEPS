@@ -263,5 +263,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="com.gnjk.peeps.Member.domain.Peeps">
 		select * from member
 	</select>
+	
+	<!-- 21.03.04 추가 (효영) -->
+	<!-- 채팅 상대방-아이디, 프로필 사진 가져오기 -->
+	<select id="selectChat" parameterType="list"
+		resultType="com.gnjk.peeps.Member.domain.Peeps">
+		select id, m_photo
+		from member
+		where m_idx = #{m_idx}
+		</select>
 
 </mapper>

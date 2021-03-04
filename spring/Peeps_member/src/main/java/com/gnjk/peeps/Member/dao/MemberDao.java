@@ -113,5 +113,8 @@ public interface MemberDao {
 
 	// 21.02.26 회원정보 조회 (정현)
 	List<Peeps> selectMemberlist();
+	
+	// 21.03.04 아이디, 프로필 사진 조회 (효영)
+	List<Peeps> selectChat(@Param("m_idx") int m_idx);
 
 }

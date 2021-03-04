@@ -20,7 +20,7 @@
 
             <div class="srch_bar">
                <div class="stylish-input-group">
-                  <span><input type="text" placeholder="@lovely_junghyun" id="sr_input"
+                  <span><input type="text" placeholder="lovely_junghyun" id="sr_input"
                      style="width: 160px;">
                      <button id="srch_b">
 						<img src="<c:url value='/resources/images/icon/navi/search.png' />">
@@ -39,23 +39,24 @@
 
       <main>
          <header>
-            <a id="photo"><img
-               src="<c:url value='/resources/images/icon/navi/023-home.png' />"></a>
+            <a id="rm_photo"></a>
             <div>
-               <input type="hidden" value=${m_idx} id="rm_idx">
+               <input type="hidden" value="rm_idx" id="rm">
+               <input type="hidden" id="rm_id">
                <!-- <div id="rm_id" value=${id}> -->
-                  <h2 name="rm_idx">${id}</h2>
+                  <h2 id="rm_idx"></h2>
                <!-- </div> -->
-
-               <h3>already 1902 messages</h3>
             </div>
          </header>
 
          <div class="well" id="chatdata">
+         <br/>
+         <br/>
             <!-- User Session Info Hidden -->
-            <input type="hidden" value=${m_idx} id="sessionuserid">
+            <input type="hidden" value=${m_idx} id="me">
+            <input type="hidden" value=${id} id="me_id">
             <!-- <div id="m_id" value=${id}> -->
-               <h2 name="me_idx">${id}</h2>
+               <h2 id="start"> Peeps 채팅을 시작해 보세요 :) </h2>
             <!-- </div> -->
 
             <div class="msgImg">
