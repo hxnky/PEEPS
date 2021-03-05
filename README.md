@@ -59,6 +59,7 @@
     * FileZila를 이용한 FTP 업로드
     * Putty를 이용한 SSH 접속
 
-  
+  ## 4. 주요기능
+  ![4_member_main_function](https://user-images.githubusercontent.com/71624723/110079835-f27cd600-7dcc-11eb-9e43-cea0d0ca02a2.png)
   
  
