@@ -235,7 +235,7 @@
 	    	//ajax로 폼데이터 전송
 	    	$.ajax({
 	    		url : 'http://52.79.234.178:8080/post/rest/member/post/upload',
-	    		/* url : 'http://localhost:8081/post/rest/member/post/upload', */
+	    		url : 'http://localhost:8081/post/rest/member/post/upload',
 	    		type : 'POST',
 	    		data : formData,
 	    		processData: false,

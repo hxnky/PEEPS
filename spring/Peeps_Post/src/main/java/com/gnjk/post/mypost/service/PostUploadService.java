@@ -38,9 +38,14 @@ public class PostUploadService {
 //			loginInfo = new Peeps(1, "jh@gmail.com", "1111", "jh", "jhS2", "profile.png", "안녕하세요", "1", 'Y', "email");
 //			session.setAttribute("peeps", loginInfo);
 //		}
+		//test 확인용
+		System.out.println("작성리퀘스트! "+writeRequest);
+		System.out.println("제목 : "+writeRequest.getPtitle());
+		System.out.println("내용: "+writeRequest.getPcontent());
 		
 		// 세션 멤버 idx 
 		int memberIdx = writeRequest.getUserIdx();
+		System.out.println("세션멤버 : "+memberIdx);
 		
 		int postResult = 0;
 
@@ -48,10 +53,10 @@ public class PostUploadService {
 		
 		System.out.println("포스트폼파일 : "+files);
 
-		for (int i = 0; i < files.length; i++) {
-			System.out.println(files[i]);
-		}
-		System.out.println("첫번째 파일 크기 : " + files[0].getSize());
+//		for (int i = 0; i < files.length; i++) {
+//			System.out.println(files[i]);
+//		}
+//		System.out.println("첫번째 파일 크기 : " + files[0].getSize());
 		
 		// 웹 경로
 		String uploadPath = "/resources/fileupload/postfile";
