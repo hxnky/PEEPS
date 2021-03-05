@@ -108,7 +108,7 @@ public class PostController {
 		return listService.getMapListView(mIdx);
 	}
 	
-	// 지도로 주소별 게시글 리스트 출력
+	// 마커 클릭 시 해당 주소가 추가된 게시글 리스트 출력
 //	@GetMapping("/postmaplist")
 	@PostMapping("/postmaplist")
 	public PostListView getMapPostList(

@@ -67,7 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			resultType="com.gnjk.post.mypost.domain.Post"
 			>
 		select * from post 
-		where member_idx=#{param2} and p_loc=#{param1}
+		where member_idx=#{param2} and p_loc=#{param1} order by p_date desc
 		<!-- limit #{param3},#{param4} -->
 	</select>
 
