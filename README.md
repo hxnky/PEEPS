@@ -60,6 +60,6 @@
     * Putty를 이용한 SSH 접속
 
   ## 4. 주요기능
-  ![4_member_main_function](https://user-images.githubusercontent.com/71624723/110080578-007f2680-7dce-11eb-98ca-44d74c725635.png)
+  ![4_member_main_function](https://user-images.githubusercontent.com/71624723/110080989-99ae3d00-7dce-11eb-9d9b-234bad230e77.png)
   
  
