@@ -60,8 +60,13 @@
     * Putty를 이용한 SSH 접속
 
   ## 4. 주요기능
+  #### 회원
   ![4_member_main_function](https://user-images.githubusercontent.com/71624723/110081257-01fd1e80-7dcf-11eb-91db-2d8dd63eb037.png)
   
+  
+  #### 채팅
+  ![리드미용_서아_016](https://user-images.githubusercontent.com/71997900/110234427-bf257d00-7f6d-11eb-9a21-794f15caf856.png)
+
   ![리드미용_서아-017](https://user-images.githubusercontent.com/71997900/110233973-2261e000-7f6b-11eb-822b-ed38fd7de860.png)
 
 
