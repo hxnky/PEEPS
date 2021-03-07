@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 탈퇴</title>
+<title>Peeps</title>
 
 <link href="<c:url value="/resources/css/edit_del.css" />"
 	rel="stylesheet">
@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div id="nav">
-		<%@ include file="/WEB-INF/views/chat/nav.jsp"%>
+		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
 	</div>
 	<div id="total_wrap">
 		<div id="edit_menu">
@@ -31,7 +31,7 @@
 			<table id="edit_table">
 				<tr>
 
-					<td>${peeps.email}<br> 탈퇴하시면 계정을 다시
+					<td>${email}<br> 탈퇴하시면 계정을 다시
 						복구할 수 없습니다. <br> 그래도 탈퇴하시겠어요?</td>
 				</tr>
 				<tr>
@@ -74,46 +74,31 @@
 <script>
 	$(function() {
 
-		var email = "${peeps.email}";
+		var email = "${email}";
 
-		$("#edit")
-				.click(
-						function() {
-
-							location.href = "${pageContext.request.contextPath}/profile/Info?email="
-									+ email;
+		$(document).on("click", "#edit", function(){
+							location.href = "${pageContext.request.contextPath}/profile/Info";
 
 						});
-
-		$("#pw_ch")
-				.click(
-						function() {
-
+		$(document).on("click", "#pw_ch", function(){
 							location.href = "${pageContext.request.contextPath}/profile/pw?email="
 									+ email;
 
 						});
-
-		$("#delete")
-				.click(
-						function() {
-
+		$(document).on("click", "#delete", function(){
 							location.href = "${pageContext.request.contextPath}/profile/delete?email="
 									+ email;
 
 						});
 
-		$("#log_out").click(function() {
-
+		$(document).on("click", "#log_out", function(){
+			
 			location.href = "${pageContext.request.contextPath}/logout";
 
 		});
 	})
 </script>
 <script>
-	function myFunction() {
-		document.getElementById("myDropdown").classList.toggle("show");
-	}
 
 	window.onclick = function(event) {
 		if (!event.target.matches('.dropbtn')) {
@@ -164,8 +149,8 @@
 
 									var reason = $('#reason').val();
 									var password = $('#password').val();
-									var email = "${peeps.email}";
-									var m_idx = "${peeps.m_idx}";
+									var email = "${email}";
+									var m_idx = ${m_idx};
 									m_idx = Number(m_idx);
 
 									console.log(password);
@@ -203,42 +188,5 @@
 	});
 </script>
 
-<script>
-	$("#keyword")
-			.click(
-					function() {
-
-						var m_idx = $
-						{
-							peeps.m_idx
-						}
-						;
-						var keyword = $('#search').val();
-
-						if (keyword.trim() == "") {
-							alert("한 글자 이상 입력하세요");
-						} else {
-							$
-									.ajax({
-										url : '${pageContext.request.contextPath}/user/finduser',
-										type : 'get',
-										async : false,
-										data : {
-											"keyword" : keyword,
-											"m_idx" : m_idx
-										},
-										success : function(data) {
-											location.href = "${pageContext.request.contextPath}/member/FindView?keyword="
-													+ keyword;
-										},
-										error : function() {
-											console.log("실패,,,,");
-										}
-									});
-
-						}
-
-					});
-</script>
 
 </html>

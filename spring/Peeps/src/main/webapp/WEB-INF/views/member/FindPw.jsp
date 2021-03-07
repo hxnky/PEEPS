@@ -9,7 +9,7 @@
 	href="resources/img/apple-icon.png">
 <link rel="icon" type="image/png" href="resources/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>PEEPS 비밀번호 찾기</title>
+<title>Peeps</title>
 <meta
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
@@ -56,6 +56,7 @@ h4 {
 	font-size: 21px;
 }
 </style>
+
 <body>
 	<div class="image-container set-full-height"
 		style="background-color: #fcf9f6">
@@ -140,17 +141,6 @@ h4 {
 	</div>
 
 </body>
-<!--   Core JS Files   -->
-<script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
-	type="text/javascript"></script>
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"
-	type="text/javascript"></script>
-<script src="<c:url value="/resources/js/jquery.bootstrap.wizard.js"/>"
-	type="text/javascript"></script>
-
-<!--  Plugin for the Wizard -->
-<%-- <script src="<c:url value="/resources/js/gsdk-bootstrap-wizard.js"/>"></script> --%>
-
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 <script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 

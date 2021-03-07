@@ -1,40 +1,29 @@
 package com.gnjk.peeps.Member.Service;
 
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gnjk.peeps.Member.dao.MemberDao;
+import com.gnjk.peeps.Member.dao.AlarmListDao;
 
 @Service
 public class DeleteService {
 
-	private MemberDao dao;
+	private AlarmListDao dao;
 
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public int Delete(String email, String password, int m_idx, String reason) {
+	// 알람 삭제
+	public int deleteAlarm(int al_idx) throws Exception {
 
-		int result = 0;
-		
-		dao = template.getMapper(MemberDao.class);
-		
-		result = dao.chk_password(email, password);
-		
-		if (result == 0) {
-			System.out.println("회원 정보가 존재하지 않습니다.");
-		} else {
-			dao.deletePeeps(email, password);
-			System.out.println(m_idx);
-			
-			dao.deleteFollowList(m_idx);
-			
-			dao.insertReason(email, reason);
-			System.out.println("회원 삭제 완료");
-		}
-		
-		return result;
+		dao = template.getMapper(AlarmListDao.class);
+
+		System.out.println("알람 삭제 서비스");
+		System.out.println(dao.deleteAlarm(al_idx));
+		return dao.deleteAlarm(al_idx);
+
 	}
 
 }

@@ -19,7 +19,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.gnjk.peeps.Member.domain.GoogleRequest;
 import com.gnjk.peeps.Member.domain.GoogleResponse;
-import com.gnjk.peeps.Member.domain.Peeps;
 
 @Controller
 public class GoogleController {
@@ -41,7 +40,7 @@ public class GoogleController {
 
 		// Google OAuth Access Token 요청을 위한 파라미터 세팅
 		GoogleRequest googleOAuthRequestParam = GoogleRequest.builder().clientId(clientId).clientSecret(clientSecret)
-				.code(authCode).redirectUri("http://localhost:8080/peeps/glogin").grantType("authorization_code")
+				.code(authCode).redirectUri("http://ec2-52-79-227-12.ap-northeast-2.compute.amazonaws.com:8080/peeps/glogin").grantType("authorization_code")
 				.build();
 
 		// JSON 파싱을 위한 기본값 세팅
@@ -69,31 +68,11 @@ public class GoogleController {
 		Map<String, String> userInfo = mapper.readValue(resultJson, new TypeReference<Map<String, String>>() {
 		});
 
-
-
-		session.setAttribute("loginInfo", userInfo);
 		session.setAttribute("access_Token", Result.getAccessToken());
-		
-
-		model.addAttribute("token", Result.getAccessToken());
-		model.addAttribute("result", result);
-		
-		
-		Peeps peeps = new Peeps();
-		
-		peeps.setEmail(userInfo.get("email"));
-		peeps.setName(userInfo.get("name"));
-		peeps.setM_photo(userInfo.get("picture"));
-		peeps.setLoginType("google");
-		
-		System.out.println(peeps);
-		
-		session.setAttribute("peeps", peeps);
-		
-		System.out.println(userInfo);
-		System.out.println("이메일 : " + userInfo.get("email"));
-		System.out.println("이름 : " + userInfo.get("name"));
-		System.out.println("사진 URL : " + userInfo.get("picture"));
+		session.setAttribute("email", userInfo.get("email"));
+		session.setAttribute("name", userInfo.get("name"));
+		session.setAttribute("m_photo", userInfo.get("picture"));
+		session.setAttribute("loginType", "google");
 
 		return "member/SocialRegForm";
 

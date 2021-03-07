@@ -33,14 +33,14 @@ public class MailSenderService {
 			// 메일 내용 컨텐츠 html
 			String html = "<h1>회원가입을 축하합니다! (●'◡'●) </h1>";
 			html += "<h3>인증을 위해 아래 링크를 클릭해주세요</h3>";
-			html += "<a href=\"http://localhost:8081/peeps/member/verify?m_idx=" + peeps.getM_idx() + "&code="
+			html += "<a href=\"http://52.79.227.12:8080/peeps/member/verify?m_idx=" + peeps.getM_idx() + "&code="
 					+ peeps.getCode() + "\">인증하기</a>";
 
 			// message에 내용 적용
 			message.setText(html, "utf-8", "html");
 
 			// from 설정
-			message.setFrom(new InternetAddress("aia.hxnky@gmail.com"));
+			message.setFrom(new InternetAddress("peeps0309@gmail.com"));
 
 			// to 설정
 			message.addRecipient(RecipientType.TO,
@@ -80,7 +80,7 @@ public class MailSenderService {
 			message.setText(html, "utf-8", "html");
 
 			// from 설정
-			message.setFrom(new InternetAddress("aia.hxnky@gmail.com"));
+			message.setFrom(new InternetAddress("peeps0309@gmail.com"));
 
 			// to 설정
 			message.addRecipient(RecipientType.TO,

@@ -1,8 +1,5 @@
 package com.gnjk.peeps.Member.Service;
 
-import java.io.File;
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,7 +19,10 @@ public class EditInfoService {
 	@Autowired
 	private SqlSessionTemplate template;
 
-	public int getPeeps(String email, HttpSession session) {
+	@Autowired
+	private RedisService redisService;
+
+	public int getPeeps(String email) {
 
 		dao = template.getMapper(MemberDao.class);
 		int result = 0;
@@ -31,72 +31,53 @@ public class EditInfoService {
 		System.out.println("프로필 편집 페이지");
 		System.out.println(peeps);
 
-		if(peeps != null) {
-			session.setAttribute("peeps", peeps);	
+		if (peeps != null) {
 			result = 1;
 		}
 
 		return result;
 	}
 
-	public int editPeeps(EditRequest editRequest, HttpServletRequest request, HttpSession session) {
+	public int editPeeps(EditRequest editRequest, HttpServletRequest request, HttpSession session, String user_imgPath) {
 
+		System.out.println("편집 서비스 !!");
+		
 		int result = 0;
 
-		String uploadPath = "/fileupload";
-
-		String saveDirPath = request.getSession().getServletContext().getRealPath(uploadPath);
-
-		String newFileName = null;
-		File newFile = null;
-
-		if (!editRequest.getM_photo().isEmpty()) {
-
-			newFileName = editRequest.getId() + System.currentTimeMillis();
-			newFile = new File(saveDirPath, newFileName);
-
-			try {
-				editRequest.getM_photo().transferTo(newFile);
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
 		Peeps peeps = editRequest.getToPeeps();
-		String email = peeps.getEmail();
 
 		System.out.println(editRequest);
 		System.out.println(peeps);
 		System.out.println(editRequest.getOldPhoto());
-
-		if (newFileName == null) {
-			peeps.setM_photo(editRequest.getOldPhoto());
+	
+		if(user_imgPath != "/profile.png") {
+			peeps.setM_photo(user_imgPath);
 		} else {
-			peeps.setM_photo(newFileName);
+			peeps.setM_photo("/profile.png");
 		}
 
 		try {
 			dao = template.getMapper(MemberDao.class);
 
 			result = dao.updateMemberInfo(peeps);
-			peeps = dao.selectMemberByEmail(email);
+			
+			System.out.println("사진 디비 수정 완료 !!");
 
 		} catch (Exception e) {
 			e.printStackTrace();
-
-			if (newFile != null && newFile.exists()) {
-				newFile.delete();
-			}
-		}
-
-		if (newFile != null && !editRequest.getOldPhoto().equals("profile.png")) {
-			new File(saveDirPath, editRequest.getOldPhoto()).delete();
-		}
+		}	
 
 		// 수정 후 세션 다시 저장
-		session.setAttribute("peeps", peeps);
+		redisService.setUserInformation(peeps.toLoginInfo(), request.getSession());
+		session.setAttribute("m_photo", peeps.getM_photo());
+		session.setAttribute("id", peeps.getId());
+		session.setAttribute("name", peeps.getName());
+		session.setAttribute("bio", peeps.getBio());
+		session.setAttribute("m_idx", peeps.getM_idx());
+		session.setAttribute("loginType", peeps.getLoginType());
+		session.setAttribute("secret", peeps.getSecret());
+		
+		System.out.println("편집 후 로그인 세션 : "+peeps.toLoginInfo());
 
 		return result;
 	}

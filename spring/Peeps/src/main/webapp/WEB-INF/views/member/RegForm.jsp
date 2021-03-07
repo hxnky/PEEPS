@@ -9,7 +9,7 @@
 	href="resources/img/apple-icon.png">
 <link rel="icon" type="image/png" href="resources/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>PEEPS 회원가입</title>
+<title>Peeps</title>
 <meta
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
 	name='viewport' />
@@ -112,11 +112,11 @@
 							<!-- 카카오랑 구글 이미지 -->
 							<div>
 								<a
-									href="https://kauth.kakao.com/oauth/authorize?client_id=c2617392eaee575ec9e742581b354a62&redirect_uri=http://localhost:8080/peeps/login&response_type=code">
+									href="https://kauth.kakao.com/oauth/authorize?client_id=c2617392eaee575ec9e742581b354a62&redirect_uri=http://52.79.227.12:8080/peeps/login&response_type=code">
 									<img id="k_login"
 									src="${pageContext.request.contextPath}/resources/images/kakao_login_medium_narrow.png">
 								</a> <a
-									href="https://accounts.google.com/o/oauth2/v2/auth?scope=profile%20email%20openid&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=http://localhost:8080/peeps/glogin&client_id=932809958130-576t52vbv3m0dq8ei051noieo4lhauc1.apps.googleusercontent.com">
+									href="https://accounts.google.com/o/oauth2/v2/auth?scope=profile%20email%20openid&access_type=offline&include_granted_scopes=true&response_type=code&state=state_parameter_passthrough_value&redirect_uri=http://ec2-52-79-227-12.ap-northeast-2.compute.amazonaws.com:8080/peeps/glogin&client_id=932809958130-576t52vbv3m0dq8ei051noieo4lhauc1.apps.googleusercontent.com">
 
 									<img id="g_login"
 									src="${pageContext.request.contextPath}/resources/images/google_login.png">
@@ -141,7 +141,7 @@
 		</div>
 
 	</div>
-
+<div id="loadingImg"></div>
 </body>
 <!--   Core JS Files   -->
 <script src="<c:url value="/resources/js/jquery-2.2.4.min.js"/>"
@@ -158,44 +158,101 @@
 <script src="<c:url value="/resources/js/jquery.validate.min.js"/>"></script>
 
 <script>
+
+function LoadingWithMask() {
+    //화면의 높이와 너비를 구합니다.
+    var maskHeight = $(document).height();
+    var maskWidth  = window.document.body.clientWidth;
+     
+    //화면에 출력할 마스크를 설정해줍니다.
+    var mask       ="<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'></div>";
+    var loadingImg ='';
+    
+    loadingImg +=" <img src='<c:url value='/resources/images/loading-unscreen.gif'/>' style='z-index:9999; width:200px; height:200px; position: absolute; display: block; left:43%; top:30%;'>"; 
+ 
+    //화면에 레이어 추가
+    $('body').append(mask);
+ 
+    //마스크의 높이와 너비를 화면 것으로 만들어 전체 화면을 채웁니다.
+    $('#mask').css({
+            'width' : maskWidth,
+            'height': maskHeight,
+            'opacity' :'0.3'
+    });
+  
+    //마스크 표시
+    $('#mask').show();
+  
+    //로딩중 이미지 표시
+    $('#loadingImg').append(loadingImg);
+    $('#loadingImg').show();
+}
+
+function closeLoadingWithMask() {
+    $('#mask, #loadingImg').hide();
+    $('#mask, #loadingImg').empty(); 
+}
+
 	$(document).on("click", "#sign_btn", function() {
+		
+		var regType1 = /[A-Za-z0-9.;\-]/;
+		
+		if($('#email').val().trim() == ""){
+			alert("이메일을 입력해주세요");
+		} else if($('#password').val().trim() == ""){
+			alert("비밀번호를 입력해주세요");
+		} else if($('#name').val().trim() == ""){
+			alert("이름을 입력해주세요");
+		} else if($('#id').val().trim() == ""){
+			alert("아이디를 입력해주세요");
+		} else if (!regType1.test(document.getElementById('id').value)) {
+			alert('아이디엔 영문과 숫자만 가능합니다.');
+			console.log("한글입력");
+			return false;
+		}else{
 
-		var email = $('#email').val();
-		var password = $('#password').val();
-		var id = $('#id').val();
-		var name = $('#name').val();
+			LoadingWithMask();
+			
+			var email = $('#email').val().replace(/(\s*)/g, "");
+			var password = $('#password').val().replace(/(\s*)/g, "");
+			var id = $('#id').val().replace(/(\s*)/g, "");
+			var name = $('#name').val().replace(/(\s*)/g, "");
 
-		console.log(email);
-		console.log(password);
-		console.log(id);
-		console.log(name);
+			console.log(email);
+			console.log(password);
+			console.log(id);
+			console.log(name);
 
-		$.ajax({
-			url : '${pageContext.request.contextPath}/member/regPost',
-			type : 'post',
-			data : {
-				"email" : email,
-				"password" : password,
-				"id" : id,
-				"name" : name
-			},
-			success : function(data) {
-				
-				if(data==1){
-					alert("이미 가입된 이메일입니다. 로그인 화면으로 이동합니다.");
-					location.href = "${pageContext.request.contextPath}/";
-				} else if(data==2){
-					alert("아이디가 중복됩니다.");
-				} else{
-					alert("회원가입이 완료되었습니다. 이메일 인증을 완료해주세요!");
-					location.href = "${pageContext.request.contextPath}/";
+			$.ajax({
+				url : '${pageContext.request.contextPath}/member/regPost',
+				type : 'post',
+				data : {
+					"email" : email,
+					"password" : password,
+					"id" : id,
+					"name" : name
+				},
+				success : function(data) {
+					closeLoadingWithMask();
+					
+					if(data==1){
+						alert("이미 가입된 이메일입니다. 로그인 화면으로 이동합니다.");
+						location.href = "${pageContext.request.contextPath}/";
+					} else if(data==2){
+						alert("아이디가 중복됩니다.");
+					} else{
+						alert("회원가입이 완료되었습니다. 이메일 인증을 완료해주세요!");
+						location.href = "${pageContext.request.contextPath}/";
+					}
+				},
+				error : function(request, status, error) {
+					console.log("통신 실패");
+
 				}
-			},
-			error : function(request, status, error) {
-				console.log("통신 실패");
+			});
+		}
 
-			}
-		});
+		
 
 	})
 </script>

@@ -1,10 +1,11 @@
 /*공통인부분*/
-
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+@import
+	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap')
+	;
 
 body {
-	font-family: 'Nanum Gothic', sans-serif;
 	background-color: #fcf9f6;
+	font-family: 'Nanum Gothic', sans-serif;
 }
 
 #total_wrap {
@@ -100,4 +101,48 @@ h3 {
 	font-weight: bold;
 	width: 300px;
 	margin: 50px auto;
+}
+
+/*드롭다운*/
+.dropbtn {
+	background-color: white;
+	color: black;
+	margin-top: 10px;
+	height: 40px;
+	width: 300px;
+	font-size: 16px;
+	border: 0.2px solid #CCC;
+	cursor: pointer;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+	min-width: 160px;
+	overflow: auto;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content div {
+	color: black;
+	height: 40px;
+	width: 300px;
+	text-align: center;
+	display: block;
+	margin: 5px auto;
+}
+
+.dropdown #sub_dd:hover {
+	background-color: #f1f1f1;
+	cursor: pointer;
+}
+
+.show {
+	display: block;
 }

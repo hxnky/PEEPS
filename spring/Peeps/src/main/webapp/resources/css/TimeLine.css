@@ -1,0 +1,196 @@
+@import
+	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap')
+	;
+
+body {
+	background-color: #fcf9f6;
+	font-family: 'Nanum Gothic', sans-serif;
+}
+
+#total_contents {
+	margin: 120px auto;
+	width: 700px;
+}
+
+.user_img>img {
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+}
+
+.cmt_img>img {
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+}
+
+#heart {
+	background-color: white;
+	border: none;
+	margin: 10px 0 0 25px;
+	height: 20px;
+}
+
+.post_wrap {
+	margin-bottom: 50px;
+	border: 1px solid black;
+	background-color: white;
+}
+
+#post_img>img {
+	width: 698px;
+	height: 698px;
+}
+
+.user_img {
+	margin: 5px 0 0 25px;
+	width: 70px;
+	height: 50px;
+	float: left;
+}
+
+.user_id {
+	width: 600px;
+	height: 60px;
+	float: left;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 60px;
+}
+
+#post_con {
+	margin-left: 25px;
+}
+
+#post_title {
+	margin: 10px 0 10px 25px;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+hr {
+	width: 650px;
+}
+
+#cmt_wrap {
+	margin: 10px 0 10px 25px;
+}
+
+.cmt_img {
+	height: 40px;
+	width: 40px;
+	float: left;
+}
+
+.cmt_id {
+	height: 40px;
+	width: 100px;
+	float: left;
+	line-height: 40px;
+	margin-left: 20px;
+}
+
+.cmt {
+	width: 350px;
+	height: 40px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	line-height: 40px;
+}
+
+#post_find {
+	margin: 10px auto;
+}
+
+#FindPost {
+	width: 650px;
+	height: 30px;
+}
+
+#PostKeyword {
+	height: 30px;
+	width: 36px;
+	border: none;
+	background-color: #fcf9f6;
+}
+
+#PostKeyword>img {
+	height: 20px;
+	width: 30px;
+}
+
+#no_post {
+	font-size: 40px;
+	margin: 20px 0 0 80px;
+	font-weight: bold;
+}
+
+.scrollToTop {
+	border: none;
+	background-color: #fcf9f6;
+}
+
+.scrollToTop>img {
+	width: 40px;
+	height: 40px;
+	position: fixed;
+	right: 100px;
+	bottom: 50px;
+}
+
+.ran_img>img {
+	width: 150px;
+	height: 150px;
+	border-radius: 100%;
+}
+
+.user_random {
+	width: 300px;
+	text-align: center;
+	display: inline;
+	margin: 10px;
+}
+
+.user_wrap {
+	text-align: center;
+	font-weight: bold;
+	font-size: 25px;
+	margin-bottom: 30px;
+}
+
+#user_content {
+	white-space: nowrap;
+	overflow-x: scroll;
+	width: 570px;
+	display: inline-block;
+	scroll-behavior: smooth;
+}
+
+#user_content::-webkit-scrollbar {
+	display: none;
+}
+
+#scr_btn {
+	width: 50px;
+	height: 50px;
+	margin-bottom: 250px;
+}
+
+#scrollToLeft, #scrollToRight {
+	background-color: #fcf9f6;
+	border: none;
+	outline: none;
+}
+
+.likeBtn {
+	border: 0px solid;
+	background-color: transparent;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
+.likeBtn:focus {
+	outline: none;
+}

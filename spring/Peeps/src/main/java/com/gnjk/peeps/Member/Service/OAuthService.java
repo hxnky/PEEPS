@@ -1,6 +1,7 @@
 package com.gnjk.peeps.Member.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class OAuthService {
 
 	@Autowired
 	private SqlSessionTemplate template;
+	
+	@Autowired
+	private RedisService redisService;
 
 	private MemberDao dao;
 
@@ -83,9 +87,21 @@ public class OAuthService {
 	}
 
 	// 소셜 회원 정보 세션에 저장
-	public Peeps selectSocialInfo(String email) {
+	public Peeps selectSocialInfo(String email, HttpServletRequest request, HttpSession session) {
 		
 		dao = template.getMapper(MemberDao.class);
+		
+		Peeps peeps = dao.selectMemberByEmail(email);
+		
+		request.getSession().setAttribute("loginInfo", peeps.toLoginInfo());
+		redisService.setUserInformation(peeps.toLoginInfo(), request.getSession());
+		
+//		session.setAttribute("m_idx", peeps.getM_idx());
+//		session.setAttribute("email", peeps.getEmail());
+//		session.setAttribute("name", peeps.getName());
+//		session.setAttribute("loginType", peeps.getLoginType());
+//		session.setAttribute("m_photo", peeps.getM_photo());
+//		session.setAttribute("id", peeps.getId());
 		
 		return dao.selectMemberByEmail(email);
 	}

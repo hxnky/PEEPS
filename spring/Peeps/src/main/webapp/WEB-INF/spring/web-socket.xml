@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+
+	<bean class="com.gnjk.peeps.Chat.handler.ChattingHandler" id="chattinghandler" />
+	<bean class="com.gnjk.peeps.Chat.handler.AlarmHandler" id="alarmhandler" />
+
+	<websocket:handlers allowed-origins="*">
+		<websocket:mapping path="/chat"
+			handler="chattinghandler" />
+		<websocket:mapping path="/alarm"
+			handler="alarmhandler" />
+
+		<websocket:handshake-interceptors>
+			<bean
+				class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+		<websocket:sockjs />
+	</websocket:handlers>
+
+</beans>

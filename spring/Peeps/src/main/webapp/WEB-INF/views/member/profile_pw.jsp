@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비밀번호 변경</title>
+<title>Peeps</title>
 
 <link href="<c:url value="/resources/css/edit_pw.css" />"
 	rel="stylesheet">
@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div id="nav">
-		<%@ include file="/WEB-INF/views/chat/nav.jsp"%>
+		<%@ include file="/WEB-INF/views/include/nav.jsp"%>
 	</div>
 	<div id="total_wrap">
 		<div id="edit_menu">
@@ -76,48 +76,36 @@
 <script>
 	$(function() {
 
-		var email = $('#email').text();
+		var email = "${email}";
 
-		$("#edit")
-				.click(
-						function() {
-
-							location.href = "${pageContext.request.contextPath}/profile/Info?email="
-									+ email;
+		$(document).on("click", "#edit", function(){
+							location.href = "${pageContext.request.contextPath}/profile/Info";
 
 						});
-
-		$("#pw_ch")
-				.click(
-						function() {
-
+		$(document).on("click", "#pw_ch", function(){
 							location.href = "${pageContext.request.contextPath}/profile/pw?email="
 									+ email;
 
 						});
-
-		$("#delete")
-				.click(
-						function() {
-
+		$(document).on("click", "#delete", function(){
 							location.href = "${pageContext.request.contextPath}/profile/delete?email="
 									+ email;
 
 						});
 
-		$("#log_out").click(function() {
-
+		$(document).on("click", "#log_out", function(){
+			
 			location.href = "${pageContext.request.contextPath}/logout";
 
 		});
-	});
+	})
 </script>
 
 <script>
 	$(document).on("click", "#change", function() {
 
 		var password = $('#now_password').val();
-		var email = "${peeps.email}";
+		var email = "${email}";
 		var c_password = $('#chk_password').val();
 		var e_password = $('#edit_password').val();
 
@@ -156,48 +144,6 @@
 		}
 
 	})
-</script>
-
-<script>
-$("#keyword")
-.click(
-		function() {
-
-			var m_idx = ${peeps.m_idx};
-			var keyword = $('#search').val();
-
-			if(keyword.trim()==""){
-				alert("한 글자 이상 입력하세요");
-			} else{
-				$
-				.ajax({
-					url : '${pageContext.request.contextPath}/user/finduser',
-					type : 'get',
-					async : false,
-					data : {
-						"keyword":keyword,
-						"m_idx" : m_idx
-					},
-					success : function(data) {
-						location.href = "${pageContext.request.contextPath}/member/FindView?keyword="+ keyword;
-					},
-					error : function() {
-						console.log("실패,,,,");
-					}
-				});
-
-			}
-
-			
-		});
-		
-var m_idx = ${peeps.m_idx};
-
-$("#MyPage_img").click(function() {
-
-	location.href = "${pageContext.request.contextPath}/mypage/" + m_idx;
-
-});
 </script>
 
 
