@@ -62,4 +62,8 @@
   ## 4. 주요기능
   ![4_member_main_function](https://user-images.githubusercontent.com/71624723/110081257-01fd1e80-7dcf-11eb-91db-2d8dd63eb037.png)
   
+  ![리드미용_서아-017](https://user-images.githubusercontent.com/71997900/110233973-2261e000-7f6b-11eb-822b-ed38fd7de860.png)
+
+
+  
  
