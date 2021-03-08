@@ -118,6 +118,7 @@
 
   ![리드미용_서아-017](https://user-images.githubusercontent.com/71997900/110233973-2261e000-7f6b-11eb-822b-ed38fd7de860.png)
 
-
+## 5. 배포주소
+http://52.79.227.12:8080/peeps/
   
  
