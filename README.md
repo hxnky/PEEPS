@@ -80,11 +80,16 @@
   ![리드미용_서아-012](https://user-images.githubusercontent.com/71997900/110235409-2691fb80-7f73-11eb-87fe-f1429ed1e9ec.png)
 
   ### - 마이페이지
-  ![리드미용_서아-013](https://user-images.githubusercontent.com/71997900/110235420-30b3fa00-7f73-11eb-88a9-b03c0d989578.png)
-  
-  ![리드미용_서아-014](https://user-images.githubusercontent.com/71997900/110235430-3d385280-7f73-11eb-824f-88d5a91a6210.png)
-  
-  ![리드미용_서아-015](https://user-images.githubusercontent.com/71997900/110235434-41fd0680-7f73-11eb-9815-dadd0f24628e.png)
+  + 프로필
+  ![정현-010](https://user-images.githubusercontent.com/71624723/110286120-b72a1380-8027-11eb-999f-e9d4a2e962f3.png)
+  + 게시글 작성
+  ![정현-011](https://user-images.githubusercontent.com/71624723/110286122-b8f3d700-8027-11eb-807b-87f6172d60b1.png)
+  + 게시글 리스트
+  ![정현-012](https://user-images.githubusercontent.com/71624723/110286134-bf824e80-8027-11eb-85a3-aaf93321ae3c.png)
+  + 게시글 상세보기
+  ![정현-013](https://user-images.githubusercontent.com/71624723/110286144-c3ae6c00-8027-11eb-9b54-eb98a351a6c8.png)
+  + 지도
+  ![정현-014](https://user-images.githubusercontent.com/71624723/110286146-c5782f80-8027-11eb-8934-8ce02a895d57.png)
 
   
   ### - 채팅
