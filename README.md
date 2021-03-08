@@ -6,7 +6,10 @@
 ![1_peeps_intro](https://user-images.githubusercontent.com/71624723/110078703-7b930d80-7dcb-11eb-98ab-476979fb197d.png)
 
 ## 2.구조 
-      * MSA아키텍처  RESRFUL
+       MSA아키텍처  RESRFUL
+      ![제목 없는 프레젠테이션 (1)](https://user-images.githubusercontent.com/71998081/110272493-aff60c00-800d-11eb-872f-57b80cd722d8.jpg)
+
+
       
 ## 3.개발환경
   
