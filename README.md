@@ -7,7 +7,7 @@
 
 ## 2.구조 
        MSA아키텍처  RESRFUL
-     ![image](https://user-images.githubusercontent.com/71998081/110272586-e469c800-800d-11eb-8ac6-d0132569dc58.png)
+    ![제목 없는 프레젠테이션 (1)](https://user-images.githubusercontent.com/71998081/110272493-aff60c00-800d-11eb-872f-57b80cd722d8.jpg)
  
 
       
