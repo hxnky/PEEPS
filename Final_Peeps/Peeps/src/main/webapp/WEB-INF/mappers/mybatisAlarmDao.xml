@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gnjk.peeps.Member.dao.AlarmDao">
+
+<insert id="insertAlarm"
+		parameterType="com.gnjk.peeps.Member.domain.Alarm">
+		insert into alarm(type,sender,receiver,post)
+		values
+		(#{type},#{sender},#{receiver},#{post})
+	</insert>
+	
+</mapper>

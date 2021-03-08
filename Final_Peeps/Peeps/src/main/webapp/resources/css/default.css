@@ -1,0 +1,211 @@
+/* chat */
+body {
+	position: sticky;
+	background-color: #FCF9F6;
+	font-family: Arial;
+}
+
+/* 스크롤 바 없애기 */
+::-webkit-scrollbar {
+	display: none;
+}
+
+aside {
+	width: 300px;
+	height: 660px;
+	background-color: #F6EECC;
+	display: inline-block;
+	font-size: 15px;
+	vertical-align: top;
+}
+
+#container {
+	width: 880px;
+	height: 660px;
+	background: #FFFDFD;
+	margin: 90px auto;
+	padding: inherit;
+	font-size: 0;
+	border-radius: 20px;
+	overflow: hidden;
+}
+
+aside header span {
+	/*border-bottom: 3px solid #c4c4c4;*/
+	display: inline-flex;
+	margin: 40px -100px 10px 100px;
+	list-style-type: none;
+	/* text-decoration-line: underline; */
+}
+
+#srch_b {
+	background: none;
+	border: none;
+	margin: 1 -5px 0 -10px;
+}
+
+.srch_bar input {
+	font-size: 16px;
+	padding: 10 10 10px 2px;
+	margin-left: -35px;
+	border-radius: 0px;
+	align-content: center;
+	width: 100%;
+	height: 32px;
+	background: none;
+	text-align: center;
+	border-color: #c4c4c4;
+}
+
+main {
+	width: 570px;
+	height: 690px;
+	display: inline-block;
+	font-size: 15px;
+	vertical-align: top;
+}
+
+#roomdata {
+	overflow-y: scroll;
+	padding-left: 0;
+	margin: 0;
+	list-style-type: none;
+	height: 590px;
+}
+
+#start {
+	margin: 30px;
+	text-align: center;
+	font-size: 25px;
+	color: #F2D785;
+}
+
+#start img {
+	margin: 0px;
+	height: 330px;
+	width: 350px;
+}
+
+/* footer*/
+main footer {
+	height: 155px;
+	padding: 5px 15px 10px 15px;
+	margin-bottom: -110px;
+}
+
+main footer #message {
+	resize: none;
+	border: none;
+	display: block;
+	width: 100%;
+	height: 80px;
+	border-radius: 3px;
+	padding: 10px;
+	font-size: 12px;
+}
+
+main footer #message::placeholder {
+	color: #ddd;
+}
+
+main footer img {
+	height: 22px;
+	cursor: pointer;
+	margin-bottom: -10px;
+}
+
+.send {
+	margin-top: -20px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#sendBtn {
+	width: 100px;
+	height: 100px;
+	font-size: 20px;
+	letter-spacing: 2px;
+	background-color: #F5E978;
+	border: none;
+	transition: all 0.3s ease 0s;
+	cursor: pointer;
+	outline: none;
+}
+
+#sendBtn:hover {
+	background-color: #F2D665;
+	box-shadow: 0px 15px 20px #F2D665;
+	color: #fff;
+	transform: scale(1.1);
+}
+
+#sendBtn a:hover {
+	color: #fff;
+}
+
+h2, h3 {
+	margin: 0;
+}
+
+aside li img {
+	border-radius: 50%;
+	margin-left: 20px;
+	margin-right: 8px;
+}
+
+main header {
+	height: 27px;
+	padding: 20px 20px 30px 40px;
+}
+
+main header>* {
+	display: inline-block;
+	vertical-align: top;
+}
+
+main header img:first-child {
+	border-radius: 50%;
+}
+
+main header img:last-child {
+	width: 24px;
+	margin-top: 8px;
+}
+
+main header div {
+	margin-left: 10px;
+	margin-right: 145px;
+}
+
+main header h2 {
+	font-size: 16px;
+	margin-bottom: 7px;
+}
+
+main header h3 {
+	font-size: 14px;
+	font-weight: normal;
+	color: #5e616a;
+}
+
+/* 채팅 공간 */
+#chatdata {
+	list-style-type: none;
+	overflow-y: scroll;
+	width: 580px;
+	height: 430px;
+	border-top: 2px solid #BDBDBD;
+	border-bottom: 2px solid #BDBDBD;
+}
+
+#id_print {
+	width: 20px;
+	height: 20px;
+	font-size: 10px;
+}
+
+#strongid {
+	font-size: 20px;
+}
