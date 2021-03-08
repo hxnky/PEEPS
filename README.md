@@ -7,7 +7,8 @@
 
 ## 2.구조 
        MSA아키텍처  RESRFUL
-    ![제목 없는 프레젠테이션 (1)](https://user-images.githubusercontent.com/71998081/110272493-aff60c00-800d-11eb-872f-57b80cd722d8.jpg)
+  ![제목 없는 프레젠테이션 (1)](https://user-images.githubusercontent.com/71998081/110272493-aff60c00-800d-11eb-872f-57b80cd722d8.jpg)
+
  
 
       
@@ -71,6 +72,7 @@
   ![리드미용_서아-009](https://user-images.githubusercontent.com/71997900/110235353-ef234f00-7f72-11eb-8fc8-074036196264.png)
   
   ### - 타임라인
+  
   ![리드미용_서아-010](https://user-images.githubusercontent.com/71997900/110235385-10843b00-7f73-11eb-85b1-04a56a373b61.png)
   + 유저검색
   ![리드미용_서아-011](https://user-images.githubusercontent.com/71997900/110235397-1ed25700-7f73-11eb-9803-87008d34fb9f.png)
