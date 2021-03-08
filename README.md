@@ -90,8 +90,12 @@
   ![정현-013](https://user-images.githubusercontent.com/71624723/110286144-c3ae6c00-8027-11eb-9b54-eb98a351a6c8.png)
   + 지도
   ![정현-014](https://user-images.githubusercontent.com/71624723/110286146-c5782f80-8027-11eb-8934-8ce02a895d57.png)
+  + 방명록 리스트
+  ![리드미-명지-016](https://user-images.githubusercontent.com/71998081/110289261-87313f00-802c-11eb-9642-25844399f6f3.jpg)
+  + 방명록 CRUD
+  ![리드미-명지-017](https://user-images.githubusercontent.com/71998081/110289455-cbbcda80-802c-11eb-82d9-336fe88e9980.jpg)
 
-  
+
   ### - 채팅
   ![리드미용_서아_016](https://user-images.githubusercontent.com/71997900/110234427-bf257d00-7f6d-11eb-9a21-794f15caf856.png)
   + WebSocket을 이용한 1:1 채팅 
