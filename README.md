@@ -69,9 +69,9 @@
   
   ### - 타임라인
   ![리드미용_서아-010](https://user-images.githubusercontent.com/71997900/110235385-10843b00-7f73-11eb-85b1-04a56a373b61.png)
-  
+  + 유저검색
   ![리드미용_서아-011](https://user-images.githubusercontent.com/71997900/110235397-1ed25700-7f73-11eb-9803-87008d34fb9f.png)
-
+  + 게시글 검색
   ![리드미용_서아-012](https://user-images.githubusercontent.com/71997900/110235409-2691fb80-7f73-11eb-87fe-f1429ed1e9ec.png)
 
   ### - 마이페이지
