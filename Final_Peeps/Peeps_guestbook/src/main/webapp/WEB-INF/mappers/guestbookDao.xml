@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> <!-- 1.공백있어도 오류남 -->
+
+<mapper namespace="com.gnjk.gb.dao.GuestbookDao">
+
+	<resultMap id="guestbookListResult"
+		type="com.gnjk.gb.domain.Guestbook">
+		<id column="gidx" property="gidx" />
+		<result column="gwriter" property="gwriter" />
+		<result column="gdate" property="gdate" />
+		<result column="gmessage" property="gmessage" />
+		<result column="gphoto" property="gphoto" />
+		<result column="midx" property="midx" />
+		<result column="etype" property="etype" />
+		<result column="mphoto" property="mphoto" />
+		<result column="myP_midx" property="myP_midx" />
+	</resultMap>
+	
+	<!-- 방명록 작성 -->
+	<insert id="insertGbook"
+		parameterType="com.gnjk.gb.domain.Guestbook"
+		useGeneratedKeys="true" keyProperty="gidx">
+		INSERT INTO guestbook
+		(gwriter,gmessage, gphoto ,midx ,etype ,mphoto,myP_midx) values (#{gwriter}, #{gmessage}, #{gphoto}, #{midx}, #{etype}, #{mphoto}, #{myP_midx})
+	</insert>
+	
+	<!-- 방명록의 총수 -->
+	<select id="selectTotalCount" resultType="int">
+		select count(*) from
+		guestbook;
+	</select>
+	
+	<select id="selectGbookList" resultMap="guestbookListResult">
+		select * from guestbook order by gdate desc limit #{param1},#{param2};
+	</select>
+	
+	<!-- 방명록 삭제 -->
+	<delete id="deleteGuestbookIdx"> <!-- DML의 경과는 무조건 숫자타입  -->
+	 
+	delete from guestbook where gidx=#{gidx}
+	
+	</delete>
+	
+	
+	<select id="selectGuestbookIdx" resultMap="guestbookListResult">
+	 select * from guestbook where gidx=#{gidx}
+	</select>
+	<!-- 방명록수정 -->
+	<update id="updateGuestbook" parameterType="com.gnjk.gb.domain.Guestbook">
+	
+	update guestbook set gmessage = #{gmessage}, gphoto= #{gphoto} where gidx=#{gidx} 
+	
+	</update>
+	
+	<select id="selectGbookList2" resultMap="guestbookListResult" >
+	select * from guestbook 
+	</select>
+	
+	
+	<!-- 댓글 등록 -->
+	<insert id="insertReply" parameterType="com.gnjk.gb.domain.Reply" useGeneratedKeys="true" keyProperty="ridx">
+
+		INSERT INTO reply (g_idx, midx, gwriter, rmsg) VALUES (#{g_idx}, #{midx}, #{gwriter},#{rmsg})
+
+	</insert>
+    <!-- 댓글 조회 -->
+	<select id="selectReplyList" parameterType="list" resultType="com.gnjk.gb.domain.Reply">
+		select * from reply where g_idx=#{g_idx}
+	</select>
+
+	<!-- 댓글 수정 -->
+	<update id="updateReply">
+		update reply set rmsg=#{rmsg} where g_idx=#{g_idx}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+		delete from reply where g_idx=#{g_idx}
+	</delete>
+	
+
+</mapper>

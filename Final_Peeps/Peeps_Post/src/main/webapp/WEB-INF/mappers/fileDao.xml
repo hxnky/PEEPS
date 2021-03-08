@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gnjk.post.mypost.dao.FileDao">
+
+	<!-- 게시글 이미지 파일 등록 -->
+	<insert id="insertFiles"
+		parameterType="com.gnjk.post.mypost.domain.PostFile"
+		useGeneratedKeys="true" keyProperty="f_idx">
+
+		INSERT INTO file
+		(f_idx, f_name, post_idx, f_path)
+		VALUES
+		<!-- <foreach collection="list" item="item" separator=","> -->
+		(#{f_idx},#{f_name},#{post_idx},#{f_path})
+		<!-- </foreach> -->
+
+	</insert>
+	
+	<!-- 게시글 이미지 파일 조회 -->
+	<select id="selectPostImgs"
+			parameterType="list"
+			resultType="com.gnjk.post.mypost.domain.PostFile"
+	>
+	select * from file
+	where post_idx=#{param}
+	</select>
+	
+	<!-- 수정하면서 삭제한 게시글의 기존 이미지 삭제  -->
+	<delete id="deleteBeforeImage">
+		delete from file where f_name=#{deleteImage}
+	</delete>
+
+
+</mapper>

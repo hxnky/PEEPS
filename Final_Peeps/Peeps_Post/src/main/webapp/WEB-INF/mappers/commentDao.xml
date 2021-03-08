@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gnjk.post.mypost.dao.CommentDao">
+
+	<!-- 21.02.17 댓글 쿼리 추가 한경 -->
+	<!-- 댓글 등록 -->
+	<insert id="insertCmt"
+		parameterType="com.gnjk.post.mypost.domain.Comment"
+		useGeneratedKeys="true" keyProperty="cmt_idx">
+
+		INSERT INTO comment
+		(post_idx,
+		member_idx, cmt_content)
+		VALUES
+		(#{post_idx}, #{member_idx},
+		#{cmt_content})
+
+	</insert>
+
+	<!-- 댓글 조회 -->
+	<select id="selectCmtList" parameterType="list"
+		resultType="com.gnjk.post.mypost.domain.Comment">
+		select * from comment where post_idx=#{post_idx}
+	</select>
+
+	<!-- 댓글 수정 -->
+	<update id="updateCmt">
+		update comment set cmt_content=#{cmt_content} where
+		cmt_idx=#{cmt_idx}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="deleteCmt">
+		delete from comment where cmt_idx=#{cmt_idx}
+	</delete>
+
+	<!-- 댓글 수 조회 -->
+	<select id="CountCmt" resultType="int">
+		select count(*) from comment
+		where post_idx=#{post_idx}
+	</select>
+
+	<!-- 대댓글 조회 -->
+	<select id="selectReList" parameterType="list"
+		resultType="com.gnjk.post.mypost.domain.Reply">
+		select * from reply where comment_idx=#{cmt_idx}
+	</select>
+	
+	<!-- 대댓글 작성 -->
+	<insert id="insertReply"
+		parameterType="com.gnjk.post.mypost.domain.Reply"
+		useGeneratedKeys="true" keyProperty="re_idx">
+
+		INSERT INTO reply
+		(comment_idx,
+		member_idx, re_content)
+		VALUES
+		(#{comment_idx}, #{member_idx},
+		#{re_content})
+
+	</insert>
+	
+	<!-- 대댓글 수정 -->
+	<update id="updateReply">
+		update reply set re_content=#{re_content} where
+		re_idx=#{re_idx}
+	</update>
+	
+	<!-- 대댓글 삭제 -->
+	<delete id="deleteReply">
+		delete from reply where re_idx=#{re_idx}
+	</delete>
+
+
+	<!-- 21.02.26 한경 추가 -->
+    <!-- 댓글 상위 3개 -->
+    <select id="selectCmtListLimit"
+       resultType="com.gnjk.post.mypost.domain.Comment">
+       select * from comment where post_idx = #{post_idx} limit 3;
+    </select>
+    
+    <!-- 21.02.26 정현 추가 -->
+    <!-- 게시글idx에 해당하는 총 대댓글 수  -->
+    	<select id="countAllReply" resultType="int">
+		select count(*) from comment as c 
+		join reply as r 
+		on c.cmt_idx = r.comment_idx 
+		where c.post_idx = #{param};
+	</select>
+	
+    <!-- 게시글idx에 해당하는 총 댓글 수  -->
+    	<select id="countAllCmt" resultType="int">
+		select count(*) from comment  
+		where post_idx = #{param};
+	</select>	
+
+</mapper>

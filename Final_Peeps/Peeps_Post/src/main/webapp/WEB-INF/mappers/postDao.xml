@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gnjk.post.mypost.dao.PostDao">
+
+	<!-- 멤버 idx 찾기 -->
+	<select id="selectMemberidx" resultType="int">
+		select m_idx from member 
+		where id=#{param}
+	</select>	
+
+	<!-- 게시글 등록 -->
+	<insert id="insertPost"
+		parameterType="com.gnjk.post.mypost.domain.Post"
+		useGeneratedKeys="true" keyProperty="p_idx">
+
+		INSERT INTO post
+		(member_idx, p_title, p_content, p_loc)
+		VALUES
+		(#{member_idx},#{p_title},#{p_content},#{p_loc})
+
+	</insert>
+
+	<!-- 게시글 썸네일 update -->
+	<update id="updatePostThumbnail">
+		update post 
+		set p_thumbnail=#{param2}
+		where p_idx=#{param1}
+	</update>
+
+	<!-- 게시글의 총 수 -->
+	<select id="selectTotalPostCount" resultType="int">
+		select count(*) from post 
+		where member_idx=#{param}
+	</select>
+	
+	<!-- 게시글의 총 수(주소) -->
+	<select id="selectTotalPostByAddrCount" resultType="int">
+		select count(*) from post 
+		where member_idx=#{param1}
+		and p_loc=#{param2}
+	</select>
+
+	<!-- 게시글 리스트 -->
+	<select id="selectPostList"
+			parameterType="list"
+			resultType="com.gnjk.post.mypost.domain.Post"
+			>
+		select * from post 
+		where member_idx=#{param1} order by p_date desc limit #{param2},#{param3}
+	</select>
+	
+	<!-- 게시글 리스트(위치) -->
+	<select id="selectPostMapList"
+			parameterType="list"
+			resultType="com.gnjk.post.mypost.domain.Post"
+			>
+		select * from post 
+		where member_idx=#{param1} and p_loc != "";
+	</select>
+	
+	<!-- 게시글 리스트(주소) -->
+	<select id="selectPostByAddrList"
+			parameterType="list"
+			resultType="com.gnjk.post.mypost.domain.Post"
+			>
+		select * from post 
+		where member_idx=#{param2} and p_loc=#{param1} order by p_date desc
+		<!-- limit #{param3},#{param4} -->
+	</select>
+
+	<!-- 게시글 조회 -->
+	<select id="selectPostDetail"
+			resultType="com.gnjk.post.mypost.domain.Post"
+	>
+		select * from post 
+		where p_idx=#{param}
+	</select>
+
+	<!-- 게시글 파일 조회 -->
+	<select id="selectPostFileList"
+			parameterType="list"
+			resultType="com.gnjk.post.mypost.domain.PostFile"
+	>
+		select * from file
+		where post_idx=#{param}
+	</select>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="deletePostByIdx">
+		delete from post where p_idx=#{pidx}
+	</delete>
+	
+	<!-- 게시글 수정 -->
+	<update id="updatePost" parameterType="com.gnjk.post.mypost.domain.Post">
+		update post 
+		set p_title=#{p_title}, p_content=#{p_content}, p_loc=#{p_loc}
+		where p_idx=#{p_idx}
+	</update>
+	
+	<!-- 게시글 좋아요 개수 update updatePostLikes -->
+	<update id="updatePostLikes">
+		update post 
+		set p_likes=p_likes+#{param2}
+		where p_idx=#{param1} 
+	</update>
+	
+	<!-- 21.02.26 한경 추가 -->
+   <select id="selectPostByM_idx" resultType="com.gnjk.post.mypost.domain.Post">
+      select * from post where member_idx = #{member_idx}
+   </select>
+   
+   <!-- 게시글 검색 -->
+   <!-- 해당 단어가 들어가는 유저 검색 -->
+   <select id="selectPostByKeyword" resultType="com.gnjk.post.mypost.domain.Post">
+      select * from post
+      <where>
+         <include refid="searchTitle" />
+         <include refid="searchContent" />
+      </where>
+   </select>
+
+   <!-- 아이디와 이름 해당하면 다 검색 -->
+   <sql id="searchTitle">
+      or p_title like concat('%',#{keyword},'%')
+   </sql>
+
+   <sql id="searchContent">
+      or p_content like concat('%',#{keyword},'%')
+   </sql>
+
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.gnjk.post.mypost.dao.LikeDao">
+
+	<!-- 좋아요 조회 -->
+	<select id="selectLike" resultType="int">
+		select count(*) from postlike 
+		where lpost_idx=#{param1}
+		and lmember_idx=#{param2}
+	</select>
+	
+	<!-- (최초)좋아요 생성 -->
+	<insert id="insertLike">
+		insert into postlike
+		(lpost_idx, lmember_idx, like_chk)
+		values
+		(#{param1}, #{param2}, #{param3})
+	</insert>
+	
+	<!-- 좋아요 like_chk 값 확인 -->
+	<select id="selectLikeChk" resultType="int">
+		select like_chk from postlike 
+		where lpost_idx=#{param1}
+		and lmember_idx=#{param2}
+	</select>
+	
+	<!-- 좋아요 like_chk 값 update -->
+	<update id="updateLike">
+		update postlike 
+		set like_chk=#{param3}
+		where lpost_idx=#{param1} 
+		and lmember_idx=#{param2}
+	</update>
+	
+   
+	
+</mapper>
