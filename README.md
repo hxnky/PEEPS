@@ -95,9 +95,9 @@
 
 
   ### - 채팅
-  ![리드미용_서아_016](https://user-images.githubusercontent.com/71997900/110234427-bf257d00-7f6d-11eb-9a21-794f15caf856.png)
-  + WebSocket을 이용한 1:1 채팅 
-  ```c
+  + WebSocket을 이용한 1:1 채팅
+  ![리드미용_서아-016](https://user-images.githubusercontent.com/71997900/110496011-6a822d80-8138-11eb-9c57-6cd56ec4ecd8.png)
+   ```c
   public class ChattingHandler extends TextWebSocketHandler {
   
      private Map<String, WebSocketSession> users = new HashMap<String, WebSocketSession>();
@@ -127,8 +127,24 @@
           users.remove(session.getId());
      }
   ```
+  
+  ![리드미용_서아-017](https://user-images.githubusercontent.com/71997900/110496041-74a42c00-8138-11eb-9b71-6925ee578f14.png)
+  + 회원 검색
+  ![리드미용_서아-018](https://user-images.githubusercontent.com/71997900/110496119-85ed3880-8138-11eb-9f2b-5078a0703ca1.png)
+  + 날씨 API
+  ![리드미용_서아-019](https://user-images.githubusercontent.com/71997900/110496180-956c8180-8138-11eb-84d7-79d12a67c18b.png)
+  + 메세지 전송
+  ![리드미용_서아-020](https://user-images.githubusercontent.com/71997900/110496283-ac12d880-8138-11eb-9422-84d3d8082ca2.png)
+ 
+  ### - 알람
+  + Alarm
+  ![리드미용_서아-021](https://user-images.githubusercontent.com/71997900/110496431-cea4f180-8138-11eb-84b6-ca255465c054.png)
+  + 실시간 알람
+  ![리드미용_서아-022](https://user-images.githubusercontent.com/71997900/110496482-dbc1e080-8138-11eb-8716-af5253c1fd98.png)
+  + 알람 아이콘
+  ![리드미용_서아-023](https://user-images.githubusercontent.com/71997900/110496515-e54b4880-8138-11eb-894f-868253107401.png)
 
-  ![리드미용_서아-017](https://user-images.githubusercontent.com/71997900/110233973-2261e000-7f6b-11eb-822b-ed38fd7de860.png)
+
 
 ## 5. 배포주소
 http://52.79.227.12:8080/peeps/
