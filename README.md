@@ -102,14 +102,14 @@
   
      private Map<String, WebSocketSession> users = new HashMap<String, WebSocketSession>();
   
-  @Override
+  	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
           String sessionId  = (String) session.getId();
 
 		users.put(sessionId , session);
-      }
+        }
       
-  @Override
+  	@Override
 	protected void handleTextMessage (WebSocketSession session, TextMessage message) throws Exception { 
      
           String sessionId  = (String) session.getId();
@@ -118,17 +118,17 @@
 		Message mes = gson.fromJson(message.getPayload(), Message.class);
 
 		TextMessage sendmes = new TextMessage(gson.toJson(mes));
-     }
+        }
      
-     @Override
+        @Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
      
           String sessionId  = (String) session.getId(); 
           users.remove(session.getId());
-     }
+        }
+   }
   ```
-  
-  ![리드미용_서아-017](https://user-images.githubusercontent.com/71997900/110496041-74a42c00-8138-11eb-9b71-6925ee578f14.png)
+  ![리드미용_서아-017](https://user-images.githubusercontent.com/71997900/110497018-6c98bc00-8139-11eb-9f1b-38b4aa57751e.png)
   + 회원 검색
   ![리드미용_서아-018](https://user-images.githubusercontent.com/71997900/110496119-85ed3880-8138-11eb-9f2b-5078a0703ca1.png)
   + 날씨 API
