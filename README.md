@@ -95,8 +95,8 @@
 
 
   ### - 채팅
-  + WebSocket을 이용한 1:1 채팅
-  ![리드미용_서아-016](https://user-images.githubusercontent.com/71997900/110496011-6a822d80-8138-11eb-9c57-6cd56ec4ecd8.png)
+ + WebSocket을 이용한 1:1 채팅
+ ![리드미용_서아-016](https://user-images.githubusercontent.com/71997900/110496011-6a822d80-8138-11eb-9c57-6cd56ec4ecd8.png)
    ```c
   public class ChattingHandler extends TextWebSocketHandler {
   
@@ -137,8 +137,8 @@
   ![리드미용_서아-020](https://user-images.githubusercontent.com/71997900/110496283-ac12d880-8138-11eb-9422-84d3d8082ca2.png)
  
   ### - 알람
-  + Alarm
-  ![리드미용_서아-021](https://user-images.githubusercontent.com/71997900/110496431-cea4f180-8138-11eb-84b6-ca255465c054.png)
+ + Alarm
+ ![리드미용_서아-021](https://user-images.githubusercontent.com/71997900/110496431-cea4f180-8138-11eb-84b6-ca255465c054.png)
   + 실시간 알람
   ![리드미용_서아-022](https://user-images.githubusercontent.com/71997900/110496482-dbc1e080-8138-11eb-8716-af5253c1fd98.png)
   + 알람 아이콘
