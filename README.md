@@ -27,7 +27,6 @@
   * 백앤드
     * Spring FrameWork
     * Java
-    * Python
     *  JSP, EL
     *  EC2
     *  S3
@@ -44,7 +43,6 @@
     * Eclipse 
     * SPRING TOOL SUITE 
     * Maven
-    * visual studio
     * github
     * putty
     * exerd
