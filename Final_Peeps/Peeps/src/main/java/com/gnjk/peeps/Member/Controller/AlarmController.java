@@ -24,11 +24,12 @@ public class AlarmController {
 	@Autowired
 	private DeleteService dservice;
 
+	// 알림 리스트 
 	@RequestMapping(value = "/alarm/select")
 	public List<Alarm> alarmList(Alarm alarm, HttpSession session) throws Exception{
 		session.setAttribute("list", service.alarmList(alarm));
 
-		System.out.println("알람 컨트롤러…");
+		System.out.println("알람 컨트롤러");
 
 		System.out.println(service.alarmList(alarm));
 
@@ -36,12 +37,13 @@ public class AlarmController {
 		
 	}
 
+	// 알림 삭제 
 	@RequestMapping(value = "/alarm/delete")
 	public int deleteAl(int al_idx, HttpSession session) throws Exception {
 
 		session.setAttribute("delAl", dservice.deleteAlarm(al_idx));
 
-		System.out.println("알람 삭제 컨트롤러.....");
+		System.out.println("알람 삭제 컨트롤러");
 
 		return dservice.deleteAlarm(al_idx);
 

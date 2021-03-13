@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+// 날씨 API
 @Controller
 @RequestMapping("/chattingData")
 public class WeatherController {
@@ -21,8 +22,8 @@ public class WeatherController {
    @GetMapping
    @ResponseBody
    public List<WeatherVo> getWeatherVo() throws IOException, ParseException {
-      System.out.println("날씨 컨트롤러 거쳐지나요???");
+	   
       return service.getWeatherVo();
+      
    }
-   
 }

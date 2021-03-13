@@ -1,6 +1,7 @@
 package com.gnjk.peeps.weather;
 
 public class WeatherVo {
+	
 	   int seq;
 	   String baseDate;
 	   String baseTime;

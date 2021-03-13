@@ -52,15 +52,15 @@ public class WeatherServiceImpl implements WeatherService {
       
       StringBuilder urlBuilder = new StringBuilder(apiUrl);
       urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + serviceKey);
-      urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="+ URLEncoder.encode(numOfRows, "UTF-8")); /* 한 페이지 결과 수 */
-      urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(pageNo, "UTF-8"));
-      urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode(data_type, "UTF-8")); /* 타입 */   
-      urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "="+ URLEncoder.encode(baseDate, "UTF-8")); /* 조회하고싶은 날짜 */
-      urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "="+ URLEncoder.encode(baseTime, "UTF-8")); /* 조회하고싶은 시간 AM 02시부터 3시간 단위 */
+      urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "="+ URLEncoder.encode(numOfRows, "UTF-8")); // 한 페이지 결과 수
+      urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode(pageNo, "UTF-8")); // 페이지 번호 
+      urlBuilder.append("&" + URLEncoder.encode("dataType", "UTF-8") + "=" + URLEncoder.encode(data_type, "UTF-8")); // 타입 
+      urlBuilder.append("&" + URLEncoder.encode("base_date", "UTF-8") + "="+ URLEncoder.encode(baseDate, "UTF-8")); // 조회하고싶은 날짜 
+      urlBuilder.append("&" + URLEncoder.encode("base_time", "UTF-8") + "="+ URLEncoder.encode(baseTime, "UTF-8")); // 조회하고싶은 시간 AM 02시부터 3시간 단위  
       urlBuilder.append("&" + URLEncoder.encode("nx", "UTF-8") + "=" + URLEncoder.encode(nx, "UTF-8")); // 경도
       urlBuilder.append("&" + URLEncoder.encode("ny", "UTF-8") + "=" + URLEncoder.encode(ny, "UTF-8")+"&"); // 위도
 
-      /* GET방식으로 전송해서 파라미터 받아오기*/
+      // GET방식으로 전송해서 파라미터 받아오기 
       URL url = new URL(urlBuilder.toString());
       
       HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -68,38 +68,37 @@ public class WeatherServiceImpl implements WeatherService {
       conn.setRequestProperty("Content-type", "application/json");
       System.out.println("Response code: " + conn.getResponseCode());
       BufferedReader rd;
-      System.out.println("111날씨 서비스Impl");
+      System.out.println("1 날씨 서비스Impl");
       if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
          rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
       } else {
          rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
       }
-      System.out.println("222날씨 서비스Impl");
+      System.out.println("2 날씨 서비스Impl");
       StringBuilder sb = new StringBuilder();
       String line;
       
       while ((line = rd.readLine()) != null) {
          sb.append(line);
       }
-      System.out.println("333날씨 서비스Impl");
+      System.out.println("3 날씨 서비스Impl");
       rd.close();
       conn.disconnect();
       String result = sb.toString();
-      System.out.println("444날씨 서비스Impl");
-      //System.out.println("결과: " + result);
+      System.out.println("4 날씨 서비스Impl");
       
       // 문자열을 JSON으로 파싱
       JSONParser jsonParser = new JSONParser();
       JSONObject jsonObj = (JSONObject) jsonParser.parse(result);
       JSONObject parse_response = (JSONObject) jsonObj.get("response");
-      JSONObject parse_body = (JSONObject) parse_response.get("body");// response 로 부터 body 찾아오기
-      JSONObject parse_items = (JSONObject) parse_body.get("items");// body 로 부터 items 받아오기
+      JSONObject parse_body = (JSONObject) parse_response.get("body"); // response 로 부터 body 찾아오기
+      JSONObject parse_items = (JSONObject) parse_body.get("items"); // body 로 부터 items 받아오기
       // items로 부터 itemlist 를 받아오기
       // itemlist : 뒤에 [ 로 시작하므로 JSONArray
       JSONArray parse_item = (JSONArray) parse_items.get("item");
 
       JSONObject obj;
-      String category;   // WeatherVo 객체에 날짜,시간 저장
+      String category; // WeatherVo 객체에 날짜,시간 저장
 
       String day = "";
       String time = "";
@@ -157,10 +156,9 @@ public class WeatherServiceImpl implements WeatherService {
       }   
 
       ObjectMapper mapper = new ObjectMapper();
-      String jsonStr = mapper.writeValueAsString(datalist);      // Serialization : Object -> Json(String)
-      // jsonStr :  Json(String)
+      String jsonStr = mapper.writeValueAsString(datalist); 
       
-      return datalist;      // ArrayList<WeatherVo>()
+      return datalist; // ArrayList<WeatherVo>()
    }
    
 

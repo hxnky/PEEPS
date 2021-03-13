@@ -33,8 +33,8 @@ public class AlarmHandler extends TextWebSocketHandler {
 		connectedSessionList = new ArrayList<WebSocketSession>();
 	}
 
+	// 웹소켓 세션 저장 
 	private Map<String, WebSocketSession> users = new HashMap<String, WebSocketSession>();
-	private List<HashMap<String, Object>> hash = new ArrayList<>(); // 웹소켓 세션을 담아둘 리스트 
 
 	@Autowired
 	private AlarmDao dao;
@@ -58,11 +58,12 @@ public class AlarmHandler extends TextWebSocketHandler {
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 
-
 		String sessionId  = (String) session.getId();
+		
 		logger.info("<<알람>> {}로 부터 {}를 전달 받았습니다.", sessionId , message.getPayload());
 		
 		Gson gson = new Gson();
+		
 		Alarm alarmData = gson.fromJson(message.getPayload(), Alarm.class);
 
 		TextMessage sendmes = new TextMessage(gson.toJson(alarmData));
@@ -73,26 +74,29 @@ public class AlarmHandler extends TextWebSocketHandler {
 		for(WebSocketSession sockSession : connectedSessionList) {	 
 			sockSession.sendMessage(sendmes);
 		}
-		// writer.sendMessage(msg);
-		System.out.println("핸들러 dao 전");
+
 		dao.insertAlarm(alarmData);
-		System.out.println("핸들러 dao 밑");
 
 	}
 
+	// 연결 종료 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		
 		String sessionId  = (String) session.getId();   // "m_idx"
+		
 		log(session.getId() + " 연결 종료 " + sessionId );
 
 		connectedSessionList.remove(session);
+		
 		users.remove(session.getId());
 
 		logger.info("{} 연결이 끊김", session.getId()+ sessionId );
+		
 		System.out.println("채팅 퇴장 : " + sessionId );
 	}
 
+	// 에러 발생 시 호출 
 	@Override
 	public void handleTransportError (WebSocketSession session, Throwable exception) throws Exception {
 

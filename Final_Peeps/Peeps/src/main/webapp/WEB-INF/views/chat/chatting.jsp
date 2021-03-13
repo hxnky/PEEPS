@@ -11,6 +11,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+
 #right {
    margin-left: 300px;
    display: inline-table;
@@ -107,8 +108,8 @@ strong {
    height: 100px;
    object-fit: cover;
 }
-</style>
 
+</style>
 
 <!-- SocketJS CDN -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -129,20 +130,25 @@ strong {
 <script>
    sock = new SockJS("${pageContext.request.contextPath}/chat");
 
-   sock.onopen = onOpen;
-   sock.onmessage = onMessage;
-   sock.onclose = onClose;
+   sock.onopen = onOpen; //연결 
+   sock.onmessage = onMessage; //메세지 전송 
+   sock.onclose = onClose; //접속 종료 
 
    function onOpen() {
       console.log('채팅 open');
    };
 
    $(document).ready(function() {
+	   
       $("#emtset").hide();
+      
       enter();
+      
       weatherAPI();
-      //var me_idx = $("#me").val();
+      
       var me_idx = ${m_idx};
+      
+      // 회원에 맞게 채팅방 출력 
       $.ajax({
          url : "${pageContext.request.contextPath}/room/select",
          type : "GET",
@@ -179,88 +185,101 @@ strong {
              search();
           }
           event.stopPropagation();
-       }); // 엔터
+       }); // enter 
       
    });
 
-   //===========================================================================================
-    // 회원 검색 
+   //========================================
+   // 회원 검색 
    function search(){
-     var m_idx = $("#me").val();
+    	
+      var m_idx = $("#me").val();
+      
       var keyword = $("#sr_input").val();
+      
       console.log(keyword);
+      
       if(keyword == "") {
          return false;
       }
-      $.ajax({
-         url : '${pageContext.request.contextPath}/user/loaduser?keyword=' + keyword,
-         type : 'post',
-         async : false,
-         data : {
-            "f_m_idx" : m_idx
-         },
-         success : function(data) {
-            console.log(data);      
-            
-            var find = data;
-            
-            if(find.length == 0){
-               
-               var printHTML = "<div id='srch_wrap'>";
-                printHTML += "<button type='button' class='srch_btn'>x</button>";
-                  printHTML += "<strong> 해당하는 회원이 존재하지 않습니다. :)";
-                  printHTML += "</strong> <br>";
-                  printHTML += "</div>";
-
-                  $('#roomdata').prepend(printHTML);
-                  console.log("메세지 없음!");
-            } else{
-               var printHTML = "<div id='srch_wrap'>";
-                  printHTML += "<button type='button' class='srch_btn'>x</button>";
-               $.each(data, function(index, find){
-                  if(find.loginType == 'email'){
-                      printHTML += "<table class='srch_rs' id='"+find.m_idx+"'><tr class='"+find.m_idx
-                      printHTML += "'><td rowspan='2'><img id='profile' src='<c:url value='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+find.m_photo
-                      printHTML += "'/>' onclick='stChat("+find.m_idx+")'></td><td id='id' onclick='stChat("
-                      printHTML += find.m_idx+")'>"+find.id+"</td></tr></table>";
-                     /* if(find.m_idx == m_idx){
-                        return false;
-                     } */
-                  } else{
-                     printHTML += "<table class='srch_rs' id='"+find.m_idx+"'><tr class='"+find.m_idx
-                     printHTML += "'><td rowspan='2'><img id='profile' src='<c:url value='"+find.m_photo
-                     printHTML += "'/>' onclick='stChat("+find.m_idx+")'></td><td id='id' onclick='stChat("
-                     printHTML += find.m_idx+")'>"+find.id+"</td></tr></table>";
-                     /* if(find.m_idx == m_idx){
-                        return false;
-                        } */
-                     }                  
-                  });   // $.each 끝
-               $('#roomdata').prepend(printHTML);
-                  //$('#'+find.m_idx).append("<tr><td id='name' onclick='GoMyPage("+find.m_idx+")'>"+find.name+"</td></tr>");
-            }
-         },   // success 끝
-         error : function() {
-            console.log("검색 실패,,,,");
-         }
-      });   // ajax 끝
+      
+	      // 아이디에 맞는 회원 검색 
+	      $.ajax({
+	         url : '${pageContext.request.contextPath}/user/loaduser?keyword=' + keyword,
+	         type : 'post',
+	         async : false,
+	         data : {
+	            "f_m_idx" : m_idx
+	         },
+	         success : function(data) {
+	        	 
+	            console.log(data);      
+	            
+	            var find = data;
+	            
+	            if(find.length == 0){
+	               
+	               var printHTML = "<div id='srch_wrap'>";
+	                printHTML += "<button type='button' class='srch_btn'>x</button>";
+	                  printHTML += "<strong> 해당하는 회원이 존재하지 않습니다. :)";
+	                  printHTML += "</strong> <br>";
+	                  printHTML += "</div>";
+	
+	                  $('#roomdata').prepend(printHTML);
+	                  console.log("메세지 없음!");
+	                  
+	            } else{
+	            	
+	               var printHTML = "<div id='srch_wrap'>";
+	                  printHTML += "<button type='button' class='srch_btn'>x</button>";
+	                  
+	               $.each(data, function(index, find){
+	            	   
+	                  if(find.loginType == 'email'){
+	                	  
+	                      printHTML += "<table class='srch_rs' id='"+find.m_idx+"'><tr class='"+find.m_idx
+	                      printHTML += "'><td rowspan='2'><img id='profile' src='<c:url value='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+find.m_photo
+	                      printHTML += "'/>' onclick='stChat("+find.m_idx+")'></td><td id='id' onclick='stChat("
+	                      printHTML += find.m_idx+")'>"+find.id+"</td></tr></table>";
+	                    
+	                  } else{
+	                	  
+	                     printHTML += "<table class='srch_rs' id='"+find.m_idx+"'><tr class='"+find.m_idx
+	                     printHTML += "'><td rowspan='2'><img id='profile' src='<c:url value='"+find.m_photo
+	                     printHTML += "'/>' onclick='stChat("+find.m_idx+")'></td><td id='id' onclick='stChat("
+	                     printHTML += find.m_idx+")'>"+find.id+"</td></tr></table>";
+	                    
+	                     }                  
+	                  });   //$.each 
+	                 
+	               $('#roomdata').prepend(printHTML);
+	                  
+	            }
+	         },   //success 
+	         
+	         error : function() {
+	            console.log("검색 실패,,,,");
+	         }
+	      });   //ajax
+	      
       $("#sr_input").val("");
-   }   //   search 끝
+	      
+   } //search
 
-   //===========================================================================================
+   //========================================
    // 상대방 아이디, 프로필 사진 출력
-  
    function getRm(rm_idx) {
 
       $('#id_print').empty();
+      
       $('#rm_photo').empty();
 
       var rm_idx = rm_idx;
+      
       console.log("rm_idx : " + rm_idx);
 
       // 상대방 번호로 아이디 조회 
-      $
-            .ajax({
+      $.ajax({
                url : '${pageContext.request.contextPath}/user/chat',
                type : 'get',
                data : {
@@ -269,68 +288,63 @@ strong {
                success : function(data) {
 
                   var find = data;
-                  console.log("데이터확인");
+                  
                   console.log(data);
 
-                  $
-                        .each(
-                              data,
-                              function(index, find) {
-                                 console.log("일단 성공인듯");
-                                 console.log(find.id + " id 출력");
-                                 console.log(find.m_photo + "사진 출력");
-                                 $("#id_print").append(
-                                       "<strong id='strongid'>"
-                                             + find.id
-                                             + "</strong>");
-                                 //$("#id_print").append("<ul id='idul' style='font-size:18px; margin-left:-15px; margin-top:14px;'>"+find.id+"</ul>")
-                                 //$("#rm_pic").val(find.m_photo);
+                  	$.each(data,function(index, find) {
+                	  
+                             console.log(find.id + " id 출력");
+                             console.log(find.m_photo + "사진 출력");
+                             
+                             $("#id_print").append( "<strong id='strongid'>" + find.id + "</strong>");
+                             
                                  console.log(find.loginType);
+                                 
                                  if (find.loginType == 'email') {
-                                    $('#rm_photo')
-                                          .append(
-                                                "<img id='profile' src='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+find.m_photo+"'>");
+                                	 
+                                    $('#rm_photo').append("<img id='profile' src='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+find.m_photo+"'>");
                                  } else {
-                                    $('#rm_photo')
-                                          .append(
-                                                "<img id='profile' src='<c:url value='"+find.m_photo+"'/>'>");
+                                    $('#rm_photo').append("<img id='profile' src='<c:url value='"+find.m_photo+"'/>'>");
                                  }
                               }) //each
+                              
                   console.log("getRm() each문까지 완료 ");
+                  	
                }, //success
+               
                error : function() {
                   console.log("상대방 정보.. 프로필.. 실패,,,,");
                }
-
             }); // ajax
-
    } //function
 
-   //===========================================================================================
+   //========================================
    function stChat(id) {
 	   
-      //$("#right").empty();
-      //$("#left").empty();
-      // 21.03.08 한경 추가 --> chatdata를 msgContent로 수정
+      // 21.03.08 추가 --> chatdata를 msgContent로 수정
 	 $("#msgContent").empty();
 
       console.log("id 출력 시작");
+      
       console.log(id);
+      
       var rm_idx = id;
 
       getRm(rm_idx);
 
       console.log("rm_idx : " + rm_idx);
+      
       $("#rm").val(rm_idx);
+      
       var me_idx = $("#me").val();
+      
       console.log("me_idx : " + me_idx);
+      
       var me_id = $("#me_id").val();
+      
       var rm_id = $("#rm_id").val();
-      //var element = document.getElementById("rm_idx");
-      //element.innerText = rm_id;
 
-       $
-         .ajax({
+       $.ajax({
             url : "${pageContext.request.contextPath}/mes/select",
             type : "GET",
             dataType : "json",
@@ -340,136 +354,128 @@ strong {
             },
             success : function(data) {
 
-               console.log("확인~"+data);
-            // 21.03.08 한경 추가
+           	   // 21.03.08 추가
                $('#msgContent').append("<input id='chk_rm' type='hidden' value='"+rm_idx+"'>");
-               $
-                     .each(
-                           data,
-                           function(key, val) {
-                              console.log("each문");
+               $.each(data, function(key, val) {
+                      
+            	   console.log("each문");
 
-                                    $("#start").hide();
+                   $("#start").hide();
 
-                                    console.log("메세지는 있음.....");
-                                    var date = new Date(
-                                          val.ch_time); // Thu Feb 18 2021 00:43:22 GMT+0900 (대한민국 표준시)
-                                    const setDate = dayjs(date)
-                                          .format(
-                                                "MM/DD HH:mm"); //02/18 00:43
-                                    console.log(rm_idx);
-                                    if (val.me_idx == me_idx) { // m_idx = m_idx
-                                       /* $("#right").empty(); */
-                                       console
-                                             .log("내가 작성한 채팅");
+                      var date = new Date(val.ch_time); // Thu Feb 18 2021 00:43:22 GMT+0900 (대한민국 표준시)
+                      
+                      const setDate = dayjs(date).format("MM/DD HH:mm"); //02/18 00:43
+                      
+                      console.log(rm_idx);
+                      
+                      if (val.me_idx == me_idx) { // me_idx = m_idx
+                    	  
+                     	 console.log("내가 작성한 채팅");
                                        
-                                       var printHTML = "<div id='right'>";
-                                       printHTML += "<strong id='rightdate'>"
-                                             + setDate
-                                             + "</strong>";
-                                       if (val.e_idx == '${0}') {
-                                          printHTML += "<strong>"
-                                                + val.ch_ms
-                                                + "</strong>";
-                                       } else {
-                                          switch (val.e_idx) {
-                                          case "emt1":
-                                             printHTML += "<img id=emt src = "
-                                                   + "<c:url value='/resources/images/emoji/clap.png'/>";
-                                             printHTML += ">";
-                                             break;
-                                          case "emt2":
-                                             printHTML += "<img id=emt src = "
-                                                   + "<c:url value='/resources/images/blue.png'/>";
-                                             printHTML += ">";
-                                             break;
-                                          case "emt3":
-                                             printHTML += "<img id=emt src = "
-                                                   + "<c:url value='/resources/images/emoji/heart.png'/>";
-                                             printHTML += ">";
-                                             break;
-                                          case "emt4":
-                                             printHTML += "<img id=emt src = "
-                                                   + "<c:url value='/resources/images/KakaoTalk_20210127_164336960.png'/>";
-                                             printHTML += ">";
-                                             break;
-                                          case "emt5":
-                                             printHTML += "<img id=emt src = "
-                                                   + "<c:url value='/resources/images/smile.png'/>";
-                                             printHTML += ">";
-                                             break;
-                                          }
-                                       }
-                                       printHTML += "</div>";
-
-                                       $('#msgContent').append(
-                                             printHTML);
+                     	 var printHTML = "<div id='right'>";
+                     	 printHTML += "<strong id='rightdate'>" + setDate + "</strong>";
+                              
+                      			if (val.e_idx == '${0}') {
+                      				
+                                    printHTML += "<strong>" + val.ch_ms + "</strong>";
+                                    
                                     } else {
-                                       /* $("#left").empty(); */
-                                       console
-                                             .log("다른 사람이 작성한 메세지");
-                                       var printHTML = "<div id='left'>";
-                                       if (val.e_idx == '${0}') {
-                                          console.log(val.ch_ms);
-                                          printHTML += "<strong>"
-                                                + val.ch_ms
-                                                + "</strong>";
-                                       } else {
-                                          switch (val.e_idx) {
-                                          case "emt1":
-                                             printHTML += "<img id=emt src = "
-                                                   + "<c:url value='/resources/images/emoji/clap.png'/>";
+                                    	
+                                      switch (val.e_idx) {
+                                      
+                                      case "emt1":
+                                             printHTML += "<img id=emt src = " + "<c:url value='/resources/images/emoji/clap.png'/>";
                                              printHTML += ">";
                                              break;
+                                             
                                           case "emt2":
-                                             printHTML += "<img id=emt src = "
-                                                   + "<c:url value='/resources/images/blue.png'/>";
+                                             printHTML += "<img id=emt src = " + "<c:url value='/resources/images/blue.png'/>";
                                              printHTML += ">";
                                              break;
+                                             
                                           case "emt3":
-                                             printHTML += "<img id=emt src = "
-                                                   + "<c:url value='/resources/images/emoji/heart.png'/>";
+                                             printHTML += "<img id=emt src = " + "<c:url value='/resources/images/emoji/heart.png'/>";
                                              printHTML += ">";
                                              break;
+                                             
                                           case "emt4":
-                                             printHTML += "<img id=emt src = "
-                                                   + "<c:url value='/resources/images/KakaoTalk_20210127_164336960.png'/>";
+                                             printHTML += "<img id=emt src = " + "<c:url value='/resources/images/KakaoTalk_20210127_164336960.png'/>";
                                              printHTML += ">";
                                              break;
+                                             
                                           case "emt5":
-                                             printHTML += "<img id=emt src = "
-                                                   + "<c:url value='/resources/images/smile.png'/>";
+                                             printHTML += "<img id=emt src = " + "<c:url value='/resources/images/smile.png'/>";
                                              printHTML += ">";
                                              break;
                                           }
                                        }
-                                       printHTML += "<strong id='leftdate'>"
-                                             + setDate
-                                             + "</strong>";
+                      			
                                        printHTML += "</div>";
 
+                                       $('#msgContent').append(printHTML);
+                                       
+                                    } else {
+                                    	
+                                       console.log("다른 사람이 작성한 메세지");
+                                       
+                                       var printHTML = "<div id='left'>";
+                                       
+                                       if (val.e_idx == '${0}') {
+                                    	   
+                                          console.log(val.ch_ms);
+                                          printHTML += "<strong>" + val.ch_ms + "</strong>";
+                                          
+                                       } else {
+                                    	   
+                                          switch (val.e_idx) {
+                                          
+	                                          case "emt1":
+	                                             printHTML += "<img id=emt src = "
+	                                                   + "<c:url value='/resources/images/emoji/clap.png'/>";
+	                                             printHTML += ">";
+	                                             break;
+	                                          case "emt2":
+	                                             printHTML += "<img id=emt src = "
+	                                                   + "<c:url value='/resources/images/blue.png'/>";
+	                                             printHTML += ">";
+	                                             break;
+	                                          case "emt3":
+	                                             printHTML += "<img id=emt src = "
+	                                                   + "<c:url value='/resources/images/emoji/heart.png'/>";
+	                                             printHTML += ">";
+	                                             break;
+	                                          case "emt4":
+	                                             printHTML += "<img id=emt src = "
+	                                                   + "<c:url value='/resources/images/KakaoTalk_20210127_164336960.png'/>";
+	                                             printHTML += ">";
+	                                             break;
+	                                          case "emt5":
+	                                             printHTML += "<img id=emt src = "
+	                                                   + "<c:url value='/resources/images/smile.png'/>";
+	                                             printHTML += ">";
+	                                             break;
+                                          }
+                                       }
+                                       
+                                       printHTML += "<strong id='leftdate'>" + setDate + "</strong>";
+                                       printHTML += "</div>";
 
-                                       $('#msgContent').append(
-                                             printHTML);
+                                       $('#msgContent').append(printHTML);
+                                       
                                     }// else => 상대방
 
-                                 $('#chatdata')
-                                       .scrollTop(
-                                             $('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
-
+                                 $('#chatdata').scrollTop(
+                                    $('#chatdata')[0].scrollHeight); // 맨 밑으로 자동 스크롤
                            }) // $.each
             }, // success
             error : function(e) {
                console.log("상대방과의 채팅 출력 실패,,,,,");
             }
-         }); // ajax 끝
-
+         }); // ajax
 }
-//
 
-//
-
-   //===========================================================================================
+   //========================================
+   // 이모티콘 전송 
    function sendemt(emt) {
       var date = new Date(); // 자바스크립트 Date 객체
       var str = JSON.stringify(date.toJSON()); // Date 객체를 JSON 형식의 문자열로 변환
@@ -493,9 +499,13 @@ strong {
          console.log('위 메세지 소켓에 전송');
       }
    }
-   //===========================================================================================
+   
+   //========================================
+   // 메세지 전송 
    function sendMessage() {
+	   
       var date = new Date(); // 자바스크립트 Date 객체
+      
       var str = JSON.stringify(date.toJSON()); // Date 객체를 JSON 형식의 문자열로 변환
 
       var mes = {
@@ -515,7 +525,8 @@ strong {
       }
       $("#message").val("");
    }
-   //===========================================================================================
+   
+   //========================================
    function onMessage(evt) {
       $('#start').remove();
       $('#startimg').remove();
@@ -529,13 +540,20 @@ strong {
       var me_id = $("#me_id").val();
 
       console.log('onMessage 실행 ');
+      
       if (obj.me_idx == me_idx) { //m_idx = m_idx
+    	  
          var printHTML = "<div id='right'>";
          printHTML += "<strong id='rightdate'>" + setDate + "</strong>";
+         
          if (obj.e_idx == '${0}') {
+        	 
             printHTML += "<strong>" + obj.ch_ms + "</strong>";
+            
          } else {
+        	 
             switch (obj.e_idx) {
+            // 이모티콘 
             case "emt1":
                printHTML += "<img id=emt src = "
                      + "<c:url value='/resources/images/emoji/clap.png'/>";
@@ -566,41 +584,43 @@ strong {
          printHTML += "</div>";
 
          $('#msgContent').append(printHTML);
+         
       } else {
          var printHTML = "<div id='left'>";
-         if (obj.e_idx == '${0}') {
-            printHTML += "<strong>" + obj.ch_ms + "</strong>";
-         } else {
+         
+	         if (obj.e_idx == '${0}') {
+	            printHTML += "<strong>" + obj.ch_ms + "</strong>";
+        	 } else {
+        	 
             switch (obj.e_idx) {
             case "emt1":
-               printHTML += "<img src = "
+               printHTML += "<img id=emt src = "
                      + "<c:url value='/resources/images/emoji/clap.png'/>";
                printHTML += ">";
                break;
             case "emt2":
-               printHTML += "<img src = "
+               printHTML += "<img id=emt src = "
                      + "<c:url value='/resources/images/blue.png'/>";
                printHTML += ">";
                break;
             case "emt3":
-               printHTML += "<img src = "
+               printHTML += "<img id=emt src = "
                      + "<c:url value='/resources/images/emoji/heart.png'/>";
                printHTML += ">";
                break;
             case "emt4":
-               printHTML += "<img src = "
+               printHTML += "<img id=emt src = "
                      + "<c:url value='/resources/images/KakaoTalk_20210127_164336960.png'/>";
                printHTML += ">";
                break;
             case "emt5":
-               printHTML += "<img src = "
+               printHTML += "<img id=emt src = "
                      + "<c:url value='/resources/images/smile.png'/>";
                printHTML += ">";
                break;
             }
          }
          printHTML += "<strong id='leftdate'>" + setDate + "</strong>";
-         printHTML += "<strong>" + obj.rm_idx + "</strong>";
          printHTML += "</div>";
 
          $('#msgContent').append(printHTML);
@@ -613,8 +633,8 @@ strong {
       console.log('채팅 close');
    };
 </script>
+
 <script>
-   // =============================================================
    // 엔터, 버튼으로 sendMessage()
    function enter() {
 
@@ -632,24 +652,24 @@ strong {
       }); // 버튼
 
    }
-   // =============================================================
+   
+   //========================================
    // 채팅방 출력
    function printRoom(data) {
 
-      var me_idx = $("#me").val();
-      var room = data;
-       console.log(room);
+    var me_idx = $("#me").val();
+    var room = data;
+    console.log(room);
 
 
-   $.each(room, function(key, val) {
+  	 $.each(room, function(key, val) {
 
-      if (room != "") {
+       if (room != "") {
          
-         var rm_idx = val.rm_idx;
-
+          var rm_idx = val.rm_idx;
+ 
           // 상대방 번호로 아이디 조회 
-          $
-                .ajax({
+          $.ajax({
                    url : '${pageContext.request.contextPath}/user/chat',
                    type : 'get',
                    data : {
@@ -661,36 +681,36 @@ strong {
                       console.log("데이터확인");
                       console.log(data);
 
-                      $
-                            .each(
-                                  data,
-                                  function(index, find) {
-                                     var date = new Date(val.ch_time);
-                                     const setDate = dayjs(date).format("MM/DD HH:mm");
+                      $.each(data,function(index, find) {
+                    	  
+                            var date = new Date(val.ch_time);
+                            const setDate = dayjs(date).format("MM/DD HH:mm");
 
-                                     var printHTML = "<div id='chatroom'onclick= 'stChat("
-                                           + val.rm_idx + ")'>";
-                                     if (find.loginType == 'email') {
-                                        printHTML += "<img id='profile' src='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+find.m_photo+"'>";
-                                      } else {
+                            var printHTML = "<div id='chatroom'onclick= 'stChat(" + val.rm_idx + ")'>";
+                                 
+                            	if (find.loginType == 'email') {
+                                    
+                            		printHTML += "<img id='profile' src='https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile"+find.m_photo+"'>";
+                                    
+                            		} else {
                                          printHTML += "<img id='profile' src='<c:url value='"+find.m_photo+"'/>'>";
-                                      }
+                                    }
                                      printHTML += "<strong>" + find.id + "</strong> <br>";
                                      printHTML += "<strong>" + val.ch_ms + "</strong> <br>";
                                      printHTML += "<strong>" + setDate + "</strong> <br>";
                                      printHTML += "</div>";
 
                                      $('#roomdata').prepend(printHTML);
-                                  });   // each 끝
+                                  });  // each
+                                  
                       console.log("printRoom 프사, 아이디 each문까지 완료 ");
                    }, //success
                    error : function() {
                       console.log("상대방 정보.. 프로필.. 실패,,,,");
                    }
-
                 }); // ajax
 
-         } else {
+       } else {
 
             $('#chatroom').remove();
             var printHTML = "<div id='chatroom''>";
@@ -706,51 +726,57 @@ strong {
 
    } // printRoom
 
-   // =============================================================
+   //========================================
    // 날씨 API
    function weatherAPI() {
 
       var today = new Date();
       var hours = today.getHours();
       var minutes = today.getMinutes();
+      
       if (minutes < 30) {
          hours = hours - 1;
+         
          if (hours < 0) {
             hours = 23;
          }
+         
       }
+      
       if (hours < 10) {
          hours = "0" + hours;
       }
 
       var realTime = hours + "00";
 
-      $
-            .ajax({
+     	 $.ajax({
                url : "${pageContext.request.contextPath}/chattingData",
                type : "GET",
                success : function(msg) {
 
                   var text = JSON.stringify(msg);
 
+                  // 날씨에 따라 날씨에 맞는 채팅방 배경화면 변경 
                   if (text.baseTime == realTime) {
+                	  
                      switch (text.pty) {
-                     case 1: // 비
-                        document.getElementById('msgContent').style.background = "url(/resources/images/plus.png)"
-                        console.log('비');
-                        break;
-                     case 2: // 비/눈
-                        document.getElementById('msgContent').style.background = "url(/resources/images/plus.png)"
-                        console.log('비/눈');
-                        break;
-                     case 3: // 눈
-                        document.getElementById('msgContent').style.background = "url(/resources/images/plus.png)"
-                        console.log('눈');
-                        break;
-                     case 4: // 소나기
-                        document.getElementById('msgContent').style.background = "url(/resources/images/plus.png)"
-                        console.log('소나기');
-                        break;
+                     
+	                     case 1: // 비
+	                        document.getElementById('msgContent').style.background = "url(https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile/weather/rain.png)"
+	                        console.log('비');
+	                        break;
+	                     case 2: // 비/눈
+	                        document.getElementById('msgContent').style.background = "url(https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile/weather/snow.jpg)"
+	                        console.log('비/눈');
+	                        break;
+	                     case 3: // 눈
+	                        document.getElementById('msgContent').style.background = "url(https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile/weather/snow2.PNG)"
+	                        console.log('눈');
+	                        break;
+	                     case 4: // 소나기
+	                        document.getElementById('msgContent').style.background = "url(https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile/weather/rain.png)"
+	                        console.log('소나기');
+	                        break;
                      }
                   } else {
                      switch (text.sky) {
@@ -759,24 +785,22 @@ strong {
                         console.log('맑음');
                         break;
                      case 3: // 구름 많음
-                        document.getElementById('msgContent').style.background = "url(/resources/images/plus.png)"
+                        document.getElementById('msgContent').style.background = "url(https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile/weather/cloud.jpg)"
                         console.log('구름 많음');
                         break;
                      case 4: // 흐림
-                        document.getElementById('msgContent').style.background = "url(/resources/images/plus.png)"
+                        document.getElementById('msgContent').style.background = "url(https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile/weather/cloud.jpg)"
                         console.log('흐림');
                         break;
                      }
                   } // if 종료
                   console.log('날씨 해당 없음');
-                  //document.getElementById('chatdata').style.background = "url(/chat/icon/snow.jpg)"
-               }, //success func 종료
+               }, //success function
 
                error : function(e) {
-                  console.log("날씨 API 실패,,,,,");
+                  console.log("날씨 API 실패");
                }
             }) // ajax 종료
-
    }
 </script>
 

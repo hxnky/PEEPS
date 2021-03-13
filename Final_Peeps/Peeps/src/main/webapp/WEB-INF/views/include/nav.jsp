@@ -80,17 +80,20 @@
             <li class="center"><a id="Logo"><img
                   src="<c:url value='/resources/images/icon/Logo.png' />"></a></li>
 
-            <li class="right"><a id="Home"
-               href="${pageContext.request.contextPath}/TimeLine?email=${email}"><img
-                  src="<c:url value='/resources/images/icon/navi/023-home.png' />"></a>
-               <a id="Content" href="<c:url value="/post/upload"/>"><img
-                  src="<c:url value='/resources/images/icon/navi/Content.png' />"></a>
-               <a id="Alarm" href="#none"> <img onclick="modal('al_my_modal')"
-                  src="<c:url value='/resources/images/icon/navi/008-notification.png' />"></a>
-               <a id="Chat"
-               href="${pageContext.request.contextPath}/user/chatting"> <img
-                  src="<c:url value='/resources/images/icon/navi/050-wechat.png'/>">
-            </a> <c:set var="loginType" value="${loginType}" /> <c:choose>
+            <li class="right">
+              <a id="Home" href="${pageContext.request.contextPath}/TimeLine?email=${email}">
+              <img src="<c:url value='/resources/images/icon/navi/023-home.png' />"></a>
+                  
+              <a id="Content" href="<c:url value="/post/upload"/>">
+              <img src="<c:url value='/resources/images/icon/navi/Content.png' />"></a>
+               
+              <a id="Alarm" href="#none"> 
+              <img onclick="modal('al_my_modal')" src="<c:url value='/resources/images/icon/navi/008-notification.png' />"></a>
+               
+              <a id="Chat" href="${pageContext.request.contextPath}/user/chatting"> 
+              <img src="<c:url value='/resources/images/icon/navi/050-wechat.png'/>"></a>
+              
+             <c:set var="loginType" value="${loginType}" /> <c:choose>
                   <c:when test="${loginType eq 'email' }">
                      <img id="MyPage_img"
                         src="https://peepsmember.s3.ap-northeast-2.amazonaws.com/peeps/profile${m_photo}">
@@ -116,6 +119,7 @@
 
 </body>
 <script>
+   // 알람 
    sock = new SockJS("${pageContext.request.contextPath}/alarm");
    sock.onopen = onOpen;
    sock.onmessage = onMessage;
@@ -178,8 +182,7 @@
       if (obj != "") {
 
          // 상대방 번호로 아이디 조회 
-         $
-               .ajax({
+         $.ajax({
                   url : '${pageContext.request.contextPath}/user/chat',
                   type : 'get',
                   data : {
@@ -190,47 +193,43 @@
                      console.log("데이터확인");
                      console.log(data);
 
-                     $
-                           .each(
-                                 data,
-                                 function(index, find) {
+                     $.each(data,function(index, find) {
 
-                                    if(obj.receiver == m_idx){
-                                    switch (obj.type) {
-                                    // 댓글 알람
-                                    case "comment":
-                                       console.log("1111comment");
-                                       alert("새로운 알람이 도착했습니다! 알람을 확인해 주세요 :) ");
-                                       
-                                       break;
-                                    // 좋아요 알람
-                                    case "like":
-                                       console.log("22222222comment");
-                                       alert("새로운 알람이 도착했습니다! 알람을 확인해 주세요 :) ");
-                                       
-                                       break;
-                                    // 팔로우 알람
-                                    case "follow":
-                                       console.log("33333333333333333comment");
-                                       alert("새로운 알람이 도착했습니다! 알람을 확인해 주세요 :) ");
-                                       
-                                       break;
-                                    } // switch 문
-                                    }
-                                 }) //each
+                        if(obj.receiver == m_idx){
+                           switch (obj.type) {
+                           // 댓글 알람
+                           case "comment":
+                           console.log("1 comment");
+                           alert("새로운 알람이 도착했습니다! 알람을 확인해 주세요 :) ");
+                           break;
+                           
+                           // 좋아요 알람
+                           case "like":
+                           console.log("2 comment");
+                           alert("새로운 알람이 도착했습니다! 알람을 확인해 주세요 :) ");
+                           break;
+                           
+                           // 팔로우 알람
+                           case "follow":
+                           console.log("3 comment");
+                           alert("새로운 알람이 도착했습니다! 알람을 확인해 주세요 :) ");
+                           break;
+                           
+                      } // switch 문
+                     }
+                    }) //each
 
                   }, //success
                   error : function() {
                      console.log("상대방 정보.. 아이디.. 실패,,,,");
                   }
-
                }); // ajax
 
       } // if
 
    } // onMessage 함수
    function onClose() {
-      console.log('알람 closeㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ');
+      console.log('알람 close......');
    };
 </script>
 
@@ -247,14 +246,13 @@
          width : '100%',
          height : '100%',
          overflow : 'auto',
-         // 레이어 색갈은 여기서 바꾸면 됨
+         // 레이어 색깔 
          backgroundColor : 'rgba(0,0,0,0.500)'
       }).appendTo('body');
-      modal
-            .css(
-                  {
-                     position : 'fixed',
-                     boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+      
+      modal.css({
+            position : 'fixed',
+            boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
                      // 시꺼먼 레이어 보다 한칸 위에 보이기
                      zIndex : zIndex + 1,
                      // div center 정렬
@@ -275,6 +273,7 @@
 <script>
    $(document).ready(function() {
       var m_idx = ${m_idx};
+      
       $.ajax({
          url : "${pageContext.request.contextPath}/alarm/select",
          type : "GET",
@@ -293,6 +292,7 @@
          }
       }); // ajax
    }); // ready
+   
    function print(alarmList) {
       if (alarmList == "") {
          var printHTML = "<div id='alarm'>";
@@ -303,9 +303,8 @@
          console.log("알람 없음!");
       } else {
          $.each(alarmList, function(key, val) {
-             // 상대방 번호로 아이디 조회 
-               $
-                     .ajax({
+               // 상대방 번호로 아이디 조회 
+               $.ajax({
                         url : '${pageContext.request.contextPath}/user/chat',
                         type : 'get',
                         data : {
@@ -317,14 +316,9 @@
                            console.log("데이터확인");
                            console.log(data);
 
-                           $
-                                 .each(
-                                       data,
-                                       function(index, find) {
+                           $.each(data,function(index, find) {
 
-                                       
-                                       
-                                       switch (val.type) {
+                                     switch (val.type) {
                                        // 댓글 알람
                                        case "comment":
                                           console.log("1111comment");
@@ -385,10 +379,11 @@
                         }
 
                      }); // ajax
-
          }) // $.each
       } // else
    } // print 함수
+   
+   
    function modal(id) {
       var zIndex = 9999;
       var modal = $('#' + id);
@@ -404,9 +399,8 @@
          // 레이어 색갈은 여기서 바꾸면 됨
          backgroundColor : 'rgba(0,0,0,0.500)'
       }).appendTo('body');
-      modal
-            .css(
-                  {
+      
+      modal.css({
                      position : 'fixed',
                      boxShadow : '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
                      // 시꺼먼 레이어 보다 한칸 위에 보이기
@@ -425,6 +419,7 @@
             });
    }
 </script>
+
 <script>
    function del_al(al_idx) {
       $.ajax({
@@ -446,46 +441,45 @@
    } // del_al
 </script>
 
-
-
 <script>
-$(document).on("click", "#keyword", function(){
-   var keyword = $('#search').val();
-   console.log(keyword);
-
-   if (keyword.trim() == "") {
-      alert("한 글자 이상 입력하세요");
-   } else {
-      location.href = "${pageContext.request.contextPath}/user/finduser?keyword="+ encodeURI(encodeURIComponent(keyword));
-   }
-
-});
-
-   
-$(document).on("click", "#MyPage_img", function(){
-   var id = "${id}";
-   
-
-   location.href = "${pageContext.request.contextPath}/user/mypage?id=" + encodeURI(encodeURIComponent(id));
-
-});
+	$(document).on("click", "#keyword", function(){
+	
+	   var keyword = $('#search').val();
+	   console.log(keyword);
+	
+	   if (keyword.trim() == "") {
+	      alert("한 글자 이상 입력하세요");
+	   } else {
+	      location.href = "${pageContext.request.contextPath}/user/finduser?keyword="+ encodeURI(encodeURIComponent(keyword));
+	   }
+	
+	});
+	
+	   
+	$(document).on("click", "#MyPage_img", function(){
+	   var id = "${id}";
+	
+	   location.href = "${pageContext.request.contextPath}/user/mypage?id=" + encodeURI(encodeURIComponent(id));
+	});
 
 </script>
+
 <script>
-//로그인체크
-$.ajax({
-   url : '${pageContext.request.contextPath}/user/loginChk',
-   type: 'get',
-   success : function(data){
-      console.log(data);
-      if(data == false){
-         alert("로그인이 필요합니다");
-         location.href = "${pageContext.request.contextPath}/";
-      }
-   },
-   error : function() {
-      console.log("로그인체크 실패,,,,");
-   }
-});
+	//로그인체크
+	$.ajax({
+	   url : '${pageContext.request.contextPath}/user/loginChk',
+	   type: 'get',
+	   success : function(data){
+	      console.log(data);
+	      if(data == false){
+	         alert("로그인이 필요합니다");
+	         location.href = "${pageContext.request.contextPath}/";
+	      }
+	   },
+	   error : function() {
+	      console.log("로그인체크 실패,,,,");
+	   }
+	});
 </script>
+
 </html>

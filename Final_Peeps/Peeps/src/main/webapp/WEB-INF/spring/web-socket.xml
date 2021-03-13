@@ -7,7 +7,6 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-
 	<bean class="com.gnjk.peeps.Chat.handler.ChattingHandler" id="chattinghandler" />
 	<bean class="com.gnjk.peeps.Chat.handler.AlarmHandler" id="alarmhandler" />
 

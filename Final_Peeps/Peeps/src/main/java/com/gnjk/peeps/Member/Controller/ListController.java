@@ -19,6 +19,7 @@ public class ListController {
 	@Autowired
 	private MesListService service;
 	
+	// 채팅방 메세지 리스트 
 	@RequestMapping(value = "/mes/select")
 	public List<Message> mesList(int rm_idx, int me_idx, HttpSession session) throws Exception{
 		
@@ -31,7 +32,7 @@ public class ListController {
 		
 	}
 	
-
+	// 회원별 채팅  
 	@RequestMapping(value = "/room/select")
 	public List<Message> roomList(int me_idx, HttpSession session) throws Exception{
 		
