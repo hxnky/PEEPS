@@ -1,3 +1,0 @@
-INDEX VERSION 1.4+/Users/seoa/Documents/GitHub/PEEPS/spring/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
-3690761729.index
-1987990359.index
