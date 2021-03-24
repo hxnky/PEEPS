@@ -1,0 +1,237 @@
+.msg_wrap {
+	background-color: #eef0ed;
+	height: 270px;
+	width: 850px;
+	margin: 0 auto 20px auto;
+}
+
+.msg_wrap2 {
+	background-color: #eef0ed;
+	height: auto;
+	width: 850px;
+	margin: 10px auto;
+	padding: 20px;
+}
+
+.ginsert_wrap>ul>li {
+	list-style-type: none;
+	float: left;
+	margin: 5px;
+	margin-top: 30px;
+}
+
+.gimg {
+	background-color: white;
+	width: 70px;
+	height: 70px;
+	margin: 10px;
+	border-radius: 50px;
+}
+
+.upgphoto, .upgid {
+	float: left;
+}
+
+.writerboutton {
+	float: right;
+	margin-left: 10px;
+}
+
+.writerPhoto {
+	width: 35px;
+	height: 35px;
+	margin: 0px;
+	border-radius: 50px;
+}
+
+.gUpDate {
+	float: right; //
+	font-size: 20px;
+}
+
+.upMsg {
+	height: auto;
+	width: 600px;
+	margin: 0 auto;
+}
+
+.gUpPhoto {
+	height: 400px;
+	width: 400px;
+}
+
+.cmt {
+	margin: 10px auto;
+}
+
+.cmt_area {
+	
+}
+
+#gCmtbtn {
+	margin-bottom: 30px;
+}
+
+#hr2 {
+	background-color: black;
+}
+
+#sbmtbtn {
+	margin-top: 30px;
+}
+
+.paging {
+	text-align: center;
+	margin-bottom: 100px;
+}
+
+.paging>span {
+	padding: 5px 10px;
+	border-radius: 4px;
+	border-right: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	font-size: 1.2em;
+}
+
+.postidx {
+	color: black;
+}
+
+.col-sm-4 {
+	width: 383px;
+}
+
+.row {
+	/* margin: auto;
+   width: 1150px; */
+	
+}
+
+.container {
+	/* max-width: 100%; 
+   height: auto; */
+	width: 1150px;
+}
+
+.pageBtn:link {
+	text-decoration: none;
+	color: gray;
+}
+
+.pageBtn:visited {
+	text-decoration: none;
+	color: gray;
+}
+
+.pageBtn:active {
+	text-decoration: none;
+	color: gray;
+}
+
+.pageBtn:hover {
+	text-decoration: none;
+	color: gray;
+}
+
+.bnt3 {
+	background-color: aqua;
+	color: black;
+	border: 1px solid black;
+	font-size: 10px;
+	padding: 5px;
+}
+
+#gEdit {
+	margin: 25px 0 5px auto;
+}
+
+#myMsgBtn {
+	width: 500px;
+	border: 1px solid #808080;
+	background-color: rgba(f, f, 0, 0);
+	color: #808080;
+	padding: 5px;
+	border-radius: 4px;
+	outline: 0px;
+	border: 0px;
+	width: 820px;
+}
+
+#sbmtbtn, #edit_but, #del_but, #gEdit, #edit_cancle {
+	border: 1px solid #808080;
+	background-color: rgba(f, f, 0, 0);
+	color: #808080;
+	padding: 5px;
+	border-radius: 4px;
+}
+
+#pageBtn, #myMsgBtn {
+	border: 1px solid #808080;
+	background-color: rgba(f, f, 0, 0);
+	color: #808080;
+	padding: 5px;
+	border-radius: 4px;
+}
+
+#pageBtn:hover {
+	color: #808080;
+	background-color: #F5E978;
+}
+
+#edit_cancle:hover {
+	color: #808080;
+	background-color: #F5E978;
+}
+
+#gEdit:hover {
+	color: #808080;
+	background-color: #F5E978;
+}
+
+#del_but:hover {
+	color: #808080;
+	background-color: #F5E978;
+}
+
+#edit_but:hover {
+	color: #808080;
+	background-color: #F5E978;
+}
+
+#sbmtbtn:hover {
+	color: #808080;
+	background-color: #F5E978;
+}
+
+#myMsgBtn:hover {
+	color: #808080;
+	background-color: #F5E978;
+}
+
+#gmessage {
+	resize: none; /* 사용자 임의 변경 불가 */
+	border: solid 2px #808080;
+	padding: 10px;
+	font-size: 13px;
+}
+
+#searchMyMsg {
+	margin: 0 0 0 150px;
+}
+
+#myMsgBtn {
+	margin: 0px 30px 0px auto;
+}
+
+#main_wrap {
+	margin-bottom: 0px;
+}
+
+div.paging {
+	width: 500px;
+	margin: 0px auto;
+}
+
+#main_wrap {
+	margin-bottom: 0px;
+}

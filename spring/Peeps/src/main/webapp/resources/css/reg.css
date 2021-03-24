@@ -1,0 +1,106 @@
+@import
+	url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap')
+	;
+
+* {
+	font-family: 'Nanum Gothic ', sans-serif;
+}
+
+#top_nav {
+	width: 500px;
+	background-color: #D9D9D9;
+	text-align: center;
+	height: 35px;
+	padding: 7px 0px;
+	list-style: none;
+}
+
+#login_btn {
+	border: white;
+	height: 40px;
+	width: 600px;
+	display: block;
+	background-color: #F5E978;
+	margin: 0px auto;
+	align-items: center;
+	border-radius: 5px;
+	max-width: 99%;
+}
+
+#sign_btn {
+	border: white;
+	height: 40px;
+	width: 600px;
+	display: block;
+	background-color: #F5E978;
+	margin: 10px auto;
+	align-items: center;
+	border-radius: 5px;
+	max-width: 99%;
+}
+
+.login_text {
+	width: 300px;
+	height: 35px;
+	border: solid 0.2px #CCC;
+	border-radius: 5px;
+	max-width: 99%;
+}
+
+table {
+	margin: 0px auto;
+}
+
+.form-group-left, .form-group-right {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 10px auto;
+}
+
+#find {
+	text-align: center;
+}
+
+.brand {
+	padding: 7px 0px;
+}
+
+img {
+	height: 55px;
+}
+
+label {
+	margin-top: 5px;
+}
+
+#k_login {
+	margin-left: 100px;
+}
+
+#g_login {
+	margin-left: 90px;
+	width: 250px;
+}
+
+#or_wrap {
+	margin-left: 100px;
+}
+
+#or_wrap>ul>li {
+	list-style: none;
+	display: inline-block;
+	text-align: center;
+	width: 150px;
+	vertical-align: middle;
+}
+
+#or_wrap>ul>li>hr {
+	width: 150px;
+	border: 1px solid #AAA;
+}
+
+#reg {
+	margin: 0px auto;
+	height: 130px;
+	width: 100px;
+}
